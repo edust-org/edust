@@ -24,9 +24,9 @@
     "noFallthroughCasesInSwitch": true,
 
     // Alias Path
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["*"]
     }
   },
   "include": ["src", "vite.config.ts"],
