@@ -6,38 +6,11 @@ Edust is a web application designed to enhance educational collaboration and int
 
 ## Features
 
-### User Account and Roles
-
-1. **User Registration:**
-
-   - Users can create an account with basic information (name, email, password, gender).
-   - Upon registration, users are assigned the default role of "user."
-
-2. **Content Access:**
-   - Registered users can view and interact with public organization pages.
-   - Users have the ability to create their own organization pages.
-
-### Organization Page Creation
-
-1. **Organization Types:**
-
-   - Users can create organization pages for different types of institutions (Education, College, School, etc.).
-
-2. **Organization Profile and Landing Page:**
-
-   - Each organization can create a profile and customize a landing page.
-   - Utilizes a built-in page builder tool for easy customization of the landing page design.
-
-3. **Public Access:**
-   - The created organization landing pages are publicly accessible for viewing by anyone.
+Our platform allows users to create accounts and authenticated users to create organizations. Public users can view organization sites built by organization creators, which mainly consist of educational institutions such as schools, colleges, and universities.
 
 ## Technologies Used
 
 - **Frontend:** React.js, TypeScript, CSS/SCSS
-- **Backend:** Node.js, Express.js, MongoDB
-- **Authentication:** JSON Web Tokens (JWT)
-- **Routing:** React Router
-- **Page Builder:** Custom implementation for organization landing pages
 
 ## Getting Started
 
@@ -62,7 +35,7 @@ To get a local copy up and running, follow these steps:
 4. **Run the Application:**
 
    ```bash
-   pnpm start
+   pnpm run dev
    ```
 
 5. **Access the Application:**
