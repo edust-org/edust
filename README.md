@@ -20,7 +20,7 @@ To get a local copy up and running, follow these steps:
 
    ```bash
    git clone https://github.com/edust-org/edust.git
-   cd repository
+   cd edust
    ```
 
 2. **Install Dependencies:**
