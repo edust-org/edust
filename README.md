@@ -19,7 +19,7 @@ To get a local copy up and running, follow these steps:
 1. **Clone Repository:**
 
    ```bash
-   git clone https://github.com/your/repository.git
+   git clone https://github.com/edust-org/edust.git
    cd repository
    ```
 
