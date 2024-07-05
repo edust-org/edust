@@ -6,9 +6,13 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+
+  ignorePatterns: ["dist", ".eslintrc.cjs", "src/types"],
+  
   parser: "@typescript-eslint/parser",
+
   plugins: ["react-refresh", "check-file"],
+
   rules: {
     "react-refresh/only-export-components": [
       "warn",
@@ -30,4 +34,13 @@ module.exports = {
       },
     ],
   },
+
+  overrides: [
+    {
+      files: ["vite-env.d.ts", "vite.config.ts", ".eslintrc.js"],
+      rules: {
+        "check-file/filename-naming-convention": "off",
+      },
+    },
+  ],
 };
