@@ -1,2 +1,4 @@
-export {Button} from './button'
-export {Typography} from './typography'
+import {Button} from './button'
+import {Typography} from './typography'
+
+export {Button, Typography}

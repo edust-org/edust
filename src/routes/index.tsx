@@ -1,4 +1,4 @@
-import { Home } from "@/pages";
+import { ErrorPage, Home } from "@/pages";
 
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 
@@ -7,6 +7,7 @@ const routes: RouteObject[] = [
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorPage />,
   },
 ];
 
