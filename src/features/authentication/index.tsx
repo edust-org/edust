@@ -1,11 +1,11 @@
 import React from "react";
 import { SignIn } from "./sign-in";
-import SignUp from "./sign-up";
+import { SignUp } from "./sign-up";
 
 interface Props {
-  compMode: "signIn" | "signUp";
+  component: "signIn" | "signUp";
 }
 
-export const Authentication: React.FC<Props> = ({ compMode }) => {
-  return <>{compMode === "signIn" ? <SignIn /> : <SignUp />}</>;
+export const Authentication: React.FC<Props> = ({ component }) => {
+  return <>{component === "signIn" ? <SignIn /> : <SignUp />}</>;
 };

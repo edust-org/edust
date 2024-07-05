@@ -8,12 +8,14 @@ module.exports = {
   ],
 
   ignorePatterns: ["dist", ".eslintrc.cjs", "src/types"],
-  
+
   parser: "@typescript-eslint/parser",
 
   plugins: ["react-refresh", "check-file"],
 
   rules: {
+    indent: ["error", 2, { SwitchCase: 1 }],
+
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

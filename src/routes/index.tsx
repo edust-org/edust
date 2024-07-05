@@ -12,11 +12,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "/auth/sign-up",
-    element: <Authentication compMode="signUp" />,
+    element: <Authentication component="signUp" />,
   },
   {
     path: "/auth/sign-in",
-    element: <Authentication compMode="signIn" />,
+    element: <Authentication component="signIn" />,
   },
 ];
 
