@@ -1,3 +1,4 @@
+import { Authentication } from "@/features";
 import { ErrorPage, Home } from "@/pages";
 
 import { createBrowserRouter, RouteObject } from "react-router-dom";
@@ -8,6 +9,14 @@ const routes: RouteObject[] = [
     path: "/",
     element: <Home />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/auth/sign-up",
+    element: <Authentication compMode="signUp" />,
+  },
+  {
+    path: "/auth/sign-in",
+    element: <Authentication compMode="signIn" />,
   },
 ];
 
