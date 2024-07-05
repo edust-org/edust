@@ -10,7 +10,7 @@ Our platform allows users to create accounts and authenticated users to create o
 
 ## Technologies Used
 
-- **Frontend:** React.js, TypeScript, CSS/SCSS
+- **Frontend:** React.js, TypeScript
 
 ## Getting Started
 
