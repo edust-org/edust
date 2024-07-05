@@ -1,4 +1,5 @@
-import Home from "@/pages/home";
+import { Home } from "@/pages";
+
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 // Define the type for the route configuration
