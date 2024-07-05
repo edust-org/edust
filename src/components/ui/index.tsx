@@ -1,8 +1,8 @@
-import {Button} from './button'
-import {Input} from './input'
-import {Label} from './label'
+export { Button } from './button'
+export { Input } from './input'
+export { Label } from './label'
 
-import {
+export {
   Form,
   FormItem,
   FormLabel,
@@ -11,20 +11,4 @@ import {
   FormMessage,
   FormField } from './form'
 
-import {Typography} from './typography'
-
-export {
-  Button,
-  Input,
-  Label,
-
-  Form,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-  FormField,
-
-  Typography,
-}
+export { Typography } from './typography'
