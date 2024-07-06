@@ -1,7 +1,8 @@
-import { Authentication, CreateAnOrganization, Site } from "@/features";
+import { Authentication, Sites } from "@/features";
 import { ErrorPage, Home } from "@/pages";
 
 import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { organizationRoutes } from "./organization-routes";
 
 // Define the type for the route configuration
 const routes: RouteObject[] = [
@@ -19,13 +20,10 @@ const routes: RouteObject[] = [
     element: <Authentication component="signIn" />,
   },
   {
-    path: "/create-an-organization",
-    element: <CreateAnOrganization />,
+    path: "/:orgId/sites",
+    element: <Sites />,
   },
-  {
-    path: "/:orgId/site",
-    element: <Site />,
-  },
+  ...organizationRoutes,
 ];
 
 // Explicitly type the router using ReturnType
