@@ -14,6 +14,7 @@ import {
   Input,
 } from "@/components/ui";
 import { useNavigate } from "react-router-dom";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -76,6 +77,17 @@ export const CreateOrganizationForm: React.FC<Props> = ({ children }) => {
               </FormItem>
             )}
           />
+          <div className="items-top flex space-x-2">
+            <Checkbox id="create_org_form_term_con" />
+            <div className="grid gap-1.5 leading-none">
+              <label
+                htmlFor="create_org_form_term_con"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                Accept terms and conditions
+              </label>
+            </div>
+          </div>
           <div className="flex items-center justify-end gap-4">
             {children}
             <Button type="submit">Create</Button>

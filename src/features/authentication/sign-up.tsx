@@ -16,6 +16,7 @@ import {
 import { SocialAuth } from "./social-auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -111,6 +112,17 @@ export const SignUp = () => {
                   </FormItem>
                 )}
               />
+              <div className="items-top flex space-x-2">
+                <Checkbox id="sign_up_term_con" />
+                <div className="grid gap-1.5 leading-none">
+                  <label
+                    htmlFor="sign_up_term_con"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Accept terms and conditions
+                  </label>
+                </div>
+              </div>
               <Button type="submit" className="w-full">
                 Create an account
               </Button>
