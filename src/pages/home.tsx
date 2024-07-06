@@ -12,8 +12,10 @@ import {
   Button,
   Typography,
 } from "@/components/ui";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -45,9 +47,10 @@ export const Home = () => {
                 Cancel
               </AlertDialogCancel>
               <AlertDialogAction
-                onClick={() =>
-                  localStorage.setItem("isOrgAcc", JSON.stringify(false))
-                }
+                onClick={() => {
+                  localStorage.setItem("isOrgAcc", JSON.stringify(false));
+                  navigate("/create-an-organization");
+                }}
               >
                 Create an Organization
               </AlertDialogAction>
