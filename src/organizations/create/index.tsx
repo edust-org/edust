@@ -1,10 +1,10 @@
 import { Typography } from "@/components/ui";
 
-export const Site = () => {
+export const CreateOrganization = () => {
   return (
     <div>
       <Typography variant="h1" className="text-center">
-        Site public page
+        CreateOrganization
       </Typography>
     </div>
   );

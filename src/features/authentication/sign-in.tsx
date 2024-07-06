@@ -15,6 +15,7 @@ import {
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -44,63 +45,72 @@ export const SignIn = () => {
   }
 
   return (
-    <div className="h-screen flex items-center justify-center p-4">
-      <Form {...form}>
-        <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="example@gmail.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="********" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full">
-              Sign In
-            </Button>
-          </form>
-
-          <div className="my-4">
-            <SocialAuth />
-          </div>
-          <Typography className="text-center mb-4">
-            <Link to={"/auth/sign-in"} className="hover:underline transition">
-              Forgot Your Password?
-            </Link>
-          </Typography>
-          <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
-            <Typography>Don’t have an account?</Typography>
-            <Link to={"/auth/sign-up"}>
-              <Button variant={"outline"} size={"sm"}>
-                Sign Up
+    <>
+      <Helmet>
+        <title>Sign In to Edist - Access Your Account</title>
+      </Helmet>
+      <div className="h-screen flex items-center justify-center p-4">
+        <Form {...form}>
+          <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="example@gmail.com"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="********"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-full">
+                Sign In
               </Button>
-            </Link>
+            </form>
+
+            <div className="my-4">
+              <SocialAuth />
+            </div>
+            <Typography className="text-center mb-4">
+              <Link to={"/auth/sign-in"} className="hover:underline transition">
+                Forgot Your Password?
+              </Link>
+            </Typography>
+            <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+              <Typography>Don’t have an account?</Typography>
+              <Link to={"/auth/sign-up"}>
+                <Button variant={"outline"} size={"sm"}>
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </Form>
-    </div>
+        </Form>
+      </div>
+    </>
   );
 };
