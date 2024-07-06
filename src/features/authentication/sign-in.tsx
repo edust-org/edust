@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -26,6 +26,8 @@ const FormSchema = z.object({
 });
 
 export const SignIn = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -36,6 +38,9 @@ export const SignIn = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
+
+    // redirect home route
+    navigate("/", { replace: true });
   }
 
   return (

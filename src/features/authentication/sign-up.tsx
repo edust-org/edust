@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -29,6 +29,8 @@ const FormSchema = z.object({
 });
 
 export const SignUp = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -40,6 +42,12 @@ export const SignUp = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
+
+    // if you new create an account show a single time a popup for create organization or not
+    localStorage.setItem("isOrgAcc", JSON.stringify(true));
+
+    // and redirect home route
+    navigate("/", { replace: true });
   }
 
   return (
