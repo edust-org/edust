@@ -12,7 +12,7 @@ import {
 } from "@/components/ui";
 import { Logo } from "@/assets/images";
 
-import { CreateOrganizationForm } from "./create-organization-form";
+import { CreateOrganizationForm } from "../create-organization-form";
 
 export const HaveOrganization = () => {
   const { value: isShowForm, setTrue: isShowFormTrue } = useBoolean(false);

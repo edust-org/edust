@@ -27,9 +27,13 @@ const FormSchema = z.object({
 
 interface Props {
   children: ReactElement<HTMLButtonElement>;
+  forPage?: boolean;
 }
 
-export const CreateOrganizationForm: React.FC<Props> = ({ children }) => {
+export const CreateOrganizationForm: React.FC<Props> = ({
+  children,
+  forPage = false,
+}) => {
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -88,9 +92,16 @@ export const CreateOrganizationForm: React.FC<Props> = ({ children }) => {
               </label>
             </div>
           </div>
-          <div className="flex items-center justify-end gap-4">
+          <div
+            className={`${
+              forPage && "flex-col-reverse"
+            } flex items-center justify-end gap-4`}
+          >
             {children}
-            <Button type="submit">Create</Button>
+            {/* TODO: This button will be enable and disable base on auth sign in or not */}
+            <Button type="submit" disabled={forPage}>
+              Create an organization
+            </Button>
           </div>
         </form>
       </Form>
