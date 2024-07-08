@@ -10,7 +10,7 @@ export const organizationRoutes = [
     element: <SitesBuilder />,
   },
   {
-    path: "/sites-builder/:siteId",
+    path: "/sites-builder/:pageId",
     element: <CustomizeSite />,
   },
   {
