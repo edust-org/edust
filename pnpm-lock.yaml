@@ -41,6 +41,9 @@ importers:
       grapesjs-blocks-basic:
         specifier: ^1.0.2
         version: 1.0.2
+      grapesjs-preset-newsletter:
+        specifier: ^1.0.2
+        version: 1.0.2
       lucide-react:
         specifier: ^0.400.0
         version: 0.400.0(react@18.3.1)
@@ -1200,6 +1203,9 @@ packages:
 
   grapesjs-blocks-basic@1.0.2:
     resolution: {integrity: sha512-SsPKf/CvQkZ+kABOsN01auAPHXh/2J20g0AWYF7fHR3Gw3TZLtdIxT1mk90Qzi76u/7sUYi3CTI+i3ZaTtXHRA==}
+
+  grapesjs-preset-newsletter@1.0.2:
+    resolution: {integrity: sha512-z8KJ1ZrTXfASSJZ/tHOcnpcWu4AMr2F/ZfQit+QjimNi3UGowwl7+Yjefuh3R7lbDTrXMMaxhCannCaJo/kPJw==}
 
   grapesjs@0.21.12:
     resolution: {integrity: sha512-BPB7sT+qWQIjpyS7nrUNEbWgvj/qvRwW0acj69PBExyd0iWkVwYV55LFB8qJore3pnuHVFZ5OkIwSPGI/mrOkA==}
@@ -2814,6 +2820,8 @@ snapshots:
       slash: 3.0.0
 
   grapesjs-blocks-basic@1.0.2: {}
+
+  grapesjs-preset-newsletter@1.0.2: {}
 
   grapesjs@0.21.12:
     dependencies:
