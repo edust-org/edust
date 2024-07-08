@@ -2,40 +2,52 @@ import { Container } from "@/components";
 import { Button, Input, Typography } from "@/components/ui";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import axios from "axios";
+import { siteBuilder } from "@/api/organizations";
 
 export const SitesBuilder = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchPages();
+    fetchPagesData();
   }, []);
 
-  const fetchPages = () => {
-    axios
-      .get("http://localhost:3000/organization_page")
-      .then(({ data }) => setData(data))
-      .catch((err) => console.error(err));
+  const fetchPagesData = async () => {
+    try {
+      const pages = await siteBuilder.getPages();
+      setData(pages || []);
+    } catch (error) {
+      console.error("Error fetching pages:", error);
+    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const payload = {
-      organizationId: "1",
-      page_name: event.target[0].value,
-    };
-
-    axios
-      .post("http://localhost:3000/organization_page", payload)
-      .then((response) => {
-        console.log("Page created successfully:", response.data);
-        fetchPages(); // Fetch the updated list of pages
-      })
-      .catch((error) => {
-        console.error("Error creating page:", error);
+    try {
+      await siteBuilder.postPage({
+        organizationId: "1",
+        page_name: event.target[0].value,
       });
+    } catch (error) {
+      throw new Error("Error submitting page data:", error);
+    } finally {
+      fetchPagesData();
+    }
+
+    // const payload = {
+    //   organizationId: "1",
+    //   page_name: event.target[0].value,
+    // };
+
+    // axios
+    //   .post("http://localhost:3000/organization_page", payload)
+    //   .then((response) => {
+    //     console.log("Page created successfully:", response.data);
+    //     fetchPagesData(); // Fetch the updated list of pages
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error creating page:", error);
+    //   });
   };
 
   return (
