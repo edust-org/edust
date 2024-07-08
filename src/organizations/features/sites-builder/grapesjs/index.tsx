@@ -6,8 +6,9 @@ import gsPluginNewsLetter from "grapesjs-preset-newsletter";
 
 export const GrapesJs = () => {
   const onEditor = (editor: Editor) => {
-    console.log("Editor loaded", { editor });
+    editor.setComponents("<div>hi</div>");
   };
+
   return (
     <>
       <GjsEditor

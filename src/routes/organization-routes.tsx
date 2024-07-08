@@ -1,9 +1,17 @@
-import { CreateOrganization, SitesBuilder } from "@/organizations";
+import {
+  CreateOrganization,
+  CustomizeSite,
+  SitesBuilder,
+} from "@/organizations";
 
 export const organizationRoutes = [
   {
     path: "/sites-builder",
     element: <SitesBuilder />,
+  },
+  {
+    path: "/sites-builder/:siteId",
+    element: <CustomizeSite />,
   },
   {
     path: "/organizations",
