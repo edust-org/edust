@@ -1,5 +1,5 @@
 import { Button, Typography } from "@/components/ui";
-import { CreateOrganizationForm } from "../components";
+import { CreateOrganizationForm } from "../../components/create-organization-form";
 import { ImgCreateOrganizations, Logo } from "@/assets/images";
 import { Link } from "react-router-dom";
 
