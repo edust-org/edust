@@ -7,11 +7,6 @@ export default async (e: any, editor: Editor | null) => {
   const formData = new FormData();
   formData.append("file", files[0]);
 
-  console.log({
-    formData,
-    f: files[0],
-  });
-
   try {
     const data = await axios.post(
       "http://localhost:3001/api/v0/upload-image",
