@@ -1,5 +1,5 @@
 import { Authentication, Sites } from "@/features";
-import { ErrorPage, Home } from "@/pages";
+import { ErrorPage, Home, Playground } from "@/pages";
 
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { organizationRoutes } from "./organization-routes";
@@ -10,6 +10,10 @@ const routes: RouteObject[] = [
     path: "/",
     element: <Home />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/playground",
+    element: <Playground />,
   },
   {
     path: "/auth/sign-up",
