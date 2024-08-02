@@ -11,9 +11,12 @@ export const Navbar = () => {
           <div>
             <img src={Logo} alt="Edust Brand Logo" width={120} />
           </div>
-          <ul>
+          <ul className="flex items-center gap-4">
             <li>
               <Link to={"/"}>Home</Link>
+            </li>
+            <li>
+              <Link to={"/playground"}>Playground</Link>
             </li>
           </ul>
           <div className="flex items-center gap-4">
