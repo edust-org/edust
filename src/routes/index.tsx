@@ -1,8 +1,9 @@
-import { Authentication, Sites } from "@/features";
+import { Sites } from "@/features";
 import { ErrorPage, Home, Playground } from "@/pages";
 
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { organizationRoutes } from "./organization-routes";
+import { SignIn, SignUp, VerifyEmailByToken } from "@/features/authentication";
 
 // Define the type for the route configuration
 const routes: RouteObject[] = [
@@ -17,11 +18,15 @@ const routes: RouteObject[] = [
   },
   {
     path: "/auth/sign-up",
-    element: <Authentication component="signUp" />,
+    element: <SignUp />,
+  },
+  {
+    path: "/auth/verify/:token",
+    element: <VerifyEmailByToken />,
   },
   {
     path: "/auth/sign-in",
-    element: <Authentication component="signIn" />,
+    element: <SignIn />,
   },
   {
     path: "/:orgId/sites",
