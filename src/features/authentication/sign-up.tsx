@@ -17,6 +17,7 @@ import { SocialAuth } from "./social-auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useRegisterMutation } from "@/app/api/v0/auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -42,18 +43,24 @@ export const SignUp = () => {
     },
   });
 
+  const [register, { isLoading, error }] = useRegisterMutation();
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-
+    register(data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
     // if you new create an account show a single time a popup for create organization or not
-    localStorage.setItem("isOrgAcc", JSON.stringify(true));
+    // localStorage.setItem("isOrgAcc", JSON.stringify(true));
 
     // and redirect home route
-    navigate("/", { replace: true });
+    // navigate("/", { replace: true });
   }
 
   return (
     <>
+      {console.log({ isLoading, error })}
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>

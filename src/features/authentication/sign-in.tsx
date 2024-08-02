@@ -16,6 +16,7 @@ import {
 import { SocialAuth } from "./social-auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useLoginMutation } from "@/app/api/v0/auth";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -27,6 +28,7 @@ const FormSchema = z.object({
 });
 
 export const SignIn = () => {
+  const [login, { isLoading, isError }] = useLoginMutation();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -38,14 +40,19 @@ export const SignIn = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    login(data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.error(err));
 
     // redirect home route
-    navigate("/", { replace: true });
+    // navigate("/", { replace: true });
   }
 
   return (
     <>
+      {console.log({ isLoading, isError })}
       <Helmet>
         <title>Sign In to Edist - Access Your Account</title>
       </Helmet>
