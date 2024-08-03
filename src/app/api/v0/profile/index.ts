@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { apiUrlV0 } from "@/app/api/axios-api-url";
-interface User {
+export interface User {
   id: number;
   name: string;
   username: string;
