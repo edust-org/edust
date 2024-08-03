@@ -1,5 +1,21 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { apiUrlV0 } from "@/app/api/axios-api-url";
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  is_verified: boolean;
+  is_profile_verified: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProfileResponse {
+  data: {
+    user: User;
+  };
+}
 
 export const profileApi = createApi({
   reducerPath: "API_V0_profileApi",
@@ -9,8 +25,8 @@ export const profileApi = createApi({
     credentials: "include",
   }),
   endpoints: (build) => ({
-    getProfile: build.query({
-      query: () => `/profile`,
+    getProfile: build.query<ProfileResponse, void>({
+      query: () => `/`,
     }),
   }),
 });

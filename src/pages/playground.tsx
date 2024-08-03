@@ -1,10 +1,13 @@
 import { useLogoutMutation } from "@/app/api/v0/auth";
+import { useGetProfileQuery } from "@/app/api/v0/profile";
 import { Navbar } from "@/components";
 import { Button, Typography } from "@/components/ui";
 import { Counter } from "@/features/counter";
 
 export const Playground = () => {
   const [logout] = useLogoutMutation();
+  const { data } = useGetProfileQuery();
+  console.log(data);
   const handleLogout = async () => {
     try {
       await logout().unwrap();
