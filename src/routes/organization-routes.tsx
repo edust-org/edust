@@ -1,17 +1,23 @@
-import {
-  CreateOrganization,
-  CustomizeSite,
-  SitesBuilder,
-} from "@/organizations";
+import { Suspense } from "react";
+import { CreateOrganization, CustomizeSite } from "@/organizations";
+import { SitesBuilder } from "@/organizations/features/sites-builder";
 
 export const organizationRoutes = [
   {
     path: "/sites-builder",
-    element: <SitesBuilder />,
+    element: (
+      <Suspense fallback={"LOADING"}>
+        <SitesBuilder />
+      </Suspense>
+    ),
   },
   {
     path: "/sites-builder/:pageId",
-    element: <CustomizeSite />,
+    element: (
+      <Suspense fallback={"LOADING"}>
+        <CustomizeSite />
+      </Suspense>
+    ),
   },
   {
     path: "/organizations",
@@ -19,6 +25,10 @@ export const organizationRoutes = [
   },
   {
     path: "/organizations/create",
-    element: <CreateOrganization />,
+    element: (
+      <Suspense fallback={"LOADING"}>
+        <CreateOrganization />
+      </Suspense>
+    ),
   },
 ];

@@ -1,17 +1,17 @@
-// Authentication.tsx (or Authentication.js)
-import React, { Suspense, lazy } from "react";
+import { lazy } from "react";
 
-// Lazy load components
-const SignUp = lazy(() => import("./sign-up"));
+const SignUp = lazy(() =>
+  import("./sign-up").then((module) => ({ default: module.SignUp }))
+);
 const SignIn = lazy(() =>
   import("./sign-in").then((module) => ({ default: module.SignIn }))
 );
+const VerifyEmailByToken = lazy(() =>
+  import("./verify-email-by-token").then((module) => ({
+    default: module.VerifyEmailByToken,
+  }))
+);
 
-const VerifyEmailByToken = lazy(() => import("./verify-email-by-token"));
+const Authentication = { SignUp, SignIn, VerifyEmailByToken };
 
-<Suspense fallback={"LOADING"}>
- <SignIn />
-</Suspense>
-
-// Exporting lazy-loaded components
-export { SignUp, SignIn, VerifyEmailByToken };
+export default Authentication;

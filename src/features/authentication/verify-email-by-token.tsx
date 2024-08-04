@@ -2,7 +2,7 @@ import { useVerifyEmailByTokenMutation } from "@/app/api/v0/auth";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const VerifyEmailByToken: React.FC = () => {
+export const VerifyEmailByToken: React.FC = () => {
   const params = useParams();
 
   const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation();
@@ -19,4 +19,3 @@ const VerifyEmailByToken: React.FC = () => {
 
   return <div>VerifyEmailByToken</div>;
 };
-export default VerifyEmailByToken;

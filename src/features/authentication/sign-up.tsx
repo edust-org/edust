@@ -32,7 +32,7 @@ const FormSchema = z.object({
   }),
 });
 
-const SignUp: React.FC = () => {
+export const SignUp: React.FC = () => {
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -153,4 +153,3 @@ const SignUp: React.FC = () => {
     </>
   );
 };
-export default SignUp;
