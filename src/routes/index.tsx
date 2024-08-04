@@ -4,6 +4,7 @@ import { ErrorPage, Home, Playground } from "@/pages";
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { organizationRoutes } from "./organization-routes";
 import { SignIn, SignUp, VerifyEmailByToken } from "@/features/authentication";
+import { Suspense } from "react";
 
 // Define the type for the route configuration
 const routes: RouteObject[] = [
@@ -18,7 +19,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "/auth/sign-up",
-    element: <SignUp />,
+    element: (
+      <Suspense fallback={"LOADING"}>
+        <SignUp />
+      </Suspense>
+    ),
   },
   {
     path: "/auth/verify/:token",
@@ -26,7 +31,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "/auth/sign-in",
-    element: <SignIn />,
+    element: (
+      <Suspense fallback={"LOADING"}>
+        <SignIn />
+      </Suspense>
+    ),
   },
   {
     path: "/:orgId/sites",

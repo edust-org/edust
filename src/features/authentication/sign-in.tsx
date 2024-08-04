@@ -17,6 +17,7 @@ import { SocialAuth } from "./social-auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLoginMutation } from "@/app/api/v0/auth";
+import React from "react";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -27,7 +28,7 @@ const FormSchema = z.object({
   }),
 });
 
-export const SignIn = () => {
+export const SignIn: React.FC  = () => {
   const [login, { isLoading, isError }] = useLoginMutation();
   const navigate = useNavigate();
 

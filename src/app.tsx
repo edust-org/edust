@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthentication } from "./app/features/authentication";
 import { useGetProfileQuery } from "./app/api/v0/profile";
@@ -6,9 +6,25 @@ import { useGetProfileQuery } from "./app/api/v0/profile";
 type AppProps = {
   children: ReactNode;
 };
+const useAccessToken = () => {
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("access_token="));
+  return token ? token.split("=")[1] : null;
+};
+
 const App: React.FC<AppProps> = ({ children }) => {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetProfileQuery();
+  const token = useAccessToken();
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    setEnabled(!!token);
+  }, [token]);
+
+  const { data, error, isLoading } = useGetProfileQuery(undefined, {
+    skip: !enabled,
+  });
 
   React.useEffect(() => {
     if (isLoading) return;

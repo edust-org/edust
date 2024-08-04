@@ -18,6 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegisterMutation } from "@/app/api/v0/auth";
+import React from "react";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -31,7 +32,7 @@ const FormSchema = z.object({
   }),
 });
 
-export const SignUp = () => {
+const SignUp: React.FC = () => {
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -152,3 +153,4 @@ export const SignUp = () => {
     </>
   );
 };
+export default SignUp;
