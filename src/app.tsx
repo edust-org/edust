@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthentication } from "./app/features/authentication";
 import { useGetProfileQuery } from "./app/api/v0/profile";
-import { useAppSelector } from "./app/hooks";
 
 type AppProps = {
   children: ReactNode;
@@ -10,8 +9,7 @@ type AppProps = {
 const App: React.FC<AppProps> = ({ children }) => {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetProfileQuery();
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  console.log(isAuthenticated);
+
   React.useEffect(() => {
     if (isLoading) return;
     if (error) {
@@ -23,7 +21,15 @@ const App: React.FC<AppProps> = ({ children }) => {
     }
   }, [data, error, isLoading, dispatch]);
 
-  return <>{isLoading ? <p>Loading</p> : children}</>;
+  return (
+    <>
+      {isLoading ? (
+        <p className="text-7xl font-bold text-blue-600">Loading</p>
+      ) : (
+        children
+      )}
+    </>
+  );
 };
 
 export default App;

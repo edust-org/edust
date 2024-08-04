@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/app/hooks";
 import { Logo } from "@/assets/images";
 import { Navbar } from "@/components";
 import { Button, Typography } from "@/components/ui";
@@ -6,8 +5,6 @@ import { HaveOrganization } from "@/organizations/components";
 import { Helmet } from "react-helmet-async";
 
 export const Home = () => {
-  const profile = useAppSelector((state) => state.auth);
-  console.log(profile);
   return (
     <>
       <Helmet>
