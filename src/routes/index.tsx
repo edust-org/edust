@@ -7,6 +7,7 @@ import { organizationRoutes } from "./organization-routes";
 
 import Authentication from "@/features/authentication";
 import { Sites } from "@/features";
+import IsAuthenticated from "./is-authenticated";
 // Define the type for the route configuration
 
 const routes: RouteObject[] = [
@@ -27,7 +28,9 @@ const routes: RouteObject[] = [
     path: "/playground",
     element: (
       <Suspense fallback={"LOADING"}>
-        <Playground />
+        <IsAuthenticated>
+          <Playground />
+        </IsAuthenticated>
       </Suspense>
     ),
   },

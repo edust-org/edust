@@ -9,7 +9,9 @@ export const Navbar = () => {
       <Container>
         <nav className="flex items-center justify-between gap-4 py-2">
           <div>
-            <img src={Logo} alt="Edust Brand Logo" width={120} />
+            <Link to={"/"}>
+              <img src={Logo} alt="Edust Brand Logo" width={120} />
+            </Link>
           </div>
           <ul className="flex items-center gap-4">
             <li>

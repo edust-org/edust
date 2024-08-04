@@ -14,10 +14,12 @@ import {
   Typography,
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLoginMutation } from "@/app/api/v0/auth";
 import React from "react";
+import { useAppDispatch } from "@/app/hooks";
+import { setAuthentication } from "@/app/features/authentication";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -28,9 +30,11 @@ const FormSchema = z.object({
   }),
 });
 
-export const SignIn: React.FC  = () => {
+export const SignIn: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [login, { isLoading, isError }] = useLoginMutation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -44,11 +48,10 @@ export const SignIn: React.FC  = () => {
     login(data)
       .then((res) => {
         console.log(res);
+        dispatch(setAuthentication({ isAuthenticated: true }));
+        navigate(location.state?.from?.pathname || "/");
       })
       .catch((err) => console.error(err));
-
-    // redirect home route
-    // navigate("/", { replace: true });
   }
 
   return (
