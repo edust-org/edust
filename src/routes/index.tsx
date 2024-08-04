@@ -6,7 +6,7 @@ import { ErrorPage, Home, Playground } from "@/pages";
 import { organizationRoutes } from "./organization-routes";
 
 import Authentication from "@/features/authentication";
-import { Sites } from "@/features/sites";
+import { Sites } from "@/features";
 // Define the type for the route configuration
 
 const routes: RouteObject[] = [
