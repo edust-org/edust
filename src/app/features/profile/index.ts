@@ -1,6 +1,6 @@
 // profileSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../api/v0/profile";
+import { profileApi, User } from "../../api/v0/profile";
 export interface ProfileState {
   user: User | null;
   loading: boolean;
@@ -27,6 +27,24 @@ const profileSlice = createSlice({
     setProfileError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(profileApi.endpoints.getProfile.matchPending, () => {})
+      .addMatcher(
+        profileApi.endpoints.getProfile.matchFulfilled,
+        (state, action) => {
+          state.user = action.payload.data.user;
+          state.loading = false;
+        }
+      )
+      .addMatcher(
+        profileApi.endpoints.getProfile.matchRejected,
+        (state, action) => {
+          state.error = action.error.message || "Failed to fetch profile";
+          state.loading = false;
+        }
+      );
   },
 });
 export const { setProfile, setProfileLoading, setProfileError } =
