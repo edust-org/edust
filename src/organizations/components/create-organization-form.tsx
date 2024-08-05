@@ -25,7 +25,7 @@ const FormSchema = z.object({
   }),
 });
 
-interface Props {
+export interface Props {
   children: ReactElement<HTMLButtonElement>;
   forPage?: boolean;
 }

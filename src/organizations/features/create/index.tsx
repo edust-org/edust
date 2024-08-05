@@ -1,7 +1,7 @@
 import { Button, Typography } from "@/components/ui";
-import { CreateOrganizationForm } from "../../components/create-organization-form";
-import { ImgCreateOrganizations, Logo } from "@/assets/images";
 import { Link } from "react-router-dom";
+import { CreateOrganizationForm } from "@/organizations/components";
+import assets from "@/assets/images";
 
 export const CreateOrganization = () => {
   return (
@@ -9,7 +9,7 @@ export const CreateOrganization = () => {
       <div className="flex items-center gap-4 h-screen overflow-hidden">
         <div className="hidden md:block md:h-full flex-1 relative">
           <img
-            src={ImgCreateOrganizations}
+            src={assets.imgCreateOrganizations}
             alt=""
             className="h-full w-full object-cover grayscale"
           />
@@ -132,7 +132,7 @@ export const CreateOrganization = () => {
           </div>
         </div>
         <div className="max-w-[550px] p-4 md:pe-8 flex-1 xl:flex-none 2xl:p-24 2xl:max-w-[800px]">
-          <img src={Logo} alt="" width={180} className="mx-auto" />
+          <img src={assets.logo} alt="" width={180} className="mx-auto" />
           <Typography variant="h2" className="text-center">
             Create a free new organization
           </Typography>

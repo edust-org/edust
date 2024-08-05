@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Logo } from "@/assets/images";
 import { Button } from "../ui";
+import assets from "@/assets/images";
 
 export const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ export const Navbar = () => {
         <nav className="flex items-center justify-between gap-4 py-2">
           <div>
             <Link to={"/"}>
-              <img src={Logo} alt="Edust Brand Logo" width={120} />
+              <img src={assets.logo} alt="Edust Brand Logo" width={120} />
             </Link>
           </div>
           <ul className="flex items-center gap-4">
