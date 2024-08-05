@@ -1,8 +1,5 @@
-import {
-  CreateOrganization,
-  CustomizeSite,
-  SitesBuilder,
-} from "@/organizations";
+import { SitesBuilder } from "@/organizations/features/sites-builder";
+import { CreateOrganization, CustomizeSite } from "@/organizations/features";
 
 export const organizationRoutes = [
   {

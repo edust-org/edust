@@ -10,9 +10,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui";
-import { Logo } from "@/assets/images";
-
-import { CreateOrganizationForm } from "../create-organization-form";
+import { CreateOrganizationForm } from "..";
+import assets from "@/assets/images";
 
 export const HaveOrganization = () => {
   const { value: isShowForm, setTrue: isShowFormTrue } = useBoolean(false);
@@ -36,7 +35,7 @@ export const HaveOrganization = () => {
                 <AlertDialogTitle className="text-center">
                   Create a free new organization
                 </AlertDialogTitle>
-                <img src={Logo} alt="" width={180} className="mx-auto" />
+                <img src={assets.logo} alt="" width={180} className="mx-auto" />
               </AlertDialogHeader>
 
               <CreateOrganizationForm>

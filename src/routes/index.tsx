@@ -1,23 +1,37 @@
-import { Authentication, Sites } from "@/features";
-import { ErrorPage, Home } from "@/pages";
+import { ErrorPage, Home, Playground } from "@/pages";
 
-import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { organizationRoutes } from "./organization-routes";
 
+import Authentication from "@/features/authentication";
+import { Sites } from "@/features";
+import IsAuthenticated from "./is-authenticated";
 // Define the type for the route configuration
-const routes: RouteObject[] = [
+
+const routes = [
   {
     path: "/",
     element: <Home />,
     errorElement: <ErrorPage />,
   },
   {
+    path: "/playground",
+    element: (
+      <IsAuthenticated>
+        <Playground />
+      </IsAuthenticated>
+    ),
+  },
+  {
     path: "/auth/sign-up",
-    element: <Authentication component="signUp" />,
+    element: <Authentication.SignUp />,
+  },
+  {
+    path: "/auth/verify/:token",
+    element: <Authentication.VerifyEmailByToken />,
   },
   {
     path: "/auth/sign-in",
-    element: <Authentication component="signIn" />,
+    element: <Authentication.SignIn />,
   },
   {
     path: "/:orgId/sites",
@@ -26,8 +40,4 @@ const routes: RouteObject[] = [
   ...organizationRoutes,
 ];
 
-// Explicitly type the router using ReturnType
-const router: ReturnType<typeof createBrowserRouter> =
-  createBrowserRouter(routes);
-
-export default router;
+export default routes;
