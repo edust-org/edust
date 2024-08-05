@@ -1,5 +1,4 @@
 import { useLogoutMutation } from "@/app/api/v0/auth";
-import Navbar from "@/components/navbar/navbar";
 import { Button, Typography } from "@/components/ui";
 import { Counter } from "@/features/counter";
 
@@ -27,7 +26,6 @@ export const Playground = () => {
 
         <Counter />
       </div>
-      <Navbar />
     </>
   );
 };
