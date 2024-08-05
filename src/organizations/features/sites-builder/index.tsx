@@ -1,4 +1,3 @@
-import { Container } from "@/components";
 import { Button, Input, Typography } from "@/components/ui";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +6,7 @@ export const SitesBuilder = () => {
   const [data, setData] = useState([]);
   return (
     <div>
-      <Container>
+      <div className="container">
         <form className="py-5">
           <Input type="text" placeholder="page-name" className="mb-4" />
           <Button type="submit">Create a Page</Button>
@@ -29,7 +28,7 @@ export const SitesBuilder = () => {
               </div>
             ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

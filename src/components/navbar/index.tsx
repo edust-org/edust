@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { Logo } from "@/assets/images";
 import { Button } from "../ui";
-import { Container } from "../container";
 
 export const Navbar = () => {
   return (
     <div className="shadow-sm">
-      <Container>
+      <div className="container">
         <nav className="flex items-center justify-between gap-4 py-2">
           <div>
             <Link to={"/"}>
@@ -30,7 +29,7 @@ export const Navbar = () => {
             </Link>
           </div>
         </nav>
-      </Container>
+      </div>
     </div>
   );
 };

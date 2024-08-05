@@ -2,6 +2,8 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthentication } from "./app/features/authentication";
 import { useGetProfileQuery } from "./app/api/v0/profile";
+import { useAppSelector } from "./app/hooks";
+import Loading from "./components/loading";
 
 type AppProps = {
   children: ReactNode;
@@ -17,6 +19,7 @@ const App: React.FC<AppProps> = ({ children }) => {
   const dispatch = useDispatch();
   const token = useAccessToken();
   const [enabled, setEnabled] = useState(false);
+  const auth = useAppSelector((state) => state.authentication);
 
   useEffect(() => {
     setEnabled(!!token);
@@ -26,26 +29,21 @@ const App: React.FC<AppProps> = ({ children }) => {
     skip: !enabled,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading) return;
-    if (error) {
-      dispatch(setAuthentication({ isAuthenticated: false }));
-    } else if (data) {
-      dispatch(setAuthentication({ isAuthenticated: true }));
-    } else {
-      dispatch(setAuthentication({ isAuthenticated: false }));
-    }
-  }, [data, error, isLoading, dispatch]);
 
-  return (
-    <>
-      {isLoading ? (
-        <p className="text-7xl font-bold text-blue-600">Loading</p>
-      ) : (
-        children
-      )}
-    </>
-  );
+    if (data?.data.user.email) {
+      dispatch(
+        setAuthentication({ isAuthenticated: true, user: data?.data.user })
+      );
+    }
+
+    if (!token) {
+      dispatch(setAuthentication({ isLoading: false }));
+    }
+  }, [data, error, isLoading, dispatch, token]);
+
+  return <>{isLoading && auth.isLoading ? <Loading.Spinner /> : children}</>;
 };
 
 export default App;

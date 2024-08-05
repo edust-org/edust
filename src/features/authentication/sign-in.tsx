@@ -48,7 +48,7 @@ export const SignIn: React.FC = () => {
     login(data)
       .then((res) => {
         console.log(res);
-        dispatch(setAuthentication({ isAuthenticated: true }));
+        dispatch(setAuthentication({ isAuthenticated: true, user: null }));
         navigate(location.state?.from?.pathname || "/");
       })
       .catch((err) => console.error(err));

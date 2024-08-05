@@ -8,7 +8,7 @@ import authenticationReducer from "./features/authentication";
 
 const logger = createLogger({
   // optional configuration
-  collapsed: true,
+  // collapsed: true,
   diff: true,
 });
 
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   ...rootReducerApiV0,
   counter: counterReducer,
   profile: profileReducer,
-  auth: authenticationReducer,
+  authentication: authenticationReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
