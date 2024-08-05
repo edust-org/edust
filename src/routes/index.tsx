@@ -1,6 +1,3 @@
-import { Suspense } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
-
 import { ErrorPage, Home, Playground } from "@/pages";
 
 import { organizationRoutes } from "./organization-routes";
@@ -10,37 +7,23 @@ import { Sites } from "@/features";
 import IsAuthenticated from "./is-authenticated";
 // Define the type for the route configuration
 
-const routes: RouteObject[] = [
+const routes = [
   {
     path: "/",
-    element: (
-      <Suspense fallback={"LOADING"}>
-        <Home />
-      </Suspense>
-    ),
-    errorElement: (
-      <Suspense fallback={"LOADING"}>
-        <ErrorPage />
-      </Suspense>
-    ),
+    element: <Home />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/playground",
     element: (
-      <Suspense fallback={"LOADING"}>
-        <IsAuthenticated>
-          <Playground />
-        </IsAuthenticated>
-      </Suspense>
+      <IsAuthenticated>
+        <Playground />
+      </IsAuthenticated>
     ),
   },
   {
     path: "/auth/sign-up",
-    element: (
-      <Suspense fallback={"LOADING"}>
-        <Authentication.SignUp />
-      </Suspense>
-    ),
+    element: <Authentication.SignUp />,
   },
   {
     path: "/auth/verify/:token",
@@ -48,25 +31,13 @@ const routes: RouteObject[] = [
   },
   {
     path: "/auth/sign-in",
-    element: (
-      <Suspense fallback={"LOADING"}>
-        <Authentication.SignIn />
-      </Suspense>
-    ),
+    element: <Authentication.SignIn />,
   },
   {
     path: "/:orgId/sites",
-    element: (
-      <Suspense fallback={"LOADING"}>
-        <Sites />
-      </Suspense>
-    ),
+    element: <Sites />,
   },
   ...organizationRoutes,
 ];
 
-// Explicitly type the router using ReturnType
-const router: ReturnType<typeof createBrowserRouter> =
-  createBrowserRouter(routes);
-
-export default router;
+export default routes;

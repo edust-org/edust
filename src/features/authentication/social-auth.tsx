@@ -1,4 +1,4 @@
-import { IconsFacebook } from "@/assets/images";
+import assets from "@/assets/images";
 import { FcGoogle } from "react-icons/fc";
 
 export const SocialAuth = () => {
@@ -8,7 +8,7 @@ export const SocialAuth = () => {
         <FcGoogle className="text-3xl" />
       </button>
       <button className="bg-white shadow border border-gray-200 p-2 rounded-full">
-        <img src={IconsFacebook} alt="" width={30} />
+        <img src={assets.iconsFacebook} alt="" width={30} />
       </button>
     </div>
   );

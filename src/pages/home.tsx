@@ -1,4 +1,4 @@
-import { Logo } from "@/assets/images";
+import assets from "@/assets/images";
 import { Navbar } from "@/components";
 import { Button, Typography } from "@/components/ui";
 import { HaveOrganization } from "@/organizations/components";
@@ -15,7 +15,7 @@ export const Home = () => {
       <Navbar />
       <div className="h-screen flex items-center justify-center flex-col gap-4">
         <Typography variant="h1">Welcome to our Edust!</Typography>
-        <img src={Logo} alt="" />
+        <img src={assets.logo} alt="" />
         <Button>Get Started</Button>
       </div>
     </>
