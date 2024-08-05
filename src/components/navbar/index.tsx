@@ -15,23 +15,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import assets from "@/assets/images";
 import { IoMenuSharp } from "react-icons/io5";
-import { useLogoutMutation } from "@/app/api/v0/auth";
 import { useAppSelector } from "@/app/hooks";
+import { NavbarRightMenus } from "./navbar-right-menus";
 
 export const Navbar = () => {
-  const [logout, { isLoading }] = useLogoutMutation();
   const auth = useAppSelector((state) => state.authentication);
-  
-  const handleLogout = async () => {
-    try {
-      await logout().unwrap();
-      console.log("Logged out successfully");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    } finally {
-      window.location.reload();
-    }
-  };
 
   return (
     <header className="shadow-sm">
@@ -127,9 +115,7 @@ export const Navbar = () => {
         </Sheet>
         <div className="flex items-center gap-4">
           {auth.isAuthenticated ? (
-            <Button variant={"destructive"} onClick={handleLogout}>
-              {isLoading ? "Loading..." : "Logout"}
-            </Button>
+            <NavbarRightMenus />
           ) : (
             <Link to={"/auth/sign-in"}>
               <Button>Sign In</Button>
