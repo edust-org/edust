@@ -46,8 +46,7 @@ export const SignIn: React.FC = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     login(data)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         dispatch(setAuthentication({ isAuthenticated: true, user: null }));
         navigate(location.state?.from?.pathname || "/");
       })

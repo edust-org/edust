@@ -1,11 +1,11 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthentication } from "./app/features/authentication";
-import { useGetProfileQuery } from "./app/api/v0/profile";
 import { useAppSelector } from "./app/hooks";
 import Loading from "./components/loading";
 import { useRoutes } from "react-router-dom";
 import routes from "./routes";
+import { useUserGetQuery } from "./app/api/v0/user";
 
 const useAccessToken = () => {
   const token = document.cookie
@@ -25,7 +25,7 @@ const App: React.FC = () => {
     setEnabled(!!token);
   }, [token]);
 
-  const { data, error, isLoading } = useGetProfileQuery(undefined, {
+  const { data, error, isLoading } = useUserGetQuery(undefined, {
     skip: !enabled,
   });
 
