@@ -15,6 +15,18 @@ export const Playground = () => {
           variant="outline"
           onClick={() => {
             toast({
+              title: "Uh oh! Something went wrong.",
+              description: "There was a problem with your request.",
+              action: <ToastAction altText="Try again">Try again</ToastAction>,
+            });
+          }}
+        >
+          default
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
               variant: "destructive",
               title: "Uh oh! Something went wrong.",
               description: "There was a problem with your request.",
@@ -22,7 +34,20 @@ export const Playground = () => {
             });
           }}
         >
-          Show Toast
+          destructive
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              variant: "success",
+              title: "Uh oh! Something went wrong.",
+              description: "There was a problem with your request.",
+              action: <ToastAction altText="Try again">Try again</ToastAction>,
+            });
+          }}
+        >
+          success
         </Button>
       </div>
     </>

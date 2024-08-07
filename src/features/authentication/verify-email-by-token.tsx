@@ -18,11 +18,10 @@ export const VerifyEmailByToken: React.FC = () => {
       verify(params.token)
         .unwrap()
         .then((res) => {
-          console.log(res);
           if (res?.data.status) {
             toast({
-              variant: "default",
-              title: "Please sign in your account!",
+              variant: "success",
+              title: res?.data.message,
               description: res?.data.message,
             });
 

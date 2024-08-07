@@ -20,6 +20,7 @@ import { useLoginMutation } from "@/app/api/v0/auth";
 import React from "react";
 import { useAppDispatch } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/authentication";
+import { toast } from "@/hooks/shadcn-ui";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -46,11 +47,28 @@ export const SignIn: React.FC = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     login(data)
-      .then(() => {
-        dispatch(setAuthentication({ isAuthenticated: true, user: null }));
-        navigate(location.state?.from?.pathname || "/");
+      .unwrap()
+      .then((res) => {
+        if (res?.data.status) {
+          toast({
+            variant: "success",
+            title: res?.data.message,
+          });
+
+          dispatch(setAuthentication({ isAuthenticated: true, user: null }));
+          navigate(location.state?.from?.pathname || "/");
+        }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.log(err);
+        console.log(err?.data);
+        if (err?.data.status) {
+          toast({
+            variant: "destructive",
+            title: err?.data.message,
+          });
+        }
+      });
   }
 
   return (
