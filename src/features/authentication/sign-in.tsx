@@ -21,6 +21,7 @@ import React from "react";
 import { useAppDispatch } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/authentication";
 import { toast } from "@/hooks/shadcn-ui";
+import { BarLoader } from "react-spinners";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -33,7 +34,7 @@ const FormSchema = z.object({
 
 export const SignIn: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [login, { isLoading, isError }] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,23 +50,21 @@ export const SignIn: React.FC = () => {
     login(data)
       .unwrap()
       .then((res) => {
-        if (res?.data.status) {
+        if (res?.status) {
           toast({
             variant: "success",
-            title: res?.data.message,
+            title: res?.message,
           });
 
           dispatch(setAuthentication({ isAuthenticated: true, user: null }));
           navigate(location.state?.from?.pathname || "/");
         }
       })
-      .catch((err) => {
-        console.log(err);
-        console.log(err?.data);
-        if (err?.data.status) {
+      .catch((error) => {
+        if (error?.data?.status) {
           toast({
             variant: "destructive",
-            title: err?.data.message,
+            title: error?.data?.message,
           });
         }
       });
@@ -73,7 +72,6 @@ export const SignIn: React.FC = () => {
 
   return (
     <>
-      {console.log({ isLoading, isError })}
       <Helmet>
         <title>Sign In to Edist - Access Your Account</title>
       </Helmet>
@@ -115,8 +113,8 @@ export const SignIn: React.FC = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Sign In
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
 

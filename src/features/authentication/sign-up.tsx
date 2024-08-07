@@ -13,15 +13,15 @@ import {
   Typography,
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegisterMutation } from "@/app/api/v0/auth";
 import React, { useState } from "react";
-import { useAppDispatch } from "@/app/hooks";
 import assets from "@/assets/images";
 import { MailOpen } from "lucide-react";
 import { BarLoader } from "react-spinners";
+import { toast } from "@/hooks/shadcn-ui";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -36,9 +36,6 @@ const FormSchema = z.object({
 });
 
 export const SignUp: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [confirmAccount, setConfirmAccount] = useState({
     isConfirm: false,
     message: "",
@@ -53,23 +50,36 @@ export const SignUp: React.FC = () => {
     },
   });
 
-  const [register, { isLoading, error, data }] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    try {
-      const result = await register(data).unwrap();
-      setConfirmAccount({
-        ...confirmAccount,
-        isConfirm: true,
-        message: result.data.message,
+    register(data)
+      .unwrap()
+      .then((res) => {
+        if (res.status) {
+          toast({
+            variant: "success",
+            title: res?.message,
+          });
+
+          setConfirmAccount({
+            ...confirmAccount,
+            isConfirm: true,
+            message: res.message,
+          });
+        }
+      })
+      .catch((error) => {
+        if (error?.data?.status) {
+          toast({
+            variant: "destructive",
+            title: error?.data?.message,
+          });
+        }
       });
-    } catch (err) {
-      console.log(err?.data?.error);
-    }
   }
 
   return (
     <>
-      {console.log({ isLoading, error, data })}
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>
@@ -163,7 +173,7 @@ export const SignUp: React.FC = () => {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>

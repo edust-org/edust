@@ -18,22 +18,22 @@ export const VerifyEmailByToken: React.FC = () => {
       verify(params.token)
         .unwrap()
         .then((res) => {
-          if (res?.data.status) {
+          console.log(res);
+          if (res?.status) {
             toast({
               variant: "success",
-              title: res?.data.message,
-              description: res?.data.message,
+              title: res?.message,
             });
 
             navigate("/auth/sign-in");
           }
         })
-        .catch((err) => {
-          if (err?.data?.error) {
+        .catch((error) => {
+          if (error?.data?.error) {
             toast({
               variant: "destructive",
               title: "Uh oh! Something went wrong.",
-              description: err?.data?.error,
+              description: error?.data?.error,
             });
           }
         });
