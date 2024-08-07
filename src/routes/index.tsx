@@ -11,7 +11,6 @@ const routes = [
   {
     path: "/",
     element: <Home />,
-    errorElement: <ErrorPage />,
   },
   {
     path: "/playground",
@@ -21,6 +20,7 @@ const routes = [
       </IsAuthenticated>
     ),
   },
+  // start Auth routes
   {
     path: "/auth/sign-up",
     element: <Authentication.SignUp />,
@@ -33,11 +33,16 @@ const routes = [
     path: "/auth/sign-in",
     element: <Authentication.SignIn />,
   },
+  // end Auth routes
   {
     path: "/:orgId/sites",
     element: <Sites />,
   },
   ...organizationRoutes,
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ];
 
 export default routes;
