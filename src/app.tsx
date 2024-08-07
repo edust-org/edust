@@ -6,6 +6,7 @@ import Loading from "./components/loading";
 import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 import { useUserGetQuery } from "./app/api/v0/user";
+import { Toaster } from "./components/ui/toaster";
 
 const useAccessToken = () => {
   const token = document.cookie
@@ -48,7 +49,13 @@ const App: React.FC = () => {
       {isLoading && auth.isLoading ? (
         <Loading.Spinner />
       ) : (
-        <Suspense fallback={<Loading.Spinner />}>{routeElements}</Suspense>
+        <Suspense fallback={<Loading.Spinner />}>
+          {/* Render hole component in routerElements */}
+          {routeElements}
+
+          {/* shadncn-ui: Toaster start  */}
+          <Toaster />
+        </Suspense>
       )}
     </>
   );

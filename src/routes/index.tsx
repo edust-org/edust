@@ -5,6 +5,7 @@ import { organizationRoutes } from "./organization-routes";
 import Authentication from "@/features/authentication";
 import { Sites } from "@/features";
 import IsAuthenticated from "./is-authenticated";
+
 // Define the type for the route configuration
 
 const routes = [
@@ -14,11 +15,7 @@ const routes = [
   },
   {
     path: "/playground",
-    element: (
-      <IsAuthenticated>
-        <Playground />
-      </IsAuthenticated>
-    ),
+    element: <Playground />,
   },
   // start Auth routes
   {

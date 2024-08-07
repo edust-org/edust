@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import {
   Button,
   Form,
@@ -19,10 +18,10 @@ import { Helmet } from "react-helmet-async";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegisterMutation } from "@/app/api/v0/auth";
 import React, { useState } from "react";
-import { setAuthentication } from "@/app/features/authentication";
 import { useAppDispatch } from "@/app/hooks";
 import assets from "@/assets/images";
 import { MailOpen } from "lucide-react";
+import { BarLoader } from "react-spinners";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -54,28 +53,23 @@ export const SignUp: React.FC = () => {
     },
   });
 
-  const [register, { isLoading, error }] = useRegisterMutation();
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-    register(data)
-      .then((res) => {
-        console.log(res);
-
-        setConfirmAccount({
-          ...confirmAccount,
-          isConfirm: true,
-          message: res.data.data.message,
-        });
-
-        // dispatch(setAuthentication({ isAuthenticated: true }));
-        // navigate(location.state?.from?.pathname || "/");
-      })
-      .catch((err) => console.error(err));
+  const [register, { isLoading, error, data }] = useRegisterMutation();
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      const result = await register(data).unwrap();
+      setConfirmAccount({
+        ...confirmAccount,
+        isConfirm: true,
+        message: result.data.message,
+      });
+    } catch (err) {
+      console.log(err?.data?.error);
+    }
   }
 
   return (
     <>
-      {console.log({ isLoading, error })}
+      {console.log({ isLoading, error, data })}
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>
@@ -170,7 +164,7 @@ export const SignUp: React.FC = () => {
                   </div>
                 </div>
                 <Button type="submit" className="w-full">
-                  {isLoading ? "Loading..." : "Create an account"}
+                  {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
 

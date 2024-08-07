@@ -1,23 +1,45 @@
 import { useVerifyEmailByTokenMutation } from "@/app/api/v0/auth";
 import assets from "@/assets/images";
 import { Typography } from "@/components/ui";
+import { useToast } from "@/hooks/shadcn-ui";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
-export const VerifyEmailByToken: React.FC = () => {
-  const params = useParams();
 
+export const VerifyEmailByToken: React.FC = () => {
+  const { toast } = useToast();
+  const params = useParams();
   const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (params.token) {
       verify(params.token)
-        .then((res) => console.log(JSON.stringify(res)))
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+          if (res?.data.status) {
+            toast({
+              variant: "default",
+              title: "Please sign in your account!",
+              description: res?.data.message,
+            });
+
+            navigate("/auth/sign-in");
+          }
+        })
         .catch((err) => {
-          console.error(console.log(JSON.stringify(err)));
+          if (err?.data?.error) {
+            toast({
+              variant: "destructive",
+              title: "Uh oh! Something went wrong.",
+              description: err?.data?.error,
+            });
+          }
         });
     }
-  }, [params.token, verify]);
+  }, [navigate, params.token, toast, verify]);
 
   return (
     <div className="h-screen flex items-center justify-center p-4">
@@ -28,7 +50,12 @@ export const VerifyEmailByToken: React.FC = () => {
             <Typography variant="h3">Verifying Your Account</Typography>
             {isLoading && <BeatLoader />}
           </div>
-          <Typography>Working for verification</Typography>
+          {!isError && <Typography>Working for verification</Typography>}
+          {isError && (
+            <Typography className="text-red-500">
+              Close this tab and Please Try again!
+            </Typography>
+          )}
         </div>
       </div>
     </div>
