@@ -30,6 +30,10 @@ const routes = [
     path: "/auth/sign-in",
     element: <Authentication.SignIn />,
   },
+  {
+    path: "/auth/forgot-password",
+    element: <Authentication.ForgotPassword />,
+  },
   // end Auth routes
   {
     path: "/:orgId/sites",

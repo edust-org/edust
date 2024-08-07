@@ -17,7 +17,6 @@ import { SocialAuth } from "./social-auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLoginMutation } from "@/app/api/v0/auth";
-import React from "react";
 import { useAppDispatch } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/authentication";
 import { toast } from "@/hooks/shadcn-ui";
@@ -122,7 +121,10 @@ export const SignIn: React.FC = () => {
               <SocialAuth />
             </div>
             <Typography className="text-center mb-4">
-              <Link to={"/auth/sign-in"} className="hover:underline transition">
+              <Link
+                to={"/auth/forgot-password"}
+                className="hover:underline transition"
+              >
                 Forgot Your Password?
               </Link>
             </Typography>

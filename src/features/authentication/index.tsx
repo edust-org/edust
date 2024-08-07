@@ -11,7 +11,12 @@ const VerifyEmailByToken = lazy(() =>
     default: module.VerifyEmailByToken,
   }))
 );
+const ForgotPassword = lazy(() =>
+  import("./forgot-password").then((module) => ({
+    default: module.ForgotPassword,
+  }))
+);
 
-const Authentication = { SignUp, SignIn, VerifyEmailByToken };
+const Authentication = { SignUp, SignIn, VerifyEmailByToken, ForgotPassword };
 
 export default Authentication;
