@@ -31,6 +31,12 @@ const VerifyOtp = lazy(() =>
   }))
 );
 
+const ResetWithNewPassword = lazy(() =>
+  import("./reset-with-new-password").then((module) => ({
+    default: module.ResetWithNewPassword,
+  }))
+);
+
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
     message: "Email must be at least 2 characters.",
@@ -64,6 +70,8 @@ export const ForgotPassword = () => {
         <title>Sign In to Edist - Access Your Account</title>
       </Helmet>
       <div className="h-screen flex items-center justify-center p-4">
+        <ResetWithNewPassword />
+
         {isVerifyOtp.isShow && <VerifyOtp />}
         {!isVerifyOtp.isShow && (
           <Form {...form}>

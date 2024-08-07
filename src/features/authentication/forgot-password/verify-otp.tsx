@@ -1,7 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
 import {
   Button,
   Form,
@@ -10,31 +6,47 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
   Typography,
 } from "@/components/ui";
 import { BarLoader } from "react-spinners";
 import assets from "@/assets/images";
-import { CircleHelp, MailOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { MailOpen } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { toast } from "@/hooks/shadcn-ui";
 
 const FormSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }).min(2, {
-    message: "Email must be at least 2 characters.",
+  otp: z.string().min(4, {
+    message: "Your one-time password must be 4 characters.",
   }),
 });
-
 export const VerifyOtp = () => {
   const isLoading = false;
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "",
+      otp: "",
     },
   });
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
   }
+
   return (
     <>
       <Form {...form}>
@@ -49,36 +61,43 @@ export const VerifyOtp = () => {
               <MailOpen className="mx-auto w-28 h-28" />
             </div>
           </div>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 text-center"
+          >
             <FormField
               control={form.control}
-              name="email"
+              name="otp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Enter Your Email Account</FormLabel>
+                  <FormLabel>One-Time OPT For Password</FormLabel>
                   <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="example@gmail.com"
-                      {...field}
-                    />
+                    <div className="flex justify-center">
+                      <InputOTP maxLength={4} {...field}>
+                        <InputOTPGroup>
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                          <InputOTPSlot index={3} />
+                        </InputOTPGroup>
+                      </InputOTP>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? <BarLoader color="#fff" /> : "Verify OTP"}
             </Button>
           </form>
-          <div className="text-center mt-4">
-            <Typography>
-              Didn’t receive the OTP yet?
-              <br />
-              Check your email address or
-              <Button variant={"link"}x>Resend OTP</Button>
-            </Typography>
-          </div>
+          <Typography className="text-center text-sm text-muted-foreground">
+            Didn’t receive the OTP yet?
+            <br />
+            Check your email address or
+            <Button variant={"link"}>Resend OTP</Button>
+          </Typography>
         </div>
       </Form>
     </>
