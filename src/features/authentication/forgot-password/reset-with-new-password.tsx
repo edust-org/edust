@@ -18,7 +18,7 @@ import { Helmet } from "react-helmet-async";
 import { useLoginMutation } from "@/app/api/v0/auth";
 import { lazy, useState } from "react";
 import { useAppDispatch } from "@/app/hooks";
-import { setAuthentication } from "@/app/features/authentication";
+import { setAuthentication } from "@/app/features/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { BarLoader } from "react-spinners";
 import assets from "@/assets/images";

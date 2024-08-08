@@ -19,7 +19,7 @@ import { useAppSelector } from "@/app/hooks";
 import { NavbarRightMenus } from "./navbar-right-menus";
 
 export const Navbar = () => {
-  const auth = useAppSelector((state) => state.authentication);
+  const auth = useAppSelector((state) => state.auth.authentication);
 
   return (
     <header className="shadow-sm">

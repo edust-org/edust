@@ -4,7 +4,7 @@ import counterReducer from "./features/counter/counter-slice";
 import { createLogger } from "redux-logger";
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0";
 import profileReducer from "./features/profile";
-import authenticationReducer from "./features/authentication";
+import authReducers from "./features/auth";
 
 const logger = createLogger({
   // optional configuration
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   ...rootReducerApiV0,
   counter: counterReducer,
   profile: profileReducer,
-  authentication: authenticationReducer,
+  auth: authReducers,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
