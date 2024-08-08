@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAuthentication } from "./app/features/authentication";
+import { setAuthentication } from "./app/features/auth";
 import { useAppSelector } from "./app/hooks";
 import Loading from "./components/loading";
 import { useRoutes } from "react-router-dom";
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const token = useAccessToken();
   const [enabled, setEnabled] = useState(false);
-  const auth = useAppSelector((state) => state.authentication);
+  const auth = useAppSelector((state) => state.auth.authentication);
 
   useEffect(() => {
     setEnabled(!!token);
