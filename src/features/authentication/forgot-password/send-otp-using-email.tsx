@@ -13,37 +13,34 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useResetPasswordMutation } from "@/app/api/v0/auth";
+import { useForgotPasswordMutation } from "@/app/api/v0/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { BarLoader } from "react-spinners";
 import assets from "@/assets/images";
-import { KeySquare } from "lucide-react";
+import { CircleHelp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const FormSchema = z.object({
-  newPassword: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+  email: z.string().email({ message: "Invalid email address." }).min(2, {
+    message: "Email must be at least 2 characters.",
   }),
 });
-export const ResetWithNewPassword = () => {
-  const [searchParams] = useSearchParams();
-  const email = searchParams.get("email");
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+export const SendOtpUsingEmail = () => {
+  const [, setSearchParams] = useSearchParams();
 
-  const navigate = useNavigate();
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      newPassword: "",
+      email: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ newPassword: data.newPassword, email });
-    resetPassword({ newPassword: data.newPassword, email })
+    forgotPassword(data)
       .unwrap()
       .then((res) => {
         if (res?.status) {
@@ -51,7 +48,7 @@ export const ResetWithNewPassword = () => {
             variant: "success",
             title: res?.message,
           });
-          navigate("/auth/sign-in");
+          setSearchParams(`step=verify-otp&email=${data.email}`);
         }
       })
       .catch((error) => {
@@ -67,7 +64,7 @@ export const ResetWithNewPassword = () => {
   return (
     <>
       <Helmet>
-        <title>Sign In to Edist - Access Your Account</title>
+        <title>Forgot Password | Edust</title>
       </Helmet>
       <div className="h-screen flex items-center justify-center p-4">
         <Form {...form}>
@@ -75,22 +72,23 @@ export const ResetWithNewPassword = () => {
             <div className="text-center space-y-4">
               <img src={assets.logo} alt="" className="mx-auto" width={250} />
               <div className="space-y-2">
-                <Typography variant="h3">Change Your Password</Typography>
-                <Typography>
-                  Enter your new password below to change your password
-                </Typography>
-                <KeySquare className="mx-auto w-28 h-28" />
+                <Typography variant="h3">Forgot Password?</Typography>
+                <CircleHelp className="mx-auto w-28 h-28" />
               </div>
             </div>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
-                name="newPassword"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Enter your new password</FormLabel>
+                    <FormLabel>Enter Your Email Account</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="******" {...field} />
+                      <Input
+                        type="email"
+                        placeholder="example@gmail.com"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
