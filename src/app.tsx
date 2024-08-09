@@ -7,6 +7,7 @@ import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 import { useUserGetQuery } from "./app/api/v0/user";
 import { Toaster } from "./components/ui/toaster";
+import { HaveAnOrgAccount } from "./organizations/components";
 
 const useAccessToken = () => {
   const token = document.cookie
@@ -55,6 +56,8 @@ const App: React.FC = () => {
 
           {/* shadncn-ui: Toaster start  */}
           <Toaster />
+
+          {auth?.user && <HaveAnOrgAccount auth={auth} />}
         </Suspense>
       )}
     </>

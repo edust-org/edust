@@ -2,11 +2,13 @@ import { Button, Typography } from "@/components/ui";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/hooks/shadcn-ui";
 import { Counter } from "@/features/counter";
+import { Navbar } from "@/components";
 
 export const Playground = () => {
   const { toast } = useToast();
   return (
     <>
+      <Navbar />
       <div className="container">
         <Typography variant="h1">Playground</Typography>
         <Counter />

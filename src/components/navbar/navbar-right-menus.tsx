@@ -30,19 +30,46 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { useLogoutMutation } from "@/app/api/v0/auth";
+import { toast } from "@/hooks/shadcn-ui";
+import { useAppDispatch } from "@/app/hooks";
+import { setAuthentication } from "@/app/features/auth";
 
 export const NavbarRightMenus = () => {
+  const dispatch = useAppDispatch();
   const [logout] = useLogoutMutation();
 
-  const handleLogout = async () => {
-    try {
-      await logout().unwrap();
-      console.log("Logged out successfully");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    } finally {
-      window.location.reload();
-    }
+  const handleLogout = () => {
+    logout()
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+        if (res?.status) {
+          toast({
+            variant: "success",
+            title: res?.message,
+          });
+
+          // Remove user data from state
+          dispatch(
+            setAuthentication({
+              isAuthenticated: false,
+              user: null,
+              isLoading: false,
+            })
+          );
+
+          // Clear local store all data
+          localStorage.clear();
+        }
+      })
+      .catch((error) => {
+        if (error?.data?.status) {
+          toast({
+            variant: "destructive",
+            title: error?.data?.message,
+          });
+        }
+      });
   };
 
   return (

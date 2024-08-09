@@ -1,7 +1,12 @@
-import { Button, Typography } from "@/components/ui";
-import { Link } from "react-router-dom";
-import { CreateOrganizationForm } from "@/organizations/components";
+import { lazy } from "react";
+import { Typography } from "@/components/ui";
 import assets from "@/assets/images";
+
+const CreateOrganizationForm = lazy(() =>
+  import("./create-organization-form").then((module) => ({
+    default: module.CreateOrganizationForm,
+  }))
+);
 
 export const CreateOrganization = () => {
   return (
@@ -136,11 +141,7 @@ export const CreateOrganization = () => {
           <Typography variant="h2" className="text-center">
             Create a free new organization
           </Typography>
-          <CreateOrganizationForm forPage>
-            <Button type="button" variant={"link"}>
-              <Link to={"/auth/sign-in"}>Sign In</Link>
-            </Button>
-          </CreateOrganizationForm>
+          <CreateOrganizationForm />
         </div>
       </div>
     </>

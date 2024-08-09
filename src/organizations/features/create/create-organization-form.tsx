@@ -1,8 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ReactElement } from "react";
-
 import {
   Button,
   Form,
@@ -13,7 +11,6 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui";
-import { useNavigate } from "react-router-dom";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const FormSchema = z.object({
@@ -25,17 +22,7 @@ const FormSchema = z.object({
   }),
 });
 
-export interface Props {
-  children: ReactElement<HTMLButtonElement>;
-  forPage?: boolean;
-}
-
-export const CreateOrganizationForm: React.FC<Props> = ({
-  children,
-  forPage = false,
-}) => {
-  const navigate = useNavigate();
-
+export const CreateOrganizationForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -46,9 +33,6 @@ export const CreateOrganizationForm: React.FC<Props> = ({
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
-
-    // redirect home route
-    navigate("/", { replace: true });
   }
 
   return (
@@ -92,17 +76,9 @@ export const CreateOrganizationForm: React.FC<Props> = ({
               </label>
             </div>
           </div>
-          <div
-            className={`${
-              forPage && "flex-col-reverse"
-            } flex items-center justify-end gap-4`}
-          >
-            {children}
-            {/* TODO: This button will be enable and disable base on auth sign in or not */}
-            <Button type="submit" disabled={forPage}>
-              Create an organization
-            </Button>
-          </div>
+          <Button type="submit" className="w-full">
+            Create an organization
+          </Button>
         </form>
       </Form>
     </>

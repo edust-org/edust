@@ -11,6 +11,7 @@ import IsAuthenticated from "./is-authenticated";
 const routes = [
   {
     path: "/",
+    exact: true,
     element: <Home />,
   },
   {
