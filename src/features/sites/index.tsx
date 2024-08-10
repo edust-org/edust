@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 export const Sites = () => {
   // TODO: have huge issues
+  //! Caching problem if sites is cached the new data not showing
   const params = useParams();
   const location = useLocation();
 
@@ -46,7 +47,9 @@ export const Sites = () => {
       )}
       {!content && (
         <div className="h-screen flex items-center justify-center gap-4 flex-col">
-          <Typography variant="h1">Sites is not available.</Typography>
+          <Typography variant="h1" className="text-red-500">
+            Sites is not available.
+          </Typography>
           <Link to={location.state?.from?.pathname || "/"}>
             <Button>go back</Button>
           </Link>

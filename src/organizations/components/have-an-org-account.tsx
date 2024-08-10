@@ -22,7 +22,7 @@ const checkIsOpenOrgPopup = (auth) => {
 
     const ls = JSON.parse(localStorage.getItem("orgPopup") || "{}");
 
-    if (isExpires) {
+    if (isExpires || auth?.user?.org_id) {
       localStorage.removeItem("orgPopup");
       return false;
     }

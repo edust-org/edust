@@ -29,7 +29,7 @@ export const OrgLists = () => {
               <Typography className="text-muted-foreground text-sm">
                 Aug 10 2024
               </Typography>
-              <Link to={`/${item.id}/sites`}>
+              <Link to={`/${item.org_username}/sites`}>
                 <Button variant={"secondary"} size={"icon"}>
                   <Eye />
                 </Button>
