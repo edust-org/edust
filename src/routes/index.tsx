@@ -37,7 +37,7 @@ const routes = [
   },
   // end Auth routes
   {
-    path: "/:orgId/sites",
+    path: "/:orgIdOrUsername/sites",
     element: <Sites />,
   },
   ...organizationRoutes,

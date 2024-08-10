@@ -21,13 +21,15 @@ export const OrgLists = () => {
         data?.data?.items?.map((item) => (
           <div key={item.id} className="bg-white shadow p-6 space-y-4">
             <Typography variant="h3" className="capitalize">
-              <Link to={"#"}>{item.name}</Link>
+              <Link to={"#"} className="hover:underline underline-offset-8">
+                {item.name}
+              </Link>
             </Typography>
             <div className="flex items-center justify-between">
               <Typography className="text-muted-foreground text-sm">
                 Aug 10 2024
               </Typography>
-              <Link to={"#"}>
+              <Link to={`/${item.id}/sites`}>
                 <Button variant={"secondary"} size={"icon"}>
                   <Eye />
                 </Button>

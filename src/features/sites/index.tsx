@@ -1,33 +1,56 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useGetOrgSitesPagesQuery } from "@/app/api/v0/public";
+import { toast } from "@/hooks/shadcn-ui";
+import { Button, Typography } from "@/components/ui";
+import { Link } from "react-router-dom";
 
 export const Sites = () => {
+  // TODO: have huge issues
   const params = useParams();
-  console.log(params);
-  const [htmlData, setHtmlData] = useState(null);
+  const location = useLocation();
+
+  const { data, isLoading, error } = useGetOrgSitesPagesQuery(
+    params.orgIdOrUsername
+  );
+
+  const [content, setContent] = useState(null);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/organization_page/f634")
-      .then((data) => setHtmlData(data.data))
-      .catch((err) => console.log(err));
-  }, []);
+    if (data?.data?.items[0]) {
+      setContent(JSON.parse(data?.data?.items[0]?.content));
+    }
+    if (error?.data?.status) {
+      toast({
+        variant: "destructive",
+        title: error?.data?.message,
+      });
+    }
+  }, [data?.data?.items, error?.data?.message, error?.data?.status]);
 
   useEffect(() => {
-    if (htmlData?.css) {
+    if (content?.css) {
       const style = document.createElement("style");
       style.type = "text/css";
-      style.innerHTML = htmlData.css;
+      style.innerHTML = content.css;
 
       document.head.appendChild(style);
     }
-  }, [htmlData?.css]);
+  }, [content?.css]);
 
   return (
     <>
-      {htmlData && (
-        <div dangerouslySetInnerHTML={{ __html: htmlData?.html }}></div>
+      {isLoading && <p>Loading...</p>}
+      {content && (
+        <div dangerouslySetInnerHTML={{ __html: content?.html }}></div>
+      )}
+      {!content && (
+        <div className="h-screen flex items-center justify-center gap-4 flex-col">
+          <Typography variant="h1">Sites is not available.</Typography>
+          <Link to={location.state?.from?.pathname || "/"}>
+            <Button>go back</Button>
+          </Link>
+        </div>
       )}
     </>
   );
