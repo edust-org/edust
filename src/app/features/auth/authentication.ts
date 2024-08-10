@@ -5,6 +5,7 @@ export interface AuthenticationState {
   isAuthenticated?: boolean;
   isLoading?: boolean;
   user?: null | object;
+  organization?: null | object;
 }
 
 // Define the initial state
@@ -12,6 +13,7 @@ const initialState: AuthenticationState = {
   isAuthenticated: false,
   isLoading: true,
   user: null,
+  organization: null,
 };
 
 // Create the auth slice
@@ -23,12 +25,14 @@ export const authentication = createSlice({
       state,
       action: PayloadAction<{
         isAuthenticated?: boolean;
-        user?: null | object;
         isLoading?: boolean;
+        user?: null | object;
+        organization?: null | object;
       }>
     ) {
       state.isAuthenticated = action.payload.isAuthenticated;
       state.user = action.payload.user;
+      state.organization = action.payload.organization;
       state.isLoading = action.payload.isLoading ?? false;
     },
   },

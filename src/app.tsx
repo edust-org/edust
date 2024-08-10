@@ -35,9 +35,19 @@ const App: React.FC = () => {
     if (isLoading) return;
 
     if (data?.data.user.email) {
-      dispatch(
-        setAuthentication({ isAuthenticated: true, user: data?.data.user })
-      );
+      if (data?.data?.organization) {
+        dispatch(
+          setAuthentication({
+            isAuthenticated: true,
+            user: data?.data.user,
+            organization: data?.data?.organization,
+          })
+        );
+      } else {
+        dispatch(
+          setAuthentication({ isAuthenticated: true, user: data?.data.user })
+        );
+      }
     }
 
     if (!token) {

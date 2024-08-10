@@ -10,6 +10,7 @@ import {
   MessageSquare,
   Plus,
   PlusCircle,
+  School,
   Settings,
   User,
   UserPlus,
@@ -31,11 +32,12 @@ import {
 } from "@/components/ui";
 import { useLogoutMutation } from "@/app/api/v0/auth";
 import { toast } from "@/hooks/shadcn-ui";
-import { useAppDispatch } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/auth";
 
 export const NavbarRightMenus = () => {
   const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth.authentication);
   const [logout] = useLogoutMutation();
 
   const handleLogout = () => {
@@ -89,11 +91,11 @@ export const NavbarRightMenus = () => {
               <span>Profile</span>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            {/* <DropdownMenuItem>
               <CreditCard className="mr-2 h-4 w-4" />
               <span>Billing</span>
               <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
@@ -107,11 +109,23 @@ export const NavbarRightMenus = () => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Users className="mr-2 h-4 w-4" />
-              <span>Team</span>
-            </DropdownMenuItem>
-            <DropdownMenuSub>
+            {auth?.organization?.id ? (
+              <DropdownMenuItem>
+                <School className="mr-2 h-4 w-4" />
+                <span className="capitalize">
+                  {auth?.organization?.name.length > 24
+                    ? auth?.organization?.name.slice(0, 23) + "..."
+                    : auth?.organization?.name}
+                </span>
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem>
+                <Plus className="mr-2 h-4 w-4" />
+                <span>Create Organizations</span>
+              </DropdownMenuItem>
+            )}
+
+            {/* <DropdownMenuSub>
               <DropdownMenuSubTrigger>
                 <UserPlus className="mr-2 h-4 w-4" />
                 <span>Invite users</span>
@@ -138,7 +152,7 @@ export const NavbarRightMenus = () => {
               <Plus className="mr-2 h-4 w-4" />
               <span>New Team</span>
               <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
