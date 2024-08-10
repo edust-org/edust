@@ -77,7 +77,7 @@ export const NavbarRightMenus = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button>
-            <CircleUserRound className="h-8 w-8" />
+            <CircleUserRound className="h-7 w-7" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

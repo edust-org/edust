@@ -23,9 +23,9 @@ export const Navbar = () => {
 
   return (
     <header className="shadow-sm">
-      <div className="container flex h-16 w-full shrink-0 items-center justify-between px-4 md:px-6">
+      <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
-          <img src={assets.logo} alt="" />
+          <img src={assets.logo} alt="" className="h-10" />
           <span className="sr-only">Edust</span>
         </Link>
         <NavigationMenu className="hidden lg:flex">

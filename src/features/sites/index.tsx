@@ -45,7 +45,7 @@ export const Sites = () => {
       {content && (
         <div dangerouslySetInnerHTML={{ __html: content?.html }}></div>
       )}
-      {!content && (
+      {!content && !isLoading && (
         <div className="h-screen flex items-center justify-center gap-4 flex-col">
           <Typography variant="h1" className="text-red-500">
             Sites is not available.
