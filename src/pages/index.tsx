@@ -4,8 +4,8 @@ export const Home = lazy(() =>
   import("./home").then((module) => ({ default: module.Home }))
 );
 
-export const ErrorPage = lazy(() =>
-  import("./error-page").then((module) => ({ default: module.ErrorPage }))
+export const NotFound = lazy(() =>
+  import("./not-found").then((module) => ({ default: module.NotFound }))
 );
 
 export const Playground = lazy(() =>

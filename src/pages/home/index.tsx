@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "@/app/hooks";
 import { lazy } from "react";
+import { HaveAnOrgAccount } from "@/organizations/components";
 
 const OrgLists = lazy(() =>
   import("./org-lists").then((module) => ({
@@ -13,18 +14,17 @@ const OrgLists = lazy(() =>
 );
 
 export const Home = () => {
-  const { isAuthenticated } = useAppSelector(
-    (state) => state.auth.authentication
-  );
+  const auth = useAppSelector((state) => state.auth.authentication);
+
   return (
     <>
       <Helmet>
         <title>Edust</title>
       </Helmet>
-
+      {auth?.user && <HaveAnOrgAccount auth={auth} />}
       <Navbar />
 
-      {!isAuthenticated && (
+      {!auth.isAuthenticated && (
         <div className="h-screen flex items-center justify-center flex-col gap-4">
           <Typography variant="h1">Welcome to our Edust!</Typography>
           <img src={assets.logo} alt="" />
@@ -34,7 +34,7 @@ export const Home = () => {
         </div>
       )}
 
-      {isAuthenticated && (
+      {auth.isAuthenticated && (
         <div className="bg-slate-50 h-screen p-8">
           <OrgLists />
         </div>

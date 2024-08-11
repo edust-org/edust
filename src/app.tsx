@@ -1,13 +1,12 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthentication } from "./app/features/auth";
-import { useAppSelector } from "./app/hooks";
 import Loading from "./components/loading";
-import { useRoutes } from "react-router-dom";
-import routes from "./routes";
-import { useUserGetQuery } from "./app/api/v0/user";
-import { Toaster } from "./components/ui/toaster";
-import { HaveAnOrgAccount } from "./organizations/components";
+import { RouterProvider } from "react-router-dom";
+import { useUserGetQuery } from "@/app/api/v0/user";
+import { Toaster } from "@/components/ui/toaster";
+import router from "@/routes";
+import { ErrorBoundary } from "@/components";
 
 const useAccessToken = () => {
   const token = document.cookie
@@ -17,11 +16,10 @@ const useAccessToken = () => {
 };
 
 const App: React.FC = () => {
-  const routeElements = useRoutes(routes);
+  // const routeElements = useRoutes(routes);
   const dispatch = useDispatch();
   const token = useAccessToken();
   const [enabled, setEnabled] = useState(false);
-  const auth = useAppSelector((state) => state.auth.authentication);
 
   useEffect(() => {
     setEnabled(!!token);
@@ -56,21 +54,12 @@ const App: React.FC = () => {
   }, [data, error, isLoading, dispatch, token]);
 
   return (
-    <>
-      {isLoading && auth.isLoading ? (
-        <Loading.Spinner />
-      ) : (
-        <Suspense fallback={<Loading.Spinner />}>
-          {/* Render hole component in routerElements */}
-          {routeElements}
-
-          {/* shadncn-ui: Toaster start  */}
-          <Toaster />
-
-          {auth?.user && <HaveAnOrgAccount auth={auth} />}
-        </Suspense>
-      )}
-    </>
+    <Suspense fallback={<Loading.Spinner />}>
+      <ErrorBoundary>
+        <Toaster />
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 
