@@ -16,7 +16,14 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route index element={<Home />} />
-      <Route path="playground" element={<Playground />} />
+      <Route
+        path="playground"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Playground />
+          </Suspense>
+        }
+      />
 
       {/* For auth routes */}
       <Route path="auth">

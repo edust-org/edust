@@ -1,5 +1,9 @@
 import { SitesBuilder } from "@/organizations/features/sites-builder";
-import { CreateOrganization, CustomizeSite } from "@/organizations/features";
+import {
+  CreateOrganization,
+  CustomizeSite,
+  Dashboard,
+} from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
@@ -16,16 +20,27 @@ const organizationRoutes = (
         }
       />
     </Route>
-    <Route path="organizations" element={<div>Organizations</div>}>
+    <Route
+      path="organizations"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <Dashboard />
+        </Suspense>
+      }
+    >
       <Route
-        path="create"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <CreateOrganization />
-          </Suspense>
-        }
+        path=""
+        element={<h1 style={{ fontSize: "50rem" }}>Dashboard Home</h1>}
       />
     </Route>
+    <Route
+      path="organizations/create"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <CreateOrganization />
+        </Suspense>
+      }
+    />
   </Route>
 );
 

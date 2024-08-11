@@ -1,4 +1,5 @@
 import {
+  CircleUser,
   CircleUserRound,
   Cloud,
   CreditCard,
@@ -14,9 +15,11 @@ import {
   Settings,
   User,
   UserPlus,
+  UserRound,
   Users,
 } from "lucide-react";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -79,9 +82,10 @@ export const NavbarRightMenus = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button>
-            <CircleUserRound className="h-7 w-7" />
-          </button>
+          <Button variant="secondary" size="icon" className="rounded-full">
+            <CircleUser className="h-5 w-5" />
+            <span className="sr-only">Toggle user menu</span>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>

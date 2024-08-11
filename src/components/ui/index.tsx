@@ -2,6 +2,8 @@
 
 export * from './alert-dialog'
 export * from './button'
+export * from './badge'
+export * from './card'
 export * from './dropdown-menu'
 export * from './form'
 export * from './input'
