@@ -1,22 +1,14 @@
 import {
   CircleUser,
-  CircleUserRound,
   Cloud,
-  CreditCard,
   Github,
   Keyboard,
   LifeBuoy,
   LogOut,
-  Mail,
-  MessageSquare,
   Plus,
-  PlusCircle,
   School,
   Settings,
   User,
-  UserPlus,
-  UserRound,
-  Users,
 } from "lucide-react";
 import {
   Button,
@@ -25,12 +17,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { useLogoutMutation } from "@/app/api/v0/auth";
