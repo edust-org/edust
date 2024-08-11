@@ -28,10 +28,7 @@ const organizationRoutes = (
         </Suspense>
       }
     >
-      <Route
-        path=""
-        element={<h1 style={{ fontSize: "50rem" }}>Dashboard Home</h1>}
-      />
+      <Route path="" element={<h1>Dashboard Home</h1>} />
     </Route>
     <Route
       path="organizations/create"
