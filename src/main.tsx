@@ -9,7 +9,6 @@ import { HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import App from "./app";
 
-import { BrowserRouter } from "react-router-dom";
 // Axios - Set default configurations
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 axios.defaults.headers.common["Content-Type"] = "application/json";
@@ -19,9 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <HelmetProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <App />
       </HelmetProvider>
     </Provider>
   </React.StrictMode>
