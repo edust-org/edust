@@ -8,7 +8,7 @@ interface IsAuthenticatedProps {
 }
 
 const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({ children }) => {
-  const isAuth = useAppSelector((state) => state.authentication);
+  const isAuth = useAppSelector((state) => state.auth.authentication);
   const location = useLocation();
 
   if (isAuth.isLoading) {

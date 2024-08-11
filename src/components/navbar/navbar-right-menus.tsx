@@ -34,6 +34,7 @@ import { useLogoutMutation } from "@/app/api/v0/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/auth";
+import { Link } from "react-router-dom";
 
 export const NavbarRightMenus = () => {
   const dispatch = useAppDispatch();
@@ -110,14 +111,16 @@ export const NavbarRightMenus = () => {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             {auth?.organization?.id ? (
-              <DropdownMenuItem>
-                <School className="mr-2 h-4 w-4" />
-                <span className="capitalize">
-                  {auth?.organization?.name.length > 24
-                    ? auth?.organization?.name.slice(0, 23) + "..."
-                    : auth?.organization?.name}
-                </span>
-              </DropdownMenuItem>
+              <Link to={"/organizations"}>
+                <DropdownMenuItem>
+                  <School className="mr-2 h-4 w-4" />
+                  <span className="capitalize">
+                    {auth?.organization?.name.length > 24
+                      ? auth?.organization?.name.slice(0, 23) + "..."
+                      : auth?.organization?.name}
+                  </span>
+                </DropdownMenuItem>
+              </Link>
             ) : (
               <DropdownMenuItem>
                 <Plus className="mr-2 h-4 w-4" />
