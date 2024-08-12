@@ -8,6 +8,26 @@ Edust is a web application designed to enhance educational collaboration and int
 
 Our platform allows users to create accounts and authenticated users to create organizations. Public users can view organization sites built by organization creators, which mainly consist of educational institutions such as schools, colleges, and universities.
 
+Certainly! Here's an improved version of the contributing guide with clearer language and formatting:
+
+## Contributing Guide
+
+Welcome to the project! We appreciate your interest in contributing. Here’s how you can get involved:
+
+### **Getting Started**
+
+If you’d like to contribute, please start by reviewing our guidelines and exploring the project. We will provide more detailed information.
+
+### **Ask Questions**
+
+If you have any questions or need help, feel free to ask in our [Discussion Forum](https://github.com/edust-org/edust/discussions). We’re here to assist you!
+
+### **Join the Community**
+
+For real-time discussions and updates, join our [Discord Server](https://discord.gg/k4V3QcpAZH). Connect with other contributors and project maintainers there.
+
+Thank you for your interest in contributing to our project. We look forward to your involvement!
+
 ## Technologies Used
 
 - **Frontend:** React.js, Redux-Toolkit, RTK Query, TypeScript
