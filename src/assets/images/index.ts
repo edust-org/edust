@@ -1,9 +1,13 @@
-import Logo from "./logo/logo.svg";
-import IconsFacebook from "./icons/facebook.svg";
+import logo from "./logo/logo.svg";
+import iconsFacebook from "./icons/facebook.svg";
 
 // For Organization
-import ImgCreateOrganizations from "./organizations/create-organizations.png";
+import imgCreateOrganizations from "./organizations/create-organizations.png";
 
-export { Logo, IconsFacebook };
+const assets = {
+  logo,
+  iconsFacebook,
+  imgCreateOrganizations,
+};
 
-export { ImgCreateOrganizations };
+export default assets;

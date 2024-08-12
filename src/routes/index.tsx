@@ -1,33 +1,72 @@
-import { Authentication, Sites } from "@/features";
-import { ErrorPage, Home } from "@/pages";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
-import { createBrowserRouter, RouteObject } from "react-router-dom";
-import { organizationRoutes } from "./organization-routes";
+import { Home, NotFound, Playground } from "@/pages";
 
-// Define the type for the route configuration
-const routes: RouteObject[] = [
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/auth/sign-up",
-    element: <Authentication component="signUp" />,
-  },
-  {
-    path: "/auth/sign-in",
-    element: <Authentication component="signIn" />,
-  },
-  {
-    path: "/:orgId/sites",
-    element: <Sites />,
-  },
-  ...organizationRoutes,
-];
+import Authentication from "@/features/authentication";
+import { Sites } from "@/features";
+import { Suspense } from "react";
+import Loading from "@/components/loading";
+import organizationRoutes from "./organization-routes";
 
-// Explicitly type the router using ReturnType
-const router: ReturnType<typeof createBrowserRouter> =
-  createBrowserRouter(routes);
+const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route index element={<Home />} />
+      <Route
+        path="playground"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Playground />
+          </Suspense>
+        }
+      />
+
+      {/* For auth routes */}
+      <Route path="auth">
+        <Route
+          path="sign-up"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Authentication.SignUp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="verify/:token"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Authentication.VerifyEmailByToken />
+            </Suspense>
+          }
+        />
+        <Route
+          path="sign-in"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Authentication.SignIn />
+            </Suspense>
+          }
+        />
+        <Route
+          path="forgot-password"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Authentication.ForgotPassword />
+            </Suspense>
+          }
+        />
+      </Route>
+
+      <Route path=":orgIdOrUsername/sites" element={<Sites />} />
+
+      <Route path="*" element={<NotFound />} />
+      {organizationRoutes}
+    </Route>
+  )
+);
 
 export default router;

@@ -1,2 +1,7 @@
-export { HaveOrganization } from "./have-organization";
-export { CreateOrganizationForm } from "./create-organization-form";
+import { lazy } from "react";
+
+export const HaveAnOrgAccount = lazy(() =>
+  import("./have-an-org-account").then((module) => ({
+    default: module.HaveAnOrgAccount,
+  }))
+);

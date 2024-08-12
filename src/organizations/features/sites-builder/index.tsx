@@ -1,59 +1,13 @@
-import { Container } from "@/components";
 import { Button, Input, Typography } from "@/components/ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { siteBuilder } from "@/api/organizations";
 
 export const SitesBuilder = () => {
   const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetchPagesData();
-  }, []);
-
-  const fetchPagesData = async () => {
-    try {
-      const pages = await siteBuilder.getPages();
-      setData(pages || []);
-    } catch (error) {
-      console.error("Error fetching pages:", error);
-    }
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      await siteBuilder.postPage({
-        organizationId: "1",
-        page_name: event.target[0].value,
-      });
-    } catch (error) {
-      throw new Error("Error submitting page data:", error);
-    } finally {
-      fetchPagesData();
-    }
-
-    // const payload = {
-    //   organizationId: "1",
-    //   page_name: event.target[0].value,
-    // };
-
-    // axios
-    //   .post("http://localhost:3000/organization_page", payload)
-    //   .then((response) => {
-    //     console.log("Page created successfully:", response.data);
-    //     fetchPagesData(); // Fetch the updated list of pages
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error creating page:", error);
-    //   });
-  };
-
   return (
     <div>
-      <Container>
-        <form className="py-5" onSubmit={(event) => handleSubmit(event)}>
+      <div className="container">
+        <form className="py-5">
           <Input type="text" placeholder="page-name" className="mb-4" />
           <Button type="submit">Create a Page</Button>
         </form>
@@ -74,7 +28,7 @@ export const SitesBuilder = () => {
               </div>
             ))}
         </div>
-      </Container>
+      </div>
     </div>
   );
 };

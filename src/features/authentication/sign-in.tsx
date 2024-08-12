@@ -14,8 +14,13 @@ import {
   Typography,
 } from "@/components/ui";
 import { SocialAuth } from "./social-auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useLoginMutation } from "@/app/api/v0/auth";
+import { useAppDispatch } from "@/app/hooks";
+import { setAuthentication } from "@/app/features/auth";
+import { toast } from "@/hooks/shadcn-ui";
+import { BarLoader } from "react-spinners";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -26,8 +31,11 @@ const FormSchema = z.object({
   }),
 });
 
-export const SignIn = () => {
+export const SignIn: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -38,10 +46,27 @@ export const SignIn = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    login(data)
+      .unwrap()
+      .then((res) => {
+        if (res?.status) {
+          toast({
+            variant: "success",
+            title: res?.message,
+          });
 
-    // redirect home route
-    navigate("/", { replace: true });
+          dispatch(setAuthentication({ isAuthenticated: true, user: null }));
+          navigate(location.state?.from?.pathname || "/");
+        }
+      })
+      .catch((error) => {
+        if (error?.data?.status) {
+          toast({
+            variant: "destructive",
+            title: error?.data?.message,
+          });
+        }
+      });
   }
 
   return (
@@ -87,8 +112,8 @@ export const SignIn = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full">
-                Sign In
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
 
@@ -96,7 +121,10 @@ export const SignIn = () => {
               <SocialAuth />
             </div>
             <Typography className="text-center mb-4">
-              <Link to={"/auth/sign-in"} className="hover:underline transition">
+              <Link
+                to={"/auth/forgot-password"}
+                className="hover:underline transition"
+              >
                 Forgot Your Password?
               </Link>
             </Typography>

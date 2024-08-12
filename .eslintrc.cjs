@@ -39,7 +39,12 @@ module.exports = {
 
   overrides: [
     {
-      files: ["vite-env.d.ts", "vite.config.ts", ".eslintrc.js"],
+      files: [
+        "vite-env.d.ts",
+        "vite.config.ts",
+        ".eslintrc.js",
+        "tailwind.config.js",
+      ],
       rules: {
         "check-file/filename-naming-convention": "off",
       },
