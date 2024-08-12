@@ -1,34 +1,35 @@
-import { SitesBuilder } from "@/organizations/features/sites-builder";
-import {
-  CreateOrganization,
-  CustomizeSite,
-  Dashboard,
-} from "@/organizations/features";
+import Dashboard, { CreateOrganization } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
 
 const organizationRoutes = (
   <Route>
-    <Route path="sites-builder" element={<SitesBuilder />}>
-      <Route
-        path=":pageId"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <CustomizeSite />
-          </Suspense>
-        }
-      />
-    </Route>
     <Route
       path="organizations"
       element={
         <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard />
+          <Dashboard.DashboardLayout />
         </Suspense>
       }
     >
       <Route path="" element={<h1>Dashboard Home</h1>} />
+      <Route
+        path="sites"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Dashboard.Sites />
+          </Suspense>
+        }
+      />
+      <Route
+        path="pages"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Dashboard.Pages />
+          </Suspense>
+        }
+      />
     </Route>
     <Route
       path="organizations/create"
