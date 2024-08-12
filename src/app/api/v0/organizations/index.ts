@@ -12,7 +12,23 @@ export const organizationsApi = createApi({
     getOrgLists: build.query<any, void>({
       query: () => `/`,
     }),
+
+    // Pages
+    createPages: build.mutation({
+      query: (body) => ({
+        url: `/sites/pages`,
+        method: "POST",
+        body,
+      }),
+    }),
+    getAllPages: build.query<any, void>({
+      query: () => `/sites/pages`,
+    }),
   }),
 });
 
-export const { useGetOrgListsQuery } = organizationsApi;
+export const {
+  useGetOrgListsQuery,
+  useCreatePagesMutation,
+  useGetAllPagesQuery,
+} = organizationsApi;

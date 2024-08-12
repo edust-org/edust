@@ -26,8 +26,12 @@ import {
 
 import assets from "@/assets/images";
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
+import { NavLink } from "./nav-link";
 
 export const Dashboard = () => {
+  const activeLinkStyle = `flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary`;
+  const inActiveLinkStyle = `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`;
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-white md:block">
@@ -43,30 +47,30 @@ export const Dashboard = () => {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
-                to="/organizations"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-              >
+              <NavLink to="/organizations">
                 <Home className="h-4 w-4" />
                 Dashboard
-              </Link>
-              <Link
-                to="/organizations/sites"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-              >
+              </NavLink>
+              <NavLink to="/organizations/sites">
                 <Globe2 className="h-4 w-4" />
                 Sites
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/organizations/pages"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? inActiveLinkStyle
+                    : isActive
+                    ? activeLinkStyle
+                    : inActiveLinkStyle
+                }
               >
                 <Layers className="h-4 w-4" />
                 Pages
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   1
                 </Badge>
-              </Link>
+              </NavLink>
             </nav>
           </div>
           <div className="mt-auto p-4">
