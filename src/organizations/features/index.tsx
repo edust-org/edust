@@ -20,9 +20,16 @@ export const Pages = lazy(() =>
     default: module.Pages,
   }))
 );
+export const PageCustomize = lazy(() =>
+  import("./page-customize").then((module) => ({
+    default: module.PageCustomize,
+  }))
+);
+
 const Dashboard = {
   DashboardLayout,
   Sites,
   Pages,
+  PageCustomize,
 };
 export default Dashboard;

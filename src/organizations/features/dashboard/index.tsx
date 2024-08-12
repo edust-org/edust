@@ -27,8 +27,10 @@ import {
 import assets from "@/assets/images";
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
 import { NavLink } from "./nav-link";
+import { useGetAllPagesQuery } from "@/app/api/v0/organizations";
 
 export const Dashboard = () => {
+  const { data } = useGetAllPagesQuery();
   const activeLinkStyle = `flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary`;
   const inActiveLinkStyle = `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`;
 
@@ -68,7 +70,7 @@ export const Dashboard = () => {
                 <Layers className="h-4 w-4" />
                 Pages
                 <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  1
+                  {data?.data?.length || "1"}
                 </Badge>
               </NavLink>
             </nav>

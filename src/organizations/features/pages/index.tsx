@@ -39,21 +39,21 @@ export const Pages = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const content =
-      '{"html":"<body id=\\"i3kk\\"><div id=\\"i3jw\\">About Page</div><div id=\\"iysl\\">I am from About page</div></body>","css":"* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#i3jw{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;font-size:4em;font-family:Verdana, Geneva, sans-serif;font-weight:700;text-align:center;}#iysl{padding:10px;}"}';
-
-    const mockData = { ...data, content };
+    const content = `{"html":"<body id=\\"i3kk\\"><div id=\\"i3jw\\">${data?.name}</div><div id=\\"iysl\\">I am from ${data?.name}</div></body>","css":"* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}*{box-sizing:border-box;}body{margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;}#i3jw{padding-top:10px;padding-right:10px;padding-bottom:10px;padding-left:10px;font-size:4em;font-family:Verdana, Geneva, sans-serif;font-weight:700;text-align:center;}#iysl{padding:10px;}"}`;
+    console.log(JSON.parse(content));
+    const mockData = { ...data, content: JSON.stringify(JSON.parse(content)) };
 
     createPage(mockData)
       .unwrap()
       .then((res) => {
-        form.reset();
+        refetch();
         if (res?.status) {
           toast({
             variant: "success",
             title: res?.message,
           });
         }
+        form.reset();
       })
       .catch((error) => {
         if (error?.data?.status) {
@@ -118,9 +118,9 @@ export const Pages = () => {
               >
                 Delete
               </Button>
-              <Button>
-                <Link to={`${page.id}`}>Edit</Link>
-              </Button>
+              <Link to={`${page.id}`} target="_blank">
+                <Button>Edit</Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}

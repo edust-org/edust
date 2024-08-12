@@ -7,8 +7,15 @@ import { useRef } from "react";
 import fetchPageContent from "./fetch-page-content";
 import savePageContent from "./save-page-content";
 import uploadImage from "./upload-image";
+import { useGetPageByIdQuery } from "@/app/api/v0/organizations";
 
-export const GrapesJs = ({ pageId }: { pageId: string }) => {
+export const GrapesJs = ({
+  pageId,
+  content,
+}: {
+  pageId: string;
+  content: string;
+}) => {
   const editorRef = useRef<Editor | null>(null); // Create a ref to store the editor instance
 
   const onEditor = async (editor: Editor) => {
@@ -16,7 +23,9 @@ export const GrapesJs = ({ pageId }: { pageId: string }) => {
     editorRef.current = editor;
 
     // Fetch the page content on load
-    await fetchPageContent(editor, pageId);
+    const data = JSON.parse(content);
+    editor.setComponents(data.html);
+    editor.setStyle(data.css);
 
     // Add a save button to the editor
     editor.Panels.addButton("options", {

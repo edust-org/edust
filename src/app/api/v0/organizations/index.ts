@@ -24,6 +24,9 @@ export const organizationsApi = createApi({
     getAllPages: build.query<any, void>({
       query: () => `/sites/pages`,
     }),
+    getPageById: build.query({
+      query: (pageId) => `/sites/pages/${pageId}`,
+    }),
   }),
 });
 
@@ -31,4 +34,5 @@ export const {
   useGetOrgListsQuery,
   useCreatePagesMutation,
   useGetAllPagesQuery,
+  useGetPageByIdQuery,
 } = organizationsApi;

@@ -32,6 +32,14 @@ const organizationRoutes = (
       />
     </Route>
     <Route
+      path="organizations/pages/:pageId"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <Dashboard.PageCustomize />
+        </Suspense>
+      }
+    />
+    <Route
       path="organizations/create"
       element={
         <Suspense fallback={<Loading.Spinner />}>
