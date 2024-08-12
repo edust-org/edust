@@ -10,7 +10,7 @@ Our platform allows users to create accounts and authenticated users to create o
 
 ## Technologies Used
 
-- **Frontend:** React.js, TypeScript
+- **Frontend:** React.js, Redux-Toolkit, RTK Query, TypeScript
 
 ## Getting Started
 
@@ -46,10 +46,9 @@ To get a local copy up and running, follow these steps:
 Contributions are welcome! Please follow these steps:
 
 1. Fork the project.
-2. Create your feature branch (`git checkout -b dev`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin dev`).
-5. Open a pull request.
+2. Commit your changes code (`git commit -m 'Add some AmazingFeature'`).
+3. Push to the branch (`git push`).
+4. Open a pull request.
 
 ## License
 
