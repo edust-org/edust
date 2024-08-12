@@ -7,7 +7,13 @@ import { useRef } from "react";
 import fetchPageContent from "./fetch-page-content";
 import savePageContent from "./save-page-content";
 import uploadImage from "./upload-image";
-import { useGetPageByIdQuery } from "@/app/api/v0/organizations";
+import {
+  useEditPageByIdMutation,
+  useGetPageByIdQuery,
+} from "@/app/api/v0/organizations";
+import { useAppDispatch } from "@/app/hooks";
+import axios from "axios";
+import { toast } from "@/hooks/shadcn-ui";
 
 export const GrapesJs = ({
   pageId,
@@ -16,6 +22,7 @@ export const GrapesJs = ({
   pageId: string;
   content: string;
 }) => {
+  const [editPage] = useEditPageByIdMutation();
   const editorRef = useRef<Editor | null>(null); // Create a ref to store the editor instance
 
   const onEditor = async (editor: Editor) => {
@@ -38,8 +45,29 @@ export const GrapesJs = ({
     // Define the save command
     editor.Commands.add("save-db", {
       run: async () => {
-        await savePageContent(editor, pageId);
-        alert("Page saved successfully!");
+        const content = JSON.stringify({
+          html: editor.getHtml(),
+          css: editor.getCss(),
+        });
+
+        editPage({ pageId, content })
+          .unwrap()
+          .then((res) => {
+            if (res?.status) {
+              toast({
+                variant: "success",
+                title: res?.message,
+              });
+            }
+          })
+          .catch((error) => {
+            if (error?.data?.status) {
+              toast({
+                variant: "destructive",
+                title: error?.data?.message,
+              });
+            }
+          });
       },
     });
   };

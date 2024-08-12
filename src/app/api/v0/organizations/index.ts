@@ -27,6 +27,14 @@ export const organizationsApi = createApi({
     getPageById: build.query({
       query: (pageId) => `/sites/pages/${pageId}`,
     }),
+
+    editPageById: build.mutation({
+      query: ({ pageId, ...patch }) => ({
+        url: `/sites/pages/${pageId}`,
+        method: "PATCH",
+        body: patch,
+      }),
+    }),
   }),
 });
 
@@ -35,4 +43,5 @@ export const {
   useCreatePagesMutation,
   useGetAllPagesQuery,
   useGetPageByIdQuery,
+  useEditPageByIdMutation,
 } = organizationsApi;
