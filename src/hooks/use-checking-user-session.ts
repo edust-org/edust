@@ -1,4 +1,4 @@
-import { useUserGetQuery } from "@/app/api/v0/user";
+import { useGetUserQuery } from "@/app/api/v0/user";
 import { setAuthentication } from "@/app/features/auth";
 import { getToken } from "@/utils";
 import { useEffect, useState, useCallback } from "react";
@@ -15,11 +15,11 @@ export const useCheckingUserSession = () => {
 
   // TODO: main problem is here
   //! When I refresh browser it's shows problems and redirect signin page still user authenticated
-  // const { data, isLoading } = useUserGetQuery(undefined, {
+  // const { data, isLoading } = useGetUserQuery(undefined, {
   //   skip: !enabled,
   // });
   // ? It will show error
-  const { data, isLoading } = useUserGetQuery();
+  const { data, isLoading } = useGetUserQuery();
 
   const checkAuthStatus = useCallback(() => {
     if (isLoading) return;

@@ -28,10 +28,10 @@ export const userApi = createApi({
   tagTypes: ["User"],
 
   endpoints: (build) => ({
-    userGet: build.query<ProfileResponse, void>({
+    getUser: build.query<ProfileResponse, void>({
       query: () => `/`,
     }),
   }),
 });
 
-export const { useUserGetQuery } = userApi;
+export const { useGetUserQuery } = userApi;

@@ -21,6 +21,7 @@ import { useAppDispatch } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { BarLoader } from "react-spinners";
+import { useGetUserQuery } from "@/app/api/v0/user";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -36,6 +37,7 @@ export const SignIn: React.FC = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const location = useLocation();
+  const { refetch } = useGetUserQuery();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -55,8 +57,26 @@ export const SignIn: React.FC = () => {
             title: res?.message,
           });
 
-          dispatch(setAuthentication({ isAuthenticated: true, user: null }));
-          navigate(location.state?.from?.pathname || "/");
+          refetch()
+            .then((res) => {
+              if (res) {
+                dispatch(setAuthentication({ isAuthenticated: true }));
+                navigate(location.state?.from?.pathname || "/");
+              }
+            })
+            .catch((error) => {
+              if (error) {
+                toast({
+                  variant: "destructive",
+                  title: error?.data?.message,
+                  description: (
+                    <div className="p-4 bg-red-700 text-white">
+                      {JSON.stringify(error)}
+                    </div>
+                  ),
+                });
+              }
+            });
         }
       })
       .catch((error) => {
