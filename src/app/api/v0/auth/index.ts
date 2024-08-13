@@ -2,12 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { apiUrlV0 } from "@/app/api/axios-api-url";
 
 export const authApi = createApi({
-  reducerPath: "API_V0_authApi",
-  tagTypes: ["Auth"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${apiUrlV0}/auth`,
     credentials: "include",
   }),
+
+  reducerPath: "API_V0_authApi",
+  tagTypes: ["Auth"],
 
   endpoints: (build) => ({
     register: build.mutation({

@@ -19,12 +19,14 @@ export interface ProfileResponse {
 }
 
 export const userApi = createApi({
-  reducerPath: "API_V0_userApi",
-  tagTypes: ["User"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${apiUrlV0}/user`,
     credentials: "include",
   }),
+
+  reducerPath: "API_V0_userApi",
+  tagTypes: ["User"],
+
   endpoints: (build) => ({
     userGet: build.query<ProfileResponse, void>({
       query: () => `/`,

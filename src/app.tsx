@@ -8,6 +8,7 @@ import { ErrorBoundary } from "@/components";
 import { useCheckingUserSession } from "./hooks";
 
 const App: React.FC = () => {
+  // ! IN THIS HOOKS HAVE A ISSUE IF USER NOT SIGN-IN
   useCheckingUserSession();
 
   return (

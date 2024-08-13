@@ -114,10 +114,12 @@ export const NavbarRightMenus = () => {
                 </DropdownMenuItem>
               </Link>
             ) : (
-              <DropdownMenuItem>
-                <Plus className="mr-2 h-4 w-4" />
-                <span>Create Organizations</span>
-              </DropdownMenuItem>
+              <Link to={"/organizations/create"}>
+                <DropdownMenuItem>
+                  <Plus className="mr-2 h-4 w-4" />
+                  <span>Create Organizations</span>
+                </DropdownMenuItem>
+              </Link>
             )}
 
             {/* <DropdownMenuSub>

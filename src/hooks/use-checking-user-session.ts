@@ -15,9 +15,11 @@ export const useCheckingUserSession = () => {
 
   // TODO: main problem is here
   //! When I refresh browser it's shows problems and redirect signin page still user authenticated
-  const { data, isLoading } = useUserGetQuery(undefined, {
-    skip: !enabled,
-  });
+  // const { data, isLoading } = useUserGetQuery(undefined, {
+  //   skip: !enabled,
+  // });
+  // ? It will show error
+  const { data, isLoading } = useUserGetQuery();
 
   const checkAuthStatus = useCallback(() => {
     if (isLoading) return;
