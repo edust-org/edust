@@ -11,17 +11,31 @@ import { Sites } from "@/features";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
 import organizationRoutes from "./organization-routes";
+import IsAuthenticated from "./is-authenticated";
+import { CreateOrganization } from "@/organizations/features";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route index element={<Home />} />
       <Route
+        path="create-a-new-organizations"
+        element={
+          <IsAuthenticated>
+            <Suspense fallback={<Loading.Spinner />}>
+              <CreateOrganization />
+            </Suspense>
+          </IsAuthenticated>
+        }
+      />
+      <Route
         path="playground"
         element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Playground />
-          </Suspense>
+          <IsAuthenticated>
+            <Suspense fallback={<Loading.Spinner />}>
+              <Playground />
+            </Suspense>
+          </IsAuthenticated>
         }
       />
 

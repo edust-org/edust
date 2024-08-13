@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { Suspense } from "react";
 import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
@@ -19,4 +20,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default React.memo(App);

@@ -1,7 +1,7 @@
 import { useUserGetQuery } from "@/app/api/v0/user";
 import { setAuthentication } from "@/app/features/auth";
 import { getToken } from "@/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 export const useCheckingUserSession = () => {
@@ -17,15 +17,18 @@ export const useCheckingUserSession = () => {
     skip: !enabled,
   });
 
-  useEffect(() => {
+  const checkAuthStatus = useCallback(() => {
     if (isLoading) return;
+    const user = data?.data?.user || null;
+    const organization = data?.data?.organization || null;
 
-    if (data?.data?.user) {
+    if (user) {
       dispatch(
         setAuthentication({
           isAuthenticated: true,
-          user: data.data.user,
-          organization: data.data.organization || null,
+          user: user,
+          organization,
+          isLoading: false,
         })
       );
     } else if (error) {
@@ -34,4 +37,8 @@ export const useCheckingUserSession = () => {
       dispatch(setAuthentication({ isLoading: false, isAuthenticated: false }));
     }
   }, [data, error, isLoading, dispatch]);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]);
 };
