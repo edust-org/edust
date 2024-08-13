@@ -13,6 +13,8 @@ export const useCheckingUserSession = () => {
     setEnabled(!!token);
   }, [token]);
 
+  // TODO: main problem is here
+  //! When I refresh browser it's shows problems and redirect signin page still user authenticated
   const { data, isLoading } = useUserGetQuery(undefined, {
     skip: !enabled,
   });
