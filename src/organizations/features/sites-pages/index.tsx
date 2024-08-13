@@ -1,5 +1,5 @@
 import {
-  useCreatePagesMutation,
+  usePostPagesMutation,
   useDeletePageByIdMutation,
   useGetAllPagesQuery,
 } from "@/app/api/v0/organizations";
@@ -42,7 +42,7 @@ export const SitesPages = () => {
   const { data, isLoading, refetch } = useGetAllPagesQuery();
   const [deletePage, { isLoading: isPageDeleteLoading }] =
     useDeletePageByIdMutation();
-  const [createPage, { isLoading: isCreateLoading }] = useCreatePagesMutation();
+  const [postPage, { isLoading: isCreateLoading }] = usePostPagesMutation();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -55,7 +55,7 @@ export const SitesPages = () => {
 
     const mockData = { ...data, content: JSON.stringify(JSON.parse(content)) };
 
-    createPage(mockData)
+    postPage(mockData)
       .unwrap()
       .then((res) => {
         refetch();

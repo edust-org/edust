@@ -14,9 +14,16 @@ export const organizationsApi = createApi({
     getOrgLists: build.query<any, void>({
       query: () => `/`,
     }),
+    postOrganization: build.mutation({
+      query: (body) => ({
+        url: `/`,
+        method: "POST",
+        body,
+      }),
+    }),
 
     // Pages
-    createPages: build.mutation({
+    postPages: build.mutation({
       query: (body) => ({
         url: `/sites/pages`,
         method: "POST",
@@ -50,7 +57,8 @@ export const organizationsApi = createApi({
 
 export const {
   useGetOrgListsQuery,
-  useCreatePagesMutation,
+  usePostOrganizationMutation,
+  usePostPagesMutation,
   useGetAllPagesQuery,
   useGetPageByIdQuery,
   useEditPageByIdMutation,

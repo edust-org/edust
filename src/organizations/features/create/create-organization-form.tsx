@@ -12,34 +12,75 @@ import {
   Input,
 } from "@/components/ui";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useAppSelector } from "@/app/hooks";
+import { usePostOrganizationMutation } from "@/app/api/v0/organizations";
+import { toast } from "@/hooks/shadcn-ui";
+import { useNavigate } from "react-router-dom";
+import { BarLoader } from "react-spinners";
+import { useGetUserQuery } from "@/app/api/v0/user";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
     message: "Enter your Organization name",
   }),
-  username: z.string().min(2, {
+  org_username: z.string().min(2, {
     message: "Enter your Organization name",
   }),
 });
 
 export const CreateOrganizationForm = () => {
-  const isAuthenticated = useAppSelector(
-    (state) => state.auth.authentication.isAuthenticated
-  );
+  const navigate = useNavigate();
+  const [postOrganization, { isLoading }] = usePostOrganizationMutation();
+  const { refetch } = useGetUserQuery();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
-      username: "",
+      org_username: "",
     },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    if (!isAuthenticated) {
-      return { go: "go to here" };
-    }
-    console.log(data);
+    postOrganization(data)
+      .unwrap()
+      .then((res) => {
+        if (res?.status) {
+          toast({
+            variant: "success",
+            title: res?.message,
+          });
+        }
+        refetch()
+          .then((res) => {
+            console.log({ res });
+            if (res) {
+              navigate("/organizations");
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              toast({
+                variant: "destructive",
+                title: error?.data?.message,
+                description: (
+                  <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                    <code className="text-white">
+                      {JSON.stringify(error, null, 2)}
+                    </code>
+                  </pre>
+                ),
+              });
+            }
+          });
+      })
+      .catch((error) => {
+        if (error?.data?.status) {
+          toast({
+            variant: "destructive",
+            title: error?.data?.message,
+          });
+        }
+      });
   }
 
   return (
@@ -61,12 +102,12 @@ export const CreateOrganizationForm = () => {
           />
           <FormField
             control={form.control}
-            name="username"
+            name="org_username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Organization Unique username</FormLabel>
+                <FormLabel>Organization Unique org_username</FormLabel>
                 <FormControl>
-                  <Input placeholder="username" {...field} />
+                  <Input placeholder="org_username" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -84,7 +125,7 @@ export const CreateOrganizationForm = () => {
             </div>
           </div>
           <Button type="submit" className="w-full">
-            Create an organization
+            {isLoading ? <BarLoader color="#fff" /> : "Create an organization"}
           </Button>
         </form>
       </Form>

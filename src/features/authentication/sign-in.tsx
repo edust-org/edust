@@ -70,9 +70,11 @@ export const SignIn: React.FC = () => {
                   variant: "destructive",
                   title: error?.data?.message,
                   description: (
-                    <div className="p-4 bg-red-700 text-white">
-                      {JSON.stringify(error)}
-                    </div>
+                    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                      <code className="text-white">
+                        {JSON.stringify(error, null, 2)}
+                      </code>
+                    </pre>
                   ),
                 });
               }
