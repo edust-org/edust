@@ -3,23 +3,15 @@ import GjsEditor from "@grapesjs/react";
 import gsPluginBlocksBasic from "grapesjs-blocks-basic";
 import gsPluginNewsLetter from "grapesjs-preset-newsletter";
 import { useRef } from "react";
-
-import fetchPageContent from "./fetch-page-content";
-import savePageContent from "./save-page-content";
 import uploadImage from "./upload-image";
-import {
-  useEditPageByIdMutation,
-  useGetPageByIdQuery,
-} from "@/app/api/v0/organizations";
-import { useAppDispatch } from "@/app/hooks";
-import axios from "axios";
+import { useEditPageByIdMutation } from "@/app/api/v0/organizations";
 import { toast } from "@/hooks/shadcn-ui";
 
 export const GrapesJs = ({
   pageId,
   content,
 }: {
-  pageId: string;
+  pageId: string | null;
   content: string;
 }) => {
   const [editPage] = useEditPageByIdMutation();

@@ -15,12 +15,13 @@ const OrgLists = lazy(() =>
 
 export const Home = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
-
+  console.log(auth);
   return (
     <>
       <Helmet>
         <title>Edust</title>
       </Helmet>
+      {/* TODO: problem here */}
       {auth?.user && <HaveAnOrgAccount auth={auth} />}
       <Navbar />
 

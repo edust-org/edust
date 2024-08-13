@@ -35,6 +35,14 @@ export const organizationsApi = createApi({
         body: patch,
       }),
     }),
+    deletePageById: build.mutation({
+      query(pageId) {
+        return {
+          url: `/sites/pages/${pageId}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
@@ -44,4 +52,5 @@ export const {
   useGetAllPagesQuery,
   useGetPageByIdQuery,
   useEditPageByIdMutation,
+  useDeletePageByIdMutation,
 } = organizationsApi;

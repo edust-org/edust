@@ -2,45 +2,47 @@ import Dashboard, { CreateOrganization } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
+import IsOrganizationOwner from "./is-organization-owner";
 
 const organizationRoutes = (
-  <Route>
-    <Route
-      path="organizations"
-      element={
+  <Route
+    path="organizations"
+    element={
+      <IsOrganizationOwner>
         <Suspense fallback={<Loading.Spinner />}>
           <Dashboard.DashboardLayout />
         </Suspense>
-      }
-    >
-      <Route path="" element={<h1>Dashboard Home</h1>} />
-      <Route
-        path="sites"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.Sites />
-          </Suspense>
-        }
-      />
-      <Route
-        path="pages"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.Pages />
-          </Suspense>
-        }
-      />
-    </Route>
+      </IsOrganizationOwner>
+    }
+  >
+    <Route path="" element={<h1>Dashboard Home</h1>} />
     <Route
-      path="organizations/pages/:pageId"
+      path="sites"
       element={
         <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard.PageCustomize />
+          <Dashboard.Sites />
         </Suspense>
       }
     />
     <Route
-      path="organizations/create"
+      path="pages"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <Dashboard.SitesPages />
+        </Suspense>
+      }
+    />
+
+    <Route
+      path="pages/:pageId"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <Dashboard.SitesPageCustomize />
+        </Suspense>
+      }
+    />
+    <Route
+      path="create"
       element={
         <Suspense fallback={<Loading.Spinner />}>
           <CreateOrganization />

@@ -15,21 +15,21 @@ export const Sites = lazy(() =>
   }))
 );
 
-export const Pages = lazy(() =>
-  import("./pages").then((module) => ({
-    default: module.Pages,
+export const SitesPages = lazy(() =>
+  import("./sites-pages").then((module) => ({
+    default: module.SitesPages,
   }))
 );
-export const PageCustomize = lazy(() =>
-  import("./page-customize").then((module) => ({
-    default: module.PageCustomize,
+export const SitesPageCustomize = lazy(() =>
+  import("./sites-page-customize").then((module) => ({
+    default: module.SitesPageCustomize,
   }))
 );
 
 const Dashboard = {
   DashboardLayout,
   Sites,
-  Pages,
-  PageCustomize,
+  SitesPages,
+  SitesPageCustomize,
 };
 export default Dashboard;

@@ -3,7 +3,7 @@ import { GrapesJs } from "./grapesjs";
 import { useGetPageByIdQuery } from "@/app/api/v0/organizations";
 import Loading from "@/components/loading";
 
-export const PageCustomize = () => {
+export const SitesPageCustomize = () => {
   const { pageId } = useParams();
   const { data, isLoading } = useGetPageByIdQuery(pageId);
 
@@ -14,7 +14,7 @@ export const PageCustomize = () => {
   return (
     <>
       {data?.data?.content && (
-        <GrapesJs pageId={pageId} content={data?.data?.content} />
+        <GrapesJs pageId={pageId || null} content={data?.data?.content} />
       )}
     </>
   );
