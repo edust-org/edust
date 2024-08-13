@@ -30,11 +30,10 @@ export const authentication = createSlice({
         organization?: null | object;
       }>
     ) {
-      state.isAuthenticated =
-        action.payload.isAuthenticated ?? state.isAuthenticated;
-      state.user = action.payload.user ?? state.user;
-      state.organization = action.payload.organization ?? state.organization;
-      state.isLoading = action.payload.isLoading ?? state.isLoading;
+      state.isAuthenticated = action.payload.isAuthenticated;
+      state.user = action.payload.user;
+      state.organization = action.payload.organization;
+      state.isLoading = action.payload.isLoading;
     },
   },
 });

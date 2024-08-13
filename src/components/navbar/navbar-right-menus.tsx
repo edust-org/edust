@@ -48,6 +48,7 @@ export const NavbarRightMenus = () => {
             setAuthentication({
               isAuthenticated: false,
               user: null,
+              organization: null,
               isLoading: false,
             })
           );

@@ -12,6 +12,7 @@ import {
   Input,
 } from "@/components/ui";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAppSelector } from "@/app/hooks";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -23,6 +24,9 @@ const FormSchema = z.object({
 });
 
 export const CreateOrganizationForm = () => {
+  const isAuthenticated = useAppSelector(
+    (state) => state.auth.authentication.isAuthenticated
+  );
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -32,6 +36,9 @@ export const CreateOrganizationForm = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (!isAuthenticated) {
+      return { go: "go to here" };
+    }
     console.log(data);
   }
 

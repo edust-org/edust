@@ -17,7 +17,14 @@ import { CreateOrganization } from "@/organizations/features";
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route index element={<Home />} />
+      <Route
+        index
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Home />
+          </Suspense>
+        }
+      />
       <Route
         path="create-a-new-organizations"
         element={
