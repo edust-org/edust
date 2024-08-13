@@ -13,7 +13,7 @@ export const useCheckingUserSession = () => {
     setEnabled(!!token);
   }, [token]);
 
-  const { data, error, isLoading } = useUserGetQuery(undefined, {
+  const { data, isLoading } = useUserGetQuery(undefined, {
     skip: !enabled,
   });
 
@@ -22,21 +22,15 @@ export const useCheckingUserSession = () => {
     const user = data?.data?.user || null;
     const organization = data?.data?.organization || null;
 
-    if (user) {
-      dispatch(
-        setAuthentication({
-          isAuthenticated: true,
-          user: user,
-          organization,
-          isLoading: false,
-        })
-      );
-    } else if (error) {
-      dispatch(setAuthentication({ isAuthenticated: false, user: null }));
-    } else {
-      dispatch(setAuthentication({ isLoading: false, isAuthenticated: false }));
-    }
-  }, [data, error, isLoading, dispatch]);
+    dispatch(
+      setAuthentication({
+        isAuthenticated: !!user,
+        user: user,
+        organization,
+        isLoading: false,
+      })
+    );
+  }, [data, isLoading, dispatch]);
 
   useEffect(() => {
     checkAuthStatus();
