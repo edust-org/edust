@@ -1,18 +1,12 @@
 import { useUserGetQuery } from "@/app/api/v0/user";
 import { setAuthentication } from "@/app/features/auth";
+import { getToken } from "@/utils";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-const useAccessToken = () => {
-  const token = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("access_token="));
-  return token ? token.split("=")[1] : null;
-};
-
 export const useCheckingAuth = () => {
   const dispatch = useDispatch();
-  const token = useAccessToken();
+  const token = getToken("access_token");
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
