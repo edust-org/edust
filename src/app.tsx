@@ -1,16 +1,13 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setAuthentication } from "./app/features/auth";
+import React, { Suspense } from "react";
 import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
-import { useUserGetQuery } from "@/app/api/v0/user";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
 import { ErrorBoundary } from "@/components";
-import { useCheckingAuth } from "./hooks";
+import { useCheckingUserSession } from "./hooks";
 
 const App: React.FC = () => {
-  useCheckingAuth();
+  useCheckingUserSession();
 
   return (
     <Suspense fallback={<Loading.Spinner />}>

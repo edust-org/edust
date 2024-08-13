@@ -4,7 +4,7 @@ import { getToken } from "@/utils";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-export const useCheckingAuth = () => {
+export const useCheckingUserSession = () => {
   const dispatch = useDispatch();
   const token = getToken("access_token");
   const [enabled, setEnabled] = useState(false);

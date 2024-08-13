@@ -1,1 +1,1 @@
-export { useCheckingAuth } from "./use-checking-auth";
+export { useCheckingUserSession } from "./use-checking-user-session";
