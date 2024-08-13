@@ -4,17 +4,18 @@ import { Suspense } from "react";
 import Loading from "@/components/loading";
 import IsOrganizationOwner from "./is-organization-owner";
 import IsAuthenticated from "./is-authenticated";
+import { Role } from "@/types";
 
 const organizationRoutes = (
   <Route>
     <Route
       path="organizations"
       element={
-        <IsOrganizationOwner>
+        <IsAuthenticated role={Role.OWNER}>
           <Suspense fallback={<Loading.Spinner />}>
             <Dashboard.DashboardLayout />
           </Suspense>
-        </IsOrganizationOwner>
+        </IsAuthenticated>
       }
     >
       <Route path="" element={<h1>Dashboard Home</h1>} />
@@ -38,9 +39,11 @@ const organizationRoutes = (
     <Route
       path="/organizations/pages/:pageId"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard.SitesPageCustomize />
-        </Suspense>
+        <IsAuthenticated role={Role.OWNER}>
+          <Suspense fallback={<Loading.Spinner />}>
+            <Dashboard.SitesPageCustomize />
+          </Suspense>
+        </IsAuthenticated>
       }
     />
     <Route
