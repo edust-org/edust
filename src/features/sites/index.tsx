@@ -29,15 +29,32 @@ export const Sites = () => {
     }
   }, [data?.data?.items, error?.data?.message, error?.data?.status]);
 
+  const [isTailwindLoaded, setTailwindLoaded] = useState(false);
+
   useEffect(() => {
-    if (content?.css) {
+    const handleLoad = () => setTailwindLoaded(true);
+
+    const tailwindScript = document.createElement("script");
+    tailwindScript.src = "https://cdn.tailwindcss.com";
+    tailwindScript.async = true;
+    tailwindScript.onload = handleLoad;
+    document.head.appendChild(tailwindScript);
+
+    // Cleanup function to remove the script
+    return () => {
+      document.head.removeChild(tailwindScript);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isTailwindLoaded && content?.css) {
       const style = document.createElement("style");
       style.type = "text/css";
       style.innerHTML = content.css;
-
+      style.setAttribute("data-dynamic", "true");
       document.head.appendChild(style);
     }
-  }, [content?.css]);
+  }, [isTailwindLoaded, content?.css]);
 
   return (
     <>

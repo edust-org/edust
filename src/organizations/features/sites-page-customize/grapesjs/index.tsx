@@ -10,6 +10,8 @@ import {
 } from "@/app/api/v0/organizations";
 import { toast } from "@/hooks/shadcn-ui";
 
+import gsPluginTailwind from "grapesjs-tailwind";
+
 export const GrapesJs = ({
   pageId,
   content,
@@ -23,6 +25,7 @@ export const GrapesJs = ({
   const editorRef = useRef<Editor | null>(null); // Create a ref to store the editor instance
 
   const onEditor = async (editor: Editor) => {
+    console.log(editor.getWrapper()?.head.toHTML());
     // Must add this reference
     editorRef.current = editor;
 
@@ -78,7 +81,6 @@ export const GrapesJs = ({
         );
         return acc;
       }, []);
-      console.log({ images });
 
       if (images.length > 0) {
         const editor = editorRef.current;
@@ -139,7 +141,7 @@ export const GrapesJs = ({
           },
         }}
         onEditor={onEditor}
-        plugins={[gsPluginBlocksBasic, gsPluginNewsLetter]}
+        plugins={[gsPluginBlocksBasic, gsPluginNewsLetter, gsPluginTailwind]}
       />
     </>
   );
