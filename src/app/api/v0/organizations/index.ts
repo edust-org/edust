@@ -52,6 +52,18 @@ export const organizationsApi = createApi({
         };
       },
     }),
+
+    // Upload Images
+    postImages: build.mutation({
+      query: (body) => ({
+        url: `/sites/pages/upload-images`,
+        method: "POST",
+        body,
+      }),
+    }),
+    getAllImages: build.query<void, void>({
+      query: () => `/sites/pages/upload-images`,
+    }),
   }),
 });
 
@@ -63,4 +75,6 @@ export const {
   useGetPageByIdQuery,
   useEditPageByIdMutation,
   useDeletePageByIdMutation,
+  usePostImagesMutation,
+  useGetAllImagesQuery,
 } = organizationsApi;

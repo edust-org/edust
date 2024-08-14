@@ -2,9 +2,12 @@ import grapesjs, { Editor } from "grapesjs";
 import GjsEditor from "@grapesjs/react";
 import gsPluginBlocksBasic from "grapesjs-blocks-basic";
 import gsPluginNewsLetter from "grapesjs-preset-newsletter";
-import { useRef } from "react";
-import uploadImage from "./upload-image";
-import { useEditPageByIdMutation } from "@/app/api/v0/organizations";
+import { useEffect, useRef, useState } from "react";
+import {
+  useEditPageByIdMutation,
+  useGetAllImagesQuery,
+  usePostImagesMutation,
+} from "@/app/api/v0/organizations";
 import { toast } from "@/hooks/shadcn-ui";
 
 export const GrapesJs = ({
@@ -15,6 +18,8 @@ export const GrapesJs = ({
   content: string;
 }) => {
   const [editPage] = useEditPageByIdMutation();
+  const [uploadImages] = usePostImagesMutation();
+  const { data: loadedImages } = useGetAllImagesQuery();
   const editorRef = useRef<Editor | null>(null); // Create a ref to store the editor instance
 
   const onEditor = async (editor: Editor) => {
@@ -64,6 +69,26 @@ export const GrapesJs = ({
     });
   };
 
+  // Load uploaded images
+  useEffect(() => {
+    if (loadedImages?.data) {
+      const images = loadedImages?.data?.reduce((acc, curr) => {
+        acc.push(
+          `${import.meta.env.VITE_BACKEND_URL}/images/sites/${curr.image_path}`
+        );
+        return acc;
+      }, []);
+      console.log({ images });
+
+      if (images.length > 0) {
+        const editor = editorRef.current;
+
+        const assetManager = editor?.AssetManager;
+        assetManager?.add(images);
+        assetManager?.render();
+      }
+    }
+  }, [loadedImages?.data]);
   return (
     <>
       <GjsEditor
@@ -80,9 +105,37 @@ export const GrapesJs = ({
           storageManager: false,
           assetManager: {
             autoAdd: true,
-            upload: "http://localhost:3001/api/v0/upload-image",
+            upload:
+              "http://localhost:3000/api/v0/organizations/sites/pages/upload-images",
             uploadName: "file",
-            uploadFile: (e) => uploadImage(e, editorRef.current),
+            uploadFile: (e: any) => {
+              const files = e.dataTransfer
+                ? e.dataTransfer.files
+                : e.target?.files;
+              const formData = new FormData();
+              formData.append("image", files[0]);
+              uploadImages(formData)
+                .unwrap()
+                .then((res) => {
+                  const image_path = res?.data?.image_path;
+
+                  if (image_path) {
+                    const editor = editorRef.current;
+
+                    if (editor) {
+                      const assetManager = editor?.AssetManager;
+                      assetManager.add([
+                        image_path,
+                        "http://localhost:3000/images/sites/2024-08-1022-46-1723611861759.png",
+                      ]);
+                      assetManager.render();
+                    }
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            },
           },
         }}
         onEditor={onEditor}
