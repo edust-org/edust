@@ -1,6 +1,9 @@
 # Edust | Education Student Teacher
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![Issues](https://img.shields.io/github/issues/edust-org/grapesjs-shadcn-ui) ![Stars](https://img.shields.io/github/stars/edust-org/grapesjs-shadcn-ui)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Issues](https://img.shields.io/github/issues/edust-org/edust)
+![Stars](https://img.shields.io/github/stars/edust-org/edust)
+![Forks](https://img.shields.io/github/forks/edust-org/edust)
 
 ## Overview
 
