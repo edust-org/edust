@@ -13,7 +13,6 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { SocialAuth } from "./social-auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useLoginMutation } from "@/app/api/v0/auth";
@@ -138,10 +137,6 @@ export const SignIn: React.FC = () => {
                 {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
-
-            <div className="my-4">
-              <SocialAuth />
-            </div>
             <Typography className="text-center mb-4">
               <Link
                 to={"/auth/forgot-password"}

@@ -12,7 +12,6 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { SocialAuth } from "./social-auth";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -177,10 +176,6 @@ export const SignUp: React.FC = () => {
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-
-              <div className="my-4">
-                <SocialAuth />
-              </div>
               <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
                 <Typography>Already have an account?</Typography>
                 <Link to={"/auth/sign-in"}>

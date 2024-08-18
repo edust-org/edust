@@ -1,5 +1,7 @@
 # Edust | Education Student Teacher
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![Issues](https://img.shields.io/github/issues/edust-org/grapesjs-shadcn-ui) ![Stars](https://img.shields.io/github/stars/edust-org/grapesjs-shadcn-ui)
+
 ## Overview
 
 Edust is a web application designed to enhance educational collaboration and interaction between students, teachers, and educational institutions. It provides features for user registration, organization page creation, and customization using a page builder tool.
@@ -22,7 +24,7 @@ If you’d like to contribute, please start by reviewing our guidelines and expl
 
 If you have any questions or need help, feel free to ask in our [Discussion Forum](https://github.com/edust-org/edust/discussions). We’re here to assist you!
 
-### **Join the Community**
+### **🔗 Join the Community**
 
 For real-time discussions and updates, join our [Discord Server](https://discord.gg/k4V3QcpAZH). Connect with other contributors and project maintainers there.
 

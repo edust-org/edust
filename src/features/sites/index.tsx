@@ -35,7 +35,7 @@ export const Sites = () => {
     const handleLoad = () => setTailwindLoaded(true);
 
     const tailwindScript = document.createElement("script");
-    tailwindScript.src = "https://cdn.tailwindcss.com";
+    tailwindScript.src = "https://cdn.tailwindcss.com?v=3.4.5";
     tailwindScript.async = true;
     tailwindScript.onload = handleLoad;
     document.head.appendChild(tailwindScript);
@@ -48,6 +48,7 @@ export const Sites = () => {
 
   useEffect(() => {
     if (isTailwindLoaded && content?.css) {
+      // By default tailwindcss available but when we use components we need cdn
       const style = document.createElement("style");
       style.type = "text/css";
       style.innerHTML = content.css;
