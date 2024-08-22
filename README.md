@@ -29,7 +29,7 @@ If you have any questions or need help, feel free to ask in our [Discussion Foru
 
 ### **🔗 Join the Community**
 
-For real-time discussions and updates, join our [Discord Server](https://discord.gg/k4V3QcpAZH). Connect with other contributors and project maintainers there.
+For real-time discussions and updates, join our [Discord Server](https://discord.gg/vnhqmn9mdj). Connect with other contributors and project maintainers there.
 
 Thank you for your interest in contributing to our project. We look forward to your involvement!
 
