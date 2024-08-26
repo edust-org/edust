@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
 import { ErrorBoundary } from "@/components";
 import { useCheckingUserSession } from "./hooks";
+import { TooltipProvider } from "@/components/ui";
 
 const App: React.FC = () => {
   // ! IN THIS HOOKS HAVE A ISSUE IF USER NOT SIGN-IN
@@ -15,7 +16,9 @@ const App: React.FC = () => {
     <Suspense fallback={<Loading.Spinner />}>
       <ErrorBoundary>
         <Toaster />
-        <RouterProvider router={router} />
+        <TooltipProvider>
+          <RouterProvider router={router} />
+        </TooltipProvider>
       </ErrorBoundary>
     </Suspense>
   );
