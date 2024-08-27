@@ -13,6 +13,7 @@ import Loading from "@/components/loading";
 import organizationRoutes from "./organization-routes";
 import IsAuthenticated from "./is-authenticated";
 import { CreateOrganization } from "@/organizations/features";
+import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,9 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           </IsAuthenticated>
         }
       />
+
+      <Route path="grapesjs" element={<GrapesjsShadcnUI />} />
+
       <Route
         path="playground"
         element={

@@ -22,6 +22,19 @@ export const organizationsApi = createApi({
       }),
     }),
 
+    // site
+    getSite: build.query<any, void>({
+      query: () => `/site`,
+    }),
+
+    editSite: build.mutation({
+      query: (body) => ({
+        url: `/sites`,
+        method: "PATCH",
+        body,
+      }),
+    }),
+
     // Pages
     postPages: build.mutation({
       query: (body) => ({
@@ -70,6 +83,8 @@ export const organizationsApi = createApi({
 export const {
   useGetOrgListsQuery,
   usePostOrganizationMutation,
+  useGetSiteQuery,
+  useEditSiteMutation,
   usePostPagesMutation,
   useGetAllPagesQuery,
   useGetPageByIdQuery,

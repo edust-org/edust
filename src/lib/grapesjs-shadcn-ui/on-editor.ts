@@ -5,11 +5,9 @@ export default async (editor: Editor) => {
   {
     editor.Commands.add("save-db", {
       run: async () => {
-        const content = JSON.stringify({
-          html: editor.getHtml(),
-          css: editor.getCss(),
-        });
-        console.log(content);
+        const projectData = editor.getProjectData();
+        const site_data = JSON.stringify(projectData);
+        console.log(projectData);
       },
     });
 

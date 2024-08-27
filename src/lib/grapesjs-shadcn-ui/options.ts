@@ -30,11 +30,7 @@ const options = (editorRef: any): EditorConfig => ({
 
   projectData: isProjectData || {
     assets: [
-      "https://via.placeholder.com/350x250/78c5d6/fff",
-      "https://via.placeholder.com/350x250/459ba8/fff",
-      "https://via.placeholder.com/350x250/79c267/fff",
-      "https://via.placeholder.com/350x250/c5d647/fff",
-      "https://via.placeholder.com/350x250/f28c33/fff",
+      "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg",
     ],
     pages: [
       {
