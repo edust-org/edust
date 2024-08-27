@@ -20,10 +20,10 @@ const organizationRoutes = (
     >
       <Route path="" element={<h1>Dashboard Home</h1>} />
       <Route
-        path="sites"
+        path="site"
         element={
           <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.Sites />
+            <Dashboard.Site />
           </Suspense>
         }
       />
@@ -46,6 +46,16 @@ const organizationRoutes = (
         </IsAuthenticated>
       }
     />
+
+    <Route
+      path="/organizations/site/edit"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <Dashboard.SiteEdit />
+        </Suspense>
+      }
+    />
+
     <Route
       path="/organizations/create"
       element={

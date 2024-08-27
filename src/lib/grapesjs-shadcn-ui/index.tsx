@@ -22,6 +22,7 @@ export const GrapesjsShadcnUI = () => {
       console.error("Editor is not initialized");
       return;
     }
+
     editorRef.current = editor;
 
     return customOnEditor(editor);

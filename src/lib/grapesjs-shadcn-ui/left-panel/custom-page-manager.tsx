@@ -31,6 +31,8 @@ export default function CustomPageManager({
       name: pageName,
       component: `<h1>Page content ${pageName}</h1>`,
     });
+
+    editor.store((data: any) => ({ site_data: JSON.stringify(data) }));
   };
 
   const handleEdit = (page) => {

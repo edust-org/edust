@@ -9,9 +9,14 @@ export const DashboardLayout = lazy(() =>
     default: module.Dashboard,
   }))
 );
-export const Sites = lazy(() =>
-  import("./sites").then((module) => ({
-    default: module.Sites,
+export const Site = lazy(() =>
+  import("./site").then((module) => ({
+    default: module.Site,
+  }))
+);
+export const SiteEdit = lazy(() =>
+  import("./site-edit").then((module) => ({
+    default: module.SiteEdit,
   }))
 );
 
@@ -28,7 +33,8 @@ export const SitesPageCustomize = lazy(() =>
 
 const Dashboard = {
   DashboardLayout,
-  Sites,
+  Site,
+  SiteEdit,
   SitesPages,
   SitesPageCustomize,
 };

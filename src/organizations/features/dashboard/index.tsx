@@ -53,9 +53,9 @@ export const Dashboard = () => {
                 <Home className="h-4 w-4" />
                 Dashboard
               </NavLink>
-              <NavLink to="/organizations/sites">
+              <NavLink to="/organizations/site">
                 <Globe2 className="h-4 w-4" />
-                Sites
+                Site
               </NavLink>
               <NavLink
                 to="/organizations/pages"

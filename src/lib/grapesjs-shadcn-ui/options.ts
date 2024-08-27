@@ -4,18 +4,34 @@ import gsPluginTuiImageEditor from "grapesjs-tui-image-editor";
 import gsPluginExport from "grapesjs-plugin-export";
 import gsPluginCustomCode from "grapesjs-custom-code";
 import plugins from "./plugins";
-import template from "./template";
-import haveProjectData from "./utils/have-projectData";
-
-const isProjectData = haveProjectData();
 
 const options = (editorRef: any): EditorConfig => ({
   height: "100vh",
   storageManager: {
-    type: "local", // Storage type. Available: local | remote
+    type: "remote", // Storage type. Available: local | remote
     autosave: true, // Store data automatically
     autoload: true, // Autoload stored data on init
-    stepsBeforeSave: 1, // If autosave is enabled, indicates how many changes are necessary before the store method is triggered
+    stepsBeforeSave: 10, // If autosave is enabled, indicates how many changes are necessary before the store method is triggered
+    options: {
+      remote: {
+        // Load project data
+        urlLoad: `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/v0/organizations/site`,
+        onLoad: (result) => {
+          const site_data = JSON.parse(result?.data?.site_data);
+          return editorRef.current.loadProjectData(site_data);
+        },
+
+        // Store project data
+        urlStore: `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/v0/organizations/site`,
+        fetchOptions: (opts) =>
+          opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
+        onStore: (data) => ({ site_data: JSON.stringify(data) }),
+      },
+    },
   },
   undoManager: { trackSelection: false },
   selectorManager: { componentFirst: true },
@@ -27,18 +43,6 @@ const options = (editorRef: any): EditorConfig => ({
   panels: { defaults: [] }, // Avoid default panels
 
   // If you enable multiple pages options then you need this
-
-  projectData: isProjectData || {
-    assets: [
-      "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg",
-    ],
-    pages: [
-      {
-        name: "Home",
-        component: template,
-      },
-    ],
-  },
 
   deviceManager: {
     devices: [
