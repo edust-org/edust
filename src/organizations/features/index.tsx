@@ -20,22 +20,9 @@ export const SiteEdit = lazy(() =>
   }))
 );
 
-export const SitesPages = lazy(() =>
-  import("./sites-pages").then((module) => ({
-    default: module.SitesPages,
-  }))
-);
-export const SitesPageCustomize = lazy(() =>
-  import("./sites-page-customize").then((module) => ({
-    default: module.SitesPageCustomize,
-  }))
-);
-
 const Dashboard = {
   DashboardLayout,
   Site,
   SiteEdit,
-  SitesPages,
-  SitesPageCustomize,
 };
 export default Dashboard;

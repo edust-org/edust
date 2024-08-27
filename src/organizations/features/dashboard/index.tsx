@@ -57,22 +57,6 @@ export const Dashboard = () => {
                 <Globe2 className="h-4 w-4" />
                 Site
               </NavLink>
-              <NavLink
-                to="/organizations/pages"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? inActiveLinkStyle
-                    : isActive
-                    ? activeLinkStyle
-                    : inActiveLinkStyle
-                }
-              >
-                <Layers className="h-4 w-4" />
-                Pages
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  {data?.data?.length || "1"}
-                </Badge>
-              </NavLink>
             </nav>
           </div>
           <div className="mt-auto p-4">

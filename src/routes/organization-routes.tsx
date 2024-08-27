@@ -2,7 +2,6 @@ import Dashboard, { CreateOrganization } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
-import IsOrganizationOwner from "./is-organization-owner";
 import IsAuthenticated from "./is-authenticated";
 import { Role } from "@/types";
 
@@ -27,26 +26,7 @@ const organizationRoutes = (
           </Suspense>
         }
       />
-      <Route
-        path="pages"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.SitesPages />
-          </Suspense>
-        }
-      />
     </Route>
-    <Route
-      path="/organizations/pages/:pageId"
-      element={
-        <IsAuthenticated role={Role.OWNER}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.SitesPageCustomize />
-          </Suspense>
-        </IsAuthenticated>
-      }
-    />
-
     <Route
       path="/organizations/site/edit"
       element={

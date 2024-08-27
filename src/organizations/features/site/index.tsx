@@ -1,17 +1,59 @@
 import { useGetSiteQuery } from "@/app/api/v0/organizations";
-import { Button } from "@/components/ui";
+import Loading from "@/components/loading";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Typography,
+} from "@/components/ui";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Site = () => {
-  const { data } = useGetSiteQuery();
+  const { data, isLoading } = useGetSiteQuery();
+  const [pages, setPages] = useState<[]>([]);
+
+  useEffect(() => {
+    const loadedData = JSON.parse(data?.data?.site_data || "[]");
+    setPages(loadedData.pages);
+  }, [data?.data?.site_data]);
+
+  if (isLoading) {
+    return <Loading.Spinner />;
+  }
 
   return (
-    <div>
-      {data?.status && (
-        <Link to={"edit"} target="_blank">
-          <Button>Edit Site</Button>
-        </Link>
-      )}
-    </div>
+    <>
+      <section>
+        <Card>
+          <CardHeader>
+            <CardTitle>Customize your sites</CardTitle>
+          </CardHeader>
+          <CardFooter>
+            <Link to={"edit"} target="_blank">
+              <Button>Edit</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      </section>
+
+      <section>
+        <Typography variant="h2">Pages List</Typography>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {pages &&
+            pages.map((page) => {
+              return (
+                <Card key={page.id}>
+                  <CardHeader>
+                    <CardTitle>{page.name}</CardTitle>
+                  </CardHeader>
+                </Card>
+              );
+            })}
+        </div>
+      </section>
+    </>
   );
 };
