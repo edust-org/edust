@@ -25,6 +25,8 @@ export const GrapesjsShadcnUI = () => {
 
     editorRef.current = editor;
 
+  
+
     return customOnEditor(editor);
   };
 

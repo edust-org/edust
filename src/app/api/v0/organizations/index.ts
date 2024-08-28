@@ -29,8 +29,16 @@ export const organizationsApi = createApi({
 
     editSite: build.mutation({
       query: (body) => ({
-        url: `/sites`,
+        url: `/site`,
         method: "PATCH",
+        body,
+      }),
+    }),
+
+    uploadImageSite: build.mutation({
+      query: (body) => ({
+        url: `/site/upload`,
+        method: "POST",
         body,
       }),
     }),
@@ -85,6 +93,7 @@ export const {
   usePostOrganizationMutation,
   useGetSiteQuery,
   useEditSiteMutation,
+  useUploadImageSiteMutation,
   usePostPagesMutation,
   useGetAllPagesQuery,
   useGetPageByIdQuery,
