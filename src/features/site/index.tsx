@@ -5,7 +5,7 @@ import { toast } from "@/hooks/shadcn-ui";
 import { Button, Typography } from "@/components/ui";
 import { Link } from "react-router-dom";
 
-export const Sites = () => {
+export const Site = () => {
   // TODO: have huge issues
   //! Caching problem if sites is cached the new data not showing
   const params = useParams();

@@ -7,7 +7,7 @@ import {
 import { Home, NotFound, Playground } from "@/pages";
 
 import Authentication from "@/features/authentication";
-import { Sites } from "@/features";
+import { Site } from "@/features";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
 import organizationRoutes from "./organization-routes";
@@ -86,7 +86,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
         />
       </Route>
 
-      <Route path=":orgIdOrUsername/sites" element={<Sites />} />
+      <Route path=":orgIdOrUsername/site" element={<Site />} />
 
       <Route path="*" element={<NotFound />} />
       {organizationRoutes}

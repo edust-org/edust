@@ -11,7 +11,7 @@ export const publicApi = createApi({
 
   endpoints: (build) => ({
     getOrgSitesPages: build.query({
-      query: (orgIdOrUsername) => `/organizations/${orgIdOrUsername}/sites/`,
+      query: (orgIdOrUsername) => `/organizations/${orgIdOrUsername}/site/`,
     }),
   }),
 });
