@@ -42,6 +42,9 @@ export const organizationsApi = createApi({
         body,
       }),
     }),
+    getUploadImagesSite: build.query<any, void>({
+      query: () => `/site/upload`,
+    }),
 
     // Pages
     postPages: build.mutation({
@@ -94,6 +97,7 @@ export const {
   useGetSiteQuery,
   useEditSiteMutation,
   useUploadImageSiteMutation,
+  useGetUploadImagesSiteQuery,
   usePostPagesMutation,
   useGetAllPagesQuery,
   useGetPageByIdQuery,
