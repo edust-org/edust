@@ -5,6 +5,27 @@ import gsPluginExport from "grapesjs-plugin-export";
 import gsPluginCustomCode from "grapesjs-custom-code";
 import plugins from "./plugins";
 
+const fetchImagesAndAddToAssetManager = async (editor) => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/v0/organizations/site/upload",
+      {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      }
+    ); // Replace with your API endpoint
+    const data = await response.json();
+    const imageUrls = data?.data?.items.map((image) => image.src);
+    if (imageUrls.length && editor) {
+      const assetManager = editor.AssetManager;
+      assetManager.add(imageUrls);
+      assetManager.render();
+    }
+  } catch (error) {
+    console.error("Error fetching images:", error);
+  }
+};
+
 const options = (editorRef: any): EditorConfig => ({
   height: "100vh",
   storageManager: {
@@ -20,6 +41,7 @@ const options = (editorRef: any): EditorConfig => ({
         }/api/v0/organizations/site`,
         onLoad: (result) => {
           const site_data = JSON.parse(result?.data?.site_data);
+          fetchImagesAndAddToAssetManager(editorRef.current);
           return editorRef.current.loadProjectData(site_data);
         },
 
@@ -37,6 +59,10 @@ const options = (editorRef: any): EditorConfig => ({
   selectorManager: { componentFirst: true },
   assetManager: {
     autoAdd: true,
+    assets: [
+      "https://via.placeholder.com/350x250/78c5d6/fff",
+      "https://via.placeholder.com/350x250/459ba8/fff",
+    ],
     uploadFile: (e) => {
       const files = e.dataTransfer ? e.dataTransfer.files : e.target?.files;
       const formData = new FormData();
