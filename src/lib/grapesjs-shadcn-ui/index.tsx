@@ -12,16 +12,54 @@ import {
 } from "@/components/ui";
 import { LeftPanel } from "./left-panel";
 import useWindowSize from "./hooks/use-window-resize";
+import { useEditSiteMutation } from "@/app/api/v0/organizations";
+import { toast } from "@/hooks/shadcn-ui";
 
 export const GrapesjsShadcnUI = () => {
   const { width: windowWidth } = useWindowSize();
   const editorRef = useRef<Editor | null>(null);
+
+  const [saveGsData] = useEditSiteMutation();
 
   const onEditor = async (editor: Editor) => {
     if (!editor) {
       console.error("Editor is not initialized");
       return;
     }
+
+    editor.Commands.add("save-db", {
+      run: async () => {
+        const pages = editor.Pages.getAll().map((page) => {
+          const component = page.getMainComponent();
+          return {
+            id: page.getId(),
+            name: page.getName(),
+            html: editor.getHtml({ component }),
+            css: editor.getCss({ component }),
+          };
+        });
+
+        saveGsData({
+          assets: JSON.stringify(editor.getProjectData()),
+          pages: JSON.stringify(pages),
+        })
+          .unwrap()
+          .then((res) => {
+            if (res?.status) {
+              toast({
+                variant: "success",
+                title: res?.message,
+              });
+            }
+          })
+          .catch((error) => {
+            toast({
+              variant: "destructive",
+              title: error?.data?.message,
+            });
+          });
+      },
+    });
 
     editorRef.current = editor;
 
