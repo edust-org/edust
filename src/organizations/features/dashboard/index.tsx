@@ -2,7 +2,6 @@ import { Link, Outlet } from "react-router-dom";
 import {
   Globe2,
   Home,
-  Layers,
   LineChart,
   Menu,
   Package,
@@ -27,10 +26,8 @@ import {
 import assets from "@/assets/images";
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
 import { NavLink } from "./nav-link";
-import { useGetAllPagesQuery } from "@/app/api/v0/organizations";
 
 export const Dashboard = () => {
-  const { data } = useGetAllPagesQuery();
   const activeLinkStyle = `flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary`;
   const inActiveLinkStyle = `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`;
 

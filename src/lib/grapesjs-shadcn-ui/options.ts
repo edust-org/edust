@@ -19,16 +19,17 @@ const options = (editorRef: any): EditorConfig => ({
           import.meta.env.VITE_BACKEND_URL
         }/api/v0/organizations/site`,
         onLoad: (result) => {
-          const assets = JSON.parse(result?.data);
-          return editorRef.current.loadProjectData(assets);
+          return editorRef.current.loadProjectData(result?.data?.assets);
         },
 
         // Store project data
         urlStore: `${
           import.meta.env.VITE_BACKEND_URL
         }/api/v0/organizations/site`,
+
         fetchOptions: (opts) =>
           opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
+
         onStore: (data, editor) => {
           const pages = editor.Pages.getAll().map((page) => {
             const component = page.getMainComponent();

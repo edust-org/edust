@@ -16,9 +16,10 @@ export const Site = () => {
   const [pages, setPages] = useState<[]>([]);
 
   useEffect(() => {
-    const loadedData = JSON.parse(data?.data?.site_data || "[]");
-    setPages(loadedData.pages);
-  }, [data?.data?.site_data]);
+    if (data?.data?.pages) {
+      setPages(data?.data?.pages);
+    }
+  }, [data?.data.pages]);
 
   if (isLoading) {
     return <Loading.Spinner />;

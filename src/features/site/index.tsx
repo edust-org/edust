@@ -6,8 +6,6 @@ import { Button, Typography } from "@/components/ui";
 import { Link } from "react-router-dom";
 
 export const Site = () => {
-  // TODO: have huge issues
-  //! Caching problem if sites is cached the new data not showing
   const params = useParams();
   const location = useLocation();
 
@@ -19,7 +17,7 @@ export const Site = () => {
 
   useEffect(() => {
     if (data?.data?.items[0]) {
-      setContent(JSON.parse(data?.data?.items[0]?.content));
+      setContent(data?.data?.items[0]);
     }
     if (error?.data?.status) {
       toast({
@@ -66,7 +64,7 @@ export const Site = () => {
       {!content && !isLoading && (
         <div className="h-screen flex items-center justify-center gap-4 flex-col">
           <Typography variant="h1" className="text-red-500">
-            Sites is not available.
+            Site is not available.
           </Typography>
           <Link to={location.state?.from?.pathname || "/"}>
             <Button>go back</Button>

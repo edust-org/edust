@@ -45,49 +45,6 @@ export const organizationsApi = createApi({
     getUploadImagesSite: build.query<any, void>({
       query: () => `/site/upload`,
     }),
-
-    // Pages
-    postPages: build.mutation({
-      query: (body) => ({
-        url: `/sites/pages`,
-        method: "POST",
-        body,
-      }),
-    }),
-    getAllPages: build.query<any, void>({
-      query: () => `/sites/pages`,
-    }),
-    getPageById: build.query({
-      query: (pageId) => `/sites/pages/${pageId}`,
-    }),
-
-    editPageById: build.mutation({
-      query: ({ pageId, ...patch }) => ({
-        url: `/sites/pages/${pageId}`,
-        method: "PATCH",
-        body: patch,
-      }),
-    }),
-    deletePageById: build.mutation({
-      query(pageId) {
-        return {
-          url: `/sites/pages/${pageId}`,
-          method: "DELETE",
-        };
-      },
-    }),
-
-    // Upload Images
-    postImages: build.mutation({
-      query: (body) => ({
-        url: `/sites/pages/upload-images`,
-        method: "POST",
-        body,
-      }),
-    }),
-    getAllImages: build.query<void, void>({
-      query: () => `/sites/pages/upload-images`,
-    }),
   }),
 });
 
@@ -98,11 +55,4 @@ export const {
   useEditSiteMutation,
   useUploadImageSiteMutation,
   useGetUploadImagesSiteQuery,
-  usePostPagesMutation,
-  useGetAllPagesQuery,
-  useGetPageByIdQuery,
-  useEditPageByIdMutation,
-  useDeletePageByIdMutation,
-  usePostImagesMutation,
-  useGetAllImagesQuery,
 } = organizationsApi;
