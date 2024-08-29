@@ -19,8 +19,8 @@ const options = (editorRef: any): EditorConfig => ({
           import.meta.env.VITE_BACKEND_URL
         }/api/v0/organizations/site`,
         onLoad: (result) => {
-          const site_data = JSON.parse(result?.data?.site_data);
-          return editorRef.current.loadProjectData(site_data);
+          const assets = JSON.parse(result?.data);
+          return editorRef.current.loadProjectData(assets);
         },
 
         // Store project data
@@ -29,7 +29,21 @@ const options = (editorRef: any): EditorConfig => ({
         }/api/v0/organizations/site`,
         fetchOptions: (opts) =>
           opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
-        onStore: (data) => ({ site_data: JSON.stringify(data) }),
+        onStore: (data, editor) => {
+          const pages = editor.Pages.getAll().map((page) => {
+            const component = page.getMainComponent();
+            return {
+              id: page.getId(),
+              name: page.getName(),
+              html: editor.getHtml({ component }),
+              css: editor.getCss({ component }),
+            };
+          });
+          return {
+            assets: JSON.stringify(data),
+            pages: JSON.stringify(pages),
+          };
+        },
       },
     },
   },

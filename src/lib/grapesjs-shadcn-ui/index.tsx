@@ -24,36 +24,6 @@ export const GrapesjsShadcnUI = () => {
     }
 
     editorRef.current = editor;
-    // Fetch and add images to Asset Manager
-    const fetchImagesAndAddToAssetManager = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/v0/organizations/site/upload",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
-        const data = await response.json();
-        const imageUrls =
-          data?.data?.items.map((image: { src: string }) => image.src) || [];
-
-        const assetManager = editor.AssetManager;
-        if (!assetManager) return false;
-        if (imageUrls.length) {
-          assetManager.add(imageUrls);
-          assetManager.render();
-        }
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
-
-    editor.on("load", async () => {
-      fetchImagesAndAddToAssetManager();
-    });
 
     return customOnEditor(editor);
   };

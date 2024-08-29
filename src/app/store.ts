@@ -8,7 +8,7 @@ import authReducers from "./features/auth";
 
 const logger = createLogger({
   // optional configuration
-  // collapsed: true,
+  collapsed: true,
   diff: true,
 });
 
