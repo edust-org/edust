@@ -3,12 +3,6 @@ import appendTailwindCss from "./hooks/use-append-tailwindCss";
 
 export default async (editor: Editor) => {
   {
-    editor.Commands.add("save-db", {
-      run: async () => {
-        await editor.store();
-      },
-    });
-
     editor.Commands.add("custom:grapesjs-plugin-export", () => {
       return editor.runCommand("gjs-export-zip");
     });
