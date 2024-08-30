@@ -22,6 +22,7 @@ import { MailOpen } from "lucide-react";
 import { BarLoader } from "react-spinners";
 import { toast } from "@/hooks/shadcn-ui";
 import { useBoolean } from "usehooks-ts";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -170,7 +171,13 @@ export const SignUp: React.FC = () => {
                       htmlFor="sign_up_term_con"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      Accept terms and conditions
+                      Accept{" "}
+                      <Link
+                        to={"http://google.com"}
+                        className="transition hover:underline"
+                      >
+                        terms and conditions
+                      </Link>
                     </label>
                   </div>
                 </div>
@@ -182,7 +189,12 @@ export const SignUp: React.FC = () => {
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-              <div className="mb-2 mt-4 flex flex-col items-center justify-between gap-4 sm:flex-row">
+
+              <div className="my-4">
+                <SocialAuth />
+              </div>
+
+              <div className="mb-2 flex flex-col items-center justify-between gap-4 sm:flex-row">
                 <Typography>Already have an account?</Typography>
                 <Link to={"/auth/sign-in"}>
                   <Button variant={"outline"} size={"sm"}>

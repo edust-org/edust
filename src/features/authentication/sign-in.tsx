@@ -21,6 +21,7 @@ import { setAuthentication } from "@/app/features/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { BarLoader } from "react-spinners";
 import { useGetUserQuery } from "@/app/api/v0/user";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -137,6 +138,9 @@ export const SignIn: React.FC = () => {
                 {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
+            <div className="mt-4">
+              <SocialAuth />
+            </div>
             <Typography className="mb-4 text-center">
               <Link
                 to={"/auth/forgot-password"}
