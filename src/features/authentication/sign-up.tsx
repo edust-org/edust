@@ -21,6 +21,7 @@ import assets from "@/assets/images";
 import { MailOpen } from "lucide-react";
 import { BarLoader } from "react-spinners";
 import { toast } from "@/hooks/shadcn-ui";
+import { useBoolean } from "usehooks-ts";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -39,6 +40,7 @@ export const SignUp: React.FC = () => {
     isConfirm: false,
     message: "",
   });
+  const { value, toggle } = useBoolean(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -105,7 +107,7 @@ export const SignUp: React.FC = () => {
         )}
         {!confirmAccount.isConfirm && (
           <Form {...form}>
-            <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
+            <div className="shadow rounded-sm p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
@@ -162,7 +164,7 @@ export const SignUp: React.FC = () => {
                   )}
                 />
                 <div className="items-top flex space-x-2">
-                  <Checkbox id="sign_up_term_con" />
+                  <Checkbox id="sign_up_term_con" onCheckedChange={toggle} />
                   <div className="grid gap-1.5 leading-none">
                     <label
                       htmlFor="sign_up_term_con"
@@ -172,11 +174,15 @@ export const SignUp: React.FC = () => {
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isLoading || !value}
+                >
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-              <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+              <div className="mt-4 mb-2 flex items-center justify-between gap-4 flex-col sm:flex-row">
                 <Typography>Already have an account?</Typography>
                 <Link to={"/auth/sign-in"}>
                   <Button variant={"outline"} size={"sm"}>
