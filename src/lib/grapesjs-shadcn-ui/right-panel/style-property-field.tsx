@@ -156,7 +156,7 @@ export default function StylePropertyField({
           <div className="flex flex-col items-center gap-3">
             {value && value !== defValue && (
               <div
-                className="w-[50px] h-[50px] rounded inline-block bg-cover bg-center cursor-pointer"
+                className="inline-block h-[50px] w-[50px] cursor-pointer rounded bg-cover bg-center"
                 style={{ backgroundImage: `url("${value}")` }}
                 onClick={() => handleChange("")}
               />
@@ -164,7 +164,7 @@ export default function StylePropertyField({
             <button
               type="button"
               onClick={openAssets}
-              className={"border rounded px-2 py-1 w-full"}
+              className={"w-full rounded border px-2 py-1"}
             >
               Select Image
             </button>
@@ -178,7 +178,7 @@ export default function StylePropertyField({
         inputToRender = (
           <div
             className={
-              "flex flex-wrap p-2 bg-black/20 rounded border border-slate-500"
+              "flex flex-wrap rounded border border-slate-500 bg-black/20 p-2"
             }
           >
             {compositeProp.getProperties().map((prop) => (
@@ -196,7 +196,7 @@ export default function StylePropertyField({
         inputToRender = (
           <div
             className={
-              "flex flex-col p-2 gap-2 bg-black/20 min-h-[54px] rounded border border-slate-500"
+              "flex min-h-[54px] flex-col gap-2 rounded border border-slate-500 bg-black/20 p-2"
             }
           >
             {layers.map((layer) => (
@@ -204,7 +204,7 @@ export default function StylePropertyField({
                 key={layer.getId()}
                 className={"rounded border border-slate-500"}
               >
-                <div className="flex gap-1 bg-slate-800 px-2 py-1 items-center">
+                <div className="flex items-center gap-1 bg-slate-800 px-2 py-1">
                   <Button
                     size="icon"
                     onClick={() => layer.move(layer.getIndex() - 1)}
@@ -222,7 +222,7 @@ export default function StylePropertyField({
                   </button>
                   <div
                     className={
-                      "bg-white min-w-[17px] min-h-[17px] text-black text-sm flex justify-center"
+                      "flex min-h-[17px] min-w-[17px] justify-center bg-white text-sm text-black"
                     }
                     style={layer.getStylePreview({
                       number: { min: -3, max: 3 },
@@ -236,7 +236,7 @@ export default function StylePropertyField({
                   </Button>
                 </div>
                 {layer.isSelected() && (
-                  <div className="p-2 flex flex-wrap">
+                  <div className="flex flex-wrap p-2">
                     {stackProp.getProperties().map((prop) => (
                       <StylePropertyField key={prop.getId()} prop={prop} />
                     ))}
@@ -255,7 +255,7 @@ export default function StylePropertyField({
       {...rest}
       className={`mb-3 px-1 ${prop.isFull() ? "w-full" : "w-1/2"}`}
     >
-      <div className={`flex mb-2 items-center ${canClear && "text-slate-500"}`}>
+      <div className={`mb-2 flex items-center ${canClear && "text-slate-500"}`}>
         <div className="flex-grow capitalize">{prop.getLabel()}</div>
         {canClear && (
           <button onClick={() => prop.clear()}>

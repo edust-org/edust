@@ -9,7 +9,7 @@ export const LeftPanel = () => {
   return (
     <>
       <Tabs defaultValue="layers">
-        <TabsList className="flex gap-2 items-center justify-start">
+        <TabsList className="flex items-center justify-start gap-2">
           <TabsTrigger value="pages">
             <RiFileCopy2Line className="text-lg" />
           </TabsTrigger>

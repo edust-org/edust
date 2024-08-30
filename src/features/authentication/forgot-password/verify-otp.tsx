@@ -69,17 +69,17 @@ export const VerifyOtp = () => {
       <Helmet>
         <title>Forgot Password | Edust</title>
       </Helmet>
-      <div className="h-screen flex items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
-          <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
-            <div className="text-center space-y-4">
+          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="space-y-4 text-center">
               <img src={assets.logo} alt="" className="mx-auto" width={250} />
               <div className="space-y-2">
                 <Typography variant="h3">Verify your email</Typography>
                 <Typography>
                   Enter OTP sent to <strong>{email}</strong>
                 </Typography>
-                <MailOpen className="mx-auto w-28 h-28" />
+                <MailOpen className="mx-auto h-28 w-28" />
               </div>
             </div>
             <form

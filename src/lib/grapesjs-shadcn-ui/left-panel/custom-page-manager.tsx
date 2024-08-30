@@ -53,7 +53,7 @@ export default function CustomPageManager({
       <div className="p-2">
         <button
           type="button"
-          className={"border rounded px-2 py-1 w-full"}
+          className={"w-full rounded border px-2 py-1"}
           onClick={addNewPage}
         >
           Add new page
@@ -62,7 +62,7 @@ export default function CustomPageManager({
       {pages.map((page, index) => (
         <div
           key={page.getId()}
-          className={`flex items-center py-2 px-4 border-b border-slate-500 ${
+          className={`flex items-center border-b border-slate-500 px-4 py-2 ${
             index === 0 ? "border-t" : ""
           }`}
         >

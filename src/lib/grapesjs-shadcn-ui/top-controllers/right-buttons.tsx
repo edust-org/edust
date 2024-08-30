@@ -49,7 +49,7 @@ export const RightButtons = () => {
         icon: <FaSave />,
       },
     ],
-    [UndoManager]
+    [UndoManager],
   );
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export const RightButtons = () => {
   return (
     <>
       <div
-        className="flex flex-wrap gap-3 ml-auto px-2 panel__top"
+        className="panel__top ml-auto flex flex-wrap gap-3 px-2"
         id="panel-top"
       >
         {cmdButtons.map(({ id, icon, disabled, options = {} }) => (
@@ -91,7 +91,7 @@ export const RightButtons = () => {
             key={id}
             type="button"
             variant={Commands.isActive(id) ? "default" : "ghost"}
-            className={`px-2 text-lg h-9`}
+            className={`h-9 px-2 text-lg`}
             onClick={() => handleButtons({ Commands, id, options })}
             disabled={disabled?.()}
           >

@@ -21,6 +21,8 @@ import assets from "@/assets/images";
 import { MailOpen } from "lucide-react";
 import { BarLoader } from "react-spinners";
 import { toast } from "@/hooks/shadcn-ui";
+import { useBoolean } from "usehooks-ts";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -39,6 +41,7 @@ export const SignUp: React.FC = () => {
     isConfirm: false,
     message: "",
   });
+  const { value, toggle } = useBoolean(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -82,14 +85,14 @@ export const SignUp: React.FC = () => {
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>
-      <div className="h-screen flex items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center p-4">
         {confirmAccount.isConfirm && (
-          <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
-            <div className="text-center space-y-4">
+          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="space-y-4 text-center">
               <img src={assets.logo} alt="" className="mx-auto" width={250} />
               <div className="space-y-2">
                 <Typography variant="h3">Confirm your account</Typography>
-                <MailOpen className="mx-auto w-28 h-28" />
+                <MailOpen className="mx-auto h-28 w-28" />
                 <Typography variant="large">
                   {confirmAccount.message}
                 </Typography>
@@ -105,7 +108,7 @@ export const SignUp: React.FC = () => {
         )}
         {!confirmAccount.isConfirm && (
           <Form {...form}>
-            <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
+            <div className="w-full rounded-sm p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
@@ -162,21 +165,36 @@ export const SignUp: React.FC = () => {
                   )}
                 />
                 <div className="items-top flex space-x-2">
-                  <Checkbox id="sign_up_term_con" />
+                  <Checkbox id="sign_up_term_con" onCheckedChange={toggle} />
                   <div className="grid gap-1.5 leading-none">
                     <label
                       htmlFor="sign_up_term_con"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      Accept terms and conditions
+                      Accept{" "}
+                      <Link
+                        to={"http://google.com"}
+                        className="transition hover:underline"
+                      >
+                        terms and conditions
+                      </Link>
                     </label>
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isLoading || !value}
+                >
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-              <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+
+              <div className="my-4">
+                <SocialAuth />
+              </div>
+
+              <div className="mb-2 flex flex-col items-center justify-between gap-4 sm:flex-row">
                 <Typography>Already have an account?</Typography>
                 <Link to={"/auth/sign-in"}>
                   <Button variant={"outline"} size={"sm"}>

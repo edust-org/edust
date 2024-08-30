@@ -21,6 +21,7 @@ import { setAuthentication } from "@/app/features/auth";
 import { toast } from "@/hooks/shadcn-ui";
 import { BarLoader } from "react-spinners";
 import { useGetUserQuery } from "@/app/api/v0/user";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -95,9 +96,9 @@ export const SignIn: React.FC = () => {
       <Helmet>
         <title>Sign In to Edist - Access Your Account</title>
       </Helmet>
-      <div className="h-screen flex items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
-          <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
+          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
@@ -137,15 +138,18 @@ export const SignIn: React.FC = () => {
                 {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
-            <Typography className="text-center mb-4">
+            <div className="mt-4">
+              <SocialAuth />
+            </div>
+            <Typography className="mb-4 text-center">
               <Link
                 to={"/auth/forgot-password"}
-                className="hover:underline transition"
+                className="transition hover:underline"
               >
                 Forgot Your Password?
               </Link>
             </Typography>
-            <div className="mb-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+            <div className="mb-4 flex flex-col items-center justify-between gap-4 sm:flex-row">
               <Typography>Don’t have an account?</Typography>
               <Link to={"/auth/sign-up"}>
                 <Button variant={"outline"} size={"sm"}>

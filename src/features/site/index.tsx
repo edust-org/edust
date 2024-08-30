@@ -10,7 +10,7 @@ export const Site = () => {
   const location = useLocation();
 
   const { data, isLoading, error } = useGetOrgSitesPagesQuery(
-    params.orgIdOrUsername
+    params.orgIdOrUsername,
   );
 
   const [content, setContent] = useState(null);
@@ -62,7 +62,7 @@ export const Site = () => {
         <div dangerouslySetInnerHTML={{ __html: content?.html }}></div>
       )}
       {!content && !isLoading && (
-        <div className="h-screen flex items-center justify-center gap-4 flex-col">
+        <div className="flex h-screen flex-col items-center justify-center gap-4">
           <Typography variant="h1" className="text-red-500">
             Site is not available.
           </Typography>
