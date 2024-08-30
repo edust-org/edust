@@ -84,14 +84,14 @@ export const SignUp: React.FC = () => {
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>
-      <div className="h-screen flex items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center p-4">
         {confirmAccount.isConfirm && (
-          <div className="shadow p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
-            <div className="text-center space-y-4">
+          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="space-y-4 text-center">
               <img src={assets.logo} alt="" className="mx-auto" width={250} />
               <div className="space-y-2">
                 <Typography variant="h3">Confirm your account</Typography>
-                <MailOpen className="mx-auto w-28 h-28" />
+                <MailOpen className="mx-auto h-28 w-28" />
                 <Typography variant="large">
                   {confirmAccount.message}
                 </Typography>
@@ -107,7 +107,7 @@ export const SignUp: React.FC = () => {
         )}
         {!confirmAccount.isConfirm && (
           <Form {...form}>
-            <div className="shadow rounded-sm p-4 md:p-6 w-full sm:max-w-96 md:max-w-[450px]">
+            <div className="w-full rounded-sm p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
@@ -182,7 +182,7 @@ export const SignUp: React.FC = () => {
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-              <div className="mt-4 mb-2 flex items-center justify-between gap-4 flex-col sm:flex-row">
+              <div className="mb-2 mt-4 flex flex-col items-center justify-between gap-4 sm:flex-row">
                 <Typography>Already have an account?</Typography>
                 <Link to={"/auth/sign-in"}>
                   <Button variant={"outline"} size={"sm"}>

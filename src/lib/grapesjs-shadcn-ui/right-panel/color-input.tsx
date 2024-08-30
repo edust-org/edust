@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui";
 
-const ColorInput = ({
+type ColorInputProps = {
+  placeholder: string;
+  value: string;
+  onChange: (ev: any) => void;
+  valueWithDef: string;
+  onColorChange: (color: string) => void;
+};
+
+const ColorInput: React.FC<ColorInputProps> = ({
   placeholder,
   value,
   onChange,
@@ -15,17 +23,17 @@ const ColorInput = ({
     setColor(valueWithDef);
   }, [valueWithDef]);
 
-  const handleColorChange = (event) => {
+  const handleColorChange = (event: any) => {
     const newColor = event.target.value;
     setColor(newColor);
     onColorChange(newColor);
   };
 
   return (
-    <div className="w-full flex items-center ">
+    <div className="flex w-full items-center">
       <div className="flex items-center gap-1">
         <div
-          className={`w-9 h-9 border cursor-pointer relative rounded`}
+          className={`relative h-9 w-9 cursor-pointer rounded border`}
           style={{
             backgroundColor: color,
           }}
@@ -34,7 +42,7 @@ const ColorInput = ({
             type="color"
             value={valueWithDef}
             onChange={handleColorChange}
-            className="absolute w-full h-full opacity-0 cursor-pointer"
+            className="absolute h-full w-full cursor-pointer opacity-0"
           />
         </div>
         <Input

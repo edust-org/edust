@@ -101,7 +101,7 @@ export default function LayerItem({
         ref={layerRef}
       >
         <div
-          className={`flex items-center p-1 pr-2 border-b gap-1 ${
+          className={`flex items-center gap-1 border-b p-1 pr-2 ${
             level === 0 ? "border-t" : ""
           } border-slate-500 ${isHovered ? "bg-sky-700" : ""} ${
             selected ? "bg-sky-500" : ""
@@ -114,13 +114,13 @@ export default function LayerItem({
             }`}
             onClick={toggleOpen}
           >
-            <IoMdArrowDropright className={open ? "rotate-90	" : "rotate-0"} />
+            <IoMdArrowDropright className={open ? "rotate-90" : "rotate-0"} />
           </div>
-          <div className="truncate flex-grow" style={itemStyle}>
+          <div className="flex-grow truncate" style={itemStyle}>
             {name}
           </div>
           <div
-            className={`group-hover:opacity-100 cursor-pointer ${
+            className={`cursor-pointer group-hover:opacity-100 ${
               visible ? "opacity-0" : "opacity-100"
             }`}
             onClick={toggleVisibility}

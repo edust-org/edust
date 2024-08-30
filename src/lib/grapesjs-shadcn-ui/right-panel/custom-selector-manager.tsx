@@ -50,7 +50,7 @@ export default function CustomSelectorManager({
   const [isShowInput, setIsShowInput] = useState(false);
 
   return (
-    <div className="gjs-custom-selector-manager p-2 flex flex-col gap-2 text-left">
+    <div className="gjs-custom-selector-manager flex flex-col gap-2 p-2 text-left">
       <div className="flex items-center">
         <div className="flex-grow">Selectors</div>
         <Form {...form}>
@@ -93,7 +93,7 @@ export default function CustomSelectorManager({
       {/* start Selectors List or classes */}
       <div
         className={
-          "flex items-center gap-2 flex-wrap p-2 bg-slate-200 border rounded min-h-[45px] border-slate-500"
+          "flex min-h-[45px] flex-wrap items-center gap-2 rounded border border-slate-500 bg-slate-200 p-2"
         }
       >
         {targetStr ? (
@@ -116,7 +116,7 @@ export default function CustomSelectorManager({
               <Button
                 type="button"
                 onClick={() => setIsShowInput(true)}
-                className={"border rounded h-6 w-6"}
+                className={"h-6 w-6 rounded border"}
                 size="icon"
               >
                 <FaPlus />
@@ -129,9 +129,9 @@ export default function CustomSelectorManager({
         {selectors.map((selector) => (
           <div
             key={selector.toString()}
-            className="px-2 py-1 flex items-center gap-1 whitespace-nowrap bg-slate-500 text-white rounded"
+            className="flex items-center gap-1 whitespace-nowrap rounded bg-slate-500 px-2 py-1 text-white"
           >
-            <div className="whitespace-pre-wrap	break-all">
+            <div className="whitespace-pre-wrap break-all">
               {selector.getLabel()}
             </div>
             <button type="button" onClick={() => removeSelector(selector)}>

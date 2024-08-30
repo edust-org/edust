@@ -23,7 +23,7 @@ export const RightPanel = () => {
   return (
     <>
       <Tabs defaultValue="blocks">
-        <TabsList className="flex gap-2 items-center justify-between">
+        <TabsList className="flex items-center justify-between gap-2">
           <TabsTrigger value="selectors">
             <FaPaintBrush className="text-lg" />
           </TabsTrigger>

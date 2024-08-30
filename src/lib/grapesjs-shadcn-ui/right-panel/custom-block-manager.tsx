@@ -26,7 +26,7 @@ export default function CustomBlockManager({
       >
         {Array.from(mapCategoryBlocks).map(([category, blocks]) => (
           <AccordionItem key={category} value={category}>
-            <AccordionTrigger className="px-2 bg-slate-100 hover:no-underline	py-2">
+            <AccordionTrigger className="bg-slate-100 px-2 py-2 hover:no-underline">
               {category}
             </AccordionTrigger>
             <AccordionContent className="bg-white pb-0">
@@ -36,7 +36,7 @@ export default function CustomBlockManager({
                     key={block.getId()}
                     draggable
                     className={
-                      "min-h-20 flex flex-col gap-1 items-center border rounded cursor-pointer py-2 px-1 transition-colors border-slate-100 shadow bg-slate-50 hover:bg-white"
+                      "flex min-h-20 cursor-pointer flex-col items-center gap-1 rounded border border-slate-100 bg-slate-50 px-1 py-2 shadow transition-colors hover:bg-white"
                     }
                     onDragStart={(ev) => dragStart(block, ev.nativeEvent)}
                     onDragEnd={() => dragStop(false)}
@@ -58,13 +58,13 @@ export default function CustomBlockManager({
                   >
                     <div
                       className={`${
-                        !block.getLabel().includes("<svg ") &&
+                        !block.getLabel().includes("<svg") &&
                         "min-h-10 min-w-10"
-                      } max-w-40 max-h-40 w-full overflow-hidden p-2 flex items-center justify-center object-cover`}
+                      } flex max-h-40 w-full max-w-40 items-center justify-center overflow-hidden object-cover p-2`}
                       dangerouslySetInnerHTML={{ __html: block.getMedia()! }}
                     />
                     {block?.getLabel() && (
-                      <div className="text-sm text-center w-full">
+                      <div className="w-full text-center text-sm">
                         <div
                           dangerouslySetInnerHTML={{
                             __html: block.getLabel().includes("<svg ")

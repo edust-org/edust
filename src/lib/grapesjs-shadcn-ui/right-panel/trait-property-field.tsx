@@ -109,8 +109,8 @@ export default function TraitPropertyField({
   }
 
   return (
-    <div {...rest} className="mb-3 px-1 w-full">
-      <div className={"flex mb-2 items-center"}>
+    <div {...rest} className="mb-3 w-full px-1">
+      <div className={"mb-2 flex items-center"}>
         <div className="flex-grow capitalize">{trait.getLabel()}</div>
       </div>
       {inputToRender}

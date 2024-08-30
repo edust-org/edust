@@ -17,7 +17,7 @@ export const TopControllers = () => {
 
   return (
     <>
-      <div className="border-b bg-muted flex items-center justify-between">
+      <div className="flex items-center justify-between border-b bg-muted">
         <div className="px-2">
           <DevicesProvider>
             {({ devices, select, selected }) => {
@@ -34,7 +34,7 @@ export const TopControllers = () => {
                       <TooltipTrigger asChild>
                         <Button
                           variant={"ghost"}
-                          className={`my-1 px-2 h-8 ${
+                          className={`my-1 h-8 px-2 ${
                             selected == "desktop" && "bg-white"
                           }`}
                           onClick={() => handleDevice(devices[0]?.id, select)}
@@ -56,7 +56,7 @@ export const TopControllers = () => {
                       <TooltipTrigger asChild>
                         <Button
                           variant={"ghost"}
-                          className={`my-1 px-2 h-8 ${
+                          className={`my-1 h-8 px-2 ${
                             selected == "tablet" && "bg-white"
                           }`}
                           onClick={() => handleDevice(devices[1]?.id, select)}
@@ -78,7 +78,7 @@ export const TopControllers = () => {
                       <TooltipTrigger asChild>
                         <Button
                           variant={"ghost"}
-                          className={`my-1 px-2 h-8 ${
+                          className={`my-1 h-8 px-2 ${
                             selected == "mobileLandscape" && "bg-white"
                           }`}
                           onClick={() => handleDevice(devices[2]?.id, select)}
@@ -102,7 +102,7 @@ export const TopControllers = () => {
                       <TooltipTrigger asChild>
                         <Button
                           variant={"ghost"}
-                          className={`my-1 px-2 h-8 ${
+                          className={`my-1 h-8 px-2 ${
                             selected == "mobilePortrait" && "bg-white"
                           }`}
                           onClick={() => handleDevice(devices[3]?.id, select)}
