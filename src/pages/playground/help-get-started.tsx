@@ -7,15 +7,11 @@ export const HelpGetStarted = () => {
       <Typography variant="h1" className="mb-8 text-center">
         We'll help you get started
       </Typography>
-
       <div>
         <div className="mx-auto grid max-w-[900px] items-center gap-4 rounded-t-2xl border bg-slate-50 p-4 md:grid-cols-[auto_224px]">
           <div className="flex items-center gap-4">
             <div>
-              <Button
-                variant={"outline"}
-                className="h-14 w-14 rounded-full p-3"
-              >
+              <Button className="h-14 w-14 rounded-full p-3">
                 <FaRegArrowAltCircleRight className="text-4xl" />
               </Button>
             </div>
@@ -26,7 +22,7 @@ export const HelpGetStarted = () => {
               </Typography>
             </div>
           </div>
-          <div className="p-2 md:max-w-56">
+          <div className="min-h-24 p-2 md:max-w-56">
             <img
               src="https://www.glideapps.com/_next/image?url=%2Fimages%2Fhomepage-2024%2Fresources%2Fsales-dashboard-template.jpg&w=1920&q=75"
               alt=""
@@ -37,10 +33,7 @@ export const HelpGetStarted = () => {
         <div className="mx-auto grid max-w-[900px] items-center gap-4 border bg-slate-50 p-4 md:grid-cols-[auto_224px]">
           <div className="flex items-center gap-4">
             <div>
-              <Button
-                variant={"outline"}
-                className="h-14 w-14 rounded-full p-3"
-              >
+              <Button className="h-14 w-14 rounded-full p-3">
                 <FaRegArrowAltCircleRight className="text-4xl" />
               </Button>
             </div>
@@ -51,7 +44,7 @@ export const HelpGetStarted = () => {
               </Typography>
             </div>
           </div>
-          <div className="p-2 md:max-w-56">
+          <div className="min-h-24 p-2 md:max-w-56">
             <img
               src="https://www.glideapps.com/_next/image?url=%2Fimages%2Fhomepage-2024%2Fresources%2Fwhat-is-no-code.jpg&w=1920&q=75"
               alt=""
@@ -62,10 +55,7 @@ export const HelpGetStarted = () => {
         <div className="mx-auto grid max-w-[900px] items-center gap-4 rounded-b-2xl border bg-slate-50 p-4 md:grid-cols-[auto_224px]">
           <div className="flex items-center gap-4">
             <div>
-              <Button
-                variant={"outline"}
-                className="h-14 w-14 rounded-full p-3"
-              >
+              <Button className="h-14 w-14 rounded-full p-3">
                 <FaRegArrowAltCircleRight className="text-4xl" />
               </Button>
             </div>
@@ -76,7 +66,7 @@ export const HelpGetStarted = () => {
               </Typography>
             </div>
           </div>
-          <div className="p-2 md:max-w-56">
+          <div className="min-h-24 p-2 md:max-w-56">
             <img
               src="https://www.glideapps.com/_next/image?url=%2Fimages%2Fhomepage-2024%2Fresources%2Fhire-a-glide-expert.jpg&w=1920&q=75"
               alt=""
