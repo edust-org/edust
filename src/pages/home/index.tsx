@@ -2,15 +2,15 @@ import { useAppSelector } from "@/app/hooks";
 import { lazy } from "react";
 import { HaveAnOrgAccount } from "@/organizations/components";
 
-const OrgLists = lazy(() =>
-  import("./org-lists").then((module) => ({
-    default: module.OrgLists,
+const GuestHome = lazy(() =>
+  import("./guest-home").then((module) => ({
+    default: module.GuestHome,
   })),
 );
 
-const GuestHome = lazy(() =>
-  import("././guest-home").then((module) => ({
-    default: module.GuestHome,
+const PrivateHome = lazy(() =>
+  import("./private-home").then((module) => ({
+    default: module.PrivateHome,
   })),
 );
 
@@ -21,13 +21,7 @@ export const Home = () => {
     <>
       {auth?.user && <HaveAnOrgAccount auth={auth} />}
 
-      {auth.isAuthenticated ? (
-        <div className="h-screen bg-slate-50 p-8">
-          <OrgLists />
-        </div>
-      ) : (
-        <GuestHome />
-      )}
+      {auth.isAuthenticated ? <PrivateHome /> : <GuestHome />}
     </>
   );
 };
