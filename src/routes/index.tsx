@@ -42,11 +42,9 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
       <Route
         path="playground"
         element={
-          <IsAuthenticated>
-            <Suspense fallback={<Loading.Spinner />}>
-              <Playground />
-            </Suspense>
-          </IsAuthenticated>
+          <Suspense fallback={<Loading.Spinner />}>
+            <Playground />
+          </Suspense>
         }
       />
 
@@ -90,8 +88,8 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
 
       <Route path="*" element={<NotFound />} />
       {organizationRoutes}
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 export default router;
