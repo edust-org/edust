@@ -7,7 +7,7 @@ import {
 import { Home, NotFound, Playground } from "@/pages";
 
 import Authentication from "@/features/authentication";
-import { Site } from "@/features";
+import { InstituteDetails, Institutes, Site } from "@/features";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
 import organizationRoutes from "./organization-routes";
@@ -26,6 +26,24 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           </Suspense>
         }
       />
+
+      <Route
+        path="/institutes"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Institutes />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/institutes/:id"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <InstituteDetails />
+          </Suspense>
+        }
+      />
+
       <Route
         path="create-a-new-organizations"
         element={
