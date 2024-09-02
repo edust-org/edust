@@ -4,6 +4,7 @@ import { HelpGetStarted } from "./help-get-started";
 import { StartDesign } from "./start-design";
 import { Faq } from "./faq";
 import Hero from "./hero";
+import { Footer } from "./footer";
 
 export const GuestHome = () => {
   return (
@@ -22,6 +23,7 @@ export const GuestHome = () => {
         <Faq />
         <StartDesign />
       </main>
+      <Footer />
     </>
   );
 };
