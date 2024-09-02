@@ -14,6 +14,7 @@ import organizationRoutes from "./organization-routes";
 import IsAuthenticated from "./is-authenticated";
 import { CreateOrganization } from "@/organizations/features";
 import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
+import { Institutes } from "@/features/institutes";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,9 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           </Suspense>
         }
       />
+
+      <Route path="/institutes" element={<Institutes />} />
+
       <Route
         path="create-a-new-organizations"
         element={
