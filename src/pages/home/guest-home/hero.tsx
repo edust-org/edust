@@ -1,9 +1,7 @@
 import { FC } from "react";
 import { Button, Typography } from "@/components/ui";
 import { Player } from "@lottiefiles/react-lottie-player";
-
 import animation from "@/assets/animations/home/edust-hero.json";
-import { cn } from "@/utils";
 
 const Hero: FC = () => {
   return (
@@ -48,7 +46,7 @@ const Hero: FC = () => {
         className="md:w-[400px] xl:w-[600px]"
       />
 
-      <div className="absolute bottom-0 left-40 -z-10 h-[1000px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-500 to-slate-300 blur-[100px]" />
+      <div className="absolute bottom-0 left-40 -z-10 h-[1000px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
       <div className="absolute -top-[400px] left-[70%] -z-10 h-[700px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
     </div>
   );

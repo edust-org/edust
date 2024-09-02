@@ -119,7 +119,7 @@ export const HelpGetStarted = () => {
               gradientUnits="userSpaceOnUse"
             >
               <stop stop-color="#0F172A" stop-opacity="0" />
-              <stop offset="1" stop-color="#111827" stop-opacity="0.75" />
+              <stop offset="1" stop-color="#111827" stop-opacity="0.45" />
             </linearGradient>
           </defs>
         </svg>
