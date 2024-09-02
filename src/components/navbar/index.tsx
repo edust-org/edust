@@ -22,7 +22,7 @@ export const Navbar = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
 
   return (
-    <header className="shadow-sm">
+    <header className="sticky top-0 z-50 bg-white bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
       <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
           <img src={assets.logo} alt="" className="h-10" />
