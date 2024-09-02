@@ -5,7 +5,7 @@ export const HelpGetStarted = () => {
   return (
     <section className="relative overflow-hidden bg-white py-4 md:py-8 lg:py-28">
       <div className="container">
-        <Typography variant="h1" className="mb-8 text-center">
+        <Typography variant="h1" className="relative z-10 mb-8 text-center">
           We'll help you get started
         </Typography>
         <div>
