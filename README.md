@@ -75,6 +75,12 @@ Contributions are welcome! Please follow these steps:
 3. Push to the branch (`git push`).
 4. Open a pull request.
 
+### Our Contributors
+
+<a href="https://github.com/edust-org/edust/graphs/contributors">
+ <img src="https://contrib.rocks/image?repo=edust-org/edust" />
+</a>
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
