@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { HelpGetStarted } from "./help-get-started";
 import { StartDesign } from "./start-design";
 import { Faq } from "./faq";
+import Hero from "./heor";
 
 export const GuestHome = () => {
   return (
@@ -13,6 +14,7 @@ export const GuestHome = () => {
 
       <div className="mb-8">
         <Navbar />
+        <Hero />
       </div>
 
       <main className="space-y-8 md:space-y-16">
