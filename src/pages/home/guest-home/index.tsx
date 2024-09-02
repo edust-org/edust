@@ -16,8 +16,8 @@ export const GuestHome = () => {
       </div>
 
       <main className="space-y-8 md:space-y-16">
-        <HelpGetStarted />
         <StartDesign />
+        <HelpGetStarted />
         <Faq />
       </main>
     </>
