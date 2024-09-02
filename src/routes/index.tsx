@@ -7,14 +7,13 @@ import {
 import { Home, NotFound, Playground } from "@/pages";
 
 import Authentication from "@/features/authentication";
-import { Site } from "@/features";
+import { InstituteDetails, Institutes, Site } from "@/features";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
 import organizationRoutes from "./organization-routes";
 import IsAuthenticated from "./is-authenticated";
 import { CreateOrganization } from "@/organizations/features";
 import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
-import { Institutes } from "@/features/institutes";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +27,22 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
         }
       />
 
-      <Route path="/institutes" element={<Institutes />} />
+      <Route
+        path="/institutes"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <Institutes />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/institutes/:id"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <InstituteDetails />
+          </Suspense>
+        }
+      />
 
       <Route
         path="create-a-new-organizations"
