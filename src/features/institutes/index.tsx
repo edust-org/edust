@@ -1,12 +1,14 @@
 import { Navbar } from "@/components";
 import {
+  Button,
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
   Form,
+  FormField,
   FormItem,
+  FormMessage,
   Input,
   Select,
   SelectContent,
@@ -25,7 +27,7 @@ const FormSchema = z.object({
   institute_name: z.string(),
   institute_type: z.string(),
   board: z.string(),
-  eiin: z.number(),
+  eiin: z.string(),
 });
 
 export const Institutes = () => {
@@ -35,10 +37,14 @@ export const Institutes = () => {
       institute_name: "",
       institute_type: "",
       board: "",
-      eiin: 0,
+      eiin: "",
     },
   });
-
+  function onSubmit(values: z.infer<typeof FormSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
   return (
     <div>
       <header className="border-b">
@@ -47,73 +53,116 @@ export const Institutes = () => {
       <section className="container grid grid-cols-[250px_auto] gap-4 py-4 md:gap-6 md:py-8">
         <aside>
           <Form {...form}>
-            <form className="space-y-2">
-              <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input placeholder="Search" className="pl-8" />
-              </div>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+              <FormField
+                control={form.control}
+                name="institute_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="relative">
+                      <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                      <Input placeholder="Search" className="pl-8" {...field} />
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="institute_type"
+                render={({ field }) => (
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Type of institutes" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Institute Types</SelectLabel>
+                          <SelectItem value="est">
+                            Eastern Standard Time (EST)
+                          </SelectItem>
+                          <SelectItem value="cst">
+                            Central Standard Time (CST)
+                          </SelectItem>
+                          <SelectItem value="mst">
+                            Mountain Standard Time (MST)
+                          </SelectItem>
+                          <SelectItem value="pst">
+                            Pacific Standard Time (PST)
+                          </SelectItem>
+                          <SelectItem value="akst">
+                            Alaska Standard Time (AKST)
+                          </SelectItem>
+                          <SelectItem value="hst">
+                            Hawaii Standard Time (HST)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Type of institutes" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Institute Types</SelectLabel>
-                    <SelectItem value="est">
-                      Eastern Standard Time (EST)
-                    </SelectItem>
-                    <SelectItem value="cst">
-                      Central Standard Time (CST)
-                    </SelectItem>
-                    <SelectItem value="mst">
-                      Mountain Standard Time (MST)
-                    </SelectItem>
-                    <SelectItem value="pst">
-                      Pacific Standard Time (PST)
-                    </SelectItem>
-                    <SelectItem value="akst">
-                      Alaska Standard Time (AKST)
-                    </SelectItem>
-                    <SelectItem value="hst">
-                      Hawaii Standard Time (HST)
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <FormField
+                control={form.control}
+                name="board"
+                render={({ field }) => (
+                  <FormItem>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Boards" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Boards</SelectLabel>
+                          <SelectItem value="est">
+                            Eastern Standard Time (EST)
+                          </SelectItem>
+                          <SelectItem value="cst">
+                            Central Standard Time (CST)
+                          </SelectItem>
+                          <SelectItem value="mst">
+                            Mountain Standard Time (MST)
+                          </SelectItem>
+                          <SelectItem value="pst">
+                            Pacific Standard Time (PST)
+                          </SelectItem>
+                          <SelectItem value="akst">
+                            Alaska Standard Time (AKST)
+                          </SelectItem>
+                          <SelectItem value="hst">
+                            Hawaii Standard Time (HST)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Boards" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Boards</SelectLabel>
-                    <SelectItem value="est">
-                      Eastern Standard Time (EST)
-                    </SelectItem>
-                    <SelectItem value="cst">
-                      Central Standard Time (CST)
-                    </SelectItem>
-                    <SelectItem value="mst">
-                      Mountain Standard Time (MST)
-                    </SelectItem>
-                    <SelectItem value="pst">
-                      Pacific Standard Time (PST)
-                    </SelectItem>
-                    <SelectItem value="akst">
-                      Alaska Standard Time (AKST)
-                    </SelectItem>
-                    <SelectItem value="hst">
-                      Hawaii Standard Time (HST)
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <FormField
+                control={form.control}
+                name="eiin"
+                render={({ field }) => (
+                  <FormItem>
+                    <Input type="number" placeholder="EIIN" {...field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-              <FormItem>
-                <Input type="number" placeholder="EIIN" />
-              </FormItem>
+              <Button type="submit" className="w-full">
+                Search
+              </Button>
             </form>
           </Form>
         </aside>
