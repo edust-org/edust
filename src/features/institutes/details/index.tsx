@@ -93,7 +93,7 @@ export const InstituteDetails = () => {
         </div>
       </section>
 
-      <section className="container mx-auto my-10 rounded-md bg-slate-300 p-8">
+      {/* <section className="container mx-auto my-10 rounded-md bg-slate-300 p-8">
         <Typography variant="h2" className="mb-5 text-center lg:text-left">
           Gallery
         </Typography>
@@ -115,7 +115,7 @@ export const InstituteDetails = () => {
             className="h-64 w-full rounded-lg object-cover shadow-md"
           />
         </div>
-      </section>
+      </section> */}
 
       <section className="container mx-auto my-10 rounded-md bg-slate-300 p-8">
         <Typography variant="h2" className="mb-5 text-center lg:text-left">
