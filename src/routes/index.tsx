@@ -103,6 +103,12 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
       </Route>
 
       <Route path=":orgIdOrUsername/site" element={<Site />} />
+      {/* TODO: route
+
+        /profile/:id
+        /{org-user}/:id
+        /{user}/:id 
+      */}
 
       <Route path="*" element={<NotFound />} />
       {organizationRoutes}

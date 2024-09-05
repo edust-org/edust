@@ -96,9 +96,9 @@ export const HelpGetStarted = () => {
               width="1114.01"
               height="1114.01"
               filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
+              colorInterpolationFilters="sRGB"
             >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feFlood floodOpacity="0" result="BackgroundImageFix" />
               <feBlend
                 mode="normal"
                 in="SourceGraphic"
@@ -118,8 +118,8 @@ export const HelpGetStarted = () => {
               y2="853"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#0F172A" stop-opacity="0" />
-              <stop offset="1" stop-color="#111827" stop-opacity="0.45" />
+              <stop stopColor="#0F172A" stopOpacity="0" />
+              <stop offset="1" stopColor="#111827" stopOpacity="0.45" />
             </linearGradient>
           </defs>
         </svg>
