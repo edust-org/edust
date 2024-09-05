@@ -11,7 +11,10 @@ import App from "./app";
 
 import { worker } from "./mocks/browser";
 
-if (process.env.NODE_ENV === "development") {
+if (
+  process.env.NODE_ENV === "development" &&
+  import.meta.env.VITE_USE_MOCKS === "true"
+) {
   worker.start();
 }
 

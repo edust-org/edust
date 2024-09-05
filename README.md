@@ -66,6 +66,17 @@ To get a local copy up and running, follow these steps:
 5. **Access the Application:**
    Open your web browser and navigate to `http://localhost:5173`.
 
+   ```txt
+   email: guest@example.com
+   password: password
+
+   email: organizer@example.com
+   password: password
+
+   email: administrator@example.com
+   password: password
+   ```
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
