@@ -6,7 +6,42 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   const { email, password } = actualBody;
 
   // Simulate user authentication
-  if (email === "example@gmail.com" && password === "password") {
+  if (email && password) {
+    const users = {
+      guest: {
+        email: "guest@example.com",
+        password: "password",
+      },
+      organizer: {
+        email: "organizer@example.com",
+        password: "password",
+      },
+      administrator: {
+        email: "administrator@example.com",
+        password: "password",
+      },
+    };
+
+    let authToken: string = "";
+
+    if (users.guest.email === email && users.guest.password === password) {
+      authToken = "authToken=guest";
+    }
+
+    if (
+      users.organizer.email === email &&
+      users.organizer.password === password
+    ) {
+      authToken = "authToken=organizer";
+    }
+
+    if (
+      users.administrator.email === email &&
+      users.administrator.password === password
+    ) {
+      authToken = "authToken=administrator";
+    }
+
     return new HttpResponse(
       JSON.stringify({
         status: "success",
@@ -16,7 +51,7 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Set-Cookie": "authToken=example-user-auth-token-with-password", // Mocked cookie for authentication
+          "Set-Cookie": authToken, // Mocked cookie for authentication
         },
       },
     );
@@ -32,4 +67,21 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   }
 });
 
-export const auth = [login];
+const logout = http.delete(`${apiUrlV0}/auth/logout`, () => {
+  return new Response(
+    JSON.stringify({
+      status: "success",
+      message: "Logout successfully",
+    }),
+    {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Set-Cookie":
+          "authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly",
+      },
+    },
+  );
+});
+
+export const auth = [login, logout];
