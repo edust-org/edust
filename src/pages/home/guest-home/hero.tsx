@@ -1,11 +1,11 @@
-import { FC } from "react";
+import animation from "@/assets/animations/home/edust-hero.json";
 import { Button, Typography } from "@/components/ui";
 import { Player } from "@lottiefiles/react-lottie-player";
-import animation from "@/assets/animations/home/edust-hero.json";
+import { FC } from "react";
 
 const Hero: FC = () => {
   return (
-    <div className="container relative flex h-full w-full flex-col-reverse items-center justify-center gap-5 overflow-hidden py-5 lg:mt-12 lg:flex-row lg:justify-between lg:overflow-visible">
+    <div className="container relative -z-10 -mt-28 flex h-full w-full flex-col-reverse items-center justify-center gap-5 overflow-hidden pb-5 pt-28 lg:mt-12 lg:flex-row lg:justify-between lg:overflow-visible lg:py-5">
       <div>
         <Typography variant="h1" style={{ lineHeight: "4rem" }}>
           Explore the Future

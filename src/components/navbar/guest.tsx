@@ -1,26 +1,26 @@
+import assets from "@/assets/images";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-  NavigationMenuList,
   NavigationMenuLink,
+  NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
-  SheetTrigger,
   SheetContent,
-  SheetTitle,
-  SheetHeader,
   SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import assets from "@/assets/images";
 import { IoMenuSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export const Guest = () => {
   return (
     <>
       <header>
-        <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
+        <div className="container flex h-[56px] w-full shrink-0 items-center justify-between bg-transparent px-4 md:px-6">
           <Link to="/" className="mr-6 hidden lg:flex">
             <img src={assets.logo} alt="" className="h-10" />
             <span className="sr-only">Edust</span>
