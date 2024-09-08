@@ -25,21 +25,21 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
     let authToken: string = "";
 
     if (users.guest.email === email && users.guest.password === password) {
-      authToken = "authToken=guest";
+      authToken = "guest";
     }
 
     if (
       users.organizer.email === email &&
       users.organizer.password === password
     ) {
-      authToken = "authToken=organizer";
+      authToken = "organizer";
     }
 
     if (
       users.administrator.email === email &&
       users.administrator.password === password
     ) {
-      authToken = "authToken=administrator";
+      authToken = "administrator";
     }
 
     return new HttpResponse(
@@ -51,7 +51,7 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Set-Cookie": authToken, // Mocked cookie for authentication
+          "Set-Cookie": `authToken=${authToken}; Path=/;`, // Mocked cookie for authentication
         },
       },
     );
@@ -68,7 +68,7 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
 });
 
 const logout = http.delete(`${apiUrlV0}/auth/logout`, () => {
-  return new Response(
+  return new HttpResponse(
     JSON.stringify({
       status: "success",
       message: "Logout successfully",
@@ -78,7 +78,7 @@ const logout = http.delete(`${apiUrlV0}/auth/logout`, () => {
       headers: {
         "Content-Type": "application/json",
         "Set-Cookie":
-          "authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly",
+          "authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;",
       },
     },
   );

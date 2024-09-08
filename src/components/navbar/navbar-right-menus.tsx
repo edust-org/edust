@@ -2,7 +2,7 @@ import {
   CircleUser,
   Cloud,
   Github,
-  Keyboard,
+  LayoutDashboard,
   LifeBuoy,
   LogOut,
   Plus,
@@ -50,7 +50,7 @@ export const NavbarRightMenus = () => {
               user: null,
               organization: null,
               isLoading: false,
-            })
+            }),
           );
 
           // Clear local store all data
@@ -95,11 +95,14 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Keyboard className="mr-2 h-4 w-4" />
-              <span>Keyboard shortcuts</span>
-              <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-            </DropdownMenuItem>
+            {!auth?.organization?.role && (
+              <Link to={"/dashboard"}>
+                <DropdownMenuItem>
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  <span>Dashboard</span>
+                </DropdownMenuItem>
+              </Link>
+            )}
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>

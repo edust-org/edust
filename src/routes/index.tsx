@@ -14,6 +14,7 @@ import organizationRoutes from "./organization-routes";
 import IsAuthenticated from "./is-authenticated";
 import { CreateOrganization } from "@/organizations/features";
 import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
+import Dashboard from "@/features/dashboard";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,42 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           </Suspense>
         }
       />
+
+      <Route
+        path="/dashboard"
+        element={
+          <IsAuthenticated>
+            <Suspense fallback={<Loading.Spinner />}>
+              <Dashboard.DashboardLayout />
+            </Suspense>
+          </IsAuthenticated>
+        }
+      >
+        <Route
+          path="institutes"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <h1>Institutes</h1>
+            </Suspense>
+          }
+        ></Route>
+        <Route
+          path="institutes/create"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Dashboard.InstitutesCreate />
+            </Suspense>
+          }
+        />
+        <Route
+          path="institutes/lists"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Dashboard.InstitutesLists />
+            </Suspense>
+          }
+        />
+      </Route>
 
       <Route
         path="/institutes"
