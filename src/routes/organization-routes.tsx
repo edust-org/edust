@@ -17,7 +17,14 @@ const organizationRoutes = (
         </IsAuthenticated>
       }
     >
-      <Route path="" element={<h1>Dashboard Home</h1>} />
+      <Route
+        path=""
+        element={
+          <h1 className="text-3xl font-bold">
+            Dashboard Home For Organizations
+          </h1>
+        }
+      />
       <Route
         path="site"
         element={
