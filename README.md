@@ -1,4 +1,4 @@
-<p align="center"><img src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg" alt="Edust"></p>
+<p align="center"><img width="700" src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg" alt="Edust"></p>
 
 <h1 align="center" style="font-size: 50px; font-weight: bold">Edust</h1>
 <p align="center">Edust is a web application designed to enhance educational collaboration and interaction<br/>between students, teachers, and educational institutions.</p>
