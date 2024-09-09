@@ -1,69 +1,71 @@
-# Edust | Education Student Teacher
+<p align="center"><img src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg" alt="Edust"></p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Issues](https://img.shields.io/github/issues/edust-org/edust)
-![Stars](https://img.shields.io/github/stars/edust-org/edust)
-![Forks](https://img.shields.io/github/forks/edust-org/edust)
+<h1 align="center" style="font-size: 50px; font-weight: bold">Edust</h1>
+<p align="center">Edust is a web application designed to enhance educational collaboration and interaction<br/>between students, teachers, and educational institutions.</p>
 
-## Overview
+<p align="center"><strong>Join with us ↘<br/></strong> 
+<a href="https://discord.gg/vnhqmn9mdj">Discord</a>
+•
+<a href="https://chat.whatsapp.com/Eh0Olh74EVP9zVhN8G7RkW">WhatsApp</a>
+</p>
 
-Edust is a web application designed to enhance educational collaboration and interaction between students, teachers, and educational institutions. It provides features for user registration, organization page creation, and customization using a page builder tool.
+<p align="center">
+    <a href="#"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+    <a href="#"><img src="https://img.shields.io/github/issues/edust-org/edust" alt="Issues"></a>
+   <a href="#"><img src="https://img.shields.io/github/stars/edust-org/edust" alt="Github Stars"></a>
+   <a href="#"><img src="https://img.shields.io/github/forks/edust-org/edust" alt="Forks"></a>
+   <a href="#"><img src="https://img.shields.io/github/commit-activity/m/edust-org/edust" alt="Commits-per-month"></a>
+</p>
 
-## Features
+<h2 style="margin-top: 50px">About Edust</h2>
 
-Our platform allows users to create accounts and authenticated users to create organizations. Public users can view organization sites built by organization creators, which mainly consist of educational institutions such as schools, colleges, and universities.
+**Edust** is a dynamic web platform crafted to empower collaboration and engagement among students, teachers, and educational institutions also organizations. The name "Edust" symbolizes the union of **Education**, **Student**, and **Teacher**, reflecting its mission to elevate educational experiences through seamless communication, resource sharing, and interactive learning.
 
-Certainly! Here's an improved version of the contributing guide with clearer language and formatting:
+<!-- ## Quick Links
 
-## Contributing Guide
+- [Item](docs/item.md) - You will find item. -->
 
-Welcome to the project! We appreciate your interest in contributing. Here’s how you can get involved:
+## Tech Stack
 
-### **Getting Started**
+- [Typescript](https://www.typescriptlang.org/) - Language
+- [React.js](https://react.dev/) - Framework
+- [Tailwind](https://tailwindcss.com/) - CSS
+- [shadcn/ui](https://ui.shadcn.com/) - Component Library
+- [mswjs](https://mswjs.io/) - API mocking
 
-If you’d like to contribute, please start by reviewing our guidelines and exploring the project. We will provide more detailed information.
+## Developer Quick-start
 
-### **Ask Questions**
+> **Note**: This is a quickstart for developers. It assumes that you have [Node](https://nodejs.org/en/download/package-manager), [NPM](https://www.npmjs.com/) and [PNPM](https://pnpm.io/installation#using-npm) installed on your machine.
 
-If you have any questions or need help, feel free to ask in our [Discussion Forum](https://github.com/edust-org/edust/discussions). We’re here to assist you!
+Want to get up and running quickly? Follow these steps:
 
-### **🔗 Join the Community**
+1. **[Fork this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks)** to your GitHub account.
 
-For real-time discussions and updates, join our [Discord Server](https://discord.gg/vnhqmn9mdj). Connect with other contributors and project maintainers there.
+   After forking the repository, clone it to your local device by using the following command:
 
-Thank you for your interest in contributing to our project. We look forward to your involvement!
-
-## Technologies Used
-
-- **Frontend:** React.js, Redux-Toolkit, RTK Query, TypeScript
-
-## Getting Started
-
-To get a local copy up and running, follow these steps:
-
-1. **Clone Repository:**
+2. **Clone Repository:**
 
    ```bash
-   git clone https://github.com/edust-org/edust.git
+   git clone https://github.com/<your-username>/edust.git
    cd edust
    ```
 
-2. **Install Dependencies:**
+3. **Install Dependencies:**
 
    ```bash
    pnpm install
    ```
 
-3. **Setup Environment Variables:**
-   Create a `.env` file in the root directory and add necessary environment variables.
+4. **Setup Environment Variables:**
+   Create a `.env` file in the root directory and add necessary environment variables from `.env.example`.
 
-4. **Run the Application:**
+5. **Run the Application:**
 
    ```bash
    pnpm run dev
    ```
 
-5. **Access the Application:**
+6. **Access the Application:**
    Open your web browser and navigate to `http://localhost:5173`.
 
    ```txt
@@ -77,25 +79,21 @@ To get a local copy up and running, follow these steps:
    password: password
    ```
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the project.
-2. Commit your changes code (`git commit -m 'Add some AmazingFeature'`).
-3. Push to the branch (`git push`).
-4. Open a pull request.
-
-### Our Contributors
+## Contributors
 
 <a href="https://github.com/edust-org/edust/graphs/contributors">
- <img src="https://contrib.rocks/image?repo=edust-org/edust" />
+  <img src="https://contrib.rocks/image?repo=edust-org/edust" />
 </a>
+
+## Acknowledgements
+
+Special thanks to these amazing projects which help power Edust:
+
+- [React.js](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn ui](https://ui.shadcn.com/)
+- [mswjs](https://mswjs.io/)
 
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
----
-
-This README provides a structured overview of the Edust project, focusing on user registration, organization page creation, and customization features as per your requirements. Adjustments can be made based on further project developments or specific user needs.
