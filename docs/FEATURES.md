@@ -1,4 +1,4 @@
-# Table of Contents Features
+# List of Contents Features
 
 - [Upcoming Features](#upcoming-features)
   <!-- - [Features by Version](#features-by-version) -->
