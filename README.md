@@ -21,9 +21,9 @@
 
 **Edust** is a dynamic web platform crafted to empower collaboration and engagement among students, teachers, and educational institutions also organizations. The name "Edust" symbolizes the union of **Education**, **Student**, and **Teacher**, reflecting its mission to elevate educational experiences through seamless communication, resource sharing, and interactive learning.
 
-<!-- ## Quick Links
+## Quick Links
 
-- [Item](docs/item.md) - You will find item. -->
+- [FEATURES](docs/FEATURES.md) - Upcoming and Release
 
 ## Tech Stack
 
