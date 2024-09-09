@@ -25,6 +25,12 @@
 
 - [FEATURES](docs/FEATURES.md) - Upcoming and Release
 
+## Key Features
+
+- Authentication
+- Custom Site Build for Organizations
+- Anyone can add new Institutes
+
 ## Tech Stack
 
 - [Typescript](https://www.typescriptlang.org/) - Language
