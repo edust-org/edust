@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
 import assets from "@/assets/images";
+import { useAppSelector } from "@/app/hooks";
 
 export function Sidebar({
   toggleIsOpen,
@@ -13,6 +14,8 @@ export function Sidebar({
   isOpen: boolean;
   toggleIsOpen: () => void;
 }) {
+  const theme = useAppSelector((state) => state.theme.theme);
+
   return (
     <aside
       className={cn(
@@ -32,9 +35,15 @@ export function Sidebar({
         >
           <Link to="/" className="flex items-center gap-2">
             {isOpen ? (
-              <img src={assets.logo} className="mr-1" />
+              <img
+                src={theme == "light" ? assets.logo : assets.logoDark}
+                className="mr-1 w-36"
+              />
             ) : (
-              <img src={assets.logoIcon} className="mr-1" />
+              <img
+                src={theme == "light" ? assets.logoIcon : assets.logoIconDark}
+                className="mr-1"
+              />
             )}
           </Link>
         </Button>
