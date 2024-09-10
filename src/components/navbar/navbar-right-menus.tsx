@@ -1,5 +1,4 @@
 import {
-  CircleUser,
   Cloud,
   Github,
   LayoutDashboard,
@@ -11,6 +10,9 @@ import {
   User,
 } from "lucide-react";
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -71,13 +73,24 @@ export const NavbarRightMenus = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
-            <CircleUser className="h-5 w-5" />
-            <span className="sr-only">Toggle user menu</span>
+          <Button variant="outline" className="relative h-8 w-8 rounded-full">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src="#" alt="Avatar" />
+              <AvatarFallback className="bg-transparent">ED</AvatarFallback>
+            </Avatar>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium leading-none">
+                {auth?.user?.name || "unknown"}
+              </p>
+              <p className="text-xs leading-none text-muted-foreground">
+                {auth?.user?.email || "unknown@email"}
+              </p>
+            </div>
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>

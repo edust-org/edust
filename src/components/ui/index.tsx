@@ -1,12 +1,14 @@
 /* eslint react-refresh/only-export-components: "off" */
 export * from "./accordion";
 export * from './alert-dialog'
+export * from "./avatar";
 
 export * from './button'
 export * from './badge'
 
 export * from './card'
 export * from "./checkbox";
+export * from "./collapsible";
 
 export * from './dropdown-menu'
 
