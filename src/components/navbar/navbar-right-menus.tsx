@@ -77,7 +77,16 @@ export const NavbarRightMenus = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium leading-none">
+                {auth?.user?.name || "unknown"}
+              </p>
+              <p className="text-xs leading-none text-muted-foreground">
+                {auth?.user?.email || "unknown@email"}
+              </p>
+            </div>
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
