@@ -20,12 +20,17 @@ import { NavbarRightMenus } from "./navbar-right-menus";
 
 export const Private = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
     <header className="sticky top-0 z-50 bg-white bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
       <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
-          <img src={assets.logo} alt="" className="h-10" />
+          <img
+            src={theme == "light" ? assets.logo : assets.logoDark}
+            alt=""
+            className="h-10"
+          />
           <span className="sr-only">Edust</span>
         </Link>
         <NavigationMenu className="hidden lg:flex">
