@@ -1,11 +1,9 @@
 import {
-  Tag,
   Users,
   Settings,
-  Bookmark,
-  SquarePen,
   LayoutGrid,
   LucideIcon,
+  Building2,
 } from "lucide-react";
 
 type Submenu = {
@@ -42,39 +40,25 @@ export function getMenuList(pathname: string): Group[] {
       ],
     },
     {
-      groupLabel: "Contents",
+      groupLabel: "",
       menus: [
         {
-          href: "",
-          label: "Posts",
-          active: pathname.includes("/posts"),
-          icon: SquarePen,
+          href: "/institutes",
+          label: "Institutes",
+          active: pathname.includes("/institutes"),
+          icon: Building2,
           submenus: [
             {
-              href: "/posts",
-              label: "All Posts",
-              active: pathname === "/posts",
+              href: "institutes",
+              label: "List Of Institutes",
+              active: pathname === "institutes",
             },
             {
-              href: "/posts/new",
-              label: "New Post",
-              active: pathname === "/posts/new",
+              href: "institutes/create",
+              label: "Create Institutes",
+              active: pathname === "institutes/create",
             },
           ],
-        },
-        {
-          href: "/categories",
-          label: "Categories",
-          active: pathname.includes("/categories"),
-          icon: Bookmark,
-          submenus: [],
-        },
-        {
-          href: "/tags",
-          label: "Tags",
-          active: pathname.includes("/tags"),
-          icon: Tag,
-          submenus: [],
         },
       ],
     },

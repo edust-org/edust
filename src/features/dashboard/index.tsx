@@ -1,8 +1,8 @@
 import { lazy } from "react";
 
 const DashboardLayout = lazy(() =>
-  import("./dashboard-layout").then((module) => ({
-    default: module.DashboardLayout,
+  import("./layout").then((module) => ({
+    default: module.Layout,
   })),
 );
 const DashboardMain = lazy(() =>
