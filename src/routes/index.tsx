@@ -40,6 +40,14 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
         }
       >
         <Route
+          path=""
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Dashboard.DashboardMain />
+            </Suspense>
+          }
+        ></Route>
+        <Route
           path="institutes"
           element={
             <Suspense fallback={<Loading.Spinner />}>

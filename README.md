@@ -19,11 +19,21 @@
 
 <h2 style="margin-top: 50px">About Edust</h2>
 
-**Edust** is a dynamic web platform crafted to empower collaboration and engagement among students, teachers, and educational institutions also organizations. The name "Edust" symbolizes the union of **Education**, **Student**, and **Teacher**, reflecting its mission to elevate educational experiences through seamless communication, resource sharing, and interactive learning.
+**Edust** is a versatile web platform designed to enhance collaboration, engagement, and opportunities within the educational community. Whether you are a **student**, **teacher**, or **institution**, Edust brings everyone together to create a more connected and enriched learning environment.
+
+Edust offers much more than just social networking.
+
+**And this is just the beginning**—Edust is continuously evolving. Our goal is to provide a comprehensive platform where education meets innovation, with new features and capabilities being added regularly to meet our users' changing needs.
 
 ## Quick Links
 
 - [FEATURES](docs/FEATURES.md) - Upcoming and Release
+
+## Key Features
+
+- Authentication
+- Custom Site Build for Organizations
+- Anyone can add new Institutes
 
 ## Tech Stack
 

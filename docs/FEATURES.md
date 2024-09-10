@@ -10,6 +10,8 @@
   - Users can register with name, email, password.
   - Authentication via login.
   - Social Media Authentication using Google and GitHub
+  - Email Verification
+  - Forget Password
 - **Organization**
   - Authenticated users can create organizations.
   - Organization types Educational.
