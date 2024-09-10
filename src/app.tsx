@@ -4,7 +4,7 @@ import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
-import { ErrorBoundary } from "@/components";
+import { ErrorBoundary, ThemeProvider } from "@/components";
 import { useCheckingUserSession } from "./hooks";
 import { TooltipProvider } from "@/components/ui";
 
@@ -16,9 +16,12 @@ const App: React.FC = () => {
     <Suspense fallback={<Loading.Spinner />}>
       <ErrorBoundary>
         <Toaster />
-        <TooltipProvider>
-          <RouterProvider router={router} />
-        </TooltipProvider>
+
+        <ThemeProvider>
+          <TooltipProvider>
+            <RouterProvider router={router} />
+          </TooltipProvider>
+        </ThemeProvider>
       </ErrorBoundary>
     </Suspense>
   );
