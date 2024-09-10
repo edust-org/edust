@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { PanelsTopLeft } from "lucide-react";
 
-import { cn } from "./utils";
+import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";

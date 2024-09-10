@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "./utils";
+import { cn } from "@/utils";
 import { Sidebar } from "./sidebar";
 
 export default function AdminPanelLayout({
