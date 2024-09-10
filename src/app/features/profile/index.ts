@@ -36,18 +36,18 @@ const profileSlice = createSlice({
         (state, action) => {
           state.user = action.payload.data.user;
           state.loading = false;
-        }
+        },
       )
       .addMatcher(
         profileApi.endpoints.getProfile.matchRejected,
         (state, action) => {
           state.error = action.error.message || "Failed to fetch profile";
           state.loading = false;
-        }
+        },
       );
   },
 });
 export const { setProfile, setProfileLoading, setProfileError } =
   profileSlice.actions;
 
-export default profileSlice.reducer;
+export const profileReducer = profileSlice.reducer;
