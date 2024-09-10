@@ -4,7 +4,7 @@ import { Navbar } from "./navbar";
 import { Typography } from "@/components/ui";
 
 export function EdustDashboard() {
-  const { value, toggle } = useBoolean();
+  const { value, toggle } = useBoolean(true);
 
   return (
     <AdminPanelLayout isOpen={value} toggleIsOpen={toggle}>

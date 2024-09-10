@@ -23,12 +23,6 @@ export default function AdminPanelLayout({
       >
         {children}
       </main>
-      <footer
-        className={cn(
-          "transition-[margin-left] duration-300 ease-in-out",
-          isOpen === false ? "lg:ml-[90px]" : "lg:ml-72",
-        )}
-      ></footer>
     </>
   );
 }
