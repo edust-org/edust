@@ -16,6 +16,7 @@ const App: React.FC = () => {
     <Suspense fallback={<Loading.Spinner />}>
       <ErrorBoundary>
         <Toaster />
+
         <TooltipProvider>
           <RouterProvider router={router} />
         </TooltipProvider>

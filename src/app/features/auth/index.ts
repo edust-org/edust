@@ -5,10 +5,8 @@ import { authentication } from "./authentication";
 export const { setAuthentication } = authentication.actions;
 
 // Reducers
-const authReducers = combineReducers({
+export const authReducers = combineReducers({
   authentication: authentication.reducer,
 });
 
 export type AuthState = ReturnType<typeof authReducers>;
-
-export default authReducers;

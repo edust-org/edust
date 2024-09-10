@@ -28,6 +28,7 @@ import { toast } from "@/hooks/shadcn-ui";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setAuthentication } from "@/app/features/auth";
 import { Link } from "react-router-dom";
+import { ModeToggle } from "../mode-toggle";
 
 export const NavbarRightMenus = () => {
   const dispatch = useAppDispatch();
@@ -70,7 +71,8 @@ export const NavbarRightMenus = () => {
   };
 
   return (
-    <>
+    <div className="flex items-center">
+      <ModeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="relative h-8 w-8 rounded-full">
@@ -187,6 +189,6 @@ export const NavbarRightMenus = () => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </>
+    </div>
   );
 };

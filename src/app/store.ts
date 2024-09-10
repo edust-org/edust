@@ -3,8 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import counterReducer from "./features/counter/counter-slice";
 import { createLogger } from "redux-logger";
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0";
-import profileReducer from "./features/profile";
-import authReducers from "./features/auth";
+import { authReducers, profileReducer, themeReducers } from "./features";
 
 const logger = createLogger({
   // optional configuration
@@ -17,6 +16,7 @@ const rootReducer = combineReducers({
   counter: counterReducer,
   profile: profileReducer,
   auth: authReducers,
+  theme: themeReducers,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
