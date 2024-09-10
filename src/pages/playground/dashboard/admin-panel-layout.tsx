@@ -4,28 +4,29 @@ import { cn } from "@/utils";
 import { Sidebar } from "./sidebar";
 
 export default function AdminPanelLayout({
-  children
+  children,
+  isOpen,
+  toggleIsOpen,
 }: {
   children: React.ReactNode;
+  isOpen: boolean;
+  toggleIsOpen: () => void;
 }) {
-  const sidebar = { isOpen: true };
-
-  if (!sidebar) return null;
   return (
     <>
-      <Sidebar />
+      <Sidebar isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
       <main
         className={cn(
-          "min-h-screen bg-zinc-50 dark:bg-zinc-900 transition-[margin-left] ease-in-out duration-300",
-          sidebar?.isOpen === false ? "lg:ml-[90px]" : "lg:ml-72"
+          "min-h-screen bg-zinc-50 transition-[margin-left] duration-300 ease-in-out dark:bg-zinc-900",
+          isOpen === false ? "lg:ml-[90px]" : "lg:ml-72",
         )}
       >
         {children}
       </main>
       <footer
         className={cn(
-          "transition-[margin-left] ease-in-out duration-300",
-          sidebar?.isOpen === false ? "lg:ml-[90px]" : "lg:ml-72"
+          "transition-[margin-left] duration-300 ease-in-out",
+          isOpen === false ? "lg:ml-[90px]" : "lg:ml-72",
         )}
       ></footer>
     </>

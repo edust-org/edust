@@ -1,10 +1,13 @@
+import { useBoolean } from "usehooks-ts";
 import AdminPanelLayout from "./admin-panel-layout";
 import { Navbar } from "./navbar";
 import { Typography } from "@/components/ui";
 
 export function EdustDashboard() {
+  const { value, toggle } = useBoolean();
+
   return (
-    <AdminPanelLayout>
+    <AdminPanelLayout isOpen={value} toggleIsOpen={toggle}>
       <Navbar title={"Dashboard"} />
       <div className="container px-4 pb-8 pt-8 sm:px-8">
         <Typography variant="h1">
