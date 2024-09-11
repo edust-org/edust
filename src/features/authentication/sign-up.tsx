@@ -11,7 +11,6 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/shadcn-ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MailOpen } from "lucide-react";
@@ -172,28 +171,7 @@ export const SignUp: React.FC = () => {
                     </FormItem>
                   )}
                 />
-                <div className="items-top flex space-x-2">
-                  <Checkbox id="sign_up_term_con" onCheckedChange={toggle} />
-                  <div className="grid gap-1.5 leading-none">
-                    <label
-                      htmlFor="sign_up_term_con"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Accept{" "}
-                      <Link
-                        to={"http://google.com"}
-                        className="transition hover:underline"
-                      >
-                        terms and conditions
-                      </Link>
-                    </label>
-                  </div>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isLoading || !value}
-                >
+                <Button type="submit" className="w-full">
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
@@ -202,8 +180,8 @@ export const SignUp: React.FC = () => {
                 <NewSocialAuth />
               </div>
 
-              <div className="mb-4 mt-3 flex items-center justify-center gap-4">
-                <Typography className="font-semibold">
+              <div className="mb-4 mt-4 flex items-center justify-center gap-4">
+                <Typography className="text-sm">
                   Already have an account?{" "}
                   <Link to={"/auth/sign-in"}>
                     <Typography className="ml-1 inline-block underline">

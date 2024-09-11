@@ -106,7 +106,10 @@ export const SignIn: React.FC = () => {
       <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
           <div className="w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex flex-col gap-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -131,17 +134,12 @@ export const SignIn: React.FC = () => {
                   <FormItem>
                     <div className="flex items-center justify-between">
                       <FormLabel>Password</FormLabel>
-                      <Typography
-                        affects="removePaddingMargin"
-                        className="text-center"
+                      <Link
+                        to={"/auth/forgot-password"}
+                        className="ml-auto inline-block text-sm underline"
                       >
-                        <Link
-                          to={"/auth/forgot-password"}
-                          className="font-semibold underline transition"
-                        >
-                          Forgot Your Password?
-                        </Link>
-                      </Typography>
+                        Forgot Your Password?
+                      </Link>
                     </div>
                     <FormControl>
                       <div className="realative">
@@ -166,8 +164,8 @@ export const SignIn: React.FC = () => {
               <NewSocialAuth />
             </div>
 
-            <div className="mb-4 mt-3 flex items-center justify-center gap-4">
-              <Typography className="font-semibold">
+            <div className="mb-4 mt-4 flex items-center justify-center gap-4">
+              <Typography className="text-sm">
                 Don't have an account?{" "}
                 <Link to={"/auth/sign-up"}>
                   <Typography className="ml-1 inline-block underline">
