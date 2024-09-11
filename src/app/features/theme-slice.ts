@@ -1,7 +1,6 @@
-// src/features/theme/themeSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "dark" | "light";
 
 export interface ThemeState {
   theme: Theme;
@@ -9,7 +8,7 @@ export interface ThemeState {
 
 const storageKey = "vite-ui-theme";
 const initialTheme: Theme =
-  (localStorage.getItem(storageKey) as Theme) || "system";
+  (localStorage.getItem(storageKey) as Theme) || "light";
 
 const initialState: ThemeState = {
   theme: initialTheme,
@@ -35,7 +34,7 @@ function updateThemeOnDocument(theme: Theme) {
   const root = window.document.documentElement;
   root.classList.remove("light", "dark");
 
-  if (theme === "system") {
+  if (theme === "light") {
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
       .matches
       ? "dark"
