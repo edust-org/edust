@@ -1,8 +1,8 @@
 // community
-import React from "react";
+import { cn } from "@/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
-import { cn } from "@/utils";
+import React from "react";
 
 type VariantKey =
   | "h1"
@@ -85,7 +85,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
       disableSelect = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : variantToTag[variant];
 
@@ -93,7 +93,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
       <Comp
         className={cn(
           typographyVariants({ variant, affects, className }),
-          disableSelect ? "select-none" : ""
+          disableSelect ? "select-none" : "",
         )}
         ref={ref}
         {...props}
@@ -101,7 +101,7 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         {children}
       </Comp>
     );
-  }
+  },
 );
 
 Typography.displayName = "Typography";

@@ -2,6 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { useLoginMutation } from "@/app/api/v0/auth";
+import { useGetUserQuery } from "@/app/api/v0/user";
+import { setAuthentication } from "@/app/features/auth";
+import { useAppDispatch } from "@/app/hooks";
 import {
   Button,
   Form,
@@ -13,15 +17,13 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { useLoginMutation } from "@/app/api/v0/auth";
-import { useAppDispatch } from "@/app/hooks";
-import { setAuthentication } from "@/app/features/auth";
 import { toast } from "@/hooks/shadcn-ui";
+import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import { useGetUserQuery } from "@/app/api/v0/user";
-import { SocialAuth } from "./social-auth";
+import { NewSocialAuth } from "./new-social-auth";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -38,6 +40,7 @@ export const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { refetch } = useGetUserQuery();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -46,6 +49,10 @@ export const SignIn: React.FC = () => {
       password: "",
     },
   });
+
+  const onVisibilityClick = () => {
+    setIsPasswordVisible((prev) => !prev);
+  };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     login(data)
@@ -98,14 +105,14 @@ export const SignIn: React.FC = () => {
       </Helmet>
       <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
-          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Email or Phone</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
@@ -122,13 +129,30 @@ export const SignIn: React.FC = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <div className="flex items-center justify-between">
+                      <FormLabel>Password</FormLabel>
+                      <Typography
+                        affects="removePaddingMargin"
+                        className="text-center"
+                      >
+                        <Link
+                          to={"/auth/forgot-password"}
+                          className="font-semibold underline transition"
+                        >
+                          Forgot Your Password?
+                        </Link>
+                      </Typography>
+                    </div>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="********"
-                        {...field}
-                      />
+                      <div className="realative">
+                        <Input
+                          type={isPasswordVisible ? "text" : "password"}
+                          placeholder="********"
+                          icon={isPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+                          onIconClick={onVisibilityClick}
+                          {...field}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -138,24 +162,19 @@ export const SignIn: React.FC = () => {
                 {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
               </Button>
             </form>
-            <div className="mt-4">
-              <SocialAuth />
+            <div className="my-4">
+              <NewSocialAuth />
             </div>
-            <Typography className="mb-4 text-center">
-              <Link
-                to={"/auth/forgot-password"}
-                className="transition hover:underline"
-              >
-                Forgot Your Password?
-              </Link>
-            </Typography>
-            <div className="mb-4 flex flex-col items-center justify-between gap-4 sm:flex-row">
-              <Typography>Don’t have an account?</Typography>
-              <Link to={"/auth/sign-up"}>
-                <Button variant={"outline"} size={"sm"}>
-                  Sign Up
-                </Button>
-              </Link>
+
+            <div className="mb-4 mt-3 flex items-center justify-center gap-4">
+              <Typography className="font-semibold">
+                Don't have an account?{" "}
+                <Link to={"/auth/sign-up"}>
+                  <Typography className="ml-1 inline-block underline">
+                    Sign Up
+                  </Typography>
+                </Link>
+              </Typography>
             </div>
           </div>
         </Form>
