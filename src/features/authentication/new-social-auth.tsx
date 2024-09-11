@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui";
+import { Button } from "@/components/ui";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export const NewSocialAuth = () => {
@@ -13,21 +13,15 @@ export const NewSocialAuth = () => {
   };
 
   return (
-    <div className="flex items-center flex-col md:flex-row justify-center gap-4">
-      <Card
-        className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-input"
-        onClick={handleGoogleLogin}
-      >
-        <FaGoogle className="text-xl" />
-        <p className="font-semibold">Join With Google</p>
-      </Card>
-      <Card
-        className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-input"
-        onClick={handleGitHubLogin}
-      >
-        <FaGithub className="text-xl" />
-        <p className="font-semibold">Join With Github</p>
-      </Card>
+    <div className="flex flex-col items-center justify-center gap-4 md:flex-row">
+      <Button className="w-full" variant="outline" onClick={handleGoogleLogin}>
+        <FaGoogle className="mr-2" />
+        Login With Google
+      </Button>
+      <Button className="w-full" variant="outline" onClick={handleGitHubLogin}>
+        <FaGithub className="mr-2" />
+        Login With Github
+      </Button>
     </div>
   );
 };
