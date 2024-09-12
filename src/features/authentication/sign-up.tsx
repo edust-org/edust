@@ -1,6 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useRegisterMutation } from "@/app/api/v0/auth";
+import assets from "@/assets/images";
 import {
   Button,
   Form,
@@ -12,17 +11,18 @@ import {
   Input,
   Typography,
 } from "@/components/ui";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useRegisterMutation } from "@/app/api/v0/auth";
-import React, { useState } from "react";
-import assets from "@/assets/images";
-import { MailOpen } from "lucide-react";
-import { BarLoader } from "react-spinners";
 import { toast } from "@/hooks/shadcn-ui";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MailOpen } from "lucide-react";
+import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { BarLoader } from "react-spinners";
 import { useBoolean } from "usehooks-ts";
-import { SocialAuth } from "./social-auth";
+import { z } from "zod";
+import { NewSocialAuth } from "./new-social-auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -41,6 +41,7 @@ export const SignUp: React.FC = () => {
     isConfirm: false,
     message: "",
   });
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { value, toggle } = useBoolean(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -51,6 +52,10 @@ export const SignUp: React.FC = () => {
       password: "",
     },
   });
+
+  const onVisibilityClick = () => {
+    setIsPasswordVisible((prev) => !prev);
+  };
 
   const [register, { isLoading }] = useRegisterMutation();
   async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -118,7 +123,7 @@ export const SignUp: React.FC = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>Full Name</FormLabel>
                       <FormControl>
                         <Input
                           type="text"
@@ -135,7 +140,7 @@ export const SignUp: React.FC = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>Email or Phone</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
@@ -155,8 +160,10 @@ export const SignUp: React.FC = () => {
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input
-                          type="password"
+                          type={isPasswordVisible ? "text" : "password"}
                           placeholder="********"
+                          icon={isPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+                          onIconClick={onVisibilityClick}
                           {...field}
                         />
                       </FormControl>
@@ -164,43 +171,24 @@ export const SignUp: React.FC = () => {
                     </FormItem>
                   )}
                 />
-                <div className="items-top flex space-x-2">
-                  <Checkbox id="sign_up_term_con" onCheckedChange={toggle} />
-                  <div className="grid gap-1.5 leading-none">
-                    <label
-                      htmlFor="sign_up_term_con"
-                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                      Accept{" "}
-                      <Link
-                        to={"http://google.com"}
-                        className="transition hover:underline"
-                      >
-                        terms and conditions
-                      </Link>
-                    </label>
-                  </div>
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isLoading || !value}
-                >
+                <Button type="submit" className="w-full">
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
 
               <div className="my-4">
-                <SocialAuth />
+                <NewSocialAuth />
               </div>
 
-              <div className="mb-2 flex flex-col items-center justify-between gap-4 sm:flex-row">
-                <Typography>Already have an account?</Typography>
-                <Link to={"/auth/sign-in"}>
-                  <Button variant={"outline"} size={"sm"}>
-                    Sign In
-                  </Button>
-                </Link>
+              <div className="mb-4 mt-4 flex items-center justify-center gap-4">
+                <Typography className="text-sm">
+                  Already have an account?{" "}
+                  <Link to={"/auth/sign-in"}>
+                    <Typography className="ml-1 inline-block underline">
+                      Sign In
+                    </Typography>
+                  </Link>
+                </Typography>
               </div>
             </div>
           </Form>
