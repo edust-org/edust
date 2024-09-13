@@ -167,10 +167,11 @@ export const SignIn: React.FC = () => {
             <div className="mb-4 mt-4 flex items-center justify-center gap-4">
               <Typography className="text-sm">
                 Don't have an account?{" "}
-                <Link to={"/auth/sign-up"}>
-                  <Typography className="ml-1 inline-block underline">
-                    Sign Up
-                  </Typography>
+                <Link
+                  to={"/auth/sign-up"}
+                  className="ml-1 inline-block underline"
+                >
+                  Sign Up
                 </Link>
               </Typography>
             </div>
