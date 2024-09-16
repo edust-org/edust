@@ -1,11 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiUrlV0 } from "@/app/api/axios-api-url";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { apiV0BaseQuery } from "../../api-url";
 
 export const authApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrlV0}/auth`,
-    credentials: "include",
-  }),
+  baseQuery: apiV0BaseQuery("/auth"),
 
   reducerPath: "API_V0_authApi",
   tagTypes: ["Auth"],
@@ -29,12 +26,6 @@ export const authApi = createApi({
         url: `/login`,
         method: "POST",
         body,
-      }),
-    }),
-    logout: build.mutation<{ status: string; message: string }, void>({
-      query: () => ({
-        url: `/logout`,
-        method: "DELETE",
       }),
     }),
     forgotPassword: build.mutation({
@@ -65,7 +56,6 @@ export const {
   useRegisterMutation,
   useVerifyEmailByTokenMutation,
   useLoginMutation,
-  useLogoutMutation,
   useForgotPasswordMutation,
   useCheckOtpMutation,
   useResetPasswordMutation,

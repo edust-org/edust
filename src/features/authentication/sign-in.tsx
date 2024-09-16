@@ -1,9 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { useLoginMutation } from "@/app/api/v0/auth";
-import { useGetUserQuery } from "@/app/api/v0/user";
 import { setAuthentication } from "@/app/features/auth";
 import { useAppDispatch } from "@/app/hooks";
 import {
@@ -24,6 +22,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { NewSocialAuth } from "./new-social-auth";
+import { access_token } from "@/utils";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -39,7 +38,6 @@ export const SignIn: React.FC = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { refetch } = useGetUserQuery();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -58,34 +56,20 @@ export const SignIn: React.FC = () => {
     login(data)
       .unwrap()
       .then((res) => {
+        const redirectPath = location.state?.from?.pathname || "/";
         if (res?.status) {
           toast({
             variant: "success",
             title: res?.message,
           });
+          dispatch(
+            setAuthentication({
+              isAuthenticated: true,
+            }),
+          );
 
-          refetch()
-            .then((res) => {
-              if (res) {
-                dispatch(setAuthentication({ isAuthenticated: true }));
-                navigate(location.state?.from?.pathname || "/");
-              }
-            })
-            .catch((error) => {
-              if (error) {
-                toast({
-                  variant: "destructive",
-                  title: error?.data?.message,
-                  description: (
-                    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                      <code className="text-white">
-                        {JSON.stringify(error, null, 2)}
-                      </code>
-                    </pre>
-                  ),
-                });
-              }
-            });
+          access_token.setToken(res.data.token);
+          navigate(redirectPath);
         }
       })
       .catch((error) => {

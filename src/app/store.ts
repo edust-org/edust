@@ -3,7 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import counterReducer from "./features/counter/counter-slice";
 import { createLogger } from "redux-logger";
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0";
-import { authReducers, profileReducer, themeReducers } from "./features";
+import { authReducers, themeReducers } from "./features";
 
 const logger = createLogger({
   // optional configuration
@@ -14,7 +14,6 @@ const logger = createLogger({
 const rootReducer = combineReducers({
   ...rootReducerApiV0,
   counter: counterReducer,
-  profile: profileReducer,
   auth: authReducers,
   theme: themeReducers,
 });
