@@ -18,10 +18,8 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const token = access_token.getToken();
 
-  const skip = !token || !isAuthenticated;
-
   const { data } = useGetUserQuery(undefined, {
-    skip,
+    skip: !token,
   });
 
   useEffect(() => {
