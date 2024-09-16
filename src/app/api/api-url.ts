@@ -25,7 +25,7 @@ export const apiV0BaseQuery = (
   basePath?: string,
 ): ReturnType<typeof fetchBaseQuery> =>
   fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath ? `/${basePath}` : ""}`,
+    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = access_token.getToken();

@@ -1,8 +1,9 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
+import { access_token } from "@/utils";
 
-export const user = http.get(`${apiUrlV0}/user`, ({ cookies }) => {
-  const authToken = cookies.authToken;
+export const user = http.get(`${apiUrlV0}/user`, () => {
+  const authToken = access_token.getToken();
 
   if (!authToken) {
     return new HttpResponse(

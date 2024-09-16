@@ -46,14 +46,8 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
       JSON.stringify({
         status: "success",
         message: "Logged in successfully!",
+        data: { token: authToken },
       }),
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": `authToken=${authToken}; Path=/;`, // Mocked cookie for authentication
-        },
-      },
     );
   } else {
     // Return a 401 Unauthorized response for invalid credentials
@@ -67,21 +61,4 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   }
 });
 
-const logout = http.delete(`${apiUrlV0}/auth/logout`, () => {
-  return new HttpResponse(
-    JSON.stringify({
-      status: "success",
-      message: "Logout successfully",
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Set-Cookie":
-          "authToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT;",
-      },
-    },
-  );
-});
-
-export const auth = [login, logout];
+export const auth = [login];
