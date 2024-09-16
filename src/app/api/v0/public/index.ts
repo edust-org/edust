@@ -1,10 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiUrlV0 } from "@/app/api/axios-api-url";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { apiV0BaseQuery } from "../../api-url";
 
 export const publicApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrlV0}/public`,
-  }),
+  baseQuery: apiV0BaseQuery("/public"),
 
   reducerPath: "API_V0_publicApi",
   tagTypes: ["Public"],
