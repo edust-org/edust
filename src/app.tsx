@@ -12,16 +12,16 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { setAuthentication } from "./app/features";
 
 const App: React.FC = () => {
-  // ! IN THIS HOOKS HAVE A ISSUE IF USER NOT SIGN-IN
-  // useCheckingUserSession();
   const isAuthenticated = useAppSelector(
     (state) => state.auth.authentication.isAuthenticated,
   );
   const dispatch = useAppDispatch();
   const token = access_token.getToken();
 
+  const skip = !token || !isAuthenticated;
+
   const { data } = useGetUserQuery(undefined, {
-    skip: !token || isAuthenticated,
+    skip,
   });
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const App: React.FC = () => {
         }),
       );
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, isAuthenticated]);
 
   return (
     <Suspense fallback={<Loading.Spinner />}>

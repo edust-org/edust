@@ -14,6 +14,7 @@ export interface User {
 
 export interface ProfileResponse {
   data: {
+    organization: object | null | undefined;
     user: User;
   };
 }
