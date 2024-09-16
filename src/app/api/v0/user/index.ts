@@ -29,7 +29,7 @@ export const userApi = createApi({
 
   endpoints: (build) => ({
     getUser: build.query<ProfileResponse, void>({
-      query: () => `/`,
+      query: () => `/self`,
     }),
   }),
 });
