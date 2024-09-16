@@ -21,8 +21,8 @@ import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import { NewSocialAuth } from "./new-social-auth";
 import { access_token } from "@/utils";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -145,7 +145,7 @@ export const SignIn: React.FC = () => {
               </Button>
             </form>
             <div className="my-4">
-              <NewSocialAuth />
+              <SocialAuth />
             </div>
 
             <div className="mb-4 mt-4 flex items-center justify-center gap-4">
