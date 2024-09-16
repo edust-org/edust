@@ -2,7 +2,7 @@ import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
 import { access_token } from "@/utils";
 
-export const user = http.get(`${apiUrlV0}/user`, () => {
+export const user = http.get(`${apiUrlV0}/user/self`, () => {
   const authToken = access_token.getToken();
 
   if (!authToken) {
