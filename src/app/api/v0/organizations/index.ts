@@ -1,11 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiUrlV0 } from "@/app/api/axios-api-url";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { apiV0BaseQuery } from "../../api-url";
 
 export const organizationsApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrlV0}/organizations`,
-    credentials: "include",
-  }),
+  baseQuery: apiV0BaseQuery("/organizations"),
 
   reducerPath: "API_V0_OrganizationsApi",
   tagTypes: ["Organizations"],

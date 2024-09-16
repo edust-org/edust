@@ -20,9 +20,8 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import { useBoolean } from "usehooks-ts";
 import { z } from "zod";
-import { NewSocialAuth } from "./new-social-auth";
+import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -42,7 +41,6 @@ export const SignUp: React.FC = () => {
     message: "",
   });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const { value, toggle } = useBoolean(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -177,16 +175,17 @@ export const SignUp: React.FC = () => {
               </form>
 
               <div className="my-4">
-                <NewSocialAuth />
+                <SocialAuth />
               </div>
 
               <div className="mb-4 mt-4 flex items-center justify-center gap-4">
                 <Typography className="text-sm">
                   Already have an account?{" "}
-                  <Link to={"/auth/sign-in"}>
-                    <Typography className="ml-1 inline-block underline">
-                      Sign In
-                    </Typography>
+                  <Link
+                    to={"/auth/sign-in"}
+                    className="ml-1 inline-block underline"
+                  >
+                    Sign In
                   </Link>
                 </Typography>
               </div>

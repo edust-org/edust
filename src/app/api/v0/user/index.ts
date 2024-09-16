@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiUrlV0 } from "@/app/api/axios-api-url";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { apiV0BaseQuery } from "../../api-url";
 
 export interface User {
   id: number;
@@ -14,22 +14,20 @@ export interface User {
 
 export interface ProfileResponse {
   data: {
+    organization: object | null | undefined;
     user: User;
   };
 }
 
 export const userApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${apiUrlV0}/user`,
-    credentials: "include",
-  }),
+  baseQuery: apiV0BaseQuery("/user"),
 
   reducerPath: "API_V0_userApi",
   tagTypes: ["User"],
 
   endpoints: (build) => ({
     getUser: build.query<ProfileResponse, void>({
-      query: () => `/`,
+      query: () => `/self`,
     }),
   }),
 });

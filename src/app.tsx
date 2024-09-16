@@ -1,16 +1,40 @@
 /* eslint-disable react-refresh/only-export-components */
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
 import { ErrorBoundary } from "@/components";
-import { useCheckingUserSession } from "./hooks";
 import { TooltipProvider } from "@/components/ui";
+import { access_token } from "./utils";
+import { useGetUserQuery } from "./app/api/v0/user";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
+import { setAuthentication } from "./app/features";
 
 const App: React.FC = () => {
-  // ! IN THIS HOOKS HAVE A ISSUE IF USER NOT SIGN-IN
-  useCheckingUserSession();
+  const isAuthenticated = useAppSelector(
+    (state) => state.auth.authentication.isAuthenticated,
+  );
+  const dispatch = useAppDispatch();
+  const token = access_token.getToken();
+
+  const skip = !token || !isAuthenticated;
+
+  const { data } = useGetUserQuery(undefined, {
+    skip,
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        setAuthentication({
+          isAuthenticated: true,
+          user: data?.data.user,
+          organization: data?.data.organization,
+        }),
+      );
+    }
+  }, [data, dispatch, isAuthenticated]);
 
   return (
     <Suspense fallback={<Loading.Spinner />}>

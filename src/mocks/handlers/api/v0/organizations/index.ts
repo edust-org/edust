@@ -1,8 +1,9 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
+import { access_token } from "@/utils";
 
-const getListOfOrg = http.get(`${apiUrlV0}/organizations`, ({ cookies }) => {
-  const authToken = cookies.authToken;
+const getListOfOrg = http.get(`${apiUrlV0}/organizations`, () => {
+  const authToken = access_token.getToken();
 
   if (!authToken) {
     return new HttpResponse(
