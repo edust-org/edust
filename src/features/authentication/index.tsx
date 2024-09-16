@@ -16,7 +16,18 @@ const ForgotPassword = lazy(() =>
     default: module.ForgotPassword,
   })),
 );
+const SocialAuthCallback = lazy(() =>
+  import("./social-auth-callback").then((module) => ({
+    default: module.SocialAuthCallback,
+  })),
+);
 
-const Authentication = { SignUp, SignIn, VerifyEmailByToken, ForgotPassword };
+const Authentication = {
+  SignUp,
+  SignIn,
+  VerifyEmailByToken,
+  ForgotPassword,
+  SocialAuthCallback,
+};
 
 export default Authentication;

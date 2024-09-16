@@ -111,10 +111,7 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           </Suspense>
         }
       />
-      <Route
-        path="playground/dashboard"
-        element={<EdustDashboard/>}
-      />
+      <Route path="playground/dashboard" element={<EdustDashboard />} />
 
       {/* For auth routes */}
       <Route path="auth">
@@ -147,6 +144,15 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
           element={
             <Suspense fallback={<Loading.Spinner />}>
               <Authentication.ForgotPassword />
+            </Suspense>
+          }
+        />
+
+        <Route
+          path="callback/:access_token"
+          element={
+            <Suspense fallback={<Loading.Spinner />}>
+              <Authentication.SocialAuthCallback />
             </Suspense>
           }
         />
