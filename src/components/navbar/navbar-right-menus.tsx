@@ -57,7 +57,7 @@ export const NavbarRightMenus = () => {
       <ModeToggle />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="relative h-8 w-8 rounded-full">
+          <Button variant="outline" className="relative h-10 w-10 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage src="#" alt="Avatar" />
               <AvatarFallback className="bg-transparent">ED</AvatarFallback>
