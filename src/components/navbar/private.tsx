@@ -17,6 +17,7 @@ import assets from "@/assets/images";
 import { IoMenuSharp } from "react-icons/io5";
 import { useAppSelector } from "@/app/hooks";
 import { NavbarRightMenus } from "./navbar-right-menus";
+import { detectTheme } from "@/utils";
 
 export const Private = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
@@ -27,7 +28,7 @@ export const Private = () => {
       <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
           <img
-            src={theme == "light" ? assets.logo : assets.logoDark}
+            src={detectTheme(theme) == "light" ? assets.logo : assets.logoDark}
             alt=""
             className="h-10"
           />

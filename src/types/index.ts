@@ -1,1 +1,2 @@
-export { Role } from "./roles";
+export * from "./roles";
+export * from "./theme";
