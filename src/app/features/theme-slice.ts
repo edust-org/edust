@@ -1,6 +1,6 @@
+import { Theme } from "@/types";
+import { updateThemeOnDocument } from "@/utils";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Theme = "dark" | "light";
 
 export interface ThemeState {
   theme: Theme;
@@ -28,19 +28,3 @@ const themeSlice = createSlice({
 
 export const { setTheme } = themeSlice.actions;
 export const themeReducers = themeSlice.reducer;
-
-// Helper function to update the document's theme class
-function updateThemeOnDocument(theme: Theme) {
-  const root = window.document.documentElement;
-  root.classList.remove("light", "dark");
-
-  if (theme === "light") {
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
-    root.classList.add(systemTheme);
-  } else {
-    root.classList.add(theme);
-  }
-}

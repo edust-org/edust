@@ -1,3 +1,4 @@
 export { cn } from "./cn";
-export { getToken } from "./get-token";
 export * from "./access-token";
+export * from "./update-theme-on-document";
+export * from "./detect-theme";
