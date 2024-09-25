@@ -1,5 +1,5 @@
 {
-  "name": "edust-org",
+  "name": "@edust/frontend",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
