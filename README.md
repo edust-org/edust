@@ -6,7 +6,7 @@
 <p align="center"><strong>Join with us ↘<br/></strong> 
 <a href="https://discord.gg/vnhqmn9mdj">Discord</a>
 •
-<a href="https://chat.whatsapp.com/Eh0Olh74EVP9zVhN8G7RkW">WhatsApp</a>
+<a href="https://chat.whatsapp.com/D40T68gxOP34w6GVNiJmP2">WhatsApp</a>
 </p>
 
 <p align="center">
