@@ -22,6 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { IoAddOutline } from "react-icons/io5";
 
 const FormSchema = z.object({
   institute_name: z.string(),
@@ -52,6 +53,12 @@ export const Institutes = () => {
       </header>
       <section className="container grid grid-cols-[250px_auto] gap-4 py-4 md:gap-6 md:py-8">
         <aside>
+          {/* ================================ */}
+          <Button size={"icon"} className="mb-4 w-full">
+            {" "}
+            <IoAddOutline className="text-2xl mr-2" /> Create an institutes
+          </Button>
+          {/* ====================================== */}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
               <FormField
