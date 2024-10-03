@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
   Form,
@@ -17,6 +18,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
+  Typography,
 } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
@@ -56,7 +58,7 @@ export const Institutes = () => {
           {/* ================================ */}
           <Button size={"icon"} className="mb-4 w-full">
             {" "}
-            <IoAddOutline className="text-2xl mr-2" /> Create an institutes
+            <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
           </Button>
           {/* ====================================== */}
           <Form {...form}>
@@ -220,6 +222,29 @@ export const Institutes = () => {
               </CardHeader>
             </Card>
           </div>
+          {/* =========================== */}
+          {/* <Card className="mt-5 w-80 p-8">
+            <Typography affects="removePaddingMargin" variant="h2">
+              Institutes not found{" "}
+            </Typography>
+            <Typography affects="removePaddingMargin" variant="p">
+              If you want to create a new institute you need to register here.
+            </Typography>
+            <Button className="w-full mt-4">Create new one</Button>
+          </Card> */}
+
+          <Card className="max-w-96 mt-5">
+            <CardHeader>
+              <CardTitle className="text-lg">Institutes not found</CardTitle>
+              <CardDescription>
+                If you want to create a new institute you need to register here.
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
+              <Button className="w-full">Create new one</Button>
+            </CardFooter>
+          </Card>
+          {/* ========================== */}
         </main>
       </section>
     </div>
