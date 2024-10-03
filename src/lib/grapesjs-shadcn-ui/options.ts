@@ -21,7 +21,7 @@ const options = (editorRef: any): EditorConfig => ({
         }/api/v0/organizations/site`,
 
         onLoad: (result) => {
-          return editorRef.current.loadProjectData(result?.data?.assets);
+          return editorRef.current.loadProjectData(JSON.parse(result?.data?.assets));
         },
         headers: {
           Authorization: `Bearer ${access_token.getToken()}`,
