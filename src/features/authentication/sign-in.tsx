@@ -44,7 +44,7 @@ export const SignIn: React.FC = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
-      password: "password",
+      password: "password2024",
     },
   });
 

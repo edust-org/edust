@@ -10,15 +10,15 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
     const users = {
       guest: {
         email: "guest@example.com",
-        password: "password",
+        password: "password2024",
       },
       organizer: {
         email: "organizer@example.com",
-        password: "password",
+        password: "password2024",
       },
       administrator: {
         email: "administrator@example.com",
-        password: "password",
+        password: "password2024",
       },
     };
 

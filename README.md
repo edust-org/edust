@@ -80,13 +80,13 @@ Want to get up and running quickly? Follow these steps:
 
    ```txt
    email: guest@example.com
-   password: password
+   password: password2024
 
    email: organizer@example.com
-   password: password
+   password: password2024
 
    email: administrator@example.com
-   password: password
+   password: password2024
    ```
 
 ## Contributors

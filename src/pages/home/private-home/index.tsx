@@ -12,7 +12,7 @@ export const PrivateHome = () => {
     <>
       <Navbar.Private />
 
-      <main className="bg-slate-100 pt-4 md:py-8">
+      <main className="min-h-[calc(100vh-56px)] bg-slate-100 pt-4 md:py-8">
         <OrgLists />
       </main>
     </>

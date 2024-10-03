@@ -17,7 +17,7 @@ export const Site = () => {
 
   useEffect(() => {
     if (data?.data?.pages) {
-      setPages(data?.data?.pages);
+      setPages(JSON.parse(data?.data?.pages));
     }
   }, [data?.data.pages]);
 
@@ -42,7 +42,7 @@ export const Site = () => {
 
       <section>
         <Typography variant="h2">Pages List</Typography>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           {pages &&
             pages.map((page) => {
               return (
