@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { IconLoader2 } from "@tabler/icons-react";
+import { TbLoader2 } from "react-icons/tb";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils";
 
@@ -81,13 +81,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {((leftSection && loading) ||
           (!leftSection && !rightSection && loading)) && (
-          <IconLoader2 className="mr-2 h-4 w-4 animate-spin" />
+          <TbLoader2 className="mr-2 h-4 w-4 animate-spin" />
         )}
         {!loading && leftSection && <div className="mr-2">{leftSection}</div>}
         {children}
         {!loading && rightSection && <div className="ml-2">{rightSection}</div>}
         {rightSection && loading && (
-          <IconLoader2 className="ml-2 h-4 w-4 animate-spin" />
+          <TbLoader2 className="ml-2 h-4 w-4 animate-spin" />
         )}
       </button>
     );

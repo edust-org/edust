@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import { TbEye, TbEyeOff } from "react-icons/tb";
 import { Button } from "./button";
 import { cn } from "@/utils";
 
@@ -27,7 +27,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
           className="absolute right-1 top-1/2 h-6 w-6 -translate-y-1/2 rounded-md text-muted-foreground"
           onClick={() => setShowPassword((prev) => !prev)}
         >
-          {showPassword ? <IconEye size={18} /> : <IconEyeOff size={18} />}
+          {showPassword ? <TbEye size={18} /> : <TbEyeOff size={18} />}
         </Button>
       </div>
     );

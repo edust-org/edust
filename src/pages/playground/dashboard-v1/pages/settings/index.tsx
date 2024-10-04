@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import {
-  IconBrowserCheck,
-  IconExclamationCircle,
-  IconNotification,
-  IconPalette,
-  IconTool,
-  IconUser,
-} from "@tabler/icons-react";
+  TbBrowserCheck,
+  TbExclamationCircle,
+  TbNotification,
+  TbPalette,
+  TbTool,
+  TbUser,
+} from "react-icons/tb";
 import { Layout } from "../../components/custom/layout";
 import { Search } from "../../components/search";
 import { Separator } from "@/components/ui";
@@ -52,32 +52,32 @@ export default function Settings() {
 const sidebarNavItems = [
   {
     title: "Profile",
-    icon: <IconUser size={18} />,
+    icon: <TbUser size={18} />,
     href: "/settings",
   },
   {
     title: "Account",
-    icon: <IconTool size={18} />,
+    icon: <TbTool size={18} />,
     href: "/settings/account",
   },
   {
     title: "Appearance",
-    icon: <IconPalette size={18} />,
+    icon: <TbPalette size={18} />,
     href: "/settings/appearance",
   },
   {
     title: "Notifications",
-    icon: <IconNotification size={18} />,
+    icon: <TbNotification size={18} />,
     href: "/settings/notifications",
   },
   {
     title: "Display",
-    icon: <IconBrowserCheck size={18} />,
+    icon: <TbBrowserCheck size={18} />,
     href: "/settings/display",
   },
   {
     title: "Error Example",
-    icon: <IconExclamationCircle size={18} />,
+    icon: <TbExclamationCircle size={18} />,
     href: "/settings/error-example",
   },
 ];

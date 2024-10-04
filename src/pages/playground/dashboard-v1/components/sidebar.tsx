@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IconChevronsLeft, IconMenu2, IconX } from "@tabler/icons-react";
+import { TbChevronsLeft, TbMenu2, TbX } from "react-icons/tb";
 import { Layout } from "./custom/layout";
 import { Button } from "./custom/button";
 import Nav from "./nav";
@@ -95,7 +95,7 @@ export default function Sidebar({
             aria-expanded={navOpened}
             onClick={() => setNavOpened((prev) => !prev)}
           >
-            {navOpened ? <IconX /> : <IconMenu2 />}
+            {navOpened ? <TbX /> : <TbMenu2 />}
           </Button>
         </Layout.Header>
 
@@ -115,8 +115,8 @@ export default function Sidebar({
           variant="outline"
           className="absolute -right-5 top-1/2 z-50 hidden rounded-full md:inline-flex"
         >
-          <IconChevronsLeft
-            stroke={1.5}
+          <TbChevronsLeft
+            stroke={"1.5"}
             className={`h-5 w-5 ${isCollapsed ? "rotate-180" : ""}`}
           />
         </Button>

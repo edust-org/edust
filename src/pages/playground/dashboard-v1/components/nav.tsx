@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IconChevronDown } from "@tabler/icons-react";
+import { TbChevronDown } from "react-icons/tb";
 import { Button, buttonVariants } from "./custom/button";
 import {
   Collapsible,
@@ -137,7 +137,7 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
             'ml-auto transition-all group-data-[state="open"]:-rotate-180',
           )}
         >
-          <IconChevronDown stroke={1} />
+          <TbChevronDown stroke={"1"} />
         </span>
       </CollapsibleTrigger>
       <CollapsibleContent className="collapsibleDropdown" asChild>
@@ -208,7 +208,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
           {label && (
             <span className="ml-auto text-muted-foreground">{label}</span>
           )}
-          <IconChevronDown
+          <TbChevronDown
             size={18}
             className="-rotate-90 text-muted-foreground"
           />

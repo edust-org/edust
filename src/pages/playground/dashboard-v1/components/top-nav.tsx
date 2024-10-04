@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 import { Button } from "./custom/button";
-import { IconMenu } from "@tabler/icons-react";
+import { TbMenu } from "react-icons/tb";
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
@@ -24,7 +24,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button size="icon" variant="outline">
-              <IconMenu />
+              <TbMenu />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="bottom" align="start">
