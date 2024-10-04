@@ -4,11 +4,15 @@ export const useCheckActiveNav = () => {
   const { pathname } = useLocation();
 
   const checkActiveNav = (nav: string) => {
+    const normalizedNav = nav.startsWith("/") ? nav : `/${nav}`;
     const pathArray = pathname.split("/").filter((item) => item !== "");
 
-    if (nav === "/" && pathArray.length < 1) return true;
-
-    return pathArray.includes(nav.replace(/^\//, ""));
+    if (normalizedNav === "/organizations") {
+      return pathArray.length === 1 && pathArray[0] === "organizations";
+    }
+    return (
+      pathname === normalizedNav || pathname.startsWith(normalizedNav + "/")
+    );
   };
 
   return { checkActiveNav };

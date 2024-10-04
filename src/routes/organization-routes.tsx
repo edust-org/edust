@@ -32,6 +32,14 @@ const organizationRoutes = (
           </Suspense>
         }
       />
+      <Route
+        path="settings"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <h1>Setting</h1>
+          </Suspense>
+        }
+      />
     </Route>
     <Route
       path="/organizations/site/edit"
