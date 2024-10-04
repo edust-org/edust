@@ -57,10 +57,10 @@ export const NavbarRightMenus = () => {
       <ThemeSwitch />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="relative h-10 w-10 rounded-full">
+          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="#" alt="Avatar" />
-              <AvatarFallback className="bg-transparent">ED</AvatarFallback>
+              <AvatarImage src="#" alt="user profile" />
+              <AvatarFallback>SN</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
