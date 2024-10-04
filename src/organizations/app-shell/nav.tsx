@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { TbChevronDown } from "react-icons/tb";
-import { Button, buttonVariants } from "./custom/button";
+import { Button, buttonVariants } from "@/components/ui";
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,8 +17,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui";
 import { cn } from "@/utils";
-import useCheckActiveNav from "../hooks/use-check-active-nav";
-import { SideLink } from "../data/sidelinks";
+import { useCheckActiveNav } from "@/hooks";
+import { SideLink } from "./sidelinks";
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean;
@@ -26,12 +26,7 @@ interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   closeNav: () => void;
 }
 
-export default function Nav({
-  links,
-  isCollapsed,
-  className,
-  closeNav,
-}: NavProps) {
+export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
   const renderLink = ({ sub, ...rest }: SideLink) => {
     const key = `${rest.title}-${rest.href}`;
     if (isCollapsed && sub)
@@ -69,7 +64,7 @@ export default function Nav({
       </TooltipProvider>
     </div>
   );
-}
+};
 
 interface NavLinkProps extends SideLink {
   subLink?: boolean;
@@ -137,7 +132,7 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
             'ml-auto transition-all group-data-[state="open"]:-rotate-180',
           )}
         >
-          <TbChevronDown stroke={"1"} />
+          <TbChevronDown />
         </span>
       </CollapsibleTrigger>
       <CollapsibleContent className="collapsibleDropdown" asChild>

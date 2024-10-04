@@ -5,11 +5,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  Button,
 } from "@/components/ui";
-import { Button } from "./custom/button";
 import { TbMenu } from "react-icons/tb";
 
-interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
+export interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
     title: string;
     href: string;
@@ -17,7 +17,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   }[];
 }
 
-export function TopNav({ className, links, ...props }: TopNavProps) {
+export const TopNav = ({ className, links, ...props }: TopNavProps) => {
   return (
     <>
       <div className="md:hidden">
@@ -61,4 +61,4 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
       </nav>
     </>
   );
-}
+};

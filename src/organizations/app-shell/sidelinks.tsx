@@ -1,3 +1,4 @@
+import { LucideGlobe } from "lucide-react";
 import {
   TbApps,
   TbBarrierBlock,
@@ -38,8 +39,14 @@ export const sidelinks: SideLink[] = [
   {
     title: "Dashboard",
     label: "",
-    href: "/",
+    href: "/organizations",
     icon: <TbLayoutDashboard size={18} />,
+  },
+  {
+    title: "Site",
+    label: "1",
+    href: "/organizations/site",
+    icon: <LucideGlobe size={18} />,
   },
   {
     title: "Tasks",
