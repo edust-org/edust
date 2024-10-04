@@ -49,6 +49,12 @@ export const sidelinks: SideLink[] = [
     icon: <LucideGlobe size={18} />,
   },
   {
+    title: "Settings",
+    label: "",
+    href: "/organizations/settings",
+    icon: <TbSettings size={18} />,
+  },
+  /*{
     title: "Tasks",
     label: "3",
     href: "/tasks",
@@ -173,11 +179,5 @@ export const sidelinks: SideLink[] = [
         icon: <TbLock size={18} />,
       },
     ],
-  },
-  {
-    title: "Settings",
-    label: "",
-    href: "/settings",
-    icon: <TbSettings size={18} />,
-  },
+  },*/
 ];
