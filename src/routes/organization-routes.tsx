@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import Loading from "@/components/loading";
 import IsAuthenticated from "./is-authenticated";
 import { Role } from "@/types";
+import { AppShell } from "@/organizations";
 
 const organizationRoutes = (
   <Route>
@@ -12,7 +13,7 @@ const organizationRoutes = (
       element={
         <IsAuthenticated role={Role.OWNER}>
           <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.DashboardLayout />
+            <AppShell />
           </Suspense>
         </IsAuthenticated>
       }
