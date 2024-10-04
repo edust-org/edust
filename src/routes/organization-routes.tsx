@@ -1,4 +1,9 @@
-import { CreateOrganization, Dashboard } from "@/organizations/features";
+import {
+  CreateOrganization,
+  Dashboard,
+  Site,
+  SiteEdit,
+} from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
@@ -19,23 +24,23 @@ const organizationRoutes = (
       }
     >
       <Route path="" element={<Dashboard />} />
-      {/* <Route
+      <Route
         path="site"
         element={
           <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.Site />
+            <Site />
           </Suspense>
         }
-      /> */}
+      />
     </Route>
-    {/* <Route
+    <Route
       path="/organizations/site/edit"
       element={
         <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard.SiteEdit />
+          <SiteEdit />
         </Suspense>
       }
-    /> */}
+    />
 
     <Route
       path="/organizations/create"
