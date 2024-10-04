@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui";
 
-export function ModeToggle() {
+export function ThemeSwitch() {
   const { setTheme } = useTheme();
   return (
     <div className="mr-2">
