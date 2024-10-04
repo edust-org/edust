@@ -6,7 +6,7 @@ const LayoutContext = React.createContext<{
   fixed: boolean;
 } | null>(null);
 
-interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   fixed?: boolean;
 }
 
@@ -43,7 +43,7 @@ const Layout = ({ className, fixed = false, ...props }: LayoutProps) => {
 };
 Layout.displayName = "Layout";
 
-interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   sticky?: boolean;
 }
 

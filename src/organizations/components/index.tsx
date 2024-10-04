@@ -5,3 +5,15 @@ export const HaveAnOrgAccount = lazy(() =>
     default: module.HaveAnOrgAccount,
   })),
 );
+
+export const TopNav = lazy(() =>
+  import("./top-nav").then((module) => ({
+    default: module.TopNav,
+  })),
+);
+
+export const UserNav = lazy(() =>
+  import("./user-nav").then((module) => ({
+    default: module.UserNav,
+  })),
+);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { TbChevronsLeft, TbMenu2, TbX } from "react-icons/tb";
-import { Layout } from "./layout";
+import { Layout } from "../components/layout";
 import { Button } from "@/components/ui";
 import { Nav } from "./nav";
 import { cn } from "@/utils";

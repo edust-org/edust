@@ -1,4 +1,4 @@
-import Dashboard, { CreateOrganization } from "@/organizations/features";
+import { CreateOrganization, Dashboard } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
@@ -18,31 +18,24 @@ const organizationRoutes = (
         </IsAuthenticated>
       }
     >
-      <Route
-        path=""
-        element={
-          <h1 className="text-3xl font-bold">
-            Dashboard Home For Organizations
-          </h1>
-        }
-      />
-      <Route
+      <Route path="" element={<Dashboard />} />
+      {/* <Route
         path="site"
         element={
           <Suspense fallback={<Loading.Spinner />}>
             <Dashboard.Site />
           </Suspense>
         }
-      />
+      /> */}
     </Route>
-    <Route
+    {/* <Route
       path="/organizations/site/edit"
       element={
         <Suspense fallback={<Loading.Spinner />}>
           <Dashboard.SiteEdit />
         </Suspense>
       }
-    />
+    /> */}
 
     <Route
       path="/organizations/create"

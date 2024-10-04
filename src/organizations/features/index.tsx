@@ -1,28 +1,11 @@
 import { lazy } from "react";
 
 export const CreateOrganization = lazy(() =>
-  import("./create").then((module) => ({ default: module.CreateOrganization }))
+  import("./create").then((module) => ({ default: module.CreateOrganization })),
 );
 
-export const DashboardLayout = lazy(() =>
+export const Dashboard = lazy(() =>
   import("./dashboard").then((module) => ({
     default: module.Dashboard,
-  }))
+  })),
 );
-export const Site = lazy(() =>
-  import("./site").then((module) => ({
-    default: module.Site,
-  }))
-);
-export const SiteEdit = lazy(() =>
-  import("./site-edit").then((module) => ({
-    default: module.SiteEdit,
-  }))
-);
-
-const Dashboard = {
-  DashboardLayout,
-  Site,
-  SiteEdit,
-};
-export default Dashboard;
