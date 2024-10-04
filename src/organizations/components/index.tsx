@@ -11,9 +11,3 @@ export const TopNav = lazy(() =>
     default: module.TopNav,
   })),
 );
-
-export const UserNav = lazy(() =>
-  import("./user-nav").then((module) => ({
-    default: module.UserNav,
-  })),
-);

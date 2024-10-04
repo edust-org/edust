@@ -9,10 +9,10 @@ import {
   Input,
 } from "@/components/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
-import { TopNav, UserNav } from "../../components";
+import { TopNav } from "../../components";
 import { RecentSales } from "./components/recent-sales";
 import { Overview } from "./components/overview";
-import { ThemeSwitch } from "@/components";
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
 
 export const Dashboard = () => {
   return (
@@ -26,8 +26,7 @@ export const Dashboard = () => {
             placeholder="Search..."
             className="md:w-[100px] lg:w-[300px]"
           />
-          <ThemeSwitch />
-          <UserNav />
+          <NavbarRightMenus />
         </div>
       </Layout.Header>
 
