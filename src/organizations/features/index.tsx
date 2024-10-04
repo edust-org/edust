@@ -9,3 +9,15 @@ export const Dashboard = lazy(() =>
     default: module.Dashboard,
   })),
 );
+
+export const Site = lazy(() =>
+  import("./site").then((module) => ({
+    default: module.Site,
+  })),
+);
+
+export const SiteEdit = lazy(() =>
+  import("./site-edit").then((module) => ({
+    default: module.SiteEdit,
+  })),
+);
