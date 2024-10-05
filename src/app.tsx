@@ -18,12 +18,16 @@ const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const token = access_token.getToken();
 
-  const { data } = useGetUserQuery(undefined, {
+  const { data, refetch } = useGetUserQuery(undefined, {
     skip: !token,
   });
 
   useEffect(() => {
     if (data) {
+
+      // forcing it to retech and getting the latest userdata instead of cached data 
+      refetch()
+
       dispatch(
         setAuthentication({
           isAuthenticated: true,
@@ -32,7 +36,7 @@ const App: React.FC = () => {
         }),
       );
     }
-  }, [data, dispatch, isAuthenticated]);
+  }, [data, dispatch, isAuthenticated, refetch]);
 
   return (
     <Suspense fallback={<Loading.Spinner />}>

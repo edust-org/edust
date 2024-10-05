@@ -62,13 +62,15 @@ export const SignIn: React.FC = () => {
             variant: "success",
             title: res?.message,
           });
+
+          // setting the token before dispatching the authentication action
+          access_token.setToken(res.data.token);
+
           dispatch(
             setAuthentication({
               isAuthenticated: true,
             }),
           );
-
-          access_token.setToken(res.data.token);
           navigate(redirectPath);
         }
       })
