@@ -53,31 +53,26 @@ const sidebarNavItems = [
   {
     title: "Profile",
     icon: <TbUser size={18} />,
-    href: "/settings",
+    href: "/playground/dashboard/settings",
   },
   {
     title: "Account",
     icon: <TbTool size={18} />,
-    href: "/settings/account",
+    href: "/playground/dashboard/settings/account",
   },
   {
     title: "Appearance",
     icon: <TbPalette size={18} />,
-    href: "/settings/appearance",
+    href: "/playground/dashboard/settings/appearance",
   },
   {
     title: "Notifications",
     icon: <TbNotification size={18} />,
-    href: "/settings/notifications",
+    href: "/playground/dashboard/settings/notifications",
   },
   {
     title: "Display",
     icon: <TbBrowserCheck size={18} />,
-    href: "/settings/display",
-  },
-  {
-    title: "Error Example",
-    icon: <TbExclamationCircle size={18} />,
-    href: "/settings/error-example",
+    href: "/playground/dashboard/settings/display",
   },
 ];
