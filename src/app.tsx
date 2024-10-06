@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
 import { ErrorBoundary } from "@/components";
 import { TooltipProvider } from "@/components/ui";
-import { access_token } from "./utils";
+import { localStore } from "./utils";
 import { useGetUserQuery } from "./app/api/v0/user";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { setAuthentication } from "./app/features";
@@ -16,7 +16,7 @@ const App: React.FC = () => {
     (state) => state.auth.authentication.isAuthenticated,
   );
   const dispatch = useAppDispatch();
-  const token = access_token.getToken();
+  const token = localStore.accessToken.get();
 
   const { data, refetch } = useGetUserQuery(undefined, {
     skip: !token,
