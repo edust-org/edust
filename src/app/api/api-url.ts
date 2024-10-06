@@ -1,4 +1,4 @@
-import { access_token } from "@/utils";
+import { localStore } from "@/utils";
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 /**
@@ -28,7 +28,7 @@ export const apiV0BaseQuery = (
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
     credentials: "include",
     prepareHeaders: (headers) => {
-      const token = access_token.getToken();
+      const token = localStore.accessToken.get();
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }

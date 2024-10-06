@@ -1,6 +1,6 @@
 import { setAuthentication } from "@/app/features";
 import { useAppDispatch } from "@/app/hooks";
-import { access_token } from "@/utils";
+import { localStore } from "@/utils";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -15,14 +15,14 @@ export const SocialAuthCallback: React.FC = () => {
     const redirectPath = location.state?.from?.pathname || "/";
 
     if (token) {
-      access_token.setToken(token);
+      localStore.accessToken.set(token);
       dispatch(
         setAuthentication({
           isAuthenticated: true,
         }),
       );
       // Store the token securely
-      if (access_token.hasToken()) {
+      if (localStore.accessToken.has()) {
         // Redirect to home or any other protected route
         navigate(redirectPath, { replace: true });
       }
