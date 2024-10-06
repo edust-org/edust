@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { Suspense, useEffect } from "react";
-import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
@@ -39,7 +38,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<Loading.Spinner />}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Toaster />
         <TooltipProvider>
           <RouterProvider router={router} />
