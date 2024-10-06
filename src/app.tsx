@@ -23,7 +23,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-      // forcing it to retech and getting the latest userdata instead of cached data
+      // forcing it to refetch and getting the latest userdata instead of cached data
       refetch();
 
       dispatch(
