@@ -11,7 +11,7 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
         status: "error",
         message: "Unauthorized access",
       }),
-      { status: 403 },
+      { status: 401 },
     );
   }
 
@@ -71,4 +71,12 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
   if (authToken === "administrator") {
     // code in future
   }
+
+  return new HttpResponse(
+    JSON.stringify({
+      status: "error",
+      message: "Invalid token",
+    }),
+    { status: 401 },
+  );
 });

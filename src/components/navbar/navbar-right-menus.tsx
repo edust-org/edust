@@ -25,7 +25,7 @@ import {
 } from "@/components/ui";
 import { toast } from "@/hooks/shadcn-ui";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { setAuthentication } from "@/app/features/auth";
+import { signOut } from "@/app/features/auth";
 import { Link } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 
@@ -34,17 +34,7 @@ export const NavbarRightMenus = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
 
   const handleLogout = () => {
-    dispatch(
-      setAuthentication({
-        isAuthenticated: false,
-        user: null,
-        organization: null,
-        isLoading: false,
-      }),
-    );
-
-    // Clear local store all data
-    localStorage.clear();
+    dispatch(signOut());
 
     toast({
       variant: "destructive",

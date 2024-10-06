@@ -1,10 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { Suspense, useEffect } from "react";
-import Loading from "./components/loading";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
-import { ErrorBoundary } from "@/components";
+import { ErrorBoundary, GlobalLoading } from "@/components";
 import { TooltipProvider } from "@/components/ui";
 import { localStore } from "./utils";
 import { useGetUserQuery } from "./app/api/v0/user";
@@ -39,7 +38,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<Loading.Spinner />}>
+      <Suspense fallback={<GlobalLoading />}>
         <Toaster />
         <TooltipProvider>
           <RouterProvider router={router} />

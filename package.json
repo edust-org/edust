@@ -66,6 +66,7 @@
     "react-spinners": "^0.14.1",
     "recharts": "^2.12.7",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.0",
