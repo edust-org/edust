@@ -10,41 +10,47 @@ import { HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import App from "./app";
 
-import { worker } from "./mocks/browser";
+async function enableMocking() {
+  const isDev = process.env.NODE_ENV === "development";
+  const isMockEnable = import.meta.env.VITE_USE_MOCKS === "true";
 
-if (
-  process.env.NODE_ENV === "development" &&
-  import.meta.env.VITE_USE_MOCKS === "true"
-) {
-  worker.start({
-    onUnhandledRequest: ({ method, url }) => {
-      console.warn(`Unhandled ${method} request to ${url}`);
-    },
-  });
+  if (isDev !== isMockEnable) {
+    console.log({ mockapi: false });
+    return;
+  }
+
+  console.log({ mockapi: true });
+
+  const { worker } = await import("./mocks/browser");
+
+  // `worker.start()` returns a Promise that resolves
+  // once the Service Worker is up and ready to intercept requests.
+  return worker.start();
 }
 
-// TO Axios using
-// Axios - Set default configurations
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
-axios.defaults.headers.common["Content-Type"] = "application/json";
-axios.defaults.withCredentials = true;
-const token = localStorage.getItem("access_token");
-// Set the token in Axios default headers
-if (token) {
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-}
-
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate
-        loading={<div>PersistGate Loading...</div>}
-        persistor={persistor}
-      >
-        <HelmetProvider>
-          <App />
-        </HelmetProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
-);
+enableMocking().then(() => {
+  // TO Axios using
+  // Axios - Set default configurations
+  axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+  axios.defaults.headers.common["Content-Type"] = "application/json";
+  axios.defaults.withCredentials = true;
+  const token = localStorage.getItem("access_token");
+  // Set the token in Axios default headers
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+  ReactDOM.createRoot(document.getElementById("root")!).render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate
+          loading={<div>PersistGate Loading...</div>}
+          persistor={persistor}
+        >
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>,
+  );
+});
