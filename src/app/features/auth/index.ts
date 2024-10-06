@@ -2,7 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { authentication } from "./authentication";
 
 // Actions
-export const { setAuthentication } = authentication.actions;
+export const { setAuthentication, signOut } = authentication.actions;
 
 // Reducers
 export const authReducers = combineReducers({
