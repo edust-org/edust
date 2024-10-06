@@ -3,7 +3,7 @@ import React, { Suspense, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import router from "@/routes";
-import { ErrorBoundary } from "@/components";
+import { ErrorBoundary, GlobalLoading } from "@/components";
 import { TooltipProvider } from "@/components/ui";
 import { localStore } from "./utils";
 import { useGetUserQuery } from "./app/api/v0/user";
@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<GlobalLoading />}>
         <Toaster />
         <TooltipProvider>
           <RouterProvider router={router} />
