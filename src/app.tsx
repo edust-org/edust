@@ -24,9 +24,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (data) {
-
-      // forcing it to retech and getting the latest userdata instead of cached data 
-      refetch()
+      // forcing it to retech and getting the latest userdata instead of cached data
+      refetch();
 
       dispatch(
         setAuthentication({
@@ -39,15 +38,14 @@ const App: React.FC = () => {
   }, [data, dispatch, isAuthenticated, refetch]);
 
   return (
-    <Suspense fallback={<Loading.Spinner />}>
-      <ErrorBoundary>
+    <ErrorBoundary>
+      <Suspense fallback={<Loading.Spinner />}>
         <Toaster />
-
         <TooltipProvider>
           <RouterProvider router={router} />
         </TooltipProvider>
-      </ErrorBoundary>
-    </Suspense>
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
