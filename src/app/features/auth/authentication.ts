@@ -28,12 +28,16 @@ export const authentication = createSlice({
         isLoading?: boolean;
         user?: null | object;
         organization?: null | object;
-      }>
+      }>,
     ) {
       state.isAuthenticated = action.payload.isAuthenticated;
       state.user = action.payload.user;
       state.organization = action.payload.organization;
       state.isLoading = action.payload.isLoading;
+    },
+    signOut() {
+      localStorage.clear();
+      return initialState;
     },
   },
 });
