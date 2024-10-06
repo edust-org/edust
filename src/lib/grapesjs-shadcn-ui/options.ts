@@ -4,7 +4,7 @@ import gsPluginTuiImageEditor from "grapesjs-tui-image-editor";
 import gsPluginExport from "grapesjs-plugin-export";
 import gsPluginCustomCode from "grapesjs-custom-code";
 import plugins from "./plugins";
-import { access_token } from "@/utils";
+import { localStore } from "@/utils";
 
 const options = (editorRef: any): EditorConfig => ({
   height: "100vh",
@@ -21,10 +21,12 @@ const options = (editorRef: any): EditorConfig => ({
         }/api/v0/organizations/site`,
 
         onLoad: (result) => {
-          return editorRef.current.loadProjectData(JSON.parse(result?.data?.assets));
+          return editorRef.current.loadProjectData(
+            JSON.parse(result?.data?.assets),
+          );
         },
         headers: {
-          Authorization: `Bearer ${access_token.getToken()}`,
+          Authorization: `Bearer ${localStore.accessToken.get()}`,
         },
 
         // Store project data

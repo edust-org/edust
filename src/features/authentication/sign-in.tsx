@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet-async";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import { access_token } from "@/utils";
+import { localStore } from "@/utils";
 import { SocialAuth } from "./social-auth";
 
 const FormSchema = z.object({
@@ -64,7 +64,7 @@ export const SignIn: React.FC = () => {
           });
 
           // setting the token before dispatching the authentication action
-          access_token.setToken(res.data.token);
+          localStore.accessToken.set(res.data.token);
 
           dispatch(
             setAuthentication({
