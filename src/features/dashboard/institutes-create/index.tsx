@@ -27,7 +27,7 @@ import {
   Typography,
 } from "@/components/ui";
 import { format } from "date-fns";
-import { CalendarIcon, ImageUp, UndoIcon } from "lucide-react";
+import { CalendarIcon, ImageUp } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/shadcn-ui";
 
@@ -117,7 +117,7 @@ export const InstitutesCreate = () => {
       <div className="flex justify-center pt-5">
         <Form {...form}>
           <div
-            className={`w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6 lg:max-w-[650px]`}
+            className={`w-full rounded-md bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6 lg:max-w-[650px]`}
           >
             <form
               onSubmit={form.handleSubmit(onSubmit)}

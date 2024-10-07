@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui";
-import assets from "@/assets/images";
+import { LogoEdust } from "@/components";
 
 export const NotFound = () => {
   const navigate = useNavigate();
   return (
     <div className="h-svh">
       <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-2">
-        <img src={assets.logoIcon} width={150} height={150} />
+        <LogoEdust />
         <h1 className="text-[7rem] font-bold leading-tight">404</h1>
         <span className="font-medium">Oops! Page Not Found!</span>
         <p className="text-center text-muted-foreground">
