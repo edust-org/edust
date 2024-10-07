@@ -1,4 +1,4 @@
-import { LogoEdust, Navbar } from "@/components";
+import { Navbar } from "@/components";
 import { Typography } from "@/components/ui";
 import { Link } from "react-router-dom";
 export const Playground = () => {
@@ -14,10 +14,6 @@ export const Playground = () => {
           </li>
         ))}
       </Typography>
-
-      <div className="m-28">
-        <LogoEdust />
-      </div>
     </div>
   );
 };

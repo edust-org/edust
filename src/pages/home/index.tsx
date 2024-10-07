@@ -2,13 +2,13 @@ import { useAppSelector } from "@/app/hooks";
 import { lazy } from "react";
 import { HaveAnOrgAccount } from "@/organizations/components";
 
-const GuestHome = lazy(() =>
+export const GuestHome = lazy(() =>
   import("./guest-home").then((module) => ({
     default: module.GuestHome,
   })),
 );
 
-const PrivateHome = lazy(() =>
+export const PrivateHome = lazy(() =>
   import("./private-home").then((module) => ({
     default: module.PrivateHome,
   })),
