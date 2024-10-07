@@ -1,17 +1,16 @@
 import { useAppSelector } from "@/app/hooks";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { guestRoutes } from "./guest";
 import { authenticatedRoutes } from "./authenticated-routes";
 import { organizationRoutes } from "./organization-routes";
 import { playgroundRoutes } from "./playground-routes";
 import { commonRoutes } from "./common-routes";
+import { NotFound } from "@/pages";
 
 export const RootRoutes = () => {
   const activeMode = useAppSelector(
     (state) => state.auth.profileSwitch.activeMode,
   );
-
-  console.log({ activeMode, user: activeMode === "user" });
 
   if (!activeMode) {
     return (
@@ -19,6 +18,8 @@ export const RootRoutes = () => {
         {guestRoutes}
         {playgroundRoutes}
         {commonRoutes}
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     );
   } else if (activeMode === "user") {
@@ -27,6 +28,7 @@ export const RootRoutes = () => {
         {authenticatedRoutes}
         {playgroundRoutes}
         {commonRoutes}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     );
   } else if (activeMode === "OWNER") {
@@ -35,6 +37,8 @@ export const RootRoutes = () => {
         {organizationRoutes}
         {playgroundRoutes}
         {commonRoutes}
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     );
   } else {
@@ -43,6 +47,8 @@ export const RootRoutes = () => {
         {guestRoutes}
         {playgroundRoutes}
         {commonRoutes}
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     );
   }
