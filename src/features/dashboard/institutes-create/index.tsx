@@ -27,33 +27,51 @@ import {
   Typography,
 } from "@/components/ui";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, ImageUp, UndoIcon } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/shadcn-ui";
 
+const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const ACCEPTED_IMAGE_MIME_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
 const FormSchema = z.object({
   category: z.string().min(1, "Category is required"),
   nameEn: z.string().min(1, "Name (en) is required"),
   nameBn: z.string().min(1, "Name (bn) is required"),
   eiin: z.string().min(1, "EIIN is required"),
   overview: z.string().min(1, "Overview is required"),
-  photo: z.string().url().min(1, "Photo is required"),
-  urls: z.string().url().min(1, "URLs is required"),
+  photo: z
+    .any()
+    .refine((files) => {
+      return files?.[0]?.size <= MAX_FILE_SIZE;
+    }, `Max image size is 5MB.`)
+    .refine(
+      (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported.",
+    ),
+  urls: z.string().url().optional(),
   board: z.string().min(1, "Board is required"),
   foundedDate: z.date({ required_error: "Initialized Date is required" }),
   country: z.string().min(1, "Country is required"),
-  state: z.string().optional(),
-  city: z.string().optional(),
-  postalCode: z.string().optional(),
-  latitude: z.string().optional(),
-  longitude: z.string().optional(),
+  state: z.string().min(1, "State is required"),
+  city: z.string().min(1, "City is required"),
+  postalCode: z.string().min(1, "Postal Code is required"),
+  latitude: z.string().min(1, "Latitude is required"),
+  longitude: z.string().min(1, "Longitude is required"),
   phone: z.string().min(1, "Phone is required"),
   email: z.string().email("Invalid email address"),
   website: z.string().optional(),
-  principalName: z.string().optional(),
+  principalName: z.string().min(1, "Principal name is required"),
   principalAge: z.string().optional(),
   tenureStart: z.date({ required_error: "Date is required" }),
 });
 
 export const InstitutesCreate = () => {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -62,7 +80,7 @@ export const InstitutesCreate = () => {
       nameBn: "",
       eiin: "",
       overview: "",
-      photo: "",
+      photo: undefined,
       urls: "",
       board: "",
       foundedDate: new Date(),
@@ -80,9 +98,18 @@ export const InstitutesCreate = () => {
       tenureStart: new Date(),
     },
   });
+  const { toast } = useToast();
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log(data);
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
   }
 
   return (
@@ -205,17 +232,43 @@ export const InstitutesCreate = () => {
                 <TabsContent value="file">
                   <FormField
                     control={form.control}
-                    name="phone"
+                    name="photo"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Photo</FormLabel>
                         <FormControl>
-                          <Input
-                            type="file"
-                            placeholder="Choose file"
-                            {...field}
-                          />
+                          <Button
+                            variant="outline"
+                            className="w-full"
+                            type="button"
+                          >
+                            <input
+                              type="file"
+                              className="hidden w-full"
+                              id="fileInput"
+                              accept="image/*"
+                              onBlur={field.onBlur}
+                              name={field.name}
+                              onChange={(e) => {
+                                field.onChange(e.target.files);
+                                setSelectedImage(e.target.files?.[0] || null);
+                              }}
+                              ref={field.ref}
+                            />
+                            <label
+                              htmlFor="fileInput"
+                              className="flex w-full items-center gap-2"
+                            >
+                              <ImageUp size={20} />
+                              <span className="whitespace-nowrap">
+                                {selectedImage
+                                  ? `${selectedImage.name}`
+                                  : "Choose File No file chosen"}
+                              </span>
+                            </label>
+                          </Button>
                         </FormControl>
+
                         <FormMessage />
                       </FormItem>
                     )}
@@ -230,7 +283,7 @@ export const InstitutesCreate = () => {
                         <FormLabel>URLs</FormLabel>
                         <FormControl>
                           <Input
-                            type="text"
+                            type="url"
                             placeholder="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg"
                             {...field}
                           />
@@ -431,13 +484,6 @@ export const InstitutesCreate = () => {
 
                 <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
                   <div className="flex-1">
-                    {/* <Address
-                      control={form.control}
-                      name="latitude"
-                      label="Latitude"
-                      type="text"
-                      placeholder="lat"
-                    /> */}
                     <FormField
                       control={form.control}
                       name="latitude"
@@ -521,7 +567,7 @@ export const InstitutesCreate = () => {
                           <FormLabel>Website</FormLabel>
                           <FormControl>
                             <Input
-                              type="text"
+                              type="url"
                               placeholder="https://www.example.com"
                               {...field}
                             />
