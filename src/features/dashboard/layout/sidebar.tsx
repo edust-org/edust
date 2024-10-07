@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { cn, detectTheme } from "@/utils";
+import { cn } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
-import assets from "@/assets/images";
-import { useAppSelector } from "@/app/hooks";
+import { LogoEdust } from "@/components";
 
 export function Sidebar({
   toggleIsOpen,
@@ -14,8 +13,6 @@ export function Sidebar({
   isOpen: boolean;
   toggleIsOpen: () => void;
 }) {
-  const theme = useAppSelector((state) => state.theme.theme);
-
   return (
     <aside
       className={cn(
@@ -34,23 +31,7 @@ export function Sidebar({
           asChild
         >
           <Link to="/" className="flex items-center gap-2">
-            {isOpen ? (
-              <img
-                src={
-                  detectTheme(theme) == "light" ? assets.logo : assets.logoDark
-                }
-                className="mr-1 w-36"
-              />
-            ) : (
-              <img
-                src={
-                  detectTheme(theme) == "light"
-                    ? assets.logoIcon
-                    : assets.logoIconDark
-                }
-                className="mr-1"
-              />
-            )}
+            <LogoEdust iconMode={!isOpen} />
           </Link>
         </Button>
         <Menu isOpen={isOpen} />
