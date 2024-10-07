@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { GlobalTopNotificationBar, Navbar } from "@/components";
 import { Helmet } from "react-helmet-async";
 import { HelpGetStarted } from "./help-get-started";
 import { StartDesign } from "./start-design";
@@ -12,6 +12,8 @@ export const GuestHome = () => {
       <Helmet>
         <title>Edust | Welcome to here</title>
       </Helmet>
+
+      <GlobalTopNotificationBar />
 
       <div className="mb-8">
         <Navbar.Guest />
