@@ -29,7 +29,7 @@ const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({
   role,
 }) => {
   const { isAuthenticated, isLoading, organization } = useAppSelector(
-    (state) => state.auth.authentication,
+    (state) => state.auth.authentication
   );
   const location = useLocation();
 

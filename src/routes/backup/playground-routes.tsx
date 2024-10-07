@@ -20,7 +20,7 @@ import V1GeneralError from "@/pages/playground/dashboard-v1/pages/errors/general
 import V1NotFoundError from "@/pages/playground/dashboard-v1/pages/errors/not-found-error";
 import V1MaintenanceError from "@/pages/playground/dashboard-v1/pages/errors/maintenance-error";
 import V1UnauthorisedError from "@/pages/playground/dashboard-v1/pages/errors/unauthorised-error";
-export const playgroundRoutes = (
+export default (
   <Route>
     <Route
       path="playground"

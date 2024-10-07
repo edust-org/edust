@@ -11,10 +11,10 @@ import IsAuthenticated from "./is-authenticated";
 import { Role } from "@/types";
 import { AppShell } from "@/organizations";
 
-export const organizationRoutes = (
+const organizationRoutes = (
   <Route>
     <Route
-      path="/"
+      path="organizations"
       element={
         <IsAuthenticated role={Role.OWNER}>
           <Suspense fallback={<Loading.Spinner />}>
@@ -42,7 +42,7 @@ export const organizationRoutes = (
       />
     </Route>
     <Route
-      path="/site/edit"
+      path="/organizations/site/edit"
       element={
         <Suspense fallback={<Loading.Spinner />}>
           <SiteEdit />
@@ -51,7 +51,7 @@ export const organizationRoutes = (
     />
 
     <Route
-      path="/create"
+      path="/organizations/create"
       element={
         <IsAuthenticated>
           <Suspense fallback={<Loading.Spinner />}>
@@ -62,3 +62,5 @@ export const organizationRoutes = (
     />
   </Route>
 );
+
+export default organizationRoutes;
