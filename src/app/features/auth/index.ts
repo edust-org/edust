@@ -5,7 +5,7 @@ import { profileSwitch } from "./profile-switch";
 // Actions
 export const { setAuthentication, signOut } = authentication.actions;
 
-export const { setProfileMode } = profileSwitch.actions;
+export const { setProfileMode, setProfileActiveMode } = profileSwitch.actions;
 
 // Reducers
 export const authReducers = combineReducers({

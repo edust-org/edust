@@ -15,7 +15,6 @@ const App: React.FC = () => {
     (state) => state.auth.authentication.isAuthenticated,
   );
   const profileSwitch = useAppSelector((state) => state.auth.profileSwitch);
-  console.log({ profileSwitch });
   const dispatch = useAppDispatch();
   const token = localStore.accessToken.get();
 
@@ -38,12 +37,15 @@ const App: React.FC = () => {
 
       dispatch(
         setProfileMode({
-          authenticated: Boolean(data?.data?.user),
+          authenticated: data?.data?.user ? "user" : undefined,
           organizationRole: data?.data?.organization?.role,
+          activeMode: profileSwitch?.activeMode
+            ? profileSwitch?.activeMode
+            : "user",
         }),
       );
     }
-  }, [data, dispatch, isAuthenticated, refetch]);
+  }, [data, dispatch, isAuthenticated, profileSwitch?.activeMode, refetch]);
 
   return (
     <ErrorBoundary>
