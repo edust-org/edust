@@ -28,6 +28,7 @@ import {
 } from "@/components/ui";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { toast } from "@/hooks/shadcn-ui";
 
 const FormSchema = z.object({
   category: z.string().min(1, "Category is required"),
@@ -82,7 +83,14 @@ export const InstitutesCreate = () => {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    toast({
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
   }
 
   return (
@@ -90,7 +98,7 @@ export const InstitutesCreate = () => {
       <div className="flex justify-center pt-5">
         <Form {...form}>
           <div
-            className={`w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6 lg:max-w-[650px]`}
+            className={`w-full rounded-md bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6 lg:max-w-[650px]`}
           >
             <form
               onSubmit={form.handleSubmit(onSubmit)}
