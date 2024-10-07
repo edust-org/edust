@@ -35,11 +35,13 @@ export const profileSwitch = createSlice({
         case state.userRole:
           state.activeMode = action.payload;
           break;
-
         default:
           state.activeMode = undefined;
           break;
       }
+    },
+    clearProfileMode() {
+      return initialState;
     },
   },
 });

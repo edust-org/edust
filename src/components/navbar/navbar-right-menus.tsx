@@ -25,16 +25,24 @@ import {
 } from "@/components/ui";
 import { toast } from "@/hooks/shadcn-ui";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { signOut } from "@/app/features/auth";
+import {
+  clearProfileMode,
+  setProfileActiveMode,
+  signOut,
+} from "@/app/features/auth";
 import { Link } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 
 export const NavbarRightMenus = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.authentication);
+  const profileMode = useAppSelector(
+    (state) => state.auth.profileSwitch.activeMode,
+  );
 
   const handleLogout = () => {
     dispatch(signOut());
+    dispatch(clearProfileMode());
 
     toast({
       variant: "destructive",
@@ -91,18 +99,44 @@ export const NavbarRightMenus = () => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {auth?.organization?.id ? (
-              <Link to={"/organizations"}>
-                <DropdownMenuItem>
-                  <School className="mr-2 h-4 w-4" />
-                  <span className="capitalize">
-                    {auth?.organization?.name.length > 24
-                      ? auth?.organization?.name.slice(0, 23) + "..."
-                      : auth?.organization?.name}
-                  </span>
-                </DropdownMenuItem>
-              </Link>
-            ) : (
+            {auth?.organization?.id && (
+              <>
+                {profileMode === "user" && (
+                  <>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        dispatch(setProfileActiveMode("OWNER"));
+                      }}
+                    >
+                      <School className="mr-2 h-4 w-4" />
+                      <span className="capitalize">
+                        {auth?.organization?.name.length > 24
+                          ? auth?.organization?.name.slice(0, 23) + "..."
+                          : auth?.organization?.name}
+                      </span>
+                    </DropdownMenuItem>
+                  </>
+                )}
+                {profileMode === "OWNER" && (
+                  <>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        dispatch(setProfileActiveMode("user"));
+                      }}
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      <span className="capitalize">
+                        {auth?.user?.name.length > 24
+                          ? auth?.user?.name.slice(0, 23) + "..."
+                          : auth?.user?.name}
+                      </span>
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </>
+            )}
+
+            {!auth?.organization?.id && (
               <Link to={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

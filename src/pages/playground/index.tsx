@@ -1,4 +1,4 @@
-import { setProfileActiveMode } from "@/app/features";
+import { clearProfileMode, setProfileActiveMode } from "@/app/features";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { Navbar } from "@/components";
 import { Button, Typography } from "@/components/ui";
@@ -22,6 +22,13 @@ export const Playground = () => {
       </Typography>
 
       <div>
+        <Button
+          onClick={() => {
+            dispatch(clearProfileMode());
+          }}
+        >
+          Clear Profile Switch
+        </Button>
         <Button
           onClick={() => {
             dispatch(setProfileActiveMode("user"));
