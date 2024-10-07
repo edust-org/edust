@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { GlobalTopNotificationBar, Navbar } from "@/components";
 import { lazy } from "react";
 
 const OrgLists = lazy(() =>
@@ -10,6 +10,8 @@ const OrgLists = lazy(() =>
 export const PrivateHome = () => {
   return (
     <>
+      <GlobalTopNotificationBar />
+
       <Navbar.Private />
 
       <main className="min-h-[calc(100vh-56px)] bg-slate-100 pt-4 md:py-8">

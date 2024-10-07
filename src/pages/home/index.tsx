@@ -14,6 +14,7 @@ export const PrivateHome = lazy(() =>
   })),
 );
 
+// TODO: need to change it's not work HaveAnOrgAccount
 export const Home = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
 
