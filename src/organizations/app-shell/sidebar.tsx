@@ -5,8 +5,8 @@ import { Button } from "@/components/ui";
 import { Nav } from "./nav";
 import { cn } from "@/utils";
 import { sidelinks } from "./sidelinks";
-import assets from "@/assets/images";
 import { Link } from "react-router-dom";
+import { LogoEdust } from "@/components";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   isCollapsed: boolean;
@@ -50,7 +50,7 @@ export const Sidebar = ({
         >
           <div className={`flex items-center ${!isCollapsed ? "gap-2" : ""}`}>
             <Link to={"/"}>
-              <img src={assets.logoIcon} width={40} height={40} />
+              <LogoEdust iconMode width={40} height={40} />
             </Link>
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? "invisible w-0" : "visible w-auto"}`}
