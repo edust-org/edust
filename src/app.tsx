@@ -8,12 +8,14 @@ import { TooltipProvider } from "@/components/ui";
 import { localStore } from "./utils";
 import { useGetUserQuery } from "./app/api/v0/user";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { setAuthentication } from "./app/features";
+import { setAuthentication, setProfileMode } from "./app/features";
 
 const App: React.FC = () => {
   const isAuthenticated = useAppSelector(
     (state) => state.auth.authentication.isAuthenticated,
   );
+  const profileSwitch = useAppSelector((state) => state.auth.profileSwitch);
+  console.log({ profileSwitch });
   const dispatch = useAppDispatch();
   const token = localStore.accessToken.get();
 
@@ -31,6 +33,13 @@ const App: React.FC = () => {
           isAuthenticated: true,
           user: data?.data.user,
           organization: data?.data.organization,
+        }),
+      );
+
+      dispatch(
+        setProfileMode({
+          authenticated: Boolean(data?.data?.user),
+          organizationRole: data?.data?.organization?.role,
         }),
       );
     }

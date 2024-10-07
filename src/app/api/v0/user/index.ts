@@ -12,9 +12,17 @@ export interface User {
   updatedAt: string;
 }
 
+export interface Organization {
+  id: string;
+  name: string;
+  org_username: string;
+  is_profile_verified: boolean;
+  role: string;
+}
+
 export interface ProfileResponse {
   data: {
-    organization: object | null | undefined;
+    organization: Organization | null;
     user: User;
   };
 }
