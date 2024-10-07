@@ -16,11 +16,8 @@ async function enableMocking() {
   const isMockEnable = import.meta.env.VITE_USE_MOCKS === "true";
 
   if (isDev !== isMockEnable) {
-    console.log({ mockapi: false });
     return;
   }
-
-  console.log({ mockapi: true });
 
   const { worker } = await import("./mocks/browser");
 
