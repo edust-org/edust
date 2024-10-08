@@ -44,7 +44,7 @@ export const VerifyEmailByToken: React.FC = () => {
     <div className="flex h-screen items-center justify-center p-4">
       <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
         <div className="space-y-4 text-center">
-          <img src={assets.logo} alt="" className="mx-auto" width={250} />
+          <img src={assets.logoLight} alt="" className="mx-auto" width={250} />
           <div className="space-y-2">
             <Typography variant="h3">Verifying Your Account</Typography>
             {isLoading && <BeatLoader />}
