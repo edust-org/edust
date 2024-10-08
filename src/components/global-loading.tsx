@@ -1,10 +1,10 @@
-import assets from "@/assets/images";
+import { LogoEdust } from "./logo-edust";
 
 export const GlobalLoading = () => {
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="space-y-4">
-        <img src={assets.logo} alt="Logo" />
+        <LogoEdust />
         <div role="status" className="flex items-center justify-center">
           <svg
             aria-hidden="true"
