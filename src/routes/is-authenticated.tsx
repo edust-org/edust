@@ -31,8 +31,8 @@ const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({
   const { isAuthenticated, isLoading, organization } = useAppSelector(
     (state) => state.auth.authentication,
   );
-  const location = useLocation();
 
+  const location = useLocation();
   // Show a loading spinner while authentication status is being checked
   if (isLoading) {
     return <Loading.Spinner />;

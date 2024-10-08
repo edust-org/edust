@@ -18,7 +18,6 @@ export const RootRoutes = () => {
         {guestRoutes}
         {playgroundRoutes}
         {commonRoutes}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     );
@@ -35,16 +34,6 @@ export const RootRoutes = () => {
     return (
       <Routes>
         {organizationRoutes}
-        {playgroundRoutes}
-        {commonRoutes}
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    );
-  } else {
-    return (
-      <Routes>
-        {guestRoutes}
         {playgroundRoutes}
         {commonRoutes}
 

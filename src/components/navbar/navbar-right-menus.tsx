@@ -30,11 +30,12 @@ import {
   setProfileActiveMode,
   signOut,
 } from "@/app/features/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 import { useTheme } from "@/hooks";
 
 export const NavbarRightMenus = () => {
+  const navigate = useNavigate();
   const { setTheme } = useTheme();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.authentication);
@@ -46,6 +47,7 @@ export const NavbarRightMenus = () => {
     dispatch(signOut());
     dispatch(clearProfileMode());
     setTheme("light");
+    navigate("/");
     toast({
       variant: "destructive",
       title: "Log out successfully!",
@@ -110,12 +112,13 @@ export const NavbarRightMenus = () => {
                     <DropdownMenuItem
                       onClick={() => {
                         dispatch(setProfileActiveMode("OWNER"));
+                        navigate("/");
                       }}
                     >
                       <School className="mr-2 h-4 w-4" />
                       <span className="capitalize">
-                        {auth?.organization?.name.length > 24
-                          ? auth?.organization?.name.slice(0, 23) + "..."
+                        {auth?.organization?.name.length > 21
+                          ? auth?.organization?.name.slice(0, 20) + "..."
                           : auth?.organization?.name}
                       </span>
                     </DropdownMenuItem>
@@ -130,8 +133,8 @@ export const NavbarRightMenus = () => {
                     >
                       <User className="mr-2 h-4 w-4" />
                       <span className="capitalize">
-                        {auth?.user?.name.length > 24
-                          ? auth?.user?.name.slice(0, 23) + "..."
+                        {auth?.user?.name.length > 21
+                          ? auth?.user?.name.slice(0, 20) + "..."
                           : auth?.user?.name}
                       </span>
                     </DropdownMenuItem>

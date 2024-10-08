@@ -11,18 +11,22 @@ export const authenticatedRoutes = (
     <Route
       path="/"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <PrivateHome />
-        </Suspense>
+        <IsAuthenticated>
+          <Suspense fallback={<Loading.Spinner />}>
+            <PrivateHome />
+          </Suspense>
+        </IsAuthenticated>
       }
     />
 
     <Route
       path="/dashboard"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard.DashboardLayout />
-        </Suspense>
+        <IsAuthenticated>
+          <Suspense fallback={<Loading.Spinner />}>
+            <Dashboard.DashboardLayout />
+          </Suspense>
+        </IsAuthenticated>
       }
     >
       <Route
