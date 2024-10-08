@@ -39,19 +39,19 @@ export const sidelinks: SideLink[] = [
   {
     title: "Dashboard",
     label: "",
-    href: "/organizations",
+    href: "/",
     icon: <TbLayoutDashboard size={18} />,
   },
   {
     title: "Site",
     label: "1",
-    href: "/organizations/site",
+    href: "/site",
     icon: <LucideGlobe size={18} />,
   },
   {
     title: "Settings",
     label: "",
-    href: "/organizations/settings",
+    href: "/settings",
     icon: <TbSettings size={18} />,
   },
   /*{

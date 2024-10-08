@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { IoMenuSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { LogoEdust } from "../logo-edust";
 
 export const Guest = () => {
   return (
@@ -22,7 +23,7 @@ export const Guest = () => {
       <header>
         <div className="container flex h-[56px] w-full shrink-0 items-center justify-between bg-transparent px-4 md:px-6">
           <Link to="/" className="mr-6 hidden lg:flex">
-            <img src={assets.logo} alt="" className="h-10" />
+            <LogoEdust />
             <span className="sr-only">Edust</span>
           </Link>
           <NavigationMenu className="hidden lg:flex">
