@@ -46,14 +46,28 @@ const FormSchema = z.object({
   overview: z.string().min(1, "Overview is required"),
   photo: z
     .any()
-    .refine((files) => {
-      return files?.[0]?.size <= MAX_FILE_SIZE;
+    .refine((file) => {
+      if (!file) return true; // Allow no file
+      return file?.[0]?.size <= MAX_FILE_SIZE;
     }, `Max image size is 5MB.`)
+    .refine((file) => {
+      if (!file) return true; // Allow no file
+      return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type);
+    }, "Only .jpg, .jpeg, .png, and .webp formats are supported.")
+    .optional(), // Photo can be optional
+
+  urls: z
+    .any()
+    .optional() // Allow the value to be optional or of any type
     .refine(
-      (files) => ACCEPTED_IMAGE_MIME_TYPES.includes(files?.[0]?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported.",
+      (val) => {
+        if (!val || typeof val !== "string") return true; // Allow no value or non-string
+        return z.string().url().safeParse(val).success; // If string, must be a valid URL
+      },
+      {
+        message: "Must be a valid URL or left empty",
+      },
     ),
-  urls: z.string().url().optional(),
   board: z.string().min(1, "Board is required"),
   foundedDate: z.date({ required_error: "Initialized Date is required" }),
   country: z.string().min(1, "Country is required"),
