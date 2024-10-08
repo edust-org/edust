@@ -1,23 +1,33 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { useGetOrgSitesPagesQuery } from "@/app/api/v0/public";
 import { toast } from "@/hooks/shadcn-ui";
 import { Button, Typography } from "@/components/ui";
 import { Link } from "react-router-dom";
+import Loading from "@/components/loading";
 
 export const Site = () => {
   const params = useParams();
+  const [query] = useSearchParams();
   const location = useLocation();
 
-  const { data, isLoading, error } = useGetOrgSitesPagesQuery(
-    params.orgIdOrUsername,
-  );
+  const filters = query.get("name")
+    ? `name=${query.get("name")}`
+    : `id=${query.get("id")}`;
+
+  const { data, isLoading, error } = useGetOrgSitesPagesQuery({
+    orgIdOrUsername: params.orgIdOrUsername,
+    filters,
+  });
 
   const [content, setContent] = useState(null);
 
   useEffect(() => {
     if (data?.data?.items[0]) {
-      setContent(data?.data?.items[0]);
+      const parsed = JSON.parse(data?.data?.items[0] || "{}");
+      if (parsed[0]) {
+        setContent(parsed[0]);
+      }
     }
     if (error?.data?.status) {
       toast({
@@ -55,13 +65,15 @@ export const Site = () => {
     }
   }, [isTailwindLoaded, content?.css]);
 
+  if (isLoading) {
+    return <Loading.Spinner />;
+  }
+
   return (
     <>
-      {isLoading && <p>Loading...</p>}
-      {content && (
+      {content ? (
         <div dangerouslySetInnerHTML={{ __html: content?.html }}></div>
-      )}
-      {!content && !isLoading && (
+      ) : (
         <div className="flex h-screen flex-col items-center justify-center gap-4">
           <Typography variant="h1" className="text-red-500">
             Site is not available.

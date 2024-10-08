@@ -9,7 +9,10 @@ export const publicApi = createApi({
 
   endpoints: (build) => ({
     getOrgSitesPages: build.query({
-      query: (orgIdOrUsername) => `/organizations/${orgIdOrUsername}/site/`,
+      query: ({ orgIdOrUsername, filters }) => {
+        const queryParams = new URLSearchParams(filters).toString();
+        return `/organizations/${orgIdOrUsername}/site/?${queryParams}`;
+      },
     }),
   }),
 });
