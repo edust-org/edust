@@ -17,21 +17,16 @@ import assets from "@/assets/images";
 import { IoMenuSharp } from "react-icons/io5";
 import { useAppSelector } from "@/app/hooks";
 import { NavbarRightMenus } from "./navbar-right-menus";
-import { detectTheme } from "@/utils";
+import { LogoEdust } from "../logo-edust";
 
 export const Private = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
-  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
-    <header className="sticky top-0 z-50 bg-white bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
+    <header className="sticky top-0 z-50 border-b bg-background bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
       <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
-          <img
-            src={detectTheme(theme) == "light" ? assets.logo : assets.logoDark}
-            alt=""
-            className="h-10"
-          />
+          <LogoEdust />
           <span className="sr-only">Edust</span>
         </Link>
         <NavigationMenu className="hidden lg:flex">
