@@ -7,7 +7,7 @@ import AppShell from "@/pages/playground/dashboard-v1/components/app-shell";
 
 import V1Dashboard from "@/pages/playground/dashboard-v1/pages/dashboard";
 import V1Task from "@/pages/playground/dashboard-v1/pages/tasks";
-import V1CommingSoon from "@/pages/playground/dashboard-v1/components/coming-soon";
+import V1CommingSoon from "@/components/coming-soon";
 import V1Settings from "@/pages/playground/dashboard-v1/pages/settings";
 import V1SettingsProfile from "@/pages/playground/dashboard-v1/pages/settings/profile";
 import V1SettingsAccount from "@/pages/playground/dashboard-v1/pages/settings/account";
