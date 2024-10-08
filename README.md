@@ -79,7 +79,7 @@ Want to get up and running quickly? Follow these steps:
    Open your web browser and navigate to `http://localhost:5173`.
 
    ```txt
-   email: guest@example.com
+   email: user@example.com
    password: password2024
 
    email: organizer@example.com

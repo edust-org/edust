@@ -8,8 +8,8 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   // Simulate user authentication
   if (email && password) {
     const users = {
-      guest: {
-        email: "guest@example.com",
+      user: {
+        email: "user@example.com",
         password: "password2024",
       },
       organizer: {
@@ -24,8 +24,8 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
 
     let authToken: string = "";
 
-    if (users.guest.email === email && users.guest.password === password) {
-      authToken = "guest";
+    if (users.user.email === email && users.user.password === password) {
+      authToken = "user";
     }
 
     if (
