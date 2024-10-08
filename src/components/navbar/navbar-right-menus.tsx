@@ -32,8 +32,10 @@ import {
 } from "@/app/features/auth";
 import { Link } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
+import { useTheme } from "@/hooks";
 
 export const NavbarRightMenus = () => {
+  const { setTheme } = useTheme();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.authentication);
   const profileMode = useAppSelector(
@@ -43,7 +45,7 @@ export const NavbarRightMenus = () => {
   const handleLogout = () => {
     dispatch(signOut());
     dispatch(clearProfileMode());
-
+    setTheme("light");
     toast({
       variant: "destructive",
       title: "Log out successfully!",
@@ -90,12 +92,14 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <Link to={"/dashboard"}>
-              <DropdownMenuItem>
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-              </DropdownMenuItem>
-            </Link>
+            {profileMode === "user" && (
+              <Link to={"/dashboard"}>
+                <DropdownMenuItem>
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  <span>Dashboard</span>
+                </DropdownMenuItem>
+              </Link>
+            )}
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
