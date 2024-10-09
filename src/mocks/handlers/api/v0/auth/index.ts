@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
+import userDb from "./user-db";
 
 const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   const actualBody = await request.clone().json();
@@ -22,33 +23,23 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
       },
     };
 
-    let authToken: string = "";
-
     if (users.user.email === email && users.user.password === password) {
-      authToken = "user";
+      return new HttpResponse(JSON.stringify(userDb.user));
     }
 
     if (
       users.organizer.email === email &&
       users.organizer.password === password
     ) {
-      authToken = "organizer";
+      return new HttpResponse(JSON.stringify(userDb.organizer));
     }
 
     if (
       users.administrator.email === email &&
       users.administrator.password === password
     ) {
-      authToken = "administrator";
+      return new HttpResponse(JSON.stringify(userDb.administrator));
     }
-
-    return new HttpResponse(
-      JSON.stringify({
-        status: "success",
-        message: "Logged in successfully!",
-        data: { token: authToken },
-      }),
-    );
   } else {
     // Return a 401 Unauthorized response for invalid credentials
     return new HttpResponse(
