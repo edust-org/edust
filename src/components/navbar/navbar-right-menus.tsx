@@ -33,6 +33,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 import { useTheme } from "@/hooks";
+import { UserMode } from "@/types";
 
 export const NavbarRightMenus = () => {
   const navigate = useNavigate();
@@ -94,7 +95,7 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {profileMode === "user" && (
+            {profileMode === UserMode.USER && (
               <Link to={"/dashboard"}>
                 <DropdownMenuItem>
                   <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -105,45 +106,53 @@ export const NavbarRightMenus = () => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {auth?.organization?.id && (
+            {auth?.organizations && (
               <>
-                {profileMode === "user" && (
-                  <>
+                {profileMode === UserMode.USER &&
+                  auth.organizations.map((org) => {
+                    return (
+                      <DropdownMenuItem
+                        key={org.id}
+                        onClick={() => {
+                          dispatch(
+                            setProfileActiveMode({
+                              org_id: org.id,
+                              org_role: org.role,
+                              has_organization: true,
+                            }),
+                          );
+                          navigate("/");
+                        }}
+                      >
+                        <School className="mr-2 h-4 w-4" />
+                        <span className="capitalize">
+                          {org.name.length > 21
+                            ? org.name.slice(0, 20) + "..."
+                            : org.name}
+                        </span>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                {typeof profileMode === "object" &&
+                  profileMode !== null &&
+                  profileMode.org_id && (
                     <DropdownMenuItem
                       onClick={() => {
-                        dispatch(setProfileActiveMode("OWNER"));
-                        navigate("/");
-                      }}
-                    >
-                      <School className="mr-2 h-4 w-4" />
-                      <span className="capitalize">
-                        {auth?.organization?.name.length > 21
-                          ? auth?.organization?.name.slice(0, 20) + "..."
-                          : auth?.organization?.name}
-                      </span>
-                    </DropdownMenuItem>
-                  </>
-                )}
-                {profileMode === "OWNER" && (
-                  <>
-                    <DropdownMenuItem
-                      onClick={() => {
-                        dispatch(setProfileActiveMode("user"));
+                        dispatch(setProfileActiveMode(UserMode.USER));
                       }}
                     >
                       <User className="mr-2 h-4 w-4" />
                       <span className="capitalize">
-                        {auth?.user?.name.length > 21
+                        {auth.user && auth.user?.name?.length > 21
                           ? auth?.user?.name.slice(0, 20) + "..."
                           : auth?.user?.name}
                       </span>
                     </DropdownMenuItem>
-                  </>
-                )}
+                  )}
               </>
             )}
 
-            {!auth?.organization?.id && (
+            {!auth?.organizations && (
               <Link to={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

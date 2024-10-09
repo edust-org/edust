@@ -1,28 +1,10 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { apiV0BaseQuery } from "../../api-url";
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  is_verified: boolean;
-  is_profile_verified: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface Organization {
-  id: string;
-  name: string;
-  org_username: string;
-  is_profile_verified: boolean;
-  role: string;
-}
+import { Organization, User } from "@/types";
 
 export interface ProfileResponse {
   data: {
-    organization: Organization | null;
+    organization: Organization[] | null;
     user: User;
   };
 }

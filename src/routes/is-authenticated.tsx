@@ -28,27 +28,22 @@ const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({
   children,
   role,
 }) => {
-  const { isAuthenticated, isLoading, organization } = useAppSelector(
-    (state) => state.auth.authentication,
-  );
+  const auth = useAppSelector((state) => state.auth.authentication);
 
   const location = useLocation();
-  // Show a loading spinner while authentication status is being checked
-  if (isLoading) {
+
+  if (auth.isLoading) {
     return <Loading.Spinner />;
   }
 
-  // Redirect to sign-in page if user is not authenticated
-  if (!isAuthenticated) {
+  if (!auth.isAuthenticated) {
     return <Navigate to="/auth/sign-in" state={{ from: location }} replace />;
   }
 
-  // Redirect to unauthorized page if role does not match
-  if (role && organization?.role !== role) {
-    return <Navigate to="/unauthorized" state={{ from: location }} replace />;
-  }
+  // if (role && organization?.role !== role) {
+  //   return <Navigate to="/unauthorized" state={{ from: location }} replace />;
+  // }
 
-  // Render children if authenticated and role (if any) matches
   return <>{children}</>;
 };
 
