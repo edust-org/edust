@@ -2,8 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useLoginMutation } from "@/app/api/v0/auth";
-import { setAuthentication } from "@/app/features/auth";
-import { useAppDispatch } from "@/app/hooks";
+import { setAuthentication, setProfileMode } from "@/app/features/auth";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import {
   Button,
   Form,
@@ -23,6 +23,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { localStore } from "@/utils";
 import { SocialAuth } from "./social-auth";
+import { Role } from "@/types";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -35,6 +36,7 @@ const FormSchema = z.object({
 
 export const SignIn: React.FC = () => {
   const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth.authentication);
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,6 +55,13 @@ export const SignIn: React.FC = () => {
   };
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    dispatch(
+      setAuthentication({
+        ...authState,
+        isLoading: true,
+      }),
+    );
+
     login(data)
       .unwrap()
       .then((res) => {
@@ -69,12 +78,29 @@ export const SignIn: React.FC = () => {
           dispatch(
             setAuthentication({
               isAuthenticated: true,
+              isLoading: false,
+              user: res.data?.user,
             }),
           );
+
+          dispatch(
+            setProfileMode({
+              system: res.data?.user.system,
+              organization_roles: res.data?.user.organization_roles,
+              activeMode: Role.USER,
+            }),
+          );
+
           navigate(redirectPath);
         }
       })
       .catch((error) => {
+        dispatch(
+          setAuthentication({
+            ...authState,
+            isLoading: false,
+          }),
+        );
         if (error?.data?.status) {
           toast({
             variant: "destructive",

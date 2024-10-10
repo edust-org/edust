@@ -1,9 +1,9 @@
-import { Typography } from "@/components/ui";
+import { ComingSoon } from "@/components";
 
 export const DashboardMain = () => {
   return (
     <div>
-      <Typography variant="h1">DashboardMain For Normal User Mode</Typography>
+      <ComingSoon className={"h-[calc(100vh-120px)]"} />
     </div>
   );
 };

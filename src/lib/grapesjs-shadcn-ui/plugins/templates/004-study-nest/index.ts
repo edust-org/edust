@@ -8,8 +8,8 @@ import thumbnail from "./study-nest.avif";
  */
 
 export const studyNest004 = {
-    id: "004",
-    content: `
+  id: "004",
+  content: `
 <!-- Header section  -->
     <header class=" ">
         <nav class="flex justify-between items-center px-8 text-white bg-[#00675f] text-[17px] p-4">
@@ -597,5 +597,5 @@ export const studyNest004 = {
     </main>
   
   `,
-    thumbnail,
+  thumbnail,
 };

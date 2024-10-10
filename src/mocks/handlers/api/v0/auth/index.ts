@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
+import userDb from "./user-db";
 
 const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   const actualBody = await request.clone().json();
@@ -8,8 +9,8 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
   // Simulate user authentication
   if (email && password) {
     const users = {
-      guest: {
-        email: "guest@example.com",
+      user: {
+        email: "user@example.com",
         password: "password2024",
       },
       organizer: {
@@ -20,35 +21,55 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
         email: "administrator@example.com",
         password: "password2024",
       },
+      systemEditor: {
+        email: "systemeditor@gmail.com",
+        password: "password2024",
+      },
     };
 
-    let authToken: string = "";
-
-    if (users.guest.email === email && users.guest.password === password) {
-      authToken = "guest";
+    if (users.user.email === email && users.user.password === password) {
+      return new HttpResponse(JSON.stringify(userDb.user), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=user",
+        },
+      });
     }
 
     if (
       users.organizer.email === email &&
       users.organizer.password === password
     ) {
-      authToken = "organizer";
+      return new HttpResponse(JSON.stringify(userDb.organizer), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=organizer",
+        },
+      });
     }
 
     if (
       users.administrator.email === email &&
       users.administrator.password === password
     ) {
-      authToken = "administrator";
+      return new HttpResponse(JSON.stringify(userDb.administrator), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=administrator",
+        },
+      });
     }
-
-    return new HttpResponse(
-      JSON.stringify({
-        status: "success",
-        message: "Logged in successfully!",
-        data: { token: authToken },
-      }),
-    );
+    if (
+      users.systemEditor.email === email &&
+      users.systemEditor.password === password
+    ) {
+      return new HttpResponse(JSON.stringify(userDb.systemEditor), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=systemEditor",
+        },
+      });
+    }
   } else {
     // Return a 401 Unauthorized response for invalid credentials
     return new HttpResponse(

@@ -7,19 +7,21 @@ import {
   CardTitle,
   Button,
   Input,
+  Typography,
 } from "@/components/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
 import { TopNav } from "../../components";
 import { RecentSales } from "./components/recent-sales";
 import { Overview } from "./components/overview";
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
+import { ComingSoon } from "@/components";
 
 export const Dashboard = () => {
   return (
     <Layout>
       {/* ===== Top Heading ===== */}
       <Layout.Header>
-        <TopNav links={topNav} />
+        {/* <TopNav links={topNav} /> */}
         <div className="ml-auto flex items-center space-x-4">
           <Input
             type="search"
@@ -32,7 +34,8 @@ export const Dashboard = () => {
 
       {/* ===== Main ===== */}
       <Layout.Body>
-        <div className="mb-2 flex items-center justify-between space-y-2">
+        <ComingSoon className={"h-[calc(100vh-120px)]"} />
+        {/* <div className="mb-2 flex items-center justify-between space-y-2">
           <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
           <div className="flex items-center space-x-2">
             <Button>Download</Button>
@@ -177,7 +180,7 @@ export const Dashboard = () => {
               </Card>
             </div>
           </TabsContent>
-        </Tabs>
+        </Tabs> */}
       </Layout.Body>
     </Layout>
   );

@@ -3,26 +3,31 @@ import { PrivateHome } from "@/pages/home";
 import { Suspense } from "react";
 import { Route } from "react-router-dom";
 import Dashboard from "@/features/dashboard";
-import IsAuthenticated from "./is-authenticated";
 import { CreateOrganization } from "@/organizations/features";
+import { Protector } from "./protector";
+import { Role } from "@/types";
 
 export const authenticatedRoutes = (
   <Route>
     <Route
       path="/"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <PrivateHome />
-        </Suspense>
+        <Protector roles={[Role.USER]}>
+          <Suspense fallback={<Loading.Spinner />}>
+            <PrivateHome />
+          </Suspense>
+        </Protector>
       }
     />
 
     <Route
       path="/dashboard"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Dashboard.DashboardLayout />
-        </Suspense>
+        <Protector roles={[Role.USER]}>
+          <Suspense fallback={<Loading.Spinner />}>
+            <Dashboard.DashboardLayout />
+          </Suspense>
+        </Protector>
       }
     >
       <Route
@@ -62,21 +67,21 @@ export const authenticatedRoutes = (
     <Route
       path="create-a-new-organizations"
       element={
-        <IsAuthenticated>
+        <Protector roles={[Role.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>
-        </IsAuthenticated>
+        </Protector>
       }
     />
     <Route
       path="/organizations/create"
       element={
-        <IsAuthenticated>
+        <Protector roles={[Role.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>
-        </IsAuthenticated>
+        </Protector>
       }
     />
   </Route>

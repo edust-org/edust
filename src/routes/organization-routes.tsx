@@ -7,20 +7,20 @@ import {
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
-import IsAuthenticated from "./is-authenticated";
 import { Role } from "@/types";
 import { AppShell } from "@/organizations";
+import { Protector } from "./protector";
 
 export const organizationRoutes = (
   <Route>
     <Route
       path="/"
       element={
-        <IsAuthenticated role={Role.OWNER}>
+        <Protector roles={[Role.OWNER, Role.EDITOR]}>
           <Suspense fallback={<Loading.Spinner />}>
             <AppShell />
           </Suspense>
-        </IsAuthenticated>
+        </Protector>
       }
     >
       <Route path="" element={<Dashboard />} />
@@ -35,29 +35,33 @@ export const organizationRoutes = (
       <Route
         path="settings"
         element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <h1>Setting</h1>
-          </Suspense>
+          <Protector roles={[Role.OWNER, Role.EDITOR]}>
+            <Suspense fallback={<Loading.Spinner />}>
+              <h1>Setting</h1>
+            </Suspense>
+          </Protector>
         }
       />
     </Route>
     <Route
       path="/site/edit"
       element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <SiteEdit />
-        </Suspense>
+        <Protector roles={[Role.OWNER]}>
+          <Suspense fallback={<Loading.Spinner />}>
+            <SiteEdit />
+          </Suspense>
+        </Protector>
       }
     />
 
     <Route
       path="/create"
       element={
-        <IsAuthenticated>
+        <Protector roles={[Role.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>
-        </IsAuthenticated>
+        </Protector>
       }
     />
   </Route>

@@ -6,23 +6,25 @@ import { organizationRoutes } from "./organization-routes";
 import { playgroundRoutes } from "./playground-routes";
 import { commonRoutes } from "./common-routes";
 import { NotFound } from "@/pages";
+import { Role } from "@/types";
 
 export const RootRoutes = () => {
   const activeMode = useAppSelector(
     (state) => state.auth.profileSwitch.activeMode,
   );
 
-  if (!activeMode) {
+  if (activeMode === Role.GUEST) {
     return (
       <Routes>
         {guestRoutes}
         {playgroundRoutes}
         {commonRoutes}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
     );
-  } else if (activeMode === "user") {
+  }
+
+  if (activeMode === "USER") {
     return (
       <Routes>
         {authenticatedRoutes}
@@ -31,25 +33,19 @@ export const RootRoutes = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
     );
-  } else if (activeMode === "OWNER") {
-    return (
-      <Routes>
-        {organizationRoutes}
-        {playgroundRoutes}
-        {commonRoutes}
+  }
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    );
-  } else {
-    return (
-      <Routes>
-        {guestRoutes}
-        {playgroundRoutes}
-        {commonRoutes}
+  if (typeof activeMode === "object" && activeMode !== null) {
+    if (activeMode.role) {
+      return (
+        <Routes>
+          {organizationRoutes}
+          {playgroundRoutes}
+          {commonRoutes}
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    );
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      );
+    }
   }
 };

@@ -15,16 +15,16 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
     );
   }
 
-  if (authToken === "guest") {
+  if (authToken === "user") {
     return HttpResponse.json({
       status: "success",
       message: "User Information",
       data: {
         user: {
           id: "07909b67-92b4-4329-9586-d282941dfc2d",
-          name: "Guest User",
+          name: "User",
           username: null,
-          email: "guest@example.com",
+          email: "user@example.com",
           password: "password2024",
           account_type: "local",
           account_details: null,

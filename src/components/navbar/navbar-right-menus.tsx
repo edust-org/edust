@@ -30,22 +30,23 @@ import {
   setProfileActiveMode,
   signOut,
 } from "@/app/features/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 import { useTheme } from "@/hooks";
+import { Role } from "@/types";
 
 export const NavbarRightMenus = () => {
+  const navigate = useNavigate();
   const { setTheme } = useTheme();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.authentication);
-  const profileMode = useAppSelector(
-    (state) => state.auth.profileSwitch.activeMode,
-  );
+  const profileMode = useAppSelector((state) => state.auth.profileSwitch);
 
   const handleLogout = () => {
     dispatch(signOut());
     dispatch(clearProfileMode());
     setTheme("light");
+    navigate("/");
     toast({
       variant: "destructive",
       title: "Log out successfully!",
@@ -92,7 +93,7 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {profileMode === "user" && (
+            {profileMode.activeMode === Role.USER && (
               <Link to={"/dashboard"}>
                 <DropdownMenuItem>
                   <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -103,44 +104,56 @@ export const NavbarRightMenus = () => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {auth?.organization?.id && (
+            {/* if organization available */}
+
+            {auth?.user?.organization_roles && (
               <>
-                {profileMode === "user" && (
-                  <>
-                    <DropdownMenuItem
-                      onClick={() => {
-                        dispatch(setProfileActiveMode("OWNER"));
-                      }}
-                    >
-                      <School className="mr-2 h-4 w-4" />
-                      <span className="capitalize">
-                        {auth?.organization?.name.length > 24
-                          ? auth?.organization?.name.slice(0, 23) + "..."
-                          : auth?.organization?.name}
-                      </span>
-                    </DropdownMenuItem>
-                  </>
-                )}
-                {profileMode === "OWNER" && (
-                  <>
-                    <DropdownMenuItem
-                      onClick={() => {
-                        dispatch(setProfileActiveMode("user"));
-                      }}
-                    >
-                      <User className="mr-2 h-4 w-4" />
-                      <span className="capitalize">
-                        {auth?.user?.name.length > 24
-                          ? auth?.user?.name.slice(0, 23) + "..."
-                          : auth?.user?.name}
-                      </span>
-                    </DropdownMenuItem>
-                  </>
+                {profileMode.activeMode === Role.USER &&
+                  auth?.user?.organization_roles?.map((role) => {
+                    return (
+                      <DropdownMenuItem
+                        key={role.id}
+                        onClick={() => {
+                          dispatch(
+                            setProfileActiveMode({
+                              id: role.id,
+                              name: role.name,
+                              role: role.role,
+                            }),
+                          );
+                          navigate("/");
+                        }}
+                      >
+                        <School className="mr-2 h-4 w-4" />
+                        <span className="capitalize">
+                          {role.name.length > 21
+                            ? role.name.slice(0, 20) + "..."
+                            : role.name}
+                        </span>
+                      </DropdownMenuItem>
+                    );
+                  })}
+                {profileMode.activeMode &&
+                  typeof profileMode.activeMode === "object" &&
+                  "id" in profileMode.activeMode && (
+                  <DropdownMenuItem
+                    onClick={() => {
+                      dispatch(setProfileActiveMode(Role.USER));
+                    }}
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    <span className="capitalize">
+                      {auth.user && auth.user?.name?.length > 21
+                        ? auth?.user?.name.slice(0, 20) + "..."
+                        : auth?.user?.name}
+                    </span>
+                  </DropdownMenuItem>
                 )}
               </>
             )}
 
-            {!auth?.organization?.id && (
+            {/* if organization is not available */}
+            {!auth?.user?.organization_roles && (
               <Link to={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />
