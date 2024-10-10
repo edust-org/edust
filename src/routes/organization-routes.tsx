@@ -7,7 +7,7 @@ import {
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
 import Loading from "@/components/loading";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 import { AppShell } from "@/organizations";
 import { Protector } from "./protector";
 
@@ -16,7 +16,7 @@ export const organizationRoutes = (
     <Route
       path="/"
       element={
-        <Protector roles={[Role.OWNER, Role.EDITOR]}>
+        <Protector roles={[Roles.OWNER, Roles.EDITOR]}>
           <Suspense fallback={<Loading.Spinner />}>
             <AppShell />
           </Suspense>
@@ -35,7 +35,7 @@ export const organizationRoutes = (
       <Route
         path="settings"
         element={
-          <Protector roles={[Role.OWNER, Role.EDITOR]}>
+          <Protector roles={[Roles.OWNER, Roles.EDITOR]}>
             <Suspense fallback={<Loading.Spinner />}>
               <h1>Setting</h1>
             </Suspense>
@@ -46,7 +46,7 @@ export const organizationRoutes = (
     <Route
       path="/site/edit"
       element={
-        <Protector roles={[Role.OWNER]}>
+        <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <SiteEdit />
           </Suspense>
@@ -57,7 +57,7 @@ export const organizationRoutes = (
     <Route
       path="/create"
       element={
-        <Protector roles={[Role.OWNER]}>
+        <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>
