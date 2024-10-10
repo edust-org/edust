@@ -21,24 +21,54 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
         email: "administrator@example.com",
         password: "password2024",
       },
+      systemEditor: {
+        email: "systemeditor@gmail.com",
+        password: "password2024",
+      },
     };
 
     if (users.user.email === email && users.user.password === password) {
-      return new HttpResponse(JSON.stringify(userDb.user));
+      return new HttpResponse(JSON.stringify(userDb.user), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=user",
+        },
+      });
     }
 
     if (
       users.organizer.email === email &&
       users.organizer.password === password
     ) {
-      return new HttpResponse(JSON.stringify(userDb.organizer));
+      return new HttpResponse(JSON.stringify(userDb.organizer), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=organizer",
+        },
+      });
     }
 
     if (
       users.administrator.email === email &&
       users.administrator.password === password
     ) {
-      return new HttpResponse(JSON.stringify(userDb.administrator));
+      return new HttpResponse(JSON.stringify(userDb.administrator), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=administrator",
+        },
+      });
+    }
+    if (
+      users.systemEditor.email === email &&
+      users.systemEditor.password === password
+    ) {
+      return new HttpResponse(JSON.stringify(userDb.systemEditor), {
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": "access_token=systemEditor",
+        },
+      });
     }
   } else {
     // Return a 401 Unauthorized response for invalid credentials

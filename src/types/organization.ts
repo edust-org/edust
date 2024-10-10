@@ -1,3 +1,5 @@
+import { Role } from "./roles";
+
 export interface Organization {
   id: string;
   name: string;
@@ -6,4 +8,10 @@ export interface Organization {
   role: string;
   created_at: Date;
   updated_at: Date;
+}
+
+export interface OrganizationRoles {
+  id: string;
+  name: string;
+  role: Role;
 }

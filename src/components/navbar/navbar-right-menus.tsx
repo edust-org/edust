@@ -33,16 +33,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 import { useTheme } from "@/hooks";
-import { UserMode } from "@/types";
+import { Role } from "@/types";
 
 export const NavbarRightMenus = () => {
   const navigate = useNavigate();
   const { setTheme } = useTheme();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.authentication);
-  const profileMode = useAppSelector(
-    (state) => state.auth.profileSwitch.activeMode,
-  );
+  const profileMode = useAppSelector((state) => state.auth.profileSwitch);
 
   const handleLogout = () => {
     dispatch(signOut());
@@ -95,7 +93,7 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {profileMode === UserMode.USER && (
+            {profileMode.activeMode === Role.USER && (
               <Link to={"/dashboard"}>
                 <DropdownMenuItem>
                   <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -106,19 +104,21 @@ export const NavbarRightMenus = () => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            {auth?.organizations && (
+            {/* if organization available */}
+
+            {auth?.user?.organization_roles && (
               <>
-                {profileMode === UserMode.USER &&
-                  auth.organizations.map((org) => {
+                {profileMode.activeMode === Role.USER &&
+                  auth?.user?.organization_roles?.map((role) => {
                     return (
                       <DropdownMenuItem
-                        key={org.id}
+                        key={role.id}
                         onClick={() => {
                           dispatch(
                             setProfileActiveMode({
-                              org_id: org.id,
-                              org_role: org.role,
-                              has_organization: true,
+                              id: role.id,
+                              name: role.name,
+                              role: role.role,
                             }),
                           );
                           navigate("/");
@@ -126,19 +126,19 @@ export const NavbarRightMenus = () => {
                       >
                         <School className="mr-2 h-4 w-4" />
                         <span className="capitalize">
-                          {org.name.length > 21
-                            ? org.name.slice(0, 20) + "..."
-                            : org.name}
+                          {role.name.length > 21
+                            ? role.name.slice(0, 20) + "..."
+                            : role.name}
                         </span>
                       </DropdownMenuItem>
                     );
                   })}
-                {typeof profileMode === "object" &&
-                  profileMode !== null &&
-                  profileMode.org_id && (
+                {profileMode.activeMode &&
+                  typeof profileMode.activeMode === "object" &&
+                  "id" in profileMode.activeMode && (
                     <DropdownMenuItem
                       onClick={() => {
-                        dispatch(setProfileActiveMode(UserMode.USER));
+                        dispatch(setProfileActiveMode(Role.USER));
                       }}
                     >
                       <User className="mr-2 h-4 w-4" />
@@ -152,7 +152,8 @@ export const NavbarRightMenus = () => {
               </>
             )}
 
-            {!auth?.organizations && (
+            {/* if organization is not available */}
+            {!auth?.user?.organization_roles && (
               <Link to={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

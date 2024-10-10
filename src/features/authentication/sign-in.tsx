@@ -23,7 +23,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { localStore } from "@/utils";
 import { SocialAuth } from "./social-auth";
-import { UserMode } from "@/types";
+import { Role, UserMode } from "@/types";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -72,8 +72,6 @@ export const SignIn: React.FC = () => {
             title: res?.message,
           });
 
-          console.log(res);
-
           // setting the token before dispatching the authentication action
           localStore.accessToken.set(res.data.token);
 
@@ -82,14 +80,14 @@ export const SignIn: React.FC = () => {
               isAuthenticated: true,
               isLoading: false,
               user: res.data?.user,
-              organizations: res.data?.organizations,
-              token: res.data.token,
             }),
           );
 
           dispatch(
             setProfileMode({
-              activeMode: UserMode.USER,
+              system: res.data?.user.system,
+              organization_roles: res.data?.user.organization_roles,
+              activeMode: Role.USER,
             }),
           );
 

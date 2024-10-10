@@ -1,5 +1,6 @@
 import { AccountType } from "./account-type";
-import { RoleTypes } from "./role-types";
+import { OrganizationRoles } from "./organization";
+import { Role } from "./roles";
 
 export interface User {
   id: string;
@@ -11,7 +12,8 @@ export interface User {
   account_details: null | object;
   is_verified: boolean;
   is_profile_verified: boolean;
-  role_types: null | RoleTypes;
+  system_role: Role;
+  organization_roles: null | OrganizationRoles[];
   created_at: Date;
   updated_at: Date;
 }

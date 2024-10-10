@@ -40,7 +40,7 @@ const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({
     return <Navigate to="/auth/sign-in" state={{ from: location }} replace />;
   }
 
-  const roles = auth.organizations?.map((role) => role.role);
+  const roles = auth.user?.organization_roles?.map((role) => role.role);
 
   if (role) {
     if (!roles?.includes(role)) {
