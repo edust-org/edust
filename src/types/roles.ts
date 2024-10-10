@@ -1,7 +1,7 @@
 /**
  * Enum representing various user roles in the application.
  */
-export enum Role {
+export enum Roles {
   /** Guest with restricted access to certain parts of the application. */
   GUEST = "GUEST",
 

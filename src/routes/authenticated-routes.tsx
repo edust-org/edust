@@ -5,14 +5,14 @@ import { Route } from "react-router-dom";
 import Dashboard from "@/features/dashboard";
 import { CreateOrganization } from "@/organizations/features";
 import { Protector } from "./protector";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 
 export const authenticatedRoutes = (
   <Route>
     <Route
       path="/"
       element={
-        <Protector roles={[Role.USER]}>
+        <Protector roles={[Roles.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <PrivateHome />
           </Suspense>
@@ -23,7 +23,7 @@ export const authenticatedRoutes = (
     <Route
       path="/dashboard"
       element={
-        <Protector roles={[Role.USER]}>
+        <Protector roles={[Roles.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <Dashboard.DashboardLayout />
           </Suspense>
@@ -67,7 +67,7 @@ export const authenticatedRoutes = (
     <Route
       path="create-a-new-organizations"
       element={
-        <Protector roles={[Role.USER]}>
+        <Protector roles={[Roles.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>
@@ -77,7 +77,7 @@ export const authenticatedRoutes = (
     <Route
       path="/organizations/create"
       element={
-        <Protector roles={[Role.USER]}>
+        <Protector roles={[Roles.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <CreateOrganization />
           </Suspense>

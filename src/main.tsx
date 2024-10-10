@@ -9,7 +9,6 @@ import { PersistGate } from "redux-persist/integration/react";
 import { HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 import App from "./app";
-import { localStore } from "./utils";
 
 async function enableMocking() {
   const isDev = process.env.NODE_ENV === "development";
@@ -32,11 +31,7 @@ enableMocking().then(() => {
   axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
   axios.defaults.headers.common["Content-Type"] = "application/json";
   axios.defaults.withCredentials = true;
-  const token = localStore.accessToken.get();
-  // Set the token in Axios default headers
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  }
+
   ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
       <Provider store={store}>

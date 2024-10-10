@@ -1,16 +1,16 @@
-import { OrganizationRoles, Role } from "@/types";
+import { OrganizationRoles, Roles } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface ProfileSwitchState {
-  system: Role;
+  system: Roles;
   organization_roles: OrganizationRoles[] | null;
-  activeMode: Role | OrganizationRoles;
+  activeMode: Roles | OrganizationRoles;
 }
 
 const initialState: ProfileSwitchState = {
-  system: Role.GUEST,
+  system: Roles.GUEST,
   organization_roles: null,
-  activeMode: Role.GUEST,
+  activeMode: Roles.GUEST,
 };
 
 export const profileSwitch = createSlice({
@@ -23,7 +23,7 @@ export const profileSwitch = createSlice({
 
     setProfileActiveMode(
       state,
-      action: PayloadAction<Role | OrganizationRoles>,
+      action: PayloadAction<Roles | OrganizationRoles>,
     ) {
       state.activeMode = action.payload;
     },

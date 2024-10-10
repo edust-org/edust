@@ -6,14 +6,14 @@ import { organizationRoutes } from "./organization-routes";
 import { playgroundRoutes } from "./playground-routes";
 import { commonRoutes } from "./common-routes";
 import { NotFound } from "@/pages";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 
 export const RootRoutes = () => {
   const activeMode = useAppSelector(
     (state) => state.auth.profileSwitch.activeMode,
   );
 
-  if (activeMode === Role.GUEST) {
+  if (activeMode === Roles.GUEST) {
     return (
       <Routes>
         {guestRoutes}
