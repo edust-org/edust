@@ -19,6 +19,7 @@ import {
 import { cn } from "@/utils";
 import { SideLink } from "./sidelinks";
 import { useCheckActiveNav } from "../hooks";
+import { useAppSelector } from "@/app/hooks";
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean;
@@ -27,7 +28,11 @@ interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
-  const renderLink = ({ sub, ...rest }: SideLink) => {
+  const activeMode = useAppSelector(
+    (state) => state.auth.profileSwitch.activeMode,
+  );
+
+  const renderLink = ({ sub, access_roles, ...rest }: SideLink) => {
     const key = `${rest.title}-${rest.href}`;
     if (isCollapsed && sub)
       return (
@@ -47,7 +52,11 @@ export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
         <NavLinkDropdown {...rest} sub={sub} key={key} closeNav={closeNav} />
       );
 
-    return <NavLink {...rest} key={key} closeNav={closeNav} />;
+    if (typeof activeMode === "object" && activeMode.role) {
+      if (access_roles.includes(activeMode.role)) {
+        return <NavLink {...rest} key={key} closeNav={closeNav} />;
+      }
+    }
   };
   return (
     <div

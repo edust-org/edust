@@ -27,19 +27,19 @@ export const organizationRoutes = (
       <Route
         path="site"
         element={
-          <Protector roles={[Role.OWNER]}>
-            <Suspense fallback={<Loading.Spinner />}>
-              <Site />
-            </Suspense>
-          </Protector>
+          <Suspense fallback={<Loading.Spinner />}>
+            <Site />
+          </Suspense>
         }
       />
       <Route
         path="settings"
         element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <h1>Setting</h1>
-          </Suspense>
+          <Protector roles={[Role.EDITOR]}>
+            <Suspense fallback={<Loading.Spinner />}>
+              <h1>Setting</h1>
+            </Suspense>
+          </Protector>
         }
       />
     </Route>
