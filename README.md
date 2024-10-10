@@ -87,6 +87,9 @@ Want to get up and running quickly? Follow these steps:
 
    email: administrator@example.com
    password: password2024
+
+   email: systemeditor@gmail.com
+   password: password2024
    ```
 
 ## Contributors
