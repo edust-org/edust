@@ -35,7 +35,7 @@ export const organizationRoutes = (
       <Route
         path="settings"
         element={
-          <Protector roles={[Role.EDITOR]}>
+          <Protector roles={[Role.OWNER, Role.EDITOR]}>
             <Suspense fallback={<Loading.Spinner />}>
               <h1>Setting</h1>
             </Suspense>
