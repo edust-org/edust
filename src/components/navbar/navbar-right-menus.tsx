@@ -136,19 +136,19 @@ export const NavbarRightMenus = () => {
                 {profileMode.activeMode &&
                   typeof profileMode.activeMode === "object" &&
                   "id" in profileMode.activeMode && (
-                    <DropdownMenuItem
-                      onClick={() => {
-                        dispatch(setProfileActiveMode(Role.USER));
-                      }}
-                    >
-                      <User className="mr-2 h-4 w-4" />
-                      <span className="capitalize">
-                        {auth.user && auth.user?.name?.length > 21
-                          ? auth?.user?.name.slice(0, 20) + "..."
-                          : auth?.user?.name}
-                      </span>
-                    </DropdownMenuItem>
-                  )}
+                  <DropdownMenuItem
+                    onClick={() => {
+                      dispatch(setProfileActiveMode(Role.USER));
+                    }}
+                  >
+                    <User className="mr-2 h-4 w-4" />
+                    <span className="capitalize">
+                      {auth.user && auth.user?.name?.length > 21
+                        ? auth?.user?.name.slice(0, 20) + "..."
+                        : auth?.user?.name}
+                    </span>
+                  </DropdownMenuItem>
+                )}
               </>
             )}
 

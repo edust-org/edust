@@ -16,7 +16,7 @@ export const organizationRoutes = (
     <Route
       path="/"
       element={
-        <Protector roles={[Role.OWNER]}>
+        <Protector roles={[Role.OWNER, Role.EDITOR]}>
           <Suspense fallback={<Loading.Spinner />}>
             <AppShell />
           </Suspense>
@@ -27,9 +27,11 @@ export const organizationRoutes = (
       <Route
         path="site"
         element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Site />
-          </Suspense>
+          <Protector roles={[Role.OWNER]}>
+            <Suspense fallback={<Loading.Spinner />}>
+              <Site />
+            </Suspense>
+          </Protector>
         }
       />
       <Route

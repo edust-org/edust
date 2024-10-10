@@ -1,7 +1,9 @@
-import { useAppSelector } from "@/app/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { Navigate } from "react-router-dom";
 import { FC, ReactNode } from "react";
 import { Role } from "@/types";
+import { setProfileActiveMode } from "@/app/features";
+import { toast } from "@/hooks/shadcn-ui";
 
 interface ProtectorProps {
   roles: Role[];
@@ -9,6 +11,7 @@ interface ProtectorProps {
 }
 
 export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.authentication.user);
 
   const activeMode = useAppSelector(
@@ -34,5 +37,14 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
     return <>{children}</>;
   }
 
-  return <Navigate to="/" />;
+  if (user) {
+    dispatch(setProfileActiveMode(user.system_role || Role.USER));
+    toast({
+      variant: "destructive",
+      title: "Access denied!",
+    });
+    return <>{children}</>;
+  }
+
+  return <Navigate to="/auth/sign-in" />;
 };

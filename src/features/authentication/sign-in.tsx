@@ -23,7 +23,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { localStore } from "@/utils";
 import { SocialAuth } from "./social-auth";
-import { Role, UserMode } from "@/types";
+import { Role } from "@/types";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {

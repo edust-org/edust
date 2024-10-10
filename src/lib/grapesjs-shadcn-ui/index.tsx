@@ -90,10 +90,10 @@ export const GrapesjsShadcnUI = () => {
               windowWidth >= 1280
                 ? 12
                 : windowWidth >= 1024
-                ? 15
-                : windowWidth >= 768
-                ? 20
-                : 12
+                  ? 15
+                  : windowWidth >= 768
+                    ? 20
+                    : 12
             }
             minSize={8}
             className="w-[200px] h-full bg-white"
@@ -121,10 +121,10 @@ export const GrapesjsShadcnUI = () => {
               windowWidth >= 1280
                 ? 13
                 : windowWidth >= 1024
-                ? 15
-                : windowWidth >= 768
-                ? 20
-                : 13
+                  ? 15
+                  : windowWidth >= 768
+                    ? 20
+                    : 13
             }
             minSize={8}
             className="w-[200px] h-full bg-white"
