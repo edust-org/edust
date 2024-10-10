@@ -33,7 +33,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { ThemeSwitch } from "../theme-switch";
 import { useTheme } from "@/hooks";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 
 export const NavbarRightMenus = () => {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {profileMode.activeMode === Role.USER && (
+            {profileMode.activeMode === Roles.USER && (
               <Link to={"/dashboard"}>
                 <DropdownMenuItem>
                   <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -108,7 +108,7 @@ export const NavbarRightMenus = () => {
 
             {auth?.user?.organization_roles && (
               <>
-                {profileMode.activeMode === Role.USER &&
+                {profileMode.activeMode === Roles.USER &&
                   auth?.user?.organization_roles?.map((role) => {
                     return (
                       <DropdownMenuItem
@@ -136,19 +136,19 @@ export const NavbarRightMenus = () => {
                 {profileMode.activeMode &&
                   typeof profileMode.activeMode === "object" &&
                   "id" in profileMode.activeMode && (
-                  <DropdownMenuItem
-                    onClick={() => {
-                      dispatch(setProfileActiveMode(Role.USER));
-                    }}
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    <span className="capitalize">
-                      {auth.user && auth.user?.name?.length > 21
-                        ? auth?.user?.name.slice(0, 20) + "..."
-                        : auth?.user?.name}
-                    </span>
-                  </DropdownMenuItem>
-                )}
+                    <DropdownMenuItem
+                      onClick={() => {
+                        dispatch(setProfileActiveMode(Roles.USER));
+                      }}
+                    >
+                      <User className="mr-2 h-4 w-4" />
+                      <span className="capitalize">
+                        {auth.user && auth.user?.name?.length > 21
+                          ? auth?.user?.name.slice(0, 20) + "..."
+                          : auth?.user?.name}
+                      </span>
+                    </DropdownMenuItem>
+                  )}
               </>
             )}
 

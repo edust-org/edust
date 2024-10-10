@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { Navigate } from "react-router-dom";
 import { FC, ReactNode } from "react";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 import { setProfileActiveMode } from "@/app/features";
 import { toast } from "@/hooks/shadcn-ui";
 
 interface ProtectorProps {
-  roles: Role[];
+  roles: Roles[];
   children: ReactNode;
 }
 
@@ -38,7 +38,7 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
   }
 
   if (user) {
-    dispatch(setProfileActiveMode(user.system_role || Role.USER));
+    dispatch(setProfileActiveMode(user.system_role || Roles.USER));
     toast({
       variant: "destructive",
       title: "Access denied!",
