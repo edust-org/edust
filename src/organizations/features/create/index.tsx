@@ -5,27 +5,27 @@ import assets from "@/assets/images";
 const CreateOrganizationForm = lazy(() =>
   import("./create-organization-form").then((module) => ({
     default: module.CreateOrganizationForm,
-  }))
+  })),
 );
 
 export const CreateOrganization = () => {
   return (
     <>
-      <div className="flex items-center gap-4 h-screen overflow-hidden">
-        <div className="hidden md:block md:h-full flex-1 relative">
+      <div className="flex h-screen items-center gap-4 overflow-hidden">
+        <div className="relative hidden flex-1 md:block md:h-full">
           <img
             src={assets.imgCreateOrganizations}
             alt=""
             className="h-full w-full object-cover grayscale"
           />
-          <div className="bg-black/35 h-full w-full absolute inset-0 backdrop-blur-sm"></div>
-          <div className="absolute inset-0 m-4 md:m-8 xl:m-16 2xl:m-24 overflow-y-scroll no-scrollbar z-10 text-white">
+          <div className="absolute inset-0 h-full w-full bg-black/35 backdrop-blur-sm"></div>
+          <div className="no-scrollbar absolute inset-0 z-10 m-4 overflow-y-scroll text-white md:m-8 xl:m-16 2xl:m-24">
             <div className="space-y-8">
               <div>
                 <Typography variant="h1">
                   Why Create an Organization?
                 </Typography>
-                <Typography>
+                <Typography className="text-white">
                   Creating an organization on our platform comes with numerous
                   benefits. Whether you're representing an educational
                   institution, a college, or a school, here’s how you can
@@ -136,7 +136,7 @@ export const CreateOrganization = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-[550px] p-4 md:pe-8 flex-1 xl:flex-none 2xl:p-24 2xl:max-w-[800px]">
+        <div className="max-w-[550px] flex-1 p-4 md:pe-8 xl:flex-none 2xl:max-w-[800px] 2xl:p-24">
           <img src={assets.logo} alt="" width={180} className="mx-auto" />
           <Typography variant="h2" className="text-center">
             Create a free new organization

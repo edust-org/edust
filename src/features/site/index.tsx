@@ -13,7 +13,9 @@ export const Site = () => {
 
   const filters = query.get("name")
     ? `name=${query.get("name")}`
-    : `id=${query.get("id")}`;
+    : query.get("id")
+      ? `id=${query.get("id")}`
+      : `name=home`;
 
   const { data, isLoading, error } = useGetOrgSitesPagesQuery({
     orgIdOrUsername: params.orgIdOrUsername,
