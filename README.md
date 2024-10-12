@@ -24,7 +24,7 @@ Edust offers much more than just social networking.
 
 **And this is just the beginning**—Edust is continuously evolving. Our goal is to provide a comprehensive platform where education meets innovation, with new features and capabilities being added regularly to meet our users' changing needs.
 
-## Quick Links
+## 🔗 Quick Links
 
 - [FEATURES](https://github.com/edust-org/edust/wiki/Features) - Discover upcoming and released features. 🔍
 - [CONTRIBUTING](https://github.com/edust-org/edust/wiki/Contribution) - Learn how to contribute to the project. 🙌
