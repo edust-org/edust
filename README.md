@@ -3,10 +3,9 @@
 <h1 align="center" style="font-size: 50px; font-weight: bold">Edust</h1>
 <p align="center">Edust is a web application designed to enhance educational collaboration and interaction<br/>between students, teachers, and educational institutions.</p>
 
-<p align="center"><strong>Join with us ↘<br/></strong> 
-<a href="https://discord.gg/vnhqmn9mdj">Discord</a>
-•
-<a href="https://chat.whatsapp.com/D40T68gxOP34w6GVNiJmP2">WhatsApp</a>
+<p align="center">
+    <strong>Join Us ↘</strong><br/>
+    <a href="https://discord.gg/vnhqmn9mdj">Connect on Discord 🤝</a>
 </p>
 
 <p align="center">
@@ -27,70 +26,41 @@ Edust offers much more than just social networking.
 
 ## Quick Links
 
-- [FEATURES](docs/FEATURES.md) - Upcoming and Release
+- [FEATURES](https://github.com/edust-org/edust/wiki/Features) - Discover upcoming and released features. 🔍
+- [CONTRIBUTING](https://github.com/edust-org/edust/wiki/Contribution) - Learn how to contribute to the project. 🙌
 
-## Key Features
+## 📖 Full Documentation
 
-- Authentication
-- Custom Site Build for Organizations
-- Anyone can add new Institutes
+For comprehensive documentation, including detailed examples, operational guidelines, and additional information, please refer to the [Wiki](https://github.com/edust-org/edust/wiki).
 
-## Tech Stack
+You can also check out the [ 📝 Case Study](docs/case-study/index.md) for insights into our development process and key decisions.
 
-- [Typescript](https://www.typescriptlang.org/) - Language
-- [React.js](https://react.dev/) - Framework
-- [Tailwind](https://tailwindcss.com/) - CSS
-- [shadcn/ui](https://ui.shadcn.com/) - Component Library
-- [mswjs](https://mswjs.io/) - API mocking
+## 🙋🏻‍♂️ Contribute to Edust
 
-## Developer Quick-start
+We welcome developers and designers to contribute to the Edust platform! Your skills and insights can significantly enhance our features and improve the overall user experience. Here’s how you can get involved:
 
-> **Note**: This is a quickstart for developers. It assumes that you have [Node](https://nodejs.org/en/download/package-manager), [NPM](https://www.npmjs.com/) and [PNPM](https://pnpm.io/installation#using-npm) installed on your machine.
+### 👨‍💻 Developers
 
-Want to get up and running quickly? Follow these steps:
+- **Frontend Development**: Get started by checking out our [Contributing Guide](https://github.com/edust-org/edust/wiki/Contribution), which provides detailed instructions on setting up your development environment, finding issues to work on, and submitting your contributions.
 
-1. **[Fork this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks)** to your GitHub account.
+- **Backend Development**: Interested in backend development? We’d love to see your portfolio! We work on backend projects privately, so please reach out to us via our [communications channel](https://discord.gg/vnhqmn9mdj) for more information.
 
-   After forking the repository, clone it to your local device by using the following command:
+- **Database Management**: If you’re passionate about database management, we encourage you to join us. Like backend development, we collaborate privately, so check our [communications channel](https://discord.gg/vnhqmn9mdj) to connect.
 
-2. **Clone Repository:**
+### 🎨🖌️ Designers
 
-   ```bash
-   git clone https://github.com/<your-username>/edust.git
-   cd edust
-   ```
+- **Design Contributions**: We invite designers to help us enhance the user experience on the Edust platform. You can start by browsing our design-related issues and sharing your creative ideas and improvements. Familiarity with UI/UX design tools, particularly Figma, is a plus!
 
-3. **Install Dependencies:**
+### ✍🏻 Documentation Writers
 
-   ```bash
-   pnpm install
-   ```
+- **Help Us Document**: If you have a knack for writing and enjoy creating clear, concise documentation, we would love your help! Contributing to our documentation helps everyone in the community and ensures that our resources are accessible.
 
-4. **Setup Environment Variables:**
-   Create a `.env` file in the root directory and add necessary environment variables from `.env.example`.
+## 💬 Communication
 
-5. **Run the Application:**
+For questions, discussions, and collaboration, you can reach us through the following channels:
 
-   ```bash
-   pnpm run dev
-   ```
-
-6. **Access the Application:**
-   Open your web browser and navigate to `http://localhost:5173`.
-
-   ```txt
-   email: user@example.com
-   password: password2024
-
-   email: organizer@example.com
-   password: password2024
-
-   email: administrator@example.com
-   password: password2024
-
-   email: systemeditor@gmail.com
-   password: password2024
-   ```
+- **GitHub Discussions**: Engage with the community, ask questions, and share insights in our [GitHub Discussions](https://github.com/edust-org/edust/discussions).
+- **Discord**: Join our [Discord server](https://discord.gg/vnhqmn9mdj) for real-time communication, support, and to connect with other members of the Edust community.
 
 ## Contributors
 
@@ -98,15 +68,6 @@ Want to get up and running quickly? Follow these steps:
   <img src="https://contrib.rocks/image?repo=edust-org/edust" />
 </a>
 
-## Acknowledgements
-
-Special thanks to these amazing projects which help power Edust:
-
-- [React.js](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn ui](https://ui.shadcn.com/)
-- [mswjs](https://mswjs.io/)
-
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+🔒 Distributed under the MIT License. See `LICENSE` for more information.
