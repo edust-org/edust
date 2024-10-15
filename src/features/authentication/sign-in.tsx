@@ -23,7 +23,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { localStore } from "@/utils";
 import { SocialAuth } from "./social-auth";
-import { Role } from "@/types";
+import { Roles } from "@/types";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -87,7 +87,7 @@ export const SignIn: React.FC = () => {
             setProfileMode({
               system: res.data?.user.system,
               organization_roles: res.data?.user.organization_roles,
-              activeMode: Role.USER,
+              activeMode: Roles.USER,
             }),
           );
 

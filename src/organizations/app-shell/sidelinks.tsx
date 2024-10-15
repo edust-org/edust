@@ -1,4 +1,4 @@
-import { Role } from "@/types";
+import { Roles } from "@/types";
 import { LucideGlobe } from "lucide-react";
 import {
   TbApps,
@@ -30,7 +30,7 @@ export interface NavLink {
   label?: string;
   href: string;
   icon: JSX.Element;
-  access_roles: Role[];
+  access_roles: Roles[];
 }
 
 export interface SideLink extends NavLink {
@@ -43,21 +43,21 @@ export const sidelinks: SideLink[] = [
     label: "",
     href: "/",
     icon: <TbLayoutDashboard size={18} />,
-    access_roles: [Role.OWNER],
+    access_roles: [Roles.OWNER],
   },
   {
     title: "Site",
     label: "1",
     href: "/site",
     icon: <LucideGlobe size={18} />,
-    access_roles: [Role.OWNER],
+    access_roles: [Roles.OWNER],
   },
   {
     title: "Settings",
     label: "",
     href: "/settings",
     icon: <TbSettings size={18} />,
-    access_roles: [Role.OWNER, Role.EDITOR],
+    access_roles: [Roles.OWNER, Roles.EDITOR],
   },
   /*{
     title: "Tasks",

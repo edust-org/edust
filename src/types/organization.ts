@@ -1,4 +1,4 @@
-import { Role } from "./roles";
+import { Roles } from "./roles";
 
 export interface Organization {
   id: string;
@@ -13,5 +13,5 @@ export interface Organization {
 export interface OrganizationRoles {
   id: string;
   name: string;
-  role: Role;
+  role: Roles;
 }
