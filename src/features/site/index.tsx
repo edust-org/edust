@@ -11,11 +11,7 @@ export const Site = () => {
   const [query] = useSearchParams();
   const location = useLocation();
 
-  const filters = query.get("name")
-    ? `name=${query.get("name")}`
-    : query.get("id")
-      ? `id=${query.get("id")}`
-      : `name=home`;
+  const filters = query.get("name") ? `name=${query.get("name")}` : `name=home`;
 
   const { data, isLoading, error } = useGetOrgSitesPagesQuery({
     orgIdOrUsername: params.orgIdOrUsername,
@@ -26,10 +22,7 @@ export const Site = () => {
 
   useEffect(() => {
     if (data?.data?.items[0]) {
-      const parsed = JSON.parse(data?.data?.items[0] || "{}");
-      if (parsed[0]) {
-        setContent(parsed[0]);
-      }
+      setContent(data?.data?.items[0]);
     }
     if (error?.data?.status) {
       toast({
