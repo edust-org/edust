@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
 import organizationDb from "./organization-db";
-import { hasToken } from "@/mocks/has-token";
+import { hasToken } from "../../../../has-token";
 
 const getListOfOrg = http.get(`${apiUrlV0}/organizations`, ({ cookies }) => {
   hasToken(cookies.access_token);

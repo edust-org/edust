@@ -1,9 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
-import { localStore } from "@/utils";
 
 export const user = http.get(`${apiUrlV0}/user/self`, () => {
-  const authToken = localStore.accessToken.get();
+  const authToken = null;
 
   if (!authToken) {
     return new HttpResponse(
