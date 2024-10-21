@@ -1,0 +1,20 @@
+# Editor configuration for React TypeScript project
+
+# Top-most EditorConfig file
+root = true
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Set default charset and line endings
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# TypeScript files
+[*.ts]
+indent_style = space
+indent_size = 2
+
+
