@@ -1,81 +1,73 @@
-# Turborepo starter
+<p align="center"><img width="700" src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1728625005/edust-cover_l3xkow.svg" alt="Edust"></p>
 
-This is an official starter Turborepo.
+<h1 align="center" style="font-size: 50px; font-weight: bold">Edust</h1>
+<p align="center">Edust is a web application designed to enhance educational collaboration and interaction<br/>between students, teachers, and educational institutions.</p>
 
-## Using this example
+<p align="center">
+    <strong>Join Us ↘</strong><br/>
+    <a href="https://discord.gg/vnhqmn9mdj">Connect on Discord 🤝</a>
+</p>
 
-Run the following command:
+<p align="center">
+    <a href="#"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+    <a href="#"><img src="https://img.shields.io/github/issues/edust-org/edust" alt="Issues"></a>
+   <a href="#"><img src="https://img.shields.io/github/stars/edust-org/edust" alt="Github Stars"></a>
+   <a href="#"><img src="https://img.shields.io/github/forks/edust-org/edust" alt="Forks"></a>
+   <a href="#"><img src="https://img.shields.io/github/commit-activity/m/edust-org/edust" alt="Commits-per-month"></a>
+</p>
 
-```sh
-npx create-turbo@latest
-```
+<h2 style="margin-top: 50px">About Edust</h2>
 
-## What's inside?
+**Edust** is a versatile web platform designed to enhance collaboration, engagement, and opportunities within the educational community. Whether you are a **student**, **teacher**, or **institution**, Edust brings everyone together to create a more connected and enriched learning environment.
 
-This Turborepo includes the following packages/apps:
+Edust offers much more than just social networking.
 
-### Apps and Packages
+**And this is just the beginning**—Edust is continuously evolving. Our goal is to provide a comprehensive platform where education meets innovation, with new features and capabilities being added regularly to meet our users' changing needs.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@edust/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@edust/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@edust/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## 🔗 Quick Links
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- [FEATURES](https://github.com/edust-org/edust/wiki/Features) - Discover upcoming and released features. 🔍
+- [CONTRIBUTING](https://github.com/edust-org/edust/wiki/Contribution) - Learn how to contribute to the project. 🙌
 
-### Utilities
+## 📖 Full Documentation
 
-This Turborepo has some additional tools already setup for you:
+For comprehensive documentation, including detailed examples, operational guidelines, and additional information, please refer to the [Wiki](https://github.com/edust-org/edust/wiki).
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+You can also check out the [ 📝 Case Study](docs/case-study/index.md) for insights into our development process and key decisions.
 
-### Build
+## 🙋🏻‍♂️ Contribute to Edust
 
-To build all apps and packages, run the following command:
+We welcome developers and designers to contribute to the Edust platform! Your skills and insights can significantly enhance our features and improve the overall user experience. Here’s how you can get involved:
 
-```
-cd my-turborepo
-pnpm build
-```
+### 👨‍💻 Developers
 
-### Develop
+- **Frontend Development**: Get started by checking out our [Contributing Guide](https://github.com/edust-org/edust/wiki/Contribution), which provides detailed instructions on setting up your development environment, finding issues to work on, and submitting your contributions.
 
-To develop all apps and packages, run the following command:
+- **Backend Development**: Interested in backend development? We’d love to see your portfolio! We work on backend projects privately, so please reach out to us via our [communications channel](https://discord.gg/vnhqmn9mdj) for more information.
 
-```
-cd my-turborepo
-pnpm dev
-```
+- **Database Management**: If you’re passionate about database management, we encourage you to join us. Like backend development, we collaborate privately, so check our [communications channel](https://discord.gg/vnhqmn9mdj) to connect.
 
-### Remote Caching
+### 🎨🖌️ Designers
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- **Design Contributions**: We invite designers to help us enhance the user experience on the Edust platform. You can start by browsing our design-related issues and sharing your creative ideas and improvements. Familiarity with UI/UX design tools, particularly Figma, is a plus!
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+### ✍🏻 Documentation Writers
 
-```
-cd my-turborepo
-npx turbo login
-```
+- **Help Us Document**: If you have a knack for writing and enjoy creating clear, concise documentation, we would love your help! Contributing to our documentation helps everyone in the community and ensures that our resources are accessible.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## 💬 Communication
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+For questions, discussions, and collaboration, you can reach us through the following channels:
 
-```
-npx turbo link
-```
+- **GitHub Discussions**: Engage with the community, ask questions, and share insights in our [GitHub Discussions](https://github.com/edust-org/edust/discussions).
+- **Discord**: Join our [Discord server](https://discord.gg/vnhqmn9mdj) for real-time communication, support, and to connect with other members of the Edust community.
 
-## Useful Links
+## Contributors
 
-Learn more about the power of Turborepo:
+<a href="https://github.com/edust-org/edust/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=edust-org/edust" />
+</a>
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## License
+
+🔒 Distributed under the MIT License. See `LICENSE` for more information.

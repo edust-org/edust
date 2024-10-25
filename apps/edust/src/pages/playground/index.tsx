@@ -1,7 +1,6 @@
 import { Navbar } from "@/components";
 import { Typography } from "@/components/ui";
 import { Link } from "react-router-dom";
-import { CheckMockPost } from "./check-mock-post";
 export const Playground = () => {
   return (
     <div className="space-y-8">
@@ -15,8 +14,6 @@ export const Playground = () => {
           </li>
         ))}
       </Typography>
-
-      <CheckMockPost />
     </div>
   );
 };
