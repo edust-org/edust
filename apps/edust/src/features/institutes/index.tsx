@@ -2,6 +2,7 @@ import { Navbar } from "@/components";
 import {
   Button,
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -19,12 +20,18 @@ import {
   SelectTrigger,
   SelectValue,
   Typography,
+  Badge,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
 } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Search } from "lucide-react";
+import { Search, Phone, Mail, MapPin } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { IoAddOutline } from "react-icons/io5";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const FormSchema = z.object({
   institute_name: z.string(),
@@ -50,10 +57,10 @@ export const Institutes = () => {
   }
   return (
     <div>
-      <header className="border-b">
+      <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
         <Navbar.Guest />
       </header>
-      <section className="container grid grid-cols-[250px_auto] gap-4 py-4 md:gap-6 md:py-8">
+      <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
           {/* ================================ */}
           <Button size={"icon"} className="mb-4 w-full">
@@ -176,8 +183,8 @@ export const Institutes = () => {
           </Form>
         </aside>
         <main>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-            <Card>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {/* <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
                   Shamsul Huda Khan College
@@ -220,7 +227,358 @@ export const Institutes = () => {
                   is located at Biddadharpur Moheshpur Jhenaidah...
                 </CardDescription>
               </CardHeader>
+            </Card> */}
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
             </Card>
+
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="overflow-hidden rounded-lg border shadow">
+              <div className="">
+                <img
+                  src="https://images.unsplash.com/photo-1537202108838-e7072bad1927?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGluc3RpdHV0ZXxlbnwwfHwwfHx8MA%3D%3D"
+                  alt="Institute Image "
+                  className="w-full object-cover max-h-60"
+                />
+              </div>
+
+              <CardContent className="p-4">
+                {/* Badge */}
+                <Link to="#">
+                  <Badge className="mb-2 bg-slate-800 text-white">
+                    University
+                  </Badge>
+                </Link>
+                {/* Title */}
+                <CardTitle className="my-3">
+                  <Link to="#">Tech University</Link>
+                </CardTitle>
+
+                {/* Icons */}
+                <div className="mt-5 flex justify-between text-xl sm:text-2xl text-slate-700">
+                  <Link to="#">
+                    <Phone />
+                  </Link>
+                  <Link to="#">
+                    <Mail />
+                  </Link>
+                  <Link to="#">
+                    <MapPin />
+                  </Link>
+                </div>
+              </CardContent>
+
+              <CardFooter className="flex items-center gap-2 p-4">
+                <Link to="#">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                <div>
+                  <Link to="#">
+                    <Typography className="text-sm font-medium">
+                      John Doe
+                    </Typography>
+                  </Link>
+                  <Link to="#">
+                    <Typography className="text-xs text-muted-foreground">
+                      Oct 29 2024
+                    </Typography>
+                  </Link>
+                </div>
+              </CardFooter>
+            </Card>
+
+            
           </div>
           {/* =========================== */}
           {/* <Card className="mt-5 w-80 p-8">
@@ -233,7 +591,7 @@ export const Institutes = () => {
             <Button className="w-full mt-4">Create new one</Button>
           </Card> */}
 
-          <Card className="max-w-96 mt-5">
+          <Card className="mt-5 max-w-96">
             <CardHeader>
               <CardTitle className="text-lg">Institutes not found</CardTitle>
               <CardDescription>
