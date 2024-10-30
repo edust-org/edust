@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +8,9 @@ export default function Page(): JSX.Element {
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Welcome to edust web!
       </h1>
-      <Link href={"/auth/sign-in"}>Sigin</Link>
+      <Link href={"/auth/sign-in"}>
+        <Button>Sign In</Button>
+      </Link>
       <Image
         src={
           "https://res.cloudinary.com/dbaa3pxau/image/upload/v1728625005/edust-cover_l3xkow.svg"
