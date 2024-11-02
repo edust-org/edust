@@ -19,28 +19,37 @@ export const organizationsApi = createApi({
       }),
     }),
 
-    // site
-    getSite: build.query<any, void>({
-      query: () => `/site`,
-    }),
-
-    editSite: build.mutation({
+    // site-builder
+    editSiteBuilder: build.mutation({
       query: (body) => ({
-        url: `/site`,
+        url: `/site-builder`,
         method: "PATCH",
         body,
       }),
     }),
+    getSiteBuilderMe: build.query<any, void>({
+      query: () => `/site-builder/me`,
+    }),
 
-    uploadImageSite: build.mutation({
+    uploadImageSiteBuilder: build.mutation({
       query: (body) => ({
-        url: `/site/upload`,
+        url: `/site-builder/images`,
         method: "POST",
         body,
       }),
     }),
-    getUploadImagesSite: build.query<any, void>({
-      query: () => `/site/upload`,
+
+    getUploadImagesSiteBuilderMe: build.query<any, void>({
+      query: () => `/site-builder/images/me`,
+    }),
+
+    deleteUploadImagesByIdSiteBuilder: build.mutation<{ success: boolean; id: number }, number>({
+      query(id) {
+        return {
+          url: `/site-builder/images/${id}`,
+          method: 'DELETE',
+        }
+      },
     }),
   }),
 });
@@ -48,8 +57,8 @@ export const organizationsApi = createApi({
 export const {
   useGetOrgListsQuery,
   usePostOrganizationMutation,
-  useGetSiteQuery,
-  useEditSiteMutation,
-  useUploadImageSiteMutation,
-  useGetUploadImagesSiteQuery,
+  useGetSiteBuilderMeQuery,
+  useEditSiteBuilderMutation,
+  useGetUploadImagesSiteBuilderMeQuery,
+  useDeleteUploadImagesByIdSiteBuilderMutation
 } = organizationsApi;

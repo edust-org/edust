@@ -8,7 +8,7 @@ const getListOfOrg = http.get(`${apiUrlV0}/organizations`, ({ cookies }) => {
   return HttpResponse.json(organizationDb.orgLists);
 });
 
-const getSite = http.get(`${apiUrlV0}/organizations/site`, ({ cookies }) => {
+const getSiteBuilderMe = http.get(`${apiUrlV0}/organizations/site-builder/me`, ({ cookies }) => {
   hasToken(cookies.access_token);
 
   if (cookies.access_token !== "organizer") {
@@ -24,4 +24,4 @@ const getSite = http.get(`${apiUrlV0}/organizations/site`, ({ cookies }) => {
   return HttpResponse.json(organizationDb.siteData);
 });
 
-export const organizations = [getListOfOrg, getSite];
+export const organizations = [getListOfOrg, getSiteBuilderMe];
