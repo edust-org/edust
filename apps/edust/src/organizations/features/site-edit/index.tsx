@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetSiteQuery } from "@/app/api/v0/organizations";
+import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations";
 import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
 
-import { useEditSiteMutation } from "@/app/api/v0/organizations";
+import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations";
 import { toast } from "@/hooks/shadcn-ui";
 
 export const SiteEdit = () => {
-  const { data } = useGetSiteQuery();
-  const [saveGsData] = useEditSiteMutation();
+  const { data } = useGetSiteBuilderMeQuery();
+  const [saveGsData] = useEditSiteBuilderMutation();
 
   const onEditor = async (editor: any) => {
     editor.Commands.add("save-db", {
@@ -61,7 +61,7 @@ export const SiteEdit = () => {
           // Load project data
           urlLoad: `${
             import.meta.env.VITE_BACKEND_URL
-          }/api/v0/organizations/site`,
+          }/api/v0/organizations/site-builder/me`,
 
           onLoad: (result) => {
             return editorRef.current.loadProjectData(
@@ -75,7 +75,7 @@ export const SiteEdit = () => {
           // Store project data
           urlStore: `${
             import.meta.env.VITE_BACKEND_URL
-          }/api/v0/organizations/site`,
+          }/api/v0/organizations/site-builder`,
 
           fetchOptions: (opts) =>
             opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,

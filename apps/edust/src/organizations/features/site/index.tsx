@@ -1,4 +1,4 @@
-import { useGetSiteQuery } from "@/app/api/v0/organizations";
+import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations";
 import Loading from "@/components/loading";
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
 import {
@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Site = () => {
-  const { data, isLoading } = useGetSiteQuery();
+  const { data, isLoading } = useGetSiteBuilderMeQuery();
   const [pages, setPages] = useState<[]>([]);
 
   useEffect(() => {

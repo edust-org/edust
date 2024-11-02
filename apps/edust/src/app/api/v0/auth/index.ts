@@ -8,6 +8,13 @@ export const authApi = createApi({
   tagTypes: ["Auth"],
 
   endpoints: (build) => ({
+    login: build.mutation({
+      query: (body) => ({
+        url: `/login`,
+        method: "POST",
+        body,
+      }),
+    }),
     register: build.mutation({
       query: (body) => ({
         url: `/register`,
@@ -19,13 +26,6 @@ export const authApi = createApi({
       query: (token) => ({
         url: `/verify/${token}`,
         method: "POST",
-      }),
-    }),
-    login: build.mutation({
-      query: (body) => ({
-        url: `/login`,
-        method: "POST",
-        body,
       }),
     }),
     forgotPassword: build.mutation({
