@@ -1,7 +1,6 @@
 import { Navbar } from "@/components";
 import {
   Button,
-  Card,
   Form,
   FormField,
   FormItem,
@@ -14,14 +13,20 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-  Typography,
 } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { IoAddOutline } from "react-icons/io5";
 import { InstitutesCard } from "./institutes-card";
+import InstituteNotFound from "./institutes-not-found";
+import {
+  useGetInstitutesCategoriesQuery,
+  useGetInstitutesQuery,
+} from "@/app/api/v0/public";
 
 const FormSchema = z.object({
   institute_name: z.string(),
@@ -45,6 +50,12 @@ export const Institutes = () => {
     // ✅ This will be type-safe and validated.
     console.log(values);
   }
+
+  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({});
+  const { data: { data: categories } = {} } = useGetInstitutesCategoriesQuery(
+    {},
+  );
+
   return (
     <div>
       <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
@@ -52,12 +63,10 @@ export const Institutes = () => {
       </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          {/* ================================ */}
           <Button size={"icon"} className="mb-4 w-full">
             {" "}
             <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
           </Button>
-          {/* ====================================== */}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
               <FormField
@@ -88,24 +97,18 @@ export const Institutes = () => {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Institute Types</SelectLabel>
-                          <SelectItem value="est">
-                            Eastern Standard Time (EST)
-                          </SelectItem>
-                          <SelectItem value="cst">
-                            Central Standard Time (CST)
-                          </SelectItem>
-                          <SelectItem value="mst">
-                            Mountain Standard Time (MST)
-                          </SelectItem>
-                          <SelectItem value="pst">
-                            Pacific Standard Time (PST)
-                          </SelectItem>
-                          <SelectItem value="akst">
-                            Alaska Standard Time (AKST)
-                          </SelectItem>
-                          <SelectItem value="hst">
-                            Hawaii Standard Time (HST)
-                          </SelectItem>
+
+                          {categories?.items?.map(
+                            ({ name, description }: any) => (
+                              <SelectItem
+                                title={description}
+                                value={name}
+                                className="capitalize"
+                              >
+                                {name}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -172,24 +175,19 @@ export const Institutes = () => {
             </form>
           </Form>
         </aside>
-        <main>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            <InstitutesCard />
-            <InstitutesCard />
-            <InstitutesCard />
-            <InstitutesCard />
-          </div>
 
-          {/* If institute not found in search time show this card */}
-          <Card className="mt-5 max-w-96 p-8">
-            <Typography affects="removePaddingMargin" variant="h2">
-              Institutes not found{" "}
-            </Typography>
-            <Typography affects="removePaddingMargin" variant="p">
-              If you want to create a new institute you need to register here.
-            </Typography>
-            <Button className="mt-4 w-full">Create new one</Button>
-          </Card>
+        <main>
+          {isLoading ? (
+            <AiOutlineLoading3Quarters className="size-6 animate-spin" />
+          ) : data.items.length ? (
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {data?.items?.map((item: any) => (
+                <InstitutesCard key={item?.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <InstituteNotFound />
+          )}
         </main>
       </section>
     </div>
