@@ -8,7 +8,7 @@ export const getOrgSitesPagesDB = {
         org_id: "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
         site_id: "33f91a95-d6ed-4b3f-bed0-24b7296ee8b6",
         page_name: "home",
-        html: '<body><section id="ieti" class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"><img id="ihv64" src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg" class="mt-10 mx-auto w-[300px]"/><h1 id="ig4x" class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center mt-4">Build your landing page\n    </h1></section></body>',
+        html: '<body><section id="ieti" class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"><img id="ihv64" src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg" class="mt-10 mx-auto w-[300px]"/><h1 id="ig4x" class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center mt-4">Build your landing page\n: HOME</h1></section></body>',
         css: "* { box-sizing: border-box; } body {margin: 0;}",
         createdAt: "2024-10-14T09:52:47.000Z",
         updatedAt: "2024-10-15T05:10:37.000Z",
@@ -30,7 +30,7 @@ export const getOrgSitesPagesDB = {
       href: "/api/v0/public/organizations/{orgIdOrUsername}/site",
       method: "GET",
     },
-    home: {
+    get_pages: {
       href: "/api/v0/public/organizations/{orgIdOrUsername}/site?name=home",
       method: "GET",
     },
@@ -107,7 +107,7 @@ export const getInstitutesDB = {
       method: "GET",
     },
     get_by_id: {
-      href: "/api/v0/public/institutes/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      href: "/api/v0/public/institutes/:id",
       method: "GET",
     },
   },
@@ -150,27 +150,11 @@ export const getInstituteByIdDB = {
   },
   _links: {
     self: {
+      href: "/api/v0/public/institutes/:id",
+      method: "GET",
+    },
+    get_institutes: {
       href: "/api/v0/public/institutes",
-      method: "GET",
-    },
-    first: {
-      href: "/api/v0/public/institutes?limit=10&page=1",
-      method: "GET",
-    },
-    previous: {
-      href: "/api/v0/public/institutes?limit=10&page=1",
-      method: "GET",
-    },
-    next: {
-      href: "/api/v0/public/institutes?limit=10&page=2",
-      method: "GET",
-    },
-    last: {
-      href: "/api/v0/public/institutes?limit=10&page=5",
-      method: "GET",
-    },
-    get_by_id: {
-      href: "/api/v0/public/institutes/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       method: "GET",
     },
   },
