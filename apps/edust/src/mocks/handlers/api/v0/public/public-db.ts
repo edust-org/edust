@@ -42,6 +42,7 @@ export const getInstitutesDB = {
   data: {
     items: [
       {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         institute_category_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         institute_category: "university",
         name: "Tech University",
@@ -63,6 +64,7 @@ export const getInstitutesDB = {
         },
       },
       {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         institute_category_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         institute_category: "university",
         name: "Tech University",

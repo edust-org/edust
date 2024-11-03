@@ -21,11 +21,15 @@ export const publicApi = createApi({
       },
     }),
     getInstituteById: build.query({
-      query: ({ id }) => {
+      query: (id) => {
         return `/institutes/${id}`;
       },
     }),
   }),
 });
 
-export const { useGetOrgSitesPagesQuery } = publicApi;
+export const {
+  useGetOrgSitesPagesQuery,
+  useGetInstitutesQuery,
+  useLazyGetInstituteByIdQuery,
+} = publicApi;
