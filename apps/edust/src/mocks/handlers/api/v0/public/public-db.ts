@@ -42,7 +42,7 @@ export const getInstitutesDB = {
   data: {
     items: [
       {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx",
         institute_category_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         institute_category: "university",
         name: "Tech University",
@@ -52,6 +52,7 @@ export const getInstitutesDB = {
         contact_email: "institute@example.com",
         phone_number: "01345678901",
         website: "www.institute.com",
+        country: "Bangladesh",
         latitude: 23.761116975637687,
         longitude: 88.94401531246783,
         createdAt: "2024-09-06T01:35:20Z",
@@ -74,6 +75,7 @@ export const getInstitutesDB = {
         contact_email: "institute@example.com",
         phone_number: "01345678901",
         website: "www.institute.com",
+        country: "Bangladesh",
         latitude: 23.761116975637687,
         longitude: 88.94401531246783,
         createdAt: "2024-09-06T01:35:20Z",
@@ -157,6 +159,45 @@ export const getInstituteByIdDB = {
     },
     get_institutes: {
       href: "/api/v0/public/institutes",
+      method: "GET",
+    },
+  },
+};
+
+// /public/institutes/categories
+export const getInstitutesCategoriesDB = {
+  status: "success",
+  data: {
+    items: [
+      {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        name: "school",
+        description:
+          "General educational institution for primary and secondary education",
+        createdAt: "2024-09-06T01:35:20Z",
+        updatedAt: "2024-09-06T01:35:20Z",
+      },
+      {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        name: "college",
+        description:
+          "Post-secondary educational institution offering undergraduate programs",
+        createdAt: "2024-09-06T01:35:20Z",
+        updatedAt: "2024-09-06T01:35:20Z",
+      },
+      {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        name: "university",
+        description:
+          "Institution offering undergraduate, graduate, and research programs",
+        createdAt: "2024-09-06T01:35:20Z",
+        updatedAt: "2024-09-06T01:35:20Z",
+      },
+    ],
+  },
+  _links: {
+    self: {
+      href: "/api/v0/public/institutes/categories",
       method: "GET",
     },
   },

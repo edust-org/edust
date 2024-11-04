@@ -25,6 +25,11 @@ export const publicApi = createApi({
         return `/institutes/${id}`;
       },
     }),
+    getInstitutesCategories: build.query({
+      query: () => {
+        return `/institutes/categories`;
+      },
+    }),
   }),
 });
 
@@ -32,4 +37,5 @@ export const {
   useGetOrgSitesPagesQuery,
   useGetInstitutesQuery,
   useLazyGetInstituteByIdQuery,
+  useGetInstitutesCategoriesQuery,
 } = publicApi;
