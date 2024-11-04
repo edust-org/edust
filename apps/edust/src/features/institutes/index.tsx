@@ -23,7 +23,10 @@ import { z } from "zod";
 import { IoAddOutline } from "react-icons/io5";
 import { InstitutesCard } from "./institutes-card";
 import InstituteNotFound from "./institutes-not-found";
-import { useGetInstitutesQuery } from "@/app/api/v0/public";
+import {
+  useGetInstitutesCategoriesQuery,
+  useGetInstitutesQuery,
+} from "@/app/api/v0/public";
 
 const FormSchema = z.object({
   institute_name: z.string(),
@@ -49,6 +52,9 @@ export const Institutes = () => {
   }
 
   const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({});
+  const { data: { data: categories } = {} } = useGetInstitutesCategoriesQuery(
+    {},
+  );
 
   return (
     <div>
@@ -91,24 +97,18 @@ export const Institutes = () => {
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Institute Types</SelectLabel>
-                          <SelectItem value="est">
-                            Eastern Standard Time (EST)
-                          </SelectItem>
-                          <SelectItem value="cst">
-                            Central Standard Time (CST)
-                          </SelectItem>
-                          <SelectItem value="mst">
-                            Mountain Standard Time (MST)
-                          </SelectItem>
-                          <SelectItem value="pst">
-                            Pacific Standard Time (PST)
-                          </SelectItem>
-                          <SelectItem value="akst">
-                            Alaska Standard Time (AKST)
-                          </SelectItem>
-                          <SelectItem value="hst">
-                            Hawaii Standard Time (HST)
-                          </SelectItem>
+
+                          {categories?.items?.map(
+                            ({ name, description }: any) => (
+                              <SelectItem
+                                title={description}
+                                value={name}
+                                className="capitalize"
+                              >
+                                {name}
+                              </SelectItem>
+                            ),
+                          )}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -181,7 +181,9 @@ export const Institutes = () => {
             <AiOutlineLoading3Quarters className="size-6 animate-spin" />
           ) : data.items.length ? (
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {data?.items?.map((item: any) => <InstitutesCard item={item} />)}
+              {data?.items?.map((item: any) => (
+                <InstitutesCard key={item?.id} item={item} />
+              ))}
             </div>
           ) : (
             <InstituteNotFound />

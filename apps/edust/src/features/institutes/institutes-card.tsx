@@ -36,8 +36,6 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     country,
   } = item;
 
-  console.log(item);
-
   const fallbackName = (name: string) => {
     const arrName = name.split(" ").filter(Boolean);
 
