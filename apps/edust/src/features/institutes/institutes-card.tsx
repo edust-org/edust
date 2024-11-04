@@ -11,14 +11,17 @@ import {
 } from "@/components/ui";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { format } from "date-fns";
+import axios from "axios";
 
 type InstitutesCardProps = {
   item: any;
 };
 
 export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
+  const [flags, setFlags] = useState({ png: "", alt: "" });
+
   const {
     id,
     institute_category,
@@ -30,6 +33,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     longitude,
     author: { name: authorName, profile_pic },
     createdAt,
+    country,
   } = item;
 
   console.log(item);
@@ -41,6 +45,18 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     const lastChar = arrName.length > 1 ? arrName[1][0] : "";
     return `${firstChar}${lastChar}`.toUpperCase();
   };
+
+  useEffect(() => {
+    const getCountry = async () => {
+      const data = await axios.get(
+        `https://restcountries.com/v3.1/name/${country}?fields=flags`,
+      );
+      // console.log(data.data[0]?.flags);
+      setFlags(data.data[0]?.flags);
+    };
+
+    getCountry();
+  }, []);
 
   return (
     <>
@@ -87,28 +103,31 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
           </div>
         </CardContent>
 
-        <CardFooter className="flex items-center gap-2 p-4">
-          <Link to="#">
-            <Avatar>
-              <AvatarImage
-                src={profile_pic || "https://github.com/shadcn.png"}
-              />
-              <AvatarFallback>{fallbackName(authorName)}</AvatarFallback>
-            </Avatar>
-          </Link>
-
-          <div>
+        <CardFooter className="flex items-center justify-between p-4">
+          <div className="flex flex-1 items-center gap-2">
             <Link to="#">
-              <Typography className="text-sm font-medium">
-                {authorName}
-              </Typography>
+              <Avatar>
+                <AvatarImage
+                  src={profile_pic || "https://github.com/shadcn.png"}
+                />
+                <AvatarFallback>{fallbackName(authorName)}</AvatarFallback>
+              </Avatar>
             </Link>
-            <Link to="#">
-              <Typography className="text-xs text-muted-foreground">
-                {format(new Date(createdAt), "MMM dd yyyy")}
-              </Typography>
-            </Link>
+            <div>
+              <Link to="#">
+                <Typography className="text-sm font-medium">
+                  {authorName}
+                </Typography>
+              </Link>
+              <Link to="#">
+                <Typography className="text-xs text-muted-foreground">
+                  {format(new Date(createdAt), "MMM dd yyyy")}
+                </Typography>
+              </Link>
+            </div>
           </div>
+
+          <img className="w-8 rounded-sm" src={flags?.png} alt={flags?.alt} />
         </CardFooter>
       </Card>
     </>
