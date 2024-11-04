@@ -14,7 +14,22 @@ export const publicApi = createApi({
         return `/organizations/${orgIdOrUsername}/site/?${queryParams}`;
       },
     }),
+    getInstitutes: build.query({
+      query: ({ filters }) => {
+        const queryParams = new URLSearchParams(filters).toString();
+        return `/institutes?${queryParams}`;
+      },
+    }),
+    getInstituteById: build.query({
+      query: (id) => {
+        return `/institutes/${id}`;
+      },
+    }),
   }),
 });
 
-export const { useGetOrgSitesPagesQuery } = publicApi;
+export const {
+  useGetOrgSitesPagesQuery,
+  useGetInstitutesQuery,
+  useLazyGetInstituteByIdQuery,
+} = publicApi;
