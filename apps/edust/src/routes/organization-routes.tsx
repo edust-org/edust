@@ -2,7 +2,7 @@ import {
   CreateOrganization,
   Dashboard,
   Site,
-  SiteEdit,
+  SiteBuilder,
 } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
@@ -44,11 +44,11 @@ export const organizationRoutes = (
       />
     </Route>
     <Route
-      path="/site/edit"
+      path="/site/builder"
       element={
         <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
-            <SiteEdit />
+            <SiteBuilder />
           </Suspense>
         </Protector>
       }

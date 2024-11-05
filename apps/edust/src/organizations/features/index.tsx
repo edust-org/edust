@@ -16,8 +16,8 @@ export const Site = lazy(() =>
   })),
 );
 
-export const SiteEdit = lazy(() =>
-  import("./site-edit").then((module) => ({
-    default: module.SiteEdit,
+export const SiteBuilder = lazy(() =>
+  import("./site-builder").then((module) => ({
+    default: module.SiteBuilder,
   })),
 );

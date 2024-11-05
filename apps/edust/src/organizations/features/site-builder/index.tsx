@@ -5,7 +5,7 @@ import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
 import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations";
 import { toast } from "@/hooks/shadcn-ui";
 
-export const SiteEdit = () => {
+export const SiteBuilder = () => {
   const { data } = useGetSiteBuilderMeQuery();
   const [saveGsData] = useEditSiteBuilderMutation();
 
