@@ -37,86 +37,6 @@ export const getOrgSitesPagesDB = {
   },
 };
 
-export const getInstitutesDB = {
-  status: "success",
-  data: {
-    items: [
-      {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx",
-        institute_category_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        institute_category: "university",
-        name: "Tech University",
-        slug: "tech-university",
-        photo:
-          "https://res.cloudinary.com/dbaa3pxau/image/upload/v1728625005/edust-cover_l3xkow.svg",
-        contact_email: "institute@example.com",
-        phone_number: "01345678901",
-        website: "www.institute.com",
-        country: "Bangladesh",
-        latitude: 23.761116975637687,
-        longitude: 88.94401531246783,
-        createdAt: "2024-09-06T01:35:20Z",
-        updatedAt: "2024-09-06T01:35:20Z",
-        author: {
-          id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          profile_pic:
-            "https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo-box_ac2erk.jpg",
-          name: "Edust Org",
-        },
-      },
-      {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        institute_category_id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        institute_category: "university",
-        name: "Tech University",
-        slug: "tech-university",
-        photo:
-          "https://res.cloudinary.com/dbaa3pxau/image/upload/v1728625005/edust-cover_l3xkow.svg",
-        contact_email: "institute@example.com",
-        phone_number: "01345678901",
-        website: "www.institute.com",
-        country: "Bangladesh",
-        latitude: 23.761116975637687,
-        longitude: 88.94401531246783,
-        createdAt: "2024-09-06T01:35:20Z",
-        updatedAt: "2024-09-06T01:35:20Z",
-        author: {
-          id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          profile_pic:
-            "https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo-box_ac2erk.jpg",
-          name: "Edust Org",
-        },
-      },
-    ],
-  },
-  _links: {
-    self: {
-      href: "/api/v0/public/institutes",
-      method: "GET",
-    },
-    first: {
-      href: "/api/v0/public/institutes?limit=10&page=1",
-      method: "GET",
-    },
-    previous: {
-      href: "/api/v0/public/institutes?limit=10&page=1",
-      method: "GET",
-    },
-    next: {
-      href: "/api/v0/public/institutes?limit=10&page=2",
-      method: "GET",
-    },
-    last: {
-      href: "/api/v0/public/institutes?limit=10&page=5",
-      method: "GET",
-    },
-    get_by_id: {
-      href: "/api/v0/public/institutes/:id",
-      method: "GET",
-    },
-  },
-};
-
 export const getInstituteByIdDB = {
   status: "success",
   data: {
@@ -159,45 +79,6 @@ export const getInstituteByIdDB = {
     },
     get_institutes: {
       href: "/api/v0/public/institutes",
-      method: "GET",
-    },
-  },
-};
-
-// /public/institutes/categories
-export const getInstitutesCategoriesDB = {
-  status: "success",
-  data: {
-    items: [
-      {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        name: "school",
-        description:
-          "General educational institution for primary and secondary education",
-        createdAt: "2024-09-06T01:35:20Z",
-        updatedAt: "2024-09-06T01:35:20Z",
-      },
-      {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        name: "college",
-        description:
-          "Post-secondary educational institution offering undergraduate programs",
-        createdAt: "2024-09-06T01:35:20Z",
-        updatedAt: "2024-09-06T01:35:20Z",
-      },
-      {
-        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-        name: "university",
-        description:
-          "Institution offering undergraduate, graduate, and research programs",
-        createdAt: "2024-09-06T01:35:20Z",
-        updatedAt: "2024-09-06T01:35:20Z",
-      },
-    ],
-  },
-  _links: {
-    self: {
-      href: "/api/v0/public/institutes/categories",
       method: "GET",
     },
   },

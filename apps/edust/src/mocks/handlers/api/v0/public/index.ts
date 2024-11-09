@@ -1,11 +1,8 @@
 import { http, HttpResponse } from "msw";
 import { apiUrlV0 } from "../../api-url";
-import {
-  getInstituteByIdDB,
-  getInstitutesDB,
-  getOrgSitesPagesDB,
-  getInstitutesCategoriesDB,
-} from "./public-db";
+import { getInstituteByIdDB, getOrgSitesPagesDB } from "./public-db";
+import getInstitutesDB from "./get-institutes-db.json";
+import getInstitutesCategoriesDB from "./get-institutes-categories-db.json";
 
 const getOrgSitesPages = http.get(
   `${apiUrlV0}/public/organizations/:orgIdOrUsername/site/?name=home`,
