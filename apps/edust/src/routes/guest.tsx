@@ -1,7 +1,8 @@
 import Loading from "@/components/loading";
 import { InstituteDetails, Institutes } from "@/features";
 import Authentication from "@/features/authentication";
-import { GuestHome } from "@/pages/home";
+import { AboutUs, ContactUs } from "@/pages";
+import { Home } from "@/pages/home";
 import { Suspense } from "react";
 import { Route } from "react-router-dom";
 
@@ -11,7 +12,7 @@ export const guestRoutes = (
       path="/"
       element={
         <Suspense fallback={<Loading.Spinner />}>
-          <GuestHome />
+          <Home.GuestHome />
         </Suspense>
       }
     />
@@ -61,6 +62,22 @@ export const guestRoutes = (
       />
     </Route>
 
+    <Route
+      path="/about-us"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <AboutUs />
+        </Suspense>
+      }
+    />
+    <Route
+      path="/contact-us"
+      element={
+        <Suspense fallback={<Loading.Spinner />}>
+          <ContactUs />
+        </Suspense>
+      }
+    />
     <Route
       path="/institutes"
       element={

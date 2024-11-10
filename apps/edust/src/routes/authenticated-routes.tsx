@@ -1,11 +1,11 @@
 import Loading from "@/components/loading";
-import { PrivateHome } from "@/pages/home";
 import { Suspense } from "react";
 import { Route } from "react-router-dom";
 import Dashboard from "@/features/dashboard";
 import { CreateOrganization } from "@/organizations/features";
 import { Protector } from "./protector";
 import { Roles } from "@/types";
+import { Home } from "@/pages/home";
 
 export const authenticatedRoutes = (
   <Route>
@@ -14,7 +14,7 @@ export const authenticatedRoutes = (
       element={
         <Protector roles={[Roles.USER]}>
           <Suspense fallback={<Loading.Spinner />}>
-            <PrivateHome />
+            <Home.PrivateHome />
           </Suspense>
         </Protector>
       }
