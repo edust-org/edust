@@ -27,6 +27,7 @@ import {
   useGetInstitutesCategoriesQuery,
   useGetInstitutesQuery,
 } from "@/app/api/v0/public";
+import { Helmet } from "react-helmet-async";
 
 const FormSchema = z.object({
   institute_name: z.string(),
@@ -58,6 +59,11 @@ export const Institutes = () => {
 
   return (
     <div>
+       <Helmet>
+        <meta name="description" content="Welcome to Edust, a design platform for creating engaging and beautiful educational content." />
+        <title>Institute | Welcome to here</title>
+        
+      </Helmet>
       <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
         <Navbar.Guest />
       </header>
