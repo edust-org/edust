@@ -21,6 +21,7 @@ export const InstituteDetails = () => {
 
   const { data, isLoading } = useGetInstituteByIdQuery(id);
   console.log(data);
+  
 
   return (
     <>
@@ -47,12 +48,12 @@ export const InstituteDetails = () => {
                 className="w-full rounded-lg object-cover"
               />
               <CardTitle className="flex items-start gap-2 pb-4 pt-7 font-bold sm:text-3xl">
-                <span>Gleichner, Tremblay and Tillman</span>
-                <Badge>Badge</Badge>
+                <span>{data?.data.name}</span>
+                <Badge>{data?.data?.institute_category}</Badge>
               </CardTitle>
               <Typography className="border-y py-2">
                 Published by
-                <span className="font-semibold text-primary"> Edust Org </span>
+                <span className="font-semibold text-primary"> {data?.data?.author?.name} </span>
                 on February 5, 2022, at 4:15 PM (PDT)
               </Typography>
             </CardHeader>
@@ -64,55 +65,55 @@ export const InstituteDetails = () => {
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Code Type</span>
-                        <span>EIIN</span>
+                        <span>{data?.data?.code_type.toUpperCase()}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Code</span>
-                        <span>333333</span>
+                        <span>{data?.data?.code}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Email</span>
-                        <span>institute@exapmle.com</span>
+                        <span>{data?.data?.contact_email}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Phone</span>
-                        <span>13245356793</span>
+                        <span>{data?.data?.phone_number}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Website</span>
-                        <span>www.institute.com</span>
+                        <span>{data?.data?.website}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Founded Date</span>
-                        <span>2024-12-06</span>
+                        <span>{data?.data?.founded_date}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Principal</span>
-                        <span>Jhon Doe</span>
+                        <span>{data?.data?.principal_name}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Language</span>
-                        <span>Bengali</span>
+                        <span>{data?.data?.language}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Country</span>
-                        <span>Bangladesh</span>
+                        <span>{data?.data?.country}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -120,7 +121,7 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           State/Division
                         </span>
-                        <span>Khulna</span>
+                        <span>{data?.data?.state_or_division}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -128,13 +129,13 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           Country/District
                         </span>
-                        <span>Chuadanga</span>
+                        <span>{data?.data?.county_or_district}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">City/Town</span>
-                        <span>Khulna</span>
+                        <span>{data?.data?.city_or_town}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -142,20 +143,20 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           Street/House Number
                         </span>
-                        <span>High Road</span>
+                        <span>{data?.data?.street_or_house_number}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Postal Code</span>
-                        <span>3424</span>
+                        <span>{data?.data?.postal_code}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Map</span>
                         <a
-                          href="https://www.google.com/maps?q=23.761116975637687,88.94401531246783"
+                          href={`https://www.google.com/maps?q=${data?.data?.latitude},${data?.data?.longitude}`}
                           target="_blank"
                         >
                           See the area
