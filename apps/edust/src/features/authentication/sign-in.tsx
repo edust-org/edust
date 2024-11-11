@@ -114,6 +114,18 @@ export const SignIn: React.FC = () => {
     <>
       <Helmet>
         <title>Sign In to Edist - Access Your Account</title>
+        <meta
+          name="description"
+          content="Sign in to Edist to access your account."
+        />
+        <meta
+          property="og:title"
+          content="Sign In to Edist - Access Your Account"
+        />
+        <meta
+          property="og:description"
+          content="Sign in to Edist to access your account."
+        />
       </Helmet>
       <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
