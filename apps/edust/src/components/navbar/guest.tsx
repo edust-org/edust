@@ -39,12 +39,12 @@ export const Guest = () => {
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="p-2 text-sm font-medium">
+                <Link to="/about-us" className="p-2 text-sm font-medium">
                   About
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
-                <Link to="#" className="p-2 text-sm font-medium">
+                <Link to="/contact-us" className="p-2 text-sm font-medium">
                   Contact
                 </Link>
               </NavigationMenuLink>

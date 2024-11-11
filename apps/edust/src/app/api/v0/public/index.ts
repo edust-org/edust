@@ -36,6 +36,6 @@ export const publicApi = createApi({
 export const {
   useGetOrgSitesPagesQuery,
   useGetInstitutesQuery,
-  useLazyGetInstituteByIdQuery,
+  useGetInstituteByIdQuery,
   useGetInstitutesCategoriesQuery,
 } = publicApi;
