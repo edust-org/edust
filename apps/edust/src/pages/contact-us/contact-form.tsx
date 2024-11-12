@@ -39,25 +39,24 @@ export const ContactForm = () => {
   }
   return (
     <>
-      <div className="mx-auto max-w-screen-sm flex gap-12 flex-col items-center">
+      <div className="flex flex-col items-center gap-12">
         <section className="flex flex-col gap-4 text-center">
           <p className="text-5xl font-extrabold text-slate-900">
             Contact our team{" "}
           </p>
-          <p className="text-base text-slate-900">Got any question about your problems</p>
+          <p className="text-base text-slate-900">
+            Got any question about your problems
+          </p>
         </section>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="w-2/3 space-y-6"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-6">
-                  <div className="flex gap-6">
+                  <div className="flex flex-row gap-6">
                     <div>
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
