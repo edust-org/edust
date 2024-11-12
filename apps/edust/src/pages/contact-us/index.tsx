@@ -1,3 +1,11 @@
+import { ContactForm } from "./contact-form";
+
 export const ContactUs = () => {
-  return <div>ContactUs</div>;
+  return (
+    <>
+      <div >
+        <ContactForm />
+      </div>
+    </>
+  );
 };
