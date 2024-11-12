@@ -48,8 +48,8 @@ export const Site = () => {
               <CardTitle>Customize your sites</CardTitle>
             </CardHeader>
             <CardFooter>
-              <Link to={"edit"} target="_blank">
-                <Button>Edit</Button>
+              <Link to={"builder"} target="_blank">
+                <Button>Customize Site</Button>
               </Link>
             </CardFooter>
           </Card>
