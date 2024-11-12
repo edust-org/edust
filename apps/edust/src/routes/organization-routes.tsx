@@ -1,4 +1,5 @@
 import {
+  AccessControl,
   CreateOrganization,
   Dashboard,
   Site,
@@ -29,6 +30,14 @@ export const organizationRoutes = (
         element={
           <Suspense fallback={<Loading.Spinner />}>
             <Site />
+          </Suspense>
+        }
+      />
+      <Route
+        path="access-control"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <AccessControl />
           </Suspense>
         }
       />
@@ -65,4 +74,4 @@ export const organizationRoutes = (
       }
     />
   </Route>
-);
+)

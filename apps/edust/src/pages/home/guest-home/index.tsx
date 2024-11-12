@@ -10,7 +10,9 @@ export const GuestHome = () => {
   return (
     <>
       <Helmet>
+        <meta name="description" content="Welcome to Edust, a design platform for creating engaging and beautiful educational content." />
         <title>Edust | Welcome to here</title>
+        
       </Helmet>
 
       <GlobalTopNotificationBar />
