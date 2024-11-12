@@ -1,15 +1,16 @@
 import {
+  AccessControl,
   CreateOrganization,
   Dashboard,
   Site,
   SiteEdit,
-} from "@/organizations/features";
-import { Route } from "react-router-dom";
-import { Suspense } from "react";
-import Loading from "@/components/loading";
-import { Roles } from "@/types";
-import { AppShell } from "@/organizations";
-import { Protector } from "./protector";
+} from "@/organizations/features"
+import { Route } from "react-router-dom"
+import { Suspense } from "react"
+import Loading from "@/components/loading"
+import { Roles } from "@/types"
+import { AppShell } from "@/organizations"
+import { Protector } from "./protector"
 
 export const organizationRoutes = (
   <Route>
@@ -29,6 +30,14 @@ export const organizationRoutes = (
         element={
           <Suspense fallback={<Loading.Spinner />}>
             <Site />
+          </Suspense>
+        }
+      />
+      <Route
+        path="access-control"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <AccessControl />
           </Suspense>
         }
       />
@@ -65,4 +74,4 @@ export const organizationRoutes = (
       }
     />
   </Route>
-);
+)
