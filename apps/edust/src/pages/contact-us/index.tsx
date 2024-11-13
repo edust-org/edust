@@ -1,4 +1,5 @@
 import { ContactForm } from "./contact-form";
+import { ContactNewsletter } from "./contact-newsletter";
 import { ContactText } from "./contact-text";
 
 export const ContactUs = () => {
@@ -8,6 +9,7 @@ export const ContactUs = () => {
         <ContactForm />
         <ContactText/>
       </div>
+      <ContactNewsletter/>
     </>
   );
 };
