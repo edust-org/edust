@@ -1,8 +1,9 @@
 import {
+  AccessControl,
   CreateOrganization,
   Dashboard,
   Site,
-  SiteEdit,
+  SiteBuilder,
 } from "@/organizations/features";
 import { Route } from "react-router-dom";
 import { Suspense } from "react";
@@ -33,6 +34,14 @@ export const organizationRoutes = (
         }
       />
       <Route
+        path="access-control"
+        element={
+          <Suspense fallback={<Loading.Spinner />}>
+            <AccessControl />
+          </Suspense>
+        }
+      />
+      <Route
         path="settings"
         element={
           <Protector roles={[Roles.OWNER, Roles.EDITOR]}>
@@ -44,11 +53,11 @@ export const organizationRoutes = (
       />
     </Route>
     <Route
-      path="/site/edit"
+      path="/site/builder"
       element={
         <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
-            <SiteEdit />
+            <SiteBuilder />
           </Suspense>
         </Protector>
       }
@@ -65,4 +74,4 @@ export const organizationRoutes = (
       }
     />
   </Route>
-);
+)

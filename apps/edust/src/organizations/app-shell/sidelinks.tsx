@@ -1,5 +1,5 @@
-import { Roles } from "@/types";
-import { LucideGlobe } from "lucide-react";
+import { Roles } from "@/types"
+import { LucideGlobe, User2, UserCog } from "lucide-react"
 import {
   TbApps,
   TbBarrierBlock,
@@ -23,18 +23,18 @@ import {
   TbUserShield,
   TbUsers,
   TbLock,
-} from "react-icons/tb";
+} from "react-icons/tb"
 
 export interface NavLink {
-  title: string;
-  label?: string;
-  href: string;
-  icon: JSX.Element;
-  access_roles: Roles[];
+  title: string
+  label?: string
+  href: string
+  icon: JSX.Element
+  access_roles: Roles[]
 }
 
 export interface SideLink extends NavLink {
-  sub?: NavLink[];
+  sub?: NavLink[]
 }
 
 export const sidelinks: SideLink[] = [
@@ -50,6 +50,13 @@ export const sidelinks: SideLink[] = [
     label: "1",
     href: "/site",
     icon: <LucideGlobe size={18} />,
+    access_roles: [Roles.OWNER],
+  },
+  {
+    title: "Access Controll",
+    label: "0",
+    href: "/access-control",
+    icon: <UserCog size={18} />,
     access_roles: [Roles.OWNER],
   },
   {
@@ -185,4 +192,4 @@ export const sidelinks: SideLink[] = [
       },
     ],
   },*/
-];
+]

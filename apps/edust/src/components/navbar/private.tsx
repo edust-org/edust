@@ -23,6 +23,7 @@ export const Private = () => {
   const auth = useAppSelector((state) => state.auth.authentication);
 
   return (
+    <>
     <header className="sticky top-0 z-50 border-b bg-background bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
       <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
         <Link to="/" className="mr-6 hidden lg:flex">
@@ -125,5 +126,6 @@ export const Private = () => {
         </div>
       </div>
     </header>
+    </>
   );
 };
