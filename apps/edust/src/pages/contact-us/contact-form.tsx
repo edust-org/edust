@@ -2,7 +2,6 @@ import {
   Button,
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,16 +13,30 @@ import { toast } from "@/hooks/shadcn-ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  first_name: z.string().min(2, {
+    message: "First name must be at least 2 characters.",
+  }),
+  last_name: z.string().min(2, {
+    message: "Last name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters.",
   }),
 });
+
 export const ContactForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      message: "",
     },
   });
 
@@ -37,89 +50,91 @@ export const ContactForm = () => {
       ),
     });
   }
-  return (
-    <>
-      <div className="flex flex-col items-center gap-12">
-        <section className="flex flex-col gap-4 text-center">
-          <p className="text-5xl font-extrabold text-slate-900">
-            Contact our team{" "}
-          </p>
-          <p className="text-base text-slate-900">
-            Got any question about your problems
-          </p>
-        </section>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+  return (
+    <div className="flex flex-col items-center gap-12">
+      <section className="flex flex-col gap-4 text-center">
+        <p className="text-5xl font-extrabold text-slate-900">
+          Contact our team
+        </p>
+        <p className="text-base text-slate-900">
+          Got any question about your problems?
+        </p>
+      </section>
+
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="flex flex-row gap-6">
             <FormField
               control={form.control}
-              name="username"
+              name="first_name"
               render={({ field }) => (
-                <FormItem className="flex flex-col gap-6">
-                  <div className="flex flex-row gap-6">
-                    <div>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="First Name"
-                          // {...field}
-                        />
-                      </FormControl>
-                      {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-                      <FormMessage />
-                    </div>
-                    {/* ================= */}
-                    <div>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Last Name"
-                          // {...field}
-                        />
-                      </FormControl>
-                      {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-                      <FormMessage />
-                    </div>
-                  </div>
-                  {/* =================== */}
-                  <div>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="you@example.com" />
-                    </FormControl>
-                    {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
-                    <FormMessage />
-                  </div>
-                  {/* =================== */}
-                  <div>
-                    <FormLabel>Your message</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Tell us a little bit about yourself"
-                        className="resize-none"
-                        // {...field}
-                      />
-                    </FormControl>
-                    {/* <FormDescription>
-                You can <span>@mention</span> other users and organizations.
-              </FormDescription> */}
-                    <FormMessage />
-                  </div>
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="First Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className="w-full" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Form>
-      </div>
-    </>
+
+            <FormField
+              control={form.control}
+              name="last_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Last Name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Your Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us a little bit about yourself"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button className="w-full" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 };

@@ -2,7 +2,7 @@ import { Button, Input } from "@/components/ui";
 
 export const ContactNewsletter = () => {
   return (
-    <div className="flex items-center justify-between rounded bg-slate-50 p-6 mt-16">
+    <div className="container mt-10 flex flex-col gap-5 rounded bg-slate-50 p-6 md:flex-row md:items-center md:justify-between">
       <div>
         <p className="text-2xl font-semibold text-black">
           Join Our Weekly Newsletter
@@ -16,7 +16,9 @@ export const ContactNewsletter = () => {
         {" "}
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input type="email" placeholder="Email" />
-          <Button type="submit">Subscribe</Button>
+          <Button size="sm" type="submit">
+            Subscribe
+          </Button>
         </div>
       </div>
     </div>
