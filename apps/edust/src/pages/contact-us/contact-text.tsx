@@ -1,6 +1,6 @@
 import { PiTelegramLogoDuotone } from "react-icons/pi";
 import { FaDiscord } from "react-icons/fa";
-import { FiPhoneCall } from "react-icons/fi";
+import { PhoneCall, Send } from "lucide-react";
 export const ContactText = () => {
   return (
     <>
@@ -15,8 +15,8 @@ export const ContactText = () => {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="flex items-center gap-3 text-base font-bold text-slate-900 hover:underline ">
-              <PiTelegramLogoDuotone /> <span>Reach out to us</span>
+            <p className="flex items-center gap-3 text-base font-bold text-slate-900 hover:underline">
+              <Send /> <span>Reach out to us</span>
             </p>
             <p className="flex items-center gap-3 text-base font-bold text-slate-900 hover:underline">
               <FaDiscord />
@@ -34,11 +34,11 @@ export const ContactText = () => {
           </div>
           <div className="flex flex-col gap-2">
             <p className="flex items-center gap-3 text-base font-bold text-slate-900 hover:underline">
-              <FiPhoneCall /> <span>+880 1760-255882</span>
+              <PhoneCall /> <span>+880 1760-255882</span>
             </p>
           </div>
         </section>
       </div>
     </>
-  );
+  )
 };
