@@ -14,13 +14,28 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom'; // Add this line to import Link
 import FilterInstitute from "../filter-institute";
+import { format } from "date-fns";
 
 export const InstituteDetails = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useGetInstituteByIdQuery(id);
   console.log(data);
+
+  const formatFoundedDate = (date: string) => {
+    if (date) {
+      const formed = format(new Date(date), "MMM dd, yyyy")
+      return formed
+    }
+  }
+
+  const formatPublishedDate =(date:string)=>{
+    if(date){
+      return  format(date, "MMMM d, yyyy, 'at' h:mm a");
+    }
+  }
   
 
   return (
@@ -49,12 +64,15 @@ export const InstituteDetails = () => {
               />
               <CardTitle className="flex items-start gap-2 pb-4 pt-7 font-bold sm:text-3xl">
                 <span>{data?.data.name}</span>
-                <Badge>{data?.data?.institute_category}</Badge>
+                {/* Badge setted into Link  */}
+                <Link to="#"><Badge>{data?.data?.institute_category}</Badge></Link>
               </CardTitle>
               <Typography className="border-y py-2">
                 Published by
-                <span className="font-semibold text-primary"> {data?.data?.author?.name} </span>
-                on February 5, 2022, at 4:15 PM (PDT)
+                {/* span to <Link></Link> */}
+                <Link to="#" className="font-semibold text-primary hover:underline"> {data?.data?.author?.name} </Link>
+                <span>on </span>
+                <Link to="#" className="hover:underline">{formatPublishedDate(data?.data?.createdAt)}</Link>
               </Typography>
             </CardHeader>
 
@@ -77,25 +95,30 @@ export const InstituteDetails = () => {
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Email</span>
-                        <span>{data?.data?.contact_email}</span>
+                        <a href={`mailto:${data?.data?.contact_email}`}
+                        className="hover:underline"
+                        >{data?.data?.contact_email}</a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Phone</span>
-                        <span>{data?.data?.phone_number}</span>
+                        {/* changed span to a and add tel to attributes */}
+                        <a href={`tel:${data?.data?.phone_number}`}>{data?.data?.phone_number}</a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Website</span>
-                        <span>{data?.data?.website}</span>
+                        <a href={data?.data?.website} target="_blank"
+                        className="hover:underline"
+                        >{data?.data?.website}</a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Founded Date</span>
-                        <span>{data?.data?.founded_date}</span>
+                        <span>{formatFoundedDate(data?.data?.founded_date)}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -158,8 +181,9 @@ export const InstituteDetails = () => {
                         <a
                           href={`https://www.google.com/maps?q=${data?.data?.latitude},${data?.data?.longitude}`}
                           target="_blank"
+                          className="hover:underline"
                         >
-                          See the area
+                          View Loaction 
                         </a>
                       </TableCell>
                     </TableRow>
