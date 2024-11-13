@@ -3,14 +3,14 @@ import {
   CreateOrganization,
   Dashboard,
   Site,
-  SiteEdit,
-} from "@/organizations/features"
-import { Route } from "react-router-dom"
-import { Suspense } from "react"
-import Loading from "@/components/loading"
-import { Roles } from "@/types"
-import { AppShell } from "@/organizations"
-import { Protector } from "./protector"
+  SiteBuilder,
+} from "@/organizations/features";
+import { Route } from "react-router-dom";
+import { Suspense } from "react";
+import Loading from "@/components/loading";
+import { Roles } from "@/types";
+import { AppShell } from "@/organizations";
+import { Protector } from "./protector";
 
 export const organizationRoutes = (
   <Route>
@@ -53,11 +53,11 @@ export const organizationRoutes = (
       />
     </Route>
     <Route
-      path="/site/edit"
+      path="/site/builder"
       element={
         <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
-            <SiteEdit />
+            <SiteBuilder />
           </Suspense>
         </Protector>
       }
