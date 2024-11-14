@@ -1,21 +1,21 @@
-import { lazy } from "react";
+import { lazy } from "react"
 
 const GuestHome = lazy(() =>
   import("./guest-home").then((module) => ({
     default: module.GuestHome,
   })),
-);
+)
 
 const PrivateHome = lazy(() =>
   import("./private-home").then((module) => ({
     default: module.PrivateHome,
   })),
-);
+)
 
 export const Home = {
   GuestHome,
   PrivateHome,
-};
+}
 /*
 import { useAppSelector } from "@/app/hooks";
 import { lazy } from "react";

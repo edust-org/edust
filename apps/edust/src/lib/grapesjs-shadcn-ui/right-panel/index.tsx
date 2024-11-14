@@ -3,21 +3,21 @@ import {
   SelectorsProvider,
   StylesProvider,
   TraitsProvider,
-} from "@grapesjs/react";
-import CustomBlockManager from "./custom-block-manager";
-import CustomSelectorManager from "./custom-selector-manager";
-import CustomStyleManager from "./custom-style-manager";
-import CustomTraitManager from "./custom-trait-manager";
+} from "@grapesjs/react"
+import CustomBlockManager from "./custom-block-manager"
+import CustomSelectorManager from "./custom-selector-manager"
+import CustomStyleManager from "./custom-style-manager"
+import CustomTraitManager from "./custom-trait-manager"
 import {
   ScrollArea,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui";
-import { MdDashboardCustomize } from "react-icons/md";
-import { FaPaintBrush } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
+} from "@/components/ui"
+import { MdDashboardCustomize } from "react-icons/md"
+import { FaPaintBrush } from "react-icons/fa"
+import { IoMdSettings } from "react-icons/io"
 
 export const RightPanel = () => {
   return (
@@ -58,5 +58,5 @@ export const RightPanel = () => {
         </ScrollArea>
       </Tabs>
     </>
-  );
-};
+  )
+}

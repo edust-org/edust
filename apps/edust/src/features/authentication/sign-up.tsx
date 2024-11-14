@@ -1,5 +1,5 @@
-import { useRegisterMutation } from "@/app/api/v0/auth";
-import assets from "@/assets/images";
+import { useRegisterMutation } from "@/app/api/v0/auth"
+import assets from "@/assets/images"
 import {
   Button,
   Form,
@@ -10,18 +10,18 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui";
-import { toast } from "@/hooks/shadcn-ui";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { MailOpen } from "lucide-react";
-import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { useForm } from "react-hook-form";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { BarLoader } from "react-spinners";
-import { z } from "zod";
-import { SocialAuth } from "./social-auth";
+} from "@/components/ui"
+import { toast } from "@/hooks/shadcn-ui"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { MailOpen } from "lucide-react"
+import React, { useState } from "react"
+import { Helmet } from "react-helmet-async"
+import { useForm } from "react-hook-form"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+import { z } from "zod"
+import { SocialAuth } from "./social-auth"
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -33,14 +33,14 @@ const FormSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-});
+})
 
 export const SignUp: React.FC = () => {
   const [confirmAccount, setConfirmAccount] = useState({
     isConfirm: false,
     message: "",
-  });
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  })
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -49,13 +49,13 @@ export const SignUp: React.FC = () => {
       email: "",
       password: "",
     },
-  });
+  })
 
   const onVisibilityClick = () => {
-    setIsPasswordVisible((prev) => !prev);
-  };
+    setIsPasswordVisible((prev) => !prev)
+  }
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation()
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     register(data)
       .unwrap()
@@ -64,13 +64,13 @@ export const SignUp: React.FC = () => {
           toast({
             variant: "success",
             title: res?.message,
-          });
+          })
 
           setConfirmAccount({
             ...confirmAccount,
             isConfirm: true,
             message: res.message,
-          });
+          })
         }
       })
       .catch((error) => {
@@ -78,9 +78,9 @@ export const SignUp: React.FC = () => {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -194,5 +194,5 @@ export const SignUp: React.FC = () => {
         )}
       </div>
     </>
-  );
-};
+  )
+}

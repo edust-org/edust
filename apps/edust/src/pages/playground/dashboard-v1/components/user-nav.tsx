@@ -1,4 +1,4 @@
-import { Button } from "../components/custom/button";
+import { Button } from "../components/custom/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui";
+} from "@/components/ui"
 
 export function UserNav() {
   return (
@@ -56,5 +56,5 @@ export function UserNav() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

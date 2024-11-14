@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "@/components/ui";
+import { Button, Card, Typography } from "@/components/ui"
 
 const InstituteNotFound = () => {
   return (
@@ -11,7 +11,7 @@ const InstituteNotFound = () => {
       </Typography>
       <Button className="mt-4 w-full">Create new one</Button>
     </Card>
-  );
-};
+  )
+}
 
-export default InstituteNotFound;
+export default InstituteNotFound

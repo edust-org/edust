@@ -1,4 +1,4 @@
-import { Layout } from "../../components/layout";
+import { Layout } from "../../components/layout"
 import {
   Card,
   CardContent,
@@ -8,13 +8,13 @@ import {
   Button,
   Input,
   Typography,
-} from "@/components/ui";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
-import { TopNav } from "../../components";
-import { RecentSales } from "./components/recent-sales";
-import { Overview } from "./components/overview";
-import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
-import { ComingSoon } from "@/components";
+} from "@/components/ui"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui"
+import { TopNav } from "../../components"
+import { RecentSales } from "./components/recent-sales"
+import { Overview } from "./components/overview"
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
+import { ComingSoon } from "@/components"
 
 export const Dashboard = () => {
   return (
@@ -183,8 +183,8 @@ export const Dashboard = () => {
         </Tabs> */}
       </Layout.Body>
     </Layout>
-  );
-};
+  )
+}
 
 const topNav = [
   {
@@ -207,4 +207,4 @@ const topNav = [
     href: "dashboard/settings",
     isActive: false,
   },
-];
+]

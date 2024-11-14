@@ -1,6 +1,6 @@
-import { PiTelegramLogoDuotone } from "react-icons/pi";
-import { FaDiscord } from "react-icons/fa";
-import { PhoneCall, Send } from "lucide-react";
+import { PiTelegramLogoDuotone } from "react-icons/pi"
+import { FaDiscord } from "react-icons/fa"
+import { PhoneCall, Send } from "lucide-react"
 export const ContactText = () => {
   return (
     <>
@@ -41,4 +41,4 @@ export const ContactText = () => {
       </div>
     </>
   )
-};
+}

@@ -1,10 +1,13 @@
-import { http, HttpResponse } from "msw";
-import { apiUrlV0 } from "../../api-url";
-import userDb from "./user-db";
+import { http, HttpResponse } from "msw"
+import { apiUrlV0 } from "../../api-url"
+import userDB from "./db/user.json"
+import organizerDB from "./db/organizer.json"
+import systemEditorDB from "./db/system-editor.json"
+import administratorDB from "./db/administrator.json"
 
 const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
-  const actualBody = await request.clone().json();
-  const { email, password } = actualBody;
+  const actualBody = await request.clone().json()
+  const { email, password } = actualBody
 
   // Simulate user authentication
   if (email && password) {
@@ -22,64 +25,44 @@ const login = http.post(`${apiUrlV0}/auth/login`, async ({ request }) => {
         password: "password2024",
       },
       systemEditor: {
-        email: "systemeditor@gmail.com",
+        email: "systemeditor@example.com",
         password: "password2024",
       },
-    };
+    }
 
     if (users.user.email === email && users.user.password === password) {
-      return new HttpResponse(JSON.stringify(userDb.user), {
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": "access_token=user",
-        },
-      });
+      return HttpResponse.json(userDB)
     }
 
     if (
       users.organizer.email === email &&
       users.organizer.password === password
     ) {
-      return new HttpResponse(JSON.stringify(userDb.organizer), {
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": "access_token=organizer",
-        },
-      });
+      return HttpResponse.json(organizerDB)
     }
 
     if (
       users.administrator.email === email &&
       users.administrator.password === password
     ) {
-      return new HttpResponse(JSON.stringify(userDb.administrator), {
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": "access_token=administrator",
-        },
-      });
+      return HttpResponse.json(administratorDB)
     }
     if (
       users.systemEditor.email === email &&
       users.systemEditor.password === password
     ) {
-      return new HttpResponse(JSON.stringify(userDb.systemEditor), {
-        headers: {
-          "Content-Type": "application/json",
-          "Set-Cookie": "access_token=systemEditor",
-        },
-      });
+      return HttpResponse.json(systemEditorDB)
     }
   } else {
     // Return a 401 Unauthorized response for invalid credentials
-    return new HttpResponse(
-      JSON.stringify({
+    return HttpResponse.json(
+      {
         status: "error",
         message: "Invalid email or password.",
-      }),
-      { status: 401, headers: { "Content-Type": "application/json" } },
-    );
+      },
+      { status: 401 },
+    )
   }
-});
+})
 
-export const auth = [login];
+export const auth = [login]

@@ -1,3 +1,3 @@
-import { heroSections } from "./hero-sections";
+import { heroSections } from "./hero-sections"
 
-export const blocksPlugins = [heroSections];
+export const blocksPlugins = [heroSections]

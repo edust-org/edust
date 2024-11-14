@@ -1,25 +1,25 @@
-import { Route } from "react-router-dom";
-import { Suspense } from "react";
-import Loading from "@/components/loading";
-import { Playground } from "@/pages";
+import { Route } from "react-router-dom"
+import { Suspense } from "react"
+import Loading from "@/components/loading"
+import { Playground } from "@/pages"
 
-import AppShell from "@/pages/playground/dashboard-v1/components/app-shell";
+import AppShell from "@/pages/playground/dashboard-v1/components/app-shell"
 
-import V1Dashboard from "@/pages/playground/dashboard-v1/pages/dashboard";
-import V1Task from "@/pages/playground/dashboard-v1/pages/tasks";
-import { ComingSoon as V1CommingSoon } from "@/components/coming-soon";
-import V1Settings from "@/pages/playground/dashboard-v1/pages/settings";
-import V1SettingsProfile from "@/pages/playground/dashboard-v1/pages/settings/profile";
-import V1SettingsAccount from "@/pages/playground/dashboard-v1/pages/settings/account";
-import V1SettingsAppearance from "@/pages/playground/dashboard-v1/pages/settings/appearance";
-import V1SettingsNotifications from "@/pages/playground/dashboard-v1/pages/settings/notifications";
-import V1SettingsDisplay from "@/pages/playground/dashboard-v1/pages/settings/display";
-import V1SettingsErrorEx from "@/pages/playground/dashboard-v1/pages/settings/error-example";
+import V1Dashboard from "@/pages/playground/dashboard-v1/pages/dashboard"
+import V1Task from "@/pages/playground/dashboard-v1/pages/tasks"
+import { ComingSoon as V1CommingSoon } from "@/components/coming-soon"
+import V1Settings from "@/pages/playground/dashboard-v1/pages/settings"
+import V1SettingsProfile from "@/pages/playground/dashboard-v1/pages/settings/profile"
+import V1SettingsAccount from "@/pages/playground/dashboard-v1/pages/settings/account"
+import V1SettingsAppearance from "@/pages/playground/dashboard-v1/pages/settings/appearance"
+import V1SettingsNotifications from "@/pages/playground/dashboard-v1/pages/settings/notifications"
+import V1SettingsDisplay from "@/pages/playground/dashboard-v1/pages/settings/display"
+import V1SettingsErrorEx from "@/pages/playground/dashboard-v1/pages/settings/error-example"
 
-import V1GeneralError from "@/pages/playground/dashboard-v1/pages/errors/general-error";
-import V1NotFoundError from "@/pages/playground/dashboard-v1/pages/errors/not-found-error";
-import V1MaintenanceError from "@/pages/playground/dashboard-v1/pages/errors/maintenance-error";
-import V1UnauthorisedError from "@/pages/playground/dashboard-v1/pages/errors/unauthorised-error";
+import V1GeneralError from "@/pages/playground/dashboard-v1/pages/errors/general-error"
+import V1NotFoundError from "@/pages/playground/dashboard-v1/pages/errors/not-found-error"
+import V1MaintenanceError from "@/pages/playground/dashboard-v1/pages/errors/maintenance-error"
+import V1UnauthorisedError from "@/pages/playground/dashboard-v1/pages/errors/unauthorised-error"
 export const playgroundRoutes = (
   <Route>
     <Route
@@ -50,4 +50,4 @@ export const playgroundRoutes = (
     <Route path="/503" element={<V1MaintenanceError />} />
     <Route path="/401" element={<V1UnauthorisedError />} />
   </Route>
-);
+)

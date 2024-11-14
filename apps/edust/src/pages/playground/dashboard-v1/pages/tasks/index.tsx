@@ -1,10 +1,10 @@
-import { Layout } from "../../components/custom/layout";
-import { Search } from "../../components/search";
-import { UserNav } from "../../components/user-nav";
-import { DataTable } from "./components/data-table";
-import { columns } from "./components/columns";
-import { tasks } from "./data/tasks";
-import { ThemeSwitch } from "@/components";
+import { Layout } from "../../components/custom/layout"
+import { Search } from "../../components/search"
+import { UserNav } from "../../components/user-nav"
+import { DataTable } from "./components/data-table"
+import { columns } from "./components/columns"
+import { tasks } from "./data/tasks"
+import { ThemeSwitch } from "@/components"
 
 export default function Tasks() {
   return (
@@ -32,5 +32,5 @@ export default function Tasks() {
         </div>
       </Layout.Body>
     </Layout>
-  );
+  )
 }

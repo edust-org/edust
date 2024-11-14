@@ -1,21 +1,21 @@
-import * as React from "react";
-import { useEditor } from "@grapesjs/react";
+import * as React from "react"
+import { useEditor } from "@grapesjs/react"
 // import { mdiEyeOffOutline, mdiEyeOutline, mdiMenuDown } from "@mdi/js";
 // import Icon from "@mdi/react";
-import type { Component } from "grapesjs";
-import { MouseEvent, useEffect, useMemo, useRef, useState } from "react";
-import { IoMdArrowDropright } from "react-icons/io";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import type { Component } from "grapesjs"
+import { MouseEvent, useEffect, useMemo, useRef, useState } from "react"
+import { IoMdArrowDropright } from "react-icons/io"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 export declare interface LayerItemProps
   extends React.HTMLProps<HTMLDivElement> {
-  component: Component;
-  level: number;
-  draggingCmp?: Component;
-  dragParent?: Component;
+  component: Component
+  level: number
+  draggingCmp?: Component
+  dragParent?: Component
 }
 
-const itemStyle = { maxWidth: `100%` };
+const itemStyle = { maxWidth: `100%` }
 
 export default function LayerItem({
   component,
@@ -23,35 +23,35 @@ export default function LayerItem({
   dragParent,
   ...props
 }: LayerItemProps) {
-  const editor = useEditor();
-  const { Layers } = editor;
-  const layerRef = useRef<HTMLDivElement>(null);
-  const [layerData, setLayerData] = useState(Layers.getLayerData(component));
-  const { open, selected, hovered, components, visible, name } = layerData;
-  const componentsIds = components.map((cmp) => cmp.getId());
-  const isDragging = draggingCmp === component;
-  const cmpHash = componentsIds.join("-");
-  const level = props.level + 1;
-  const isHovered = hovered || dragParent === component;
+  const editor = useEditor()
+  const { Layers } = editor
+  const layerRef = useRef<HTMLDivElement>(null)
+  const [layerData, setLayerData] = useState(Layers.getLayerData(component))
+  const { open, selected, hovered, components, visible, name } = layerData
+  const componentsIds = components.map((cmp) => cmp.getId())
+  const isDragging = draggingCmp === component
+  const cmpHash = componentsIds.join("-")
+  const level = props.level + 1
+  const isHovered = hovered || dragParent === component
 
   useEffect(() => {
-    level === 0 && setLayerData(Layers.getLayerData(component));
+    level === 0 && setLayerData(Layers.getLayerData(component))
     if (layerRef.current) {
-      (layerRef.current as any).__cmp = component;
+      ;(layerRef.current as any).__cmp = component
     }
-  }, [Layers, component, level]);
+  }, [Layers, component, level])
 
   useEffect(() => {
     const up = (cmp: Component) => {
-      cmp === component && setLayerData(Layers.getLayerData(cmp));
-    };
-    const ev = Layers.events.component;
-    editor.on(ev, up);
+      cmp === component && setLayerData(Layers.getLayerData(cmp))
+    }
+    const ev = Layers.events.component
+    editor.on(ev, up)
 
     return () => {
-      editor.off(ev, up);
-    };
-  }, [editor, Layers, component]);
+      editor.off(ev, up)
+    }
+  }, [editor, Layers, component])
 
   const cmpToRender = useMemo(() => {
     return components.map((cmp) => (
@@ -62,33 +62,33 @@ export default function LayerItem({
         draggingCmp={draggingCmp}
         dragParent={dragParent}
       />
-    ));
-  }, [components, level, draggingCmp, dragParent]);
+    ))
+  }, [components, level, draggingCmp, dragParent])
 
   const toggleOpen = (ev: MouseEvent) => {
-    ev.stopPropagation();
-    Layers.setLayerData(component, { open: !open });
-  };
+    ev.stopPropagation()
+    Layers.setLayerData(component, { open: !open })
+  }
 
   const toggleVisibility = (ev: MouseEvent) => {
-    ev.stopPropagation();
-    Layers.setLayerData(component, { visible: !visible });
-  };
+    ev.stopPropagation()
+    Layers.setLayerData(component, { visible: !visible })
+  }
 
   const select = (event: MouseEvent) => {
-    event.stopPropagation();
-    Layers.setLayerData(component, { selected: true }, { event });
-  };
+    event.stopPropagation()
+    Layers.setLayerData(component, { selected: true }, { event })
+  }
 
   const hover = (hovered: boolean) => {
     if (!hovered || !draggingCmp) {
-      Layers.setLayerData(component, { hovered });
+      Layers.setLayerData(component, { hovered })
     }
-  };
+  }
 
   const wrapperCls = `layer-item flex flex-col ${
     selected ? "bg-sky-900" : ""
-  } ${!visible || isDragging ? "opacity-50" : ""}`;
+  } ${!visible || isDragging ? "opacity-50" : ""}`
 
   return (
     <div className={wrapperCls}>
@@ -135,5 +135,5 @@ export default function LayerItem({
         </div>
       )}
     </div>
-  );
+  )
 }

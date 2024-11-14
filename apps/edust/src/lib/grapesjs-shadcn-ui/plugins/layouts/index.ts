@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs";
+import { Editor } from "grapesjs"
 
 /**
  * @param editor
@@ -16,7 +16,7 @@ import { Editor } from "grapesjs";
  */
 
 export const layoutPlugin = (editor: Editor) => {
-  const blockManager = editor.BlockManager;
+  const blockManager = editor.BlockManager
 
   // Section
   blockManager.add("layout-section", {
@@ -33,7 +33,7 @@ export const layoutPlugin = (editor: Editor) => {
 <rect x="12" y="131.5" width="176" height="48" stroke="#0F172A" stroke-width="8"/>
 </svg>
 `,
-  });
+  })
 
   // Container
   blockManager.add("layout-container", {
@@ -49,7 +49,7 @@ export const layoutPlugin = (editor: Editor) => {
 <rect x="12" y="44.5" width="176" height="111" stroke="#0F172A" stroke-width="8"/>
 </svg>
 `,
-  });
+  })
 
   // Col-1
   blockManager.add("layout-col-1", {
@@ -70,7 +70,7 @@ export const layoutPlugin = (editor: Editor) => {
     media: `<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="58" y="12" width="84" height="176" stroke="#0F172A" stroke-width="8"/>
 </svg>`,
-  });
+  })
 
   // Col-2
   blockManager.add("layout-col-2", {
@@ -97,7 +97,7 @@ export const layoutPlugin = (editor: Editor) => {
 <rect x="108" y="12" width="80" height="176" stroke="#0F172A" stroke-width="8"/>
 </svg>
 `,
-  });
+  })
 
   // Col-3
   blockManager.add("layout-col-3", {
@@ -131,7 +131,7 @@ export const layoutPlugin = (editor: Editor) => {
 <rect x="140" y="12" width="48" height="176" stroke="#0F172A" stroke-width="8"/>
 </svg>
 `,
-  });
+  })
 
   // Col-4
   blockManager.add("layout-col-4", {
@@ -170,7 +170,7 @@ export const layoutPlugin = (editor: Editor) => {
 <rect x="156" y="12" width="32" height="176" stroke="#0F172A" stroke-width="8"/>
 </svg>
 `,
-  });
+  })
 
   // Div
   blockManager.add("layout-div", {
@@ -183,5 +183,5 @@ export const layoutPlugin = (editor: Editor) => {
       attributes: { class: "min-h-12" },
     },
     media: `<svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 17 17" height="3em" width="3em" xmlns="http://www.w3.org/2000/svg"><g></g><path d="M1 0h3v17h-3v-17zM5 17h3v-17h-3v17zM9 17h3v-17h-3v17zM13 0v17h3v-17h-3z"></path></svg>`,
-  });
-};
+  })
+}

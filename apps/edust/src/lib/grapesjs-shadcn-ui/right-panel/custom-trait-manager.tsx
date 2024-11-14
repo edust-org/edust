@@ -1,5 +1,5 @@
-import { TraitsResultProps } from "@grapesjs/react";
-import TraitPropertyField from "./trait-property-field";
+import { TraitsResultProps } from "@grapesjs/react"
+import TraitPropertyField from "./trait-property-field"
 
 export default function CustomTraitManager({
   traits,
@@ -14,5 +14,5 @@ export default function CustomTraitManager({
         ))
       )}
     </div>
-  );
+  )
 }

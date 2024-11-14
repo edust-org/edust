@@ -1,27 +1,27 @@
-"use client";
+"use client"
 
-import { Link, useLocation } from "react-router-dom";
-import { Ellipsis, LogOut } from "lucide-react";
+import { Link, useLocation } from "react-router-dom"
+import { Ellipsis, LogOut } from "lucide-react"
 
-import { cn } from "@/utils";
-import { getMenuList } from "./menu-list";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { CollapseMenuButton } from "./collapse-menu-button";
+import { cn } from "@/utils"
+import { getMenuList } from "./menu-list"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { CollapseMenuButton } from "./collapse-menu-button"
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/tooltip"
 
 interface MenuProps {
-  isOpen: boolean | undefined;
+  isOpen: boolean | undefined
 }
 
 export function Menu({ isOpen }: MenuProps) {
-  const pathname = useLocation();
-  const menuList = getMenuList(pathname.pathname);
+  const pathname = useLocation()
+  const menuList = getMenuList(pathname.pathname)
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
@@ -133,5 +133,5 @@ export function Menu({ isOpen }: MenuProps) {
         </ul>
       </nav>
     </ScrollArea>
-  );
+  )
 }

@@ -1,30 +1,30 @@
-import * as React from "react";
-import { cn } from "@/utils";
+import * as React from "react"
+import { cn } from "@/utils"
 
 const LayoutContext = React.createContext<{
-  offset: number;
-  fixed: boolean;
-} | null>(null);
+  offset: number
+  fixed: boolean
+} | null>(null)
 
 export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
-  fixed?: boolean;
+  fixed?: boolean
 }
 
 const Layout = ({ className, fixed = false, ...props }: LayoutProps) => {
-  const divRef = React.useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = React.useState(0);
+  const divRef = React.useRef<HTMLDivElement>(null)
+  const [offset, setOffset] = React.useState(0)
 
   React.useEffect(() => {
-    const div = divRef.current;
+    const div = divRef.current
 
-    if (!div) return;
-    const onScroll = () => setOffset(div.scrollTop);
+    if (!div) return
+    const onScroll = () => setOffset(div.scrollTop)
 
     // clean up code
-    div.removeEventListener("scroll", onScroll);
-    div.addEventListener("scroll", onScroll, { passive: true });
-    return () => div.removeEventListener("scroll", onScroll);
-  }, []);
+    div.removeEventListener("scroll", onScroll)
+    div.addEventListener("scroll", onScroll, { passive: true })
+    return () => div.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
     <LayoutContext.Provider value={{ offset, fixed }}>
@@ -39,22 +39,22 @@ const Layout = ({ className, fixed = false, ...props }: LayoutProps) => {
         {...props}
       />
     </LayoutContext.Provider>
-  );
-};
-Layout.displayName = "Layout";
+  )
+}
+Layout.displayName = "Layout"
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  sticky?: boolean;
+  sticky?: boolean
 }
 
 const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
   ({ className, sticky, ...props }, ref) => {
     // Check if Layout.Header is used within Layout
-    const contextVal = React.useContext(LayoutContext);
+    const contextVal = React.useContext(LayoutContext)
     if (contextVal === null) {
       throw new Error(
         `Layout.Header must be used within ${Layout.displayName}.`,
-      );
+      )
     }
 
     return (
@@ -70,19 +70,19 @@ const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
         )}
         {...props}
       />
-    );
+    )
   },
-);
-Header.displayName = "Header";
+)
+Header.displayName = "Header"
 
 const Body = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   // Check if Layout.Body is used within Layout
-  const contextVal = React.useContext(LayoutContext);
+  const contextVal = React.useContext(LayoutContext)
   if (contextVal === null) {
-    throw new Error(`Layout.Body must be used within ${Layout.displayName}.`);
+    throw new Error(`Layout.Body must be used within ${Layout.displayName}.`)
   }
 
   return (
@@ -96,11 +96,11 @@ const Body = React.forwardRef<
       )}
       {...props}
     />
-  );
-});
-Body.displayName = "Body";
+  )
+})
+Body.displayName = "Body"
 
-Layout.Header = Header;
-Layout.Body = Body;
+Layout.Header = Header
+Layout.Body = Body
 
-export { Layout };
+export { Layout }

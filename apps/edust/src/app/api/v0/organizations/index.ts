@@ -1,5 +1,5 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiV0BaseQuery } from "../../api-url";
+import { createApi } from "@reduxjs/toolkit/query/react"
+import { apiV0BaseQuery } from "../../api-url"
 
 export const organizationsApi = createApi({
   baseQuery: apiV0BaseQuery("/organizations"),
@@ -43,16 +43,19 @@ export const organizationsApi = createApi({
       query: () => `/site-builder/images/me`,
     }),
 
-    deleteUploadImagesByIdSiteBuilder: build.mutation<{ success: boolean; id: number }, number>({
+    deleteUploadImagesByIdSiteBuilder: build.mutation<
+      { success: boolean; id: number },
+      number
+    >({
       query(id) {
         return {
           url: `/site-builder/images/${id}`,
-          method: 'DELETE',
+          method: "DELETE",
         }
       },
     }),
   }),
-});
+})
 
 export const {
   useGetOrgListsQuery,
@@ -60,5 +63,5 @@ export const {
   useGetSiteBuilderMeQuery,
   useEditSiteBuilderMutation,
   useGetUploadImagesSiteBuilderMeQuery,
-  useDeleteUploadImagesByIdSiteBuilderMutation
-} = organizationsApi;
+  useDeleteUploadImagesByIdSiteBuilderMutation,
+} = organizationsApi

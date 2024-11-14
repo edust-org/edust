@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "./sidebar";
-import useIsCollapsed from "../hooks/use-is-collapsed";
-import SkipToMain from "./skip-to-main";
+import { Outlet } from "react-router-dom"
+import Sidebar from "./sidebar"
+import useIsCollapsed from "../hooks/use-is-collapsed"
+import SkipToMain from "./skip-to-main"
 
 export default function AppShell() {
-  const [isCollapsed, setIsCollapsed] = useIsCollapsed();
+  const [isCollapsed, setIsCollapsed] = useIsCollapsed()
   return (
     <div className="relative h-full overflow-hidden bg-background">
       <SkipToMain />
@@ -16,5 +16,5 @@ export default function AppShell() {
         <Outlet />
       </main>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 import {
   Button,
@@ -12,32 +12,32 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui";
-import { useSearchParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { useForgotPasswordMutation } from "@/app/api/v0/auth";
-import { toast } from "@/hooks/shadcn-ui";
-import { BarLoader } from "react-spinners";
-import assets from "@/assets/images";
-import { CircleHelp } from "lucide-react";
-import { Link } from "react-router-dom";
+} from "@/components/ui"
+import { useSearchParams } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
+import { useForgotPasswordMutation } from "@/app/api/v0/auth"
+import { toast } from "@/hooks/shadcn-ui"
+import { BarLoader } from "react-spinners"
+import assets from "@/assets/images"
+import { CircleHelp } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
     message: "Email must be at least 2 characters.",
   }),
-});
+})
 export const SendOtpUsingEmail = () => {
-  const [, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams()
 
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
     },
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     forgotPassword(data)
@@ -47,8 +47,8 @@ export const SendOtpUsingEmail = () => {
           toast({
             variant: "success",
             title: res?.message,
-          });
-          setSearchParams(`step=verify-otp&email=${data.email}`);
+          })
+          setSearchParams(`step=verify-otp&email=${data.email}`)
         }
       })
       .catch((error) => {
@@ -56,9 +56,9 @@ export const SendOtpUsingEmail = () => {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -109,5 +109,5 @@ export const SendOtpUsingEmail = () => {
         </Form>
       </div>
     </>
-  );
-};
+  )
+}

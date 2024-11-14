@@ -1,7 +1,7 @@
-import { TbPlanet } from "react-icons/tb";
+import { TbPlanet } from "react-icons/tb"
 
 interface ComingSoonProps {
-  className?: string;
+  className?: string
 }
 
 export const ComingSoon = ({ className }: ComingSoonProps) => {
@@ -16,5 +16,5 @@ export const ComingSoon = ({ className }: ComingSoonProps) => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
-import useLocalStorage from './use-local-storage'
+import { useEffect } from "react"
+import useLocalStorage from "./use-local-storage"
 
 export default function useIsCollapsed() {
   const [isCollapsed, setIsCollapsed] = useLocalStorage({
-    key: 'collapsed-sidebar',
+    key: "collapsed-sidebar",
     defaultValue: false,
   })
 
@@ -17,11 +17,11 @@ export default function useIsCollapsed() {
     handleResize()
 
     // Add event listener for window resize
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
 
     // Cleanup event listener on component unmount
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
   }, [isCollapsed, setIsCollapsed])
 

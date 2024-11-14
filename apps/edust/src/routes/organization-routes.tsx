@@ -4,13 +4,13 @@ import {
   Dashboard,
   Site,
   SiteBuilder,
-} from "@/organizations/features";
-import { Route } from "react-router-dom";
-import { Suspense } from "react";
-import Loading from "@/components/loading";
-import { Roles } from "@/types";
-import { AppShell } from "@/organizations";
-import { Protector } from "./protector";
+} from "@/organizations/features"
+import { Route } from "react-router-dom"
+import { Suspense } from "react"
+import Loading from "@/components/loading"
+import { Roles } from "@/types"
+import { AppShell } from "@/organizations"
+import { Protector } from "./protector"
 
 export const organizationRoutes = (
   <Route>

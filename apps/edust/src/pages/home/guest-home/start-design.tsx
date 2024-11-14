@@ -1,5 +1,5 @@
-import { Button, Typography } from "@/components/ui";
-import { Link } from "react-router-dom";
+import { Button, Typography } from "@/components/ui"
+import { Link } from "react-router-dom"
 
 export const StartDesign = () => {
   return (
@@ -14,5 +14,5 @@ export const StartDesign = () => {
         </Link>
       </div>
     </section>
-  );
-};
+  )
+}

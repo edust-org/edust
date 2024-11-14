@@ -10,12 +10,12 @@ Footer: Optional footer with additional links or information.
 
  */
 
-import { useIsCollapsed } from "@/hooks";
-import { Outlet } from "react-router-dom";
-import { Sidebar } from "./sidebar";
+import { useIsCollapsed } from "@/hooks"
+import { Outlet } from "react-router-dom"
+import { Sidebar } from "./sidebar"
 
 export const AppShell = () => {
-  const [isCollapsed, setIsCollapsed] = useIsCollapsed();
+  const [isCollapsed, setIsCollapsed] = useIsCollapsed()
   return (
     <div className="relative h-full overflow-hidden bg-background">
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
@@ -26,5 +26,5 @@ export const AppShell = () => {
         <Outlet />
       </main>
     </div>
-  );
-};
+  )
+}

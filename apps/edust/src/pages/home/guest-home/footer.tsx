@@ -1,4 +1,4 @@
-import { Typography } from "@/components/ui";
+import { Typography } from "@/components/ui"
 
 export const Footer = () => {
   return (
@@ -7,5 +7,5 @@ export const Footer = () => {
         © 2024 Edust. All rights reserved.
       </Typography>
     </div>
-  );
-};
+  )
+}

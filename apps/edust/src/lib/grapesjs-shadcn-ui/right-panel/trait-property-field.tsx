@@ -1,6 +1,6 @@
-import * as React from "react";
-import { useEditor } from "@grapesjs/react";
-import type { Trait } from "grapesjs";
+import * as React from "react"
+import { useEditor } from "@grapesjs/react"
+import type { Trait } from "grapesjs"
 import {
   Button,
   Checkbox,
@@ -11,43 +11,43 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
-import ColorInput from "./color-input";
+} from "@/components/ui"
+import ColorInput from "./color-input"
 
 interface StylePropertyFieldProps extends React.HTMLProps<HTMLDivElement> {
-  trait: Trait;
+  trait: Trait
 }
 
 export default function TraitPropertyField({
   trait,
   ...rest
 }: StylePropertyFieldProps) {
-  const editor = useEditor();
+  const editor = useEditor()
   const handleChange = (value: string) => {
-    trait.setValue(value);
-  };
+    trait.setValue(value)
+  }
 
   const onChange = (ev: any) => {
-    handleChange(ev.target.value);
-  };
+    handleChange(ev.target.value)
+  }
 
   const handleButtonClick = () => {
-    const command = trait.get("command");
+    const command = trait.get("command")
     if (command) {
       typeof command === "string"
         ? editor.runCommand(command)
-        : command(editor, trait);
+        : command(editor, trait)
     }
-  };
+  }
 
-  const type = trait.getType();
-  const defValue = trait.getDefault() || trait.attributes.placeholder;
-  const value = trait.getValue();
-  const valueWithDef = typeof value !== "undefined" ? value : defValue;
+  const type = trait.getType()
+  const defValue = trait.getDefault() || trait.attributes.placeholder
+  const value = trait.getValue()
+  const valueWithDef = typeof value !== "undefined" ? value : defValue
 
   let inputToRender = (
     <Input placeholder={defValue} value={value} onChange={onChange} />
-  );
+  )
 
   switch (type) {
     case "select":
@@ -60,20 +60,20 @@ export default function TraitPropertyField({
             <SelectContent>
               <SelectGroup>
                 {trait.getOptions().map((option) => {
-                  const optionId = trait.getOptionId(option) || "outside";
-                  const optionLabel = trait.getOptionLabel(option) || "outside";
+                  const optionId = trait.getOptionId(option) || "outside"
+                  const optionLabel = trait.getOptionLabel(option) || "outside"
                   return (
                     <SelectItem key={optionId} value={optionId}>
                       {optionLabel}
                     </SelectItem>
-                  );
+                  )
                 })}
               </SelectGroup>
             </SelectContent>
           </Select>
-        );
+        )
       }
-      break;
+      break
     case "color":
       {
         inputToRender = (
@@ -84,9 +84,9 @@ export default function TraitPropertyField({
             valueWithDef={valueWithDef}
             onColorChange={(value) => handleChange(value)}
           />
-        );
+        )
       }
-      break;
+      break
     case "checkbox":
       {
         inputToRender = (
@@ -94,18 +94,18 @@ export default function TraitPropertyField({
             checked={value}
             onCheckedChange={(ev) => trait.setValue(ev)}
           />
-        );
+        )
       }
-      break;
+      break
     case "button":
       {
         inputToRender = (
           <Button className="w-full" onClick={handleButtonClick}>
             {trait.getLabel()}
           </Button>
-        );
+        )
       }
-      break;
+      break
   }
 
   return (
@@ -115,5 +115,5 @@ export default function TraitPropertyField({
       </div>
       {inputToRender}
     </div>
-  );
+  )
 }

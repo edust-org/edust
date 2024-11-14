@@ -1,11 +1,11 @@
-import { StylesResultProps } from "@grapesjs/react";
+import { StylesResultProps } from "@grapesjs/react"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui";
-import StylePropertyField from "./style-property-field";
+} from "@/components/ui"
+import StylePropertyField from "./style-property-field"
 
 export default function CustomStyleManager({
   sectors,
@@ -25,5 +25,5 @@ export default function CustomStyleManager({
         ))}
       </Accordion>
     </div>
-  );
+  )
 }

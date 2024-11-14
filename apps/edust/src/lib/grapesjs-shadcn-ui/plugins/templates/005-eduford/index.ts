@@ -1,4 +1,4 @@
-import thumbnail from "./eduford.avif";
+import thumbnail from "./eduford.avif"
 
 /**
  * Nazmul Hossain
@@ -368,4 +368,4 @@ export const eduford005 = {
     </footer>
   `,
   thumbnail,
-};
+}

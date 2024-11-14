@@ -1,9 +1,9 @@
-import { Separator } from "@/components/ui";
+import { Separator } from "@/components/ui"
 
 interface ContentSectionProps {
-  title: string;
-  desc: string;
-  children: JSX.Element;
+  title: string
+  desc: string
+  children: JSX.Element
 }
 
 export default function ContentSection({
@@ -22,5 +22,5 @@ export default function ContentSection({
         <div className="lg:max-w-xl">{children}</div>
       </div>
     </div>
-  );
+  )
 }

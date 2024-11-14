@@ -1,4 +1,5 @@
-import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { RootState } from "../store"
 
 /**
  * Creates a base query function for interacting with API version v0.
@@ -26,4 +27,14 @@ export const apiV0BaseQuery = (
   fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
     credentials: "include",
-  });
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).authentication.auth.auth.token
+
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`)
+      }
+
+      return headers
+    },
+  })

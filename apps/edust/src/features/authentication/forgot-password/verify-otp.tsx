@@ -7,39 +7,39 @@ import {
   FormLabel,
   FormMessage,
   Typography,
-} from "@/components/ui";
-import { BarLoader } from "react-spinners";
-import assets from "@/assets/images";
-import { MailOpen } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+} from "@/components/ui"
+import { BarLoader } from "react-spinners"
+import assets from "@/assets/images"
+import { MailOpen } from "lucide-react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { toast } from "@/hooks/shadcn-ui";
-import { Helmet } from "react-helmet-async";
-import { useSearchParams } from "react-router-dom";
-import { useCheckOtpMutation } from "@/app/api/v0/auth";
+} from "@/components/ui/input-otp"
+import { toast } from "@/hooks/shadcn-ui"
+import { Helmet } from "react-helmet-async"
+import { useSearchParams } from "react-router-dom"
+import { useCheckOtpMutation } from "@/app/api/v0/auth"
 
 const FormSchema = z.object({
   otp: z.string().min(4, {
     message: "Your one-time password must be 4 characters.",
   }),
-});
+})
 export const VerifyOtp = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const email = searchParams.get("email");
-  const [checkOtp, { isLoading }] = useCheckOtpMutation();
+  const [searchParams, setSearchParams] = useSearchParams()
+  const email = searchParams.get("email")
+  const [checkOtp, { isLoading }] = useCheckOtpMutation()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       otp: "",
     },
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     checkOtp({ otp: parseInt(data?.otp), email })
@@ -49,8 +49,8 @@ export const VerifyOtp = () => {
           toast({
             variant: "success",
             title: res?.message,
-          });
-          setSearchParams(`step=reset-password&email=${email}`);
+          })
+          setSearchParams(`step=reset-password&email=${email}`)
         }
       })
       .catch((error) => {
@@ -59,9 +59,9 @@ export const VerifyOtp = () => {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -123,5 +123,5 @@ export const VerifyOtp = () => {
         </Form>
       </div>
     </>
-  );
-};
+  )
+}

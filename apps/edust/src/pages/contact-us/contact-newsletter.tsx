@@ -1,4 +1,4 @@
-import { Button, Input } from "@/components/ui";
+import { Button, Input } from "@/components/ui"
 
 export const ContactNewsletter = () => {
   return (
@@ -22,5 +22,5 @@ export const ContactNewsletter = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

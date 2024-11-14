@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 import {
   TbBrowserCheck,
   TbExclamationCircle,
@@ -6,13 +6,13 @@ import {
   TbPalette,
   TbTool,
   TbUser,
-} from "react-icons/tb";
-import { Layout } from "../../components/custom/layout";
-import { Search } from "../../components/search";
-import { Separator } from "@/components/ui";
-import { UserNav } from "../../components/user-nav";
-import SidebarNav from "./components/sidebar-nav";
-import { ThemeSwitch } from "@/components";
+} from "react-icons/tb"
+import { Layout } from "../../components/custom/layout"
+import { Search } from "../../components/search"
+import { Separator } from "@/components/ui"
+import { UserNav } from "../../components/user-nav"
+import SidebarNav from "./components/sidebar-nav"
+import { ThemeSwitch } from "@/components"
 
 export default function Settings() {
   return (
@@ -46,7 +46,7 @@ export default function Settings() {
         </div>
       </Layout.Body>
     </Layout>
-  );
+  )
 }
 
 const sidebarNavItems = [
@@ -75,4 +75,4 @@ const sidebarNavItems = [
     icon: <TbBrowserCheck size={18} />,
     href: "/playground/dashboard/settings/display",
   },
-];
+]

@@ -1,6 +1,6 @@
-import { Navbar } from "@/components";
-import { Typography } from "@/components/ui";
-import { Link } from "react-router-dom";
+import { Navbar } from "@/components"
+import { Typography } from "@/components/ui"
+import { Link } from "react-router-dom"
 export const Playground = () => {
   return (
     <div className="space-y-8">
@@ -15,11 +15,11 @@ export const Playground = () => {
         ))}
       </Typography>
     </div>
-  );
-};
+  )
+}
 interface LinkTypes {
-  title: string;
-  href: string;
+  title: string
+  href: string
 }
 const links: LinkTypes[] = [
   {
@@ -38,4 +38,4 @@ const links: LinkTypes[] = [
     title: "Settings",
     href: "dashboard/settings",
   },
-];
+]

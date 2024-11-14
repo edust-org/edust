@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
-import { cn } from "@/utils";
-import { Button } from "@/components/ui/button";
-import { Menu } from "./menu";
-import { SidebarToggle } from "./sidebar-toggle";
-import { LogoEdust } from "@/components";
+import { cn } from "@/utils"
+import { Button } from "@/components/ui/button"
+import { Menu } from "./menu"
+import { SidebarToggle } from "./sidebar-toggle"
+import { LogoEdust } from "@/components"
 
 export function Sidebar({
   toggleIsOpen,
   isOpen,
 }: {
-  isOpen: boolean;
-  toggleIsOpen: () => void;
+  isOpen: boolean
+  toggleIsOpen: () => void
 }) {
   return (
     <aside
@@ -37,5 +37,5 @@ export function Sidebar({
         <Menu isOpen={isOpen} />
       </div>
     </aside>
-  );
+  )
 }

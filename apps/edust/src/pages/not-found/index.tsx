@@ -7,7 +7,7 @@ import { useEffect } from "react"
 
 export const NotFound = () => {
   const activeMode = useAppSelector(
-    (state) => state.auth.profileSwitch.activeMode,
+    (state) => state.authentication.profileSwitch.activeMode,
   )
 
   const navigate = useNavigate()

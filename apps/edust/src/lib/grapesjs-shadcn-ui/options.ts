@@ -1,9 +1,9 @@
-import { EditorConfig } from "grapesjs";
-import gsPluginBlocksBasic from "grapesjs-blocks-basic";
-import gsPluginTuiImageEditor from "grapesjs-tui-image-editor";
-import gsPluginExport from "grapesjs-plugin-export";
-import gsPluginCustomCode from "grapesjs-custom-code";
-import plugins from "./plugins";
+import { EditorConfig } from "grapesjs"
+import gsPluginBlocksBasic from "grapesjs-blocks-basic"
+import gsPluginTuiImageEditor from "grapesjs-tui-image-editor"
+import gsPluginExport from "grapesjs-plugin-export"
+import gsPluginCustomCode from "grapesjs-custom-code"
+import plugins from "./plugins"
 
 const options = (editorRef: any): EditorConfig => ({
   height: "100vh",
@@ -45,5 +45,5 @@ const options = (editorRef: any): EditorConfig => ({
     gsPluginCustomCode,
   ],
   pluginsOpts: {},
-});
-export default options;
+})
+export default options

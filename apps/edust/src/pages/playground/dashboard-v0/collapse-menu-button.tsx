@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { ChevronDown, Dot, LucideIcon } from "lucide-react";
+import { Link } from "react-router-dom"
+import { useState } from "react"
+import { ChevronDown, Dot, LucideIcon } from "lucide-react"
 
-import { cn } from "@/utils";
-import { Button } from "@/components/ui/button";
-import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
+import { cn } from "@/utils"
+import { Button } from "@/components/ui/button"
+import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu"
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -21,20 +21,20 @@ import {
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@/components/ui";
+} from "@/components/ui"
 
 type Submenu = {
-  href: string;
-  label: string;
-  active: boolean;
-};
+  href: string
+  label: string
+  active: boolean
+}
 
 interface CollapseMenuButtonProps {
-  icon: LucideIcon;
-  label: string;
-  active: boolean;
-  submenus: Submenu[];
-  isOpen: boolean | undefined;
+  icon: LucideIcon
+  label: string
+  active: boolean
+  submenus: Submenu[]
+  isOpen: boolean | undefined
 }
 
 export function CollapseMenuButton({
@@ -44,8 +44,8 @@ export function CollapseMenuButton({
   submenus,
   isOpen,
 }: CollapseMenuButtonProps) {
-  const isSubmenuActive = submenus.some((submenu) => submenu.active);
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(isSubmenuActive);
+  const isSubmenuActive = submenus.some((submenu) => submenu.active)
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(isSubmenuActive)
 
   return isOpen ? (
     <Collapsible
@@ -168,5 +168,5 @@ export function CollapseMenuButton({
         <DropdownMenuArrow className="fill-border" />
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import * as React from "react";
-import { TbEye, TbEyeOff } from "react-icons/tb";
-import { Button } from "./button";
-import { cn } from "@/utils";
+import * as React from "react"
+import { TbEye, TbEyeOff } from "react-icons/tb"
+import { Button } from "./button"
+import { cn } from "@/utils"
 
 export interface PasswordInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {}
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, ...props }, ref) => {
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false)
     return (
       <div className="relative rounded-md">
         <input
@@ -30,9 +30,9 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
           {showPassword ? <TbEye size={18} /> : <TbEyeOff size={18} />}
         </Button>
       </div>
-    );
+    )
   },
-);
-PasswordInput.displayName = "PasswordInput";
+)
+PasswordInput.displayName = "PasswordInput"
 
-export { PasswordInput };
+export { PasswordInput }

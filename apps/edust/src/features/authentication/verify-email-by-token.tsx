@@ -1,31 +1,31 @@
-import { useVerifyEmailByTokenMutation } from "@/app/api/v0/auth";
-import assets from "@/assets/images";
-import { Typography } from "@/components/ui";
-import { useToast } from "@/hooks/shadcn-ui";
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { BeatLoader } from "react-spinners";
+import { useVerifyEmailByTokenMutation } from "@/app/api/v0/auth"
+import assets from "@/assets/images"
+import { Typography } from "@/components/ui"
+import { useToast } from "@/hooks/shadcn-ui"
+import React, { useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import { BeatLoader } from "react-spinners"
 
 export const VerifyEmailByToken: React.FC = () => {
-  const { toast } = useToast();
-  const params = useParams();
-  const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation();
+  const { toast } = useToast()
+  const params = useParams()
+  const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (params.token) {
       verify(params.token)
         .unwrap()
         .then((res) => {
-          console.log(res);
+          console.log(res)
           if (res?.status) {
             toast({
               variant: "success",
               title: res?.message,
-            });
+            })
 
-            navigate("/auth/sign-in");
+            navigate("/auth/sign-in")
           }
         })
         .catch((error) => {
@@ -34,11 +34,11 @@ export const VerifyEmailByToken: React.FC = () => {
               variant: "destructive",
               title: "Uh oh! Something went wrong.",
               description: error?.data?.error,
-            });
+            })
           }
-        });
+        })
     }
-  }, [navigate, params.token, toast, verify]);
+  }, [navigate, params.token, toast, verify])
 
   return (
     <div className="flex h-screen items-center justify-center p-4">
@@ -58,5 +58,5 @@ export const VerifyEmailByToken: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

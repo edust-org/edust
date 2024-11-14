@@ -1,19 +1,19 @@
-import { DevicesProvider, WithEditor } from "@grapesjs/react";
-import { RightButtons } from "./right-buttons";
+import { DevicesProvider, WithEditor } from "@grapesjs/react"
+import { RightButtons } from "./right-buttons"
 import {
   Button,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui";
-import { FaDesktop, FaMobileAlt } from "react-icons/fa";
-import { FaTabletScreenButton } from "react-icons/fa6";
-import { BiMobileLandscape } from "react-icons/bi";
+} from "@/components/ui"
+import { FaDesktop, FaMobileAlt } from "react-icons/fa"
+import { FaTabletScreenButton } from "react-icons/fa6"
+import { BiMobileLandscape } from "react-icons/bi"
 
 export const TopControllers = () => {
   const handleDevice = (selected: string | number, select) => {
-    select(selected);
-  };
+    select(selected)
+  }
 
   return (
     <>
@@ -21,8 +21,8 @@ export const TopControllers = () => {
         <div className="px-2">
           <DevicesProvider>
             {({ devices, select, selected }) => {
-              const iconInactive = `text-lg text-slate-500`;
-              const iconActive = `text-lg text-slate-900`;
+              const iconInactive = `text-lg text-slate-500`
+              const iconActive = `text-lg text-slate-900`
 
               return (
                 <div>
@@ -119,7 +119,7 @@ export const TopControllers = () => {
                     </Tooltip>
                   )}
                 </div>
-              );
+              )
             }}
           </DevicesProvider>
         </div>
@@ -129,5 +129,5 @@ export const TopControllers = () => {
         </WithEditor>
       </div>
     </>
-  );
-};
+  )
+}

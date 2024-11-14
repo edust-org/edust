@@ -1,5 +1,5 @@
-import { useGetInstituteByIdQuery } from "@/app/api/v0/public";
-import { Navbar } from "@/components";
+import { useGetInstituteByIdQuery } from "@/app/api/v0/public"
+import { Navbar } from "@/components"
 import {
   Card,
   CardContent,
@@ -10,19 +10,19 @@ import {
   TableCell,
   TableRow,
   Typography,
-} from "@/components/ui";
-import { Badge } from "@/components/ui/badge";
-import { Helmet } from "react-helmet-async";
-import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom'; // Add this line to import Link
-import FilterInstitute from "../filter-institute";
-import { format } from "date-fns";
+} from "@/components/ui"
+import { Badge } from "@/components/ui/badge"
+import { Helmet } from "react-helmet-async"
+import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom" // Add this line to import Link
+import FilterInstitute from "../filter-institute"
+import { format } from "date-fns"
 
 export const InstituteDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams()
 
-  const { data, isLoading } = useGetInstituteByIdQuery(id);
-  console.log(data);
+  const { data, isLoading } = useGetInstituteByIdQuery(id)
+  console.log(data)
 
   const formatFoundedDate = (date: string) => {
     if (date) {
@@ -31,12 +31,11 @@ export const InstituteDetails = () => {
     }
   }
 
-  const formatPublishedDate =(date:string)=>{
-    if(date){
-      return  format(date, "MMMM d, yyyy, 'at' h:mm a");
+  const formatPublishedDate = (date: string) => {
+    if (date) {
+      return format(date, "MMMM d, yyyy, 'at' h:mm a")
     }
   }
-  
 
   return (
     <>
@@ -65,14 +64,24 @@ export const InstituteDetails = () => {
               <CardTitle className="flex items-start gap-2 pb-4 pt-7 font-bold sm:text-3xl">
                 <span>{data?.data.name}</span>
                 {/* Badge setted into Link  */}
-                <Link to="#"><Badge>{data?.data?.institute_category}</Badge></Link>
+                <Link to="#">
+                  <Badge>{data?.data?.institute_category}</Badge>
+                </Link>
               </CardTitle>
               <Typography className="border-y py-2">
                 Published by
                 {/* span to <Link></Link> */}
-                <Link to="#" className="font-semibold text-primary hover:underline"> {data?.data?.author?.name} </Link>
+                <Link
+                  to="#"
+                  className="font-semibold text-primary hover:underline"
+                >
+                  {" "}
+                  {data?.data?.author?.name}{" "}
+                </Link>
                 <span>on </span>
-                <Link to="#" className="hover:underline">{formatPublishedDate(data?.data?.createdAt)}</Link>
+                <Link to="#" className="hover:underline">
+                  {formatPublishedDate(data?.data?.createdAt)}
+                </Link>
               </Typography>
             </CardHeader>
 
@@ -95,30 +104,41 @@ export const InstituteDetails = () => {
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Email</span>
-                        <a href={`mailto:${data?.data?.contact_email}`}
-                        className="hover:underline"
-                        >{data?.data?.contact_email}</a>
+                        <a
+                          href={`mailto:${data?.data?.contact_email}`}
+                          className="hover:underline"
+                        >
+                          {data?.data?.contact_email}
+                        </a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Phone</span>
                         {/* changed span to a and add tel to attributes */}
-                        <a href={`tel:${data?.data?.phone_number}`}>{data?.data?.phone_number}</a>
+                        <a href={`tel:${data?.data?.phone_number}`}>
+                          {data?.data?.phone_number}
+                        </a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Website</span>
-                        <a href={data?.data?.website} target="_blank"
-                        className="hover:underline"
-                        >{data?.data?.website}</a>
+                        <a
+                          href={data?.data?.website}
+                          target="_blank"
+                          className="hover:underline"
+                        >
+                          {data?.data?.website}
+                        </a>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Founded Date</span>
-                        <span>{formatFoundedDate(data?.data?.founded_date)}</span>
+                        <span>
+                          {formatFoundedDate(data?.data?.founded_date)}
+                        </span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -183,7 +203,7 @@ export const InstituteDetails = () => {
                           target="_blank"
                           className="hover:underline"
                         >
-                          View Loaction 
+                          View Loaction
                         </a>
                       </TableCell>
                     </TableRow>
@@ -192,12 +212,18 @@ export const InstituteDetails = () => {
               </div>
             </CardContent>
           </Card>
-          <div className=" mt-7 border rounded-md p-3">
-            <Typography className="p-0" affects="removePaddingMargin" variant="h2">Overview it will render html</Typography>
+          <div className="mt-7 rounded-md border p-3">
+            <Typography
+              className="p-0"
+              affects="removePaddingMargin"
+              variant="h2"
+            >
+              Overview it will render html
+            </Typography>
           </div>
         </div>
       </section>
       {/*  */}
     </>
-  );
-};
+  )
+}

@@ -1,9 +1,9 @@
-import { SelectorsResultProps } from "@grapesjs/react";
-import { IoIosClose } from "react-icons/io";
-import { FaPlus } from "react-icons/fa";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { SelectorsResultProps } from "@grapesjs/react"
+import { IoIosClose } from "react-icons/io"
+import { FaPlus } from "react-icons/fa"
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
@@ -16,9 +16,9 @@ import {
   SelectValue,
   Button,
   Input,
-} from "@/components/ui";
-import {} from "@/components/ui";
-import { useState } from "react";
+} from "@/components/ui"
+import {} from "@/components/ui"
+import { useState } from "react"
 
 const FormSchema = z.object({
   state: z
@@ -26,7 +26,7 @@ const FormSchema = z.object({
       required_error: "Please select an state to display.",
     })
     .default("DEFAULT ID"),
-});
+})
 
 export default function CustomSelectorManager({
   selectors,
@@ -37,17 +37,17 @@ export default function CustomSelectorManager({
   addSelector,
   removeSelector,
 }: Omit<SelectorsResultProps, "Container">) {
-  const targetStr = targets.join(", ");
+  const targetStr = targets.join(", ")
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     // console.log(data);
   }
 
-  const [isShowInput, setIsShowInput] = useState(false);
+  const [isShowInput, setIsShowInput] = useState(false)
 
   return (
     <div className="gjs-custom-selector-manager flex flex-col gap-2 p-2 text-left">
@@ -56,7 +56,7 @@ export default function CustomSelectorManager({
         <Form {...form}>
           <form
             onChange={(e) => {
-              setState(e.target.value);
+              setState(e.target.value)
             }}
             onSubmit={form.handleSubmit(onSubmit)}
           >
@@ -106,8 +106,8 @@ export default function CustomSelectorManager({
                     addSelector({
                       name: e?.target?.value,
                       label: e?.target?.value,
-                    });
-                    setIsShowInput(false);
+                    })
+                    setIsShowInput(false)
                   }
                 }}
                 onBlur={() => setIsShowInput(false)}
@@ -146,5 +146,5 @@ export default function CustomSelectorManager({
         Selected: <span className="opacity-70">{targetStr || "None"}</span>
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import { SheetMenu } from "./sheet-menu";
-import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
+import { SheetMenu } from "./sheet-menu"
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 
 interface NavbarProps {
-  title: string;
+  title: string
 }
 
 export function Navbar({ title }: NavbarProps) {
@@ -18,5 +18,5 @@ export function Navbar({ title }: NavbarProps) {
         </div>
       </div>
     </header>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import thumbnail from "./study-nest.avif";
+import thumbnail from "./study-nest.avif"
 
 /**
  * Md. Imran Hassan?
@@ -598,4 +598,4 @@ export const studyNest004 = {
   
   `,
   thumbnail,
-};
+}

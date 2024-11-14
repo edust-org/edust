@@ -1,35 +1,35 @@
-import { useRef } from "react";
-import grapesjs, { Editor } from "grapesjs";
-import GjsEditor, { Canvas } from "@grapesjs/react";
-import { RightPanel } from "./right-panel";
-import { TopControllers } from "./top-controllers";
-import options from "./options";
-import { default as customOnEditor } from "./on-editor";
+import { useRef } from "react"
+import grapesjs, { Editor } from "grapesjs"
+import GjsEditor, { Canvas } from "@grapesjs/react"
+import { RightPanel } from "./right-panel"
+import { TopControllers } from "./top-controllers"
+import options from "./options"
+import { default as customOnEditor } from "./on-editor"
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@/components/ui";
-import { LeftPanel } from "./left-panel";
-import useWindowSize from "./hooks/use-window-resize";
+} from "@/components/ui"
+import { LeftPanel } from "./left-panel"
+import useWindowSize from "./hooks/use-window-resize"
 
 export const GrapesjsShadcnUI = (props) => {
-  const { onEditor, optionsCustomize } = props;
-  const { width: windowWidth } = useWindowSize();
-  const editorRef = useRef<Editor | null>(null);
+  const { onEditor, optionsCustomize } = props
+  const { width: windowWidth } = useWindowSize()
+  const editorRef = useRef<Editor | null>(null)
 
   const gsOnEditor = async (editor: Editor) => {
     if (!editor) {
-      console.error("Editor is not initialized");
-      return;
+      console.error("Editor is not initialized")
+      return
     }
 
-    editorRef.current = editor;
+    editorRef.current = editor
 
-    await onEditor(editor);
+    await onEditor(editor)
 
-    return customOnEditor(editor);
-  };
+    return customOnEditor(editor)
+  }
 
   return (
     <div>
@@ -100,5 +100,5 @@ export const GrapesjsShadcnUI = (props) => {
         </ResizablePanelGroup>
       </GjsEditor>
     </div>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
-import { GlobalTopNotificationBar, Navbar } from "@/components";
-import { lazy } from "react";
+import { GlobalTopNotificationBar, Navbar } from "@/components"
+import { lazy } from "react"
 
 const OrgLists = lazy(() =>
   import("./org-lists").then((module) => ({
     default: module.OrgLists,
   })),
-);
+)
 
 export const PrivateHome = () => {
   return (
@@ -18,5 +18,5 @@ export const PrivateHome = () => {
         <OrgLists />
       </main>
     </>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/custom/button";
+import { useNavigate } from "react-router-dom"
+import { Button } from "../../components/custom/button"
 
 export default function NotFoundError() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <div className="h-svh">
       <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-2">
@@ -20,5 +20,5 @@ export default function NotFoundError() {
         </div>
       </div>
     </div>
-  );
+  )
 }

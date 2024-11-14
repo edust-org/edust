@@ -1,13 +1,13 @@
-import { Navbar } from "@/components";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { InstitutesCard } from "./institutes-card";
-import InstituteNotFound from "./institutes-not-found";
-import { useGetInstitutesQuery } from "@/app/api/v0/public";
-import { Helmet } from "react-helmet-async";
-import FilterInstitute from "./filter-institute";
+import { Navbar } from "@/components"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { InstitutesCard } from "./institutes-card"
+import InstituteNotFound from "./institutes-not-found"
+import { useGetInstitutesQuery } from "@/app/api/v0/public"
+import { Helmet } from "react-helmet-async"
+import FilterInstitute from "./filter-institute"
 
 export const Institutes = () => {
-  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({});
+  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({})
 
   return (
     <div>
@@ -23,7 +23,7 @@ export const Institutes = () => {
       </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          <FilterInstitute/>
+          <FilterInstitute />
         </aside>
 
         <main>
@@ -41,5 +41,5 @@ export const Institutes = () => {
         </main>
       </section>
     </div>
-  );
-};
+  )
+}

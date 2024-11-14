@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { TbChevronDown } from "react-icons/tb";
-import { Button, buttonVariants } from "@/components/ui";
+import { Link } from "react-router-dom"
+import { TbChevronDown } from "react-icons/tb"
+import { Button, buttonVariants } from "@/components/ui"
 import {
   Collapsible,
   CollapsibleContent,
@@ -15,25 +15,25 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui";
-import { cn } from "@/utils";
-import { SideLink } from "./sidelinks";
-import { useCheckActiveNav } from "../hooks";
-import { useAppSelector } from "@/app/hooks";
+} from "@/components/ui"
+import { cn } from "@/utils"
+import { SideLink } from "./sidelinks"
+import { useCheckActiveNav } from "../hooks"
+import { useAppSelector } from "@/app/hooks"
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
-  isCollapsed: boolean;
-  links: SideLink[];
-  closeNav: () => void;
+  isCollapsed: boolean
+  links: SideLink[]
+  closeNav: () => void
 }
 
 export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
   const activeMode = useAppSelector(
-    (state) => state.auth.profileSwitch.activeMode,
-  );
+    (state) => state.authentication.profileSwitch.activeMode,
+  )
 
   const renderLink = ({ sub, access_roles, ...rest }: SideLink) => {
-    const key = `${rest.title}-${rest.href}`;
+    const key = `${rest.title}-${rest.href}`
     if (isCollapsed && sub)
       return (
         <NavLinkIconDropdown
@@ -42,22 +42,22 @@ export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
           key={key}
           closeNav={closeNav}
         />
-      );
+      )
 
     if (isCollapsed)
-      return <NavLinkIcon {...rest} key={key} closeNav={closeNav} />;
+      return <NavLinkIcon {...rest} key={key} closeNav={closeNav} />
 
     if (sub)
       return (
         <NavLinkDropdown {...rest} sub={sub} key={key} closeNav={closeNav} />
-      );
+      )
 
     if (typeof activeMode === "object" && activeMode.role) {
       if (access_roles.includes(activeMode.role)) {
-        return <NavLink {...rest} key={key} closeNav={closeNav} />;
+        return <NavLink {...rest} key={key} closeNav={closeNav} />
       }
     }
-  };
+  }
   return (
     <div
       data-collapsed={isCollapsed}
@@ -72,12 +72,12 @@ export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
         </nav>
       </TooltipProvider>
     </div>
-  );
-};
+  )
+}
 
 interface NavLinkProps extends SideLink {
-  subLink?: boolean;
-  closeNav: () => void;
+  subLink?: boolean
+  closeNav: () => void
 }
 
 function NavLink({
@@ -110,13 +110,13 @@ function NavLink({
         </div>
       )}
     </Link>
-  );
+  )
 }
 
 function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
   /* Open collapsible by default
    * if one of child element is active */
-  const isChildActive = !!sub?.find((s) => useCheckActiveNav(s.href));
+  const isChildActive = !!sub?.find((s) => useCheckActiveNav(s.href))
 
   return (
     <Collapsible defaultOpen={isChildActive}>
@@ -151,7 +151,7 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
         </ul>
       </CollapsibleContent>
     </Collapsible>
-  );
+  )
 }
 
 function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
@@ -179,13 +179,13 @@ function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
         )}
       </TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
   /* Open collapsible by default
    * if one of child element is active */
-  const isChildActive = !!sub?.find((s) => useCheckActiveNav(s.href));
+  const isChildActive = !!sub?.find((s) => useCheckActiveNav(s.href))
 
   return (
     <DropdownMenu>
@@ -230,5 +230,5 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

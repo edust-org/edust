@@ -1,7 +1,7 @@
-import animation from "@/assets/animations/home/edust-hero.json";
-import { Button, Typography } from "@/components/ui";
-import { Player } from "@lottiefiles/react-lottie-player";
-import { FC } from "react";
+import animation from "@/assets/animations/home/edust-hero.json"
+import { Button, Typography } from "@/components/ui"
+import { Player } from "@lottiefiles/react-lottie-player"
+import { FC } from "react"
 
 const Hero: FC = () => {
   return (
@@ -49,7 +49,7 @@ const Hero: FC = () => {
       <div className="absolute bottom-0 left-40 -z-10 h-[1000px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
       <div className="absolute -top-[400px] left-[70%] -z-10 h-[700px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

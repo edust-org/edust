@@ -1,8 +1,8 @@
-import { http, HttpResponse } from "msw";
-import { apiUrlV0 } from "../../api-url";
+import { http, HttpResponse } from "msw"
+import { apiUrlV0 } from "../../api-url"
 
 export const user = http.get(`${apiUrlV0}/user/self`, () => {
-  const authToken = null;
+  const authToken = null
 
   if (!authToken) {
     return new HttpResponse(
@@ -11,7 +11,7 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
         message: "Unauthorized access",
       }),
       { status: 401 },
-    );
+    )
   }
 
   if (authToken === "user") {
@@ -33,7 +33,7 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
           updatedAt: "2024-09-03T14:19:29.000Z",
         },
       },
-    });
+    })
   }
 
   if (authToken === "organizer") {
@@ -64,7 +64,7 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
           role: "OWNER",
         },
       },
-    });
+    })
   }
 
   if (authToken === "administrator") {
@@ -77,5 +77,5 @@ export const user = http.get(`${apiUrlV0}/user/self`, () => {
       message: "Invalid token",
     }),
     { status: 401 },
-  );
-});
+  )
+})

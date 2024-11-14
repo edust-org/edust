@@ -1,15 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { useTheme } from "@/hooks";
-import { Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button"
+import { useTheme } from "@/hooks"
+import { Moon, Sun } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui";
+} from "./ui"
 
 export function ThemeSwitch() {
-  const { setTheme } = useTheme();
+  const { setTheme } = useTheme()
   return (
     <div className="mr-2">
       <DropdownMenu>
@@ -33,5 +33,5 @@ export function ThemeSwitch() {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
+  )
 }

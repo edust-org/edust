@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { TbLoader2 } from "react-icons/tb";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/utils";
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { TbLoader2 } from "react-icons/tb"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/utils"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -32,7 +32,7 @@ const buttonVariants = cva(
       size: "default",
     },
   },
-);
+)
 
 interface ButtonPropsBase
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -42,16 +42,16 @@ type ButtonProps = ButtonPropsBase &
   (
     | { asChild: true }
     | {
-        asChild?: false;
-        loading?: boolean;
-        leftSection?: JSX.Element;
-        rightSection?: JSX.Element;
+        asChild?: false
+        loading?: boolean
+        leftSection?: JSX.Element
+        rightSection?: JSX.Element
       }
-  );
+  )
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, children, ...props }, ref) => {
-    const { asChild, ...rest } = props;
+    const { asChild, ...rest } = props
     if (asChild) {
       return (
         <Slot
@@ -61,7 +61,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         >
           {children}
         </Slot>
-      );
+      )
     }
 
     const {
@@ -70,7 +70,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       rightSection,
       disabled,
       ...otherProps
-    } = props;
+    } = props
 
     return (
       <button
@@ -90,10 +90,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <TbLoader2 className="ml-2 h-4 w-4 animate-spin" />
         )}
       </button>
-    );
+    )
   },
-);
-Button.displayName = "Button";
+)
+Button.displayName = "Button"
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { Button, buttonVariants };
+export { Button, buttonVariants }

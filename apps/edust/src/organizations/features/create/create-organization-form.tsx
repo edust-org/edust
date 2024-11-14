@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 import {
   Button,
   Form,
@@ -10,13 +10,13 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/components/ui";
-import { Checkbox } from "@/components/ui/checkbox";
-import { usePostOrganizationMutation } from "@/app/api/v0/organizations";
-import { toast } from "@/hooks/shadcn-ui";
-import { useNavigate } from "react-router-dom";
-import { BarLoader } from "react-spinners";
-import { useGetUserQuery } from "@/app/api/v0/user";
+} from "@/components/ui"
+import { Checkbox } from "@/components/ui/checkbox"
+import { usePostOrganizationMutation } from "@/app/api/v0/organizations"
+import { toast } from "@/hooks/shadcn-ui"
+import { useNavigate } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+import { useGetUserQuery } from "@/app/api/v0/user"
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -25,12 +25,12 @@ const FormSchema = z.object({
   org_username: z.string().min(2, {
     message: "Enter your Organization name",
   }),
-});
+})
 
 export const CreateOrganizationForm = () => {
-  const navigate = useNavigate();
-  const [postOrganization, { isLoading }] = usePostOrganizationMutation();
-  const { refetch } = useGetUserQuery();
+  const navigate = useNavigate()
+  const [postOrganization, { isLoading }] = usePostOrganizationMutation()
+  const { refetch } = useGetUserQuery()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -38,7 +38,7 @@ export const CreateOrganizationForm = () => {
       name: "",
       org_username: "",
     },
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     postOrganization(data)
@@ -48,13 +48,13 @@ export const CreateOrganizationForm = () => {
           toast({
             variant: "success",
             title: res?.message,
-          });
+          })
         }
         refetch()
           .then((res) => {
-            console.log({ res });
+            console.log({ res })
             if (res) {
-              navigate("/organizations");
+              navigate("/organizations")
             }
           })
           .catch((error) => {
@@ -69,18 +69,18 @@ export const CreateOrganizationForm = () => {
                     </code>
                   </pre>
                 ),
-              });
+              })
             }
-          });
+          })
       })
       .catch((error) => {
         if (error?.data?.status) {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -130,5 +130,5 @@ export const CreateOrganizationForm = () => {
         </form>
       </Form>
     </>
-  );
-};
+  )
+}
