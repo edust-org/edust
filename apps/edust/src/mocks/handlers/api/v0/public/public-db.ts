@@ -35,7 +35,7 @@ export const getOrgSitesPagesDB = {
       method: "GET",
     },
   },
-};
+}
 
 export const getInstituteByIdDB = {
   status: "success",
@@ -82,4 +82,4 @@ export const getInstituteByIdDB = {
       method: "GET",
     },
   },
-};
+}

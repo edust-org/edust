@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   Typography,
-} from "@/components/ui";
+} from "@/components/ui"
 
 export const Faq = () => {
   return (
@@ -81,5 +81,5 @@ export const Faq = () => {
         </AccordionItem>
       </Accordion>
     </section>
-  );
-};
+  )
+}

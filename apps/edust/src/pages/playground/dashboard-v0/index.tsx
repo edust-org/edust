@@ -1,11 +1,11 @@
-import { useBoolean } from "usehooks-ts";
-import { Typography } from "@/components/ui";
-import { Sidebar } from "./sidebar";
-import { cn } from "@/utils";
-import { Navbar } from "./navbar";
+import { useBoolean } from "usehooks-ts"
+import { Typography } from "@/components/ui"
+import { Sidebar } from "./sidebar"
+import { cn } from "@/utils"
+import { Navbar } from "./navbar"
 
 export function EdustDashboard() {
-  const { value: isOpen, toggle } = useBoolean(true);
+  const { value: isOpen, toggle } = useBoolean(true)
 
   return (
     <>
@@ -81,7 +81,7 @@ export function EdustDashboard() {
         </div>
       </main>
     </>
-  );
+  )
 }
 
-export default EdustDashboard;
+export default EdustDashboard

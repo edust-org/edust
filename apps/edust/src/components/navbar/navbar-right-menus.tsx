@@ -8,7 +8,7 @@ import {
   School,
   Settings,
   User,
-} from "lucide-react";
+} from "lucide-react"
 import {
   Avatar,
   AvatarFallback,
@@ -22,36 +22,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui";
-import { toast } from "@/hooks/shadcn-ui";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+} from "@/components/ui"
+import { toast } from "@/hooks/shadcn-ui"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import {
   clearProfileMode,
   setProfileActiveMode,
   signOut,
-} from "@/app/features/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { ThemeSwitch } from "../theme-switch";
-import { useTheme } from "@/hooks";
-import { Roles } from "@/types";
+} from "@/app/features/authentication"
+import { Link, useNavigate } from "react-router-dom"
+import { ThemeSwitch } from "../theme-switch"
+import { useTheme } from "@/hooks"
+import { Roles } from "@/types"
 
 export const NavbarRightMenus = () => {
-  const navigate = useNavigate();
-  const { setTheme } = useTheme();
-  const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth.authentication);
-  const profileMode = useAppSelector((state) => state.auth.profileSwitch);
+  const navigate = useNavigate()
+  const { setTheme } = useTheme()
+  const dispatch = useAppDispatch()
+  const auth = useAppSelector((state) => state.authentication.auth)
+  const profileMode = useAppSelector(
+    (state) => state.authentication.profileSwitch,
+  )
 
   const handleLogout = () => {
-    dispatch(signOut());
-    dispatch(clearProfileMode());
-    setTheme("light");
-    navigate("/");
+    dispatch(signOut())
+    dispatch(clearProfileMode())
+    setTheme("light")
+    navigate("/")
     toast({
       variant: "destructive",
       title: "Log out successfully!",
-    });
-  };
+    })
+  }
 
   return (
     <div className="flex items-center">
@@ -109,7 +111,7 @@ export const NavbarRightMenus = () => {
             {auth?.user?.organization_roles && (
               <>
                 {profileMode.activeMode === Roles.USER &&
-                  auth?.user?.organization_roles?.map((role) => {
+                  profileMode.organizationRoles?.map((role) => {
                     return (
                       <DropdownMenuItem
                         key={role.id}
@@ -120,25 +122,27 @@ export const NavbarRightMenus = () => {
                               name: role.name,
                               role: role.role,
                             }),
-                          );
-                          navigate("/");
+                          )
+                          navigate("/")
                         }}
                       >
                         <School className="mr-2 h-4 w-4" />
-                        <span className="capitalize">
+                        <span
+                          className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
+                        >
                           {role.name.length > 21
                             ? role.name.slice(0, 20) + "..."
                             : role.name}
                         </span>
                       </DropdownMenuItem>
-                    );
+                    )
                   })}
                 {profileMode.activeMode &&
                   typeof profileMode.activeMode === "object" &&
                   "id" in profileMode.activeMode && (
                     <DropdownMenuItem
                       onClick={() => {
-                        dispatch(setProfileActiveMode(Roles.USER));
+                        dispatch(setProfileActiveMode(Roles.USER))
                       }}
                     >
                       <User className="mr-2 h-4 w-4" />
@@ -213,5 +217,5 @@ export const NavbarRightMenus = () => {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
-};
+  )
+}

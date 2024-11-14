@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { TbChevronsLeft, TbMenu2, TbX } from "react-icons/tb";
-import { Layout } from "./custom/layout";
-import { Button } from "./custom/button";
-import Nav from "./nav";
-import { cn } from "@/utils";
-import { sidelinks } from "../data/sidelinks";
+import { useEffect, useState } from "react"
+import { TbChevronsLeft, TbMenu2, TbX } from "react-icons/tb"
+import { Layout } from "./custom/layout"
+import { Button } from "./custom/button"
+import Nav from "./nav"
+import { cn } from "@/utils"
+import { sidelinks } from "../data/sidelinks"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
-  isCollapsed: boolean;
-  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  isCollapsed: boolean
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function Sidebar({
@@ -16,16 +16,16 @@ export default function Sidebar({
   isCollapsed,
   setIsCollapsed,
 }: SidebarProps) {
-  const [navOpened, setNavOpened] = useState(false);
+  const [navOpened, setNavOpened] = useState(false)
 
   /* Make body not scrollable when navBar is opened */
   useEffect(() => {
     if (navOpened) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("overflow-hidden")
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("overflow-hidden")
     }
-  }, [navOpened]);
+  }, [navOpened])
 
   return (
     <aside
@@ -122,5 +122,5 @@ export default function Sidebar({
         </Button>
       </Layout>
     </aside>
-  );
+  )
 }

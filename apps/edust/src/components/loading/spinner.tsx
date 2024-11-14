@@ -1,4 +1,4 @@
-import { LogoEdust } from "../logo-edust";
+import { LogoEdust } from "../logo-edust"
 
 export const Spinner = () => {
   return (
@@ -26,5 +26,5 @@ export const Spinner = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

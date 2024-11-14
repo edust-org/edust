@@ -1,4 +1,4 @@
-import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public";
+import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
 import {
   Button,
   Form,
@@ -13,23 +13,23 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Search } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { IoAddOutline } from "react-icons/io5";
-import { z } from "zod";
+} from "@/components/ui"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Search } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { IoAddOutline } from "react-icons/io5"
+import { z } from "zod"
 
 const FormSchema = z.object({
   institute_name: z.string(),
   institute_type: z.string(),
   board: z.string(),
   eiin: z.string(),
-});
+})
 const FilterInstitute = () => {
   const { data: { data: categories } = {} } = useGetInstitutesCategoriesQuery(
     {},
-  );
+  )
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -38,11 +38,11 @@ const FilterInstitute = () => {
       board: "",
       eiin: "",
     },
-  });
+  })
   function onSubmit(values: z.infer<typeof FormSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    console.log(values)
   }
 
   return (
@@ -157,7 +157,7 @@ const FilterInstitute = () => {
         </form>
       </Form>
     </div>
-  );
-};
+  )
+}
 
-export default FilterInstitute;
+export default FilterInstitute

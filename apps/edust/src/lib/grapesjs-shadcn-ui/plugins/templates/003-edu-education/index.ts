@@ -1,4 +1,4 @@
-import thumbnail from "./education.avif";
+import thumbnail from "./education.avif"
 
 /**
  * Md. Mehedi Hassan?
@@ -1051,4 +1051,4 @@ export const eduEducation003 = {
     <!-- footer end -->
   `,
   thumbnail,
-};
+}

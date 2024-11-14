@@ -8,11 +8,11 @@ import {
   FormMessage,
   Input,
   Textarea,
-} from "@/components/ui";
-import { toast } from "@/hooks/shadcn-ui";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+} from "@/components/ui"
+import { toast } from "@/hooks/shadcn-ui"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 const FormSchema = z.object({
   first_name: z.string().min(2, {
@@ -27,7 +27,7 @@ const FormSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
-});
+})
 
 export const ContactForm = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -38,7 +38,7 @@ export const ContactForm = () => {
       email: "",
       message: "",
     },
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -48,7 +48,7 @@ export const ContactForm = () => {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
   }
 
   return (
@@ -136,5 +136,5 @@ export const ContactForm = () => {
         </form>
       </Form>
     </div>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
-import { useBoolean } from "usehooks-ts";
-import { Sidebar } from "./sidebar";
-import { cn } from "@/utils";
-import { Navbar } from "./navbar";
-import { Outlet } from "react-router-dom";
+import { useBoolean } from "usehooks-ts"
+import { Sidebar } from "./sidebar"
+import { cn } from "@/utils"
+import { Navbar } from "./navbar"
+import { Outlet } from "react-router-dom"
 
 export function Layout() {
-  const { value: isOpen, toggle } = useBoolean(true);
+  const { value: isOpen, toggle } = useBoolean(true)
 
   return (
     <>
@@ -22,7 +22,7 @@ export function Layout() {
         </div>
       </main>
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout

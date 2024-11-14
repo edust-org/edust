@@ -1,11 +1,11 @@
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react"
 
-import { cn } from "@/utils";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/utils"
+import { Button } from "@/components/ui/button"
 
 interface SidebarToggleProps {
-  isOpen: boolean | undefined;
-  setIsOpen?: () => void;
+  isOpen: boolean | undefined
+  setIsOpen?: () => void
 }
 
 export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
@@ -25,5 +25,5 @@ export function SidebarToggle({ isOpen, setIsOpen }: SidebarToggleProps) {
         />
       </Button>
     </div>
-  );
+  )
 }

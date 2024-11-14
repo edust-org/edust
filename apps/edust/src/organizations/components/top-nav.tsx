@@ -1,20 +1,20 @@
-import { cn } from "@/utils";
-import { Link } from "react-router-dom";
+import { cn } from "@/utils"
+import { Link } from "react-router-dom"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   Button,
-} from "@/components/ui";
-import { TbMenu } from "react-icons/tb";
+} from "@/components/ui"
+import { TbMenu } from "react-icons/tb"
 
 export interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
-    title: string;
-    href: string;
-    isActive: boolean;
-  }[];
+    title: string
+    href: string
+    isActive: boolean
+  }[]
 }
 
 export const TopNav = ({ className, links, ...props }: TopNavProps) => {
@@ -60,5 +60,5 @@ export const TopNav = ({ className, links, ...props }: TopNavProps) => {
         ))}
       </nav>
     </>
-  );
-};
+  )
+}

@@ -1,19 +1,19 @@
-import { Layout } from "../../components/custom/layout";
-import { Button } from "../../components/custom/button";
+import { Layout } from "../../components/custom/layout"
+import { Button } from "../../components/custom/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Search } from "../../components/search";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
-import { TopNav } from "../../components/top-nav";
-import { UserNav } from "../../components/user-nav";
-import { RecentSales } from "./components/recent-sales";
-import { Overview } from "./components/overview";
-import { ThemeSwitch } from "@/components";
+} from "@/components/ui/card"
+import { Search } from "../../components/search"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui"
+import { TopNav } from "../../components/top-nav"
+import { UserNav } from "../../components/user-nav"
+import { RecentSales } from "./components/recent-sales"
+import { Overview } from "./components/overview"
+import { ThemeSwitch } from "@/components"
 
 export default function Dashboard() {
   return (
@@ -178,7 +178,7 @@ export default function Dashboard() {
         </Tabs>
       </Layout.Body>
     </Layout>
-  );
+  )
 }
 
 const topNav = [
@@ -202,4 +202,4 @@ const topNav = [
     href: "dashboard/settings",
     isActive: false,
   },
-];
+]

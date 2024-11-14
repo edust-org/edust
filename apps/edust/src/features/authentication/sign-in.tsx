@@ -1,9 +1,12 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useLoginMutation } from "@/app/api/v0/auth";
-import { setAuthentication, setProfileMode } from "@/app/features/auth";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { useLoginMutation } from "@/app/api/v0/auth"
+import {
+  setAuthentication,
+  setProfileMode,
+} from "@/app/features/authentication"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import {
   Button,
   Form,
@@ -14,16 +17,15 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui";
-import { toast } from "@/hooks/shadcn-ui";
-import { useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BarLoader } from "react-spinners";
-import { localStore } from "@/utils";
-import { SocialAuth } from "./social-auth";
-import { Roles } from "@/types";
+} from "@/components/ui"
+import { toast } from "@/hooks/shadcn-ui"
+import { useState } from "react"
+import { Helmet } from "react-helmet-async"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+import { SocialAuth } from "./social-auth"
+import { Roles } from "@/types"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -32,15 +34,15 @@ const FormSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-});
+})
 
 export const SignIn: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const authState = useAppSelector((state) => state.auth.authentication);
-  const [login, { isLoading }] = useLoginMutation();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const dispatch = useAppDispatch()
+  const authState = useAppSelector((state) => state.authentication.auth)
+  const [login, { isLoading }] = useLoginMutation()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -48,50 +50,51 @@ export const SignIn: React.FC = () => {
       email: "",
       password: "password2024",
     },
-  });
+  })
 
   const onVisibilityClick = () => {
-    setIsPasswordVisible((prev) => !prev);
-  };
+    setIsPasswordVisible((prev) => !prev)
+  }
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(userData: z.infer<typeof FormSchema>) {
     dispatch(
       setAuthentication({
         ...authState,
         isLoading: true,
       }),
-    );
+    )
 
-    login(data)
+    login(userData)
       .unwrap()
-      .then((res) => {
-        const redirectPath = location.state?.from?.pathname || "/";
-        if (res?.status) {
+      .then((data) => {
+        const redirectPath = location.state?.from?.pathname || "/"
+        if (data?.status) {
           toast({
             variant: "success",
-            title: res?.message,
-          });
-
-          // setting the token before dispatching the authentication action
-          localStore.accessToken.set(res.data.token);
-
+            title: data?.message,
+          })
+          
           dispatch(
             setAuthentication({
               isAuthenticated: true,
               isLoading: false,
-              user: res.data?.user,
+              user: data?.data,
+              auth: {
+                token: data?.auth.token,
+                expiresAt: data?.auth.expiresAt,
+              },
             }),
-          );
+          )
 
           dispatch(
             setProfileMode({
-              system: res.data?.user.system,
-              organization_roles: res.data?.user.organization_roles,
+              systemRole: data.data?.system_role,
+              organizationRoles: data.data?.organization_roles,
               activeMode: Roles.USER,
             }),
-          );
+          )
 
-          navigate(redirectPath);
+          navigate(redirectPath)
         }
       })
       .catch((error) => {
@@ -100,14 +103,14 @@ export const SignIn: React.FC = () => {
             ...authState,
             isLoading: false,
           }),
-        );
+        )
         if (error?.data?.status) {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -203,5 +206,5 @@ export const SignIn: React.FC = () => {
         </Form>
       </div>
     </>
-  );
-};
+  )
+}

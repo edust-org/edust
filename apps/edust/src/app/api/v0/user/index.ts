@@ -1,12 +1,12 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiV0BaseQuery } from "../../api-url";
-import { Organization, User } from "@/types";
+import { createApi } from "@reduxjs/toolkit/query/react"
+import { apiV0BaseQuery } from "../../api-url"
+import { Organization, User } from "@/types"
 
 export interface ProfileResponse {
   data: {
-    organization: Organization[] | null;
-    user: User;
-  };
+    organization: Organization[] | null
+    user: User
+  }
 }
 
 export const userApi = createApi({
@@ -20,6 +20,6 @@ export const userApi = createApi({
       query: () => `/self`,
     }),
   }),
-});
+})
 
-export const { useGetUserQuery } = userApi;
+export const { useGetUserQuery } = userApi

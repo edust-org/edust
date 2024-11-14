@@ -1,4 +1,4 @@
-import { Typography } from "./ui";
+import { Typography } from "./ui"
 
 export const GlobalTopNotificationBar = () => {
   return (
@@ -13,5 +13,5 @@ export const GlobalTopNotificationBar = () => {
         </a>
       </Typography>
     </div>
-  );
-};
+  )
+}

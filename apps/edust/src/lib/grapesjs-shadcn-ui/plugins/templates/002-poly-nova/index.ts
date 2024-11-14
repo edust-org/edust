@@ -1,4 +1,4 @@
-import thumbnail from "./poly-nova.avif";
+import thumbnail from "./poly-nova.avif"
 
 /**
  * Who created this template?
@@ -261,4 +261,4 @@ export const polyNova002 = {
     </footer>`,
 
   thumbnail,
-};
+}

@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 import {
   Button,
@@ -12,37 +12,37 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { useResetPasswordMutation } from "@/app/api/v0/auth";
-import { toast } from "@/hooks/shadcn-ui";
-import { BarLoader } from "react-spinners";
-import assets from "@/assets/images";
-import { KeySquare } from "lucide-react";
-import { Link } from "react-router-dom";
+} from "@/components/ui"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
+import { useResetPasswordMutation } from "@/app/api/v0/auth"
+import { toast } from "@/hooks/shadcn-ui"
+import { BarLoader } from "react-spinners"
+import assets from "@/assets/images"
+import { KeySquare } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const FormSchema = z.object({
   newPassword: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-});
+})
 export const ResetWithNewPassword = () => {
-  const [searchParams] = useSearchParams();
-  const email = searchParams.get("email");
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [searchParams] = useSearchParams()
+  const email = searchParams.get("email")
+  const [resetPassword, { isLoading }] = useResetPasswordMutation()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       newPassword: "",
     },
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ newPassword: data.newPassword, email });
+    console.log({ newPassword: data.newPassword, email })
     resetPassword({ newPassword: data.newPassword, email })
       .unwrap()
       .then((res) => {
@@ -50,8 +50,8 @@ export const ResetWithNewPassword = () => {
           toast({
             variant: "success",
             title: res?.message,
-          });
-          navigate("/auth/sign-in");
+          })
+          navigate("/auth/sign-in")
         }
       })
       .catch((error) => {
@@ -59,9 +59,9 @@ export const ResetWithNewPassword = () => {
           toast({
             variant: "destructive",
             title: error?.data?.message,
-          });
+          })
         }
-      });
+      })
   }
 
   return (
@@ -111,5 +111,5 @@ export const ResetWithNewPassword = () => {
         </Form>
       </div>
     </>
-  );
-};
+  )
+}

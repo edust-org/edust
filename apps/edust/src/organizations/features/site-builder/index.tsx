@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations";
-import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui";
+import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations"
+import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui"
 
-import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations";
-import { toast } from "@/hooks/shadcn-ui";
+import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations"
+import { toast } from "@/hooks/shadcn-ui"
 
 export const SiteBuilder = () => {
-  const { data } = useGetSiteBuilderMeQuery();
-  const [saveGsData] = useEditSiteBuilderMutation();
+  const { data } = useGetSiteBuilderMeQuery()
+  const [saveGsData] = useEditSiteBuilderMutation()
 
   const onEditor = async (editor: any) => {
     editor.Commands.add("save-db", {
       run: async () => {
-        const selectedComponent = editor?.Pages?.getSelected();
+        const selectedComponent = editor?.Pages?.getSelected()
         const page = {
           page_id: selectedComponent?.getId(),
           page_name: selectedComponent?.getName(),
@@ -22,12 +22,12 @@ export const SiteBuilder = () => {
           css: editor.getCss({
             component: selectedComponent?.getMainComponent(),
           }),
-        };
+        }
 
         // in this here assets means whole project data
-        const assets = editor.getProjectData();
-        console.log(page);
-        console.log(assets);
+        const assets = editor.getProjectData()
+        console.log(page)
+        console.log(assets)
         saveGsData({
           assets: JSON.stringify(editor.getProjectData()),
         })
@@ -37,18 +37,18 @@ export const SiteBuilder = () => {
               toast({
                 variant: "success",
                 title: res?.message,
-              });
+              })
             }
           })
           .catch((error) => {
             toast({
               variant: "destructive",
               title: error?.data?.message,
-            });
-          });
+            })
+          })
       },
-    });
-  };
+    })
+  }
 
   const optionsCustomize = (editorRef) => ({
     storageManager: {
@@ -66,7 +66,7 @@ export const SiteBuilder = () => {
           onLoad: (result) => {
             return editorRef.current.loadProjectData(
               JSON.parse(result?.data?.assets),
-            );
+            )
           },
           headers: {
             CredentialsContainer: true,
@@ -82,18 +82,18 @@ export const SiteBuilder = () => {
 
           onStore: (data, editor) => {
             const pages = editor.Pages.getAll().map((page) => {
-              const component = page.getMainComponent();
+              const component = page.getMainComponent()
               return {
                 id: page.getId(),
                 name: page.getName(),
                 html: editor.getHtml({ component }),
                 css: editor.getCss({ component }),
-              };
-            });
+              }
+            })
             return {
               assets: JSON.stringify(data),
               pages: JSON.stringify(pages),
-            };
+            }
           },
         },
       },
@@ -102,9 +102,9 @@ export const SiteBuilder = () => {
     assetManager: {
       autoAdd: true,
       uploadFile: (e) => {
-        const files = e.dataTransfer ? e.dataTransfer.files : e.target?.files;
-        const formData = new FormData();
-        formData.append("image", files[0]);
+        const files = e.dataTransfer ? e.dataTransfer.files : e.target?.files
+        const formData = new FormData()
+        formData.append("image", files[0])
 
         fetch("http://localhost:3000/api/v0/organizations/site/upload", {
           method: "POST",
@@ -113,27 +113,27 @@ export const SiteBuilder = () => {
         })
           .then((response) => {
             if (!response.ok) {
-              throw new Error("Network response was not ok");
+              throw new Error("Network response was not ok")
             }
-            return response.json();
+            return response.json()
           })
           .then((data) => {
-            const image_path = data?.data.src;
+            const image_path = data?.data.src
             if (image_path) {
-              const editor = editorRef?.current;
+              const editor = editorRef?.current
               if (editor) {
-                const assetManager = editor?.AssetManager;
-                assetManager.add([image_path]);
-                assetManager.render();
+                const assetManager = editor?.AssetManager
+                assetManager.add([image_path])
+                assetManager.render()
               }
             }
           })
           .catch((error) => {
-            console.error("Error:", error);
-          });
+            console.error("Error:", error)
+          })
       },
     },
-  });
+  })
   return (
     <div>
       {data?.status && (
@@ -143,5 +143,5 @@ export const SiteBuilder = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}

@@ -1,10 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon, CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import dayjs from "dayjs";
-import { cn } from "@/utils";
-import { Button } from "../../../components/custom/button";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { CalendarIcon, CaretSortIcon, CheckIcon } from "@radix-ui/react-icons"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import dayjs from "dayjs"
+import { cn } from "@/utils"
+import { Button } from "../../../components/custom/button"
 import {
   Calendar,
   Command,
@@ -23,9 +23,9 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui";
+} from "@/components/ui"
 
-import { toast } from "@/hooks/shadcn-ui";
+import { toast } from "@/hooks/shadcn-ui"
 
 const languages = [
   { label: "English", value: "en" },
@@ -37,7 +37,7 @@ const languages = [
   { label: "Japanese", value: "ja" },
   { label: "Korean", value: "ko" },
   { label: "Chinese", value: "zh" },
-] as const;
+] as const
 
 const accountFormSchema = z.object({
   name: z
@@ -54,21 +54,21 @@ const accountFormSchema = z.object({
   language: z.string({
     required_error: "Please select a language.",
   }),
-});
+})
 
-type AccountFormValues = z.infer<typeof accountFormSchema>;
+type AccountFormValues = z.infer<typeof accountFormSchema>
 
 // This can come from your database or API.
 const defaultValues: Partial<AccountFormValues> = {
   // name: "Your name",
   // dob: new Date("2023-01-23"),
-};
+}
 
 export function AccountForm() {
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
-  });
+  })
 
   function onSubmit(data: AccountFormValues) {
     toast({
@@ -78,7 +78,7 @@ export function AccountForm() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
   }
 
   return (
@@ -164,8 +164,8 @@ export function AccountForm() {
                     >
                       {field.value
                         ? languages.find(
-                          (language) => language.value === field.value,
-                        )?.label
+                            (language) => language.value === field.value,
+                          )?.label
                         : "Select language"}
                       <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
@@ -181,7 +181,7 @@ export function AccountForm() {
                           value={language.label}
                           key={language.value}
                           onSelect={() => {
-                            form.setValue("language", language.value);
+                            form.setValue("language", language.value)
                           }}
                         >
                           <CheckIcon
@@ -209,5 +209,5 @@ export function AccountForm() {
         <Button type="submit">Update account</Button>
       </form>
     </Form>
-  );
+  )
 }

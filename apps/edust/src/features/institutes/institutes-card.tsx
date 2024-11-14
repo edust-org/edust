@@ -8,19 +8,19 @@ import {
   CardFooter,
   CardTitle,
   Typography,
-} from "@/components/ui";
-import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
-import { FC, useEffect, useState } from "react";
-import { format } from "date-fns";
-import axios from "axios";
+} from "@/components/ui"
+import { Link } from "react-router-dom"
+import { Phone, Mail, MapPin } from "lucide-react"
+import { FC, useEffect, useState } from "react"
+import { format } from "date-fns"
+import axios from "axios"
 
 type InstitutesCardProps = {
-  item: any;
-};
+  item: any
+}
 
 export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
-  const [flags, setFlags] = useState({ png: "", alt: "" });
+  const [flags, setFlags] = useState({ png: "", alt: "" })
 
   const {
     id,
@@ -34,27 +34,27 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     author: { name: authorName, profile_pic },
     createdAt,
     country,
-  } = item;
+  } = item
 
   const fallbackName = (name: string) => {
-    const arrName = name.split(" ").filter(Boolean);
+    const arrName = name.split(" ").filter(Boolean)
 
-    const firstChar = arrName[0][0];
-    const lastChar = arrName.length > 1 ? arrName[1][0] : "";
-    return `${firstChar}${lastChar}`.toUpperCase();
-  };
+    const firstChar = arrName[0][0]
+    const lastChar = arrName.length > 1 ? arrName[1][0] : ""
+    return `${firstChar}${lastChar}`.toUpperCase()
+  }
 
   useEffect(() => {
     const getCountry = async () => {
       const data = await axios.get(
         `https://restcountries.com/v3.1/name/${country}?fields=flags`,
-      );
+      )
       // console.log(data.data[0]?.flags);
-      setFlags(data.data[0]?.flags);
-    };
+      setFlags(data.data[0]?.flags)
+    }
 
-    getCountry();
-  }, []);
+    getCountry()
+  }, [])
 
   return (
     <>
@@ -129,5 +129,5 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
         </CardFooter>
       </Card>
     </>
-  );
-};
+  )
+}

@@ -277,4 +277,4 @@ export default {
       updated_at: "2024-10-03T02:56:51.000Z",
     },
   },
-};
+}

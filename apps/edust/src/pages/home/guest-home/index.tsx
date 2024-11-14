@@ -1,18 +1,20 @@
-import { GlobalTopNotificationBar, Navbar } from "@/components";
-import { Helmet } from "react-helmet-async";
-import { HelpGetStarted } from "./help-get-started";
-import { StartDesign } from "./start-design";
-import { Faq } from "./faq";
-import Hero from "./hero";
-import { Footer } from "./footer";
+import { GlobalTopNotificationBar, Navbar } from "@/components"
+import { Helmet } from "react-helmet-async"
+import { HelpGetStarted } from "./help-get-started"
+import { StartDesign } from "./start-design"
+import { Faq } from "./faq"
+import Hero from "./hero"
+import { Footer } from "./footer"
 
 export const GuestHome = () => {
   return (
     <>
       <Helmet>
-        <meta name="description" content="Welcome to Edust, a design platform for creating engaging and beautiful educational content." />
+        <meta
+          name="description"
+          content="Welcome to Edust, a design platform for creating engaging and beautiful educational content."
+        />
         <title>Edust | Welcome to here</title>
-        
       </Helmet>
 
       <GlobalTopNotificationBar />
@@ -29,5 +31,5 @@ export const GuestHome = () => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}

@@ -1,27 +1,27 @@
-import * as React from "react";
-import { cn } from "@/utils";
+import * as React from "react"
+import { cn } from "@/utils"
 
 interface BreadcrumbProps extends React.ComponentPropsWithoutRef<"nav"> {
   children:
     | React.ReactElement<typeof BreadcrumbItem>
-    | React.ReactElement<typeof BreadcrumbItem>[];
-  separator?: React.ReactNode;
+    | React.ReactElement<typeof BreadcrumbItem>[]
+  separator?: React.ReactNode
 }
 
-const BreadcrumbContext = React.createContext<boolean>(false);
+const BreadcrumbContext = React.createContext<boolean>(false)
 
 const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
   ({ className, children, separator, ...props }, ref) => {
-    const validChildren = getValidChildren(children);
+    const validChildren = getValidChildren(children)
 
-    const count = validChildren.length;
+    const count = validChildren.length
 
     const clones = validChildren.map((child, index) =>
       React.cloneElement(child, {
         separator,
         isLastChild: count === index + 1,
       }),
-    );
+    )
 
     return (
       <BreadcrumbContext.Provider value={true}>
@@ -29,14 +29,14 @@ const Breadcrumb = React.forwardRef<HTMLElement, BreadcrumbProps>(
           <ol className={cn(`flex`)}>{clones}</ol>
         </nav>
       </BreadcrumbContext.Provider>
-    );
+    )
   },
-);
-Breadcrumb.displayName = "Breadcrumb";
+)
+Breadcrumb.displayName = "Breadcrumb"
 
 interface InternalBreadcrumbItemProps {
-  separator?: React.ReactNode;
-  isLastChild: boolean;
+  separator?: React.ReactNode
+  isLastChild: boolean
 }
 
 interface BreadcrumbItemProps
@@ -48,14 +48,14 @@ interface BreadcrumbItemProps
 const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
   ({ className, children, ...props }, ref) => {
     const { separator, isLastChild, ...rest } =
-      props as InternalBreadcrumbItemProps;
+      props as InternalBreadcrumbItemProps
 
     // Check if BreadcrumbItem is used within Breadcrumb
-    const isInsideBreadcrumb = React.useContext(BreadcrumbContext);
+    const isInsideBreadcrumb = React.useContext(BreadcrumbContext)
     if (!isInsideBreadcrumb) {
       throw new Error(
         `${BreadcrumbItem.displayName} must be used within ${Breadcrumb.displayName}.`,
-      );
+      )
     }
 
     return (
@@ -65,21 +65,21 @@ const BreadcrumbItem = React.forwardRef<HTMLLIElement, BreadcrumbItemProps>(
           <span className="mx-2 *:!inline-block">{separator ?? "/"}</span>
         )}
       </li>
-    );
+    )
   },
-);
-BreadcrumbItem.displayName = "BreadcrumbItem";
+)
+BreadcrumbItem.displayName = "BreadcrumbItem"
 
 /* ========== Util Func ========== */
 
 const getValidChildren = (children: React.ReactNode) =>
   React.Children.toArray(children).filter((child) => {
     if (React.isValidElement(child) && child.type === BreadcrumbItem) {
-      return React.isValidElement(child);
+      return React.isValidElement(child)
     }
     throw new Error(
       `${Breadcrumb.displayName} can only have ${BreadcrumbItem.displayName} as children.`,
-    );
-  }) as React.ReactElement[];
+    )
+  }) as React.ReactElement[]
 
-export { Breadcrumb, BreadcrumbItem };
+export { Breadcrumb, BreadcrumbItem }

@@ -1,4 +1,4 @@
-import thumbnail from "./lifeSchool.avif";
+import thumbnail from "./lifeSchool.avif"
 
 /**
  * mihazul abedin apon
@@ -1223,4 +1223,4 @@ export const lifeSchool006 = {
   
   `,
   thumbnail,
-};
+}

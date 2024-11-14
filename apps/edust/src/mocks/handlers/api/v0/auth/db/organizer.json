@@ -1,0 +1,77 @@
+{
+  "status": "success",
+  "message": "Logged in successfully!",
+  "auth": {
+    "token": "ORGANIZER_TOKEN",
+    "expiresAt": "2024-11-21T13:34:25.648Z"
+  },
+  "data": {
+    "id": "9bc3b5c1-296a-4712-859e-f4283e8b0e2a",
+    "name": "Organizer",
+    "username": "organizer",
+    "email": "organizer@example.com",
+    "system_role": null,
+    "createdAt": "2016-08-26T01:33:57.000Z",
+    "updatedAt": "2024-11-09T07:06:12.000Z",
+    "organization_roles": [
+      {
+        "id": "a86df457-e376-4136-b959-b4e77cd17cf9",
+        "role": "EDITOR",
+        "organization": {
+          "id": "dd811b47-ff4a-4822-b013-2be86482fc36",
+          "name": "harvard university",
+          "org_username": "harvard-univ",
+          "profile_verified": "UNVERIFIED",
+          "createdAt": "2024-11-03T02:29:28.000Z",
+          "updatedAt": "2024-11-08T13:06:30.000Z"
+        }
+      },
+      {
+        "id": "f3da7e11-905e-44c8-8324-d3cbcf481d83",
+        "role": "OWNER",
+        "organization": {
+          "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+          "name": "deploy vertical schemas",
+          "org_username": "deploy-vertical-schemas",
+          "profile_verified": "UNVERIFIED",
+          "createdAt": "2024-07-20T21:57:27.000Z",
+          "updatedAt": "2024-11-08T16:05:31.000Z"
+        }
+      },
+      {
+        "id": "f69b9dab-83f7-4e88-a8d9-5cec06200e5b",
+        "role": "EDITOR",
+        "organization": {
+          "id": "91f12d2c-bc70-4f3f-8fd3-04eb2f4789e1",
+          "name": "stanford university",
+          "org_username": "stanford-univ",
+          "profile_verified": "UNVERIFIED",
+          "createdAt": "2024-02-15T10:14:08.000Z",
+          "updatedAt": "2024-11-08T17:01:43.000Z"
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": { "href": "/api/v0/auth/login", "method": "GET" },
+    "forgot_password": {
+      "href": "/api/v0/auth/forgot-password",
+      "method": "POST"
+    },
+    "check_otp": { "href": "/api/v0/auth/check-otp", "method": "POST" },
+    "reset_password": {
+      "href": "/api/v0/auth/reset-password",
+      "method": "POST"
+    },
+    "google_auth": { "href": "/api/v0/auth/google", "method": "GET" },
+    "google_callback": {
+      "href": "/api/v0/auth/google/callback",
+      "method": "GET"
+    },
+    "github_auth": { "href": "/api/v0/auth/github", "method": "GET" },
+    "github_callback": {
+      "href": "/api/v0/auth/github/callback",
+      "method": "GET"
+    }
+  }
+}

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui";
+import { useState, useEffect } from "react"
+import { Input } from "@/components/ui"
 
 type ColorInputProps = {
-  placeholder: string;
-  value: string;
-  onChange: (ev: any) => void;
-  valueWithDef: string;
-  onColorChange: (color: string) => void;
-};
+  placeholder: string
+  value: string
+  onChange: (ev: any) => void
+  valueWithDef: string
+  onColorChange: (color: string) => void
+}
 
 const ColorInput: React.FC<ColorInputProps> = ({
   placeholder,
@@ -16,18 +16,18 @@ const ColorInput: React.FC<ColorInputProps> = ({
   valueWithDef,
   onColorChange,
 }) => {
-  const [color, setColor] = useState(valueWithDef || "#ffffff");
+  const [color, setColor] = useState(valueWithDef || "#ffffff")
 
   // Update local color state when valueWithDef changes
   useEffect(() => {
-    setColor(valueWithDef);
-  }, [valueWithDef]);
+    setColor(valueWithDef)
+  }, [valueWithDef])
 
   const handleColorChange = (event: any) => {
-    const newColor = event.target.value;
-    setColor(newColor);
-    onColorChange(newColor);
-  };
+    const newColor = event.target.value
+    setColor(newColor)
+    onColorChange(newColor)
+  }
 
   return (
     <div className="flex w-full items-center">
@@ -54,7 +54,7 @@ const ColorInput: React.FC<ColorInputProps> = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ColorInput;
+export default ColorInput

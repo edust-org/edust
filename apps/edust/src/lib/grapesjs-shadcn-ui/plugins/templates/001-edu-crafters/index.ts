@@ -1,4 +1,4 @@
-import thumbnail from "./edu-crafters.avif";
+import thumbnail from "./edu-crafters.avif"
 
 /**
  * Who created this template?
@@ -433,4 +433,4 @@ export const eduCrafets001 = {
     </footer>`,
 
   thumbnail,
-};
+}

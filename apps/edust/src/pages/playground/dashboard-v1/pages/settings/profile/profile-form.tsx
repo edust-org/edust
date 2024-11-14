@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { Link } from "react-router-dom";
-import { useFieldArray, useForm } from "react-hook-form";
-import { Button } from "../../../components/custom/button";
+import { z } from "zod"
+import { Link } from "react-router-dom"
+import { useFieldArray, useForm } from "react-hook-form"
+import { Button } from "../../../components/custom/button"
 import {
   Form,
   FormControl,
@@ -17,11 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
   Textarea,
-} from "@/components/ui";
+} from "@/components/ui"
 
-import { toast } from "@/hooks/shadcn-ui";
-import { cn } from "@/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "@/hooks/shadcn-ui"
+import { cn } from "@/utils"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 const profileFormSchema = z.object({
   username: z
@@ -45,9 +45,9 @@ const profileFormSchema = z.object({
       }),
     )
     .optional(),
-});
+})
 
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
+type ProfileFormValues = z.infer<typeof profileFormSchema>
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
@@ -56,19 +56,19 @@ const defaultValues: Partial<ProfileFormValues> = {
     { value: "https://shadcn.com" },
     { value: "http://twitter.com/shadcn" },
   ],
-};
+}
 
 export default function ProfileForm() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: "onChange",
-  });
+  })
 
   const { fields, append } = useFieldArray({
     name: "urls",
     control: form.control,
-  });
+  })
 
   function onSubmit(data: ProfileFormValues) {
     toast({
@@ -78,7 +78,7 @@ export default function ProfileForm() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
   }
 
   return (
@@ -183,5 +183,5 @@ export default function ProfileForm() {
         <Button type="submit">Update profile</Button>
       </form>
     </Form>
-  );
+  )
 }

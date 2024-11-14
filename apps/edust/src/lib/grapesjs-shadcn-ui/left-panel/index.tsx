@@ -1,9 +1,9 @@
-import { LayersProvider, PagesProvider } from "@grapesjs/react";
-import CustomPageManager from "./custom-page-manager";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui";
-import { FaLayerGroup } from "react-icons/fa";
-import { RiFileCopy2Line } from "react-icons/ri";
-import CustomLayerManager from "./custom-layer-manager";
+import { LayersProvider, PagesProvider } from "@grapesjs/react"
+import CustomPageManager from "./custom-page-manager"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui"
+import { FaLayerGroup } from "react-icons/fa"
+import { RiFileCopy2Line } from "react-icons/ri"
+import CustomLayerManager from "./custom-layer-manager"
 
 export const LeftPanel = () => {
   return (
@@ -29,5 +29,5 @@ export const LeftPanel = () => {
         </TabsContent>
       </Tabs>
     </>
-  );
-};
+  )
+}

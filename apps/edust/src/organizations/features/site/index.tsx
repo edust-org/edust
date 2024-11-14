@@ -1,6 +1,6 @@
-import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations";
-import Loading from "@/components/loading";
-import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
+import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations"
+import Loading from "@/components/loading"
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Button,
   Card,
@@ -9,23 +9,23 @@ import {
   CardTitle,
   Input,
   Typography,
-} from "@/components/ui";
-import { Layout } from "@/organizations/components/layout";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+} from "@/components/ui"
+import { Layout } from "@/organizations/components/layout"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 export const Site = () => {
-  const { data, isLoading } = useGetSiteBuilderMeQuery();
-  const [pages, setPages] = useState<[]>([]);
+  const { data, isLoading } = useGetSiteBuilderMeQuery()
+  const [pages, setPages] = useState<[]>([])
 
   useEffect(() => {
     if (data?.data?.pages) {
-      setPages(JSON.parse(data?.data?.pages));
+      setPages(JSON.parse(data?.data?.pages))
     }
-  }, [data?.data.pages]);
+  }, [data?.data.pages])
 
   if (isLoading) {
-    return <Loading.Spinner />;
+    return <Loading.Spinner />
   }
 
   return (
@@ -66,11 +66,11 @@ export const Site = () => {
                       <CardTitle>{page.name}</CardTitle>
                     </CardHeader>
                   </Card>
-                );
+                )
               })}
           </div>
         </section>
       </Layout.Body>
     </Layout>
-  );
-};
+  )
+}

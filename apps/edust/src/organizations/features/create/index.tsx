@@ -1,12 +1,12 @@
-import { lazy } from "react";
-import { Typography } from "@/components/ui";
-import assets from "@/assets/images";
+import { lazy } from "react"
+import { Typography } from "@/components/ui"
+import assets from "@/assets/images"
 
 const CreateOrganizationForm = lazy(() =>
   import("./create-organization-form").then((module) => ({
     default: module.CreateOrganizationForm,
   })),
-);
+)
 
 export const CreateOrganization = () => {
   return (
@@ -145,5 +145,5 @@ export const CreateOrganization = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}

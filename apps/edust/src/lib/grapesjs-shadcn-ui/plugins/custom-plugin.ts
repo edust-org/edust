@@ -1,7 +1,7 @@
-import { Editor } from "grapesjs";
+import { Editor } from "grapesjs"
 
 export const customPlugin = (editor: Editor) => {
-  const blockManager = editor.BlockManager;
+  const blockManager = editor.BlockManager
 
   // blockManager.add("custom-image", {
   //   label: "Image",
@@ -54,7 +54,7 @@ export const customPlugin = (editor: Editor) => {
       style: { width: "615px" },
       name: "Video",
     },
-  });
+  })
 
   blockManager.add("custom-map", {
     label: "Map",
@@ -66,5 +66,5 @@ export const customPlugin = (editor: Editor) => {
       type: "map",
       style: { height: "350px" },
     },
-  });
-};
+  })
+}

@@ -1,5 +1,5 @@
-import { Button, Typography } from "@/components/ui";
-import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { Button, Typography } from "@/components/ui"
+import { FaRegArrowAltCircleRight } from "react-icons/fa"
 
 export const HelpGetStarted = () => {
   return (
@@ -125,5 +125,5 @@ export const HelpGetStarted = () => {
         </svg>
       </div>
     </section>
-  );
-};
+  )
+}

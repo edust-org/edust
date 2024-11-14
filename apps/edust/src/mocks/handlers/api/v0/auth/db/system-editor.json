@@ -1,0 +1,39 @@
+{
+  "status": "success",
+  "message": "Logged in successfully!",
+  "auth": {
+    "token": "SYSTEM_EDITOR_TOKEN",
+    "expiresAt": "2024-11-21T13:38:14.867Z"
+  },
+  "data": {
+    "id": "cd5df1ff-04a2-45e8-a008-b729e45d8b01",
+    "name": "System Editor",
+    "username": "systemeditor",
+    "email": "systemeditor@gmail.com",
+    "system_role": "EDITOR",
+    "createdAt": "2017-01-20T12:06:45.000Z",
+    "updatedAt": "2024-11-09T11:16:16.000Z"
+  },
+  "_links": {
+    "self": { "href": "/api/v0/auth/login", "method": "GET" },
+    "forgot_password": {
+      "href": "/api/v0/auth/forgot-password",
+      "method": "POST"
+    },
+    "check_otp": { "href": "/api/v0/auth/check-otp", "method": "POST" },
+    "reset_password": {
+      "href": "/api/v0/auth/reset-password",
+      "method": "POST"
+    },
+    "google_auth": { "href": "/api/v0/auth/google", "method": "GET" },
+    "google_callback": {
+      "href": "/api/v0/auth/google/callback",
+      "method": "GET"
+    },
+    "github_auth": { "href": "/api/v0/auth/github", "method": "GET" },
+    "github_callback": {
+      "href": "/api/v0/auth/github/callback",
+      "method": "GET"
+    }
+  }
+}

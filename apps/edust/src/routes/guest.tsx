@@ -1,10 +1,10 @@
-import Loading from "@/components/loading";
-import { InstituteDetails, Institutes } from "@/features";
-import Authentication from "@/features/authentication";
-import { AboutUs, ContactUs } from "@/pages";
-import { Home } from "@/pages/home";
-import { Suspense } from "react";
-import { Route } from "react-router-dom";
+import Loading from "@/components/loading"
+import { InstituteDetails, Institutes } from "@/features"
+import Authentication from "@/features/authentication"
+import { AboutUs, ContactUs } from "@/pages"
+import { Home } from "@/pages/home"
+import { Suspense } from "react"
+import { Route } from "react-router-dom"
 
 export const guestRoutes = (
   <Route>
@@ -95,4 +95,4 @@ export const guestRoutes = (
       }
     />
   </Route>
-);
+)

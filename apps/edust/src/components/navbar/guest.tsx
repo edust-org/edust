@@ -1,10 +1,10 @@
-import assets from "@/assets/images";
-import { Button } from "@/components/ui/button";
+import assets from "@/assets/images"
+import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu"
 import {
   Sheet,
   SheetContent,
@@ -12,10 +12,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { IoMenuSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { LogoEdust } from "../logo-edust";
+} from "@/components/ui/sheet"
+import { IoMenuSharp } from "react-icons/io5"
+import { Link } from "react-router-dom"
+import { LogoEdust } from "../logo-edust"
 
 export const Guest = () => {
   return (
@@ -107,5 +107,5 @@ export const Guest = () => {
         </div>
       </header>
     </>
-  );
-};
+  )
+}

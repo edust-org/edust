@@ -1,5 +1,5 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { apiV0BaseQuery } from "../../api-url";
+import { createApi } from "@reduxjs/toolkit/query/react"
+import { apiV0BaseQuery } from "../../api-url"
 
 export const authApi = createApi({
   baseQuery: apiV0BaseQuery("/auth"),
@@ -50,7 +50,7 @@ export const authApi = createApi({
       }),
     }),
   }),
-});
+})
 
 export const {
   useRegisterMutation,
@@ -59,4 +59,4 @@ export const {
   useForgotPasswordMutation,
   useCheckOtpMutation,
   useResetPasswordMutation,
-} = authApi;
+} = authApi

@@ -1,5 +1,5 @@
-import { useBoolean } from "usehooks-ts";
-import { parseISO, addHours, isAfter } from "date-fns";
+import { useBoolean } from "usehooks-ts"
+import { parseISO, addHours, isAfter } from "date-fns"
 
 import {
   AlertDialog,
@@ -10,35 +10,35 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui";
-import { useNavigate } from "react-router-dom";
+} from "@/components/ui"
+import { useNavigate } from "react-router-dom"
 
 const checkIsOpenOrgPopup = (auth) => {
   if (auth.isAuthenticated && auth?.user?.createdAt) {
-    const userCreatedAt = auth?.user?.createdAt;
-    const createdAt = parseISO(userCreatedAt);
-    const expirationTime = addHours(createdAt, 24 * 7); // 24 * 7 = h * days
-    const isExpires = isAfter(new Date(), expirationTime);
+    const userCreatedAt = auth?.user?.createdAt
+    const createdAt = parseISO(userCreatedAt)
+    const expirationTime = addHours(createdAt, 24 * 7) // 24 * 7 = h * days
+    const isExpires = isAfter(new Date(), expirationTime)
 
-    const ls = JSON.parse(localStorage.getItem("orgPopup") || "{}");
+    const ls = JSON.parse(localStorage.getItem("orgPopup") || "{}")
 
     if (isExpires || auth?.organization?.id) {
-      localStorage.removeItem("orgPopup");
-      return false;
+      localStorage.removeItem("orgPopup")
+      return false
     }
 
     if (!isExpires && ls?.disable === undefined) {
-      localStorage.setItem("orgPopup", JSON.stringify({ ...ls, isOpen: true }));
-      return true;
+      localStorage.setItem("orgPopup", JSON.stringify({ ...ls, isOpen: true }))
+      return true
     }
   }
-};
+}
 
 export const HaveAnOrgAccount = ({ auth }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const { value: openModal, setFalse: openModalFalse } = useBoolean(
-    checkIsOpenOrgPopup(auth)
-  );
+    checkIsOpenOrgPopup(auth),
+  )
 
   return (
     <>
@@ -55,11 +55,11 @@ export const HaveAnOrgAccount = ({ auth }) => {
           <AlertDialogFooter>
             <AlertDialogCancel
               onClick={() => {
-                openModalFalse();
+                openModalFalse()
                 localStorage.setItem(
                   "orgPopup",
-                  JSON.stringify({ isOpen: false, disable: true })
-                );
+                  JSON.stringify({ isOpen: false, disable: true }),
+                )
               }}
             >
               Cancel
@@ -68,10 +68,10 @@ export const HaveAnOrgAccount = ({ auth }) => {
               onClick={() => {
                 localStorage.setItem(
                   "orgPopup",
-                  JSON.stringify({ isOpen: false, disable: true })
-                );
-                navigate("/organizations/create");
-                openModalFalse();
+                  JSON.stringify({ isOpen: false, disable: true }),
+                )
+                navigate("/organizations/create")
+                openModalFalse()
               }}
             >
               Create an Organization
@@ -80,5 +80,5 @@ export const HaveAnOrgAccount = ({ auth }) => {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  );
-};
+  )
+}

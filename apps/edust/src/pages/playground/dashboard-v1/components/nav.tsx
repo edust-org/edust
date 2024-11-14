@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { TbChevronDown } from "react-icons/tb";
-import { Button, buttonVariants } from "./custom/button";
+import { Link } from "react-router-dom"
+import { TbChevronDown } from "react-icons/tb"
+import { Button, buttonVariants } from "./custom/button"
 import {
   Collapsible,
   CollapsibleContent,
@@ -15,15 +15,15 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui";
-import { cn } from "@/utils";
-import useCheckActiveNav from "../hooks/use-check-active-nav";
-import { SideLink } from "../data/sidelinks";
+} from "@/components/ui"
+import { cn } from "@/utils"
+import useCheckActiveNav from "../hooks/use-check-active-nav"
+import { SideLink } from "../data/sidelinks"
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
-  isCollapsed: boolean;
-  links: SideLink[];
-  closeNav: () => void;
+  isCollapsed: boolean
+  links: SideLink[]
+  closeNav: () => void
 }
 
 export default function Nav({
@@ -33,7 +33,7 @@ export default function Nav({
   closeNav,
 }: NavProps) {
   const renderLink = ({ sub, ...rest }: SideLink) => {
-    const key = `${rest.title}-${rest.href}`;
+    const key = `${rest.title}-${rest.href}`
     if (isCollapsed && sub)
       return (
         <NavLinkIconDropdown
@@ -42,18 +42,18 @@ export default function Nav({
           key={key}
           closeNav={closeNav}
         />
-      );
+      )
 
     if (isCollapsed)
-      return <NavLinkIcon {...rest} key={key} closeNav={closeNav} />;
+      return <NavLinkIcon {...rest} key={key} closeNav={closeNav} />
 
     if (sub)
       return (
         <NavLinkDropdown {...rest} sub={sub} key={key} closeNav={closeNav} />
-      );
+      )
 
-    return <NavLink {...rest} key={key} closeNav={closeNav} />;
-  };
+    return <NavLink {...rest} key={key} closeNav={closeNav} />
+  }
   return (
     <div
       data-collapsed={isCollapsed}
@@ -68,12 +68,12 @@ export default function Nav({
         </nav>
       </TooltipProvider>
     </div>
-  );
+  )
 }
 
 interface NavLinkProps extends SideLink {
-  subLink?: boolean;
-  closeNav: () => void;
+  subLink?: boolean
+  closeNav: () => void
 }
 
 function NavLink({
@@ -84,7 +84,7 @@ function NavLink({
   closeNav,
   subLink = false,
 }: NavLinkProps) {
-  const { checkActiveNav } = useCheckActiveNav();
+  const { checkActiveNav } = useCheckActiveNav()
   return (
     <Link
       to={href}
@@ -107,15 +107,15 @@ function NavLink({
         </div>
       )}
     </Link>
-  );
+  )
 }
 
 function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
-  const { checkActiveNav } = useCheckActiveNav();
+  const { checkActiveNav } = useCheckActiveNav()
 
   /* Open collapsible by default
    * if one of child element is active */
-  const isChildActive = !!sub?.find((s) => checkActiveNav(s.href));
+  const isChildActive = !!sub?.find((s) => checkActiveNav(s.href))
 
   return (
     <Collapsible defaultOpen={isChildActive}>
@@ -150,11 +150,11 @@ function NavLinkDropdown({ title, icon, label, sub, closeNav }: NavLinkProps) {
         </ul>
       </CollapsibleContent>
     </Collapsible>
-  );
+  )
 }
 
 function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
-  const { checkActiveNav } = useCheckActiveNav();
+  const { checkActiveNav } = useCheckActiveNav()
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
@@ -179,15 +179,15 @@ function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
         )}
       </TooltipContent>
     </Tooltip>
-  );
+  )
 }
 
 function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
-  const { checkActiveNav } = useCheckActiveNav();
+  const { checkActiveNav } = useCheckActiveNav()
 
   /* Open collapsible by default
    * if one of child element is active */
-  const isChildActive = !!sub?.find((s) => checkActiveNav(s.href));
+  const isChildActive = !!sub?.find((s) => checkActiveNav(s.href))
 
   return (
     <DropdownMenu>
@@ -232,5 +232,5 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

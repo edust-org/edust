@@ -1,3 +1,3 @@
-import { apiV0 } from "./api/v0";
+import { apiV0 } from "./api/v0"
 
-export const handlers = [...apiV0];
+export const handlers = [...apiV0]

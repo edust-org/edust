@@ -1,6 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 import {
   Button,
   Calendar,
@@ -25,19 +25,19 @@ import {
   TabsTrigger,
   Textarea,
   Typography,
-} from "@/components/ui";
-import { format } from "date-fns";
-import { CalendarIcon, ImageUp } from "lucide-react";
-import { useState } from "react";
-import { useToast } from "@/hooks/shadcn-ui";
+} from "@/components/ui"
+import { format } from "date-fns"
+import { CalendarIcon, ImageUp } from "lucide-react"
+import { useState } from "react"
+import { useToast } from "@/hooks/shadcn-ui"
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5;
+const MAX_FILE_SIZE = 1024 * 1024 * 5
 const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/jpg",
   "image/png",
   "image/webp",
-];
+]
 const FormSchema = z.object({
   category: z.string().min(1, "Category is required"),
   nameEn: z.string().min(1, "Name (en) is required"),
@@ -47,12 +47,12 @@ const FormSchema = z.object({
   photo: z
     .any()
     .refine((file) => {
-      if (!file) return true; // Allow no file
-      return file?.[0]?.size <= MAX_FILE_SIZE;
+      if (!file) return true // Allow no file
+      return file?.[0]?.size <= MAX_FILE_SIZE
     }, `Max image size is 5MB.`)
     .refine((file) => {
-      if (!file) return true; // Allow no file
-      return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type);
+      if (!file) return true // Allow no file
+      return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
     }, "Only .jpg, .jpeg, .png, and .webp formats are supported.")
     .optional(), // Photo can be optional
 
@@ -61,8 +61,8 @@ const FormSchema = z.object({
     .optional() // Allow the value to be optional or of any type
     .refine(
       (val) => {
-        if (!val || typeof val !== "string") return true; // Allow no value or non-string
-        return z.string().url().safeParse(val).success; // If string, must be a valid URL
+        if (!val || typeof val !== "string") return true // Allow no value or non-string
+        return z.string().url().safeParse(val).success // If string, must be a valid URL
       },
       {
         message: "Must be a valid URL or left empty",
@@ -82,10 +82,10 @@ const FormSchema = z.object({
   principalName: z.string().min(1, "Principal name is required"),
   principalAge: z.string().optional(),
   tenureStart: z.date({ required_error: "Date is required" }),
-});
+})
 
 export const InstitutesCreate = () => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -111,11 +111,11 @@ export const InstitutesCreate = () => {
       principalAge: "",
       tenureStart: new Date(),
     },
-  });
-  const { toast } = useToast();
+  })
+  const { toast } = useToast()
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
+    console.log(data)
     toast({
       title: "You submitted the following values:",
       description: (
@@ -123,7 +123,7 @@ export const InstitutesCreate = () => {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
   }
 
   return (
@@ -264,8 +264,8 @@ export const InstitutesCreate = () => {
                               onBlur={field.onBlur}
                               name={field.name}
                               onChange={(e) => {
-                                field.onChange(e.target.files);
-                                setSelectedImage(e.target.files?.[0] || null);
+                                field.onChange(e.target.files)
+                                setSelectedImage(e.target.files?.[0] || null)
                               }}
                               ref={field.ref}
                             />
@@ -693,5 +693,5 @@ export const InstitutesCreate = () => {
         </Form>
       </div>
     </>
-  );
-};
+  )
+}

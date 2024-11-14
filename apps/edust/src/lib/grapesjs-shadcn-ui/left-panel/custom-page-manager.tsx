@@ -1,5 +1,5 @@
-import { PagesResultProps, useEditor } from "@grapesjs/react";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { PagesResultProps, useEditor } from "@grapesjs/react"
+import { MdDelete, MdEdit } from "react-icons/md"
 
 export default function CustomPageManager({
   pages,
@@ -8,45 +8,45 @@ export default function CustomPageManager({
   select,
   remove,
 }: PagesResultProps) {
-  const editor = useEditor();
+  const editor = useEditor()
 
   const addNewPage = () => {
-    const pn = prompt("What is your page name?");
+    const pn = prompt("What is your page name?")
 
     if (!pn) {
-      return alert("Please give me your page name.");
+      return alert("Please give me your page name.")
     }
-    const pageName = pn?.toLocaleLowerCase();
+    const pageName = pn?.toLocaleLowerCase()
 
-    const pg = editor.Pages;
+    const pg = editor.Pages
     const pgs = pg.getAll().map((p) => {
-      return p?.attributes?.name?.toLowerCase();
-    });
+      return p?.attributes?.name?.toLowerCase()
+    })
 
     if (pgs.includes(pageName)) {
-      return alert("Already page name exist.");
+      return alert("Already page name exist.")
     }
 
     add({
       name: pageName,
       component: `<h1>Page content ${pageName}</h1>`,
-    });
+    })
 
-    editor.store((data: any) => ({ site_data: JSON.stringify(data) }));
-  };
+    editor.store((data: any) => ({ site_data: JSON.stringify(data) }))
+  }
 
   const handleEdit = (page) => {
     // Log the current page data (including its name)
-    console.log("Page before update:", page);
+    console.log("Page before update:", page)
 
     // Update the page name
-    const newName = prompt("Enter the new page name:", page.get("name"));
+    const newName = prompt("Enter the new page name:", page.get("name"))
 
     // If the user provided a new name, update the page
     if (newName && newName.trim()) {
-      page.set("name", newName);
+      page.set("name", newName)
     }
-  };
+  }
 
   return (
     <div className="gjs-custom-page-manager">
@@ -86,5 +86,5 @@ export default function CustomPageManager({
         </div>
       ))}
     </div>
-  );
+  )
 }

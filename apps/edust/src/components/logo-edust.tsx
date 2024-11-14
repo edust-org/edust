@@ -1,12 +1,12 @@
-import { useAppSelector } from "@/app/hooks";
-import assets from "@/assets/images";
-import { detectTheme } from "@/utils";
+import { useAppSelector } from "@/app/hooks"
+import assets from "@/assets/images"
+import { detectTheme } from "@/utils"
 
 interface LogoEdustProps {
-  iconMode?: boolean;
-  width?: number;
-  height?: number;
-  className?: string;
+  iconMode?: boolean
+  width?: number
+  height?: number
+  className?: string
 }
 
 export const LogoEdust = ({
@@ -15,21 +15,21 @@ export const LogoEdust = ({
   height,
   className,
 }: LogoEdustProps) => {
-  const theme = useAppSelector((state) => state.theme.theme);
+  const theme = useAppSelector((state) => state.theme.theme)
 
   const logos = {
     light: assets.logoLight,
     dark: assets.logoDark,
     lightIcon: assets.logoIconBoxLight,
     darkIcon: assets.logoIconBoxDark,
-  };
+  }
 
   const logosAlt = {
     light: "Edust Org",
     dark: "Edust Org",
     lightIcon: "Edust Org Icon Logo",
     darkIcon: "Edust Org Icon Logo",
-  };
+  }
 
   if (iconMode) {
     if (detectTheme(theme) == "light") {
@@ -41,7 +41,7 @@ export const LogoEdust = ({
           height={height}
           className={className}
         />
-      );
+      )
     }
     if (detectTheme(theme) == "dark") {
       return (
@@ -52,7 +52,7 @@ export const LogoEdust = ({
           height={height}
           className={className}
         />
-      );
+      )
     }
   } else {
     if (detectTheme(theme) == "light") {
@@ -64,7 +64,7 @@ export const LogoEdust = ({
           height={height}
           className={className}
         />
-      );
+      )
     }
     if (detectTheme(theme) == "dark") {
       return (
@@ -75,7 +75,7 @@ export const LogoEdust = ({
           height={height}
           className={className}
         />
-      );
+      )
     }
   }
-};
+}

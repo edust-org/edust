@@ -1,4 +1,4 @@
-import { LogoEdust } from "./logo-edust";
+import { LogoEdust } from "./logo-edust"
 
 export const GlobalLoading = () => {
   return (
@@ -26,5 +26,5 @@ export const GlobalLoading = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useEditor } from "@grapesjs/react";
+import * as React from "react"
+import { useEditor } from "@grapesjs/react"
 import type {
   Property,
   PropertyComposite,
@@ -7,13 +7,13 @@ import type {
   PropertySelect,
   PropertySlider,
   PropertyStack,
-} from "grapesjs";
+} from "grapesjs"
 
-import { MdDelete, MdOutlineArrowDropDownCircle } from "react-icons/md";
-import { IoIosClose, IoMdArrowDropupCircle } from "react-icons/io";
-import { FaPlus } from "react-icons/fa";
+import { MdDelete, MdOutlineArrowDropDownCircle } from "react-icons/md"
+import { IoIosClose, IoMdArrowDropupCircle } from "react-icons/io"
+import { FaPlus } from "react-icons/fa"
 
-import ColorInput from "./color-input";
+import ColorInput from "./color-input"
 import {
   Button,
   Input,
@@ -27,53 +27,53 @@ import {
   RadioGroupItem,
   Label,
   Slider,
-} from "@/components/ui";
+} from "@/components/ui"
 
 interface StylePropertyFieldProps extends React.HTMLProps<HTMLDivElement> {
-  prop: Property;
+  prop: Property
 }
 
 export default function StylePropertyField({
   prop,
   ...rest
 }: StylePropertyFieldProps) {
-  const editor = useEditor();
+  const editor = useEditor()
   const handleChange = (value: string) => {
-    prop.upValue(value);
-  };
+    prop.upValue(value)
+  }
 
   const onChange = (ev: any) => {
-    handleChange(ev.target.value);
-  };
+    handleChange(ev.target.value)
+  }
 
   const openAssets = () => {
-    const { Assets } = editor;
+    const { Assets } = editor
     Assets.open({
       select: (asset, complete) => {
-        prop.upValue(asset.getSrc(), { partial: !complete });
-        complete && Assets.close();
+        prop.upValue(asset.getSrc(), { partial: !complete })
+        complete && Assets.close()
       },
       types: ["image"],
       accept: "image/*",
-    });
-  };
+    })
+  }
 
-  const type = prop.getType();
-  const defValue = prop.getDefaultValue();
-  const canClear = prop.canClear();
-  const hasValue = prop.hasValue();
-  const value = prop.getValue();
-  const valueString = hasValue ? value : "";
-  const valueWithDef = hasValue ? value : defValue;
+  const type = prop.getType()
+  const defValue = prop.getDefaultValue()
+  const canClear = prop.canClear()
+  const hasValue = prop.hasValue()
+  const value = prop.getValue()
+  const valueString = hasValue ? value : ""
+  const valueWithDef = hasValue ? value : defValue
 
   let inputToRender = (
     <Input placeholder={defValue} value={valueString} onChange={onChange} />
-  );
+  )
 
   switch (type) {
     case "radio":
       {
-        const radioProp = prop as PropertyRadio;
+        const radioProp = prop as PropertyRadio
         inputToRender = (
           <RadioGroup defaultValue={value} onValueChange={handleChange}>
             {radioProp.getOptions().map((option) => (
@@ -91,12 +91,12 @@ export default function StylePropertyField({
               </div>
             ))}
           </RadioGroup>
-        );
+        )
       }
-      break;
+      break
     case "select":
       {
-        const selectProp = prop as PropertySelect;
+        const selectProp = prop as PropertySelect
         inputToRender = (
           <Select value={value} onValueChange={handleChange}>
             <SelectTrigger className="w-[180px]">
@@ -105,21 +105,21 @@ export default function StylePropertyField({
             <SelectContent>
               <SelectGroup>
                 {selectProp.getOptions().map((option) => {
-                  const optionId = selectProp.getOptionId(option) || "outside";
+                  const optionId = selectProp.getOptionId(option) || "outside"
                   const optionLabel =
-                    selectProp.getOptionLabel(option) || "outside";
+                    selectProp.getOptionLabel(option) || "outside"
                   return (
                     <SelectItem key={optionId} value={optionId}>
                       {optionLabel}
                     </SelectItem>
-                  );
+                  )
                 })}
               </SelectGroup>
             </SelectContent>
           </Select>
-        );
+        )
       }
-      break;
+      break
     case "color":
       {
         inputToRender = (
@@ -130,12 +130,12 @@ export default function StylePropertyField({
             valueWithDef={valueWithDef}
             onColorChange={(value) => handleChange(value)}
           />
-        );
+        )
       }
-      break;
+      break
     case "slider":
       {
-        const sliderProp = prop as PropertySlider;
+        const sliderProp = prop as PropertySlider
 
         inputToRender = (
           <Slider
@@ -144,12 +144,12 @@ export default function StylePropertyField({
             max={sliderProp.getMax()}
             step={sliderProp.getStep()}
             onValueChange={(e) => {
-              handleChange(e[0].toString());
+              handleChange(e[0].toString())
             }}
           />
-        );
+        )
       }
-      break;
+      break
     case "file":
       {
         inputToRender = (
@@ -169,12 +169,12 @@ export default function StylePropertyField({
               Select Image
             </button>
           </div>
-        );
+        )
       }
-      break;
+      break
     case "composite":
       {
-        const compositeProp = prop as PropertyComposite;
+        const compositeProp = prop as PropertyComposite
         inputToRender = (
           <div
             className={
@@ -185,14 +185,14 @@ export default function StylePropertyField({
               <StylePropertyField key={prop.getId()} prop={prop} />
             ))}
           </div>
-        );
+        )
       }
-      break;
+      break
     case "stack":
       {
-        const stackProp = prop as PropertyStack;
-        const layers = stackProp.getLayers();
-        const isTextShadow = stackProp.getName() === "text-shadow";
+        const stackProp = prop as PropertyStack
+        const layers = stackProp.getLayers()
+        const isTextShadow = stackProp.getName() === "text-shadow"
         inputToRender = (
           <div
             className={
@@ -245,9 +245,9 @@ export default function StylePropertyField({
               </div>
             ))}
           </div>
-        );
+        )
       }
-      break;
+      break
   }
 
   return (
@@ -274,5 +274,5 @@ export default function StylePropertyField({
       </div>
       {inputToRender}
     </div>
-  );
+  )
 }
