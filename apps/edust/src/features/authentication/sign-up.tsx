@@ -157,13 +157,20 @@ export const SignUp: React.FC = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
-                          type={isPasswordVisible ? "text" : "password"}
-                          placeholder="********"
-                          icon={isPasswordVisible ? <FaEye /> : <FaEyeSlash />}
-                          onIconClick={onVisibilityClick}
-                          {...field}
-                        />
+                        <div className="relative">
+                          <Input
+                            type={isPasswordVisible ? "text" : "password"}
+                            placeholder="********"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
+                            onClick={onVisibilityClick}
+                          >
+                            {isPasswordVisible ? <FaEye /> : <FaEyeSlash />}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
