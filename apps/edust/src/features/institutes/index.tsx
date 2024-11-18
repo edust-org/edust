@@ -7,7 +7,9 @@ import { Helmet } from "react-helmet-async"
 import FilterInstitute from "./filter-institute"
 
 export const Institutes = () => {
-  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({})
+  // const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({})
+  const data = {items:[]}
+  const isLoading = false;
 
   return (
     <div>
@@ -36,7 +38,9 @@ export const Institutes = () => {
               ))}
             </div>
           ) : (
-            <InstituteNotFound />
+            <div className="flex justify-center items-center">
+              <InstituteNotFound />
+            </div>
           )}
         </main>
       </section>
