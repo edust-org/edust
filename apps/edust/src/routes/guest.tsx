@@ -53,7 +53,7 @@ export const guestRoutes = (
       />
 
       <Route
-        path="callback/:access_token"
+        path="callback/:token"
         element={
           <Suspense fallback={<Loading.Spinner />}>
             <Authentication.SocialAuthCallback />
