@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async"
 import FilterInstitute from "./filter-institute"
 
 export const Institutes = () => {
-  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({})
+  const { data: { data } = {}, isLoading } = useGetInstitutesQuery({})
 
   return (
     <div>
