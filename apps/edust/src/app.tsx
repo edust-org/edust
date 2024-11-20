@@ -4,8 +4,11 @@ import { Toaster } from "@/components/ui/toaster"
 import router from "@/routes"
 import { ErrorBoundary, GlobalLoading } from "@/components"
 import { TooltipProvider } from "@/components/ui"
+import axios from "./utils/axios"
 
 const App: React.FC = () => {
+  // Axios - Set default configurations
+  axios()
   return (
     <ErrorBoundary>
       <Suspense fallback={<GlobalLoading />}>
