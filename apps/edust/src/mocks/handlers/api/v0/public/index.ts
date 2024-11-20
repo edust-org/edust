@@ -4,8 +4,14 @@ import { getInstituteByIdDB, getOrgSitesPagesDB } from "./public-db"
 import getInstitutesDB from "./get-institutes-db.json"
 import getInstitutesCategoriesDB from "./get-institutes-categories-db.json"
 
-const getOrgSitesPages = http.get(
-  `${apiUrlV0}/public/organizations/:orgIdOrUsername/site/?name=home`,
+const getOrgSitesByOrgId = http.get(
+  `${apiUrlV0}/public/organizations/orgId-:145d86ab-7061-426b-acd0-2200ef634eb9/site/?name=home`,
+  () => {
+    return HttpResponse.json(getOrgSitesPagesDB)
+  },
+)
+const getOrgSitesByUsername = http.get(
+  `${apiUrlV0}/public/organizations/orgUsername-oxford-univ/site/?name=home`,
   () => {
     return HttpResponse.json(getOrgSitesPagesDB)
   },
@@ -27,7 +33,8 @@ const getInstituteById = http.get(`${apiUrlV0}/public/institutes/:id`, () => {
 })
 
 export const publicApi = [
-  getOrgSitesPages,
+  getOrgSitesByOrgId,
+  getOrgSitesByUsername,
   getInstitutes,
   getInstitutesCategories,
   getInstituteById,
