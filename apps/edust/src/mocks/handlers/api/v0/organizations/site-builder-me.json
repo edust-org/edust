@@ -1,0 +1,94 @@
+{
+  "status": "success",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "33f91a95-d6ed-4b3f-bed0-24b7296ee8b6",
+    "org_id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+    "assets": {
+      "pages": [
+        {
+          "id": "PoFG30PNj7Uyoip4",
+          "name": "home",
+          "frames": [
+            {
+              "id": "CPqtgjgTK16ie4Hh",
+              "component": {
+                "head": { "type": "head" },
+                "type": "wrapper",
+                "docEl": { "tagName": "html" },
+                "stylable": [
+                  "background",
+                  "background-color",
+                  "background-image",
+                  "background-repeat",
+                  "background-attachment",
+                  "background-position",
+                  "background-size"
+                ],
+                "components": [
+                  {
+                    "classes": [
+                      "px-4",
+                      "min-h-10",
+                      "h-screen",
+                      "flex",
+                      "items-center",
+                      "flex-col",
+                      "justify-center"
+                    ],
+                    "tagName": "section",
+                    "attributes": { "id": "ieti" },
+                    "components": [
+                      {
+                        "type": "image",
+                        "classes": ["mt-10", "mx-auto", "w-[300px]"],
+                        "resizable": { "ratioDefault": 1 },
+                        "attributes": {
+                          "id": "ihv64",
+                          "src": "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg"
+                        }
+                      },
+                      {
+                        "type": "text",
+                        "classes": [
+                          "scroll-m-20",
+                          "text-4xl",
+                          "font-extrabold",
+                          "tracking-tight",
+                          "lg:text-5xl",
+                          "text-center",
+                          "mt-4"
+                        ],
+                        "tagName": "h1",
+                        "attributes": { "id": "ig4x" },
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "Build your landing page\n    "
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "assets": [
+        {
+          "src": "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg",
+          "type": "image",
+          "width": 0,
+          "height": 0,
+          "unitDim": "px"
+        }
+      ],
+      "styles": [],
+      "symbols": []
+    },
+    "createdAt": "2000-10-10T19:37:16.000Z",
+    "updatedAt": "2024-11-22T16:09:48.000Z"
+  }
+}

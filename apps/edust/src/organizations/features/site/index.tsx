@@ -13,6 +13,7 @@ import {
 import { Layout } from "@/organizations/components/layout"
 import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet-async"
+import { Link } from "react-router-dom"
 
 export const Site = () => {
   const { data, isLoading } = useGetSiteBuilderMeQuery()
@@ -66,7 +67,9 @@ export const Site = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button className="mt-2">Start Editing</Button>
+              <Link to={"builder"} target="_blank">
+                <Button className="mt-2">Start Editing</Button>
+              </Link>
             </CardContent>
           </Card>
         </section>
