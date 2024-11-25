@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@edust/ui": "workspace:*",
     "@edust/grapesjs": "workspace:*",
     "@grapesjs/react": "^1.0.0",
     "@hookform/resolvers": "^3.9.1",
