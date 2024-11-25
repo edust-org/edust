@@ -1,4 +1,5 @@
-import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui"
+// TODO! temporary import from src
+import { GrapesjsEdust } from "@edust/grapesjs-edust/src"
 
 import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations"
 import { toast } from "@/hooks/shadcn-ui"
@@ -132,10 +133,7 @@ export const SiteBuilder = () => {
   })
   return (
     <div>
-      <GrapesjsShadcnUI
-        onEditor={onEditor}
-        optionsCustomize={optionsCustomize}
-      />
+      <GrapesjsEdust onEditor={onEditor} optionsCustomize={optionsCustomize} />
     </div>
   )
 }
