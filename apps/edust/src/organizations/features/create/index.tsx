@@ -1,12 +1,6 @@
-import { lazy } from "react"
 import { Typography } from "@/components/ui"
 import assets from "@/assets/images"
-
-const CreateOrganizationForm = lazy(() =>
-  import("./create-organization-form").then((module) => ({
-    default: module.CreateOrganizationForm,
-  })),
-)
+import { CreateOrganizationForm } from "./create-organization-form"
 
 export const CreateOrganization = () => {
   return (
@@ -137,7 +131,7 @@ export const CreateOrganization = () => {
           </div>
         </div>
         <div className="max-w-[550px] flex-1 p-4 md:pe-8 xl:flex-none 2xl:max-w-[800px] 2xl:p-24">
-          <img src={assets.logo} alt="" width={180} className="mx-auto" />
+          <img src={assets.logoLight} alt="" width={180} className="mx-auto" />
           <Typography variant="h2" className="text-center">
             Create a free new organization
           </Typography>
