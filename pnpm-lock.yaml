@@ -69,6 +69,9 @@ importers:
       '@edust/grapesjs':
         specifier: workspace:*
         version: link:../../packages/grapesjs
+      '@edust/grapesjs-edust':
+        specifier: workspace:*
+        version: link:../../packages/grapesjs-edust
       '@grapesjs/react':
         specifier: ^1.0.0
         version: 1.0.0

@@ -1,4 +1,4 @@
-import { GrapesjsShadcnUI } from ".";
+import { GrapesjsEdust } from ".";
 function App() {
   const token = "";
 
@@ -128,7 +128,7 @@ function App() {
 
   return (
     <>
-      <GrapesjsShadcnUI onEditor={onEditor} optionsCustomize={()=>({})} />
+      <GrapesjsEdust onEditor={onEditor} optionsCustomize={() => ({})} />
     </>
   );
 }
