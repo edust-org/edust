@@ -20,10 +20,10 @@ export const guestRoutes = (
     {/* For auth routes */}
     <Route path="/auth">
       <Route
-        path="sign-up"
+        path="register"
         element={
           <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.SignUp />
+            <Authentication.Register />
           </Suspense>
         }
       />
@@ -36,10 +36,10 @@ export const guestRoutes = (
         }
       />
       <Route
-        path="sign-in"
+        path="login"
         element={
           <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.SignIn />
+            <Authentication.Login />
           </Suspense>
         }
       />

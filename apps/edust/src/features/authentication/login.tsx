@@ -36,7 +36,7 @@ const FormSchema = z.object({
   }),
 })
 
-export const SignIn: React.FC = () => {
+export const Login: React.FC = () => {
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state) => state.authentication.auth)
   const [login, { isLoading }] = useLoginMutation()
@@ -190,7 +190,7 @@ export const SignIn: React.FC = () => {
               />
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? <BarLoader color="#fff" /> : "Sign In"}
+                {isLoading ? <BarLoader color="#fff" /> : "Login"}
               </Button>
             </form>
             <div className="my-4">
@@ -201,10 +201,10 @@ export const SignIn: React.FC = () => {
               <Typography className="text-sm">
                 Don't have an account?{" "}
                 <Link
-                  to={"/auth/sign-up"}
+                  to={"/auth/register"}
                   className="ml-1 inline-block underline"
                 >
-                  Sign Up
+                  Register
                 </Link>
               </Typography>
             </div>

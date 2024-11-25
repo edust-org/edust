@@ -35,7 +35,7 @@ const FormSchema = z.object({
   }),
 })
 
-export const SignUp: React.FC = () => {
+export const Register: React.FC = () => {
   const [confirmAccount, setConfirmAccount] = useState({
     isConfirm: false,
     message: "",
@@ -92,7 +92,12 @@ export const SignUp: React.FC = () => {
         {confirmAccount.isConfirm && (
           <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
-              <img src={assets.logo} alt="" className="mx-auto" width={250} />
+              <img
+                src={assets.logoLight}
+                alt="Logo"
+                className="mx-auto"
+                width={250}
+              />
               <div className="space-y-2">
                 <Typography variant="h3">Confirm your account</Typography>
                 <MailOpen className="mx-auto h-28 w-28" />
@@ -189,10 +194,10 @@ export const SignUp: React.FC = () => {
                 <Typography className="text-sm">
                   Already have an account?{" "}
                   <Link
-                    to={"/auth/sign-in"}
+                    to={"/auth/login"}
                     className="ml-1 inline-block underline"
                   >
-                    Sign In
+                    Login
                   </Link>
                 </Typography>
               </div>

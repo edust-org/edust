@@ -60,7 +60,7 @@ export const Guest = () => {
             <SheetContent side="left">
               <SheetTitle>
                 <Link to="/">
-                  <img src={assets.logo} alt="" />
+                  <img src={assets.logoDark} alt="" />
                   <span className="sr-only">Acme Inc</span>
                 </Link>
 
@@ -100,8 +100,8 @@ export const Guest = () => {
             </SheetContent>
           </Sheet>
           <div className="flex items-center gap-4">
-            <Link to={"/auth/sign-in"}>
-              <Button>Sign In</Button>
+            <Link to={"/auth/login"}>
+              <Button>Login</Button>
             </Link>
           </div>
         </div>

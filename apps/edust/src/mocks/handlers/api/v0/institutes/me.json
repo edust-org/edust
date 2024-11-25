@@ -1,0 +1,180 @@
+{
+  "status": "success",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "items": [
+      {
+        "id": "05586208-a0ef-4f59-87a1-64d7a92654ae",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxxxXDickinson Group",
+        "slug": "baxxxxxxxxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a11123304691642::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T12:59:42.000Z",
+        "updatedAt": "2024-11-30T12:59:42.000Z"
+      },
+      {
+        "id": "0e5b7e2f-1307-42c4-b343-a8a3a020fd43",
+        "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "institute_category": "university",
+        "name": "Dhaka college4",
+        "slug": "dhaka-college4::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "4::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:57:42.000Z",
+        "updatedAt": "2024-11-30T09:57:42.000Z"
+      },
+      {
+        "id": "30aa3b81-7f52-44f0-b9b8-fcd2138fc25c",
+        "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "institute_category": "university",
+        "name": "Dhaka college",
+        "slug": "dhaka-college-11::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "11::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-12-01T08:29:34.000Z",
+        "updatedAt": "2024-12-01T08:29:34.000Z"
+      },
+      {
+        "id": "377be168-1de6-4e5b-998e-b57d082d5d04",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxXDickinson Group",
+        "slug": "baxxxxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a11123046916::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:02:11.000Z",
+        "updatedAt": "2024-11-30T09:02:11.000Z"
+      },
+      {
+        "id": "3960bf56-fd5b-4f07-8fcb-0eb2fe22c7a2",
+        "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "institute_category": "university",
+        "name": "Dhaka college-12",
+        "slug": "dhaka-college-12::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "12::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-12-01T08:38:29.000Z",
+        "updatedAt": "2024-12-01T08:38:29.000Z"
+      },
+      {
+        "id": "501d058c-d8ef-4b51-be6c-ae421422423d",
+        "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "institute_category": "university",
+        "name": "Dhaka college",
+        "slug": "dhaka-college-10::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "10::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-12-01T08:27:19.000Z",
+        "updatedAt": "2024-12-01T08:27:19.000Z"
+      },
+      {
+        "id": "841d93e0-8756-4f81-a22e-7f4d867a1767",
+        "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "institute_category": "university",
+        "name": "Dhaka college",
+        "slug": "dhaka-college-9::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "9::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-12-01T08:26:35.000Z",
+        "updatedAt": "2024-12-01T08:26:35.000Z"
+      },
+      {
+        "id": "a1f54431-3b88-4628-8cf5-407d6d43ad1a",
+        "institute_category_id": "0573c702-679c-4461-9d2e-01a78b3b91be",
+        "institute_category": "pharmacy-school",
+        "name": "Dhaka college2",
+        "slug": "dhaka-college2::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "2::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:36:06.000Z",
+        "updatedAt": "2024-11-30T09:36:06.000Z"
+      },
+      {
+        "id": "b2928253-d76a-414e-9d25-99f1017e0cd4",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxaxxXDickinson Group",
+        "slug": "baxxxxxxxxaxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a111233x04x691642::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T13:59:05.000Z",
+        "updatedAt": "2024-11-30T13:59:05.000Z"
+      },
+      {
+        "id": "b6a994c5-f056-4923-a1ed-dec173565894",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxaxxXDickinson Group",
+        "slug": "baxxxxxxxaxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a111233x04691642::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T13:34:02.000Z",
+        "updatedAt": "2024-11-30T13:34:02.000Z"
+      },
+      {
+        "id": "b925c69f-a3ac-4d39-a312-565098db8f70",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxxXDickinson Group",
+        "slug": "baxxxxxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a111230469164::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:06:35.000Z",
+        "updatedAt": "2024-11-30T09:06:35.000Z"
+      },
+      {
+        "id": "ba988af9-7250-4001-9087-9a4a4b232e1d",
+        "institute_category_id": "0573c702-679c-4461-9d2e-01a78b3b91be",
+        "institute_category": "pharmacy-school",
+        "name": "Dhaka college3",
+        "slug": "dhaka-college3::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "3::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:37:18.000Z",
+        "updatedAt": "2024-11-30T09:37:18.000Z"
+      },
+      {
+        "id": "bf6aebbe-b9fa-4a43-b448-f3e9256b1aea",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxxxXDickinson Group",
+        "slug": "baxxxxxxxxxdickinson-group::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "eiin",
+        "code": "a1112304691642::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:08:20.000Z",
+        "updatedAt": "2024-11-30T09:08:20.000Z"
+      },
+      {
+        "id": "c3e99e7e-243d-4dba-9cd4-da897c6807c9",
+        "institute_category_id": "0573c702-679c-4461-9d2e-01a78b3b91be",
+        "institute_category": "pharmacy-school",
+        "name": "Dhaka college1",
+        "slug": "dhaka-college1::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "code_type": "EIIN",
+        "code": "66666::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "createdAt": "2024-11-30T09:31:56.000Z",
+        "updatedAt": "2024-11-30T09:31:56.000Z"
+      },
+      {
+        "id": "f94f957a-1fd7-4a19-b7b3-4d52d73cf3b5",
+        "institute_category_id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "institute_category": "college",
+        "name": "baxxxxxaxxXDickinson Group",
+        "slug": "baxxxxxxxxxxdickinson-group",
+        "code_type": "eiin",
+        "code": "a11123304691642",
+        "createdAt": "2024-11-30T10:26:14.000Z",
+        "updatedAt": "2024-12-01T06:13:54.000Z"
+      }
+    ]
+  },
+  "_links": {
+    "self": { "href": "/api/v0/institutes/me", "method": "GET" },
+    "create": { "href": "/api/v0/institutes", "method": "POST" },
+    "get_by_id": { "href": "/api/v0/institutes/:id", "method": "GET" },
+    "edit_by_id": { "href": "/api/v0/institutes/:id", "method": "PATCH" },
+    "delete_by_id": { "href": "/api/v0/institutes/:id", "method": "DELETE" }
+  }
+}

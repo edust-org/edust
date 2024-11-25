@@ -1,10 +1,10 @@
 import { lazy } from "react"
 
-const SignUp = lazy(() =>
-  import("./sign-up").then((module) => ({ default: module.SignUp })),
+const Register = lazy(() =>
+  import("./register").then((module) => ({ default: module.Register })),
 )
-const SignIn = lazy(() =>
-  import("./sign-in").then((module) => ({ default: module.SignIn })),
+const Login = lazy(() =>
+  import("./login").then((module) => ({ default: module.Login })),
 )
 const VerifyEmailByToken = lazy(() =>
   import("./verify-email-by-token").then((module) => ({
@@ -23,8 +23,8 @@ const SocialAuthCallback = lazy(() =>
 )
 
 const Authentication = {
-  SignUp,
-  SignIn,
+  Register,
+  Login,
   VerifyEmailByToken,
   ForgotPassword,
   SocialAuthCallback,
