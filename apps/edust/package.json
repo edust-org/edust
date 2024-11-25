@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@edust/grapesjs": "workspace:*",
     "@grapesjs/react": "^1.0.0",
     "@hookform/resolvers": "^3.9.1",
     "@lottiefiles/react-lottie-player": "^3.5.4",
@@ -45,7 +46,6 @@
     "cmdk": "^1.0.4",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
-    "grapesjs": "^0.22.3",
     "grapesjs-blocks-basic": "^1.0.2",
     "grapesjs-custom-code": "^1.0.2",
     "grapesjs-plugin-export": "^1.0.12",

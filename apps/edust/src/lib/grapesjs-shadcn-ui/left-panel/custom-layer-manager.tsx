@@ -1,6 +1,6 @@
 import * as React from "react"
 import { LayersResultProps, useEditor } from "@grapesjs/react"
-import type { Component, Editor } from "grapesjs"
+import type { Component, Editor } from "@edust/grapesjs"
 import { useRef, useState } from "react"
 import LayerItem from "../left-panel/layer-item"
 

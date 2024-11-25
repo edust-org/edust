@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import grapesjs, { Editor } from "grapesjs"
+import grapesjs, { Editor } from "@edust/grapesjs"
 import GjsEditor, { Canvas } from "@grapesjs/react"
 import { RightPanel } from "./right-panel"
 import { TopControllers } from "./top-controllers"

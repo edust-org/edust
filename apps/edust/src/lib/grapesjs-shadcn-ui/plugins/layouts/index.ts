@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs"
+import { Editor } from "@edust/grapesjs"
 
 /**
  * @param editor

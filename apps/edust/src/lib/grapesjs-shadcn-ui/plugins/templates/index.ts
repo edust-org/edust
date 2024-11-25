@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs"
+import { Editor } from "@edust/grapesjs"
 import { eduCrafets001 } from "./001-edu-crafters"
 import { eduEducation003 } from "./003-edu-education"
 import { polyNova002 } from "./002-poly-nova"

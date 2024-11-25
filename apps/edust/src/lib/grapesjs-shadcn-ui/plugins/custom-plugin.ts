@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs"
+import { Editor } from "@edust/grapesjs"
 
 export const customPlugin = (editor: Editor) => {
   const blockManager = editor.BlockManager

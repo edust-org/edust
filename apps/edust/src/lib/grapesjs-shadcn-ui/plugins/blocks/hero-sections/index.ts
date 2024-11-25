@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs"
+import { Editor } from "@edust/grapesjs"
 import { hero1 } from "./hero-1"
 import { hero2 } from "./hero-2"
 

@@ -7,7 +7,7 @@ import type {
   PropertySelect,
   PropertySlider,
   PropertyStack,
-} from "grapesjs"
+} from "@edust/grapesjs"
 
 import { MdDelete, MdOutlineArrowDropDownCircle } from "react-icons/md"
 import { IoIosClose, IoMdArrowDropupCircle } from "react-icons/io"
