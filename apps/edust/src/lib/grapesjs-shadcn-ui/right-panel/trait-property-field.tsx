@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useEditor } from "@grapesjs/react"
-import type { Trait } from "grapesjs"
+import type { Trait } from "@edust/grapesjs"
 import {
   Button,
   Checkbox,

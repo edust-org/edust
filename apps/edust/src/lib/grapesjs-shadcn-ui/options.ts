@@ -1,4 +1,4 @@
-import { EditorConfig } from "grapesjs"
+import { EditorConfig } from "@edust/grapesjs"
 import gsPluginBlocksBasic from "grapesjs-blocks-basic"
 import gsPluginTuiImageEditor from "grapesjs-tui-image-editor"
 import gsPluginExport from "grapesjs-plugin-export"
