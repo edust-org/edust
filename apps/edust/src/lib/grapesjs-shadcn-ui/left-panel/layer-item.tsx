@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEditor } from "@grapesjs/react"
 // import { mdiEyeOffOutline, mdiEyeOutline, mdiMenuDown } from "@mdi/js";
 // import Icon from "@mdi/react";
-import type { Component } from "grapesjs"
+import type { Component } from "@edust/grapesjs"
 import { MouseEvent, useEffect, useMemo, useRef, useState } from "react"
 import { IoMdArrowDropright } from "react-icons/io"
 import { FaEye, FaEyeSlash } from "react-icons/fa"

@@ -1,4 +1,4 @@
-import { Editor } from "grapesjs"
+import { Editor } from "@edust/grapesjs"
 import appendTailwindCss from "./hooks/use-append-tailwindCss"
 
 export default async (editor: Editor) => {
