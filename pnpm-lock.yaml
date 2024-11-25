@@ -66,15 +66,9 @@ importers:
 
   apps/edust:
     dependencies:
-      '@edust/grapesjs':
-        specifier: workspace:*
-        version: link:../../packages/grapesjs
       '@edust/grapesjs-edust':
         specifier: workspace:*
         version: link:../../packages/grapesjs-edust
-      '@grapesjs/react':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@hookform/resolvers':
         specifier: ^3.9.1
         version: 3.9.1(react-hook-form@7.53.2(react@18.3.1))
@@ -174,24 +168,6 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
-      grapesjs-blocks-basic:
-        specifier: ^1.0.2
-        version: 1.0.2
-      grapesjs-custom-code:
-        specifier: ^1.0.2
-        version: 1.0.2
-      grapesjs-plugin-export:
-        specifier: ^1.0.12
-        version: 1.0.12
-      grapesjs-preset-newsletter:
-        specifier: ^1.0.2
-        version: 1.0.2
-      grapesjs-tailwind:
-        specifier: 1.0.11
-        version: 1.0.11
-      grapesjs-tui-image-editor:
-        specifier: ^1.0.2
-        version: 1.0.2
       immer:
         specifier: ^10.1.1
         version: 10.1.1
@@ -649,6 +625,12 @@ importers:
       lucide-react:
         specifier: ^0.460.0
         version: 0.460.0(react@18.3.1)
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.9
+        version: 0.6.9(prettier@3.3.3)
       react:
         specifier: ^18.3.1
         version: 18.3.1
