@@ -16,7 +16,7 @@ import useWindowSize from "./hooks/use-window-resize"
 // import grapesjs css
 import "@edust/grapesjs/css/grapes.min.css"
 
-export const GrapesjsShadcnUI = (props) => {
+export const GrapesjsEdust = (props) => {
   const { onEditor, optionsCustomize } = props
   const { width: windowWidth } = useWindowSize()
   const editorRef = useRef<Editor | null>(null)

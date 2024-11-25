@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@edust/grapesjs": "workspace:*",
+    "@edust/grapesjs-edust": "workspace:*",
     "@grapesjs/react": "^1.0.0",
     "@hookform/resolvers": "^3.9.1",
     "@lottiefiles/react-lottie-player": "^3.5.4",
