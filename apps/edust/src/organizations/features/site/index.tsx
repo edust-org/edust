@@ -4,14 +4,15 @@ import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Button,
   Card,
-  CardFooter,
+  CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
   Input,
-  Typography,
 } from "@/components/ui"
 import { Layout } from "@/organizations/components/layout"
 import { useEffect, useState } from "react"
+import { Helmet } from "react-helmet-async"
 import { Link } from "react-router-dom"
 
 export const Site = () => {
@@ -22,7 +23,7 @@ export const Site = () => {
     if (data?.data?.pages) {
       setPages(JSON.parse(data?.data?.pages))
     }
-  }, [data?.data.pages])
+  }, [data?.data?.pages])
 
   if (isLoading) {
     return <Loading.Spinner />
@@ -30,7 +31,19 @@ export const Site = () => {
 
   return (
     <Layout>
-      <Layout.Header>
+      <Helmet>
+        <title>Site Builder | Edust</title>
+        <meta
+          name="description"
+          content="Edust is a powerful and flexible platform for building and managing websites."
+        />
+        <meta property="og:title" content="Site Builder | Edust" />
+        <meta
+          property="og:description"
+          content="Edust is a powerful and flexible platform for building and managing websites."
+        />
+      </Helmet>
+      <Layout.Header className="">
         <div className="ml-auto flex items-center space-x-4">
           <Input
             type="search"
@@ -42,33 +55,23 @@ export const Site = () => {
       </Layout.Header>
 
       <Layout.Body>
-        <section className="mb-4">
-          <Card className="max-w-xl">
-            <CardHeader>
-              <CardTitle>Customize your sites</CardTitle>
-            </CardHeader>
-            <CardFooter>
-              <Link to={"builder"} target="_blank">
-                <Button>Customize Site</Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </section>
-
         <section>
-          <Typography variant="h2">Pages List</Typography>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {pages &&
-              pages.map((page) => {
-                return (
-                  <Card key={page.id}>
-                    <CardHeader>
-                      <CardTitle>{page.name}</CardTitle>
-                    </CardHeader>
-                  </Card>
-                )
-              })}
-          </div>
+          <Card className="mb-6 max-w-xs border">
+            <CardHeader>
+              <CardTitle className="text-2xl font-semibold">
+                Make Your Site Your Own
+              </CardTitle>
+              <CardDescription className="text-sm">
+                Easily customize and build a unique static site to fit your
+                needs.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Link to={"builder"} target="_blank">
+                <Button className="mt-2">Start Editing</Button>
+              </Link>
+            </CardContent>
+          </Card>
         </section>
       </Layout.Body>
     </Layout>

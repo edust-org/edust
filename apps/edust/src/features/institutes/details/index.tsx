@@ -22,7 +22,6 @@ export const InstituteDetails = () => {
   const { id } = useParams()
 
   const { data, isLoading } = useGetInstituteByIdQuery(id)
-  console.log(data)
 
   const formatFoundedDate = (date: string) => {
     if (date) {

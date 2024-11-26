@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations"
-import { GrapesjsShadcnUI } from "@/lib/grapesjs-shadcn-ui"
+// TODO! temporary import from src
+import { GrapesjsEdust } from "@edust/grapesjs-edust/src"
 
 import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations"
 import { toast } from "@/hooks/shadcn-ui"
+import { useAppSelector } from "@/app/hooks"
 
 export const SiteBuilder = () => {
-  const { data } = useGetSiteBuilderMeQuery()
+  const token = useAppSelector((state) => state.authentication.auth.auth.token)
   const [saveGsData] = useEditSiteBuilderMutation()
 
   const onEditor = async (editor: any) => {
@@ -14,7 +14,6 @@ export const SiteBuilder = () => {
       run: async () => {
         const selectedComponent = editor?.Pages?.getSelected()
         const page = {
-          page_id: selectedComponent?.getId(),
           page_name: selectedComponent?.getName(),
           html: editor.getHtml({
             component: selectedComponent?.getMainComponent(),
@@ -26,10 +25,9 @@ export const SiteBuilder = () => {
 
         // in this here assets means whole project data
         const assets = editor.getProjectData()
-        console.log(page)
-        console.log(assets)
         saveGsData({
-          assets: JSON.stringify(editor.getProjectData()),
+          assets,
+          page,
         })
           .unwrap()
           .then((res) => {
@@ -64,12 +62,10 @@ export const SiteBuilder = () => {
           }/api/v0/organizations/site-builder/me`,
 
           onLoad: (result) => {
-            return editorRef.current.loadProjectData(
-              JSON.parse(result?.data?.assets),
-            )
+            return editorRef.current.loadProjectData(result?.data?.assets)
           },
           headers: {
-            CredentialsContainer: true,
+            Authorization: `Bearer ${token}`,
           },
 
           // Store project data
@@ -80,19 +76,20 @@ export const SiteBuilder = () => {
           fetchOptions: (opts) =>
             opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
 
-          onStore: (data, editor) => {
-            const pages = editor.Pages.getAll().map((page) => {
-              const component = page.getMainComponent()
-              return {
-                id: page.getId(),
-                name: page.getName(),
-                html: editor.getHtml({ component }),
-                css: editor.getCss({ component }),
-              }
-            })
+          onStore: (assets, editor) => {
+            const selectedComponent = editor?.Pages?.getSelected()
+            const page = {
+              page_name: selectedComponent?.getName(),
+              html: editor.getHtml({
+                component: selectedComponent?.getMainComponent(),
+              }),
+              css: editor.getCss({
+                component: selectedComponent?.getMainComponent(),
+              }),
+            }
             return {
-              assets: JSON.stringify(data),
-              pages: JSON.stringify(pages),
+              assets,
+              page,
             }
           },
         },
@@ -136,12 +133,7 @@ export const SiteBuilder = () => {
   })
   return (
     <div>
-      {data?.status && (
-        <GrapesjsShadcnUI
-          onEditor={onEditor}
-          optionsCustomize={optionsCustomize}
-        />
-      )}
+      <GrapesjsEdust onEditor={onEditor} optionsCustomize={optionsCustomize} />
     </div>
   )
 }
