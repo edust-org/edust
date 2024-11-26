@@ -38,7 +38,7 @@ export const Institutes = () => {
               ))}
             </div>
           ) : (
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center">
               <InstituteNotFound />
             </div>
           )}
