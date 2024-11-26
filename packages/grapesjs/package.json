@@ -1,0 +1,43 @@
+{
+  "name": "@edust/grapesjs",
+  "description": "Free and Open Source Web Builder Framework",
+  "version": "0.22.3",
+  "author": "Artur Arseniev",
+  "license": "BSD-3-Clause",
+  "homepage": "http://grapesjs.com",
+  "main": "grapes.min.js",
+  "types": "index.d.ts",
+  "module": "grapes.mjs",
+  "exports": {
+    ".": {
+      "import": "./grapes.mjs",
+      "require": "./grapes.min.js",
+      "types": "./index.d.ts"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "locale",
+    "src/styles"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GrapesJS/grapesjs.git"
+  },
+  "keywords": [
+    "grapes",
+    "grapesjs",
+    "wysiwyg",
+    "web",
+    "template",
+    "editor",
+    "newsletter",
+    "site",
+    "builder"
+  ]
+}

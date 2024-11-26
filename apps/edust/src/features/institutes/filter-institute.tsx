@@ -27,9 +27,9 @@ const FormSchema = z.object({
   eiin: z.string(),
 })
 const FilterInstitute = () => {
-  const { data: { data: categories } = {} } = useGetInstitutesCategoriesQuery(
-    {},
-  )
+  const { data } = useGetInstitutesCategoriesQuery({})
+  const categories = data?.data?.items || []
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -76,14 +76,14 @@ const FilterInstitute = () => {
                   defaultValue={field.value}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Type of institutes" />
+                    <SelectValue placeholder="Type of categories" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Institute Types</SelectLabel>
-
-                      {categories?.items?.map(({ name, description }: any) => (
+                      <SelectLabel>A</SelectLabel>
+                      {categories?.map(({ id, name, description }: any) => (
                         <SelectItem
+                          key={id}
                           title={description}
                           value={name}
                           className="capitalize"

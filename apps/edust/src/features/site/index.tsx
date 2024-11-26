@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useLocation, useParams, useSearchParams } from "react-router-dom"
-import { useGetOrgSitesPagesQuery } from "@/app/api/v0/public"
+import { useGetOrgSitesByUsernameQuery } from "@/app/api/v0/public"
 import { toast } from "@/hooks/shadcn-ui"
 import { Button, Typography } from "@/components/ui"
 import { Link } from "react-router-dom"
@@ -13,8 +13,8 @@ export const Site = () => {
 
   const filters = query.get("name") ? `name=${query.get("name")}` : `name=home`
 
-  const { data, isLoading, error } = useGetOrgSitesPagesQuery({
-    orgIdOrUsername: params.orgIdOrUsername,
+  const { data, isLoading, error } = useGetOrgSitesByUsernameQuery({
+    orgUsername: params.orgIdOrUsername,
     filters,
   })
 

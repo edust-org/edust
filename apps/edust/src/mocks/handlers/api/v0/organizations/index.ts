@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw"
 import { apiUrlV0 } from "../../api-url"
 import organizationDb from "./organization-db"
+import siteBuilderMe from "./site-builder-me.json"
 import token from "@/mocks/token"
 
 const getListOfOrg = http.get(`${apiUrlV0}/organizations`, ({ request }) => {
@@ -14,7 +15,7 @@ const getSiteBuilderMe = http.get(
     token.isAuthenticated(request)
     token.isOrganizer(request)
 
-    return HttpResponse.json(organizationDb.siteData)
+    return HttpResponse.json(siteBuilderMe)
   },
 )
 

@@ -8,10 +8,16 @@ export const publicApi = createApi({
   tagTypes: ["Public"],
 
   endpoints: (build) => ({
-    getOrgSitesPages: build.query({
-      query: ({ orgIdOrUsername, filters }) => {
+    getOrgSitesByOrgId: build.query({
+      query: ({ orgId, filters }) => {
         const queryParams = new URLSearchParams(filters).toString()
-        return `/organizations/${orgIdOrUsername}/site/?${queryParams}`
+        return `/organizations/orgId-${orgId}/site/?${queryParams}`
+      },
+    }),
+    getOrgSitesByUsername: build.query({
+      query: ({ orgUsername, filters }) => {
+        const queryParams = new URLSearchParams(filters).toString()
+        return `/organizations/orgUsername-${orgUsername}/site/?${queryParams}`
       },
     }),
     getInstitutes: build.query({
@@ -34,7 +40,8 @@ export const publicApi = createApi({
 })
 
 export const {
-  useGetOrgSitesPagesQuery,
+  useGetOrgSitesByOrgIdQuery,
+  useGetOrgSitesByUsernameQuery,
   useGetInstitutesQuery,
   useGetInstituteByIdQuery,
   useGetInstitutesCategoriesQuery,

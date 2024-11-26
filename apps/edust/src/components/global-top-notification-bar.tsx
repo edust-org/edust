@@ -1,4 +1,5 @@
 import { Typography } from "./ui"
+import packageInfo from "../../package.json"
 
 export const GlobalTopNotificationBar = () => {
   return (
@@ -7,9 +8,10 @@ export const GlobalTopNotificationBar = () => {
         Edust - Development in Progress{" "}
         <a
           href="https://github.com/edust-org/edust"
+          target="_blank"
           className="hover:underline"
         >
-          (v0.0.0)
+          (v{packageInfo.version})
         </a>
       </Typography>
     </div>
