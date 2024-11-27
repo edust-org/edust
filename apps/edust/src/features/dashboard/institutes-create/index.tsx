@@ -6,6 +6,7 @@ import {
   Calendar,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -40,10 +41,7 @@ const ACCEPTED_IMAGE_MIME_TYPES = [
 ]
 const FormSchema = z.object({
   category: z.string().min(1, "Category is required"),
-  nameEn: z.string().min(1, "Name (en) is required"),
-  nameBn: z.string().min(1, "Name (bn) is required"),
-  eiin: z.string().min(1, "EIIN is required"),
-  overview: z.string().min(1, "Overview is required"),
+  name: z.string().min(1, "Name is required"),
   photo: z
     .any()
     .refine((file) => {
@@ -72,7 +70,8 @@ const FormSchema = z.object({
   foundedDate: z.date({ required_error: "Initialized Date is required" }),
   country: z.string().min(1, "Country is required"),
   state: z.string().min(1, "State is required"),
-  city: z.string().min(1, "City is required"),
+  city: z.string().min(1, "County/District is required"),
+  district: z.string().min(1, "District is required"),
   postalCode: z.string().min(1, "Postal Code is required"),
   latitude: z.string().min(1, "Latitude is required"),
   longitude: z.string().min(1, "Longitude is required"),
@@ -90,16 +89,15 @@ export const InstitutesCreate = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       category: "",
-      nameEn: "",
-      nameBn: "",
-      eiin: "",
-      overview: "",
+      name: "",
+     
       photo: undefined,
       urls: "",
       board: "",
       foundedDate: new Date(),
       country: "",
       state: "",
+      district:"",
       city: "",
       postalCode: "",
       latitude: "",
@@ -137,6 +135,14 @@ export const InstitutesCreate = () => {
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col gap-4 md:gap-8"
             >
+              <div>
+                <Tabs>
+                  <TabsList>
+                    <TabsTrigger value="file">Edit</TabsTrigger>
+                    <TabsTrigger value="link">Preview</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
               <div className="border-b-2 border-b-gray-200 pb-6">
                 <Typography variant="h4">Create institute</Typography>
                 <Typography variant="p" affects="removePaddingMargin">
@@ -165,7 +171,10 @@ export const InstitutesCreate = () => {
                         <SelectItem value="School">School</SelectItem>
                       </SelectContent>
                     </Select>
-
+                    <FormDescription>
+                      You can manage verified email addresses in your email
+                      settings.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -173,10 +182,10 @@ export const InstitutesCreate = () => {
 
               <FormField
                 control={form.control}
-                name="nameEn"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name (en)</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input
                         type="text"
@@ -184,59 +193,237 @@ export const InstitutesCreate = () => {
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>
+                      This is your public display name. It can be your real name
+                      or a pseudonym. You can only change this once every 30
+                      days.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="nameBn"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name (bn)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Institute name"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex flex-col gap-4">
+                <Typography variant="h4">Address</Typography>
 
-              <FormField
-                control={form.control}
-                name="eiin"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>EIIN (unique)</FormLabel>
-                    <FormControl>
-                      <Input type="number" placeholder="EIIN" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="country"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Country</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a country" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Bangladesh">
+                                Bangladesh
+                              </SelectItem>
+                              <SelectItem value="Palestine">
+                                Palestine
+                              </SelectItem>
+                              <SelectItem value="Afghanistan">
+                                Afghanistan
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormDescription>
+                            This is the language that will be used in the
+                            dashboard.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="state"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>State/Division</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="State/Division" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Khulna">Khulna</SelectItem>
+                              <SelectItem value="Dhaka">Dhaka</SelectItem>
+                              <SelectItem value="Kustia">Kustia</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormDescription>
+                            <FormDescription>
+                              This is the language that will be used in the
+                              dashboard.
+                            </FormDescription>
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
 
-              <FormField
-                control={form.control}
-                name="overview"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Overview</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Overview the institute"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="district"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>County/District</FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a city/town" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Jhenaidah">
+                                Jhenaidah
+                              </SelectItem>
+                              <SelectItem value="Chuadanga">
+                                Chuadang
+                              </SelectItem>
+                              <SelectItem value="Barishal">Barishal</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormDescription>
+                            This is the language that will be used in the
+                            dashboard.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="postalCode"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>City/Town</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Postal Code"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            This is your public display name.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="postalCode"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Street/House Number</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Postal Code"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            This is your public display name.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="postalCode"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Postal Code</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Postal Code"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormDescription>
+                            This is your public display name.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="latitude"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Latitude</FormLabel>
+                          <FormControl>
+                            <Input type="text" placeholder="lat" {...field} />
+                          </FormControl>
+                          <FormDescription>
+                            This is your public display name.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <FormField
+                      control={form.control}
+                      name="longitude"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Longitude</FormLabel>
+                          <FormControl>
+                            <Input type="text" placeholder="long" {...field} />
+                          </FormControl>
+                          <FormDescription>
+                            This is your public display name.
+                          </FormDescription>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
 
               <Tabs defaultValue="file">
                 <TabsList>
@@ -283,6 +470,7 @@ export const InstitutesCreate = () => {
                           </Button>
                         </FormControl>
 
+                        <FormDescription>Choose your image.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -302,6 +490,10 @@ export const InstitutesCreate = () => {
                             {...field}
                           />
                         </FormControl>
+
+                        <FormDescription>
+                          Enter your image link.
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -316,14 +508,14 @@ export const InstitutesCreate = () => {
                     name="board"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Board</FormLabel>
+                        <FormLabel>Code Type</FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
                         >
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Select a institute board" />
+                              <SelectValue placeholder="Select a Code Type" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
@@ -332,6 +524,68 @@ export const InstitutesCreate = () => {
                             <SelectItem value="Cumilla">Cumilla</SelectItem>
                           </SelectContent>
                         </Select>
+
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex-1">
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Code</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            placeholder="Institute Code"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              <div className="flex w-full items-center gap-4 md:gap-8">
+                <div className="flex-1">
+                  <FormField
+                    control={form.control}
+                    name="board"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Language</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a language" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="Jashore">Jashore</SelectItem>
+                            <SelectItem value="Dhaka">Dhaka</SelectItem>
+                            <SelectItem value="Cumilla">Cumilla</SelectItem>
+                          </SelectContent>
+                        </Select>
+
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -368,314 +622,108 @@ export const InstitutesCreate = () => {
                             />
                           </PopoverContent>
                         </Popover>
-
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
               </div>
-
-              {/* Address */}
-              <div className="flex flex-col gap-4">
-                <Typography variant="h4">Address</Typography>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="country"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Country</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select a country" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Bangladesh">
-                                Bangladesh
-                              </SelectItem>
-                              <SelectItem value="Palestine">
-                                Palestine
-                              </SelectItem>
-                              <SelectItem value="Afghanistan">
-                                Afghanistan
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="state"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>State/Division</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="State/Division" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Khulna">Khulna</SelectItem>
-                              <SelectItem value="Dhaka">Dhaka</SelectItem>
-                              <SelectItem value="Kustia">Kustia</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="city"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>City/Town</FormLabel>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select a city/town" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="Jhenaidah">
-                                Jhenaidah
-                              </SelectItem>
-                              <SelectItem value="Chuadanga">
-                                Chuadang
-                              </SelectItem>
-                              <SelectItem value="Barishal">Barishal</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="postalCode"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Postal Code</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="Postal Code"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="latitude"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Latitude</FormLabel>
-                          <FormControl>
-                            <Input type="text" placeholder="lat" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="longitude"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Longitude</FormLabel>
-                          <FormControl>
-                            <Input type="text" placeholder="long" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact */}
-              <div className="flex flex-col gap-4">
-                <Typography variant="h4">Contact</Typography>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="phone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Phone</FormLabel>
-                          <FormControl>
-                            <Input type="tel" placeholder="Phone" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="Email"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="website"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Website</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="url"
-                              placeholder="https://www.example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1"></div>
-                </div>
-              </div>
-
-              {/* Principal Details */}
-              <div className="flex flex-col gap-4">
-                <Typography variant="h4">Principal Details</Typography>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="principalName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input type="text" placeholder="Name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="principalAge"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Age</FormLabel>
-                          <FormControl>
-                            <Input type="number" placeholder="Age" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
-                  <div className="flex-1">
-                    <FormField
-                      control={form.control}
-                      name="tenureStart"
-                      render={({ field }) => (
-                        <FormItem className="flex flex-col">
-                          <FormLabel className="mb-1 mt-1.5">
-                            Tenure Start
-                          </FormLabel>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <FormControl>
-                                <Button variant={"outline"}>
-                                  {field.value ? (
-                                    format(field.value, "PPP")
-                                  ) : (
-                                    <span>Pick a date</span>
-                                  )}
-                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                </Button>
-                              </FormControl>
-                            </PopoverTrigger>
-                            <PopoverContent
-                              className="w-auto p-0"
-                              align="start"
-                            >
-                              <Calendar
-                                mode="single"
-                                selected={field.value}
-                                onSelect={field.onChange}
-                                initialFocus
+              {/* ============================================================= */}
+              <div className="flex w-full flex-col items-center gap-4 md:flex-row md:gap-8">
+                <div className="flex-1">
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone</FormLabel>
+                        <FormControl>
+                          <Input type="tel" placeholder="Phone" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
+                        <FormField
+                          control={form.control}
+                          name="principalName"
+                          render={({ field }) => (
+                            <div className="flex-1">
+                              <FormField
+                                control={form.control}
+                                name="website"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Website</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        type="url"
+                                        placeholder="https://www.example.com"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormDescription>
+                                      This is the language that will be used in
+                                      the dashboard.
+                                    </FormDescription>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
                               />
-                            </PopoverContent>
-                          </Popover>
-
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="flex-1"></div>
+                            </div>
+                          )}
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="flex-1">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="Email" {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          This is the language that will be used in the
+                          dashboard.
+                        </FormDescription>
+                        <FormMessage />
+                        <FormField
+                          control={form.control}
+                          name="principalName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel> Principal Name </FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  placeholder="Name"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormDescription>
+                                This is the language that will be used in the
+                                dashboard.
+                              </FormDescription>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
+              {/* ============================================================= */}
 
               <div className="flex items-center justify-between">
                 <Button variant="destructive" type="reset">
