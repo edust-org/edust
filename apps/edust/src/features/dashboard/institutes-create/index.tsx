@@ -33,8 +33,9 @@ import { CalendarIcon, Check, ChevronsUpDown, ImageUp } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import imageCompression from "browser-image-compression"
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5
+const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
 const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -145,11 +146,11 @@ export const InstitutesCreate = () => {
       principal_name: "Edust Org",
 
       country: "bangladesh",
-      state_or_division: "",
-      county_or_district: "",
-      city_or_town: "",
-      street_or_house_number: "",
-      postal_code: "",
+      state_or_division: "khulna",
+      county_or_district: "khulna",
+      city_or_town: "Alamdanga, Chuadanga",
+      street_or_house_number: "High way",
+      postal_code: "7210",
       latitude: 23.766110669210573,
       longitude: 88.95013133825535,
       overview: "",
@@ -167,29 +168,56 @@ export const InstitutesCreate = () => {
     }
   }, [nameValue, form.setValue])
 
-  function onSubmit(data: z.infer<typeof FormSchema>, event) {
+  async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     const formAction = event.nativeEvent.submitter.value
 
-    if (formAction === Status.PUBLISHED) {
-      // Handle the publish logic
-      toast({
-        title: "Institute created and published",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
-      })
-    } else if (formAction === Status.DRAFT) {
-      // Handle the save as draft logic
-      toast({
-        title: "Institute saved as draft",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-          </pre>
-        ),
-      })
+    const imageFile = data.photo[0]
+    console.log("originalFile instanceof Blob", imageFile instanceof Blob) // true
+    console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`)
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options)
+      console.log(
+        "compressedFile instanceof Blob",
+        compressedFile instanceof Blob,
+      ) // true
+      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
+
+      data.photo = compressedFile
+      console.log(compressedFile)
+
+      if (formAction === Status.PUBLISHED) {
+        // Handle the publish logic
+        toast({
+          title: "Institute created and published",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(data, null, 2)}
+              </code>
+            </pre>
+          ),
+        })
+      } else if (formAction === Status.DRAFT) {
+        // Handle the save as draft logic
+        toast({
+          title: "Institute saved as draft",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(data, null, 2)}
+              </code>
+            </pre>
+          ),
+        })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
