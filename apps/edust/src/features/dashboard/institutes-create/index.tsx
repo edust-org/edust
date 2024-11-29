@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  Label,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -23,6 +24,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
+  Typography,
 } from "@/components/ui"
 import { useToast } from "@/hooks/shadcn-ui"
 import { Status } from "@/types"
@@ -34,6 +36,7 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import imageCompression from "browser-image-compression"
+import Editor from "./editor"
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
 const ACCEPTED_IMAGE_MIME_TYPES = [
@@ -101,6 +104,8 @@ export const InstitutesCreate = () => {
       value: category.id,
     })) || []
 
+  const [overview, setOverview] = useState("")
+
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
   const languages = [{ label: "Bengali", value: "bengali" }]
@@ -158,6 +163,7 @@ export const InstitutesCreate = () => {
   })
 
   const nameValue = form.watch("name")
+
   useEffect(() => {
     if (nameValue) {
       // TODO: need to generate slug with validation
@@ -166,7 +172,10 @@ export const InstitutesCreate = () => {
       // Update the slug field in the form state
       form.setValue("slug", generatedSlug)
     }
-  }, [nameValue, form.setValue])
+    if (overview) {
+      form.setValue("overview", overview)
+    }
+  }, [nameValue, overview, form.setValue])
 
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     const formAction = event.nativeEvent.submitter.value
@@ -190,7 +199,7 @@ export const InstitutesCreate = () => {
 
       data.photo = compressedFile
       console.log(compressedFile)
-
+      console.log(overview)
       if (formAction === Status.PUBLISHED) {
         // Handle the publish logic
         toast({
@@ -1084,6 +1093,11 @@ export const InstitutesCreate = () => {
                       </FormItem>
                     )}
                   />
+                </div>
+
+                <div>
+                  <Label>Overview</Label>
+                  <Editor setContentHtml={setOverview} />
                 </div>
 
                 <div className="flex items-center justify-between">
