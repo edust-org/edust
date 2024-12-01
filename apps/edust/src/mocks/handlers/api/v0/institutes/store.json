@@ -1,0 +1,54 @@
+{
+  "status": "success",
+  "message": "Success! New resource created.",
+  "data": {
+    "id": "3960bf56-fd5b-4f07-8fcb-0eb2fe22c7a2",
+    "institute_category_id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+    "user_id": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+    "name": "Dhaka college-12",
+    "slug": "dhaka-college-12::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+    "code": "12::b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+    "code_type": "EIIN",
+    "overview": "",
+    "photo": "http://res.cloudinary.com/dmiewayfu/image/upload/v1733042308/edust-org/templates/jane-last-k60yoejb75k-unsplash-m45cn5c7.jpg",
+    "contact_email": "edustorg@gmail.com",
+    "phone_number": "01760255882",
+    "website": "www.edust.org",
+    "founded_date": "2024-12-01T08:37:58.000Z",
+    "principal_name": "Edust Org",
+    "language": "bengali",
+    "country": "bangladesh",
+    "state_or_division": "khulna",
+    "county_or_district": "khulna",
+    "city_or_town": "Alamdanga, Chuadanga",
+    "street_or_house_number": "High way",
+    "postal_code": "7210",
+    "latitude": 23.766110669210573,
+    "longitude": 88.95013133825535,
+    "status": "DRAFT",
+    "updatedAt": "2024-12-01T08:38:29.466Z",
+    "createdAt": "2024-12-01T08:38:29.466Z"
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v0/institutes",
+      "method": "POST"
+    },
+    "me": {
+      "href": "/api/v0/institutes/me",
+      "method": "GET"
+    },
+    "get_by_id": {
+      "href": "/api/v0/institutes/:id",
+      "method": "GET"
+    },
+    "edit_by_id": {
+      "href": "/api/v0/institutes/:id",
+      "method": "PATCH"
+    },
+    "delete_by_id": {
+      "href": "/api/v0/institutes/:id",
+      "method": "DELETE"
+    }
+  }
+}
