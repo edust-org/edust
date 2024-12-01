@@ -26,7 +26,6 @@ import {
   TabsTrigger,
   Typography,
 } from "@/components/ui"
-import { useToast } from "@/hooks/shadcn-ui"
 import { Status } from "@/types"
 import { cn } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -37,6 +36,11 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import imageCompression from "browser-image-compression"
 import Editor from "./editor"
+import { useBoolean } from "usehooks-ts"
+import { usePostInstituteMutation } from "@/app/api/v0/institutes"
+import { toast as toastShadcn } from "@/hooks/shadcn-ui"
+import { toast } from "sonner"
+import { BarLoader } from "react-spinners"
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
 const ACCEPTED_IMAGE_MIME_TYPES = [
@@ -89,21 +93,22 @@ const FormSchema = z.object({
   city_or_town: z.string().trim().min(1, { message: "required" }),
   street_or_house_number: z.string().trim().min(1, { message: "required" }),
   postal_code: z.string().trim().min(1, { message: "required" }),
-  latitude: z.number(),
-  longitude: z.number(),
+  latitude: z.string().min(1, { message: "required" }),
+  longitude: z.string().min(1, { message: "required" }),
 
   overview: z.string().trim(),
 })
 
 export const InstitutesCreate = () => {
-  const { toast } = useToast()
   const { data: categoriesData } = useGetInstitutesCategoriesQuery({})
+  const [postInstitute, { isLoading }] = usePostInstituteMutation()
   const categories =
     categoriesData?.data?.items?.map((category) => ({
       label: category?.name,
       value: category.id,
     })) || []
 
+  const { value: isError, setTrue, setFalse } = useBoolean(false)
   const [overview, setOverview] = useState("")
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
@@ -156,8 +161,8 @@ export const InstitutesCreate = () => {
       city_or_town: "Alamdanga, Chuadanga",
       street_or_house_number: "High way",
       postal_code: "7210",
-      latitude: 23.766110669210573,
-      longitude: 88.95013133825535,
+      latitude: "23.766110669210573",
+      longitude: "88.95013133825535",
       overview: "",
     },
   })
@@ -172,17 +177,26 @@ export const InstitutesCreate = () => {
       // Update the slug field in the form state
       form.setValue("slug", generatedSlug)
     }
-    if (overview) {
+    if (
+      overview &&
+      !overview.includes(
+        '<h1 dir="auto" style="text-align: center">Welcome to Edust!</h1>',
+      )
+    ) {
       form.setValue("overview", overview)
     }
-  }, [nameValue, overview, form.setValue])
+
+    if (Object.keys(form.formState.errors).length) {
+      setTrue()
+    } else {
+      setFalse()
+    }
+  }, [nameValue, overview, form.setValue, form.formState.errors])
 
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     const formAction = event.nativeEvent.submitter.value
 
     const imageFile = data.photo[0]
-    console.log("originalFile instanceof Blob", imageFile instanceof Blob) // true
-    console.log(`originalFile size ${imageFile.size / 1024 / 1024} MB`)
 
     const options = {
       maxSizeMB: 1,
@@ -190,49 +204,52 @@ export const InstitutesCreate = () => {
       useWebWorker: true,
     }
     try {
-      const compressedFile = await imageCompression(imageFile, options)
-      console.log(
-        "compressedFile instanceof Blob",
-        compressedFile instanceof Blob,
-      ) // true
-      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
+      const compressedImageFile = await imageCompression(imageFile, options)
 
-      data.photo = compressedFile
-      console.log(compressedFile)
-      console.log(overview)
+      const formData = new FormData()
+
+      // Append fields from data to FormData
+      Object.entries(data).forEach(([key, value]) => {
+        if (key === "photo") {
+          formData.append(key, compressedImageFile, imageFile.name)
+        } else {
+          formData.append(key, value as string)
+        }
+      })
+
       if (formAction === Status.PUBLISHED) {
-        // Handle the publish logic
-        toast({
-          title: "Institute created and published",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">
-                {JSON.stringify(data, null, 2)}
-              </code>
-            </pre>
-          ),
-        })
-      } else if (formAction === Status.DRAFT) {
-        // Handle the save as draft logic
-        toast({
-          title: "Institute saved as draft",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">
-                {JSON.stringify(data, null, 2)}
-              </code>
-            </pre>
-          ),
-        })
+        formData.append("status", Status.PUBLISHED)
       }
+
+      postInstitute(formData)
+        .unwrap()
+        .then((data) => {
+          toast.success(data.message)
+        })
+        .catch((error) => {
+          toast.error(error.data.message)
+        })
     } catch (error) {
-      console.log(error)
+      toastShadcn({
+        title: "error",
+        variant: "destructive",
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(error, null, 2)}</code>
+          </pre>
+        ),
+      })
     }
   }
 
   return (
     <>
-      <div className="mx-auto max-w-4xl rounded bg-white p-6 shadow">
+      <div
+        className={cn(
+          "mx-auto max-w-4xl rounded bg-white p-6 shadow",
+          `${isError ? "shadow-destructive" : ""}`,
+        )}
+      >
         <Tabs defaultValue="edit">
           <TabsList>
             <TabsTrigger value="edit">Edit</TabsTrigger>
@@ -1101,7 +1118,11 @@ export const InstitutesCreate = () => {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <Button variant="destructive" type="reset">
+                  <Button
+                    variant="destructive"
+                    type="reset"
+                    disabled={isLoading}
+                  >
                     Cancel
                   </Button>
                   <div className="flex gap-6">
@@ -1109,16 +1130,22 @@ export const InstitutesCreate = () => {
                       type="submit"
                       name="action"
                       value={Status.PUBLISHED}
+                      disabled={isLoading}
                     >
-                      Create and Publish
+                      {isLoading ? (
+                        <BarLoader color="#fff" />
+                      ) : (
+                        "Create and Publish"
+                      )}
                     </Button>
                     <Button
                       variant="secondary"
                       type="submit"
                       name="action"
                       value={Status.DRAFT}
+                      disabled={isLoading}
                     >
-                      Save as draft
+                      {isLoading ? <BarLoader color="#fff" /> : "Save as draft"}
                     </Button>
                   </div>
                 </div>

@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <Suspense fallback={<GlobalLoading />}>
-        <Toaster />
+        <Toaster richColors />
         <ShadcnuiToaster />
         <TooltipProvider>
           <RouterProvider router={router} />
