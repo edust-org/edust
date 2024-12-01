@@ -23,7 +23,6 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui"
-import { toast } from "@/hooks/shadcn-ui"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import {
   clearProfileMode,
@@ -34,6 +33,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { ThemeSwitch } from "../theme-switch"
 import { useTheme } from "@/hooks"
 import { Roles } from "@/types"
+import { toast } from "sonner"
 
 export const NavbarRightMenus = () => {
   const navigate = useNavigate()
@@ -49,10 +49,11 @@ export const NavbarRightMenus = () => {
     dispatch(clearProfileMode())
     setTheme("light")
     navigate("/")
-    toast({
-      variant: "destructive",
-      title: "Log out successfully!",
-    })
+    toast.error("Log out successfully!")
+    const setTime = setTimeout(() => {
+      window.location.replace("/")
+    }, 1000)
+    clearTimeout(setTime)
   }
 
   return (

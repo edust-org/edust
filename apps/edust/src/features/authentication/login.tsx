@@ -18,7 +18,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { toast } from "@/hooks/shadcn-ui"
+import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
@@ -26,6 +26,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { SocialAuth } from "./social-auth"
 import { Roles } from "@/types"
+import { toast } from "sonner"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -69,10 +70,7 @@ export const Login: React.FC = () => {
       .then((data) => {
         const redirectPath = location.state?.from?.pathname || "/"
         if (data?.status) {
-          toast({
-            variant: "success",
-            title: data?.message,
-          })
+          toast.success(data.message)
 
           dispatch(
             setAuthentication({
@@ -105,7 +103,7 @@ export const Login: React.FC = () => {
           }),
         )
         if (error?.data?.status) {
-          toast({
+          toastShadcn({
             variant: "destructive",
             title: error?.data?.message,
           })

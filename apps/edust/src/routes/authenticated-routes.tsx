@@ -42,7 +42,7 @@ export const authenticatedRoutes = (
         path="institutes"
         element={
           <Suspense fallback={<Loading.Spinner />}>
-            <h1>Institutes</h1>
+            <Dashboard.InstitutesLists />
           </Suspense>
         }
       ></Route>
