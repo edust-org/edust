@@ -8,9 +8,6 @@ export const institutesApi = createApi({
   tagTypes: ["Institutes"],
 
   endpoints: (build) => ({
-    getInstitutesLists: build.query<any, void>({
-      query: () => `/`,
-    }),
     postInstitute: build.mutation({
       query: (body) => ({
         url: `/`,
@@ -18,8 +15,37 @@ export const institutesApi = createApi({
         body,
       }),
     }),
+    getMeInstitutesLists: build.query<any, void>({
+      query: () => `/me`,
+    }),
+    getInstitutesId: build.query({
+      query: ({ instituteId, filters }) => {
+        const queryParams = new URLSearchParams(filters).toString()
+        return `/${instituteId}/?${queryParams}`
+      },
+    }),
+    editInstitutesById: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/${id}`,
+        method: "PATCH",
+        body,
+      }),
+    }),
+    deleteInstituteById: build.mutation({
+      query(id) {
+        return {
+          url: `/${id}`,
+          method: "DELETE",
+        }
+      },
+    }),
   }),
 })
 
-export const { useGetInstitutesListsQuery, usePostInstituteMutation } =
-  institutesApi
+export const {
+  usePostInstituteMutation,
+  useGetInstitutesIdQuery,
+  useGetMeInstitutesListsQuery,
+  useEditInstitutesByIdMutation,
+  useDeleteInstituteByIdMutation,
+} = institutesApi
