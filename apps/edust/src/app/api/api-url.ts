@@ -1,5 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { RootState } from "../store"
+import { RootState, store } from "../store"
+import { signOut } from "../features"
 
 /**
  * Creates a base query function for interacting with API version v0.
@@ -23,8 +24,8 @@ import { RootState } from "../store"
  */
 export const apiV0BaseQuery = (
   basePath?: string,
-): ReturnType<typeof fetchBaseQuery> =>
-  fetchBaseQuery({
+): ReturnType<typeof fetchBaseQuery> => {
+  return fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
@@ -33,8 +34,11 @@ export const apiV0BaseQuery = (
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set("authorization", `Bearer ${token}`)
+      } else {
+        store.dispatch(signOut())
       }
 
       return headers
     },
   })
+}

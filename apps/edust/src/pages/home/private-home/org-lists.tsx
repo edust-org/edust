@@ -1,5 +1,6 @@
 import { useGetOrgListsQuery } from "@/app/api/v0/organizations"
 import { Button, Skeleton, Typography } from "@/components/ui"
+import { format } from "date-fns"
 import { Eye } from "lucide-react"
 import { Helmet } from "react-helmet-async"
 import { Link } from "react-router-dom"
@@ -40,9 +41,9 @@ export const OrgLists = () => {
             </Typography>
             <div className="flex items-center justify-between">
               <Typography className="text-sm text-muted-foreground">
-                Aug 10 2024
+                {format(new Date(item.createdAt), "MMM dd, yyyy")}
               </Typography>
-              <Link to={`/${item.org_username}/site`} target="_blank">
+              <Link to={`/u/${item.org_username}/site`} target="_blank">
                 <Button variant={"secondary"} size={"icon"}>
                   <Eye />
                 </Button>

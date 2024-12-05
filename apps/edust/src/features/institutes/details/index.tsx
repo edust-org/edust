@@ -18,6 +18,10 @@ import { Link } from "react-router-dom" // Add this line to import Link
 import FilterInstitute from "../filter-institute"
 import { format } from "date-fns"
 
+import "katex/dist/katex.min.css"
+
+import "reactjs-tiptap-editor/style.css"
+
 export const InstituteDetails = () => {
   const { id } = useParams()
 
@@ -56,8 +60,8 @@ export const InstituteDetails = () => {
           <Card className="border-none p-0">
             <CardHeader className="p-0">
               <img
-                src="https://i.ibb.co.com/zG6sBXr/image-36.png"
-                alt="building"
+                src={data?.data?.photo}
+                alt={data?.data.name}
                 className="w-full rounded-lg object-cover"
               />
               <CardTitle className="flex items-start gap-2 pb-4 pt-7 font-bold sm:text-3xl">
@@ -211,15 +215,13 @@ export const InstituteDetails = () => {
               </div>
             </CardContent>
           </Card>
-          <div className="mt-7 rounded-md border p-3">
-            <Typography
-              className="p-0"
-              affects="removePaddingMargin"
-              variant="h2"
-            >
-              Overview it will render html
-            </Typography>
-          </div>
+          {data?.data?.overview && (
+            <div className="mt-7 rounded-md border p-3 ProseMirror" aria-label="Rich-Text Editor">
+              <div
+                dangerouslySetInnerHTML={{ __html: data?.data?.overview }}
+              ></div>
+            </div>
+          )}
         </div>
       </section>
       {/*  */}
