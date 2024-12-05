@@ -10,6 +10,7 @@ export const NotFound = () => {
     (state) => state.authentication.profileSwitch.activeMode,
   )
 
+  // const location = useLocation()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -18,8 +19,9 @@ export const NotFound = () => {
       activeMode === Roles.OWNER ||
       activeMode === Roles.EDITOR
     ) {
-      return navigate("/")
+      navigate("/")
     }
+    navigate("/")
   }, [activeMode])
 
   return (

@@ -3,6 +3,6 @@ import { Route } from "react-router-dom"
 
 export const commonRoutes = (
   <Route>
-    <Route path=":orgIdOrUsername/site" element={<Site />} />
+    <Route path="/u/:orgIdOrUsername/site" element={<Site />} />
   </Route>
 )
