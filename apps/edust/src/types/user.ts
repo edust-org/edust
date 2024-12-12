@@ -14,6 +14,6 @@ export interface User {
   is_profile_verified: boolean
   system_role: Roles
   organization_roles: null | OrganizationRoles[]
-  created_at: Date
-  updated_at: Date
+  createdAt: Date
+  updatedAt: Date
 }

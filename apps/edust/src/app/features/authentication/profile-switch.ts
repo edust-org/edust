@@ -22,7 +22,7 @@ export const profileSwitch = createSlice({
 
       const organizationRoles = action.payload.organizationRoles?.map(
         (role: any) => {
-          return { id: role.id, role: role.role, name: role.organization.name }
+          return { id: role.id, role: role.role, name: role.name }
         },
       )
 
