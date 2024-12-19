@@ -9,7 +9,7 @@ export const StartDesign = () => {
           Start your design transformation with <br />
           custom sites today.
         </Typography>
-        <Link to={"/auth/sign-up"}>
+        <Link to={"/auth/register"}>
           <Button variant={"outline"}>Get Started</Button>
         </Link>
       </div>
