@@ -1,11 +1,11 @@
-import { GrapesjsEdust } from ".";
+import GrapesjsEdust from "./grapesjs-edust"
 function App() {
-  const token = "";
+  const token = ""
 
   const onEditor = async (editor: any) => {
     editor.Commands.add("save-db", {
       run: async () => {
-        const selectedComponent = editor?.Pages?.getSelected();
+        const selectedComponent = editor?.Pages?.getSelected()
         const page = {
           page_name: selectedComponent?.getName(),
           html: editor.getHtml({
@@ -14,10 +14,10 @@ function App() {
           css: editor.getCss({
             component: selectedComponent?.getMainComponent(),
           }),
-        };
+        }
 
         // in this here assets means whole project data
-        const assets = editor.getProjectData();
+        const assets = editor.getProjectData()
         /*
         saveGsData({
           assets,
@@ -39,8 +39,8 @@ function App() {
             });
           });*/
       },
-    });
-  };
+    })
+  }
 
   const optionsCustomize = (editorRef) => ({
     storageManager: {
@@ -56,7 +56,7 @@ function App() {
           }/api/v0/organizations/site-builder/me`,
 
           onLoad: (result) => {
-            return editorRef.current.loadProjectData(result?.data?.assets);
+            return editorRef.current.loadProjectData(result?.data?.assets)
           },
           headers: {
             Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ function App() {
             opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
 
           onStore: (assets, editor) => {
-            const selectedComponent = editor?.Pages?.getSelected();
+            const selectedComponent = editor?.Pages?.getSelected()
             const page = {
               page_name: selectedComponent?.getName(),
               html: editor.getHtml({
@@ -80,11 +80,11 @@ function App() {
               css: editor.getCss({
                 component: selectedComponent?.getMainComponent(),
               }),
-            };
+            }
             return {
               assets,
               page,
-            };
+            }
           },
         },
       },
@@ -93,9 +93,9 @@ function App() {
     assetManager: {
       autoAdd: true,
       uploadFile: (e) => {
-        const files = e.dataTransfer ? e.dataTransfer.files : e.target?.files;
-        const formData = new FormData();
-        formData.append("image", files[0]);
+        const files = e.dataTransfer ? e.dataTransfer.files : e.target?.files
+        const formData = new FormData()
+        formData.append("image", files[0])
 
         fetch("http://localhost:3000/api/v0/organizations/site/upload", {
           method: "POST",
@@ -104,33 +104,33 @@ function App() {
         })
           .then((response) => {
             if (!response.ok) {
-              throw new Error("Network response was not ok");
+              throw new Error("Network response was not ok")
             }
-            return response.json();
+            return response.json()
           })
           .then((data) => {
-            const image_path = data?.data.src;
+            const image_path = data?.data.src
             if (image_path) {
-              const editor = editorRef?.current;
+              const editor = editorRef?.current
               if (editor) {
-                const assetManager = editor?.AssetManager;
-                assetManager.add([image_path]);
-                assetManager.render();
+                const assetManager = editor?.AssetManager
+                assetManager.add([image_path])
+                assetManager.render()
               }
             }
           })
           .catch((error) => {
-            console.error("Error:", error);
-          });
+            console.error("Error:", error)
+          })
       },
     },
-  });
+  })
 
   return (
     <>
       <GrapesjsEdust onEditor={onEditor} optionsCustomize={() => ({})} />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

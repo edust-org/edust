@@ -1,5 +1,5 @@
-// TODO! temporary import from src
-import { GrapesjsEdust } from "@edust/grapesjs-edust/src"
+import GrapesjsEdust from "@edust/grapesjs-edust"
+import "@edust/grapesjs-edust/style.css"
 
 import { useEditSiteBuilderMutation } from "@/app/api/v0/organizations"
 import { toast } from "@/hooks/shadcn-ui"

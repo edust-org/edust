@@ -2,7 +2,6 @@ import { useRef } from "react"
 import grapesjs, { Editor } from "@edust/grapesjs"
 import GjsEditor, { Canvas } from "@grapesjs/react"
 import { RightPanel } from "./right-panel"
-import { TopControllers } from "./top-controllers"
 import options from "./options"
 import { default as customOnEditor } from "./on-editor"
 import {
@@ -13,10 +12,13 @@ import {
 import { LeftPanel } from "./left-panel"
 import useWindowSize from "./hooks/use-window-resize"
 
+import "./index.css"
 // import grapesjs css
 import "@edust/grapesjs/css/grapes.min.css"
+import { TopArea } from "./top-area"
+import { TooltipProvider } from "@radix-ui/react-tooltip"
 
-export const GrapesjsEdust = (props) => {
+const GrapesjsEdust = (props) => {
   const { onEditor, optionsCustomize } = props
   const { width: windowWidth } = useWindowSize()
   const editorRef = useRef<Editor | null>(null)
@@ -35,7 +37,7 @@ export const GrapesjsEdust = (props) => {
   }
 
   return (
-    <div>
+    <TooltipProvider>
       <GjsEditor
         className="gjs-custom-editor"
         // Pass the core GrapesJS library to the wrapper (required).
@@ -72,7 +74,7 @@ export const GrapesjsEdust = (props) => {
           {/* Start Middle Area */}
           <ResizablePanel minSize={30} className="h-full flex-1">
             <header>
-              <TopControllers />
+              <TopArea />
             </header>
             <main className="h-full">
               <Canvas className="border-b-[42px] border-transparent bg-slate-200" />
@@ -100,6 +102,7 @@ export const GrapesjsEdust = (props) => {
           {/* End Right Panel */}
         </ResizablePanelGroup>
       </GjsEditor>
-    </div>
+    </TooltipProvider>
   )
 }
+export default GrapesjsEdust

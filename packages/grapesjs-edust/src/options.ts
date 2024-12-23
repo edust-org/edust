@@ -4,11 +4,20 @@ import gsPluginTuiImageEditor from "grapesjs-tui-image-editor"
 import gsPluginExport from "grapesjs-plugin-export"
 import gsPluginCustomCode from "grapesjs-custom-code"
 import plugins from "./plugins"
+import template from "./template"
 
 const options = (editorRef: any): EditorConfig => ({
   height: "100vh",
   undoManager: { trackSelection: false },
   selectorManager: { componentFirst: true },
+  pageManager: {
+    pages: [
+      {
+        name: "home",
+        component: template,
+      },
+    ],
+  },
   panels: { defaults: [] }, // Avoid default panels
 
   // If you enable multiple pages options then you need this
