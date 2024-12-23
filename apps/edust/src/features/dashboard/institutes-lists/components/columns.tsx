@@ -1,6 +1,9 @@
 "use client"
 
-import { useDeleteInstituteByIdMutation } from "@/app/api/v0/institutes"
+import {
+  useDeleteInstituteByIdMutation,
+  useGetMeInstitutesListsQuery,
+} from "@/app/api/v0/institutes"
 import {
   Button,
   Checkbox,
@@ -92,6 +95,7 @@ export const columns: ColumnDef<Institutes>[] = [
 
       const [deleteInstitute, { isLoading: isDeleting }] =
         useDeleteInstituteByIdMutation()
+      const { refetch } = useGetMeInstitutesListsQuery()
 
       return (
         <DropdownMenu>
@@ -115,7 +119,8 @@ export const columns: ColumnDef<Institutes>[] = [
                 deleteInstitute(institute.id)
                   .unwrap()
                   .then((data) => {
-                    toast.success(data.data.message)
+                    toast.success(data.message)
+                    refetch()
                   })
                   .catch((error) => {
                     console.log(error)

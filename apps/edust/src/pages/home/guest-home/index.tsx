@@ -28,7 +28,7 @@ export const GuestHome = () => {
         <HelpGetStarted />
         <Faq />
         <StartDesign />
-      </main>
+      </main> 
       <Footer />
     </>
   )

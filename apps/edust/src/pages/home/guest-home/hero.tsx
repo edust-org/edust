@@ -8,13 +8,9 @@ const Hero: FC = () => {
     <div className="container relative -z-10 -mt-28 flex h-full w-full flex-col-reverse items-center justify-center gap-5 overflow-hidden pb-5 pt-28 lg:mt-12 lg:flex-row lg:justify-between lg:overflow-visible lg:py-5">
       <div>
         <Typography variant="h1" style={{ lineHeight: "4rem" }}>
-          Explore the Future
+          Build your own site
           <br />
-          of Education with
-          <br />
-          <span className="bg-gradient-to-r from-slate-950 to-slate-400 bg-clip-text text-transparent">
-            Edust!
-          </span>
+          for your organizations
         </Typography>
 
         <Typography

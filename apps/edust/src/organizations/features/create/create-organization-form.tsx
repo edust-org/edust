@@ -13,72 +13,104 @@ import {
 } from "@/components/ui"
 import { Checkbox } from "@/components/ui/checkbox"
 import { usePostOrganizationMutation } from "@/app/api/v0/organizations"
-import { toast } from "@/hooks/shadcn-ui"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
-import { useGetUserQuery } from "@/app/api/v0/user"
+import { useEffect } from "react"
+import { toast } from "sonner"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { setAuthentication, setProfileMode } from "@/app/features"
+import { OrganizationRoles } from "@/types"
 
 const FormSchema = z.object({
-  name: z.string().min(2, {
-    message: "Enter your Organization name",
-  }),
-  org_username: z.string().min(2, {
-    message: "Enter your Organization name",
-  }),
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Name is required" })
+    .max(100, { message: "Name must not exceed 100 characters" }),
+  org_username: z
+    .string()
+    .trim()
+    .min(1, { message: "Organization username is required" })
+    .regex(/^[a-zA-Z0-9_-]+$/, {
+      message:
+        "Organization username can only contain letters, numbers, underscores, and hyphens",
+    })
+    .max(100, {
+      message: "Organization username must not exceed 100 characters",
+    }),
+  isAccepted: z.boolean(),
 })
 
 export const CreateOrganizationForm = () => {
+  const dispatch = useAppDispatch()
+  const profileState = useAppSelector(
+    (state) => state.authentication.profileSwitch,
+  )
+  const authState = useAppSelector((state) => state.authentication.auth)
   const navigate = useNavigate()
+  const location = useLocation()
+  const redirectPath = location.state?.from?.pathname || "/"
   const [postOrganization, { isLoading }] = usePostOrganizationMutation()
-  const { refetch } = useGetUserQuery()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
       org_username: "",
+      isAccepted: false,
     },
   })
 
+  const nameValue = form.watch("name")
+  useEffect(() => {
+    if (nameValue) {
+      // TODO: need to generate slug with validation
+      // Generate slug from the name by converting it to lowercase and replacing spaces with hyphens
+      const orgUsername = nameValue.trim().toLowerCase().replace(/\s+/g, "-")
+
+      // Update the slug field in the form state
+      form.setValue("org_username", orgUsername)
+    }
+  }, [nameValue, form.setValue])
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    postOrganization(data)
+    const payload = { name: data.name, org_username: data.org_username }
+    postOrganization(payload)
       .unwrap()
       .then((res) => {
-        if (res?.status) {
-          toast({
-            variant: "success",
-            title: res?.message,
-          })
+        toast.success(res.message)
+
+        if (res.data.organizationRole.id) {
+          const organizationRoles: OrganizationRoles[] = [
+            {
+              id: res.data.organizationRole.id,
+              role: res.data.organizationRole.role,
+              name: res.data.name,
+            },
+          ]
+          dispatch(
+            setAuthentication({
+              ...authState,
+              user: {
+                ...authState.user,
+                organization_roles: organizationRoles,
+              },
+            }),
+          )
+
+          dispatch(
+            setProfileMode({
+              ...profileState,
+              organizationRoles,
+            }),
+          )
         }
-        refetch()
-          .then((res) => {
-            console.log({ res })
-            if (res) {
-              navigate("/organizations")
-            }
-          })
-          .catch((error) => {
-            if (error) {
-              toast({
-                variant: "destructive",
-                title: error?.data?.message,
-                description: (
-                  <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">
-                      {JSON.stringify(error, null, 2)}
-                    </code>
-                  </pre>
-                ),
-              })
-            }
-          })
+
+        navigate(redirectPath)
       })
       .catch((error) => {
         if (error?.data?.status) {
-          toast({
-            variant: "destructive",
-            title: error?.data?.message,
-          })
+          toast.error(error?.data?.message)
         }
       })
   }
@@ -113,18 +145,29 @@ export const CreateOrganizationForm = () => {
               </FormItem>
             )}
           />
-          <div className="items-top flex space-x-2">
-            <Checkbox id="create_org_form_term_con" />
-            <div className="grid gap-1.5 leading-none">
-              <label
-                htmlFor="create_org_form_term_con"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Accept terms and conditions
-              </label>
-            </div>
-          </div>
-          <Button type="submit" className="w-full">
+
+          <FormField
+            control={form.control}
+            name="isAccepted"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                <FormControl>
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <div className="space-y-1 leading-none">
+                  <FormLabel>Accept terms and conditions</FormLabel>
+                </div>
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!form.getValues("isAccepted")}
+          >
             {isLoading ? <BarLoader color="#fff" /> : "Create an organization"}
           </Button>
         </form>
