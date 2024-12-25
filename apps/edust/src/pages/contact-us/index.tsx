@@ -2,6 +2,7 @@ import { Navbar } from "@/components"
 import { ContactForm } from "./contact-form"
 import { ContactNewsletter } from "./contact-newsletter"
 import { ContactText } from "./contact-text"
+import { Footer } from "@/pages/components/footer"
 
 export const ContactUs = () => {
   return (
@@ -12,6 +13,7 @@ export const ContactUs = () => {
         <ContactText />
       </div>
       <ContactNewsletter />
+      <Footer />
     </>
   )
 }

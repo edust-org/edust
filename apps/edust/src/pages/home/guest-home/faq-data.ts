@@ -40,4 +40,9 @@ export default [
     answer: `Once an organization is created, authenticated users can customize
             and manage their organization's site using our platform's tools.`,
   },
+  {
+    question: `How are organization sites built and managed?`,
+    answer: `Once an organization is created, authenticated users can customize
+            and manage their organization's site using our platform's tools.`,
+  },
 ]

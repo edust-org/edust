@@ -27,6 +27,7 @@ import { BarLoader } from "react-spinners"
 import { SocialAuth } from "./social-auth"
 import { Roles } from "@/types"
 import { toast } from "sonner"
+import { LogoEdust } from "@/components"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -91,7 +92,7 @@ export const Login: React.FC = () => {
               name: role.organization.name,
             }),
           )
-          
+
           dispatch(
             setProfileMode({
               systemRole: data.data?.system_role,
@@ -139,6 +140,11 @@ export const Login: React.FC = () => {
       <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
           <div className="w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="text-center">
+              <Link to={"/"}>
+                <LogoEdust className="mb-3 inline-block" width={250} />
+              </Link>{" "}
+            </div>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col gap-4"
@@ -202,7 +208,6 @@ export const Login: React.FC = () => {
             <div className="my-4">
               <SocialAuth />
             </div>
-
             <div className="mb-4 mt-4 flex items-center justify-center gap-4">
               <Typography className="text-sm">
                 Don't have an account?{" "}

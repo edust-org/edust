@@ -3,7 +3,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa"
 
 export const HelpGetStarted = () => {
   return (
-    <section className="relative overflow-hidden bg-white py-4 md:py-8 lg:py-28">
+    <section className="relative overflow-hidden bg-slate-50 py-4 md:py-8 lg:py-28">
       <div className="container">
         <Typography variant="h1" className="relative z-10 mb-8 text-center">
           We'll help you get started
@@ -31,7 +31,7 @@ export const HelpGetStarted = () => {
               />
             </div>
           </div>
-          <div className="relative z-10 mx-auto grid max-w-[900px] items-center gap-4 border border-white bg-gradient-to-r from-white from-15% p-4 backdrop-blur-lg md:grid-cols-[auto_224px]">
+          <div className="relative z-10 mx-auto grid max-w-[900px] items-center gap-4 border border-white bg-gradient-to-r from-white from-10% p-4 backdrop-blur-lg md:grid-cols-[auto_224px]">
             <div className="flex items-center gap-4">
               <div>
                 <Button className="h-10 w-10 animate-bounce rounded-full p-1.5">

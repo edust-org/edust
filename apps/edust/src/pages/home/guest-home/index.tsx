@@ -4,7 +4,7 @@ import { HelpGetStarted } from "./help-get-started"
 import { StartDesign } from "./start-design"
 import { Faq } from "./faq"
 import Hero from "./hero"
-import { Footer } from "./footer"
+import { Footer } from "@/pages/components/footer"
 
 export const GuestHome = () => {
   return (
@@ -24,11 +24,11 @@ export const GuestHome = () => {
         <Hero />
       </div>
 
-      <main className="space-y-8 md:space-y-16">
+      <main className="space-y-8 md:space-y-16 lg:space-y-32">
         <HelpGetStarted />
         <Faq />
         <StartDesign />
-      </main> 
+      </main>
       <Footer />
     </>
   )

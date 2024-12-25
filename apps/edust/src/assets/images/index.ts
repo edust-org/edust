@@ -7,7 +7,7 @@ import iconsFacebook from "./icons/facebook.svg"
 // For Organization
 import imgCreateOrganizations from "./organizations/create-organizations.png"
 
-import HomeGuestStartDesign from "./home/home-guest-start-design.avif"
+import homeFaq from "./home/undraw_questions_g2px.svg"
 
 const assets = {
   logoLight,
@@ -16,7 +16,7 @@ const assets = {
   logoIconBoxDark,
   iconsFacebook,
   imgCreateOrganizations,
-  HomeGuestStartDesign,
+  homeFaq,
 }
 
 export default assets

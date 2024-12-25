@@ -8,6 +8,7 @@ import {
 } from "@/components/ui"
 import faqData from "./faq-data"
 import { Link } from "react-router-dom"
+import assets from "@/assets/images"
 
 export const Faq = () => {
   return (
@@ -16,16 +17,20 @@ export const Faq = () => {
         Frequently Asked Questions (FAQ)
       </Typography>
 
-      <Accordion type="single" collapsible className="mx-auto max-w-[700px]">
-        {faqData.map((faq, index) => (
-          <AccordionItem value={`item-${index}`}>
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent>{faq.answer}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-2">
+        <Accordion type="single" collapsible>
+          {faqData.map((faq, index) => (
+            <AccordionItem value={`item-${index}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
 
-      <div className="mx-auto mt-8 max-w-xl space-y-4 rounded bg-muted px-4 py-6 text-center shadow-sm">
+        <img src={assets.homeFaq} alt="faq" />
+      </div>
+
+      <div className="mx-auto mt-16 max-w-xl space-y-4 rounded bg-muted px-4 py-6 text-center shadow-sm">
         <Typography variant="h3">Still have questions?</Typography>
         <Typography>
           Have questions or need assistance? Our team is here to help!
