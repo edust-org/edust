@@ -109,7 +109,7 @@ export const NavbarRightMenus = () => {
           <DropdownMenuGroup>
             {/* if organization available */}
 
-            {auth?.user?.organization_roles && (
+            {auth?.user?.organizationRoles && (
               <>
                 {profileMode.activeMode === Roles.USER &&
                   profileMode.organizationRoles?.map((role) => {
@@ -158,7 +158,7 @@ export const NavbarRightMenus = () => {
             )}
 
             {/* if organization is not available */}
-            {!auth?.user?.organization_roles && (
+            {!auth?.user?.organizationRoles && (
               <Link to={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

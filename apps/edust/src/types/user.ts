@@ -8,12 +8,12 @@ export interface User {
   username: null | string
   email: string
   password: string
-  account_type: AccountType
-  account_details: null | object
-  is_verified: boolean
-  is_profile_verified: boolean
-  system_role: Roles
-  organization_roles: null | OrganizationRoles[]
+  accountType: AccountType
+  accountDetails: null | object
+  isVerified: boolean
+  isProfileVerified: boolean
+  systemRole: Roles
+  organizationRoles: null | OrganizationRoles[]
   createdAt: Date
   updatedAt: Date
 }

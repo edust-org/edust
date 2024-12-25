@@ -1,13 +1,30 @@
 import { http, HttpResponse } from "msw"
 import { apiUrlV0 } from "../../api-url"
-import organizationDb from "./organization-db"
+import createOrgDB from "./create-org.json"
+import listOfOrgDB from "./list-of-org.json"
 import siteBuilderMe from "./site-builder-me.json"
 import token from "@/mocks/token"
 
 const getListOfOrg = http.get(`${apiUrlV0}/organizations`, ({ request }) => {
   token.isAuthenticated(request)
-  return HttpResponse.json(organizationDb.orgLists)
+  return HttpResponse.json(listOfOrgDB)
 })
+
+const createOrg = http.post(
+  `${apiUrlV0}/organizations`,
+  async ({ request }) => {
+    const actualBody = await request.clone().json()
+    const { name, orgUsername } = actualBody
+    token.isAuthenticated(request)
+
+    const response = createOrgDB
+
+    response.data.name = name
+    response.data.orgUsername = orgUsername
+
+    return HttpResponse.json(response)
+  },
+)
 
 const getSiteBuilderMe = http.get(
   `${apiUrlV0}/organizations/site-builder/me`,
@@ -19,4 +36,4 @@ const getSiteBuilderMe = http.get(
   },
 )
 
-export const organizations = [getListOfOrg, getSiteBuilderMe]
+export const organizations = [createOrg, getListOfOrg, getSiteBuilderMe]

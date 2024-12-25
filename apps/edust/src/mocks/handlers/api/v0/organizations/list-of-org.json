@@ -1,0 +1,714 @@
+{
+  "status": "success",
+  "message": "Organization retrieved successfully!",
+  "data": {
+    "items": [
+      {
+        "id": "012df54a-437d-4ded-bdaf-00fa653f951f",
+        "name": "Olson Hayes university",
+        "orgUsername": "olson-hayes-university",
+        "createdAt": "1976-07-21T17:48:18.000Z",
+        "updatedAt": "1976-07-21T17:48:18.000Z"
+      },
+      {
+        "id": "015cb8ca-1e04-4441-b26e-2c0c151b5b1e",
+        "name": "Braun Parisian photographyschool and Arts",
+        "orgUsername": "braun-parisian-photographyschool-and-arts",
+        "createdAt": "1994-10-08T13:25:52.000Z",
+        "updatedAt": "1994-10-08T13:25:52.000Z"
+      },
+      {
+        "id": "02ef2a34-f3e2-4394-bb2b-81e763d93790",
+        "name": "Schmidt Mayer lawcollege of Technology",
+        "orgUsername": "schmidt-mayer-lawcollege-of-technology",
+        "createdAt": "1998-08-19T02:40:51.000Z",
+        "updatedAt": "1998-08-19T02:40:51.000Z"
+      },
+      {
+        "id": "03330bfe-c894-43ef-863b-15693400e761",
+        "name": "Ward Group medicalcollege",
+        "orgUsername": "ward-group-medicalcollege",
+        "createdAt": "2016-12-10T06:19:54.000Z",
+        "updatedAt": "2016-12-10T06:19:54.000Z"
+      },
+      {
+        "id": "0f776432-1a54-4780-ac68-a8e383d78002",
+        "name": "Crona Group scienceacademy",
+        "orgUsername": "crona-group-scienceacademy",
+        "createdAt": "2015-04-08T13:23:14.000Z",
+        "updatedAt": "2015-04-08T13:23:14.000Z"
+      },
+      {
+        "id": "140f4d05-667a-43fc-b873-6d9a1d74e761",
+        "name": "Bechtelar Schiller and Paucek university of Science",
+        "orgUsername": "bechtelar-schiller-and-paucek-university-of-science",
+        "createdAt": "1982-12-11T05:36:45.000Z",
+        "updatedAt": "1982-12-11T05:36:45.000Z"
+      },
+      {
+        "id": "148e58e7-b86b-4aa8-96af-97ff6ed1036b",
+        "name": "Haley McKenzie and Price photographyschool and Arts",
+        "orgUsername": "haley-mckenzie-and-price-photographyschool-and-arts",
+        "createdAt": "2003-08-22T12:23:21.000Z",
+        "updatedAt": "2003-08-22T12:23:21.000Z"
+      },
+      {
+        "id": "1628e7a9-15c1-42d4-82a5-668132a127c2",
+        "name": "Baumbach Luettgen university and Arts",
+        "orgUsername": "baumbach-luettgen-university-and-arts",
+        "createdAt": "1988-02-27T03:13:04.000Z",
+        "updatedAt": "1988-02-27T03:13:04.000Z"
+      },
+      {
+        "id": "16619251-6b75-411d-baf3-066b433adec3",
+        "name": "Thompson LLC philosophyschool of Science",
+        "orgUsername": "thompson-llc-philosophyschool-of-science",
+        "createdAt": "2006-02-26T16:41:40.000Z",
+        "updatedAt": "2006-02-26T16:41:40.000Z"
+      },
+      {
+        "id": "181ffc98-16be-4276-8f36-65e1d30e7d7c",
+        "name": "Crooks Rempel scienceacademy and Arts",
+        "orgUsername": "crooks-rempel-scienceacademy-and-arts",
+        "createdAt": "2002-05-04T00:07:08.000Z",
+        "updatedAt": "2002-05-04T00:07:08.000Z"
+      },
+      {
+        "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+        "name": "harvard university",
+        "orgUsername": "harvard-univ",
+        "createdAt": "2024-07-26T17:07:32.000Z",
+        "updatedAt": "2024-11-22T10:42:47.000Z"
+      },
+      {
+        "id": "1f9f11a1-dcb8-43a5-a3f5-ed43c2b49345",
+        "name": "Legros LLC technicalcollege of Technology",
+        "orgUsername": "legros-llc-technicalcollege-of-technology",
+        "createdAt": "1984-01-05T05:28:04.000Z",
+        "updatedAt": "1984-01-05T05:28:04.000Z"
+      },
+      {
+        "id": "20124274-8797-437d-9826-5858c0c995e8",
+        "name": "Lind Skiles and Orn philosophyschool of Technology",
+        "orgUsername": "lind-skiles-and-orn-philosophyschool-of-technology",
+        "createdAt": "1993-04-14T13:15:45.000Z",
+        "updatedAt": "1993-04-14T13:15:45.000Z"
+      },
+      {
+        "id": "2387f67b-4bae-4114-bee2-f89d0de421f8",
+        "name": "Schaden Group photographyschool",
+        "orgUsername": "schaden-group-photographyschool",
+        "createdAt": "2014-10-24T09:49:38.000Z",
+        "updatedAt": "2014-10-24T09:49:38.000Z"
+      },
+      {
+        "id": "24b90c4b-69d2-4e30-8c40-dfea47716b42",
+        "name": "Purdy Runte highschool",
+        "orgUsername": "purdy-runte-highschool",
+        "createdAt": "2017-02-19T07:34:07.000Z",
+        "updatedAt": "2017-02-19T07:34:07.000Z"
+      },
+      {
+        "id": "24c8feed-0a61-45d5-ac70-e7f201b4a9bc",
+        "name": "Gutkowski LLC scienceacademy",
+        "orgUsername": "gutkowski-llc-scienceacademy",
+        "createdAt": "1984-08-06T18:29:17.000Z",
+        "updatedAt": "1984-08-06T18:29:17.000Z"
+      },
+      {
+        "id": "251c07aa-e51a-487c-ac42-190faf2b60e8",
+        "name": "Collier Braun and Fahey school of Technology",
+        "orgUsername": "collier-braun-and-fahey-school-of-technology",
+        "createdAt": "2023-09-07T13:12:30.000Z",
+        "updatedAt": "2023-09-07T13:12:30.000Z"
+      },
+      {
+        "id": "2c80d95a-182b-4540-b14b-e40a436462cb",
+        "name": "Ankunding and Sons artschool",
+        "orgUsername": "ankunding-and-sons-artschool",
+        "createdAt": "2016-11-18T20:25:31.000Z",
+        "updatedAt": "2016-11-18T20:25:31.000Z"
+      },
+      {
+        "id": "2ea3aa3d-e493-4dc4-aa69-0a37ce1b3d19",
+        "name": "Doyle Paucek and Lubowitz medicalcollege and Arts",
+        "orgUsername": "doyle-paucek-and-lubowitz-medicalcollege-and-arts",
+        "createdAt": "2015-08-22T13:32:56.000Z",
+        "updatedAt": "2015-08-22T13:32:56.000Z"
+      },
+      {
+        "id": "30757e7a-77c8-42f3-8ab4-5d30d481bdad",
+        "name": "Corkery Lemke philosophyschool and Arts",
+        "orgUsername": "corkery-lemke-philosophyschool-and-arts",
+        "createdAt": "2001-07-31T11:15:06.000Z",
+        "updatedAt": "2001-07-31T11:15:06.000Z"
+      },
+      {
+        "id": "313da7aa-a1d8-4802-aed5-6d6ad7547029",
+        "name": "Stiedemann LLC technicalcollege",
+        "orgUsername": "stiedemann-llc-technicalcollege",
+        "createdAt": "1993-06-21T11:12:40.000Z",
+        "updatedAt": "1993-06-21T11:12:40.000Z"
+      },
+      {
+        "id": "3462dd35-6748-4119-bd39-3eed993727f0",
+        "name": "Littel and Sons school and Arts",
+        "orgUsername": "littel-and-sons-school-and-arts",
+        "createdAt": "1983-08-23T20:28:36.000Z",
+        "updatedAt": "1983-08-23T20:28:36.000Z"
+      },
+      {
+        "id": "38fd7fe3-9bf7-4f09-82b5-f83ad8d0cee6",
+        "name": "Trantow Schroeder school",
+        "orgUsername": "trantow-schroeder-school",
+        "createdAt": "2017-02-06T16:47:09.000Z",
+        "updatedAt": "2017-02-06T16:47:09.000Z"
+      },
+      {
+        "id": "40401d3d-5528-484d-a852-da225afc690b",
+        "name": "Schroeder Group madrasah",
+        "orgUsername": "schroeder-group-madrasah",
+        "createdAt": "1986-08-02T07:52:45.000Z",
+        "updatedAt": "1986-08-02T07:52:45.000Z"
+      },
+      {
+        "id": "4468987e-df95-483c-8e0b-4280acdd7985",
+        "name": "OKeefe LLC technicalcollege of Technology",
+        "orgUsername": "okeefe-llc-technicalcollege-of-technology",
+        "createdAt": "1992-10-14T18:54:53.000Z",
+        "updatedAt": "1992-10-14T18:54:53.000Z"
+      },
+      {
+        "id": "4b7d9944-cf72-4c43-ac44-65bcbd0f133c",
+        "name": "Friesen Heaney and Lebsack college",
+        "orgUsername": "friesen-heaney-and-lebsack-college",
+        "createdAt": "1996-07-10T23:54:12.000Z",
+        "updatedAt": "1996-07-10T23:54:12.000Z"
+      },
+      {
+        "id": "4c7ee1c6-679c-4b83-b2fc-5c872a5fddb1",
+        "name": "Bechtelar LLC lawcollege of Technology",
+        "orgUsername": "bechtelar-llc-lawcollege-of-technology",
+        "createdAt": "2022-06-27T17:31:39.000Z",
+        "updatedAt": "2022-06-27T17:31:39.000Z"
+      },
+      {
+        "id": "4dd73990-376c-4557-924b-f2cb76f1ed9a",
+        "name": "Hand Ferry school and Arts",
+        "orgUsername": "hand-ferry-school-and-arts",
+        "createdAt": "1980-12-09T21:55:36.000Z",
+        "updatedAt": "1980-12-09T21:55:36.000Z"
+      },
+      {
+        "id": "550882dd-0234-4d0a-a31e-5be4fd23dffd",
+        "name": "Rau Inc college of Science",
+        "orgUsername": "rau-inc-college-of-science",
+        "createdAt": "2000-09-09T12:37:14.000Z",
+        "updatedAt": "2000-09-09T12:37:14.000Z"
+      },
+      {
+        "id": "55166863-817a-4284-9533-e160006fde0f",
+        "name": "Vandervort Weissnat and Parisian scienceacademy",
+        "orgUsername": "vandervort-weissnat-and-parisian-scienceacademy",
+        "createdAt": "2006-09-19T04:35:19.000Z",
+        "updatedAt": "2006-09-19T04:35:19.000Z"
+      },
+      {
+        "id": "58b4b3d5-6a6f-44f4-b4cf-2cf786299c6f",
+        "name": "Macejkovic Sipes polytechnicinstitute of Science",
+        "orgUsername": "macejkovic-sipes-polytechnicinstitute-of-science",
+        "createdAt": "1997-07-29T05:41:06.000Z",
+        "updatedAt": "1997-07-29T05:41:06.000Z"
+      },
+      {
+        "id": "599d67d8-9b78-4dae-8c95-8119299ae6b9",
+        "name": "Streich Rau photographyschool and Arts",
+        "orgUsername": "streich-rau-photographyschool-and-arts",
+        "createdAt": "2002-06-23T03:06:59.000Z",
+        "updatedAt": "2002-06-23T03:06:59.000Z"
+      },
+      {
+        "id": "5f2bfaf5-08ee-46ed-98ff-96eaaf14dccf",
+        "name": "Strosin McKenzie madrasah of Technology",
+        "orgUsername": "strosin-mckenzie-madrasah-of-technology",
+        "createdAt": "1996-03-06T16:33:55.000Z",
+        "updatedAt": "1996-03-06T16:33:55.000Z"
+      },
+      {
+        "id": "60df7ac0-32eb-4a9e-95fa-b83db7d0e6c8",
+        "name": "Gleason Legros and Jerde lawcollege",
+        "orgUsername": "gleason-legros-and-jerde-lawcollege",
+        "createdAt": "1980-10-01T23:04:23.000Z",
+        "updatedAt": "1980-10-01T23:04:23.000Z"
+      },
+      {
+        "id": "638c933d-8abe-44f3-bc3e-b342c46f15ff",
+        "name": "Hamill Lowe university and Arts",
+        "orgUsername": "hamill-lowe-university-and-arts",
+        "createdAt": "2003-08-09T18:15:14.000Z",
+        "updatedAt": "2003-08-09T18:15:14.000Z"
+      },
+      {
+        "id": "651f1e32-aa86-449d-b576-5c5242bc655c",
+        "name": "Abernathy Emard college and Arts",
+        "orgUsername": "abernathy-emard-college-and-arts",
+        "createdAt": "2014-12-20T06:41:34.000Z",
+        "updatedAt": "2014-12-20T06:41:34.000Z"
+      },
+      {
+        "id": "664c972c-61e9-43ad-bb24-41485dcd7c31",
+        "name": "Huels Cronin and Wilkinson highschool and Arts",
+        "orgUsername": "huels-cronin-and-wilkinson-highschool-and-arts",
+        "createdAt": "2000-06-03T13:11:45.000Z",
+        "updatedAt": "2000-06-03T13:11:45.000Z"
+      },
+      {
+        "id": "6aa88dc4-6a72-4ed3-9c4e-0155ff55a1ea",
+        "name": "Boehm Ondricka lawcollege and Arts",
+        "orgUsername": "boehm-ondricka-lawcollege-and-arts",
+        "createdAt": "1999-12-29T02:54:00.000Z",
+        "updatedAt": "1999-12-29T02:54:00.000Z"
+      },
+      {
+        "id": "6b9ad241-b642-41fd-9e9b-0f7949b5e8f6",
+        "name": "Homenick Tillman and Boehm philosophyschool",
+        "orgUsername": "homenick-tillman-and-boehm-philosophyschool",
+        "createdAt": "2003-05-29T17:34:15.000Z",
+        "updatedAt": "2003-05-29T17:34:15.000Z"
+      },
+      {
+        "id": "6bb9f5b6-60c8-4760-a630-c73a29b7cb2e",
+        "name": "Quigley Keebler and Murphy university and Arts",
+        "orgUsername": "quigley-keebler-and-murphy-university-and-arts",
+        "createdAt": "2005-02-16T23:11:56.000Z",
+        "updatedAt": "2005-02-16T23:11:56.000Z"
+      },
+      {
+        "id": "6d89f158-bcf6-4e21-8636-5ae70413aa21",
+        "name": "Boehm Schuster scienceacademy of Science",
+        "orgUsername": "boehm-schuster-scienceacademy-of-science",
+        "createdAt": "2022-07-18T19:05:04.000Z",
+        "updatedAt": "2022-07-18T19:05:04.000Z"
+      },
+      {
+        "id": "72bd54f8-bfaa-4c78-ad9a-dec67b69941f",
+        "name": "Ullrich Douglas and Welch highschool and Arts",
+        "orgUsername": "ullrich-douglas-and-welch-highschool-and-arts",
+        "createdAt": "2011-06-06T03:13:29.000Z",
+        "updatedAt": "2011-06-06T03:13:29.000Z"
+      },
+      {
+        "id": "7354a252-74b3-47e4-a464-a166ade8577c",
+        "name": "Beahan Sawayn lawcollege of Technology",
+        "orgUsername": "beahan-sawayn-lawcollege-of-technology",
+        "createdAt": "2005-09-27T05:20:08.000Z",
+        "updatedAt": "2005-09-27T05:20:08.000Z"
+      },
+      {
+        "id": "73b50f5e-6992-4257-8f67-f52930b61640",
+        "name": "Morar Brakus photographyschool",
+        "orgUsername": "morar-brakus-photographyschool",
+        "createdAt": "1984-04-10T09:03:15.000Z",
+        "updatedAt": "1984-04-10T09:03:15.000Z"
+      },
+      {
+        "id": "744be45d-d73f-4c3f-a823-b63c60ff6dd9",
+        "name": "Lowe Gleichner and Braun philosophyschool",
+        "orgUsername": "lowe-gleichner-and-braun-philosophyschool",
+        "createdAt": "2020-06-17T15:05:03.000Z",
+        "updatedAt": "2020-06-17T15:05:03.000Z"
+      },
+      {
+        "id": "78c0c2e9-cd59-42df-b633-023aff84893e",
+        "name": "Schroeder Nolan polytechnicinstitute and Arts",
+        "orgUsername": "schroeder-nolan-polytechnicinstitute-and-arts",
+        "createdAt": "1985-01-25T10:54:57.000Z",
+        "updatedAt": "1985-01-25T10:54:57.000Z"
+      },
+      {
+        "id": "7b1c7348-5abe-468e-8019-d5541f1cac56",
+        "name": "Jenkins Gislason philosophyschool",
+        "orgUsername": "jenkins-gislason-philosophyschool",
+        "createdAt": "1978-11-06T01:59:20.000Z",
+        "updatedAt": "1978-11-06T01:59:20.000Z"
+      },
+      {
+        "id": "7c54696a-5035-4da3-a7db-d7c81f096e34",
+        "name": "Smitham LLC artschool",
+        "orgUsername": "smitham-llc-artschool",
+        "createdAt": "2005-11-17T04:54:33.000Z",
+        "updatedAt": "2005-11-17T04:54:33.000Z"
+      },
+      {
+        "id": "804f8c1e-bbc8-4cb5-b035-a73f0a4d5e87",
+        "name": "Yundt Hermann and Batz polytechnicinstitute and Arts",
+        "orgUsername": "yundt-hermann-and-batz-polytechnicinstitute-and-arts",
+        "createdAt": "2008-09-11T20:32:44.000Z",
+        "updatedAt": "2008-09-11T20:32:44.000Z"
+      },
+      {
+        "id": "81e181b2-d9ac-4116-ac2c-e73b21b89879",
+        "name": "Rutherford Wuckert and Morar madrasah of Technology",
+        "orgUsername": "rutherford-wuckert-and-morar-madrasah-of-technology",
+        "createdAt": "2013-04-09T17:59:21.000Z",
+        "updatedAt": "2013-04-09T17:59:21.000Z"
+      },
+      {
+        "id": "84c62518-337b-47a8-871e-c88dfad0597b",
+        "name": "Franecki Turner and McDermott artschool and Arts",
+        "orgUsername": "franecki-turner-and-mcdermott-artschool-and-arts",
+        "createdAt": "1999-02-18T19:00:33.000Z",
+        "updatedAt": "1999-02-18T19:00:33.000Z"
+      },
+      {
+        "id": "88361182-062e-43ff-b52b-a52c15f43fce",
+        "name": "Bahringer Lynch and OReilly university and Arts",
+        "orgUsername": "bahringer-lynch-and-oreilly-university-and-arts",
+        "createdAt": "2008-03-23T09:44:43.000Z",
+        "updatedAt": "2008-03-23T09:44:43.000Z"
+      },
+      {
+        "id": "8a6218b2-c40e-4be4-8484-3ec53cf9ec8f",
+        "name": "Rodriguez Group medicalcollege of Science",
+        "orgUsername": "rodriguez-group-medicalcollege-of-science",
+        "createdAt": "2015-07-06T12:32:20.000Z",
+        "updatedAt": "2015-07-06T12:32:20.000Z"
+      },
+      {
+        "id": "8bf9e179-2900-4d97-be04-c77a9cf8943b",
+        "name": "Brown Erdman and Hackett philosophyschool and Arts",
+        "orgUsername": "brown-erdman-and-hackett-philosophyschool-and-arts",
+        "createdAt": "2013-02-07T15:07:48.000Z",
+        "updatedAt": "2013-02-07T15:07:48.000Z"
+      },
+      {
+        "id": "8cb5f55a-4e14-4cf5-8872-5439257dd30a",
+        "name": "Brekke OConnell hospitalityschool of Science",
+        "orgUsername": "brekke-oconnell-hospitalityschool-of-science",
+        "createdAt": "1979-12-23T01:39:33.000Z",
+        "updatedAt": "1979-12-23T01:39:33.000Z"
+      },
+      {
+        "id": "8d233467-d0c6-49c8-b155-3bb00ce5f417",
+        "name": "Yost Lebsack and Conn photographyschool of Science",
+        "orgUsername": "yost-lebsack-and-conn-photographyschool-of-science",
+        "createdAt": "1974-01-26T05:02:25.000Z",
+        "updatedAt": "1974-01-26T05:02:25.000Z"
+      },
+      {
+        "id": "8e2d7383-bc08-4283-b085-529aaedb98c0",
+        "name": "Hickle Group hospitalityschool of Science",
+        "orgUsername": "hickle-group-hospitalityschool-of-science",
+        "createdAt": "2016-12-21T04:26:30.000Z",
+        "updatedAt": "2016-12-21T04:26:30.000Z"
+      },
+      {
+        "id": "9149fcab-ad5f-4d36-9045-a98e9d7cac6d",
+        "name": "Adams Group artschool of Technology",
+        "orgUsername": "adams-group-artschool-of-technology",
+        "createdAt": "2015-12-24T04:40:45.000Z",
+        "updatedAt": "2015-12-24T04:40:45.000Z"
+      },
+      {
+        "id": "96ff31e3-2fcf-4ce5-9476-c5144915ad67",
+        "name": "Stracke Group polytechnicinstitute of Science",
+        "orgUsername": "stracke-group-polytechnicinstitute-of-science",
+        "createdAt": "1982-06-23T05:42:22.000Z",
+        "updatedAt": "1982-06-23T05:42:22.000Z"
+      },
+      {
+        "id": "97873e3a-3155-4727-acd2-ce64508cf663",
+        "name": "Feeney Inc engineeringschool and Arts",
+        "orgUsername": "feeney-inc-engineeringschool-and-arts",
+        "createdAt": "2009-12-05T05:32:48.000Z",
+        "updatedAt": "2009-12-05T05:32:48.000Z"
+      },
+      {
+        "id": "98b840fd-a346-466c-8f15-55fcdf0f1125",
+        "name": "Romaguera Deckow college",
+        "orgUsername": "romaguera-deckow-college",
+        "createdAt": "1988-01-19T11:19:32.000Z",
+        "updatedAt": "1988-01-19T11:19:32.000Z"
+      },
+      {
+        "id": "9e3ebab8-92df-4c35-8b38-d137c2067c33",
+        "name": "Hand Jaskolski photographyschool of Science",
+        "orgUsername": "hand-jaskolski-photographyschool-of-science",
+        "createdAt": "2003-09-14T02:42:55.000Z",
+        "updatedAt": "2003-09-14T02:42:55.000Z"
+      },
+      {
+        "id": "a0050f4d-7c7f-4265-bea3-19cc0f4819a3",
+        "name": "Cartwright LLC scienceacademy of Technology",
+        "orgUsername": "cartwright-llc-scienceacademy-of-technology",
+        "createdAt": "1990-11-07T12:54:50.000Z",
+        "updatedAt": "1990-11-07T12:54:50.000Z"
+      },
+      {
+        "id": "a3b7e048-eaf6-46ee-9de7-7a655ca6b04e",
+        "name": "DAmore Group artschool of Technology",
+        "orgUsername": "damore-group-artschool-of-technology",
+        "createdAt": "1974-05-11T18:04:40.000Z",
+        "updatedAt": "1974-05-11T18:04:40.000Z"
+      },
+      {
+        "id": "a54c6e72-9ae8-4138-bcd5-5c20e2f58b39",
+        "name": "Cronin Smith and Roob medicalcollege of Technology",
+        "orgUsername": "cronin-smith-and-roob-medicalcollege-of-technology",
+        "createdAt": "1975-02-10T08:19:39.000Z",
+        "updatedAt": "1975-02-10T08:19:39.000Z"
+      },
+      {
+        "id": "a552fa82-5367-451a-aaa7-5c07911c9184",
+        "name": "Mraz King and Witting engineeringschool of Science",
+        "orgUsername": "mraz-king-and-witting-engineeringschool-of-science",
+        "createdAt": "2009-02-25T21:41:08.000Z",
+        "updatedAt": "2009-02-25T21:41:08.000Z"
+      },
+      {
+        "id": "abc947d6-c75d-47d5-8af3-37af44026d63",
+        "name": "Windler Cruickshank and Heathcote college",
+        "orgUsername": "windler-cruickshank-and-heathcote-college",
+        "createdAt": "1986-11-27T17:44:55.000Z",
+        "updatedAt": "1986-11-27T17:44:55.000Z"
+      },
+      {
+        "id": "ac8154a4-663d-4ebe-88a8-91daef356c53",
+        "name": "Boehm Inc university of Technology",
+        "orgUsername": "boehm-inc-university-of-technology",
+        "createdAt": "1985-09-28T19:54:56.000Z",
+        "updatedAt": "1985-09-28T19:54:56.000Z"
+      },
+      {
+        "id": "b4cf70ba-a955-4a27-a454-1d6a8057a1f0",
+        "name": "Homenick and Sons engineeringschool",
+        "orgUsername": "homenick-and-sons-engineeringschool",
+        "createdAt": "1981-02-18T07:08:31.000Z",
+        "updatedAt": "1981-02-18T07:08:31.000Z"
+      },
+      {
+        "id": "b9e15c72-35c4-4617-962b-0c892ea9eb58",
+        "name": "Yundt Wilderman and Jenkins madrasah",
+        "orgUsername": "yundt-wilderman-and-jenkins-madrasah",
+        "createdAt": "1975-02-12T01:33:16.000Z",
+        "updatedAt": "1975-02-12T01:33:16.000Z"
+      },
+      {
+        "id": "bbd90171-ed41-4c9f-ab16-933ad123930e",
+        "name": "Bechtelar Johnston and Buckridge lawcollege",
+        "orgUsername": "bechtelar-johnston-and-buckridge-lawcollege",
+        "createdAt": "1988-07-17T04:34:38.000Z",
+        "updatedAt": "1988-07-17T04:34:38.000Z"
+      },
+      {
+        "id": "bc7dae1b-b703-40ba-8de0-a1d2f3202f63",
+        "name": "Schuster Group university and Arts",
+        "orgUsername": "schuster-group-university-and-arts",
+        "createdAt": "2001-12-22T19:16:34.000Z",
+        "updatedAt": "2001-12-22T19:16:34.000Z"
+      },
+      {
+        "id": "be37e49d-f1d5-41f9-b25d-f866f04bdb82",
+        "name": "Hahn Kuvalis and Hackett polytechnicinstitute of Technology",
+        "orgUsername": "hahn-kuvalis-and-hackett-polytechnicinstitute-of-technology",
+        "createdAt": "1986-11-25T16:26:51.000Z",
+        "updatedAt": "1986-11-25T16:26:51.000Z"
+      },
+      {
+        "id": "c314ddc4-c391-4a56-bd8c-a8120545cae8",
+        "name": "Homenick Koelpin university of Technology",
+        "orgUsername": "homenick-koelpin-university-of-technology",
+        "createdAt": "2009-04-09T00:11:03.000Z",
+        "updatedAt": "2009-04-09T00:11:03.000Z"
+      },
+      {
+        "id": "c4104d7d-e29b-4d84-ba5a-89f56ab53660",
+        "name": "Schulist LLC madrasah of Science",
+        "orgUsername": "schulist-llc-madrasah-of-science",
+        "createdAt": "1987-04-26T15:39:22.000Z",
+        "updatedAt": "1987-04-26T15:39:22.000Z"
+      },
+      {
+        "id": "cad37ee8-6f0e-43ea-a5ca-6d4cf7342fe2",
+        "name": "Kuphal Inc hospitalityschool",
+        "orgUsername": "kuphal-inc-hospitalityschool",
+        "createdAt": "1998-09-17T13:48:11.000Z",
+        "updatedAt": "1998-09-17T13:48:11.000Z"
+      },
+      {
+        "id": "cad6f532-e396-4142-889e-5b739528cc2d",
+        "name": "Schamberger LLC polytechnicinstitute and Arts",
+        "orgUsername": "schamberger-llc-polytechnicinstitute-and-arts",
+        "createdAt": "2024-03-05T23:08:29.000Z",
+        "updatedAt": "2024-03-05T23:08:29.000Z"
+      },
+      {
+        "id": "cb3966fa-a14b-42a0-b5ec-1247fa5427a1",
+        "name": "Ullrich Balistreri madrasah of Science",
+        "orgUsername": "ullrich-balistreri-madrasah-of-science",
+        "createdAt": "2000-08-12T10:30:15.000Z",
+        "updatedAt": "2000-08-12T10:30:15.000Z"
+      },
+      {
+        "id": "cc38b88f-41de-4b30-943c-369e863d4d96",
+        "name": "Thompson and Sons technicalcollege of Technology",
+        "orgUsername": "thompson-and-sons-technicalcollege-of-technology",
+        "createdAt": "2012-12-23T02:52:07.000Z",
+        "updatedAt": "2012-12-23T02:52:07.000Z"
+      },
+      {
+        "id": "cc474049-2f75-4495-bf6a-18e0d17be6f2",
+        "name": "Carter LLC madrasah and Arts",
+        "orgUsername": "carter-llc-madrasah-and-arts",
+        "createdAt": "1993-03-21T01:20:17.000Z",
+        "updatedAt": "1993-03-21T01:20:17.000Z"
+      },
+      {
+        "id": "cee63e5a-fce3-4f1a-813d-05e1b296b0ae",
+        "name": "Hackett Group hospitalityschool of Science",
+        "orgUsername": "hackett-group-hospitalityschool-of-science",
+        "createdAt": "2022-08-30T02:01:34.000Z",
+        "updatedAt": "2022-08-30T02:01:34.000Z"
+      },
+      {
+        "id": "d66b0e25-f053-4841-93bf-9a1941e1c1f5",
+        "name": "Bashirian Macejkovic lawcollege of Science",
+        "orgUsername": "bashirian-macejkovic-lawcollege-of-science",
+        "createdAt": "1979-04-24T04:49:43.000Z",
+        "updatedAt": "1979-04-24T04:49:43.000Z"
+      },
+      {
+        "id": "d91ba48e-ddd9-4bd0-85e4-0074bf3e4a50",
+        "name": "Beahan Becker technicalcollege and Arts",
+        "orgUsername": "beahan-becker-technicalcollege-and-arts",
+        "createdAt": "1985-11-06T01:33:22.000Z",
+        "updatedAt": "1985-11-06T01:33:22.000Z"
+      },
+      {
+        "id": "d9f9f9b0-1070-4031-a98f-eb9bf62f31f2",
+        "name": "Smitham Berge and Durgan photographyschool of Science",
+        "orgUsername": "smitham-berge-and-durgan-photographyschool-of-science",
+        "createdAt": "2005-02-19T16:13:39.000Z",
+        "updatedAt": "2005-02-19T16:13:39.000Z"
+      },
+      {
+        "id": "e36567fb-6182-401b-ad4b-165c6be541d2",
+        "name": "Kris Nikolaus and Torphy technicalcollege and Arts",
+        "orgUsername": "kris-nikolaus-and-torphy-technicalcollege-and-arts",
+        "createdAt": "2020-01-23T12:58:39.000Z",
+        "updatedAt": "2020-01-23T12:58:39.000Z"
+      },
+      {
+        "id": "e404be90-f038-4071-9b9b-fc2efe53fa42",
+        "name": "Luettgen Ziemann and Kunze highschool of Science",
+        "orgUsername": "luettgen-ziemann-and-kunze-highschool-of-science",
+        "createdAt": "2005-05-17T20:38:40.000Z",
+        "updatedAt": "2005-05-17T20:38:40.000Z"
+      },
+      {
+        "id": "e43cb4dd-ead8-4a43-8a44-c42f28d5bc9f",
+        "name": "Connelly LLC artschool of Science",
+        "orgUsername": "connelly-llc-artschool-of-science",
+        "createdAt": "1991-06-03T19:12:17.000Z",
+        "updatedAt": "1991-06-03T19:12:17.000Z"
+      },
+      {
+        "id": "e4497d35-f8f7-479f-a4f9-e602c44cf31d",
+        "name": "Lesch and Sons polytechnicinstitute of Technology",
+        "orgUsername": "lesch-and-sons-polytechnicinstitute-of-technology",
+        "createdAt": "1999-11-11T07:56:37.000Z",
+        "updatedAt": "1999-11-11T07:56:37.000Z"
+      },
+      {
+        "id": "e5dbbe4b-9b48-4dd9-a17e-98d4ae8e36d3",
+        "name": "Klocko Abernathy and Walter hospitalityschool and Arts",
+        "orgUsername": "klocko-abernathy-and-walter-hospitalityschool-and-arts",
+        "createdAt": "1999-06-14T02:31:18.000Z",
+        "updatedAt": "1999-06-14T02:31:18.000Z"
+      },
+      {
+        "id": "e828cdac-053b-4428-bfdc-96e4cc2212e6",
+        "name": "Kuhic Leffler and Bartell medicalcollege",
+        "orgUsername": "kuhic-leffler-and-bartell-medicalcollege",
+        "createdAt": "1991-01-23T02:44:22.000Z",
+        "updatedAt": "1991-01-23T02:44:22.000Z"
+      },
+      {
+        "id": "e89a2f93-a7b0-47a0-8bfb-b96c05d12c32",
+        "name": "Quitzon Stehr lawcollege and Arts",
+        "orgUsername": "quitzon-stehr-lawcollege-and-arts",
+        "createdAt": "1993-12-01T00:39:57.000Z",
+        "updatedAt": "1993-12-01T00:39:57.000Z"
+      },
+      {
+        "id": "eaab686d-fb54-4c36-8c7c-37a346effbab",
+        "name": "Steuber and Sons photographyschool of Technology",
+        "orgUsername": "steuber-and-sons-photographyschool-of-technology",
+        "createdAt": "2019-10-24T18:01:37.000Z",
+        "updatedAt": "2019-10-24T18:01:37.000Z"
+      },
+      {
+        "id": "eafbe717-39f6-46a5-a393-09d094454a06",
+        "name": "VonRueden LLC hospitalityschool",
+        "orgUsername": "vonrueden-llc-hospitalityschool",
+        "createdAt": "2021-04-04T10:56:54.000Z",
+        "updatedAt": "2021-04-04T10:56:54.000Z"
+      },
+      {
+        "id": "eb11c502-469b-4717-a92b-58538b8f70b9",
+        "name": "Gislason Reichel and Mante artschool",
+        "orgUsername": "gislason-reichel-and-mante-artschool",
+        "createdAt": "2014-06-07T00:05:36.000Z",
+        "updatedAt": "2014-06-07T00:05:36.000Z"
+      },
+      {
+        "id": "ed1d783d-22a3-4eb9-a569-9eb93cf79078",
+        "name": "Lemke Inc technicalcollege of Science",
+        "orgUsername": "lemke-inc-technicalcollege-of-science",
+        "createdAt": "1978-10-10T13:56:04.000Z",
+        "updatedAt": "1978-10-10T13:56:04.000Z"
+      },
+      {
+        "id": "ef552ead-e6e4-419c-8b45-2c3fcfabb54f",
+        "name": "Gerhold Raynor and Rempel hospitalityschool",
+        "orgUsername": "gerhold-raynor-and-rempel-hospitalityschool",
+        "createdAt": "1976-12-19T15:40:00.000Z",
+        "updatedAt": "1976-12-19T15:40:00.000Z"
+      },
+      {
+        "id": "f1f97cc7-312c-4de6-ae79-0fbf9651c9e4",
+        "name": "Willms Inc highschool and Arts",
+        "orgUsername": "willms-inc-highschool-and-arts",
+        "createdAt": "2018-05-27T10:52:10.000Z",
+        "updatedAt": "2018-05-27T10:52:10.000Z"
+      },
+      {
+        "id": "f72cd9cd-4029-49ac-9f30-bb3b9f5f06f8",
+        "name": "Schiller Rempel engineeringschool of Technology",
+        "orgUsername": "schiller-rempel-engineeringschool-of-technology",
+        "createdAt": "1973-03-12T09:39:50.000Z",
+        "updatedAt": "1973-03-12T09:39:50.000Z"
+      },
+      {
+        "id": "fce57960-b0dc-413a-b63f-7c6d893ac41e",
+        "name": "Kreiger Schmeler and Marquardt scienceacademy of Technology",
+        "orgUsername": "kreiger-schmeler-and-marquardt-scienceacademy-of-technology",
+        "createdAt": "2000-10-09T21:46:26.000Z",
+        "updatedAt": "2000-10-09T21:46:26.000Z"
+      },
+      {
+        "id": "ffc04d15-98bc-4b83-bb9c-c09c569d2538",
+        "name": "Watsica Boyle and Ebert technicalcollege",
+        "orgUsername": "watsica-boyle-and-ebert-technicalcollege",
+        "createdAt": "1978-12-06T00:06:19.000Z",
+        "updatedAt": "1978-12-06T00:06:19.000Z"
+      }
+    ]
+  },
+  "_links": {
+    "self": { "href": "/api/v0/organizations", "method": "GET" },
+    "create": { "href": "/api/v0/organizations", "method": "POST" },
+    "me": { "href": "/api/v0/organizations/me", "method": "GET" },
+    "editByMe": { "href": "/api/v0/organizations/me", "method": "PATCH" }
+  }
+}

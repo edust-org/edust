@@ -19,7 +19,7 @@ import { useEffect } from "react"
 import { toast } from "sonner"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { setAuthentication, setProfileMode } from "@/app/features"
-import { OrganizationRoles } from "@/types"
+import { OrganizationRoles, User } from "@/types"
 
 const FormSchema = z.object({
   name: z
@@ -27,7 +27,7 @@ const FormSchema = z.object({
     .trim()
     .min(1, { message: "Name is required" })
     .max(100, { message: "Name must not exceed 100 characters" }),
-  org_username: z
+  orgUsername: z
     .string()
     .trim()
     .min(1, { message: "Organization username is required" })
@@ -56,7 +56,7 @@ export const CreateOrganizationForm = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
-      org_username: "",
+      orgUsername: "",
       isAccepted: false,
     },
   })
@@ -69,41 +69,45 @@ export const CreateOrganizationForm = () => {
       const orgUsername = nameValue.trim().toLowerCase().replace(/\s+/g, "-")
 
       // Update the slug field in the form state
-      form.setValue("org_username", orgUsername)
+      form.setValue("orgUsername", orgUsername)
     }
   }, [nameValue, form.setValue])
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    const payload = { name: data.name, org_username: data.org_username }
+    const payload = { name: data.name, orgUsername: data.orgUsername }
     postOrganization(payload)
       .unwrap()
       .then((res) => {
         toast.success(res.message)
 
-        if (res.data.organizationRole.id) {
+        if (res.data.role.id) {
           const organizationRoles: OrganizationRoles[] = [
             {
-              id: res.data.organizationRole.id,
-              role: res.data.organizationRole.role,
+              id: res.data.role.id,
+              role: res.data.role.name,
               name: res.data.name,
             },
           ]
-          dispatch(
-            setAuthentication({
-              ...authState,
-              user: {
-                ...authState.user,
-                organization_roles: organizationRoles,
-              },
-            }),
-          )
-
-          dispatch(
-            setProfileMode({
-              ...profileState,
+          if (authState.user) {
+            const user: User = {
+              ...authState?.user,
               organizationRoles,
-            }),
-          )
+            }
+
+            dispatch(
+              setAuthentication({
+                ...authState,
+                user,
+              }),
+            )
+
+            dispatch(
+              setProfileMode({
+                ...profileState,
+                organizationRoles,
+              }),
+            )
+          }
         }
 
         navigate(redirectPath)
@@ -134,12 +138,12 @@ export const CreateOrganizationForm = () => {
           />
           <FormField
             control={form.control}
-            name="org_username"
+            name="orgUsername"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Organization Unique org_username</FormLabel>
+                <FormLabel>Organization Unique orgUsername</FormLabel>
                 <FormControl>
-                  <Input placeholder="org_username" {...field} />
+                  <Input placeholder="orgUsername" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

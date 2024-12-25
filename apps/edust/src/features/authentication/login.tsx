@@ -85,7 +85,7 @@ export const Login: React.FC = () => {
             }),
           )
 
-          const organizationRoles = data.data?.organization_roles?.map(
+          const organizationRoles = data.data?.organizationRoles?.map(
             (role) => ({
               id: role.id,
               role: role.role,
@@ -95,7 +95,7 @@ export const Login: React.FC = () => {
 
           dispatch(
             setProfileMode({
-              systemRole: data.data?.system_role,
+              systemRole: data.data?.systemRole,
               organizationRoles,
               activeMode: Roles.USER,
             }),
