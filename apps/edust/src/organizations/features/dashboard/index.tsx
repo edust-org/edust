@@ -15,8 +15,11 @@ import { RecentSales } from "./components/recent-sales"
 import { Overview } from "./components/overview"
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import { ComingSoon } from "@/components"
+import { useGetOrgMeQuery } from "@/app/api/v0/organizations"
 
 export const Dashboard = () => {
+  const { data } = useGetOrgMeQuery()
+  console.log(data)
   return (
     <Layout>
       {/* ===== Top Heading ===== */}

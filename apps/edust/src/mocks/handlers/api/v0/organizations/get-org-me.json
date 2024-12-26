@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "message": "Organization retrieved successfully!",
+  "data": {
+    "id": "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "name": "Drive Front-End Blockchains",
+    "orgUsername": "drive-front-end-blockchains",
+    "role": {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "OWNER",
+      "descending": "This is for org owner"
+    },
+    "site": {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "pages": 3,
+      "images": 23
+    },
+    "createdAt": "2024-09-06T01:35:20Z",
+    "updatedAt": "2024-09-06T01:35:20Z"
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v0/organizations/me",
+      "method": "GET"
+    },
+    "create": {
+      "href": "/api/v0/organizations",
+      "method": "POST"
+    },
+    "edit": {
+      "href": "/api/v0/organizations/me",
+      "method": "PATCH"
+    }
+  }
+}

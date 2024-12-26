@@ -8,9 +8,12 @@ export const organizationsApi = createApi({
   tagTypes: ["Organizations"],
 
   endpoints: (build) => ({
-    getOrgLists: build.query<any, void>({
-      query: () => `/`,
+    // me
+    getOrgMe: build.query<any, void>({
+      query: () => `/me`,
     }),
+
+    // org
     postOrganization: build.mutation({
       query: (body) => ({
         url: `/`,
@@ -18,50 +21,80 @@ export const organizationsApi = createApi({
         body,
       }),
     }),
-
-    // site-builder
-    editSiteBuilder: build.mutation({
-      query: (body) => ({
-        url: `/site-builder`,
-        method: "PATCH",
-        body,
-      }),
-    }),
-    getSiteBuilderMe: build.query<any, void>({
-      query: () => `/site-builder/me`,
+    getOrgLists: build.query<any, void>({
+      query: () => `/`,
     }),
 
-    uploadImageSiteBuilder: build.mutation({
-      query: (body) => ({
-        url: `/site-builder/images`,
+    // site-builder/images
+    uploadSiteBuilderImage: build.mutation({
+      query: ({ orgId, body }) => ({
+        url: `/${orgId}/site-builder/images`,
         method: "POST",
         body,
       }),
     }),
 
-    getUploadImagesSiteBuilderMe: build.query<any, void>({
-      query: () => `/site-builder/images/me`,
+    getSiteBuilderImages: build.query<any, void>({
+      query: (orgId) => `/${orgId}/site-builder/images`,
     }),
 
-    deleteUploadImagesByIdSiteBuilder: build.mutation<
-      { success: boolean; id: number },
-      number
+    editSiteBuilderImagesById: build.mutation<
+      any,
+      { orgId: string; imageId: string; body: any }
     >({
-      query(id) {
+      query({ orgId, imageId, body }) {
         return {
-          url: `/site-builder/images/${id}`,
+          url: `/${orgId}/site-builder/images/${imageId}`,
+          method: "PATCH",
+          body,
+        }
+      },
+    }),
+
+    deleteSiteBuilderImagesById: build.mutation<
+      any,
+      { orgId: string; imageId: string }
+    >({
+      query({ orgId, imageId }) {
+        return {
+          url: `/${orgId}/site-builder/images/${imageId}`,
           method: "DELETE",
         }
       },
+    }),
+
+    // site-builder
+    createSiteBuilder: build.mutation({
+      query: ({ orgId, body }) => ({
+        url: `/${orgId}/site-builder`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    getSiteBuilder: build.query<any, void>({
+      query: (orgId) => `/${orgId}/site-builder`,
+    }),
+
+    editSiteBuilder: build.mutation({
+      query: ({ orgId, body }) => ({
+        url: `/${orgId}/site-builder`,
+        method: "PATCH",
+        body,
+      }),
     }),
   }),
 })
 
 export const {
-  useGetOrgListsQuery,
+  useGetOrgMeQuery,
   usePostOrganizationMutation,
-  useGetSiteBuilderMeQuery,
+  useGetOrgListsQuery,
+  useUploadSiteBuilderImageMutation,
+  useGetSiteBuilderImagesQuery,
+  useEditSiteBuilderImagesByIdMutation,
+  useDeleteSiteBuilderImagesByIdMutation,
+  useCreateSiteBuilderMutation,
+  useGetSiteBuilderQuery,
   useEditSiteBuilderMutation,
-  useGetUploadImagesSiteBuilderMeQuery,
-  useDeleteUploadImagesByIdSiteBuilderMutation,
 } = organizationsApi

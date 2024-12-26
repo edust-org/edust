@@ -1,5 +1,4 @@
-import { useGetSiteBuilderMeQuery } from "@/app/api/v0/organizations"
-import Loading from "@/components/loading"
+import { useGetOrgMeQuery } from "@/app/api/v0/organizations"
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Button,
@@ -9,26 +8,14 @@ import {
   CardHeader,
   CardTitle,
   Input,
+  Skeleton,
 } from "@/components/ui"
 import { Layout } from "@/organizations/components/layout"
-import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { Link } from "react-router-dom"
 
 export const Site = () => {
-  const { data, isLoading } = useGetSiteBuilderMeQuery()
-  const [pages, setPages] = useState<[]>([])
-
-  useEffect(() => {
-    if (data?.data?.pages) {
-      setPages(JSON.parse(data?.data?.pages))
-    }
-  }, [data?.data?.pages])
-
-  if (isLoading) {
-    return <Loading.Spinner />
-  }
-
+  const { data, isLoading } = useGetOrgMeQuery()
   return (
     <Layout>
       <Helmet>
@@ -56,22 +43,42 @@ export const Site = () => {
 
       <Layout.Body>
         <section>
-          <Card className="mb-6 max-w-xs border">
-            <CardHeader>
-              <CardTitle className="text-2xl font-semibold">
-                Make Your Site Your Own
-              </CardTitle>
-              <CardDescription className="text-sm">
-                Easily customize and build a unique static site to fit your
-                needs.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Link to={"builder"} target="_blank">
-                <Button className="mt-2">Start Editing</Button>
-              </Link>
-            </CardContent>
-          </Card>
+          {isLoading ? (
+            <Card className="mb-6 max-w-xs border">
+              <CardHeader>
+                <CardTitle>
+                  <Skeleton className="h-6" />
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  <Skeleton className="h-12" />
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-10 max-w-28" />
+              </CardContent>
+            </Card>
+          ) : (
+            <Card className="mb-6 max-w-xs border">
+              <CardHeader>
+                <CardTitle className="text-2xl font-semibold">
+                  Make Your Site Your Own
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  Easily customize and build a unique static site to fit your
+                  needs.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {data.data?.site ? (
+                  <Link to={"builder"} target="_blank">
+                    <Button className="mt-2">Start Editing</Button>
+                  </Link>
+                ) : (
+                  <Button className="mt-2">Create now</Button>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </section>
       </Layout.Body>
     </Layout>
