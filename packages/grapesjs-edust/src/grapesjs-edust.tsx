@@ -117,7 +117,7 @@ const GrapesjsEdust = (props) => {
   const { width: windowWidth } = useWindowSize()
   const editorRef = useRef<Editor | null>(null)
 
-  const gsOnEditor = async (editor: Editor) => {
+  async function gsOnEditor(editor: Editor) {
     if (!editor) {
       console.error("Editor is not initialized")
       return
@@ -133,6 +133,12 @@ const GrapesjsEdust = (props) => {
   const sideAreaStyle =
     "bg-sidebar text-sidebar-foreground border-sidebar-border w-36 md:w-48 lg:w-52 2xl:w-56"
 
+  const newOptions = { ...options(editorRef), ...optionsCustomize(editorRef) }
+  console.log({
+    options: options(editorRef),
+    cop: optionsCustomize(editorRef),
+    newOptions,
+  })
   return (
     <ContextProviders>
       <TooltipProvider>
@@ -146,7 +152,7 @@ const GrapesjsEdust = (props) => {
           grapesjs={grapesjs}
           // Load the GrapesJS CSS file asynchronously from URL.
           // This is an optional prop, you can always import the CSS directly in your JS if you wish.
-          options={{ ...options(editorRef), ...optionsCustomize(editorRef) }}
+          options={newOptions}
           onEditor={gsOnEditor}
         >
           <TopArea />

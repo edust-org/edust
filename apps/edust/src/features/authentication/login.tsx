@@ -89,7 +89,7 @@ export const Login: React.FC = () => {
             (role) => ({
               id: role.id,
               role: role.role,
-              name: role.organization.name,
+              organization: role.organization,
             }),
           )
 

@@ -1,7 +1,33 @@
 import { signOut } from "@/app/features"
 import { store } from "@/app/store"
-import axios from "axios"
+import defaultAxios from "axios"
 
+const axios = defaultAxios.create({
+  baseURL: import.meta.env.VITE_BACKEND_URL,
+})
+
+axios.interceptors.request.use((config) => {
+  const state = store.getState()
+  const token = state.authentication.auth.auth?.token
+  let expiresAt = state.authentication.auth.auth?.expiresAt
+  expiresAt = new Date(expiresAt)
+  const currentDate = new Date()
+
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`
+  } else {
+    // Remove the Authorization header if no token is provided
+    delete config.headers["Authorization"]
+  }
+
+  if (expiresAt < currentDate) {
+    store.dispatch(signOut())
+  }
+
+  return config
+})
+export default axios
+/*
 export default () => {
   const state = store.getState()
 
@@ -27,7 +53,7 @@ export default () => {
     store.dispatch(signOut())
   }
 
-  /*
+  
   // Add interceptors if needed
   axios.interceptors.request.use(
     (config) => {
@@ -49,5 +75,6 @@ export default () => {
       console.error("Response Error:", error)
       return Promise.reject(error)
     },
-  )*/
+  )
 }
+*/

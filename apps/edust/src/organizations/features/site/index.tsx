@@ -1,4 +1,7 @@
-import { useGetOrgMeQuery } from "@/app/api/v0/organizations"
+import {
+  useCreateSiteBuilderMutation,
+  useGetOrgMeQuery,
+} from "@/app/api/v0/organizations"
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Button,
@@ -13,9 +16,33 @@ import {
 import { Layout } from "@/organizations/components/layout"
 import { Helmet } from "react-helmet-async"
 import { Link } from "react-router-dom"
+import { BarLoader } from "react-spinners"
+import { toast } from "sonner"
+import siteAssets from "./site-assets"
 
 export const Site = () => {
-  const { data, isLoading } = useGetOrgMeQuery()
+  const { data, isLoading, refetch } = useGetOrgMeQuery()
+  const [createSite, { isLoading: isLoadingSiteCreation }] =
+    useCreateSiteBuilderMutation()
+
+  const handleCreateSite = async () => {
+    const orgId = data.data.id
+    const body = {
+      assets: siteAssets.assets,
+      page: siteAssets.page,
+    }
+    try {
+      const response = await createSite({ orgId, body }).unwrap()
+
+      toast.success(response.message)
+      refetch()
+
+      window.open(`${window.location.origin}/site/builder`, "_blank")
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  console.log(data)
   return (
     <Layout>
       <Helmet>
@@ -42,9 +69,9 @@ export const Site = () => {
       </Layout.Header>
 
       <Layout.Body>
-        <section>
+        <section className="flex gap-4">
           {isLoading ? (
-            <Card className="mb-6 max-w-xs border">
+            <Card className="max-w-xs border">
               <CardHeader>
                 <CardTitle>
                   <Skeleton className="h-6" />
@@ -58,26 +85,55 @@ export const Site = () => {
               </CardContent>
             </Card>
           ) : (
-            <Card className="mb-6 max-w-xs border">
-              <CardHeader>
-                <CardTitle className="text-2xl font-semibold">
-                  Make Your Site Your Own
-                </CardTitle>
-                <CardDescription className="text-sm">
-                  Easily customize and build a unique static site to fit your
-                  needs.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {data.data?.site ? (
-                  <Link to={"builder"} target="_blank">
-                    <Button className="mt-2">Start Editing</Button>
-                  </Link>
-                ) : (
-                  <Button className="mt-2">Create now</Button>
-                )}
-              </CardContent>
-            </Card>
+            <>
+              <Card className="max-w-xs border">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-semibold">
+                    Make Your Site Your Own
+                  </CardTitle>
+                  <CardDescription className="text-sm">
+                    Easily customize and build a unique static site to fit your
+                    needs.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {data.data?.site ? (
+                    <Link to={"builder"} target="_blank">
+                      <Button className="mt-2">Start Editing</Button>
+                    </Link>
+                  ) : (
+                    <Button
+                      onClick={handleCreateSite}
+                      className="mt-2"
+                      disabled={isLoadingSiteCreation}
+                    >
+                      {isLoadingSiteCreation ? (
+                        <BarLoader color="#fff" />
+                      ) : (
+                        <>Create now</>
+                      )}
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+
+              {data.data?.site?.images}
+              {data.data?.site?.pages}
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    Total Pages are ({data.data?.site?.pages})
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    Total Images are ({data.data?.site?.images})
+                  </CardTitle>
+                </CardHeader>
+              </Card>
+            </>
           )}
         </section>
       </Layout.Body>

@@ -14,7 +14,7 @@ export const organizationsApi = createApi({
     }),
 
     // org
-    postOrganization: build.mutation({
+    createOrganization: build.mutation({
       query: (body) => ({
         url: `/`,
         method: "POST",
@@ -34,7 +34,7 @@ export const organizationsApi = createApi({
       }),
     }),
 
-    getSiteBuilderImages: build.query<any, void>({
+    getSiteBuilderImages: build.query<any, any>({
       query: (orgId) => `/${orgId}/site-builder/images`,
     }),
 
@@ -64,7 +64,7 @@ export const organizationsApi = createApi({
     }),
 
     // site-builder
-    createSiteBuilder: build.mutation({
+    createSiteBuilder: build.mutation<any, { orgId: string; body: any }>({
       query: ({ orgId, body }) => ({
         url: `/${orgId}/site-builder`,
         method: "POST",
@@ -88,7 +88,7 @@ export const organizationsApi = createApi({
 
 export const {
   useGetOrgMeQuery,
-  usePostOrganizationMutation,
+  useCreateOrganizationMutation,
   useGetOrgListsQuery,
   useUploadSiteBuilderImageMutation,
   useGetSiteBuilderImagesQuery,

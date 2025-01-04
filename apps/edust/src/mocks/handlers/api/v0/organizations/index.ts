@@ -16,17 +16,14 @@ const getOrgMe = http.get(
 )
 
 const getListOfOrg = http.get(
-  `${apiUrlV0}/organizations`,
-  async ({ request }) => {
-    token.isAuthenticated(request)
-    await delay(300)
-    return HttpResponse.json(listOfOrgDB)
-  },
-)
-
-const createOrg = http.post(
-  `${apiUrlV0}/organizations`,
-  async ({ request }) => {
+    `${apiUrlV0}/organizations`,
+    async ({ request }) => {
+      token.isAuthenticated(request)
+      await delay(300)
+      return HttpResponse.json(listOfOrgDB)
+    },
+  ),
+  createOrg = http.post(`${apiUrlV0}/organizations`, async ({ request }) => {
     const actualBody = await request.clone().json()
     const { name, orgUsername } = actualBody
     token.isAuthenticated(request)
@@ -37,13 +34,151 @@ const createOrg = http.post(
     response.data.orgUsername = orgUsername
 
     return HttpResponse.json(response)
-  },
-)
+  })
+
+const uploadSiteBuilderImage = http.post(
+    `${apiUrlV0}/organizations/:orgId/site-builder/images`,
+    async ({ request }) => {
+      await delay(500)
+      return sendOrgResponse(request, {
+        status: "success",
+        message: "Success! New resource created.",
+        data: {
+          id: "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          src: "https://dummyimage.com/1280x720/000000/fff",
+          createdAt: "2024-09-06T12:45:20Z",
+          updatedAt: "2024-09-06T12:45:20Z",
+        },
+        _links: {
+          self: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "POST",
+          },
+          getImages: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "GET",
+          },
+          deleteImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "DELETE",
+          },
+          editImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "PATCH",
+          },
+        },
+      })
+    },
+  ),
+  getSiteBuilderImages = http.get(
+    `${apiUrlV0}/organizations/:orgId/site-builder/images`,
+    ({ request }) =>
+      sendOrgResponse(request, {
+        status: "success",
+        message: "Success! Your request has been completed.",
+        data: {
+          items: [
+            {
+              id: "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              src: "https://dummyimage.com/1280x720/000000/fff",
+              createdAt: "2024-09-06T01:35:20Z",
+              updatedAt: "2024-09-06T01:35:20Z",
+            },
+            {
+              id: "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              src: "https://dummyimage.com/1280x720/000000/fff",
+              createdAt: "2024-09-06T01:35:20Z",
+              updatedAt: "2024-09-06T01:35:20Z",
+            },
+          ],
+        },
+        _links: {
+          self: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "GET",
+          },
+          deleteImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "DELETE",
+          },
+          uploadImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "POST",
+          },
+          editImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "PATCH",
+          },
+        },
+      }),
+  ),
+  editSiteBuilderImagesById = http.patch(
+    `${apiUrlV0}/organizations/:orgId/site-builder/images/:imageId`,
+    async ({ request }) => {
+      return sendOrgResponse(request, {
+        status: "success",
+        message: "Site retrieved successfully!",
+        data: {
+          id: "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          assets: "{}",
+          createdAt: "2024-09-06T01:35:20Z",
+          updatedAt: "2024-09-06T01:35:20Z",
+        },
+        _links: {
+          self: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "PATCH",
+          },
+          deleteImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "DELETE",
+          },
+          get: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "GET",
+          },
+          uploadImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "POST",
+          },
+        },
+      })
+    },
+  ),
+  deleteSiteBuilderImagesById = http.delete(
+    `${apiUrlV0}/organizations/:orgId/site-builder/images/:imageId`,
+    async ({ request }) => {
+      return sendOrgResponse(request, {
+        status: "success",
+        message: "Success! No additional content available.",
+        data: null,
+        _links: {
+          self: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "DELETE",
+          },
+          get: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "GET",
+          },
+          uploadImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "POST",
+          },
+          editImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "PATCH",
+          },
+        },
+      })
+    },
+  )
 
 const createSiteBuilder = http.post(
     `${apiUrlV0}/organizations/:orgId/site-builder`,
-    ({ request }) =>
-      sendOrgResponse(request, {
+    async ({ request }) => {
+      await delay(500)
+      return sendOrgResponse(request, {
         status: "success",
         message: "Success! New resource created.",
         data: null,
@@ -61,7 +196,8 @@ const createSiteBuilder = http.post(
             method: "POST",
           },
         },
-      }),
+      })
+    },
   ),
   getSiteBuilder = http.get(
     `${apiUrlV0}/organizations/:orgId/site-builder`,
@@ -96,6 +232,10 @@ export const organizations = [
   getOrgMe,
   createOrg,
   getListOfOrg,
+  uploadSiteBuilderImage,
+  getSiteBuilderImages,
+  editSiteBuilderImagesById,
+  deleteSiteBuilderImagesById,
   createSiteBuilder,
   getSiteBuilder,
   editSiteBuilder,

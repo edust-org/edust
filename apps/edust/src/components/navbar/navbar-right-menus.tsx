@@ -120,7 +120,7 @@ export const NavbarRightMenus = () => {
                           dispatch(
                             setProfileActiveMode({
                               id: role.id,
-                              name: role.name,
+                              organization: role.organization,
                               role: role.role,
                             }),
                           )
@@ -131,9 +131,9 @@ export const NavbarRightMenus = () => {
                         <span
                           className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
                         >
-                          {role.name.length > 21
-                            ? role.name.slice(0, 20) + "..."
-                            : role.name}
+                          {role.organization.name.length > 21
+                            ? role.organization.name.slice(0, 20) + "..."
+                            : role.organization.name}
                         </span>
                       </DropdownMenuItem>
                     )

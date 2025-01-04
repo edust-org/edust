@@ -6,53 +6,54 @@ import gsPluginCustomCode from "grapesjs-custom-code"
 import plugins from "./plugins"
 import template from "./template"
 
-const options = (editorRef: any): EditorConfig => ({
-  height: "100vh",
-  undoManager: { trackSelection: false },
-  selectorManager: { componentFirst: true },
-  pageManager: {
-    pages: [
-      {
-        name: "home",
-        component: template,
-      },
-    ],
-  },
-  panels: { defaults: [] }, // Avoid default panels
+function options(editorRef: any): EditorConfig {
+  return {
+    height: "100vh",
+    undoManager: { trackSelection: false },
+    selectorManager: { componentFirst: true },
+    pageManager: {
+      pages: [
+        {
+          name: "home",
+          component: template,
+        },
+      ],
+    },
+    panels: { defaults: [] }, // Avoid default panels
+    // If you enable multiple pages options then you need this
+    deviceManager: {
+      devices: [
+        {
+          name: "Desktop",
+          width: "",
+          // widthMedia: "1024px",
+        },
+        {
+          name: "Tablet",
+          width: "768px",
+          widthMedia: "768px",
+        },
+        // {
+        //   name: "Mobile Landscape",
+        //   width: "640px",
+        //   widthMedia: "640px",
+        // },
+        {
+          name: "Mobile Portrait",
+          width: "375px",
+          widthMedia: "375px",
+        },
+      ],
+    },
 
-  // If you enable multiple pages options then you need this
-  deviceManager: {
-    devices: [
-      {
-        name: "Desktop",
-        width: "",
-        // widthMedia: "1024px",
-      },
-      {
-        name: "Tablet",
-        width: "768px",
-        widthMedia: "768px",
-      },
-      // {
-      //   name: "Mobile Landscape",
-      //   width: "640px",
-      //   widthMedia: "640px",
-      // },
-      {
-        name: "Mobile Portrait",
-        width: "375px",
-        widthMedia: "375px",
-      },
+    plugins: [
+      gsPluginBlocksBasic,
+      ...plugins,
+      gsPluginTuiImageEditor,
+      gsPluginExport,
+      gsPluginCustomCode,
     ],
-  },
-
-  plugins: [
-    gsPluginBlocksBasic,
-    ...plugins,
-    gsPluginTuiImageEditor,
-    gsPluginExport,
-    gsPluginCustomCode,
-  ],
-  pluginsOpts: {},
-})
+    pluginsOpts: {},
+  }
+}
 export default options

@@ -12,7 +12,7 @@ import {
   Input,
 } from "@/components/ui"
 import { Checkbox } from "@/components/ui/checkbox"
-import { usePostOrganizationMutation } from "@/app/api/v0/organizations"
+import { useCreateOrganizationMutation } from "@/app/api/v0/organizations"
 import { useLocation, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { useEffect } from "react"
@@ -50,7 +50,7 @@ export const CreateOrganizationForm = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const redirectPath = location.state?.from?.pathname || "/"
-  const [postOrganization, { isLoading }] = usePostOrganizationMutation()
+  const [postOrganization, { isLoading }] = useCreateOrganizationMutation()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -85,7 +85,7 @@ export const CreateOrganizationForm = () => {
             {
               id: res.data.role.id,
               role: res.data.role.name,
-              name: res.data.name,
+              organization: res.data,
             },
           ]
           if (authState.user) {
