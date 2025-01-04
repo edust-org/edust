@@ -116,9 +116,6 @@ export const Site = () => {
                   )}
                 </CardContent>
               </Card>
-
-              {data.data?.site?.images}
-              {data.data?.site?.pages}
               <Card>
                 <CardHeader>
                   <CardTitle>

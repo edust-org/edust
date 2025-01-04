@@ -34,6 +34,7 @@ import { ThemeSwitch } from "../theme-switch"
 import { useTheme } from "@/hooks"
 import { Roles } from "@/types"
 import { toast } from "sonner"
+import { clearAllCaches } from "@/app/api/v0"
 
 export const NavbarRightMenus = () => {
   const navigate = useNavigate()
@@ -47,13 +48,10 @@ export const NavbarRightMenus = () => {
   const handleLogout = () => {
     dispatch(signOut())
     dispatch(clearProfileMode())
+    clearAllCaches(dispatch)
     setTheme("light")
     navigate("/")
     toast.error("Log out successfully!")
-    const setTime = setTimeout(() => {
-      window.location.replace("/")
-    }, 1000)
-    clearTimeout(setTime)
   }
 
   return (

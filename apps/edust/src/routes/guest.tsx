@@ -8,84 +8,30 @@ import { Route } from "react-router-dom"
 
 export const guestRoutes = (
   <Route>
-    <Route
-      path="/"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Home.GuestHome />
-        </Suspense>
-      }
-    />
+    <Route path="/" element={<Home.GuestHome />} />
 
     {/* For auth routes */}
     <Route path="/auth">
-      <Route
-        path="register"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.Register />
-          </Suspense>
-        }
-      />
+      <Route path="register" element={<Authentication.Register />} />
       <Route
         path="verify/:token"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.VerifyEmailByToken />
-          </Suspense>
-        }
+        element={<Authentication.VerifyEmailByToken />}
       />
-      <Route
-        path="login"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.Login />
-          </Suspense>
-        }
-      />
+      <Route path="login" element={<Authentication.Login />} />
       <Route
         path="forgot-password"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.ForgotPassword />
-          </Suspense>
-        }
+        element={<Authentication.ForgotPassword />}
       />
 
       <Route
         path="callback/:token"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Authentication.SocialAuthCallback />
-          </Suspense>
-        }
+        element={<Authentication.SocialAuthCallback />}
       />
     </Route>
 
-    <Route
-      path="/about-us"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <AboutUs />
-        </Suspense>
-      }
-    />
-    <Route
-      path="/contact-us"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <ContactUs />
-        </Suspense>
-      }
-    />
-    <Route
-      path="/institutes"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Institutes />
-        </Suspense>
-      }
-    />
+    <Route path="/about-us" element={<AboutUs />} />
+    <Route path="/contact-us" element={<ContactUs />} />
+    <Route path="/institutes" element={<Institutes />} />
     <Route
       path="/institutes/:id"
       element={

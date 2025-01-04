@@ -1,28 +1,10 @@
-import { lazy } from "react"
-
-const DashboardLayout = lazy(() =>
-  import("./layout").then((module) => ({
-    default: module.Layout,
-  })),
-)
-const DashboardMain = lazy(() =>
-  import("./dashboard-main").then((module) => ({
-    default: module.DashboardMain,
-  })),
-)
-const InstitutesCreate = lazy(() =>
-  import("./institutes-create").then((module) => ({
-    default: module.InstitutesCreate,
-  })),
-)
-const InstitutesLists = lazy(() =>
-  import("./institutes-lists").then((module) => ({
-    default: module.InstitutesLists,
-  })),
-)
+import Layout from "./layout"
+import { DashboardMain } from "./dashboard-main"
+import { InstitutesCreate } from "./institutes-create"
+import { InstitutesLists } from "./institutes-lists"
 
 const Dashboard = {
-  DashboardLayout,
+  DashboardLayout: Layout,
   DashboardMain,
   InstitutesCreate,
   InstitutesLists,

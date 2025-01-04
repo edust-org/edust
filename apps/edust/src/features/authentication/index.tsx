@@ -1,26 +1,8 @@
-import { lazy } from "react"
-
-const Register = lazy(() =>
-  import("./register").then((module) => ({ default: module.Register })),
-)
-const Login = lazy(() =>
-  import("./login").then((module) => ({ default: module.Login })),
-)
-const VerifyEmailByToken = lazy(() =>
-  import("./verify-email-by-token").then((module) => ({
-    default: module.VerifyEmailByToken,
-  })),
-)
-const ForgotPassword = lazy(() =>
-  import("./forgot-password").then((module) => ({
-    default: module.ForgotPassword,
-  })),
-)
-const SocialAuthCallback = lazy(() =>
-  import("./social-auth-callback").then((module) => ({
-    default: module.SocialAuthCallback,
-  })),
-)
+import { Register } from "./register"
+import { Login } from "./login"
+import { VerifyEmailByToken } from "./verify-email-by-token"
+import { ForgotPassword } from "./forgot-password"
+import { SocialAuthCallback } from "./social-auth-callback"
 
 const Authentication = {
   Register,

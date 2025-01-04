@@ -38,7 +38,7 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
   }
 
   if (user) {
-    dispatch(setProfileActiveMode(user.system_role || Roles.USER))
+    dispatch(setProfileActiveMode(user.systemRole || Roles.USER))
     toast({
       variant: "destructive",
       title: "Access denied!",

@@ -15,7 +15,7 @@ const logger = createLogger({
 
 // Configuration for redux-persist
 const persistConfig = {
-  key: "root",
+  key: "edust",
   storage,
   whitelist: ["authentication", "theme"],
 }

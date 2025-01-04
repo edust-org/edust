@@ -1,16 +1,5 @@
-import { lazy } from "react"
-
-const GuestHome = lazy(() =>
-  import("./guest-home").then((module) => ({
-    default: module.GuestHome,
-  })),
-)
-
-const PrivateHome = lazy(() =>
-  import("./private-home").then((module) => ({
-    default: module.PrivateHome,
-  })),
-)
+import { GuestHome } from "./guest-home"
+import { PrivateHome } from "./private-home"
 
 export const Home = {
   GuestHome,

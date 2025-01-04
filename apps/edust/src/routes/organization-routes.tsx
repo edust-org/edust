@@ -1,6 +1,5 @@
 import {
   AccessControl,
-  CreateOrganization,
   Dashboard,
   Site,
   SiteBuilder,
@@ -18,9 +17,7 @@ export const organizationRoutes = (
       path="/"
       element={
         <Protector roles={[Roles.OWNER, Roles.EDITOR]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <AppShell />
-          </Suspense>
+          <AppShell />
         </Protector>
       }
     >
@@ -33,21 +30,12 @@ export const organizationRoutes = (
           </Suspense>
         }
       />
-      <Route
-        path="access-control"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <AccessControl />
-          </Suspense>
-        }
-      />
+      <Route path="access-control" element={<AccessControl />} />
       <Route
         path="settings"
         element={
           <Protector roles={[Roles.OWNER, Roles.EDITOR]}>
-            <Suspense fallback={<Loading.Spinner />}>
-              <h1>Setting</h1>
-            </Suspense>
+            <h1>Setting</h1>
           </Protector>
         }
       />
@@ -58,17 +46,6 @@ export const organizationRoutes = (
         <Protector roles={[Roles.OWNER]}>
           <Suspense fallback={<Loading.Spinner />}>
             <SiteBuilder />
-          </Suspense>
-        </Protector>
-      }
-    />
-
-    <Route
-      path="/create"
-      element={
-        <Protector roles={[Roles.OWNER]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <CreateOrganization />
           </Suspense>
         </Protector>
       }

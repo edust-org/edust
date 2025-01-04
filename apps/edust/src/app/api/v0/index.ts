@@ -1,3 +1,4 @@
+import { Dispatch } from "@reduxjs/toolkit"
 import { authApi } from "./auth"
 import { institutesApi } from "./institutes"
 import { organizationsApi } from "./organizations"
@@ -16,3 +17,10 @@ export const rootMiddlewareApiV0 = [
   organizationsApi.middleware,
   publicApi.middleware,
 ]
+
+export const clearAllCaches = (dispatch: Dispatch) => {
+  dispatch(authApi.util.resetApiState())
+  dispatch(institutesApi.util.resetApiState())
+  dispatch(organizationsApi.util.resetApiState())
+  dispatch(publicApi.util.resetApiState())
+}

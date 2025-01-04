@@ -1,24 +1,12 @@
 import { lazy } from "react"
 
-export const CreateOrganization = lazy(() =>
-  import("./create").then((module) => ({ default: module.CreateOrganization })),
-)
-
-export const Dashboard = lazy(() =>
-  import("./dashboard").then((module) => ({
-    default: module.Dashboard,
-  })),
-)
+export * from "./create"
+export * from "./dashboard"
+export * from "./access-control"
 
 export const Site = lazy(() =>
   import("./site").then((module) => ({
     default: module.Site,
-  })),
-)
-
-export const AccessControl = lazy(() =>
-  import("./access-control").then((module) => ({
-    default: module.AccessControl,
   })),
 )
 

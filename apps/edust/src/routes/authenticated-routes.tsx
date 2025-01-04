@@ -1,5 +1,3 @@
-import Loading from "@/components/loading"
-import { Suspense } from "react"
 import { Route } from "react-router-dom"
 import Dashboard from "@/features/dashboard"
 import { CreateOrganization } from "@/organizations/features"
@@ -13,9 +11,7 @@ export const authenticatedRoutes = (
       path="/"
       element={
         <Protector roles={[Roles.USER]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <Home.PrivateHome />
-          </Suspense>
+          <Home.PrivateHome />
         </Protector>
       }
     />
@@ -24,63 +20,24 @@ export const authenticatedRoutes = (
       path="/dashboard"
       element={
         <Protector roles={[Roles.USER]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.DashboardLayout />
-          </Suspense>
+          <Dashboard.DashboardLayout />
         </Protector>
       }
     >
-      <Route
-        path=""
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.DashboardMain />
-          </Suspense>
-        }
-      ></Route>
-      <Route
-        path="institutes"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.InstitutesLists />
-          </Suspense>
-        }
-      ></Route>
+      <Route path="" element={<Dashboard.DashboardMain />}></Route>
+      <Route path="institutes" element={<Dashboard.InstitutesLists />}></Route>
       <Route
         path="institutes/create"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.InstitutesCreate />
-          </Suspense>
-        }
+        element={<Dashboard.InstitutesCreate />}
       />
-      <Route
-        path="institutes/lists"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Dashboard.InstitutesLists />
-          </Suspense>
-        }
-      />
+      <Route path="institutes/lists" element={<Dashboard.InstitutesLists />} />
     </Route>
 
-    <Route
-      path="create-a-new-organizations"
-      element={
-        <Protector roles={[Roles.USER]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <CreateOrganization />
-          </Suspense>
-        </Protector>
-      }
-    />
     <Route
       path="/organizations/create"
       element={
         <Protector roles={[Roles.USER]}>
-          <Suspense fallback={<Loading.Spinner />}>
-            <CreateOrganization />
-          </Suspense>
+          <CreateOrganization />
         </Protector>
       }
     />
