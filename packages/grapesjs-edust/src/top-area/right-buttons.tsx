@@ -1,19 +1,18 @@
 import { useEditor } from "@grapesjs/react"
-import {
-  CodeXml,
-  FileArchive,
-  Fullscreen,
-  Redo2,
-  Trash,
-  Undo2,
-} from "lucide-react"
-import { Button, ToggleGroup, ToggleGroupItem } from "@/components/ui"
+import { Redo2, Undo2 } from "lucide-react"
+import { Button } from "@/components/ui"
 import { useEffect, useMemo, useState } from "react"
 
-import { FaCode, FaRedo, FaSave, FaUndo } from "react-icons/fa"
+import { FaCode } from "react-icons/fa"
 import { MdBorderClear, MdDelete } from "react-icons/md"
 import { PiExportBold } from "react-icons/pi"
 import { SlSizeFullscreen } from "react-icons/sl"
+
+interface Commands {
+  isActive: (id: string) => boolean
+  stop: (id: string) => void
+  run: (id: string, options?: Record<string, unknown>) => void
+}
 
 export const RightButtons = () => {
   const editor = useEditor()
@@ -66,7 +65,8 @@ export const RightButtons = () => {
     const updateEvent = "update"
     const updateCounter = () => setUpdateCounter((value) => value + 1)
     const onCommand = (id: string) => {
-      cmdButtons.find((btn) => btn.id === id) && updateCounter()
+      const cmdButton = cmdButtons.find((btn) => btn.id === id)
+      if (cmdButton) updateCounter()
     }
     editor.on(cmdEvent, onCommand)
     editor.on(updateEvent, updateCounter)
@@ -80,13 +80,25 @@ export const RightButtons = () => {
     }
   }, [Commands, cmdButtons, editor])
 
-  const handleButtons = ({ Commands, id, options }) => {
+  const handleButtons = ({
+    Commands,
+    id,
+    options,
+  }: {
+    Commands: Commands
+    id: string
+    options: Record<string, unknown>
+  }) => {
     if (id == "core:canvas-clear") {
       const isConfirm = confirm("Do you want do delete it?")
 
       if (!isConfirm) return
     }
-    Commands.isActive(id) ? Commands.stop(id) : Commands.run(id, options)
+    if (Commands.isActive(id)) {
+      Commands.stop(id)
+    } else {
+      Commands.run(id, options)
+    }
   }
 
   return (

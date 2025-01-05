@@ -18,7 +18,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/grapesjs-edust.tsx"),
+      entry: path.resolve(__dirname, "src/index.tsx"),
       name: "GrapesjsEdust",
       fileName: (format) => `index.${format}.js`,
     },

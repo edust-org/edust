@@ -23,13 +23,12 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  DialogClose,
 } from "@/components/ui"
+import { usePageContext } from "@/context/page"
 import { useEditor } from "@grapesjs/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 import { z } from "zod"
 
 const FormSchema = z.object({
@@ -39,6 +38,7 @@ const FormSchema = z.object({
 })
 
 export const File = () => {
+  const { addANewPage } = usePageContext()
   const editor = useEditor()
   const [open, setOpen] = useState(false)
 
@@ -77,26 +77,31 @@ export const File = () => {
                     <form
                       onSubmit={form.handleSubmit(
                         (data: z.infer<typeof FormSchema>) => {
-                          const pages = editor.Pages
-                          const pageName = data.pageName.toLocaleLowerCase()
-
-                          const pg = editor.Pages
-                          const pgs = pg.getAll().map((p) => {
-                            return p?.attributes?.name?.toLowerCase()
-                          })
-
-                          if (pgs.includes(pageName)) {
-                            return toast.error("Already have this page name.")
+                          const isSuccess = addANewPage(data, editor)
+                          if (isSuccess) {
+                            form.reset()
+                            setOpen(false)
                           }
+                          // const pages = editor.Pages
+                          // const pageName = data.pageName.toLocaleLowerCase()
 
-                          pages.add({
-                            name: pageName,
-                            component: `<h1>Page content ${pageName}</h1>`,
-                          })
+                          // const pg = editor.Pages
+                          // const pgs = pg.getAll().map((p) => {
+                          //   return p?.attributes?.name?.toLowerCase()
+                          // })
 
-                          toast.success("successfully new page created!")
-                          form.reset()
-                          setOpen(false)
+                          // if (pgs.includes(pageName)) {
+                          //   return toast.error("Already have this page name.")
+                          // }
+
+                          // pages.add({
+                          //   name: pageName,
+                          //   component: `<h1>Page content ${pageName}</h1>`,
+                          // })
+
+                          // toast.success("successfully new page created!")
+                          // form.reset()
+                          // setOpen(false)
                         },
                       )}
                       className="space-y-6"

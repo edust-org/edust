@@ -6,8 +6,11 @@ import gsPluginCustomCode from "grapesjs-custom-code"
 import plugins from "./plugins"
 import template from "./template"
 
-function options(editorRef: any): EditorConfig {
+function options(): EditorConfig {
   return {
+    canvas:{
+      scripts: ['https://cdn.tailwindcss.com?v=3.4.5']
+    },
     height: "100vh",
     undoManager: { trackSelection: false },
     selectorManager: { componentFirst: true },

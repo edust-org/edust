@@ -17,7 +17,7 @@ export default function CustomStyleManager({
           <AccordionItem value={sector.getId()} key={sector.getId()}>
             <AccordionTrigger> {sector.getName()}</AccordionTrigger>
             <AccordionContent>
-              {sector.getProperties().map((prop) => (
+              {sector.getProperties().map((prop: any) => (
                 <StylePropertyField key={prop.getId()} prop={prop} />
               ))}
             </AccordionContent>

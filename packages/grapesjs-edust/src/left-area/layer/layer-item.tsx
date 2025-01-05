@@ -20,7 +20,6 @@ export declare interface LayerItemProps
   dragParent?: Component
 }
 
-const itemStyle = { maxWidth: `100%` }
 export const LayerItem = ({
   component,
   draggingCmp,
@@ -31,15 +30,15 @@ export const LayerItem = ({
   const { Layers } = editor
   const layerRef = useRef<HTMLDivElement>(null)
   const [layerData, setLayerData] = useState(Layers.getLayerData(component))
-  const { open, selected, hovered, components, visible, name } = layerData
-  const componentsIds = components.map((cmp) => cmp.getId())
+  const { open, selected, components, visible, name } = layerData
   const isDragging = draggingCmp === component
-  const cmpHash = componentsIds.join("-")
   const level = props.level + 1
-  const isHovered = hovered || dragParent === component
 
   useEffect(() => {
-    level === 0 && setLayerData(Layers.getLayerData(component))
+    if (level === 0) {
+      setLayerData(Layers.getLayerData(component))
+    }
+
     if (layerRef.current) {
       ;(layerRef.current as any).__cmp = component
     }
@@ -47,7 +46,9 @@ export const LayerItem = ({
 
   useEffect(() => {
     const up = (cmp: Component) => {
-      cmp === component && setLayerData(Layers.getLayerData(cmp))
+      if (cmp === component) {
+        setLayerData(Layers.getLayerData(cmp))
+      }
     }
     const ev = Layers.events.component
     editor.on(ev, up)
@@ -58,7 +59,7 @@ export const LayerItem = ({
   }, [editor, Layers, component])
 
   const cmpToRender = useMemo(() => {
-    return components.map((cmp) => (
+    return components.map((cmp: Component) => (
       <CollapsibleContent key={cmp.getId()}>
         <SidebarMenuSub>
           <LayerItem
@@ -72,17 +73,17 @@ export const LayerItem = ({
     ))
   }, [components, level, draggingCmp, dragParent])
 
-  const toggleOpen = (ev: MouseEvent) => {
+  const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = (ev) => {
     ev.stopPropagation()
     Layers.setLayerData(component, { open: !open })
   }
 
-  const toggleVisibility = (ev: MouseEvent) => {
+  const toggleVisibility: React.MouseEventHandler<HTMLButtonElement> = (ev) => {
     ev.stopPropagation()
     Layers.setLayerData(component, { visible: !visible })
   }
 
-  const select = (event: MouseEvent) => {
+  const select: React.MouseEventHandler<HTMLDivElement> = (event) => {
     event.stopPropagation()
     Layers.setLayerData(component, { selected: true }, { event })
   }

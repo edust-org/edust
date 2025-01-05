@@ -44,7 +44,7 @@ export default function CustomSelectorManager({
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    // console.log(data);
+    console.log(data)
   }
 
   const [isShowInput, setIsShowInput] = useState(false)
@@ -56,7 +56,8 @@ export default function CustomSelectorManager({
         <Form {...form}>
           <form
             onChange={(e) => {
-              setState(e.target.value)
+              const target = e.target as HTMLInputElement
+              setState(target.value)
             }}
             onSubmit={form.handleSubmit(onSubmit)}
           >
@@ -103,9 +104,10 @@ export default function CustomSelectorManager({
                 placeholder="Custom class"
                 onKeyDown={(e) => {
                   if (e.key == "Enter") {
+                    const target = e.target as HTMLInputElement
                     addSelector({
-                      name: e?.target?.value,
-                      label: e?.target?.value,
+                      name: target.value,
+                      label: target.value,
                     })
                     setIsShowInput(false)
                   }

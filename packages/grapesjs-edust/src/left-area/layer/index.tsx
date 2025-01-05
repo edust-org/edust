@@ -7,59 +7,12 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
 } from "@/components/ui"
 import { Component, Editor } from "@edust/grapesjs"
 import { LayersResultProps, useEditor } from "@grapesjs/react"
-import { ChevronRight, Eye, Layers } from "lucide-react"
+import { ChevronRight, Layers } from "lucide-react"
 import { useRef, useState } from "react"
 import { LayerItem } from "./layer-item"
-
-type TreeItem = [string, ...(TreeItem | string)[]]
-
-interface Data {
-  tree: TreeItem[]
-}
-
-// example data
-const data: Data = {
-  tree: [
-    [
-      "body",
-      [
-        "div",
-        [
-          "section",
-          [
-            "article",
-            [
-              "header",
-              ["h1", ["span", ["strong", ["i", ["u", ["a", ["b"]]]]]]],
-              "p",
-            ],
-            [
-              "main",
-              [
-                "div",
-                [
-                  "ul",
-                  ["li", ["a", ["span", ["i", ["b", ["small", ["mark"]]]]]]],
-                  ["li", ["p", ["span", ["u", ["code"]]]]],
-                ],
-              ],
-            ],
-            [
-              "footer",
-              ["div", ["p", ["small", ["b", ["i", ["u", ["time"]]]]]]],
-            ],
-          ],
-        ],
-      ],
-    ],
-  ],
-}
 
 type DragRect = {
   y: number
@@ -85,7 +38,6 @@ interface CanMove extends Partial<Omit<CanMoveResult, "source">> {
 
 const LAYER_PAD = 5
 export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
-  console.log(root)
   const editor = useEditor()
   const { Components } = editor
   const [pointerDown, setPointerDown] = useState(false)
@@ -111,9 +63,11 @@ export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
     const isBefore = pointerY < layerRect.y + layerH / 2
     const cmpSource = !dragging ? cmp : dragging
     const cmpTarget = cmp.parent()
+
     const cmpIndex = cmp.index() + (isBefore ? 0 : 1)
     !dragging && setDragging(cmp)
     setCmpPointerOver(cmp)
+
     const canMove = Components.canMove(cmpTarget!, cmpSource, cmpIndex)
     const canMoveInside = Components.canMove(cmp, cmpSource)
     const canMoveRes: CanMove = {
@@ -141,8 +95,9 @@ export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
   }
 
   const onDragEnd = () => {
-    canMoveRes?.result &&
+    if (canMoveRes?.result) {
       canMoveRes.source?.move(canMoveRes.target!, { at: canMoveRes.index })
+    }
     setCanMoveRes({})
     setPointerDown(false)
     setDragging(undefined)

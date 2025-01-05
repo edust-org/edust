@@ -1,0 +1,201 @@
+import GrapesjsEdust from "@edust/grapesjs-edust"
+import "@edust/grapesjs-edust/style.css"
+
+import {
+  useDeleteSiteBuilderImagesByIdMutation,
+  useEditSiteBuilderMutation,
+} from "@/app/api/v0/organizations"
+import { useAppSelector } from "@/app/hooks"
+import { toast } from "sonner"
+import getImages from "./get-images"
+
+export const Builder = () => {
+  const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
+  const orgId = useAppSelector((state) => {
+    let activeMode = state.authentication.profileSwitch.activeMode
+    if (typeof activeMode == "object") {
+      return activeMode.organization.id
+    }
+    return ""
+  })
+
+  const token = useAppSelector((state) => state.authentication.auth.auth.token)
+  const [saveGsData] = useEditSiteBuilderMutation()
+
+  async function onEditor(editor: any) {
+    editor.Commands.add("save-db", {
+      run: async () => {
+        const selectedComponent = editor?.Pages?.getSelected()
+        const page = {
+          pageName: selectedComponent?.getName(),
+          html: editor.getHtml({
+            component: selectedComponent?.getMainComponent(),
+          }),
+          css: editor.getCss({
+            component: selectedComponent?.getMainComponent(),
+          }),
+        }
+        // in this here assets means whole project data
+        const assets = editor.getProjectData()
+        saveGsData({
+          orgId,
+          body: {
+            assets: assets,
+            page,
+          },
+        })
+          .unwrap()
+          .then((res) => {
+            if (res?.status) {
+              toast.success(res?.message)
+            }
+          })
+          .catch((error) => {
+            toast.error(error?.data?.message)
+          })
+      },
+    })
+    editor.on("asset:remove", async (asset) => {
+      const id = asset.attributes?.id
+      try {
+        const res = await deleteImage({ imageId: id, orgId })
+        console.log(res)
+        toast.success(res?.data?.message)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        let images = await getImages(orgId)
+        images = images?.data?.items?.map((item) => ({
+          id: item.id,
+          src: item.src,
+        }))
+        editor.AssetManager.add(images)
+      }
+    })
+
+    editor.on("load", async (some, argument) => {
+      try {
+        let images = await getImages(orgId)
+        images = images?.data?.items?.map((item) => ({
+          id: item.id,
+          src: item.src,
+        }))
+        editor.AssetManager.add(images)
+      } catch (error) {
+        console.error(error)
+      }
+    })
+  }
+
+  const optionsCustomize = (editorRef) => {
+    return {
+      storageManager: {
+        type: "remote", // Storage type. Available: local | remote
+        autosave: true, // Store data automatically
+        autoload: true, // Autoload stored data on init
+        stepsBeforeSave: 10, // If autosave is enabled, indicates how many changes are necessary before the store method is triggered
+        options: {
+          remote: {
+            // Load project data
+            urlLoad: `${
+              import.meta.env.VITE_BACKEND_URL
+            }/api/v0/organizations/${orgId}/site-builder`,
+
+            onLoad: (result) => {
+              return editorRef.current.loadProjectData(result?.data?.assets)
+            },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+
+            // Store project data
+            urlStore: `${
+              import.meta.env.VITE_BACKEND_URL
+            }/api/v0/organizations/${orgId}/site-builder`,
+
+            fetchOptions: (opts) =>
+              opts.method === "POST" ? { ...opts, method: "PATCH" } : opts,
+
+            onStore: (assets, editor) => {
+              const selectedComponent = editor?.Pages?.getSelected()
+              const page = {
+                pageName: selectedComponent?.getName(),
+                html: editor.getHtml({
+                  component: selectedComponent?.getMainComponent(),
+                }),
+                css: editor.getCss({
+                  component: selectedComponent?.getMainComponent(),
+                }),
+              }
+              return {
+                assets,
+                page,
+              }
+            },
+          },
+        },
+      },
+
+      assetManager: {
+        uploadFile: async (event) => {
+          try {
+            const files = event.dataTransfer
+              ? event.dataTransfer.files
+              : event.target?.files
+
+            if (!files || files.length === 0) {
+              throw new Error("No files selected for upload.")
+            }
+
+            // Prepare FormData with all selected files
+            const formData = new FormData()
+            Array.from(files).forEach((file) => formData.append("images", file))
+
+            // API endpoint for image upload
+            const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/api/v0/organizations/${orgId}/site-builder/images`
+
+            // Perform the upload
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              body: formData,
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            })
+
+            if (!response.ok) {
+              const errorText = await response.text()
+              throw new Error(`Upload failed: ${errorText}`)
+            }
+
+            const responseData = await response.json()
+
+            // Validate and process the response data
+            const imagePaths = responseData?.data?.items.map((item) => item.src)
+            if (!imagePaths || imagePaths.length === 0) {
+              throw new Error("No valid image paths returned from the server.")
+            }
+
+            // Add images to the editor's Asset Manager
+            const editor = editorRef?.current
+            if (editor) {
+              const assetManager = editor.AssetManager
+              assetManager.add(imagePaths)
+              assetManager.render()
+            } else {
+              console.warn("Editor instance is not available.")
+            }
+          } catch (error) {
+            console.error("Error during image upload:", error.message)
+          }
+        },
+      },
+    }
+  }
+
+  return (
+    <div>
+      <GrapesjsEdust onEditor={onEditor} optionsCustomize={optionsCustomize} />
+    </div>
+  )
+}

@@ -49,9 +49,11 @@ export default function StylePropertyField({
   const openAssets = () => {
     const { Assets } = editor
     Assets.open({
-      select: (asset, complete) => {
+      select: (asset: any, complete: any) => {
         prop.upValue(asset.getSrc(), { partial: !complete })
-        complete && Assets.close()
+        if (complete) {
+          Assets.close()
+        }
       },
       types: ["image"],
       accept: "image/*",

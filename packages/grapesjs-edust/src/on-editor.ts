@@ -1,5 +1,4 @@
 import { Editor } from "@edust/grapesjs"
-import appendTailwindCss from "./hooks/use-append-tailwindCss"
 
 export default async (editor: Editor) => {
   {
@@ -30,18 +29,6 @@ export default async (editor: Editor) => {
           ],
         },
       },
-    })
-
-    // Loaded TailwindCSS
-    editor.Canvas.getModel()["on"]("change:frames", (_m, frames) => {
-      frames.forEach((frame) => {
-        if (frame) {
-          return appendTailwindCss(frame)
-        }
-        return frame.once("loaded", () => {
-          return appendTailwindCss(frame)
-        })
-      })
     })
   }
 }
