@@ -47,6 +47,7 @@ export const Builder = () => {
     })
     editor.on("asset:remove", async (asset) => {
       const id = asset?.attributes?.id
+      if (!id) return
       try {
         const res = await deleteImage({ imageId: id, orgId })
         toast.success(res?.data?.message)

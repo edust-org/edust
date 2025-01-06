@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui"
 import { LogoEdust } from "@/components"
 import { useAppSelector } from "@/app/hooks"
@@ -10,7 +10,8 @@ export const NotFound = () => {
     (state) => state.authentication.profileSwitch.activeMode,
   )
 
-  // const location = useLocation()
+  const location = useLocation()
+  const redirectPath = location.state?.from?.pathname || "/"
   const navigate = useNavigate()
 
   useEffect(() => {

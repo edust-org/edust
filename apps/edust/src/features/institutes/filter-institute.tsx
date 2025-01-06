@@ -1,4 +1,5 @@
 import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
+import { useAppSelector } from "@/app/hooks"
 import {
   Button,
   Form,
@@ -18,44 +19,67 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { IoAddOutline } from "react-icons/io5"
+import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 
 const FormSchema = z.object({
-  institute_name: z.string(),
-  institute_type: z.string(),
-  board: z.string(),
-  eiin: z.string(),
+  name: z.string(),
+  instituteCategoryId: z.string(),
 })
-const FilterInstitute = () => {
+const FilterInstitute = ({ query, setQuery }) => {
+  const isAuthenticated = useAppSelector(
+    (state) => state.authentication.auth.isAuthenticated,
+  )
+
+  const navigate = useNavigate()
+
   const { data } = useGetInstitutesCategoriesQuery({})
   const categories = data?.data?.items || []
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      institute_name: "",
-      institute_type: "",
-      board: "",
-      eiin: "",
+      name: "",
+      instituteCategoryId: "",
     },
   })
   function onSubmit(values: z.infer<typeof FormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+    const hasValue = Object.entries(values).some((item) => {
+      return item[1]
+    })
+
+    if (hasValue) {
+      setQuery({
+        search: {
+          name: values.name,
+        },
+        filter: {
+          instituteCategoryId: values.instituteCategoryId,
+        },
+      })
+    }
   }
 
   return (
     <div>
-      <Button size={"icon"} className="mb-4 w-full">
-        {" "}
+      <Button
+        size={"icon"}
+        className="mb-4 w-full"
+        onClick={() => {
+          if (!isAuthenticated) {
+            return navigate("/auth/login")
+          }
+
+          navigate("/dashboard/institutes/create")
+        }}
+      >
         <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
       </Button>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField
             control={form.control}
-            name="institute_name"
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <div className="relative">
@@ -68,7 +92,7 @@ const FilterInstitute = () => {
           />
           <FormField
             control={form.control}
-            name="institute_type"
+            name="instituteCategoryId"
             render={({ field }) => (
               <FormItem>
                 <Select
@@ -76,7 +100,7 @@ const FilterInstitute = () => {
                   defaultValue={field.value}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Type of categories" />
+                    <SelectValue placeholder="Choose a category" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -85,7 +109,7 @@ const FilterInstitute = () => {
                         <SelectItem
                           key={id}
                           title={description}
-                          value={name}
+                          value={id}
                           className="capitalize"
                         >
                           {name}
@@ -99,7 +123,7 @@ const FilterInstitute = () => {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="board"
             render={({ field }) => (
@@ -149,11 +173,25 @@ const FilterInstitute = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <Button type="submit" className="w-full">
-            Search
-          </Button>
+          <div className="flex items-center justify-between gap-2">
+            <Button type="submit" className="flex-1">
+              Search
+            </Button>
+            {Boolean(Object.keys(query).length) && (
+              <Button
+                size={"sm"}
+                variant={"ghost"}
+                onClick={() => {
+                  form.reset()
+                  setQuery({})
+                }}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
         </form>
       </Form>
     </div>

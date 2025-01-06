@@ -1,13 +1,20 @@
 import { Navbar } from "@/components"
-import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import { InstitutesCard } from "./institutes-card"
 import InstituteNotFound from "./institutes-not-found"
 import { useGetInstitutesQuery } from "@/app/api/v0/public"
 import { Helmet } from "react-helmet-async"
 import FilterInstitute from "./filter-institute"
+import { InstitutesCardSkeleton } from "./institutes-card-skeleton"
+import { useEffect, useState } from "react"
+import { Button } from "@/components/ui"
 
 export const Institutes = () => {
-  const { data: { data } = {}, error, isLoading } = useGetInstitutesQuery({})
+  const [query, setQuery] = useState({})
+  const {
+    data: { data } = {},
+    isLoading,
+    isFetching,
+  } = useGetInstitutesQuery(query)
 
   return (
     <div>
@@ -23,23 +30,24 @@ export const Institutes = () => {
       </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          <FilterInstitute />
+          <FilterInstitute setQuery={setQuery} query={query} />
         </aside>
-
         <main>
-          {isLoading ? (
-            <AiOutlineLoading3Quarters className="size-6 animate-spin" />
-          ) : data?.items?.length ? (
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {data?.items?.map((item: any) => (
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {isLoading || isFetching ? (
+              new Array(9)
+                .fill("Card Skeleton")
+                .map((_, index) => <InstitutesCardSkeleton key={index} />)
+            ) : data?.items?.length ? (
+              data?.items?.map((item: any) => (
                 <InstitutesCard key={item?.id} item={item} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex justify-center items-center">
-              <InstituteNotFound />
-            </div>
-          )}
+              ))
+            ) : (
+              <div className="flex items-center justify-center">
+                <InstituteNotFound />
+              </div>
+            )}
+          </div>
         </main>
       </section>
     </div>

@@ -25,7 +25,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { SocialAuth } from "./social-auth"
-import { Roles } from "@/types"
+import { OrganizationRoles, Roles } from "@/types"
 import { toast } from "sonner"
 import { LogoEdust } from "@/components"
 
@@ -86,7 +86,7 @@ export const Login: React.FC = () => {
           )
 
           const organizationRoles = data.data?.organizationRoles?.map(
-            (role) => ({
+            (role: OrganizationRoles) => ({
               id: role.id,
               role: role.role,
               organization: role.organization,

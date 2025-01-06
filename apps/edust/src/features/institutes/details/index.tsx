@@ -1,10 +1,14 @@
 import { useGetInstituteByIdQuery } from "@/app/api/v0/public"
 import { Navbar } from "@/components"
 import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
   Card,
   CardContent,
   CardHeader,
   CardTitle,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -21,6 +25,7 @@ import { format } from "date-fns"
 import "katex/dist/katex.min.css"
 
 import "reactjs-tiptap-editor/style.css"
+import { Terminal } from "lucide-react"
 
 export const InstituteDetails = () => {
   const { id } = useParams()
@@ -54,7 +59,10 @@ export const InstituteDetails = () => {
       {/*  */}
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          <FilterInstitute />
+          <Skeleton className="mb-2 h-32" />
+          <Skeleton className="mb-2 h-16" />
+          <Typography className="text-center">Filter Institute</Typography>
+          {/* <FilterInstitute /> */}
         </aside>
         <div className="mx-auto max-w-screen-2xl">
           <Card className="border-none p-0">
@@ -68,7 +76,7 @@ export const InstituteDetails = () => {
                 <span>{data?.data.name}</span>
                 {/* Badge setted into Link  */}
                 <Link to="#">
-                  <Badge>{data?.data?.institute_category}</Badge>
+                  <Badge>{data?.data?.instituteCategory}</Badge>
                 </Link>
               </CardTitle>
               <Typography className="border-y py-2">
@@ -95,7 +103,7 @@ export const InstituteDetails = () => {
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Code Type</span>
-                        <span>{data?.data?.code_type.toUpperCase()}</span>
+                        <span>{data?.data?.codeType.toUpperCase()}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -108,10 +116,10 @@ export const InstituteDetails = () => {
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Email</span>
                         <a
-                          href={`mailto:${data?.data?.contact_email}`}
+                          href={`mailto:${data?.data?.contactEmail}`}
                           className="hover:underline"
                         >
-                          {data?.data?.contact_email}
+                          {data?.data?.contactEmail}
                         </a>
                       </TableCell>
                     </TableRow>
@@ -119,8 +127,8 @@ export const InstituteDetails = () => {
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Phone</span>
                         {/* changed span to a and add tel to attributes */}
-                        <a href={`tel:${data?.data?.phone_number}`}>
-                          {data?.data?.phone_number}
+                        <a href={`tel:${data?.data?.phoneNumber}`}>
+                          {data?.data?.phoneNumber}
                         </a>
                       </TableCell>
                     </TableRow>
@@ -140,14 +148,14 @@ export const InstituteDetails = () => {
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Founded Date</span>
                         <span>
-                          {formatFoundedDate(data?.data?.founded_date)}
+                          {formatFoundedDate(data?.data?.foundedDate)}
                         </span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Principal</span>
-                        <span>{data?.data?.principal_name}</span>
+                        <span>{data?.data?.principalName}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -167,7 +175,7 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           State/Division
                         </span>
-                        <span>{data?.data?.state_or_division}</span>
+                        <span>{data?.data?.stateOrDivision}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -175,13 +183,13 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           Country/District
                         </span>
-                        <span>{data?.data?.county_or_district}</span>
+                        <span>{data?.data?.countyOrDistrict}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">City/Town</span>
-                        <span>{data?.data?.city_or_town}</span>
+                        <span>{data?.data?.cityOrTown}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -189,13 +197,13 @@ export const InstituteDetails = () => {
                         <span className="w-36 font-semibold">
                           Street/House Number
                         </span>
-                        <span>{data?.data?.street_or_house_number}</span>
+                        <span>{data?.data?.streetOrHouseNumber}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Postal Code</span>
-                        <span>{data?.data?.postal_code}</span>
+                        <span>{data?.data?.postalCode}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
@@ -215,13 +223,33 @@ export const InstituteDetails = () => {
               </div>
             </CardContent>
           </Card>
-          {data?.data?.overview && (
-            <div className="mt-7 rounded-md border p-3 ProseMirror" aria-label="Rich-Text Editor">
+
+          <>
+            {data?.data?.overview && (
               <div
-                dangerouslySetInnerHTML={{ __html: data?.data?.overview }}
-              ></div>
-            </div>
-          )}
+                className="ProseMirror mt-7 rounded-md border p-3"
+                aria-label="Rich-Text Editor"
+              >
+                <div
+                  dangerouslySetInnerHTML={{ __html: data?.data?.overview }}
+                ></div>
+              </div>
+            )}
+          </>
+
+          <Alert className="mt-6 lg:mt-8">
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Disclaimer!</AlertTitle>
+            <AlertDescription>
+              The content displayed on this page has been collected from
+              publicly available sources. While we strive to ensure accuracy,
+              there may be errors or outdated information.
+              <br />
+              If you notice any incorrect or misleading details, please contact
+              our support team. We will promptly review and correct any
+              inaccuracies.
+            </AlertDescription>
+          </Alert>
         </div>
       </section>
       {/*  */}

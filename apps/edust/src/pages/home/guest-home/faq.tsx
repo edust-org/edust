@@ -20,7 +20,7 @@ export const Faq = () => {
       <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-2">
         <Accordion type="single" collapsible>
           {faqData.map((faq, index) => (
-            <AccordionItem value={`item-${index}`}>
+            <AccordionItem value={`item-${index}`} key={`item-${index}`}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
               <AccordionContent>{faq.answer}</AccordionContent>
             </AccordionItem>

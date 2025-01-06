@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { Navigate } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom"
 import { FC, ReactNode } from "react"
 import { Roles } from "@/types"
 import { setProfileActiveMode } from "@/app/features"
@@ -11,6 +11,8 @@ interface ProtectorProps {
 }
 
 export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
+  const location = useLocation()
+
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.authentication.auth.user)
 
@@ -20,7 +22,7 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
 
   // if user not exist
   if (!user) {
-    return <Navigate to="/auth/sign-in" />
+    return <Navigate to="/auth/login" state={{ from: location }} replace />
   }
 
   // first check the organization role
@@ -46,5 +48,5 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
     return <>{children}</>
   }
 
-  return <Navigate to="/auth/sign-in" />
+  return <Navigate to="/auth/login" state={{ from: location }} replace />
 }

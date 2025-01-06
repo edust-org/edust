@@ -1,4 +1,5 @@
 export * from "./account-type"
+export * from "./institute"
 export * from "./organization"
 export * from "./roles"
 export * from "./status"

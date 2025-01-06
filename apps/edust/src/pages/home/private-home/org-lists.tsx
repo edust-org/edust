@@ -43,7 +43,7 @@ export const OrgLists = () => {
               <Typography className="text-sm text-muted-foreground">
                 {format(new Date(item.createdAt), "MMM dd, yyyy")}
               </Typography>
-              <Link to={`/u/${item.org_username}/site`} target="_blank">
+              <Link to={`/u/${item.orgUsername}/site`} target="_blank">
                 <Button variant={"secondary"} size={"icon"}>
                   <Eye />
                 </Button>

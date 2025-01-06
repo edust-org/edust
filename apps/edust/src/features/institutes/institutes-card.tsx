@@ -24,14 +24,14 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
 
   const {
     id,
-    institute_category,
+    instituteCategory,
     name,
     photo,
-    phone_number,
-    contact_email,
+    phoneNumber,
+    contactEmail,
     latitude,
     longitude,
-    author: { name: authorName, profile_pic },
+    author: { name: authorName, profilePic },
     createdAt,
     country,
   } = item
@@ -74,7 +74,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
           {/* Badge */}
           <Link to="#">
             <Badge className="mb-2 bg-slate-800 capitalize text-white">
-              {institute_category}
+              {instituteCategory}
             </Badge>
           </Link>
           {/* Title */}
@@ -84,11 +84,11 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
 
           {/* Icons */}
           <div className="mt-5 flex justify-between text-xl text-slate-700 sm:text-2xl">
-            <a href={`tel:${phone_number}`}>
+            <a href={`tel:${phoneNumber}`}>
               <Phone />
             </a>
 
-            <a href={`mailto:${contact_email}`}>
+            <a href={`mailto:${contactEmail}`}>
               <Mail />
             </a>
 
@@ -106,7 +106,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
             <Link to="#">
               <Avatar>
                 <AvatarImage
-                  src={profile_pic || "https://github.com/shadcn.png"}
+                  src={profilePic || "https://github.com/shadcn.png"}
                 />
                 <AvatarFallback>{fallbackName(authorName)}</AvatarFallback>
               </Avatar>
