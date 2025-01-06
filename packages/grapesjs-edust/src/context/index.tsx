@@ -1,11 +1,9 @@
 import { ReactNode } from "react"
 import CounterProvider from "./counter"
-import { PageProvider } from "./page"
+import { PageContextProps, PageProvider } from "./page"
 
 interface ContextProps {
-  pageOptions: {
-    addANewPage: (formData: { pageName: string }) => boolean
-  }
+  pageOptions: PageContextProps
 }
 
 interface ContextProviderProps extends ContextProps {
@@ -18,9 +16,7 @@ export const ContextProviders = ({
 }: ContextProviderProps) => {
   return (
     <CounterProvider>
-      <PageProvider addANewPage={pageOptions.addANewPage}>
-        {children}
-      </PageProvider>
+      <PageProvider {...pageOptions}>{children}</PageProvider>
     </CounterProvider>
   )
 }

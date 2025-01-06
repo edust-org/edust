@@ -8,8 +8,8 @@ import template from "./template"
 
 function options(): EditorConfig {
   return {
-    canvas:{
-      scripts: ['https://cdn.tailwindcss.com?v=3.4.5']
+    canvas: {
+      scripts: ["https://cdn.tailwindcss.com?v=3.4.5"],
     },
     height: "100vh",
     undoManager: { trackSelection: false },

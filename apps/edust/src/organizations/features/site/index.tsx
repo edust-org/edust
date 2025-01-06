@@ -19,6 +19,7 @@ import { Link } from "react-router-dom"
 import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import siteAssets from "./site-assets"
+import { v4 as uuidv4 } from "uuid"
 
 export const Site = () => {
   const { data, isLoading, refetch } = useGetOrgMeQuery()
@@ -29,7 +30,7 @@ export const Site = () => {
     const orgId = data.data.id
     const body = {
       assets: siteAssets.assets,
-      page: siteAssets.page,
+      page: { ...siteAssets.page, id: uuidv4() },
     }
     try {
       const response = await createSite({ orgId, body }).unwrap()
@@ -97,7 +98,7 @@ export const Site = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {data.data?.site ? (
+                  {data?.data?.site ? (
                     <Link to={"builder"} target="_blank">
                       <Button className="mt-2">Start Editing</Button>
                     </Link>
@@ -119,14 +120,14 @@ export const Site = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>
-                    Total Pages are ({data.data?.site?.pages})
+                    Total Pages are ({data?.data?.site?.pages || 0})
                   </CardTitle>
                 </CardHeader>
               </Card>
               <Card>
                 <CardHeader>
                   <CardTitle>
-                    Total Images are ({data.data?.site?.images})
+                    Total Images are ({data?.data?.site?.images || 0})
                   </CardTitle>
                 </CardHeader>
               </Card>

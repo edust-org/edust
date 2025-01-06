@@ -76,32 +76,12 @@ export const File = () => {
                   <Form {...form}>
                     <form
                       onSubmit={form.handleSubmit(
-                        (data: z.infer<typeof FormSchema>) => {
-                          const isSuccess = addANewPage(data, editor)
-                          if (isSuccess) {
+                        async (data: z.infer<typeof FormSchema>) => {
+                          const isAdded = await addANewPage(data, editor)
+                          if (isAdded) {
                             form.reset()
                             setOpen(false)
                           }
-                          // const pages = editor.Pages
-                          // const pageName = data.pageName.toLocaleLowerCase()
-
-                          // const pg = editor.Pages
-                          // const pgs = pg.getAll().map((p) => {
-                          //   return p?.attributes?.name?.toLowerCase()
-                          // })
-
-                          // if (pgs.includes(pageName)) {
-                          //   return toast.error("Already have this page name.")
-                          // }
-
-                          // pages.add({
-                          //   name: pageName,
-                          //   component: `<h1>Page content ${pageName}</h1>`,
-                          // })
-
-                          // toast.success("successfully new page created!")
-                          // form.reset()
-                          // setOpen(false)
                         },
                       )}
                       className="space-y-6"

@@ -106,7 +106,7 @@ const calendars = [
 ]
 interface GrapesjsEdustProps {
   onEditor: (editor: Editor) => Promise<void>
-  optionsCustomize: (editor: Editor | null) => object
+  optionsCustomize: (editor: React.MutableRefObject<Editor | null>) => object
 }
 
 export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
@@ -129,8 +129,6 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
   const sideAreaStyle =
     "bg-sidebar text-sidebar-foreground border-sidebar-border w-36 md:w-48 lg:w-52 2xl:w-56"
 
-  const newOptions = { ...options(), ...optionsCustomize(editorRef.current) }
-
   return (
     <TooltipProvider>
       <Toaster richColors />
@@ -142,7 +140,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
         grapesjs={grapesjs}
         // Load the GrapesJS CSS file asynchronously from URL.
         // This is an optional prop, you can always import the CSS directly in your JS if you wish.
-        options={newOptions}
+        options={{ ...options(), ...optionsCustomize(editorRef) }}
         onEditor={gsOnEditor}
       >
         <TopArea />

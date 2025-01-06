@@ -128,7 +128,13 @@ function App() {
   // })
 
   return (
-    <ContextProviders pageOptions={{ addANewPage: () => true }}>
+    <ContextProviders
+      pageOptions={{
+        addANewPage: async () => true,
+        deletePage: async () => true,
+        editPageName: async () => true,
+      }}
+    >
       <GrapesjsEdust onEditor={async () => {}} optionsCustomize={() => ({})} />
     </ContextProviders>
   )

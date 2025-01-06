@@ -1,8 +1,28 @@
+import type { Editor, Page } from "@edust/grapesjs"
 import React, { createContext, ReactNode, useContext } from "react"
 
-interface PageContextProps {
-  addANewPage: (data: { pageName: string }, editor: object) => boolean
-  handleAnotherAction?: (id: number) => void
+export interface PageContextProps {
+  addANewPage: (data: { pageName: string }, editor: object) => Promise<boolean>
+  deletePage: ({
+    page,
+    editor,
+    removePage,
+  }: {
+    page: Page
+    editor: Editor
+    removePage: () => void
+  }) => Promise<boolean>
+  editPageName: ({
+    pageName,
+    page,
+    pages,
+    editor,
+  }: {
+    pageName: string
+    page: Page
+    pages: Page[]
+    editor: Editor
+  }) => Promise<boolean>
 }
 
 // Initialize the context

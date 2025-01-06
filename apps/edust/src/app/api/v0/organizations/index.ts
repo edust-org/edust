@@ -63,6 +63,39 @@ export const organizationsApi = createApi({
       },
     }),
 
+    // site page
+    addSitePage: build.mutation<
+      any,
+      {
+        orgId: string
+        body: { id: string; pageName: string; html: string; css: string }
+      }
+    >({
+      query: ({ orgId, body }) => ({
+        url: `/${orgId}/site-builder/pages`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    updateSitePageName: build.mutation<
+      any,
+      { orgId: string; pageId: string; pageName: string }
+    >({
+      query: ({ orgId, pageId, pageName }) => ({
+        url: `/${orgId}/site-builder/pages/${pageId}`,
+        method: "PATCH",
+        body: { pageName },
+      }),
+    }),
+
+    deleteSitePage: build.mutation<any, { orgId: string; pageId: string }>({
+      query: ({ orgId, pageId }) => ({
+        url: `/${orgId}/site-builder/pages/${pageId}`,
+        method: "DELETE",
+      }),
+    }),
+
     // site-builder
     createSiteBuilder: build.mutation<any, { orgId: string; body: any }>({
       query: ({ orgId, body }) => ({
@@ -88,12 +121,19 @@ export const organizationsApi = createApi({
 
 export const {
   useGetOrgMeQuery,
+
   useCreateOrganizationMutation,
   useGetOrgListsQuery,
+
   useUploadSiteBuilderImageMutation,
   useGetSiteBuilderImagesQuery,
   useEditSiteBuilderImagesByIdMutation,
   useDeleteSiteBuilderImagesByIdMutation,
+
+  useAddSitePageMutation,
+  useUpdateSitePageNameMutation,
+  useDeleteSitePageMutation,
+
   useCreateSiteBuilderMutation,
   useGetSiteBuilderQuery,
   useEditSiteBuilderMutation,

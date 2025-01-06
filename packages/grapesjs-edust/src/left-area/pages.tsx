@@ -34,12 +34,12 @@ import {
   SidebarMenuSub,
 } from "@/components/ui"
 import { ChevronRight, Edit, StickyNote, Trash2 } from "lucide-react"
-import { PagesResultProps } from "@grapesjs/react"
+import { PagesResultProps, useEditor } from "@grapesjs/react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { toast } from "sonner"
 import { useState } from "react"
+import { usePageContext } from "@/context/page"
 
 const FormSchema = z.object({
   pageName: z.string().min(2, {
@@ -53,6 +53,7 @@ export const Pages = ({
   select,
   selected,
 }: PagesResultProps) => {
+  const { deletePage, editPageName } = usePageContext()
   const [open, setOpen] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -61,7 +62,7 @@ export const Pages = ({
       pageName: "",
     },
   })
-
+  const editor = useEditor()
   return (
     <>
       <Collapsible defaultOpen className="group/collapsible">
@@ -131,14 +132,25 @@ export const Pages = ({
                             <Form {...form}>
                               <form
                                 onSubmit={form.handleSubmit(
-                                  (data: z.infer<typeof FormSchema>) => {
-                                    if (pageName === data.pageName) {
-                                      return toast.error("same name provided!")
-                                    }
-                                    page.set("name", data.pageName)
+                                  async (data: z.infer<typeof FormSchema>) => {
+                                    const isEdited = await editPageName({
+                                      pageName: data.pageName.toLocaleLowerCase(),
+                                      page,
+                                      pages,
+                                      editor,
+                                    })
 
-                                    toast.success("successfully name changed!")
-                                    setOpen(false)
+                                    if (isEdited) {
+                                      setOpen(false)
+                                    }
+
+                                    // if (pageName === data.pageName) {
+                                    //   return toast.error("same name provided!")
+                                    // }
+                                    // page.set("name", data.pageName)
+
+                                    // toast.success("successfully name changed!")
+                                    // setOpen(false)
                                   },
                                 )}
                                 className="space-y-6"
@@ -184,9 +196,12 @@ export const Pages = ({
                             <AlertDialogFooter>
                               <AlertDialogCancel>Cancel</AlertDialogCancel>
                               <AlertDialogAction
-                                onClick={() => {
-                                  remove(page)
-                                  toast.success("successfully page deleted!")
+                                onClick={async () => {
+                                  await deletePage({
+                                    page,
+                                    editor,
+                                    removePage: remove,
+                                  })
                                 }}
                               >
                                 Continue
