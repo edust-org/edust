@@ -44,7 +44,7 @@
     "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "cmdk": "^1.0.4",
+    "cmdk": "^1.0.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "immer": "^10.1.1",

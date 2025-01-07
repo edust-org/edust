@@ -20,6 +20,7 @@ import Loading from "@/components/loading"
 import { Playground } from "@/pages"
 import { Suspense } from "react"
 import { Route } from "react-router"
+import { Home } from "@/pages/playground/home"
 
 export default (
   <>
@@ -49,5 +50,6 @@ export default (
     <Route path="/playground/404" element={<V1NotFoundError />} />
     <Route path="/playground/503" element={<V1MaintenanceError />} />
     <Route path="/playground/401" element={<V1UnauthorisedError />} />
+    <Route path="/playground/home" element={<Home />} />
   </>
 )
