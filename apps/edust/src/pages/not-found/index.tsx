@@ -1,29 +1,29 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router"
 import { Button } from "@/components/ui"
 import { LogoEdust } from "@/components"
-import { useAppSelector } from "@/app/hooks"
-import { Roles } from "@/types"
-import { useEffect } from "react"
+// import { useAppSelector } from "@/app/hooks"
+// import { Roles } from "@/types"
+// import { useEffect } from "react"
 
 export const NotFound = () => {
-  const activeMode = useAppSelector(
-    (state) => state.authentication.profileSwitch.activeMode,
-  )
+  // const activeMode = useAppSelector(
+  //   (state) => state.authentication.profileSwitch.activeMode,
+  // )
 
   const location = useLocation()
   const redirectPath = location.state?.from?.pathname || "/"
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (
-      activeMode === Roles.USER ||
-      activeMode === Roles.OWNER ||
-      activeMode === Roles.EDITOR
-    ) {
-      navigate("/")
-    }
-    navigate("/")
-  }, [activeMode])
+  // useEffect(() => {
+  //   if (
+  //     activeMode === Roles.USER ||
+  //     activeMode === Roles.OWNER ||
+  //     activeMode === Roles.EDITOR
+  //   ) {
+  //     navigate("/")
+  //   }
+  //   navigate("/")
+  // }, [activeMode])
 
   return (
     <div className="h-svh">

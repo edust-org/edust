@@ -4,7 +4,7 @@ import {
   Site,
   SiteBuilder,
 } from "@/organizations/features"
-import { Route } from "react-router-dom"
+import { Route } from "react-router"
 import { Suspense } from "react"
 import Loading from "@/components/loading"
 import { Roles } from "@/types"

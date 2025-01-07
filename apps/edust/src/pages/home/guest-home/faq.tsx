@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@/components/ui"
 import faqData from "./faq-data"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import assets from "@/assets/images"
 
 export const Faq = () => {

@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom"
+import { Route } from "react-router"
 import Dashboard from "@/features/dashboard"
 import { CreateOrganization } from "@/organizations/features"
 import { Protector } from "./protector"

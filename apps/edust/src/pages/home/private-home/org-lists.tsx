@@ -3,7 +3,7 @@ import { Button, Skeleton, Typography } from "@/components/ui"
 import { format } from "date-fns"
 import { Eye } from "lucide-react"
 import { Helmet } from "react-helmet-async"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 export const OrgLists = () => {
   const { data, isLoading } = useGetOrgListsQuery()

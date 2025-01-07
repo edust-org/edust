@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom"
+import { Route } from "react-router"
 import { Suspense } from "react"
 import Loading from "@/components/loading"
 import { Playground } from "@/pages"

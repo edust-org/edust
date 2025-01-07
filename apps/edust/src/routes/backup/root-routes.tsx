@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/app/hooks"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router"
 import { guestRoutes } from "./guest"
 import { authenticatedRoutes } from "./authenticated-routes"
 import { organizationRoutes } from "./organization-routes"

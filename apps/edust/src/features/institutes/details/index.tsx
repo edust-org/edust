@@ -17,8 +17,8 @@ import {
 } from "@/components/ui"
 import { Badge } from "@/components/ui/badge"
 import { Helmet } from "react-helmet-async"
-import { useParams } from "react-router-dom"
-import { Link } from "react-router-dom" // Add this line to import Link
+import { useParams } from "react-router"
+import { Link } from "react-router" // Add this line to import Link
 import FilterInstitute from "../filter-institute"
 import { format } from "date-fns"
 

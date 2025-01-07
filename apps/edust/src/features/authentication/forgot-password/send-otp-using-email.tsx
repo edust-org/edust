@@ -13,14 +13,14 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router"
 import { Helmet } from "react-helmet-async"
 import { useForgotPasswordMutation } from "@/app/api/v0/auth"
 import { toast } from "@/hooks/shadcn-ui"
 import { BarLoader } from "react-spinners"
 import assets from "@/assets/images"
 import { CircleHelp } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {

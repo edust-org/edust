@@ -1,5 +1,5 @@
 import { Site } from "@/features"
-import { Route } from "react-router-dom"
+import { Route } from "react-router"
 
 export const commonRoutes = (
   <Route>

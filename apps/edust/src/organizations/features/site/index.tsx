@@ -15,7 +15,7 @@ import {
 } from "@/components/ui"
 import { Layout } from "@/organizations/components/layout"
 import { Helmet } from "react-helmet-async"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import siteAssets from "./site-assets"

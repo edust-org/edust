@@ -1,6 +1,6 @@
 "use client"
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { LayoutGrid, LogOut, User } from "lucide-react"
 
 import { Button } from "@/components/ui/button"

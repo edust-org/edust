@@ -3,7 +3,7 @@ import assets from "@/assets/images"
 import { Typography } from "@/components/ui"
 import { useToast } from "@/hooks/shadcn-ui"
 import React, { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router"
 import { BeatLoader } from "react-spinners"
 
 export const VerifyEmailByToken: React.FC = () => {

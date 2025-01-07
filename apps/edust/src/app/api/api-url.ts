@@ -29,7 +29,7 @@ export const apiV0BaseQuery = (
     baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).authentication.auth.auth?.token
+      const token = (getState() as RootState).authentication.auth?.token
 
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {

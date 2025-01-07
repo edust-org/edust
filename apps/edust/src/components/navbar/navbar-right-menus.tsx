@@ -24,12 +24,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import {
-  clearProfileMode,
-  setProfileActiveMode,
-  signOut,
-} from "@/app/features/authentication"
-import { Link, useNavigate } from "react-router-dom"
+import { signOut } from "@/app/features/authentication"
+import { Link, useNavigate } from "react-router"
 import { ThemeSwitch } from "../theme-switch"
 import { useTheme } from "@/hooks"
 import { Roles } from "@/types"
@@ -40,14 +36,10 @@ export const NavbarRightMenus = () => {
   const navigate = useNavigate()
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
-  const auth = useAppSelector((state) => state.authentication.auth)
-  const profileMode = useAppSelector(
-    (state) => state.authentication.profileSwitch,
-  )
+  const auth = useAppSelector((state) => state.authentication)
 
   const handleLogout = () => {
     dispatch(signOut())
-    dispatch(clearProfileMode())
     clearAllCaches(dispatch)
     setTheme("light")
     navigate("/")
@@ -94,66 +86,32 @@ export const NavbarRightMenus = () => {
               <span>Settings</span>
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </DropdownMenuItem>
-            {profileMode.activeMode === Roles.USER && (
-              <Link to={"/dashboard"}>
-                <DropdownMenuItem>
-                  <LayoutDashboard className="mr-2 h-4 w-4" />
-                  <span>Dashboard</span>
-                </DropdownMenuItem>
-              </Link>
-            )}
+            <Link to={"/dashboard"}>
+              <DropdownMenuItem>
+                <LayoutDashboard className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             {/* if organization available */}
 
-            {auth?.user?.organizationRoles && (
-              <>
-                {profileMode.activeMode === Roles.USER &&
-                  profileMode.organizationRoles?.map((role) => {
-                    return (
-                      <DropdownMenuItem
-                        key={role.id}
-                        onClick={() => {
-                          dispatch(
-                            setProfileActiveMode({
-                              id: role.id,
-                              organization: role.organization,
-                              role: role.role,
-                            }),
-                          )
-                          navigate("/")
-                        }}
-                      >
-                        <School className="mr-2 h-4 w-4" />
-                        <span
-                          className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
-                        >
-                          {role.organization.name.length > 21
-                            ? role.organization.name.slice(0, 20) + "..."
-                            : role.organization.name}
-                        </span>
-                      </DropdownMenuItem>
-                    )
-                  })}
-                {profileMode.activeMode &&
-                  typeof profileMode.activeMode === "object" &&
-                  "id" in profileMode.activeMode && (
-                    <DropdownMenuItem
-                      onClick={() => {
-                        dispatch(setProfileActiveMode(Roles.USER))
-                      }}
+            {auth?.user?.organizationRoles &&
+              auth?.user?.organizationRoles?.map((role) => (
+                <Link to={'/organizations'} key={role.id}>
+                  <DropdownMenuItem>
+                    <School className="mr-2 h-4 w-4" />
+                    <span
+                      className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
                     >
-                      <User className="mr-2 h-4 w-4" />
-                      <span className="capitalize">
-                        {auth.user && auth.user?.name?.length > 21
-                          ? auth?.user?.name.slice(0, 20) + "..."
-                          : auth?.user?.name}
-                      </span>
-                    </DropdownMenuItem>
-                  )}
-              </>
-            )}
+                      {role.organization.name.length > 21
+                        ? role.organization.name.slice(0, 20) + "..."
+                        : role.organization.name}
+                    </span>
+                  </DropdownMenuItem>
+                </Link>
+              ))}
 
             {/* if organization is not available */}
             {!auth?.user?.organizationRoles && (

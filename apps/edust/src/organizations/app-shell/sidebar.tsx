@@ -5,7 +5,7 @@ import { Button } from "@/components/ui"
 import { Nav } from "./nav"
 import { cn } from "@/utils"
 import { sidelinks } from "./sidelinks"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { LogoEdust } from "@/components"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {

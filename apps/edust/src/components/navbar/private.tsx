@@ -12,7 +12,7 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import assets from "@/assets/images"
 import { IoMenuSharp } from "react-icons/io5"
 import { useAppSelector } from "@/app/hooks"
@@ -20,7 +20,7 @@ import { NavbarRightMenus } from "./navbar-right-menus"
 import { LogoEdust } from "../logo-edust"
 
 export const Private = () => {
-  const auth = useAppSelector((state) => state.authentication.auth)
+  const auth = useAppSelector((state) => state.authentication)
 
   return (
     <>

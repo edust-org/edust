@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { Button } from "../../components/custom/button"
 
 export default function NotFoundError() {

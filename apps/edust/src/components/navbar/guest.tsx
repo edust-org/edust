@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { IoMenuSharp } from "react-icons/io5"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { LogoEdust } from "../logo-edust"
 
 export const Guest = () => {

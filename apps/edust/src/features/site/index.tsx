@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { useLocation, useParams, useSearchParams } from "react-router-dom"
+import { useLocation, useParams, useSearchParams } from "react-router"
 import { useGetOrgSitesByUsernameQuery } from "@/app/api/v0/public"
 import { toast } from "@/hooks/shadcn-ui"
 import { Button, Typography } from "@/components/ui"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import Loading from "@/components/loading"
 
 export const Site = () => {
@@ -17,7 +17,7 @@ export const Site = () => {
     orgUsername: params.orgIdOrUsername,
     filters,
   })
-console.log(data);
+  console.log(data)
   const [content, setContent] = useState(null)
 
   useEffect(() => {

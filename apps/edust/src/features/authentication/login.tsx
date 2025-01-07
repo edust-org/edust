@@ -2,10 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useLoginMutation } from "@/app/api/v0/auth"
-import {
-  setAuthentication,
-  setProfileMode,
-} from "@/app/features/authentication"
+import { setAuthentication } from "@/app/features"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import {
   Button,
@@ -22,7 +19,7 @@ import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router"
 import { BarLoader } from "react-spinners"
 import { SocialAuth } from "./social-auth"
 import { OrganizationRoles, Roles } from "@/types"
@@ -40,7 +37,7 @@ const FormSchema = z.object({
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch()
-  const authState = useAppSelector((state) => state.authentication.auth)
+  const authState = useAppSelector((state) => state.authentication)
   const [login, { isLoading }] = useLoginMutation()
   const navigate = useNavigate()
   const location = useLocation()
@@ -84,23 +81,6 @@ export const Login: React.FC = () => {
               },
             }),
           )
-
-          const organizationRoles = data.data?.organizationRoles?.map(
-            (role: OrganizationRoles) => ({
-              id: role.id,
-              role: role.role,
-              organization: role.organization,
-            }),
-          )
-
-          dispatch(
-            setProfileMode({
-              systemRole: data.data?.systemRole,
-              organizationRoles,
-              activeMode: Roles.USER,
-            }),
-          )
-
           navigate(redirectPath)
         }
       })

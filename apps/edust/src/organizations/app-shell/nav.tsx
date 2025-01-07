@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { TbChevronDown } from "react-icons/tb"
 import { Button, buttonVariants } from "@/components/ui"
 import {
@@ -28,10 +28,7 @@ interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
-  const activeMode = useAppSelector(
-    (state) => state.authentication.profileSwitch.activeMode,
-  )
-
+  const activeMode = {role: 'a'}
   const renderLink = ({ sub, access_roles, ...rest }: SideLink) => {
     const key = `${rest.title}-${rest.href}`
     if (isCollapsed && sub)
@@ -51,11 +48,8 @@ export const Nav = ({ links, isCollapsed, className, closeNav }: NavProps) => {
       return (
         <NavLinkDropdown {...rest} sub={sub} key={key} closeNav={closeNav} />
       )
-
-    if (typeof activeMode === "object" && activeMode.role) {
-      if (access_roles.includes(activeMode.role)) {
-        return <NavLink {...rest} key={key} closeNav={closeNav} />
-      }
+    if (access_roles?.includes(activeMode.role)) {
+      return <NavLink {...rest} key={key} closeNav={closeNav} />
     }
   }
   return (

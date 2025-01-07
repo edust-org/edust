@@ -4,7 +4,7 @@ import Authentication from "@/features/authentication"
 import { AboutUs, ContactUs } from "@/pages"
 import { Home } from "@/pages/home"
 import { Suspense } from "react"
-import { Route } from "react-router-dom"
+import { Route } from "react-router"
 
 export const guestRoutes = (
   <Route>

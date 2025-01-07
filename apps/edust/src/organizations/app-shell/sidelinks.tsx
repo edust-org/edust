@@ -30,7 +30,6 @@ export interface NavLink {
   label?: string
   href: string
   icon: JSX.Element
-  access_roles: Roles[]
 }
 
 export interface SideLink extends NavLink {
@@ -41,16 +40,14 @@ export const sidelinks: SideLink[] = [
   {
     title: "Dashboard",
     label: "",
-    href: "/",
+    href: "/organizations",
     icon: <TbLayoutDashboard size={18} />,
-    access_roles: [Roles.OWNER],
   },
   {
     title: "Site",
     label: "1",
-    href: "/site",
+    href: "/organizations/site",
     icon: <LucideGlobe size={18} />,
-    access_roles: [Roles.OWNER],
   },
   // {
   //   title: "Access Controll",

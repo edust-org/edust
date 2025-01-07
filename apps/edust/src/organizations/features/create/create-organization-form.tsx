@@ -13,12 +13,12 @@ import {
 } from "@/components/ui"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useCreateOrganizationMutation } from "@/app/api/v0/organizations"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router"
 import { BarLoader } from "react-spinners"
 import { useEffect } from "react"
 import { toast } from "sonner"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { setAuthentication, setProfileMode } from "@/app/features"
+import { setAuthentication } from "@/app/features"
 import { OrganizationRoles, User } from "@/types"
 
 const FormSchema = z.object({
@@ -43,10 +43,7 @@ const FormSchema = z.object({
 
 export const CreateOrganizationForm = () => {
   const dispatch = useAppDispatch()
-  const profileState = useAppSelector(
-    (state) => state.authentication.profileSwitch,
-  )
-  const authState = useAppSelector((state) => state.authentication.auth)
+  const authState = useAppSelector((state) => state.authentication)
   const navigate = useNavigate()
   const location = useLocation()
   const redirectPath = location.state?.from?.pathname || "/"
@@ -98,13 +95,6 @@ export const CreateOrganizationForm = () => {
               setAuthentication({
                 ...authState,
                 user,
-              }),
-            )
-
-            dispatch(
-              setProfileMode({
-                ...profileState,
-                organizationRoles,
               }),
             )
           }

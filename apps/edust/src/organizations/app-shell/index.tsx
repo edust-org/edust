@@ -11,7 +11,7 @@ Footer: Optional footer with additional links or information.
  */
 
 import { useIsCollapsed } from "@/hooks"
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router"
 import { Sidebar } from "./sidebar"
 
 export const AppShell = () => {

@@ -1,9 +1,8 @@
-import { setAuthentication, setProfileMode } from "@/app/features"
+import { setAuthentication } from "@/app/features"
 import { useAppDispatch } from "@/app/hooks"
 import { useEffect } from "react"
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router"
 import Cookies from "js-cookie"
-import { Roles } from "@/types"
 import { toast } from "@/hooks/shadcn-ui"
 
 export const SocialAuthCallback: React.FC = () => {
@@ -27,14 +26,6 @@ export const SocialAuthCallback: React.FC = () => {
             token: data?.auth.token,
             expiresAt: data?.auth.expiresAt,
           },
-        }),
-      )
-
-      dispatch(
-        setProfileMode({
-          systemRole: data.data?.system_role,
-          organizationRoles: data.data?.organization_roles,
-          activeMode: Roles.USER,
         }),
       )
 

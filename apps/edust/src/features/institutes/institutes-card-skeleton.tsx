@@ -8,7 +8,7 @@ import {
   CardTitle,
   Skeleton,
 } from "@/components/ui"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 export const InstitutesCardSkeleton = () => {
   return (

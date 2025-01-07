@@ -9,7 +9,7 @@ import {
   CardTitle,
   Typography,
 } from "@/components/ui"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { Phone, Mail, MapPin } from "lucide-react"
 import { FC, useEffect, useState } from "react"
 import { format } from "date-fns"

@@ -5,7 +5,8 @@ import { persistReducer, persistStore } from "redux-persist"
 import counterReducer from "./features/counter/counter-slice"
 import { createLogger } from "redux-logger"
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0"
-import { authReducers, themeReducers } from "./features"
+import {  themeReducers } from "./features"
+import authentication from './features/authentication'
 
 const logger = createLogger({
   // optional configuration
@@ -23,7 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   ...rootReducerApiV0,
   counter: counterReducer,
-  authentication: authReducers,
+  authentication,
   theme: themeReducers,
 })
 

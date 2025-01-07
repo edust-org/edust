@@ -18,7 +18,7 @@ import {
 } from "@/components/ui"
 
 import { toast } from "@/hooks/shadcn-ui"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 const notificationsFormSchema = z.object({
   type: z.enum(["all", "mentions", "none"], {

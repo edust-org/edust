@@ -12,15 +12,11 @@ import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
 export const Builder = () => {
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
-  const orgId = useAppSelector((state) => {
-    let activeMode = state.authentication.profileSwitch.activeMode
-    if (typeof activeMode == "object") {
-      return activeMode.organization.id
-    }
-    return ""
-  })
-
-  const token = useAppSelector((state) => state.authentication.auth.auth.token)
+  const {
+    orgId,
+    auth: { token },
+  } = useAppSelector((state) => state.authentication)
+  
   const [saveGsData] = useEditSiteBuilderMutation()
 
   async function onEditor(editor: any) {

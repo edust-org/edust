@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { IoAddOutline } from "react-icons/io5"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { z } from "zod"
 
 const FormSchema = z.object({
@@ -28,7 +28,7 @@ const FormSchema = z.object({
 })
 const FilterInstitute = ({ query, setQuery }) => {
   const isAuthenticated = useAppSelector(
-    (state) => state.authentication.auth.isAuthenticated,
+    (state) => state.authentication.isAuthenticated,
   )
 
   const navigate = useNavigate()

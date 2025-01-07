@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 
 const checkIsOpenOrgPopup = (auth) => {
   if (auth.isAuthenticated && auth?.user?.createdAt) {

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import { Navigate, useLocation } from "react-router-dom"
+import { Navigate, useLocation } from "react-router"
 import { FC, ReactNode } from "react"
 import { Roles } from "@/types"
 import { setProfileActiveMode } from "@/app/features"
@@ -14,7 +14,7 @@ export const Protector: FC<ProtectorProps> = ({ roles = [], children }) => {
   const location = useLocation()
 
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.authentication.auth.user)
+  const user = useAppSelector((state) => state.authentication.user)
 
   const activeMode = useAppSelector(
     (state) => state.authentication.profileSwitch.activeMode,

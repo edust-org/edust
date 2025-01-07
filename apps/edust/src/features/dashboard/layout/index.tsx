@@ -2,7 +2,7 @@ import { useBoolean } from "usehooks-ts"
 import { Sidebar } from "./sidebar"
 import { cn } from "@/utils"
 import { Navbar } from "./navbar"
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router"
 
 export function Layout() {
   const { value: isOpen, toggle } = useBoolean(true)

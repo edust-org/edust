@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/input-otp"
 import { toast } from "@/hooks/shadcn-ui"
 import { Helmet } from "react-helmet-async"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router"
 import { useCheckOtpMutation } from "@/app/api/v0/auth"
 
 const FormSchema = z.object({

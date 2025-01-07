@@ -1,4 +1,4 @@
-import { NavLink as RouterNavLink } from "react-router-dom"
+import { NavLink as RouterNavLink } from "react-router"
 
 export const NavLink = ({ to, children }) => {
   const activeLinkStyle = `flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary`

@@ -13,13 +13,7 @@ import {
 import slugify from "slugify"
 
 export const SiteBuilder = () => {
-  const orgId = useAppSelector((state) => {
-    let activeMode = state.authentication.profileSwitch.activeMode
-    if (typeof activeMode == "object") {
-      return activeMode.organization.id
-    }
-    return ""
-  })
+  const orgId = useAppSelector((state) => state.authentication.orgId)
 
   const [saveNewPage] = useAddSitePageMutation()
   const [saveGsData] = useEditSiteBuilderMutation()

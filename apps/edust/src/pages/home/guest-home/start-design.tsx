@@ -1,5 +1,5 @@
 import { Button, Typography } from "@/components/ui"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 export const StartDesign = () => {
   return (

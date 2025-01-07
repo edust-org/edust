@@ -1,5 +1,5 @@
 import { lazy } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router"
 
 const SendOtpUsingEmail = lazy(() =>
   import("./send-otp-using-email").then((module) => ({

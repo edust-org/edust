@@ -8,8 +8,8 @@ const axios = defaultAxios.create({
 
 axios.interceptors.request.use((config) => {
   const state = store.getState()
-  const token = state.authentication.auth.auth?.token
-  let expiresAt = state.authentication.auth.auth?.expiresAt
+  const token = state.authentication.auth?.token
+  let expiresAt = state.authentication.auth?.expiresAt
   expiresAt = new Date(expiresAt)
   const currentDate = new Date()
 
@@ -36,9 +36,9 @@ export default () => {
   axios.defaults.headers.common["Content-Type"] = "application/json"
   axios.defaults.withCredentials = true // for cookies
 
-  const token = state.authentication.auth.auth?.token
+  const token = state.authentication.auth?.token
 
-  let expiresAt = state.authentication.auth.auth?.expiresAt
+  let expiresAt = state.authentication.auth?.expiresAt
   expiresAt = new Date(expiresAt)
   const currentDate = new Date()
 

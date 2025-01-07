@@ -1,7 +1,6 @@
 import { Navbar } from "@/components"
 import { Typography } from "@/components/ui"
-import { Link } from "react-router-dom"
-import { CreatableSelectDemo } from "./creatable-select-demo"
+import { Link } from "react-router"
 export const Playground = () => {
   return (
     <div className="space-y-8">
@@ -16,7 +15,7 @@ export const Playground = () => {
             </li>
           ))}
         </Typography>
-        <CreatableSelectDemo />
+        {/* <CreatableSelectDemo /> */}
       </div>
     </div>
   )

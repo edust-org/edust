@@ -1,17 +1,52 @@
-import { combineReducers } from "@reduxjs/toolkit"
-import { authentication } from "./authentication"
-import { profileSwitch } from "./profile-switch"
+import { Roles, User } from "@/types"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-// Actions
-export const { setAuthentication, signOut } = authentication.actions
+export interface AuthenticationState {
+  isAuthenticated: boolean
+  isLoading: boolean
+  user: User | null
+  orgId: string
+  auth: {
+    token: string
+    expiresAt: Date
+  }
+}
 
-export const { setProfileMode, setProfileActiveMode, clearProfileMode } =
-  profileSwitch.actions
+const initialState: AuthenticationState = {
+  isAuthenticated: false,
+  isLoading: false,
+  user: null,
+  orgId: "",
+  auth: {
+    token: "",
+    expiresAt: new Date(),
+  },
+}
 
-// Reducers
-export const authReducers = combineReducers({
-  auth: authentication.reducer,
-  profileSwitch: profileSwitch.reducer,
+export const authentication = createSlice({
+  name: "authentication",
+  initialState,
+  reducers: {
+    setAuthentication(state, action: PayloadAction<AuthenticationState>) {
+      state.isAuthenticated = action.payload.isAuthenticated
+      state.user = action.payload.user
+
+      const isOwner =
+        action.payload.user?.organizationRoles?.filter(
+          (item) => item.role === Roles.OWNER,
+        ) || []
+      state.orgId = isOwner.length > 0 ? isOwner[0].role : ""
+
+      state.auth = action.payload.auth
+      state.isLoading = action.payload.isLoading
+    },
+    signOut() {
+      localStorage.clear()
+      return initialState
+    },
+  },
 })
 
-export type AuthState = ReturnType<typeof authReducers>
+export const { setAuthentication, signOut } = authentication.actions
+
+export default authentication.reducer

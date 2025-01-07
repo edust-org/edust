@@ -13,14 +13,14 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router"
 import { Helmet } from "react-helmet-async"
 import { useResetPasswordMutation } from "@/app/api/v0/auth"
 import { toast } from "@/hooks/shadcn-ui"
 import { BarLoader } from "react-spinners"
 import assets from "@/assets/images"
 import { KeySquare } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 
 const FormSchema = z.object({
   newPassword: z.string().min(6, {
