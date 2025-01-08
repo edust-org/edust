@@ -52,20 +52,20 @@ export const File = () => {
   return (
     <>
       <MenubarMenu>
-        <MenubarTrigger className="relative">File</MenubarTrigger>
+        <MenubarTrigger className="eg-relative">File</MenubarTrigger>
         <MenubarContent>
           <MenubarSub>
             <MenubarSubTrigger>New</MenubarSubTrigger>
-            <MenubarSubContent className="w-[230px]">
+            <MenubarSubContent className="eg-w-[230px]">
               {/* <MenubarItem>
                 Page <MenubarShortcut>⌘N</MenubarShortcut>
               </MenubarItem> */}
 
               <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTrigger className="flex w-full cursor-auto items-center rounded-sm px-2 py-1.5 text-sm hover:bg-slate-50">
+                <DialogTrigger className="eg-flex eg-w-full eg-cursor-auto eg-items-center eg-rounded-sm eg-px-2 eg-py-1.5 eg-text-sm hover:eg-bg-slate-50">
                   <span>Page</span> <MenubarShortcut>⌘N</MenubarShortcut>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:eg-max-w-[425px]">
                   <DialogHeader>
                     <DialogTitle>Create a new page</DialogTitle>
                     <DialogDescription>
@@ -84,7 +84,7 @@ export const File = () => {
                           }
                         },
                       )}
-                      className="space-y-6"
+                      className="eg-space-y-6"
                     >
                       <FormField
                         control={form.control}

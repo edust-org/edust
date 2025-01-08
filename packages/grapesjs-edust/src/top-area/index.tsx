@@ -5,7 +5,7 @@ import { Menus } from "./menus"
 
 export function TopArea() {
   return (
-    <div className="grid grid-cols-3 items-center border-b px-2 lg:px-4">
+    <div className="eg-grid eg-grid-cols-3 eg-items-center eg-border-b eg-px-2 lg:eg-px-4">
       <WithEditor>
         <Menus />
         <Devices />

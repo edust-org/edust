@@ -119,15 +119,15 @@ export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
 
   return (
     <>
-      <Collapsible defaultOpen className="group/collapsible">
+      <Collapsible defaultOpen className="eg-group/collapsible">
         <SidebarGroup>
           <SidebarGroupLabel
             asChild
-            className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            className="eg-group/label eg-text-sm eg-text-sidebar-foreground eg-hover:bg-sidebar-accent eg-hover:text-sidebar-accent-foreground"
           >
             <CollapsibleTrigger>
-              <Layers className="me-1" /> Layers
-              <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+              <Layers className="eg-me-1" /> Layers
+              <ChevronRight className="eg-ml-auto eg-transition-transform group-data-[state=open]/collapsible:eg-rotate-90" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
           <CollapsibleContent>
@@ -135,7 +135,7 @@ export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
               <SidebarGroup>
                 <SidebarGroupContent>
                   <SidebarMenu
-                    className="gjs-custom-layer-manager touch-none"
+                    className="gjs-custom-layer-manager eg-touch-none"
                     onPointerDown={onDragStart}
                     onPointerMove={onDragMove}
                     onPointerUp={onDragEnd}
@@ -151,7 +151,7 @@ export const Layer = ({ root }: Omit<LayersResultProps, "Container">) => {
                     {showIndicator && (
                       <div
                         ref={indicatorRef}
-                        className={"absolute h-0.5 w-full bg-yellow-400"}
+                        className={"eg-absolute eg-h-0.5 eg-w-full eg-bg-yellow-400"}
                         style={indicatorStyle}
                       ></div>
                     )}

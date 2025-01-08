@@ -94,14 +94,14 @@ export const LayerItem = ({
     }
   }
 
-  const wrapperCls = `layer-item flex flex-col ${
-    selected ? "bg-slate-100" : ""
-  } ${!visible || isDragging ? "opacity-50" : ""}`
+  const wrapperCls = `eg-layer-item eg-flex eg-flex-col ${
+    selected ? "eg-bg-slate-100" : ""
+  } ${!visible || isDragging ? "eg-opacity-50" : ""}`
 
   return (
     <SidebarMenuItem className={wrapperCls}>
       <Collapsible
-        className="group/collapsible group max-w-full [&[data-state=open]>button>svg:first-child]:rotate-90"
+        className="eg-group/collapsible eg-group eg-max-w-full [&[data-state=open]>button>svg:first-child]:eg-rotate-90"
         onClick={select}
         onMouseEnter={() => hover(true)}
         onMouseLeave={() => hover(false)}
@@ -112,25 +112,25 @@ export const LayerItem = ({
           <CollapsibleTrigger asChild onClick={toggleOpen}>
             <ChevronRight
               className={cn(
-                "transition-transform",
-                !components.length ? "pointer-events-none opacity-0" : "",
+                "eg-transition-transform",
+                !components.length ? "eg-pointer-events-none eg-opacity-0" : "",
               )}
             />
           </CollapsibleTrigger>
           {name}
           {visible ? (
             <button onClick={toggleVisibility}>
-              <Eye className="h-4 w-4" />
+              <Eye className="eg-h-4 eg-w-4" />
             </button>
           ) : (
             <button onClick={toggleVisibility}>
-              <EyeClosed className="h-4 w-4" />
+              <EyeClosed className="eg-h-4 eg-w-4" />
             </button>
           )}
         </SidebarMenuButton>
       </Collapsible>
       {!!(open && components.length) && (
-        <div className={`max-w-full ${!open ? "hidden" : ""}`}>
+        <div className={`eg-max-w-full ${!open ? "eg-hidden" : ""}`}>
           {cmpToRender}
         </div>
       )}

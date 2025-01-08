@@ -23,18 +23,18 @@ export const RightPanel = () => {
   return (
     <>
       <Tabs defaultValue="blocks">
-        <TabsList className="flex items-center justify-between gap-2">
+        <TabsList className="eg-flex eg-items-center eg-justify-between eg-gap-2">
           <TabsTrigger value="selectors">
-            <FaPaintBrush className="text-lg" />
+            <FaPaintBrush className="eg-text-lg" />
           </TabsTrigger>
           <TabsTrigger value="traits">
-            <IoMdSettings className="text-lg" />
+            <IoMdSettings className="eg-text-lg" />
           </TabsTrigger>
           <TabsTrigger value="blocks">
-            <MdDashboardCustomize className="text-lg" />
+            <MdDashboardCustomize className="eg-text-lg" />
           </TabsTrigger>
         </TabsList>
-        <ScrollArea className="h-screen">
+        <ScrollArea className="eg-h-screen">
           <TabsContent value="selectors">
             <>
               <SelectorsProvider>

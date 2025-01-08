@@ -50,8 +50,8 @@ export default function CustomSelectorManager({
   const [isShowInput, setIsShowInput] = useState(false)
 
   return (
-    <div className="gjs-custom-selector-manager flex flex-col gap-2 p-2 text-left">
-      <div className="flex items-center">
+    <div className="gjs-custom-selector-manager eg-flex eg-flex-col eg-gap-2 eg-p-2 eg-text-left">
+      <div className="eg-flex eg-items-center">
         <div className="flex-grow">Selectors</div>
         <Form {...form}>
           <form

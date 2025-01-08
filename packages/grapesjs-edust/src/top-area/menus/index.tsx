@@ -16,7 +16,7 @@ import { File } from "./file"
 export const Menus = () => {
   return (
     <>
-      <Menubar  className="rounded-none border-none shadow-none">
+      <Menubar className="eg-rounded-none eg-border-none eg-shadow-none">
         <File />
         <MenubarMenu>
           <MenubarTrigger>Edit</MenubarTrigger>
@@ -100,14 +100,16 @@ export const Menus = () => {
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu>
-          <MenubarTrigger className="hidden md:block">Account</MenubarTrigger>
+          <MenubarTrigger className="eg-hidden md:eg-block">
+            Account
+          </MenubarTrigger>
           <MenubarContent forceMount>
             <MenubarLabel inset>Switch Account</MenubarLabel>
             <MenubarSeparator />
-            <MenubarRadioGroup value="benoit">
-              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioGroup value="1">
+              <MenubarRadioItem value="2">Andy</MenubarRadioItem>
+              <MenubarRadioItem value="3">Benoit</MenubarRadioItem>
+              <MenubarRadioItem value="4">Luis</MenubarRadioItem>
             </MenubarRadioGroup>
             <MenubarSeparator />
             <MenubarItem inset>Manage Family...</MenubarItem>

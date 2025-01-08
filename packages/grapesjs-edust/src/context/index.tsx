@@ -1,6 +1,7 @@
 import { ReactNode } from "react"
 import CounterProvider from "./counter"
 import { PageContextProps, PageProvider } from "./page"
+import { RightPanelProvider } from "./right-panel"
 
 interface ContextProps {
   pageOptions: PageContextProps
@@ -16,7 +17,9 @@ export const ContextProviders = ({
 }: ContextProviderProps) => {
   return (
     <CounterProvider>
-      <PageProvider {...pageOptions}>{children}</PageProvider>
+      <PageProvider {...pageOptions}>
+        <RightPanelProvider>{children}</RightPanelProvider>
+      </PageProvider>
     </CounterProvider>
   )
 }

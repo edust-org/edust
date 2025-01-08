@@ -19,7 +19,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      "fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "eg-fixed eg-inset-0 eg-z-50 eg-bg-black/80 eg- data-[state=open]:eg-animate-in data-[state=closed]:eg-animate-out data-[state=closed]:eg-fade-out-0 data-[state=open]:eg-fade-in-0",
       className
     )}
     {...props}
@@ -29,16 +29,16 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  "fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out",
+  "eg-fixed eg-z-50 eg-gap-4 eg-bg-background eg-p-6 eg-shadow-lg eg-transition eg-ease-in-out data-[state=closed]:eg-duration-300 data-[state=open]:eg-duration-500 data-[state=open]:eg-animate-in data-[state=closed]:eg-animate-out",
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        top: "eg-inset-x-0 eg-top-0 eg-border-b data-[state=closed]:eg-slide-out-to-top data-[state=open]:eg-slide-in-from-top",
         bottom:
-          "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        left: "inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm",
+          "eg-inset-x-0 eg-bottom-0 eg-border-t data-[state=closed]:eg-slide-out-to-bottom data-[state=open]:eg-slide-in-from-bottom",
+        left: "eg-inset-y-0 eg-left-0 eg-h-full eg-w-3/4 eg-border-r data-[state=closed]:eg-slide-out-to-left data-[state=open]:eg-slide-in-from-left sm:eg-max-w-sm",
         right:
-          "inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm",
+          "eg-inset-y-0 eg-right-0 eg-h-full eg-w-3/4 eg-border-l data-[state=closed]:eg-slide-out-to-right data-[state=open]:eg-slide-in-from-right sm:eg-max-w-sm",
       },
     },
     defaultVariants: {
@@ -62,9 +62,9 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side }), className)}
       {...props}
     >
-      <SheetPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
+      <SheetPrimitive.Close className="eg-absolute eg-right-4 eg-top-4 eg-rounded-sm eg-opacity-70 eg-ring-offset-background eg-transition-opacity hover:eg-opacity-100 focus:eg-outline-none focus:eg-ring-2 focus:eg-ring-ring focus:eg-ring-offset-2 disabled:eg-pointer-events-none data-[state=open]:eg-bg-secondary">
+        <X className="eg-h-4 eg-w-4" />
+        <span className="eg-sr-only">Close</span>
       </SheetPrimitive.Close>
       {children}
     </SheetPrimitive.Content>
@@ -78,7 +78,7 @@ const SheetHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
+      "eg-flex eg-flex-col eg-space-y-2 eg-text-center sm:eg-text-left",
       className
     )}
     {...props}
@@ -92,7 +92,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "eg-flex eg-flex-col-reverse sm:eg-flex-row sm:eg-justify-end sm:eg-space-x-2",
       className
     )}
     {...props}
@@ -106,7 +106,7 @@ const SheetTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold text-foreground", className)}
+    className={cn("eg-text-lg eg-font-semibold eg-text-foreground", className)}
     {...props}
   />
 ))
@@ -118,7 +118,7 @@ const SheetDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("eg-text-sm eg-text-muted-foreground", className)}
     {...props}
   />
 ))

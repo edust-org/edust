@@ -65,15 +65,15 @@ export const Pages = ({
   const editor = useEditor()
   return (
     <>
-      <Collapsible defaultOpen className="group/collapsible">
+      <Collapsible defaultOpen className="eg-group/collapsible">
         <SidebarGroup>
           <SidebarGroupLabel
             asChild
-            className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            className="eg-group/label eg-text-sm eg-text-sidebar-foreground eg-hover:bg-sidebar-accent eg-hover:text-sidebar-accent-foreground"
           >
             <CollapsibleTrigger>
-              <StickyNote className="me-1" /> Pages
-              <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+              <StickyNote className="eg-me-1" /> Pages
+              <ChevronRight className="eg-ml-auto eg-transition-transform eg-group-data-[state=open]/collapsible:rotate-90" />
             </CollapsibleTrigger>
           </SidebarGroupLabel>
           <CollapsibleContent>
@@ -84,10 +84,10 @@ export const Pages = ({
                   return (
                     <SidebarMenuButton
                       key={page.getId()}
-                      className="data-[active=true]:bg-transparent"
+                      className="data-[active=true]:eg-bg-transparent"
                     >
                       <span
-                        className="flex-grow capitalize"
+                        className="eg-flex-grow eg-capitalize"
                         onClick={() => select(page)}
                       >
                         {pageName}
@@ -101,7 +101,7 @@ export const Pages = ({
                     className="data-[active=true]:bg-transparent"
                   >
                     <span
-                      className="flex-grow capitalize"
+                      className="eg-flex-grow eg-capitalize"
                       onClick={() => select(page)}
                     >
                       {pageName}
@@ -118,9 +118,9 @@ export const Pages = ({
                           }}
                         >
                           <DialogTrigger asChild>
-                            <Edit className="ml-auto w-4 transition-colors hover:text-primary" />
+                            <Edit className="eg-ml-auto eg-w-4 eg-transition-colors eg-hover:text-primary" />
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-[425px]">
+                          <DialogContent className="sm:eg-max-w-[425px]">
                             <DialogHeader>
                               <DialogTitle>Edit page name</DialogTitle>
                               <DialogDescription>
@@ -153,7 +153,7 @@ export const Pages = ({
                                     // setOpen(false)
                                   },
                                 )}
-                                className="space-y-6"
+                                className="eg-space-y-6"
                               >
                                 <FormField
                                   control={form.control}
@@ -180,7 +180,7 @@ export const Pages = ({
 
                         <AlertDialog>
                           <AlertDialogTrigger>
-                            <Trash2 className="ml-auto w-4 transition-colors hover:text-destructive" />
+                            <Trash2 className="eg-ml-auto eg-w-4 eg-transition-colors hover:eg-text-destructive" />
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>

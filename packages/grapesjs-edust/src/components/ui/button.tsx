@@ -5,26 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "eg-inline-flex eg-items-center eg-justify-center eg-gap-2 eg-whitespace-nowrap eg-rounded-md eg-text-sm eg-font-medium eg-transition-colors focus-visible:eg-outline-none focus-visible:eg-ring-1 focus-visible:eg-ring-ring disabled:eg-pointer-events-none disabled:eg-opacity-50 [&_svg]:eg-pointer-events-none [&_svg]:eg-size-4 [&_svg]:eg-shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "eg-bg-primary eg-text-primary-foreground eg-shadow hover:eg-bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "eg-bg-destructive eg-text-destructive-foreground eg-shadow-sm hover:eg-bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "eg-border eg-border-input eg-bg-background eg-shadow-sm hover:eg-bg-accent hover:eg-text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "eg-bg-secondary eg-text-secondary-foreground eg-shadow-sm hover:eg-bg-secondary/80",
+        ghost: "hover:eg-bg-accent hover:eg-text-accent-foreground",
+        link: "eg-text-primary eg-underline-offset-4 hover:eg-underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "eg-h-9 eg-px-4 eg-py-2",
+        sm: "eg-h-8 eg-rounded-md eg-px-3 eg-text-xs",
+        lg: "eg-h-10 eg-rounded-md eg-px-8",
+        icon: "eg-h-9 eg-w-9",
       },
     },
     defaultVariants: {

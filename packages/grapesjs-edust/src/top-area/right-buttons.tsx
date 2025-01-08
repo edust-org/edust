@@ -104,7 +104,7 @@ export const RightButtons = () => {
   return (
     <>
       <div
-        className="panel__top flex items-center justify-end gap-2"
+        className="panel__top eg-flex eg-items-center eg-justify-end eg-gap-2"
         id="panel-top"
       >
         {cmdButtons.map(({ id, icon, disabled, options = {} }) => (
@@ -112,7 +112,7 @@ export const RightButtons = () => {
             key={id}
             type="button"
             variant={Commands.isActive(id) ? "default" : "ghost"}
-            className={`h-9 px-2 text-lg`}
+            className={`eg-h-9 eg-px-2 eg-text-lg`}
             onClick={() => handleButtons({ Commands, id, options })}
             disabled={disabled?.()}
           >

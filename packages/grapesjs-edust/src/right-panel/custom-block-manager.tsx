@@ -18,25 +18,25 @@ export default function CustomBlockManager({
 }: CustomBlockManagerProps) {
   const editor = useEditor()
   return (
-    <div className="gjs-custom-block-manager text-left">
+    <div className="gjs-custom-block-manager eg-text-left">
       <Accordion
         type="multiple"
-        className="w-full pb-12"
+        className="eg-w-full eg-pb-12"
         defaultValue={["Basic"]}
       >
         {Array.from(mapCategoryBlocks).map(([category, blocks]) => (
           <AccordionItem key={category} value={category}>
-            <AccordionTrigger className="bg-slate-100 px-2 py-2 hover:no-underline">
+            <AccordionTrigger className="eg-bg-slate-100 eg-px-2 eg-py-2 hover:eg-no-underline">
               {category}
             </AccordionTrigger>
-            <AccordionContent className="bg-white pb-0">
-              <div className="grid grid-cols-2 gap-2 p-2">
+            <AccordionContent className="eg-bg-white eg-pb-0">
+              <div className="eg-grid eg-grid-cols-2 eg-gap-2 eg-p-2">
                 {blocks.map((block) => (
                   <div
                     key={block.getId()}
                     draggable
                     className={
-                      "flex min-h-20 cursor-pointer flex-col items-center gap-1 rounded border border-slate-100 bg-slate-50 px-1 py-2 shadow transition-colors hover:bg-white"
+                      "eg-flex eg-min-h-20 eg-cursor-pointer eg-flex-col eg-items-center eg-gap-1 eg-rounded eg-border eg-border-slate-100 eg-bg-slate-50 eg-px-1 eg-py-2 eg-shadow eg-transition-colors hover:eg-bg-white"
                     }
                     onDragStart={(ev) => dragStart(block, ev.nativeEvent)}
                     onDragEnd={() => dragStop(false)}
@@ -59,12 +59,12 @@ export default function CustomBlockManager({
                     <div
                       className={`${
                         !block.getLabel().includes("<svg") &&
-                        "min-h-10 min-w-10"
-                      } flex max-h-40 w-full max-w-40 items-center justify-center overflow-hidden object-cover p-2`}
+                        "eg-min-h-10 eg-min-w-10"
+                      } eg-max-h-18 eg-max-w-18 eg-flex eg-w-12 eg-items-center eg-justify-center eg-overflow-hidden eg-object-cover eg-p-2`}
                       dangerouslySetInnerHTML={{ __html: block.getMedia()! }}
                     />
                     {block?.getLabel() && (
-                      <div className="w-full text-center text-sm">
+                      <div className="eg-w-full eg-text-center eg-text-sm">
                         <div
                           dangerouslySetInnerHTML={{
                             __html: block.getLabel().includes("<svg ")

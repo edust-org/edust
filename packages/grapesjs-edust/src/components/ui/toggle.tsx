@@ -7,18 +7,18 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/utils"
 
 const toggleVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "eg-inline-flex eg-items-center eg-justify-center eg-gap-2 eg-rounded-md eg-text-sm eg-font-medium eg-transition-colors hover:eg-bg-muted hover:eg-text-muted-foreground focus-visible:eg-outline-none focus-visible:eg-ring-1 focus-visible:eg-ring-ring disabled:eg-pointer-events-none disabled:eg-opacity-50 data-[state=on]:eg-bg-accent data-[state=on]:eg-text-accent-foreground [&_svg]:eg-pointer-events-none [&_svg]:eg-size-4 [&_svg]:eg-shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-transparent",
+        default: "eg-bg-transparent",
         outline:
-          "border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "eg-border eg-border-input eg-bg-transparent eg-shadow-sm hover:eg-bg-accent hover:eg-text-accent-foreground",
       },
       size: {
-        default: "h-9 px-2 min-w-9",
-        sm: "h-8 px-1.5 min-w-8",
-        lg: "h-10 px-2.5 min-w-10",
+        default: "eg-h-9 eg-px-2 eg-min-w-9",
+        sm: "eg-h-8 eg-px-1.5 eg-min-w-8",
+        lg: "eg-h-10 eg-px-2.5 eg-min-w-10",
       },
     },
     defaultVariants: {

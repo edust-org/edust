@@ -30,10 +30,10 @@ const ColorInput: React.FC<ColorInputProps> = ({
   }
 
   return (
-    <div className="flex w-full items-center">
-      <div className="flex items-center gap-1">
+    <div className="eg-flex eg-w-full eg-items-center">
+      <div className="eg-flex eg-items-center eg-gap-1">
         <div
-          className={`relative h-9 w-9 cursor-pointer rounded border`}
+          className={`eg-relative eg-h-9 eg-w-9 eg-cursor-pointer eg-rounded eg-border`}
           style={{
             backgroundColor: color,
           }}
@@ -42,7 +42,7 @@ const ColorInput: React.FC<ColorInputProps> = ({
             type="color"
             value={valueWithDef}
             onChange={handleColorChange}
-            className="absolute h-full w-full cursor-pointer opacity-0"
+            className="eg-absolute eg-h-full eg-w-full eg-cursor-pointer eg-opacity-0"
           />
         </div>
         <Input
@@ -50,7 +50,7 @@ const ColorInput: React.FC<ColorInputProps> = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="w-full flex-1"
+          className="eg-w-full eg-flex-1"
         />
       </div>
     </div>
