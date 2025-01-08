@@ -23,6 +23,8 @@ export * from './input-otp'
 
 export * from './label'
 
+export * from './navigation-menu'
+
 export * from "./popover";
 
 export * from "./radio-group";

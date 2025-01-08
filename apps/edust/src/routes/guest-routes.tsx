@@ -1,16 +1,13 @@
+import { ComingSoon } from "@/components"
 import Loading from "@/components/loading"
-import { InstituteDetails, Institutes } from "@/features"
+import { InstituteDetails, Institutes, Site } from "@/features"
 import Authentication from "@/features/authentication"
 import { AboutUs, ContactUs } from "@/pages"
-import { Home } from "@/pages/home"
 import { Suspense } from "react"
 import { Route } from "react-router"
 
-export const guestRoutes = (
-  <Route>
-    <Route path="/" element={<Home.GuestHome />} />
-
-    {/* For auth routes */}
+export default (
+  <>
     <Route path="/auth">
       <Route path="register" element={<Authentication.Register />} />
       <Route
@@ -31,6 +28,7 @@ export const guestRoutes = (
 
     <Route path="/about-us" element={<AboutUs />} />
     <Route path="/contact-us" element={<ContactUs />} />
+    <Route path="/u/:orgIdOrUsername/site" element={<Site />} />
     <Route path="/institutes" element={<Institutes />} />
     <Route
       path="/institutes/:id"
@@ -40,5 +38,9 @@ export const guestRoutes = (
         </Suspense>
       }
     />
-  </Route>
+
+    <Route path="/feedback" element={<ComingSoon />} />
+    <Route path="/help-center" element={<ComingSoon />} />
+    <Route path="/contact-support" element={<ComingSoon />} />
+  </>
 )

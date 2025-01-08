@@ -1,51 +1,64 @@
-import animation from "@/assets/animations/home/edust-hero.json"
 import { Button, Typography } from "@/components/ui"
-import { Player } from "@lottiefiles/react-lottie-player"
-import { FC } from "react"
+import { cn } from "@/utils"
+import { Link } from "react-router"
 
-const Hero: FC = () => {
+export const Hero = () => {
   return (
-    <div className="container relative -z-10 -mt-28 flex h-full w-full flex-col-reverse items-center justify-center gap-5 overflow-hidden pb-5 pt-28 lg:mt-12 lg:flex-row lg:justify-between lg:overflow-visible lg:py-5">
-      <div>
-        <Typography variant="h1" style={{ lineHeight: "4rem" }}>
-          Build your own site
-          <br />
-          for your organizations
-        </Typography>
-
+    <div className="relative mt-20 grid items-center justify-center gap-6 pb-8 pt-6 md:py-10">
+      <div className="flex max-w-[980px] flex-col items-center gap-6 pb-24">
         <Typography
-          variant="p"
-          className="text-lg font-light text-slate-950 md:text-xl"
+          variant="h1"
+          className="font-pixel z-10 text-center font-bold leading-tight tracking-wider text-accent-foreground"
         >
-          Don’t worry about <span className="font-bold">Domain</span> and{" "}
-          <span className="font-bold">Hoisting</span> just build your site{" "}
-          <br />
-          and publish it.
+          Build your own site for your
+          <Typography className="z-10 mt-0 underline decoration-gray-400 decoration-4 underline-offset-2 sm:mt-0 md:mt-0 lg:mt-3">
+            organizations
+          </Typography>
         </Typography>
-
-        <Typography variant="p" className="text-slate-800 md:text-lg">
+        <Typography className="z-10 max-w-[700px] text-center text-lg text-accent-foreground sm:text-xl">
+          Don’t worry about Domain and Hoisting just build your site and publish
+          it.
+        </Typography>{" "}
+        <Typography
+          className="z-10 max-w-[700px] text-center text-accent-foreground"
+          affects="removePaddingMargin"
+        >
           Discover new features, create organizations, and build customizable
-          <br />
-          pages for{" "}
-          <span className="font-semibold">educational institutions</span>. Join
-          Edust today to revolutionize <br />
+          pages for educational institutions. Join Edust today to revolutionize
           the way we learn and collaborate.
-        </Typography>
-
-        <Button className="mt-5">Get Started - it’s free</Button>
+        </Typography>{" "}
+        <Link to={"/auth/register"} className="z-10">
+          <Button size={"lg"}>Get Started</Button>
+        </Link>
       </div>
 
-      <Player
-        autoplay
-        loop
-        src={animation}
-        className="md:w-[400px] xl:w-[600px]"
-      />
+      <section className="absolute inset-0 z-0 max-w-[1000]">
+        <div
+          className={cn(
+            "pointer-events-none absolute size-full overflow-hidden opacity-50 [perspective:200px]",
+          )}
+        >
+          {/* Grid */}
+          <div className="absolute inset-0 [transform:rotateX(35deg)]">
+            <div
+              className={cn(
+                "animate-grid",
 
-      <div className="absolute bottom-0 left-40 -z-10 h-[1000px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
-      <div className="absolute -top-[400px] left-[70%] -z-10 h-[700px] w-[183px] rotate-45 rounded-b-full bg-gradient-to-b from-slate-400 to-slate-300 blur-[100px]" />
+                "[background-repeat:repeat] [background-size:60px_60px] [height:300vh] [inset:0%_0px] [margin-left:-50%] [transform-origin:100%_0_0] [width:600vw]",
+
+                // Light Styles
+                "[background-image:linear-gradient(to_right,rgba(0,0,0,0.3)_1px,transparent_0),linear-gradient(to_bottom,rgba(0,0,0,0.3)_1px,transparent_0)]",
+
+                // Dark styles
+                "dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.2)_1px,transparent_0),linear-gradient(to_bottom,rgba(255,255,255,0.2)_1px,transparent_0)]",
+              )}
+            />
+          </div>
+
+          {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent to-90% dark:from-gray-700" />
+        </div>
+      </section>
     </div>
   )
 }
-
-export default Hero

@@ -1,144 +1,157 @@
 import { LogoEdust } from "@/components"
 import { Separator, Typography } from "@/components/ui"
-import { FaDiscord, FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa"
+import { FaFacebook, FaLinkedin } from "react-icons/fa"
+import { FaXTwitter } from "react-icons/fa6"
+import { Link } from "react-router"
+
+// data will be 3
+const footerData = [
+  {
+    title: "Quick Links",
+    links: [
+      {
+        title: "About Us",
+        href: "/about-us",
+        isExternal: false,
+      },
+      {
+        title: "Institutes",
+        href: "/institutes",
+        isExternal: false,
+      },
+      {
+        title: "Create Organization",
+        href: "/organization-create",
+        isExternal: false,
+      },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      {
+        title: "Feedback Form",
+        href: "/feedback",
+        isExternal: false,
+      },
+      {
+        title: "Help Center",
+        href: "/help-center",
+        isExternal: false,
+      },
+      {
+        title: "Contact Support",
+        href: "/contact-support",
+        isExternal: false,
+      },
+      {
+        title: "Live Chat",
+        href: "#",
+        isExternal: false,
+      },
+    ],
+  },
+  {
+    title: "Community",
+    links: [
+      {
+        title: "Discord",
+        href: "https://discord.gg/vnhqmn9mdj",
+        isExternal: true,
+      },
+      {
+        title: "GitHub",
+        href: "https://github.com/edust-org/edust/discussions",
+        isExternal: true,
+      },
+      {
+        title: "Forums",
+        href: "#",
+        isExternal: false,
+      },
+    ],
+  },
+]
+
+const socialLinks = [
+  {
+    icon: <FaFacebook className="size-5" />,
+    href: "https://www.facebook.com/edustorg",
+  },
+  {
+    icon: <FaXTwitter className="size-5" />,
+    href: "https://x.com/edust_org",
+  },
+  {
+    icon: <FaLinkedin className="size-5" />,
+    href: "https://www.linkedin.com/company/edust-org",
+  },
+]
 
 export const Footer = () => {
   return (
-    <>
-      <div className="container mt-8 lg:mt-16">
-        <div>
-          <LogoEdust />
-          <div className="mt-6 grid gap-8 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-4">
-            <div>
-              <h3 className="mb-4 font-bold">Product</h3>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Overview</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Pricing</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Marketplace</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Pricing</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 font-bold">Company</h3>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="font-medium hover:text-primary">
-                  <a href="#">About</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Team</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Blog</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-4 font-bold">Resources</h3>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Help</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Sales</a>
-                </li>
-                <li className="font-medium hover:text-primary">
-                  <a href="#">Advertise</a>
-                </li>
-              </ul>
-            </div>
-            <div className="lg:col-span-2 xl:col-span-1">
-              <ul className="mb-10 flex items-center gap-2 text-muted-foreground">
-                <li className="font-medium">
-                  <a href="https://discord.gg/vnhqmn9mdj" target="_blank">
-                    <span className="flex size-12 items-center justify-center rounded-full bg-muted transition-colors hover:text-primary">
-                      <FaDiscord className="h-6 w-6" />
-                    </span>
-                  </a>
-                </li>
-                <li className="font-medium">
-                  <a href="https://github.com/edust-org" target="_blank">
-                    <span className="flex size-12 items-center justify-center rounded-full bg-muted transition-colors hover:text-primary">
-                      <FaGithub className="h-6 w-6" />
-                    </span>
-                  </a>
-                </li>
-                <li className="font-medium">
-                  <a
-                    href="https://www.linkedin.com/company/edust-org"
-                    target="_blank"
-                  >
-                    <span className="flex size-12 items-center justify-center rounded-full bg-muted transition-colors hover:text-primary">
-                      <FaLinkedin className="h-6 w-6" />
-                    </span>
-                  </a>
-                </li>
-                <li className="font-medium">
-                  <a href="https://www.facebook.com/edustorg" target="_blank">
-                    <span className="flex size-12 items-center justify-center rounded-full bg-muted transition-colors hover:text-primary">
-                      <FaFacebook className="h-6 w-6" />
-                    </span>
-                  </a>
-                </li>
-              </ul>
-              <div className="grid w-full max-w-sm items-center gap-1.5">
-                <label
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  htmlFor="email"
+    <footer>
+      <Separator />
+      <section className="container grid grid-cols-2 gap-x-12 gap-y-8 py-20 md:grid-cols-4">
+        <div className="flex flex-col gap-2">
+          <Link rel="noreferrer noopener" to="/">
+            <LogoEdust width={170} />
+            <Typography
+              affects="removePaddingMargin"
+              className="py-2 text-sm font-light leading-5"
+            >
+              Edust is your trusted platform connecting students, teachers, and
+              educational institutions. Our mission is to empower learning
+              through innovation, collaboration, and access to exceptional
+              resources.
+            </Typography>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <Typography variant="large">Follow Us | &nbsp;&nbsp;</Typography>
+            <div className="flex items-center gap-2">
+              {socialLinks.map((link) => (
+                <a
+                  rel="noreferrer noopener"
+                  href={link.href}
+                  className="opacity-60 hover:opacity-100"
+                  target="_blank"
                 >
-                  Subscribe to our newsletter
-                </label>
-                <div className="flex w-full max-w-sm items-center space-x-2">
-                  <input
-                    type="email"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="Email"
-                  />
-                  <button
-                    className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-                    type="submit"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  By submitting, you agree to our
-                  <a href="#" className="ml-1 text-primary hover:underline">
-                    Privacy Policy
-                  </a>
-                </p>
-              </div>
+                  {link.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      </div>
 
-      <Separator className="mt-4 md:mt-8" />
-      <div className="container">
-        <div className="grid items-center justify-center gap-4 py-4 md:grid-cols-2 md:justify-between md:py-6">
-          <Typography className="text-center md:text-start">
-            © 2024 Edust. All rights reserved.
-          </Typography>
-          <ul className="flex gap-4 text-muted-foreground md:justify-end">
-            <li className="whitespace-nowrap underline hover:text-primary">
-              <a href="#">Terms and Conditions</a>
-            </li>
-            <li className="whitespace-nowrap underline hover:text-primary">
-              <a href="#">Privacy Policy</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </>
+        {footerData.map((item, index) => (
+          <div className="flex flex-col gap-2" key={index}>
+            <h3 className="text-lg font-bold">{item.title}</h3>
+            {item.links.map((link, index) => (
+              <div key={index}>
+                {link.isExternal ? (
+                  <a
+                    rel="noreferrer noopener"
+                    href={link.href}
+                    className="opacity-60 hover:opacity-100"
+                    target="_blank"
+                  >
+                    {link.title}
+                  </a>
+                ) : (
+                  <Link to={link.href} className="opacity-60 hover:opacity-100">
+                    {link.title}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </section>
+
+      <section className="container pb-14 text-center">
+        <Typography>&copy; 2025 Edust. All rights reserved.</Typography>
+      </section>
+    </footer>
   )
 }

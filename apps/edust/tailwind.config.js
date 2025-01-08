@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export const darkMode = ["class"];
+export const darkMode = ["class"]
 export const content = [
   "./pages/**/*.{ts,tsx}",
   "./components/**/*.{ts,tsx}",
   "./app/**/*.{ts,tsx}",
   "./src/**/*.{ts,tsx}",
-];
-export const prefix = "";
+]
+export const prefix = ""
 export const theme = {
   container: {
     center: true,
@@ -72,13 +72,18 @@ export const theme = {
         "0%,70%,100%": { opacity: "1" },
         "20%,50%": { opacity: "0" },
       },
+      grid: {
+        "0%": { transform: "translateY(-50%)" },
+        "100%": { transform: "translateY(0)" },
+      },
     },
     animation: {
       "accordion-down": "accordion-down 0.2s ease-out",
       "accordion-up": "accordion-up 0.2s ease-out",
       "caret-blink": "caret-blink 1.25s ease-out infinite",
+      grid: "grid 15s linear infinite",
     },
   },
-};
+}
 // eslint-disable-next-line no-undef
-export const plugins = [require("tailwindcss-animate")];
+export const plugins = [require("tailwindcss-animate")]

@@ -20,7 +20,6 @@ import Loading from "@/components/loading"
 import { Playground } from "@/pages"
 import { Suspense } from "react"
 import { Route } from "react-router"
-import { Home } from "@/pages/playground/home"
 
 export default (
   <>
@@ -31,25 +30,25 @@ export default (
           <Playground />
         </Suspense>
       }
-    >
-      <Route path="dashboard" element={<PlayAppShell />}>
-        <Route index element={<V1Dashboard />} />
-        <Route path="tasks" element={<V1Task />} />
-        <Route path="users" element={<V1CommingSoon />} />
-        <Route path="settings" element={<V1Settings />}>
-          <Route index element={<V1SettingsProfile />} />
-          <Route path="account" element={<V1SettingsAccount />} />
-          <Route path="appearance" element={<V1SettingsAppearance />} />
-          <Route path="notifications" element={<V1SettingsNotifications />} />
-          <Route path="display" element={<V1SettingsDisplay />} />
-          <Route path="error-example" element={<V1SettingsErrorEx />} />
-        </Route>
+    ></Route>
+
+    <Route path="/playground/dashboard" element={<PlayAppShell />}>
+      <Route index element={<V1Dashboard />} />
+      <Route path="tasks" element={<V1Task />} />
+      <Route path="users" element={<V1CommingSoon />} />
+      <Route path="settings" element={<V1Settings />}>
+        <Route index element={<V1SettingsProfile />} />
+        <Route path="account" element={<V1SettingsAccount />} />
+        <Route path="appearance" element={<V1SettingsAppearance />} />
+        <Route path="notifications" element={<V1SettingsNotifications />} />
+        <Route path="display" element={<V1SettingsDisplay />} />
+        <Route path="error-example" element={<V1SettingsErrorEx />} />
       </Route>
     </Route>
     <Route path="/playground/500" element={<V1GeneralError />} />
     <Route path="/playground/404" element={<V1NotFoundError />} />
     <Route path="/playground/503" element={<V1MaintenanceError />} />
     <Route path="/playground/401" element={<V1UnauthorisedError />} />
-    <Route path="/playground/home" element={<Home />} />
+    <Route path="/playground/coming-soon" element={<V1CommingSoon />} />
   </>
 )

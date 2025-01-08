@@ -190,7 +190,8 @@
     font-style: italic;
     font-display: swap;
   }
-  html {
+  html,
+  body {
     font-family: "Roboto", sans-serif;
   }
   body {

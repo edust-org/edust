@@ -3,7 +3,7 @@ import { ProtectedRoute } from "./protected-route"
 import { Roles } from "@/types"
 import { AppShell } from "@/organizations"
 import {
-  AccessControl,
+  CreateOrganization,
   Dashboard,
   Site,
   SiteBuilder,
@@ -13,6 +13,14 @@ import Loading from "@/components/loading"
 
 export default (
   <>
+    <Route
+      path="/organizations/create"
+      element={
+        <ProtectedRoute>
+          <CreateOrganization />
+        </ProtectedRoute>
+      }
+    />
     <Route
       path="/organizations"
       element={
@@ -30,31 +38,14 @@ export default (
           </Suspense>
         }
       />
-      {/* <Route
-        path="site"
-        element={
-          <Suspense fallback={<Loading.Spinner />}>
-            <Site />
-          </Suspense>
-        }
-      />
-      <Route path="access-control" element={<AccessControl />} />
-      <Route
-        path="settings"
-        element={
-          <ProtectedRoute roles={[Roles.OWNER]}>
-            <h1>Setting</h1>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="site/builder"
-        element={
-          <ProtectedRoute roles={[Roles.OWNER]}>
-            <SiteBuilder />
-          </ProtectedRoute>
-        }
-      /> */}
     </Route>
+    <Route
+      path="/organizations/site/builder"
+      element={
+        <ProtectedRoute roles={[Roles.OWNER]}>
+          <SiteBuilder />
+        </ProtectedRoute>
+      }
+    />
   </>
 )

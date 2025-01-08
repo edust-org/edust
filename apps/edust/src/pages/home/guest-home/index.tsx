@@ -1,10 +1,13 @@
-import { GlobalTopNotificationBar, Navbar } from "@/components"
+import { GlobalTopNotificationBar } from "@/components"
 import { Helmet } from "react-helmet-async"
-import { HelpGetStarted } from "./help-get-started"
-import { StartDesign } from "./start-design"
+import { Hero } from "./hero"
+import { Services } from "./services"
+import { Community } from "./community"
 import { Faq } from "./faq"
-import Hero from "./hero"
+import { StartDesign } from "./start-design"
+import { Newsletter } from "./newsletter"
 import { Footer } from "@/pages/components/footer"
+import { Navbar } from "./navbar"
 
 export const GuestHome = () => {
   return (
@@ -19,16 +22,15 @@ export const GuestHome = () => {
 
       <GlobalTopNotificationBar />
 
-      <div className="mb-8">
-        <Navbar.Guest />
-        <Hero />
-      </div>
+      <Navbar />
 
-      <main className="space-y-8 md:space-y-16 lg:space-y-32">
-        <HelpGetStarted />
-        <Faq />
-        <StartDesign />
-      </main>
+      <Hero />
+
+      <Services />
+      <Community />
+      <Faq />
+      <StartDesign />
+      <Newsletter />
       <Footer />
     </>
   )
