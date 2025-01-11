@@ -10,7 +10,6 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { toast } from "@/hooks/shadcn-ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { MailOpen } from "lucide-react"
 import React, { useState } from "react"
@@ -22,6 +21,8 @@ import { BarLoader } from "react-spinners"
 import { z } from "zod"
 import { SocialAuth } from "./social-auth"
 import { LogoEdust } from "@/components"
+import { Layout } from "./layout"
+import { toast } from "sonner"
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -61,10 +62,7 @@ export const Register: React.FC = () => {
       .unwrap()
       .then((res) => {
         if (res.status) {
-          toast({
-            variant: "success",
-            title: res?.message,
-          })
+          toast.success(res?.message)
 
           setConfirmAccount({
             ...confirmAccount,
@@ -75,10 +73,7 @@ export const Register: React.FC = () => {
       })
       .catch((error) => {
         if (error?.data?.status) {
-          toast({
-            variant: "destructive",
-            title: error?.data?.message,
-          })
+          toast.error(error?.data?.message)
         }
       })
   }
@@ -88,7 +83,7 @@ export const Register: React.FC = () => {
       <Helmet>
         <title>Sign Up for Edust - Start Your Journey</title>
       </Helmet>
-      <div className="flex h-screen items-center justify-center p-4">
+      <Layout>
         {confirmAccount.isConfirm && (
           <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
@@ -115,7 +110,7 @@ export const Register: React.FC = () => {
         )}
         {!confirmAccount.isConfirm && (
           <Form {...form}>
-            <div className="w-full rounded-sm p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="w-full rounded bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
               <div className="text-center">
                 <Link to={"/"}>
                   <LogoEdust className="mb-3 inline-block" width={250} />
@@ -206,7 +201,7 @@ export const Register: React.FC = () => {
             </div>
           </Form>
         )}
-      </div>
+      </Layout>
     </>
   )
 }

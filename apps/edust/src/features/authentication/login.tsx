@@ -25,6 +25,7 @@ import { SocialAuth } from "./social-auth"
 import { OrganizationRoles, Roles } from "@/types"
 import { toast } from "sonner"
 import { LogoEdust } from "@/components"
+import { Layout } from "./layout"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -72,6 +73,7 @@ export const Login: React.FC = () => {
 
           dispatch(
             setAuthentication({
+              ...authState,
               isAuthenticated: true,
               isLoading: false,
               user: data?.data,
@@ -117,9 +119,9 @@ export const Login: React.FC = () => {
           content="Sign in to Edist to access your account."
         />
       </Helmet>
-      <div className="flex h-screen items-center justify-center p-4">
+      <Layout>
         <Form {...form}>
-          <div className="w-full rounded-md p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full rounded bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="text-center">
               <Link to={"/"}>
                 <LogoEdust className="mb-3 inline-block" width={250} />
@@ -201,7 +203,7 @@ export const Login: React.FC = () => {
             </div>
           </div>
         </Form>
-      </div>
+      </Layout>
     </>
   )
 }

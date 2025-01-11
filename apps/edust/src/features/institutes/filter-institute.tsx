@@ -62,19 +62,21 @@ const FilterInstitute = ({ query, setQuery }) => {
 
   return (
     <div>
-      <Button
-        size={"icon"}
-        className="mb-4 w-full"
-        onClick={() => {
-          if (!isAuthenticated) {
-            return navigate("/auth/login")
-          }
+      {!isAuthenticated && (
+        <Button
+          size={"icon"}
+          className="mb-4 w-full"
+          onClick={() => {
+            if (!isAuthenticated) {
+              return navigate("/auth/login")
+            }
 
-          navigate("/dashboard/institutes/create")
-        }}
-      >
-        <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
-      </Button>
+            navigate("/dashboard/institutes/create")
+          }}
+        >
+          <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
+        </Button>
+      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField

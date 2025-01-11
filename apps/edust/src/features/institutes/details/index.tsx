@@ -54,7 +54,7 @@ export const InstituteDetails = () => {
         <meta property="og:description" content="Institute Details Page" />
       </Helmet>
       <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
-        <Navbar.Guest />
+        <Navbar />
       </header>
       {/*  */}
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">

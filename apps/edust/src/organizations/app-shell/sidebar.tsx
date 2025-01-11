@@ -55,8 +55,8 @@ export const Sidebar = ({
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? "invisible w-0" : "visible w-auto"}`}
             >
-              <span className="font-medium">Org Admin</span>
-              <span className="text-xs">Vite + ShadcnUI</span>
+              <span className="font-medium">OWNER</span>
+              {/* <span className="text-xs">Edust Org</span> */}
             </div>
           </div>
 

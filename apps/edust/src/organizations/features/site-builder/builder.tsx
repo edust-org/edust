@@ -16,7 +16,7 @@ export const Builder = () => {
     orgId,
     auth: { token },
   } = useAppSelector((state) => state.authentication)
-  
+  console.log({ orgId })
   const [saveGsData] = useEditSiteBuilderMutation()
 
   async function onEditor(editor: any) {

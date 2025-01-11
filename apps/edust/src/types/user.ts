@@ -5,15 +5,17 @@ import { Roles } from "./roles"
 export interface User {
   id: string
   name: string
-  username: null | string
+  username: string
   email: string
   password: string
   accountType: AccountType
-  accountDetails: null | object
+  accountDetails?: object
+  profilePic: string | null
+  profilePicDetails?: Record<string, unknown>
   isVerified: boolean
   isProfileVerified: boolean
   systemRole: Roles
-  organizationRoles: null | OrganizationRoles[]
+  organizationRoles: OrganizationRoles[]
   createdAt: Date
   updatedAt: Date
 }

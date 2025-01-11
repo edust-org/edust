@@ -1,14 +1,4 @@
-import {
-  Cloud,
-  Github,
-  LayoutDashboard,
-  LifeBuoy,
-  LogOut,
-  Plus,
-  School,
-  Settings,
-  User,
-} from "lucide-react"
+import { LayoutDashboard, LogOut, Plus, School } from "lucide-react"
 import {
   Avatar,
   AvatarFallback,
@@ -26,7 +16,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { signOut } from "@/app/features/authentication"
 import { Link, useNavigate } from "react-router"
-import { ThemeSwitch } from "../theme-switch"
 import { useTheme } from "@/hooks"
 import { Roles } from "@/types"
 import { toast } from "sonner"
@@ -48,12 +37,14 @@ export const NavbarRightMenus = () => {
 
   return (
     <div className="flex items-center">
-      <ThemeSwitch />
+      {/* <ThemeSwitch /> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="#" alt="user profile" />
+              {auth.user?.profilePic && (
+                <AvatarImage src={auth.user?.profilePic} alt="user profile" />
+              )}
               <AvatarFallback>SN</AvatarFallback>
             </Avatar>
           </Button>
@@ -71,21 +62,6 @@ export const NavbarRightMenus = () => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            {/* <DropdownMenuItem>
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem> */}
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </DropdownMenuItem>
             <Link to={"/dashboard"}>
               <DropdownMenuItem>
                 <LayoutDashboard className="mr-2 h-4 w-4" />
@@ -93,13 +69,12 @@ export const NavbarRightMenus = () => {
               </DropdownMenuItem>
             </Link>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
+
           <DropdownMenuGroup>
             {/* if organization available */}
-
             {auth?.user?.organizationRoles &&
               auth?.user?.organizationRoles?.map((role) => (
-                <Link to={'/organizations'} key={role.id}>
+                <Link to={"/organizations"} key={role.id}>
                   <DropdownMenuItem>
                     <School className="mr-2 h-4 w-4" />
                     <span
@@ -122,49 +97,7 @@ export const NavbarRightMenus = () => {
                 </DropdownMenuItem>
               </Link>
             )}
-
-            {/* <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                <UserPlus className="mr-2 h-4 w-4" />
-                <span>Invite users</span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuItem>
-                    <Mail className="mr-2 h-4 w-4" />
-                    <span>Email</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    <span>Message</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <PlusCircle className="mr-2 h-4 w-4" />
-                    <span>More...</span>
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-            <DropdownMenuItem>
-              <Plus className="mr-2 h-4 w-4" />
-              <span>New Team</span>
-              <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-            </DropdownMenuItem> */}
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Github className="mr-2 h-4 w-4" />
-            <span>GitHub</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <LifeBuoy className="mr-2 h-4 w-4" />
-            <span>Support</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem disabled>
-            <Cloud className="mr-2 h-4 w-4" />
-            <span>API</span>
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />

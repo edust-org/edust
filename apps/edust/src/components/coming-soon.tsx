@@ -25,7 +25,9 @@ export const ComingSoon = ({ className }: ComingSoonProps) => {
           This page has not been created yet. <br />
           Stay tuned though!
         </Typography>
-        <Button onClick={() => navigate(-1)}>Back</Button>
+        <Button onClick={() => navigate(-1)} size={"lg"}>
+          Back
+        </Button>
       </div>
     </div>
   )

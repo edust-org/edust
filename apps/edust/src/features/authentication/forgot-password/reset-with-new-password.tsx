@@ -16,11 +16,11 @@ import {
 import { useNavigate, useSearchParams } from "react-router"
 import { Helmet } from "react-helmet-async"
 import { useResetPasswordMutation } from "@/app/api/v0/auth"
-import { toast } from "@/hooks/shadcn-ui"
 import { BarLoader } from "react-spinners"
-import assets from "@/assets/images"
 import { KeySquare } from "lucide-react"
 import { Link } from "react-router"
+import { LogoEdust } from "@/components"
+import { toast } from "sonner"
 
 const FormSchema = z.object({
   newPassword: z.string().min(6, {
@@ -47,19 +47,13 @@ export const ResetWithNewPassword = () => {
       .unwrap()
       .then((res) => {
         if (res?.status) {
-          toast({
-            variant: "success",
-            title: res?.message,
-          })
-          navigate("/auth/sign-in")
+          toast.success(res?.message)
+          navigate("/auth/login")
         }
       })
       .catch((error) => {
         if (error?.data?.status) {
-          toast({
-            variant: "destructive",
-            title: error?.data?.message,
-          })
+          toast.error(error?.data?.message)
         }
       })
   }
@@ -67,13 +61,17 @@ export const ResetWithNewPassword = () => {
   return (
     <>
       <Helmet>
-        <title>Sign In to Edist - Access Your Account</title>
+        <title>Sign In to Edust - Access Your Account</title>
       </Helmet>
       <div className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
           <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
-              <img src={assets.logo} alt="" className="mx-auto" width={250} />
+              <div className="text-center">
+                <Link to={"/"}>
+                  <LogoEdust className="mb-3 inline-block" width={250} />
+                </Link>{" "}
+              </div>
               <div className="space-y-2">
                 <Typography variant="h3">Change Your Password</Typography>
                 <Typography>
@@ -97,7 +95,7 @@ export const ResetWithNewPassword = () => {
                 )}
               />
               <div className="flex items-center justify-end gap-4">
-                <Link to={"/auth/sign-in"}>
+                <Link to={"/auth/login"}>
                   <Button type="button" variant={"outline"}>
                     Cancel
                   </Button>

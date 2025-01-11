@@ -5,8 +5,7 @@ import { useGetInstitutesQuery } from "@/app/api/v0/public"
 import { Helmet } from "react-helmet-async"
 import FilterInstitute from "./filter-institute"
 import { InstitutesCardSkeleton } from "./institutes-card-skeleton"
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui"
+import {  useState } from "react"
 
 export const Institutes = () => {
   const [query, setQuery] = useState({})
@@ -26,7 +25,7 @@ export const Institutes = () => {
         <title>Institute | Welcome to here</title>
       </Helmet>
       <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
-        <Navbar.Guest />
+        <Navbar />
       </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>

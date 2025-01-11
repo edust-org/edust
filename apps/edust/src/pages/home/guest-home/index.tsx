@@ -1,4 +1,4 @@
-import { GlobalTopNotificationBar } from "@/components"
+import { GlobalTopNotificationBar, Navbar } from "@/components"
 import { Helmet } from "react-helmet-async"
 import { Hero } from "./hero"
 import { Services } from "./services"
@@ -7,7 +7,6 @@ import { Faq } from "./faq"
 import { StartDesign } from "./start-design"
 import { Newsletter } from "./newsletter"
 import { Footer } from "@/pages/components/footer"
-import { Navbar } from "./navbar"
 
 export const GuestHome = () => {
   return (

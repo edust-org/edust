@@ -35,7 +35,8 @@ export const authentication = createSlice({
         action.payload.user?.organizationRoles?.filter(
           (item) => item.role === Roles.OWNER,
         ) || []
-      state.orgId = isOwner.length > 0 ? isOwner[0].role : ""
+      console.log(isOwner)
+      state.orgId = isOwner.length > 0 ? isOwner[0].organization.id : ""
 
       state.auth = action.payload.auth
       state.isLoading = action.payload.isLoading

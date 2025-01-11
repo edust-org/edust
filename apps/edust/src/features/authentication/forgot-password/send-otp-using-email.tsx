@@ -18,9 +18,10 @@ import { Helmet } from "react-helmet-async"
 import { useForgotPasswordMutation } from "@/app/api/v0/auth"
 import { toast } from "@/hooks/shadcn-ui"
 import { BarLoader } from "react-spinners"
-import assets from "@/assets/images"
 import { CircleHelp } from "lucide-react"
 import { Link } from "react-router"
+import { Layout } from "../layout"
+import { LogoEdust } from "@/components"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -66,11 +67,15 @@ export const SendOtpUsingEmail = () => {
       <Helmet>
         <title>Forgot Password | Edust</title>
       </Helmet>
-      <div className="flex h-screen items-center justify-center p-4">
+      <Layout className="flex h-screen items-center justify-center p-4">
         <Form {...form}>
-          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full rounded bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
-              <img src={assets.logo} alt="" className="mx-auto" width={250} />
+              <div className="text-center">
+                <Link to={"/"}>
+                  <LogoEdust className="mb-3 inline-block" width={250} />
+                </Link>{" "}
+              </div>{" "}
               <div className="space-y-2">
                 <Typography variant="h3">Forgot Password?</Typography>
                 <CircleHelp className="mx-auto h-28 w-28" />
@@ -95,7 +100,7 @@ export const SendOtpUsingEmail = () => {
                 )}
               />
               <div className="flex items-center justify-end gap-4">
-                <Link to={"/auth/sign-in"}>
+                <Link to={"/auth/login"}>
                   <Button type="button" variant={"outline"}>
                     Cancel
                   </Button>
@@ -107,7 +112,7 @@ export const SendOtpUsingEmail = () => {
             </form>
           </div>
         </Form>
-      </div>
+      </Layout>
     </>
   )
 }
