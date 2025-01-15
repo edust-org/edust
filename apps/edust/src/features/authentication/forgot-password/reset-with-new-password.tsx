@@ -30,6 +30,7 @@ const FormSchema = z.object({
 export const ResetWithNewPassword = () => {
   const [searchParams] = useSearchParams()
   const email = searchParams.get("email")
+  const otp = searchParams.get("otp")
   const [resetPassword, { isLoading }] = useResetPasswordMutation()
 
   const navigate = useNavigate()
@@ -42,8 +43,7 @@ export const ResetWithNewPassword = () => {
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({ newPassword: data.newPassword, email })
-    resetPassword({ newPassword: data.newPassword, email })
+    resetPassword({ newPassword: data.newPassword, email, otp })
       .unwrap()
       .then((res) => {
         if (res?.status) {

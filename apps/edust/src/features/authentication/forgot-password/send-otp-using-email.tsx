@@ -16,12 +16,12 @@ import {
 import { useSearchParams } from "react-router"
 import { Helmet } from "react-helmet-async"
 import { useForgotPasswordMutation } from "@/app/api/v0/auth"
-import { toast } from "@/hooks/shadcn-ui"
 import { BarLoader } from "react-spinners"
 import { CircleHelp } from "lucide-react"
 import { Link } from "react-router"
 import { Layout } from "../layout"
 import { LogoEdust } from "@/components"
+import { toast } from "sonner"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -45,19 +45,13 @@ export const SendOtpUsingEmail = () => {
       .unwrap()
       .then((res) => {
         if (res?.status) {
-          toast({
-            variant: "success",
-            title: res?.message,
-          })
+          toast.success(res?.message)
           setSearchParams(`step=verify-otp&email=${data.email}`)
         }
       })
       .catch((error) => {
         if (error?.data?.status) {
-          toast({
-            variant: "destructive",
-            title: error?.data?.message,
-          })
+          toast.error(error?.data?.message)
         }
       })
   }

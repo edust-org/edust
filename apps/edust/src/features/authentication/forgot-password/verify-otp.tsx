@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@/components/ui"
 import { BarLoader } from "react-spinners"
-import assets from "@/assets/images"
 import { MailOpen } from "lucide-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -19,10 +18,11 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp"
-import { toast } from "@/hooks/shadcn-ui"
 import { Helmet } from "react-helmet-async"
 import { useSearchParams } from "react-router"
 import { useCheckOtpMutation } from "@/app/api/v0/auth"
+import { toast } from "sonner"
+import { LogoEdust } from "@/components"
 
 const FormSchema = z.object({
   otp: z.string().min(4, {
@@ -42,24 +42,18 @@ export const VerifyOtp = () => {
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    checkOtp({ otp: parseInt(data?.otp), email })
+    checkOtp({ otp: data.otp, email })
       .unwrap()
       .then((res) => {
         if (res?.status) {
-          toast({
-            variant: "success",
-            title: res?.message,
-          })
-          setSearchParams(`step=reset-password&email=${email}`)
+          toast.success(res?.message)
+          setSearchParams(`step=reset-password&email=${email}&otp=${data.otp}`)
         }
       })
       .catch((error) => {
         // error?.data?.status
         if (error) {
-          toast({
-            variant: "destructive",
-            title: error?.data?.message,
-          })
+          toast.error(error?.data?.message)
         }
       })
   }
@@ -73,7 +67,7 @@ export const VerifyOtp = () => {
         <Form {...form}>
           <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
-              <img src={assets.logo} alt="" className="mx-auto" width={250} />
+              <LogoEdust width={250} />
               <div className="space-y-2">
                 <Typography variant="h3">Verify your email</Typography>
                 <Typography>

@@ -11,7 +11,7 @@ export default (
     <Route path="/auth">
       <Route path="register" element={<Authentication.Register />} />
       <Route
-        path="verify/:token"
+        path="verify-account/:token"
         element={<Authentication.VerifyEmailByToken />}
       />
       <Route path="login" element={<Authentication.Login />} />

@@ -75,7 +75,7 @@ export const Site = () => {
       <Layout.Body>
         <section className="flex gap-4">
           {isLoading ? (
-            <Card className="max-w-xs border">
+            <Card className="w-full max-w-xs border">
               <CardHeader>
                 <CardTitle>
                   <Skeleton className="h-6" />

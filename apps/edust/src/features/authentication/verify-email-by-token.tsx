@@ -1,13 +1,12 @@
 import { useVerifyEmailByTokenMutation } from "@/app/api/v0/auth"
 import assets from "@/assets/images"
 import { Typography } from "@/components/ui"
-import { useToast } from "@/hooks/shadcn-ui"
 import React, { useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { BeatLoader } from "react-spinners"
+import { toast } from "sonner"
 
 export const VerifyEmailByToken: React.FC = () => {
-  const { toast } = useToast()
   const params = useParams()
   const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation()
 
@@ -20,21 +19,14 @@ export const VerifyEmailByToken: React.FC = () => {
         .then((res) => {
           console.log(res)
           if (res?.status) {
-            toast({
-              variant: "success",
-              title: res?.message,
-            })
+            toast.success(res?.message)
 
-            navigate("/auth/sign-in")
+            navigate("/auth/login")
           }
         })
         .catch((error) => {
           if (error?.data?.error) {
-            toast({
-              variant: "destructive",
-              title: "Uh oh! Something went wrong.",
-              description: error?.data?.error,
-            })
+            toast.error(error?.data?.error)
           }
         })
     }

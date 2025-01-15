@@ -12,7 +12,10 @@ import {
   Input,
 } from "@/components/ui"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useCreateOrganizationMutation } from "@/app/api/v0/organizations"
+import {
+  useCreateOrganizationMutation,
+  useGetOrgListsQuery,
+} from "@/app/api/v0/organizations"
 import { useLocation, useNavigate } from "react-router"
 import { BarLoader } from "react-spinners"
 import { useEffect } from "react"
@@ -42,6 +45,7 @@ const FormSchema = z.object({
 })
 
 export const CreateOrganizationForm = () => {
+  const { refetch } = useGetOrgListsQuery()
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state) => state.authentication)
   const navigate = useNavigate()
@@ -99,8 +103,9 @@ export const CreateOrganizationForm = () => {
             )
           }
         }
-
-        navigate(redirectPath)
+        refetch()
+          .then(() => navigate(redirectPath))
+          .catch(() => navigate(redirectPath))
       })
       .catch((error) => {
         if (error?.data?.status) {

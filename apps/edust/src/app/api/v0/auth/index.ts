@@ -24,7 +24,7 @@ export const authApi = createApi({
     }),
     verifyEmailByToken: build.mutation({
       query: (token) => ({
-        url: `/verify/${token}`,
+        url: `/verify-account/${token}`,
         method: "POST",
       }),
     }),
