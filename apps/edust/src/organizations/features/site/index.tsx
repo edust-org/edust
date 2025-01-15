@@ -38,7 +38,10 @@ export const Site = () => {
       toast.success(response.message)
       refetch()
 
-      window.open(`${window.location.origin}/site/builder`, "_blank")
+      window.open(
+        `${window.location.origin}/organizations/site/builder`,
+        "_blank",
+      )
     } catch (error) {
       console.error(error)
     }

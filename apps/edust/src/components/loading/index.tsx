@@ -1,8 +1,4 @@
-import { lazy } from "react"
-
-const Spinner = lazy(() =>
-  import("./spinner").then((module) => ({ default: module.Spinner })),
-)
+import { Spinner } from "./spinner"
 
 const Loading = { Spinner }
 

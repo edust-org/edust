@@ -4,7 +4,7 @@ import { Link } from "react-router"
 export const Playground = () => {
   return (
     <div className="space-y-8">
-      <Navbar.Private />
+      <Navbar />
       <div className="container">
         <Typography variant="list">
           {links.map((link, index) => (

@@ -16,7 +16,7 @@ export const Builder = () => {
     orgId,
     auth: { token },
   } = useAppSelector((state) => state.authentication)
-  console.log({ orgId })
+
   const [saveGsData] = useEditSiteBuilderMutation()
 
   async function onEditor(editor: any) {
@@ -87,7 +87,9 @@ export const Builder = () => {
           }/api/v0/organizations/${orgId}/site-builder`,
 
           onLoad: (result) => {
-            return editorRef?.current?.loadProjectData(result?.data?.assets)
+            return editorRef?.current?.loadProjectData(
+              JSON.parse(result?.data?.assets || "{}"),
+            )
           },
           headers: {
             Authorization: `Bearer ${token}`,

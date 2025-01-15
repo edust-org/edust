@@ -1,11 +1,5 @@
 import { GlobalTopNotificationBar, Navbar } from "@/components"
-import { lazy } from "react"
-
-const OrgLists = lazy(() =>
-  import("./org-lists").then((module) => ({
-    default: module.OrgLists,
-  })),
-)
+import { OrgLists } from "./org-lists"
 
 export const PrivateHome = () => {
   return (

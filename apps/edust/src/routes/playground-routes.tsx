@@ -16,21 +16,12 @@ import V1NotFoundError from "@/pages/playground/dashboard-v1/pages/errors/not-fo
 import V1MaintenanceError from "@/pages/playground/dashboard-v1/pages/errors/maintenance-error"
 import V1UnauthorisedError from "@/pages/playground/dashboard-v1/pages/errors/unauthorised-error"
 
-import Loading from "@/components/loading"
 import { Playground } from "@/pages"
-import { Suspense } from "react"
 import { Route } from "react-router"
 
 export default (
   <>
-    <Route
-      path="/playground"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <Playground />
-        </Suspense>
-      }
-    ></Route>
+    <Route path="/playground" element={<Playground />}></Route>
 
     <Route path="/playground/dashboard" element={<PlayAppShell />}>
       <Route index element={<V1Dashboard />} />
