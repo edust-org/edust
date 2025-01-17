@@ -18,7 +18,7 @@ const themeSlice = createSlice({
   reducers: {
     setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload
-      updateThemeOnDocument(action.payload)
+      updateThemeOnDocument(state.theme)
     },
   },
 })

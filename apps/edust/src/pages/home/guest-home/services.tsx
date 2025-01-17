@@ -30,16 +30,16 @@ const serviceList: ServiceProps[] = [
     pro: 0,
   },
   {
-    title: "Email Notifications and Updates",
+    title: "Organization Landing Pages",
     description:
-      "Stay connected with automated email notifications for updates, collaborations, and events.",
-    pro: 1,
+      "Design and customize a dedicated landing page for your organization to showcase your vision, programs, and updates.",
+    pro: 0,
   },
   {
     title: "SEO Optimization",
     description:
       "Boost your organization’s visibility with built-in SEO tools for optimized search rankings.",
-    pro: 1,
+    pro: 0,
   },
 ]
 
@@ -51,11 +51,11 @@ export const Services = () => {
       </Typography>
 
       <Typography className="mb-4 text-center text-3xl font-bold md:text-4xl">
-        Grow Your Business
+        Grow Your Organization
       </Typography>
       <Typography className="mx-auto mb-8 text-center text-xl text-muted-foreground md:w-1/2">
-        From marketing and sales to operations and strategy, we have the
-        expertise to help you achieve your goals.
+        Empower your organization with tools to create a unique and impactful
+        website tailored to your educational goals.
       </Typography>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
 

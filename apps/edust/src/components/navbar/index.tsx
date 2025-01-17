@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   Button,
   NavigationMenu,
@@ -35,7 +34,7 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <NavigationMenu className={cn("mx-auto !block max-w-full")}>
-        <NavigationMenuList className="container flex h-14 w-screen justify-between px-4">
+        <NavigationMenuList className="container flex h-14 justify-between px-4">
           <NavigationMenuItem className="flex font-bold">
             <Link
               rel="noreferrer noopener"

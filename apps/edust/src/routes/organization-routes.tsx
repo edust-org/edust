@@ -43,6 +43,7 @@ export default (
       path="/organizations/site/builder"
       element={
         <ProtectedRoute roles={[Roles.OWNER]}>
+          <Suspense fallback={<Loading.Spinner />}></Suspense>
           <SiteBuilder />
         </ProtectedRoute>
       }

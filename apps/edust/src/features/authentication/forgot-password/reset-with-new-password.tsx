@@ -63,9 +63,9 @@ export const ResetWithNewPassword = () => {
       <Helmet>
         <title>Sign In to Edust - Access Your Account</title>
       </Helmet>
-      <div className="flex h-screen items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center bg-muted p-4">
         <Form {...form}>
-          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full bg-background p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
               <div className="text-center">
                 <Link to={"/"}>

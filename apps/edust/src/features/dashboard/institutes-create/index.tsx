@@ -1,4 +1,3 @@
-import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
 import {
   Button,
   Calendar,
@@ -24,7 +23,6 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-  Typography,
 } from "@/components/ui"
 import { Status } from "@/types"
 import { cn } from "@/utils"
@@ -37,6 +35,7 @@ import { z } from "zod"
 import imageCompression from "browser-image-compression"
 import Editor from "./editor"
 import { useBoolean } from "usehooks-ts"
+import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
 import { usePostInstituteMutation } from "@/app/api/v0/institutes"
 import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { toast } from "sonner"

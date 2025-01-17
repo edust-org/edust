@@ -63,11 +63,11 @@ export const VerifyOtp = () => {
       <Helmet>
         <title>Forgot Password | Edust</title>
       </Helmet>
-      <div className="flex h-screen items-center justify-center p-4">
+      <div className="flex h-screen items-center justify-center bg-muted p-4">
         <Form {...form}>
-          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full bg-background p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
-              <LogoEdust width={250} />
+              <LogoEdust width={250} className="mb-3 inline-block" />
               <div className="space-y-2">
                 <Typography variant="h3">Verify your email</Typography>
                 <Typography>

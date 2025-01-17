@@ -31,8 +31,8 @@ const footerData = [
     links: [
       {
         title: "Feedback Form",
-        href: "/feedback",
-        isExternal: false,
+        href: "https://docs.google.com/forms/d/e/1FAIpQLScIxBL2Zm1MVpmRTNoLUIwD-vcW9rv1SG73zx3Ggq48y1RRZQ/viewform?usp=header",
+        isExternal: true,
       },
       {
         title: "Help Center",
@@ -130,14 +130,33 @@ export const Footer = () => {
             {item.links.map((link, index) => (
               <div key={index}>
                 {link.isExternal ? (
-                  <a
-                    rel="noreferrer noopener"
-                    href={link.href}
-                    className="opacity-60 hover:opacity-100"
-                    target="_blank"
-                  >
-                    {link.title}
-                  </a>
+                  link.title == "Feedback Form" ? (
+                    <div className="relative inline-block">
+                      <a
+                        rel="noreferrer noopener"
+                        href={link.href}
+                        className="opacity-60 hover:opacity-100"
+                        target="_blank"
+                      >
+                        {link.title}
+                      </a>
+                      <div className="absolute -right-4 top-0">
+                        <span className="relative flex h-3 w-3">
+                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
+                          <span className="relative inline-flex h-3 w-3 rounded-full bg-primary"></span>
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <a
+                      rel="noreferrer noopener"
+                      href={link.href}
+                      className="opacity-60 hover:opacity-100"
+                      target="_blank"
+                    >
+                      {link.title}
+                    </a>
+                  )
                 ) : (
                   <Link to={link.href} className="opacity-60 hover:opacity-100">
                     {link.title}

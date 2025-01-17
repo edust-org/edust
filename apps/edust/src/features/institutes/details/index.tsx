@@ -21,10 +21,6 @@ import { useParams } from "react-router"
 import { Link } from "react-router" // Add this line to import Link
 import FilterInstitute from "../filter-institute"
 import { format } from "date-fns"
-
-import "katex/dist/katex.min.css"
-
-import "reactjs-tiptap-editor/style.css"
 import { Terminal } from "lucide-react"
 
 export const InstituteDetails = () => {

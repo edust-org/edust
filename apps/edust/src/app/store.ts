@@ -5,14 +5,18 @@ import { persistReducer, persistStore } from "redux-persist"
 import counterReducer from "./features/counter/counter-slice"
 import { createLogger } from "redux-logger"
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0"
-import {  themeReducers } from "./features"
-import authentication from './features/authentication'
+import { themeReducers } from "./features"
+import authentication from "./features/authentication"
 
-const logger = createLogger({
-  // optional configuration
-  collapsed: true,
-  diff: true,
-})
+// Create logger only if in development environment
+const logger =
+  process.env.NODE_ENV === "development"
+    ? createLogger({
+        // optional configuration
+        collapsed: true,
+        diff: true,
+      })
+    : undefined
 
 // Configuration for redux-persist
 const persistConfig = {
@@ -35,11 +39,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
+    const middleware = getDefaultMiddleware({
       serializableCheck: false,
     })
-      .concat(logger)
-      .concat(rootMiddlewareApiV0)
+    if (logger) {
+      middleware.push(logger)
+    }
+    return middleware.concat(rootMiddlewareApiV0)
   },
 })
 

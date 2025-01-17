@@ -85,7 +85,7 @@ export const Register: React.FC = () => {
       </Helmet>
       <Layout>
         {confirmAccount.isConfirm && (
-          <div className="w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="w-full bg-background p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="space-y-4 text-center">
               <div className="text-center">
                 <Link to={"/"}>
@@ -110,7 +110,7 @@ export const Register: React.FC = () => {
         )}
         {!confirmAccount.isConfirm && (
           <Form {...form}>
-            <div className="w-full rounded bg-white p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+            <div className="w-full rounded bg-background p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
               <div className="text-center">
                 <Link to={"/"}>
                   <LogoEdust className="mb-3 inline-block" width={250} />

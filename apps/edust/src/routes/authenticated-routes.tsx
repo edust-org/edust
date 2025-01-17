@@ -14,11 +14,11 @@ export default (
     >
       <Route path="" element={<Dashboard.DashboardMain />}></Route>
       <Route path="institutes" element={<Dashboard.InstitutesLists />}></Route>
+      <Route path="institutes/lists" element={<Dashboard.InstitutesLists />} />
       <Route
         path="institutes/create"
         element={<Dashboard.InstitutesCreate />}
       />
-      <Route path="institutes/lists" element={<Dashboard.InstitutesLists />} />
     </Route>
   </>
 )

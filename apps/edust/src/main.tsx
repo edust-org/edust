@@ -1,5 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+
+import "katex/dist/katex.min.css"
+import "reactjs-tiptap-editor/style.css"
 import "./index.css"
 
 import { Provider } from "react-redux"
