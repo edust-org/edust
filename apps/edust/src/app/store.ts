@@ -7,6 +7,7 @@ import { createLogger } from "redux-logger"
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0"
 import { themeReducers } from "./features"
 import authentication from "./features/authentication"
+import { rootMiddleware_OthersApi, rootReducer_OthersApi } from "./api/_others"
 
 // Create logger only if in development environment
 const logger =
@@ -27,6 +28,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   ...rootReducerApiV0,
+  ...rootReducer_OthersApi,
   counter: counterReducer,
   authentication,
   theme: themeReducers,
@@ -45,7 +47,10 @@ export const store = configureStore({
     if (logger) {
       middleware.push(logger)
     }
-    return middleware.concat(rootMiddlewareApiV0)
+    return middleware.concat([
+      ...rootMiddlewareApiV0,
+      ...rootMiddleware_OthersApi,
+    ])
   },
 })
 

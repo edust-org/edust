@@ -7,21 +7,20 @@ import {
   CardContent,
   CardFooter,
   CardTitle,
+  Skeleton,
   Typography,
 } from "@/components/ui"
 import { Link } from "react-router"
 import { Phone, Mail, MapPin } from "lucide-react"
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 import { format } from "date-fns"
-import axios from "axios"
+import { useGetFlagsByCountryQuery } from "@/app/api/_others/restcountries"
 
 type InstitutesCardProps = {
   item: any
 }
 
 export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
-  const [flags, setFlags] = useState({ png: "", alt: "" })
-
   const {
     id,
     instituteCategory,
@@ -36,6 +35,9 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     country,
   } = item
 
+  const { data: flag, isLoading: isFlagLoading } =
+    useGetFlagsByCountryQuery(country)
+
   const fallbackName = (name: string) => {
     const arrName = name.split(" ").filter(Boolean)
 
@@ -43,18 +45,6 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     const lastChar = arrName.length > 1 ? arrName[1][0] : ""
     return `${firstChar}${lastChar}`.toUpperCase()
   }
-
-  useEffect(() => {
-    const getCountry = async () => {
-      const data = await axios.get(
-        `https://restcountries.com/v3.1/name/${country}?fields=flags`,
-      )
-      // console.log(data.data[0]?.flags);
-      setFlags(data.data[0]?.flags)
-    }
-
-    getCountry()
-  }, [])
 
   return (
     <>
@@ -125,7 +115,11 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
             </div>
           </div>
 
-          <img className="w-8 rounded-sm" src={flags?.png} alt={flags?.alt} />
+          {isFlagLoading ? (
+            <Skeleton className="h-6 w-9 rounded" />
+          ) : (
+            <img className="w-8 rounded-sm" src={flag?.png} alt={flag?.alt} />
+          )}
         </CardFooter>
       </Card>
     </>

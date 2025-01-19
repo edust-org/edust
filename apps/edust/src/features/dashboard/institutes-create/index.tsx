@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Status } from "@/types"
 import {
   Button,
-  Calendar,
   Card,
   CardContent,
   Command,
@@ -28,11 +27,10 @@ import {
 } from "@/components/ui"
 
 import { cn } from "@/utils"
-import { CalendarIcon, Check, ChevronsUpDown, ImageUp } from "lucide-react"
+import { Check, ChevronsUpDown, ImageUp } from "lucide-react"
 import { usePostInstituteMutation } from "@/app/api/v0/institutes"
 import { BarLoader } from "react-spinners"
 import { lazy, Suspense, useEffect, useState } from "react"
-import { format } from "date-fns"
 
 import imageCompression from "browser-image-compression"
 
@@ -41,7 +39,8 @@ import { DatePicker } from "@/components/ui/manual/date-picker"
 import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { toast } from "sonner"
 
-import { CategoriesField } from "./components/categories-field"
+import { CategoriesField } from "./components/categories.field"
+import { CountryField } from "./components/country.field"
 
 const Editor = lazy(() => import("./editor"))
 
@@ -115,7 +114,7 @@ export const InstitutesCreate = () => {
       contactEmail: "",
       website: "",
       principalName: "",
-      country: "bangladesh",
+      country: "",
       stateOrDivision: "",
       countyOrDistrict: "",
       cityOrTown: "",
@@ -131,7 +130,6 @@ export const InstitutesCreate = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const languages = [{ label: "Bengali", value: "bengali" }]
 
-  const countries = [{ label: "Bangladesh", value: "bangladesh" }]
   const stateOrDivision = [
     { label: "Dhaka", value: "dhaka" },
     { label: "Chittagong", value: "chittagong" },
@@ -638,71 +636,7 @@ export const InstitutesCreate = () => {
 
               <div className="grid gap-6 md:grid-cols-2">
                 {/* country */}
-                <FormField
-                  control={form.control}
-                  name="country"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>
-                        country <span className="text-destructive">*</span>
-                      </FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              role="combobox"
-                              className={cn(
-                                "justify-between",
-                                !field.value && "text-muted-foreground",
-                              )}
-                            >
-                              {field.value
-                                ? countries.find(
-                                    (country) => country.value === field.value,
-                                  )?.label
-                                : "Select country"}
-                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="p-0">
-                          <Command>
-                            <CommandInput placeholder="Search country..." />
-                            <CommandList>
-                              <CommandEmpty>No country found.</CommandEmpty>
-                              <CommandGroup>
-                                {countries.map((country) => (
-                                  <CommandItem
-                                    value={country.label}
-                                    key={country.value}
-                                    onSelect={() => {
-                                      form.setValue("country", country.value)
-                                    }}
-                                  >
-                                    {country.label}
-                                    <Check
-                                      className={cn(
-                                        "ml-auto",
-                                        country.value === field.value
-                                          ? "opacity-100"
-                                          : "opacity-0",
-                                      )}
-                                    />
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      <FormDescription>
-                        Select the country where the institute is located.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <CountryField form={form} />
 
                 {/* stateOrDivision */}
                 <FormField
