@@ -15,6 +15,11 @@ const footerData = [
         isExternal: false,
       },
       {
+        title: "Contact Us",
+        href: "/contact-us",
+        isExternal: false,
+      },
+      {
         title: "Institutes",
         href: "/institutes",
         isExternal: false,

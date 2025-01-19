@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/app/hooks"
 import React, { useCallback, useState } from "react"
 
 import RcTiptapEditor, {
@@ -176,7 +177,7 @@ const extensions = [
   Twitter,
 ]
 
-const DEFAULT = `<h1 dir="auto" style="text-align: center">Welcome to Edust!</h1><p dir="auto" style="text-align: center">Edust is a web application designed to enhance educational collaboration and interaction between students, teachers, and educational institutions.</p><p dir="auto"></p><p dir="auto"><div style="text-align: center;" class="image"><img height="auto" style="" src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1728625005/edust-cover_l3xkow.svg" flipx="false" flipy="false" width="567" align="center" inline="false"></div></p><div data-type="horizontalRule"><hr></div><h2 dir="auto">Links</h2><p dir="auto">👉<a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://github.com/edust-org/edust">Repository</a></p><p dir="auto">👉<a target="_blank" rel="noopener noreferrer nofollow" class="link" href="https://github.com/edust-org/edust/wiki/Features#list-of-contents-features">Features</a></p>`
+const DEFAULT = ``
 
 function debounce(func: any, wait: number) {
   let timeout: NodeJS.Timeout
@@ -191,7 +192,7 @@ function Editor({ setContentHtml }: { setContentHtml: any }) {
   const [content, setContent] = useState(DEFAULT)
   const refEditor = React.useRef<any>(null)
 
-  const [theme, setTheme] = useState("light")
+  const theme = useAppSelector((state) => state.theme.theme)
   const [disable, setDisable] = useState(false)
 
   const onValueChange = useCallback(
@@ -252,7 +253,7 @@ function Editor({ setContentHtml }: { setContentHtml: any }) {
           content={DEFAULT}
           onChangeContent={onValueChange}
           extensions={extensions}
-          dark={theme === "dark"}
+          dark={theme == "dark"}
           disabled={disable}
         />
 

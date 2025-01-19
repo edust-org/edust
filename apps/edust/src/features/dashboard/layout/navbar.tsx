@@ -1,3 +1,4 @@
+import { ThemeSwitch } from "@/components"
 import { SheetMenu } from "./sheet-menu"
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 
@@ -14,6 +15,7 @@ export function Navbar({ title }: NavbarProps) {
           <h1 className="font-bold">{title}</h1>
         </div>
         <div className="flex flex-1 items-center justify-end">
+          <ThemeSwitch />
           <NavbarRightMenus />
         </div>
       </div>

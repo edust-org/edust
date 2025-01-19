@@ -47,8 +47,8 @@ export const publicApi = createApi({
       },
     }),
     getInstitutesCategories: build.query({
-      query: () => {
-        return `/institutes/categories`
+      query: (filters) => {
+        return `/institutes/categories${createQueryString(filters)}`
       },
     }),
   }),

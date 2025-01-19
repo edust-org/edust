@@ -33,8 +33,8 @@ const FilterInstitute = ({ query, setQuery }) => {
 
   const navigate = useNavigate()
 
-  const { data } = useGetInstitutesCategoriesQuery({})
-  const categories = data?.data?.items || []
+  const { data } = useGetInstitutesCategoriesQuery({ limit: 500 })
+  const categoriesData = data?.data?.items || []
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -59,6 +59,29 @@ const FilterInstitute = ({ query, setQuery }) => {
       })
     }
   }
+
+  const grouped = categoriesData.reduce((acc, item) => {
+    // Get the first letter of the name to group by
+    const firstChar = item.name.charAt(0).toLowerCase()
+
+    // Check if the group already exists, if not, create it
+    if (!acc[firstChar]) {
+      acc[firstChar] = { recentChar: firstChar, categories: [] }
+    }
+
+    // Push the item into the corresponding group
+    acc[firstChar].categories.push({
+      id: item.id,
+      name: item.name,
+    })
+
+    return acc
+  }, {})
+
+  const categories = Object.values(grouped).map((group) => ({
+    [group.recentChar]: group.recentChar,
+    categories: group.categories,
+  }))
 
   return (
     <div>
@@ -106,17 +129,27 @@ const FilterInstitute = ({ query, setQuery }) => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>A</SelectLabel>
-                      {categories?.map(({ id, name, description }: any) => (
-                        <SelectItem
-                          key={id}
-                          title={description}
-                          value={id}
-                          className="capitalize"
-                        >
-                          {name}
-                        </SelectItem>
-                      ))}
+                      {categories.map((item) => {
+                        const { categories, ...alpha } = item
+                        const key = Object.entries(alpha)[0][0]
+                        return (
+                          <>
+                            <SelectLabel>{key.toUpperCase()}</SelectLabel>
+                            {categories?.map(
+                              ({ id, name, description }: any) => (
+                                <SelectItem
+                                  key={id}
+                                  title={description}
+                                  value={id}
+                                  className="capitalize"
+                                >
+                                  {name}
+                                </SelectItem>
+                              ),
+                            )}
+                          </>
+                        )
+                      })}
                     </SelectGroup>
                   </SelectContent>
                 </Select>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigation } from 'react-router-dom';
+import { useNavigation } from 'react-router';
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';

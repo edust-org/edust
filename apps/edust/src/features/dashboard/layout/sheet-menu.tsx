@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import { MenuIcon, PanelsTopLeft } from "lucide-react"
+import { MenuIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Menu } from "./menu"
@@ -8,8 +8,8 @@ import {
   SheetHeader,
   SheetContent,
   SheetTrigger,
-  SheetTitle,
 } from "@/components/ui/sheet"
+import { LogoEdust } from "@/components"
 
 export function SheetMenu() {
   return (
@@ -26,9 +26,8 @@ export function SheetMenu() {
             variant="link"
             asChild
           >
-            <Link to="/dashboard" className="flex items-center gap-2">
-              <PanelsTopLeft className="mr-1 h-6 w-6" />
-              <SheetTitle className="text-lg font-bold">Brand</SheetTitle>
+            <Link to="/" className="flex items-center gap-2">
+              <LogoEdust width={100} />
             </Link>
           </Button>
         </SheetHeader>

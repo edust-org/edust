@@ -1,6 +1,12 @@
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Status } from "@/types"
 import {
   Button,
   Calendar,
+  Card,
+  CardContent,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -19,27 +25,25 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
 } from "@/components/ui"
-import { Status } from "@/types"
+
 import { cn } from "@/utils"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
 import { CalendarIcon, Check, ChevronsUpDown, ImageUp } from "lucide-react"
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import imageCompression from "browser-image-compression"
-import Editor from "./editor"
-import { useBoolean } from "usehooks-ts"
-import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
 import { usePostInstituteMutation } from "@/app/api/v0/institutes"
+import { BarLoader } from "react-spinners"
+import { lazy, Suspense, useEffect, useState } from "react"
+import { format } from "date-fns"
+
+import imageCompression from "browser-image-compression"
+
+import Loading from "@/components/loading"
+import { DatePicker } from "@/components/ui/manual/date-picker"
 import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { toast } from "sonner"
-import { BarLoader } from "react-spinners"
+
+import { CategoriesField } from "./components/categories-field"
+
+const Editor = lazy(() => import("./editor"))
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
 const ACCEPTED_IMAGE_MIME_TYPES = [
@@ -49,17 +53,15 @@ const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/webp",
 ]
 const FormSchema = z.object({
-  institute_category_id: z
+  instituteCategoryId: z
     .string({
       required_error: "Please select a category.",
     })
     .min(1, "category is required"),
   name: z.string().min(1, "Name is required"),
   slug: z.string().min(1, "Slug is required"),
-
-  code_type: z.string().trim().min(1, { message: "code_type required" }),
+  codeType: z.string().trim().min(1, { message: "codeType required" }),
   code: z.string().min(1, "code is required"),
-
   photo: z
     .any()
     .refine((file) => !!file, `Photo is required`)
@@ -72,52 +74,65 @@ const FormSchema = z.object({
     }, "Only .jpg, .jpeg, .png, and .webp formats are supported."),
 
   language: z.string().trim().min(1, { message: "required" }),
-  founded_date: z.preprocess(
+  foundedDate: z.preprocess(
     (arg) => (typeof arg === "string" ? new Date(arg) : arg),
     z.date(),
   ),
 
-  phone_number: z.string().trim().min(1, { message: "required" }),
-  contact_email: z
+  phoneNumber: z.string().trim().min(1, { message: "required" }),
+  contactEmail: z
     .string()
     .trim()
     .min(1, { message: "required" })
     .email({ message: "Invalid email format" }),
   website: z.string().trim(),
-  principal_name: z.string().trim().min(1, { message: "required" }),
+  principalName: z.string().trim().min(1, { message: "required" }),
 
   country: z.string().trim().min(1, { message: "required" }),
-  state_or_division: z.string().trim().min(1, { message: "required" }),
-  county_or_district: z.string().trim().min(1, { message: "required" }),
-  city_or_town: z.string().trim().min(1, { message: "required" }),
-  street_or_house_number: z.string().trim().min(1, { message: "required" }),
-  postal_code: z.string().trim().min(1, { message: "required" }),
-  latitude: z.string().min(1, { message: "required" }),
-  longitude: z.string().min(1, { message: "required" }),
-
+  stateOrDivision: z.string().trim().min(1, { message: "required" }),
+  countyOrDistrict: z.string().trim().min(1, { message: "required" }),
+  cityOrTown: z.string().trim().min(1, { message: "required" }),
+  streetOrHouseNumber: z.string().trim().min(1, { message: "required" }),
+  postalCode: z.string().trim().min(1, { message: "required" }),
+  latitude: z.coerce.number().min(-90).max(90),
+  longitude: z.coerce.number().min(-180).max(180),
   overview: z.string().trim(),
 })
 
 export const InstitutesCreate = () => {
-  const { data: categoriesData } = useGetInstitutesCategoriesQuery({})
-  const [postInstitute, { isLoading }] = usePostInstituteMutation()
-  const categories =
-    categoriesData?.data?.items?.map((category) => ({
-      label: category?.name,
-      value: category.id,
-    })) || []
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      instituteCategoryId: "",
+      name: "",
+      slug: "",
+      codeType: "",
+      code: "",
+      photo: undefined,
+      language: "",
+      foundedDate: undefined,
+      phoneNumber: "",
+      contactEmail: "",
+      website: "",
+      principalName: "",
+      country: "bangladesh",
+      stateOrDivision: "",
+      countyOrDistrict: "",
+      cityOrTown: "",
+      streetOrHouseNumber: "",
+      postalCode: "",
+      latitude: 0,
+      longitude: 0,
+      overview: "",
+    },
+  })
 
-  const { value: isError, setTrue, setFalse } = useBoolean(false)
-  const [overview, setOverview] = useState("")
-
+  const codeType = [{ label: "EIIN", value: "eiin" }]
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
-
   const languages = [{ label: "Bengali", value: "bengali" }]
-  const codeType = [{ label: "EIIN", value: "EIIN" }]
 
   const countries = [{ label: "Bangladesh", value: "bangladesh" }]
-
-  const state_or_division = [
+  const stateOrDivision = [
     { label: "Dhaka", value: "dhaka" },
     { label: "Chittagong", value: "chittagong" },
     { label: "Khulna", value: "khulna" },
@@ -126,8 +141,7 @@ export const InstitutesCreate = () => {
     { label: "Barisal", value: "barisal" },
     { label: "Rangpur", value: "rangpur" },
   ]
-
-  const county_or_district = [
+  const countyOrDistrict = [
     { label: "Dhaka", value: "dhaka" },
     { label: "Chattogram", value: "chattogram" },
     { label: "Khulna", value: "khulna" },
@@ -136,35 +150,7 @@ export const InstitutesCreate = () => {
     { label: "Barisal", value: "barisal" },
     { label: "Rangpur", value: "rangpur" },
   ]
-
-  // TODO! remove default values
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      institute_category_id: "0bb6a543-b905-4d53-8bd1-5163a81768eb",
-      name: "Dhaka college",
-      slug: "dhaka-college",
-      code_type: "EIIN",
-      code: "66666",
-      photo: undefined,
-      language: "bengali",
-      founded_date: new Date(),
-      phone_number: "01760255882",
-      contact_email: "edustorg@gmail.com",
-      website: "www.edust.org",
-      principal_name: "Edust Org",
-
-      country: "bangladesh",
-      state_or_division: "khulna",
-      county_or_district: "khulna",
-      city_or_town: "Alamdanga, Chuadanga",
-      street_or_house_number: "High way",
-      postal_code: "7210",
-      latitude: "23.766110669210573",
-      longitude: "88.95013133825535",
-      overview: "",
-    },
-  })
+  const [overview, setOverview] = useState("")
 
   const nameValue = form.watch("name")
 
@@ -176,23 +162,28 @@ export const InstitutesCreate = () => {
       // Update the slug field in the form state
       form.setValue("slug", generatedSlug)
     }
-    if (
-      overview &&
-      !overview.includes(
-        '<h1 dir="auto" style="text-align: center">Welcome to Edust!</h1>',
-      )
-    ) {
+    if (overview) {
       form.setValue("overview", overview)
-    }
-
-    if (Object.keys(form.formState.errors).length) {
-      setTrue()
-    } else {
-      setFalse()
     }
   }, [nameValue, overview, form.setValue, form.formState.errors])
 
+  const [postInstitute, { isLoading }] = usePostInstituteMutation()
+
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
+    if (data.overview === '<p dir="auto"></p>') {
+      data.overview = ""
+    }
+    console.log(data)
+    toastShadcn({
+      title: "DATA",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    })
+    return
+
     const formAction = event.nativeEvent.submitter.value
 
     const imageFile = data.photo[0]
@@ -243,31 +234,417 @@ export const InstitutesCreate = () => {
 
   return (
     <>
-      <div
-        className={cn(
-          "mx-auto max-w-4xl rounded bg-white p-6 shadow",
-          `${isError ? "shadow-destructive" : ""}`,
-        )}
-      >
-        <Tabs defaultValue="edit">
-          <TabsList>
-            <TabsTrigger value="edit">Edit</TabsTrigger>
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-          </TabsList>
-          <TabsContent value="edit">
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="mt-6 space-y-6"
-              >
-                {/* institute_category_id */}
+      <Card className={cn("mx-auto max-w-7xl")}>
+        <CardContent>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="mt-6 space-y-6"
+            >
+              {/* instituteCategoryId */}
+              <CategoriesField form={form} />
+
+              {/* name */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Name <span className="text-destructive">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Institute name"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Enter the full name of the institute (e.g., "XYZ
+                      University").
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* slug */}
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Slug <span className="text-destructive">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        placeholder="Institute slug"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Enter a short, URL-friendly version of the institute name
+                      (e.g., "xyz-university"). We recommended to use default.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* codeType */}
                 <FormField
                   control={form.control}
-                  name="institute_category_id"
+                  name="codeType"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel className="mb-2">
+                        Code Type <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "justify-between",
+                                !field.value && "text-muted-foreground",
+                              )}
+                              {...field}
+                            >
+                              {field.value
+                                ? codeType.find(
+                                    (ct) => ct.value === field.value,
+                                  )?.label
+                                : "Select codeType"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                          <Command>
+                            <CommandInput placeholder="Search codeType..." />
+                            <CommandList>
+                              <CommandEmpty>No codeType found.</CommandEmpty>
+                              <CommandGroup>
+                                {codeType.map((ct) => (
+                                  <CommandItem
+                                    value={ct.label}
+                                    key={ct.value}
+                                    onSelect={() => {
+                                      form.setValue("codeType", ct.value)
+                                    }}
+                                  >
+                                    {ct.label}
+                                    <Check
+                                      className={cn(
+                                        "ml-auto",
+                                        ct.value === field.value
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription>
+                        Choose the type of code that corresponds to the
+                        institute (e.g., "Institution Code").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* code */}
+                <FormField
+                  control={form.control}
+                  name="code"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Code <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute code"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Provide the unique code for the institute (e.g.,
+                        "XYZ-123").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* photo */}
+              <FormField
+                control={form.control}
+                name="photo"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Photo <span className="text-destructive">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        type="button"
+                      >
+                        <input
+                          type="file"
+                          className="hidden w-full"
+                          id="fileInput"
+                          accept="image/*"
+                          onBlur={field.onBlur}
+                          name={field.name}
+                          onChange={(e) => {
+                            field.onChange(e.target.files)
+                            setSelectedImage(e.target.files?.[0] || null)
+                          }}
+                          ref={field.ref}
+                        />
+                        <label
+                          htmlFor="fileInput"
+                          className="flex w-full items-center gap-2"
+                        >
+                          <ImageUp size={20} />
+                          <span className="whitespace-nowrap">
+                            {selectedImage
+                              ? `${selectedImage.name}`
+                              : "Choose File No file chosen"}
+                          </span>
+                        </label>
+                      </Button>
+                    </FormControl>
+                    <FormDescription>
+                      Upload a cover photo of the institute.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* language */}
+                <FormField
+                  control={form.control}
+                  name="language"
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>
-                        Categories <span className="text-destructive">*</span>
+                        Language <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "justify-between",
+                                !field.value && "text-muted-foreground",
+                              )}
+                              {...field}
+                            >
+                              {field.value
+                                ? languages.find(
+                                    (language) =>
+                                      language.value === field.value,
+                                  )?.label
+                                : "Select language"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                          <Command>
+                            <CommandInput placeholder="Search language..." />
+                            <CommandList>
+                              <CommandEmpty>No language found.</CommandEmpty>
+                              <CommandGroup>
+                                {languages.map((language) => (
+                                  <CommandItem
+                                    value={language.label}
+                                    key={language.value}
+                                    onSelect={() => {
+                                      form.setValue("language", language.value)
+                                    }}
+                                  >
+                                    {language.label}
+                                    <Check
+                                      className={cn(
+                                        "ml-auto",
+                                        language.value === field.value
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription>
+                        Select the primary language used at the institute (e.g.,
+                        "Bengali").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* foundedDate */}
+                <FormField
+                  control={form.control}
+                  name="foundedDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>
+                        Date of birth
+                        <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <DatePicker
+                        date={field.value}
+                        setDate={field.onChange}
+                        field={field}
+                      />
+                      <FormDescription>
+                        Provide the date the institute was founded (e.g.,
+                        "1990-05-15").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* phoneNumber */}
+                <FormField
+                  control={form.control}
+                  name="phoneNumber"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        phone <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute phone"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter the primary contact phone number for the institute
+                        (e.g., "+8801234567890").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* contactEmail */}
+                <FormField
+                  control={form.control}
+                  name="contactEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Contact Email{" "}
+                        <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter the contact email address for the institute (e.g.,
+                        "info@xyzuniversity.edu").
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* website */}
+                <FormField
+                  control={form.control}
+                  name="website"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>website</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute website"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Provide the official website URL of the institute (e.g.,
+                        "www.xyzuniversity.edu") (Optional).
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* principalName */}
+                <FormField
+                  control={form.control}
+                  name="principalName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        Principal Name{" "}
+                        <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute principal name"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter the name of the principal of the institute.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* country */}
+                <FormField
+                  control={form.control}
+                  name="country"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>
+                        country <span className="text-destructive">*</span>
                       </FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -281,37 +658,33 @@ export const InstitutesCreate = () => {
                               )}
                             >
                               {field.value
-                                ? categories.find(
-                                    (category) =>
-                                      category.value === field.value,
+                                ? countries.find(
+                                    (country) => country.value === field.value,
                                   )?.label
-                                : "Select category"}
+                                : "Select country"}
                               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
                         <PopoverContent className="p-0">
                           <Command>
-                            <CommandInput placeholder="Search category..." />
+                            <CommandInput placeholder="Search country..." />
                             <CommandList>
-                              <CommandEmpty>No category found.</CommandEmpty>
+                              <CommandEmpty>No country found.</CommandEmpty>
                               <CommandGroup>
-                                {categories.map((category) => (
+                                {countries.map((country) => (
                                   <CommandItem
-                                    value={category.label}
-                                    key={category.value}
+                                    value={country.label}
+                                    key={country.value}
                                     onSelect={() => {
-                                      form.setValue(
-                                        "institute_category_id",
-                                        category.value,
-                                      )
+                                      form.setValue("country", country.value)
                                     }}
                                   >
-                                    {category.label}
+                                    {country.label}
                                     <Check
                                       className={cn(
                                         "ml-auto",
-                                        category.value === field.value
+                                        country.value === field.value
                                           ? "opacity-100"
                                           : "opacity-0",
                                       )}
@@ -324,836 +697,334 @@ export const InstitutesCreate = () => {
                         </PopoverContent>
                       </Popover>
                       <FormDescription>
-                        This is the category that will be used in the
-                        institutes.
+                        Select the country where the institute is located.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                {/* name */}
+                {/* stateOrDivision */}
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="stateOrDivision"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>
+                        stateOrDivision{" "}
+                        <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "justify-between",
+                                !field.value && "text-muted-foreground",
+                              )}
+                            >
+                              {field.value
+                                ? stateOrDivision.find(
+                                    (stateDivision) =>
+                                      stateDivision.value === field.value,
+                                  )?.label
+                                : "Select stateOrDivision"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                          <Command>
+                            <CommandInput placeholder="Search country..." />
+                            <CommandList>
+                              <CommandEmpty>No country found.</CommandEmpty>
+                              <CommandGroup>
+                                {stateOrDivision.map((stateDivision) => (
+                                  <CommandItem
+                                    value={stateDivision.label}
+                                    key={stateDivision.value}
+                                    onSelect={() => {
+                                      form.setValue(
+                                        "stateOrDivision",
+                                        stateDivision.value,
+                                      )
+                                    }}
+                                  >
+                                    {stateDivision.label}
+                                    <Check
+                                      className={cn(
+                                        "ml-auto",
+                                        stateDivision.value === field.value
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription>
+                        Select the state or division where the institute is
+                        located.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* countyOrDistrict */}
+                <FormField
+                  control={form.control}
+                  name="countyOrDistrict"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>
+                        countyOrDistrict{" "}
+                        <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "justify-between",
+                                !field.value && "text-muted-foreground",
+                              )}
+                            >
+                              {field.value
+                                ? countyOrDistrict.find(
+                                    (country) => country.value === field.value,
+                                  )?.label
+                                : "Select country"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                          <Command>
+                            <CommandInput placeholder="Search country..." />
+                            <CommandList>
+                              <CommandEmpty>No country found.</CommandEmpty>
+                              <CommandGroup>
+                                {countyOrDistrict.map((country) => (
+                                  <CommandItem
+                                    value={country.label}
+                                    key={country.value}
+                                    onSelect={() => {
+                                      form.setValue(
+                                        "countyOrDistrict",
+                                        country.value,
+                                      )
+                                    }}
+                                  >
+                                    {country.label}
+                                    <Check
+                                      className={cn(
+                                        "ml-auto",
+                                        country.value === field.value
+                                          ? "opacity-100"
+                                          : "opacity-0",
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription>
+                        Enter the county or district in which the institute is
+                        located.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* cityOrTown */}
+                <FormField
+                  control={form.control}
+                  name="cityOrTown"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        Name <span className="text-destructive">*</span>
+                        cityOrTown <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
                           type="text"
-                          placeholder="Institute name"
+                          placeholder="Institute cityOrTown"
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is your public display name. It can be your real
-                        name or a pseudonym. You can only change this once every
-                        30 days.
+                        Enter the city or town where the institute is located.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
-                {/* slug */}
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* streetOrHouseNumber */}
                 <FormField
                   control={form.control}
-                  name="slug"
+                  name="streetOrHouseNumber"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        Slug <span className="text-destructive">*</span>
+                        streetOrHouseNumber{" "}
+                        <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
                         <Input
                           type="text"
-                          placeholder="Institute slug"
+                          placeholder="Institute streetOrHouseNumber"
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is your public display name. It can be your real
-                        name or a pseudonym. You can only change this once every
-                        30 days.
+                        Enter the street address or house number of the
+                        institute.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* code_type */}
-                  <FormField
-                    control={form.control}
-                    name="code_type"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel className="mb-2">
-                          Code Type <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "justify-between",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value
-                                  ? codeType.find(
-                                      (ct) => ct.value === field.value,
-                                    )?.label
-                                  : "Select code_type"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="p-0">
-                            <Command>
-                              <CommandInput placeholder="Search code_type..." />
-                              <CommandList>
-                                <CommandEmpty>No code_type found.</CommandEmpty>
-                                <CommandGroup>
-                                  {codeType.map((ct) => (
-                                    <CommandItem
-                                      value={ct.label}
-                                      key={ct.value}
-                                      onSelect={() => {
-                                        form.setValue("code_type", ct.value)
-                                      }}
-                                    >
-                                      {ct.label}
-                                      <Check
-                                        className={cn(
-                                          "ml-auto",
-                                          ct.value === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0",
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          This is the code_type that will be used in the
-                          institutes.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* code */}
-                  <FormField
-                    control={form.control}
-                    name="code"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Code <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute code"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display code.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                {/* photo */}
+                {/* postalCode */}
                 <FormField
                   control={form.control}
-                  name="photo"
+                  name="postalCode"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        Photo <span className="text-destructive">*</span>
+                        postalCode <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Button
-                          variant="outline"
-                          className="w-full"
-                          type="button"
-                        >
-                          <input
-                            type="file"
-                            className="hidden w-full"
-                            id="fileInput"
-                            accept="image/*"
-                            onBlur={field.onBlur}
-                            name={field.name}
-                            onChange={(e) => {
-                              field.onChange(e.target.files)
-                              setSelectedImage(e.target.files?.[0] || null)
-                            }}
-                            ref={field.ref}
-                          />
-                          <label
-                            htmlFor="fileInput"
-                            className="flex w-full items-center gap-2"
-                          >
-                            <ImageUp size={20} />
-                            <span className="whitespace-nowrap">
-                              {selectedImage
-                                ? `${selectedImage.name}`
-                                : "Choose File No file chosen"}
-                            </span>
-                          </label>
-                        </Button>
+                        <Input
+                          type="text"
+                          placeholder="Institute postalCode"
+                          {...field}
+                        />
                       </FormControl>
+                      <FormDescription>
+                        Enter the postal/ZIP code for the institute's location.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* latitude */}
+                <FormField
+                  control={form.control}
+                  name="latitude"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        latitude <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute latitude"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter the latitude coordinate for the institute’s
+                        geographical location.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* language */}
-                  <FormField
-                    control={form.control}
-                    name="language"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>
-                          Language <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "justify-between",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value
-                                  ? languages.find(
-                                      (language) =>
-                                        language.value === field.value,
-                                    )?.label
-                                  : "Select language"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="p-0">
-                            <Command>
-                              <CommandInput placeholder="Search language..." />
-                              <CommandList>
-                                <CommandEmpty>No language found.</CommandEmpty>
-                                <CommandGroup>
-                                  {languages.map((language) => (
-                                    <CommandItem
-                                      value={language.label}
-                                      key={language.value}
-                                      onSelect={() => {
-                                        form.setValue(
-                                          "language",
-                                          language.value,
-                                        )
-                                      }}
-                                    >
-                                      {language.label}
-                                      <Check
-                                        className={cn(
-                                          "ml-auto",
-                                          language.value === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0",
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          This is the language that will be used in the
-                          institutes.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                {/* longitude */}
+                <FormField
+                  control={form.control}
+                  name="longitude"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        longitude <span className="text-destructive">*</span>
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          placeholder="Institute longitude"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Enter the longitude coordinate for the institute’s
+                        geographical location.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
-                  {/* founded_date */}
-                  <FormField
-                    control={form.control}
-                    name="founded_date"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>
-                          Date of birth{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant={"outline"}
-                                className={cn(
-                                  "pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, "PPP")
-                                ) : (
-                                  <span>Pick a date</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) =>
-                                date > new Date() ||
-                                date < new Date("1900-01-01")
-                              }
-                              initialFocus
-                            />
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          Your date of birth is used to calculate your age.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* phone_number */}
-                  <FormField
-                    control={form.control}
-                    name="phone_number"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          phone <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute phone"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display name. It can be your real
-                          name or a pseudonym. You can only change this once
-                          every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {/* contact_email */}
-                  <FormField
-                    control={form.control}
-                    name="contact_email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          contact_email{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute email"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display name. It can be your real
-                          name or a pseudonym. You can only change this once
-                          every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* website */}
-                  <FormField
-                    control={form.control}
-                    name="website"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>website</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute website"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display name. It can be your real
-                          name or a pseudonym. You can only change this once
-                          every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {/* principal_name */}
-                  <FormField
-                    control={form.control}
-                    name="principal_name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          principal_name{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute principal name"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display name. It can be your real
-                          name or a pseudonym. You can only change this once
-                          every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* country */}
-                  <FormField
-                    control={form.control}
-                    name="country"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>
-                          country <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "justify-between",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value
-                                  ? countries.find(
-                                      (country) =>
-                                        country.value === field.value,
-                                    )?.label
-                                  : "Select country"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="p-0">
-                            <Command>
-                              <CommandInput placeholder="Search country..." />
-                              <CommandList>
-                                <CommandEmpty>No country found.</CommandEmpty>
-                                <CommandGroup>
-                                  {countries.map((country) => (
-                                    <CommandItem
-                                      value={country.label}
-                                      key={country.value}
-                                      onSelect={() => {
-                                        form.setValue("country", country.value)
-                                      }}
-                                    >
-                                      {country.label}
-                                      <Check
-                                        className={cn(
-                                          "ml-auto",
-                                          country.value === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0",
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          This is the country that will be used in the
-                          institutes.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* state_or_division */}
-                  <FormField
-                    control={form.control}
-                    name="state_or_division"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>
-                          state_or_division{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "justify-between",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value
-                                  ? state_or_division.find(
-                                      (stateDivision) =>
-                                        stateDivision.value === field.value,
-                                    )?.label
-                                  : "Select state_or_division"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="p-0">
-                            <Command>
-                              <CommandInput placeholder="Search country..." />
-                              <CommandList>
-                                <CommandEmpty>No country found.</CommandEmpty>
-                                <CommandGroup>
-                                  {state_or_division.map((stateDivision) => (
-                                    <CommandItem
-                                      value={stateDivision.label}
-                                      key={stateDivision.value}
-                                      onSelect={() => {
-                                        form.setValue(
-                                          "state_or_division",
-                                          stateDivision.value,
-                                        )
-                                      }}
-                                    >
-                                      {stateDivision.label}
-                                      <Check
-                                        className={cn(
-                                          "ml-auto",
-                                          stateDivision.value === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0",
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          This is the stateDivision that will be used in the
-                          institutes.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* county_or_district */}
-                  <FormField
-                    control={form.control}
-                    name="county_or_district"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>
-                          county_or_district{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant="outline"
-                                role="combobox"
-                                className={cn(
-                                  "justify-between",
-                                  !field.value && "text-muted-foreground",
-                                )}
-                              >
-                                {field.value
-                                  ? county_or_district.find(
-                                      (country) =>
-                                        country.value === field.value,
-                                    )?.label
-                                  : "Select country"}
-                                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="p-0">
-                            <Command>
-                              <CommandInput placeholder="Search country..." />
-                              <CommandList>
-                                <CommandEmpty>No country found.</CommandEmpty>
-                                <CommandGroup>
-                                  {county_or_district.map((country) => (
-                                    <CommandItem
-                                      value={country.label}
-                                      key={country.value}
-                                      onSelect={() => {
-                                        form.setValue(
-                                          "county_or_district",
-                                          country.value,
-                                        )
-                                      }}
-                                    >
-                                      {country.label}
-                                      <Check
-                                        className={cn(
-                                          "ml-auto",
-                                          country.value === field.value
-                                            ? "opacity-100"
-                                            : "opacity-0",
-                                        )}
-                                      />
-                                    </CommandItem>
-                                  ))}
-                                </CommandGroup>
-                              </CommandList>
-                            </Command>
-                          </PopoverContent>
-                        </Popover>
-                        <FormDescription>
-                          This is the country that will be used in the
-                          institutes.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* city_or_town */}
-                  <FormField
-                    control={form.control}
-                    name="city_or_town"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          city_or_town{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute city_or_town"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display city_or_town. It can be
-                          your real name or a pseudonym. You can only change
-                          this once every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* street_or_house_number */}
-                  <FormField
-                    control={form.control}
-                    name="street_or_house_number"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          street_or_house_number{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute street_or_house_number"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display street_or_house_number. It
-                          can be your real name or a pseudonym. You can only
-                          change this once every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* postal_code */}
-                  <FormField
-                    control={form.control}
-                    name="postal_code"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          postal_code{" "}
-                          <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute postal_code"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display postal_code. It can be
-                          your real name or a pseudonym. You can only change
-                          this once every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* latitude */}
-                  <FormField
-                    control={form.control}
-                    name="latitude"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          latitude <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute latitude"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display latitude. It can be your
-                          real name or a pseudonym. You can only change this
-                          once every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* longitude */}
-                  <FormField
-                    control={form.control}
-                    name="longitude"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          longitude <span className="text-destructive">*</span>
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            placeholder="Institute longitude"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          This is your public display longitude. It can be your
-                          real name or a pseudonym. You can only change this
-                          once every 30 days.
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div>
+              <div>
+                <Suspense fallback={<Loading.Spinner />}>
                   <Label>Overview</Label>
                   <Editor setContentHtml={setOverview} />
-                </div>
+                </Suspense>
+              </div>
 
-                <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between">
+                <Button
+                  variant="destructive"
+                  type="reset"
+                  disabled={isLoading}
+                  onClick={() => {
+                    form.reset()
+                  }}
+                >
+                  Cancel
+                </Button>
+                <div className="flex gap-6">
                   <Button
-                    variant="destructive"
-                    type="reset"
+                    type="submit"
+                    name="action"
+                    value={Status.PUBLISHED}
                     disabled={isLoading}
                   >
-                    Cancel
+                    {isLoading ? (
+                      <BarLoader color="#fff" />
+                    ) : (
+                      "Create and Publish"
+                    )}
                   </Button>
-                  <div className="flex gap-6">
-                    <Button
-                      type="submit"
-                      name="action"
-                      value={Status.PUBLISHED}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <BarLoader color="#fff" />
-                      ) : (
-                        "Create and Publish"
-                      )}
-                    </Button>
-                    <Button
-                      variant="secondary"
-                      type="submit"
-                      name="action"
-                      value={Status.DRAFT}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? <BarLoader color="#fff" /> : "Save as draft"}
-                    </Button>
-                  </div>
+                  <Button
+                    variant="secondary"
+                    type="submit"
+                    name="action"
+                    value={Status.DRAFT}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? <BarLoader color="#fff" /> : "Save as draft"}
+                  </Button>
                 </div>
-              </form>
-            </Form>
-          </TabsContent>
-          <TabsContent value="preview">Preview</TabsContent>
-        </Tabs>
-      </div>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </>
   )
 }
