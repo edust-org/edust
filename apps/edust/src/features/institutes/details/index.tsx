@@ -168,34 +168,50 @@ export const InstituteDetails = () => {
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
-                        <span className="w-36 font-semibold">
-                          State/Division
-                        </span>
-                        <span>{data?.data?.stateOrDivision}</span>
+                        <span className="w-36 font-semibold">Division</span>
+                        <span>{data?.data?.division}</span>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="flex gap-4 sm:gap-24">
+                        <span className="w-36 font-semibold">District</span>
+                        <span>{data?.data?.district}</span>
+                      </TableCell>
+                    </TableRow>
+                    {data?.data?.subDivision && (
+                      <TableRow>
+                        <TableCell className="flex gap-4 sm:gap-24">
+                          <span className="w-36 font-semibold">
+                            Sub Division
+                          </span>
+                          <span>{data?.data?.subDivision}</span>
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    <TableRow>
+                      <TableCell className="flex gap-4 sm:gap-24">
+                        <span className="w-36 font-semibold">Sub District</span>
+                        <span>{data?.data?.subDistrict}</span>
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">
-                          Country/District
+                          Address line 1
                         </span>
-                        <span>{data?.data?.countyOrDistrict}</span>
+                        <span>{data?.data?.addressLine1}</span>
                       </TableCell>
                     </TableRow>
-                    <TableRow>
-                      <TableCell className="flex gap-4 sm:gap-24">
-                        <span className="w-36 font-semibold">City/Town</span>
-                        <span>{data?.data?.cityOrTown}</span>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="flex gap-4 sm:gap-24">
-                        <span className="w-36 font-semibold">
-                          Street/House Number
-                        </span>
-                        <span>{data?.data?.streetOrHouseNumber}</span>
-                      </TableCell>
-                    </TableRow>
+                    {data?.data?.addressLine2 && (
+                      <TableRow>
+                        <TableCell className="flex gap-4 sm:gap-24">
+                          <span className="w-36 font-semibold">
+                            Address line 2
+                          </span>
+                          <span>{data?.data?.addressLine2}</span>
+                        </TableCell>
+                      </TableRow>
+                    )}
                     <TableRow>
                       <TableCell className="flex gap-4 sm:gap-24">
                         <span className="w-36 font-semibold">Postal Code</span>

@@ -24,6 +24,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Textarea,
 } from "@/components/ui"
 
 import { cn } from "@/utils"
@@ -40,7 +41,9 @@ import { toast as toastShadcn } from "@/hooks/shadcn-ui"
 import { toast } from "sonner"
 
 import { CategoriesField } from "./components/categories.field"
-import { CountryField } from "./components/country.field"
+import { DivisionField } from "./components/division.field"
+import { DistrictField } from "./components/district.field"
+import { SubDistrictField } from "./components/sub-district.field"
 
 const Editor = lazy(() => import("./editor"))
 
@@ -84,21 +87,39 @@ const FormSchema = z.object({
     .trim()
     .min(1, { message: "required" })
     .email({ message: "Invalid email format" }),
-  website: z.string().trim(),
+  website: z.string().trim().optional(),
   principalName: z.string().trim().min(1, { message: "required" }),
 
   country: z.string().trim().min(1, { message: "required" }),
-  stateOrDivision: z.string().trim().min(1, { message: "required" }),
-  countyOrDistrict: z.string().trim().min(1, { message: "required" }),
-  cityOrTown: z.string().trim().min(1, { message: "required" }),
-  streetOrHouseNumber: z.string().trim().min(1, { message: "required" }),
+  division: z.string().trim().min(1, { message: "required" }),
+  district: z.string().trim().min(1, { message: "required" }),
+  subDivision: z.string().trim().optional(),
+  subDistrict: z.string().trim().min(1, { message: "required" }),
+  addressLine1: z.string().trim().min(1, { message: "required" }),
+  addressLine2: z.string().trim().optional(),
   postalCode: z.string().trim().min(1, { message: "required" }),
-  latitude: z.coerce.number().min(-90).max(90),
-  longitude: z.coerce.number().min(-180).max(180),
-  overview: z.string().trim(),
+  latitude: z.coerce
+    .number()
+    .min(-90)
+    .max(90)
+    .refine((value) => value !== 0, {
+      message: "Latitude cannot be 0",
+    }),
+  longitude: z.coerce
+    .number()
+    .min(-180)
+    .max(180)
+    .refine((value) => value !== 0, {
+      message: "Longitude cannot be 0",
+    }),
+  overview: z.string().trim().optional(),
 })
 
 export const InstitutesCreate = () => {
+  // TODO: get lat long
+  // const g= navigator.geolocation
+  // g.getCurrentPosition((p)=>console.log(p))
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -114,40 +135,30 @@ export const InstitutesCreate = () => {
       contactEmail: "",
       website: "",
       principalName: "",
-      country: "",
-      stateOrDivision: "",
-      countyOrDistrict: "",
-      cityOrTown: "",
-      streetOrHouseNumber: "",
+      country: "Bangladesh",
+      division: "",
+      district: "",
+      subDivision: undefined,
+      subDistrict: "",
+      addressLine1: "",
+      addressLine2: undefined,
       postalCode: "",
       latitude: 0,
       longitude: 0,
-      overview: "",
+      overview: undefined,
     },
   })
 
-  const codeType = [{ label: "EIIN", value: "eiin" }]
+  const codeType = [{ label: "EIIN", value: "EIIN" }]
   const [selectedImage, setSelectedImage] = useState<File | null>(null)
-  const languages = [{ label: "Bengali", value: "bengali" }]
+  const languages = [
+    { label: "Bengali", value: "Bengali" },
+    { label: "English", value: "English" },
+    { label: "Arabic", value: "Arabic" },
+    { label: "Urdu", value: "Urdu" },
+  ]
+  const countries = [{ label: "Bangladesh", value: "Bangladesh" }]
 
-  const stateOrDivision = [
-    { label: "Dhaka", value: "dhaka" },
-    { label: "Chittagong", value: "chittagong" },
-    { label: "Khulna", value: "khulna" },
-    { label: "Rajshahi", value: "rajshahi" },
-    { label: "Sylhet", value: "sylhet" },
-    { label: "Barisal", value: "barisal" },
-    { label: "Rangpur", value: "rangpur" },
-  ]
-  const countyOrDistrict = [
-    { label: "Dhaka", value: "dhaka" },
-    { label: "Chattogram", value: "chattogram" },
-    { label: "Khulna", value: "khulna" },
-    { label: "Rajshahi", value: "rajshahi" },
-    { label: "Sylhet", value: "sylhet" },
-    { label: "Barisal", value: "barisal" },
-    { label: "Rangpur", value: "rangpur" },
-  ]
   const [overview, setOverview] = useState("")
 
   const nameValue = form.watch("name")
@@ -169,18 +180,8 @@ export const InstitutesCreate = () => {
 
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     if (data.overview === '<p dir="auto"></p>') {
-      data.overview = ""
+      data.overview = undefined
     }
-    console.log(data)
-    toastShadcn({
-      title: "DATA",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
-    return
 
     const formAction = event.nativeEvent.submitter.value
 
@@ -201,7 +202,9 @@ export const InstitutesCreate = () => {
         if (key === "photo") {
           formData.append(key, compressedImageFile, imageFile.name)
         } else {
-          formData.append(key, value as string)
+          if (value !== undefined && value !== null && value !== "") {
+            formData.append(key, value as string)
+          }
         }
       })
 
@@ -636,17 +639,13 @@ export const InstitutesCreate = () => {
 
               <div className="grid gap-6 md:grid-cols-2">
                 {/* country */}
-                <CountryField form={form} />
-
-                {/* stateOrDivision */}
                 <FormField
                   control={form.control}
-                  name="stateOrDivision"
+                  name="country"
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>
-                        stateOrDivision{" "}
-                        <span className="text-destructive">*</span>
+                        country <span className="text-destructive">*</span>
                       </FormLabel>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -658,84 +657,10 @@ export const InstitutesCreate = () => {
                                 "justify-between",
                                 !field.value && "text-muted-foreground",
                               )}
+                              {...field}
                             >
                               {field.value
-                                ? stateOrDivision.find(
-                                    (stateDivision) =>
-                                      stateDivision.value === field.value,
-                                  )?.label
-                                : "Select stateOrDivision"}
-                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="p-0">
-                          <Command>
-                            <CommandInput placeholder="Search country..." />
-                            <CommandList>
-                              <CommandEmpty>No country found.</CommandEmpty>
-                              <CommandGroup>
-                                {stateOrDivision.map((stateDivision) => (
-                                  <CommandItem
-                                    value={stateDivision.label}
-                                    key={stateDivision.value}
-                                    onSelect={() => {
-                                      form.setValue(
-                                        "stateOrDivision",
-                                        stateDivision.value,
-                                      )
-                                    }}
-                                  >
-                                    {stateDivision.label}
-                                    <Check
-                                      className={cn(
-                                        "ml-auto",
-                                        stateDivision.value === field.value
-                                          ? "opacity-100"
-                                          : "opacity-0",
-                                      )}
-                                    />
-                                  </CommandItem>
-                                ))}
-                              </CommandGroup>
-                            </CommandList>
-                          </Command>
-                        </PopoverContent>
-                      </Popover>
-                      <FormDescription>
-                        Select the state or division where the institute is
-                        located.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* countyOrDistrict */}
-                <FormField
-                  control={form.control}
-                  name="countyOrDistrict"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>
-                        countyOrDistrict{" "}
-                        <span className="text-destructive">*</span>
-                      </FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              role="combobox"
-                              className={cn(
-                                "justify-between",
-                                !field.value && "text-muted-foreground",
-                              )}
-                            >
-                              {field.value
-                                ? countyOrDistrict.find(
+                                ? countries.find(
                                     (country) => country.value === field.value,
                                   )?.label
                                 : "Select country"}
@@ -749,15 +674,12 @@ export const InstitutesCreate = () => {
                             <CommandList>
                               <CommandEmpty>No country found.</CommandEmpty>
                               <CommandGroup>
-                                {countyOrDistrict.map((country) => (
+                                {countries.map((country) => (
                                   <CommandItem
                                     value={country.label}
                                     key={country.value}
                                     onSelect={() => {
-                                      form.setValue(
-                                        "countyOrDistrict",
-                                        country.value,
-                                      )
+                                      form.setValue("country", country.value)
                                     }}
                                   >
                                     {country.label}
@@ -777,59 +699,69 @@ export const InstitutesCreate = () => {
                         </PopoverContent>
                       </Popover>
                       <FormDescription>
-                        Enter the county or district in which the institute is
-                        located.
+                        Select the country where the institute is located.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                {/* cityOrTown */}
+                {/* division */}
+                <DivisionField form={form} />
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* district */}
+                <DistrictField form={form} />
+
+                {/* subDivision */}
+                {/* TODO: will do in future at this moment for bd */}
+
+                {/* subDistrict */}
+                <SubDistrictField
+                  form={form}
+                  district={form.watch().district}
+                />
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* addressLine1 */}
                 <FormField
                   control={form.control}
-                  name="cityOrTown"
+                  name="addressLine1"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        cityOrTown <span className="text-destructive">*</span>
+                        addressLine1 <span className="text-destructive">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="Institute cityOrTown"
+                        <Textarea
+                          placeholder="Institute addressLine1"
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        Enter the city or town where the institute is located.
+                        Enter the primary address line (e.g., street address,
+                        house number, P.O. Box).
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* streetOrHouseNumber */}
+                {/* addressLine2 */}
                 <FormField
                   control={form.control}
-                  name="streetOrHouseNumber"
+                  name="addressLine2"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        streetOrHouseNumber{" "}
-                        <span className="text-destructive">*</span>
-                      </FormLabel>
+                      <FormLabel>addressLine2</FormLabel>
                       <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="Institute streetOrHouseNumber"
+                        <Textarea
+                          placeholder="Institute addressLine2"
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        Enter the street address or house number of the
-                        institute.
+                        Enter an apartment, suite, unit, or floor number.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

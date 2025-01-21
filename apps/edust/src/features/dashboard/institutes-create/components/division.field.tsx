@@ -1,4 +1,4 @@
-import { useGetCountriesQuery } from "@/app/api/_others/restcountries"
+import { useGetBDDivisionsQuery } from "@/app/api/_others/bdapis"
 import {
   Button,
   Command,
@@ -22,30 +22,18 @@ import { cn } from "@/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 import { useMemo } from "react"
 
-export const CountryField = ({ form }) => {
-  const { data, isLoading } = useGetCountriesQuery()
+export const DivisionField = ({ form }) => {
+  const { data, isLoading } = useGetBDDivisionsQuery()
 
-  const countries = useMemo(() => {
+  const division = useMemo(() => {
     if (data) {
-      return [...data].sort().map((country) => ({
-        label: country,
-        value: country,
+      return [...data].sort().map((div) => ({
+        label: div,
+        value: div,
       }))
     }
     // if data not found
-    return [
-      { label: "Afghanistan", value: "Afghanistan" },
-      { label: "Bangladesh", value: "Bangladesh" },
-      { label: "Bhutan", value: "Bhutan" },
-      { label: "China", value: "China" },
-      { label: "India", value: "India" },
-      { label: "Maldives", value: "Maldives" },
-      { label: "Myanmar", value: "Myanmar" },
-      { label: "Nepal", value: "Nepal" },
-      { label: "Pakistan", value: "Pakistan" },
-      { label: "Sri Lanka", value: "Sri Lanka" },
-      { label: "Thailand", value: "Thailand" },
-    ]
+    return [{ label: "Dhaka", value: "Dhaka" }]
   }, [data])
 
   if (isLoading) {
@@ -55,11 +43,11 @@ export const CountryField = ({ form }) => {
   return (
     <FormField
       control={form.control}
-      name="country"
+      name="division"
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>
-            country <span className="text-destructive">*</span>
+            division <span className="text-destructive">*</span>
           </FormLabel>
           <Popover>
             <PopoverTrigger asChild>
@@ -73,32 +61,31 @@ export const CountryField = ({ form }) => {
                   )}
                 >
                   {field.value
-                    ? countries.find((country) => country.value === field.value)
-                        ?.label
-                    : "Select country"}
+                    ? division.find((div) => div.value === field.value)?.label
+                    : "Select division"}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="p-0">
               <Command>
-                <CommandInput placeholder="Search country..." />
+                <CommandInput placeholder="Search division..." />
                 <CommandList>
-                  <CommandEmpty>No country found.</CommandEmpty>
+                  <CommandEmpty>No division found.</CommandEmpty>
                   <CommandGroup>
-                    {countries.map((country) => (
+                    {division.map((div) => (
                       <CommandItem
-                        value={country.label}
-                        key={country.value}
+                        value={div.label}
+                        key={div.value}
                         onSelect={() => {
-                          form.setValue("country", country.value)
+                          form.setValue("division", div.value)
                         }}
                       >
-                        {country.label}
+                        {div.label}
                         <Check
                           className={cn(
                             "ml-auto",
-                            country.value === field.value
+                            div.value === field.value
                               ? "opacity-100"
                               : "opacity-0",
                           )}
@@ -111,7 +98,7 @@ export const CountryField = ({ form }) => {
             </PopoverContent>
           </Popover>
           <FormDescription>
-            Select the country where the institute is located.
+            Select the division where the institute is located.
           </FormDescription>
           <FormMessage />
         </FormItem>

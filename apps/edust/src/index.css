@@ -197,6 +197,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  div[data-radix-popper-content-wrapper] {
+    input,
+    textarea {
+      border-width: 0px !important;
+    }
+  }
 }
 
 @layer utilities {
