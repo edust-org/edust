@@ -7,6 +7,7 @@ import { createLogger } from "redux-logger"
 import { rootMiddlewareApiV0, rootReducerApiV0 } from "./api/v0"
 import { themeReducers } from "./features"
 import authentication from "./features/authentication"
+import institutes from "./features/institutes"
 import { rootMiddleware_OthersApi, rootReducer_OthersApi } from "./api/_others"
 
 // Create logger only if in development environment
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   ...rootReducer_OthersApi,
   counter: counterReducer,
   authentication,
+  institutes,
   theme: themeReducers,
 })
 

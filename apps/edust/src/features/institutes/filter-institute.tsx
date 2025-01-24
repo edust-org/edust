@@ -1,5 +1,6 @@
 import { useGetInstitutesCategoriesQuery } from "@/app/api/v0/public"
-import { useAppSelector } from "@/app/hooks"
+import { institutesFiltering, resetInstitutesFiltering } from "@/app/features"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import {
   Button,
   Form,
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
+import React from "react"
 import { useForm } from "react-hook-form"
 import { IoAddOutline } from "react-icons/io5"
 import { useNavigate } from "react-router"
@@ -26,7 +28,10 @@ const FormSchema = z.object({
   name: z.string(),
   instituteCategoryId: z.string(),
 })
-const FilterInstitute = ({ query, setQuery }) => {
+const FilterInstitute = ({ isDetailsPage = false }) => {
+  const dispatch = useAppDispatch()
+  const stateInstituteFilter = useAppSelector((state) => state.institutes)
+
   const isAuthenticated = useAppSelector(
     (state) => state.authentication.isAuthenticated,
   )
@@ -39,8 +44,8 @@ const FilterInstitute = ({ query, setQuery }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
-      instituteCategoryId: "",
+      name: stateInstituteFilter.name,
+      instituteCategoryId: stateInstituteFilter.instituteCategoryId,
     },
   })
   function onSubmit(values: z.infer<typeof FormSchema>) {
@@ -49,14 +54,15 @@ const FilterInstitute = ({ query, setQuery }) => {
     })
 
     if (hasValue) {
-      setQuery({
-        search: {
+      dispatch(
+        institutesFiltering({
           name: values.name,
-        },
-        filter: {
           instituteCategoryId: values.instituteCategoryId,
-        },
-      })
+        }),
+      )
+      if (isDetailsPage) {
+        navigate("/institutes")
+      }
     }
   }
 
@@ -123,6 +129,7 @@ const FilterInstitute = ({ query, setQuery }) => {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  value={form.getValues().instituteCategoryId}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Choose a category" />
@@ -133,7 +140,7 @@ const FilterInstitute = ({ query, setQuery }) => {
                         const { categories, ...alpha } = item
                         const key = Object.entries(alpha)[0][0]
                         return (
-                          <>
+                          <React.Fragment key={key}>
                             <SelectLabel>{key.toUpperCase()}</SelectLabel>
                             {categories?.map(
                               ({ id, name, description }: any) => (
@@ -147,7 +154,7 @@ const FilterInstitute = ({ query, setQuery }) => {
                                 </SelectItem>
                               ),
                             )}
-                          </>
+                          </React.Fragment>
                         )
                       })}
                     </SelectGroup>
@@ -214,13 +221,13 @@ const FilterInstitute = ({ query, setQuery }) => {
             <Button type="submit" className="flex-1">
               Search
             </Button>
-            {Boolean(Object.keys(query).length) && (
+            {Object.values(stateInstituteFilter).some((i) => i !== "") && (
               <Button
                 size={"sm"}
                 variant={"ghost"}
                 onClick={() => {
                   form.reset()
-                  setQuery({})
+                  dispatch(resetInstitutesFiltering())
                 }}
               >
                 Clear

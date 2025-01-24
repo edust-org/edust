@@ -55,10 +55,7 @@ export const InstituteDetails = () => {
       {/*  */}
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          <Skeleton className="mb-2 h-32" />
-          <Skeleton className="mb-2 h-16" />
-          <Typography className="text-center">Filter Institute</Typography>
-          {/* <FilterInstitute /> */}
+          <FilterInstitute isDetailsPage />
         </aside>
         <div className="mx-auto max-w-screen-2xl">
           <Card className="border-none p-0">
@@ -226,7 +223,7 @@ export const InstituteDetails = () => {
                           target="_blank"
                           className="hover:underline"
                         >
-                          View Loaction
+                          View Location
                         </a>
                       </TableCell>
                     </TableRow>

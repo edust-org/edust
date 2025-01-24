@@ -5,15 +5,19 @@ import { useGetInstitutesQuery } from "@/app/api/v0/public"
 import { Helmet } from "react-helmet-async"
 import FilterInstitute from "./filter-institute"
 import { InstitutesCardSkeleton } from "./institutes-card-skeleton"
-import {  useState } from "react"
+import { useAppSelector } from "@/app/hooks"
 
 export const Institutes = () => {
-  const [query, setQuery] = useState({})
+  const stateInstituteFilter = useAppSelector((state) => state.institutes)
+
   const {
     data: { data } = {},
     isLoading,
     isFetching,
-  } = useGetInstitutesQuery(query)
+  } = useGetInstitutesQuery({
+    search: { name: stateInstituteFilter.name },
+    filter: { instituteCategoryId: stateInstituteFilter.instituteCategoryId },
+  })
 
   return (
     <div>
@@ -29,7 +33,7 @@ export const Institutes = () => {
       </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
-          <FilterInstitute setQuery={setQuery} query={query} />
+          <FilterInstitute />
         </aside>
         <main>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
