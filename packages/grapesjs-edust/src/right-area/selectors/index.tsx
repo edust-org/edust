@@ -28,7 +28,7 @@ const FormSchema = z.object({
     .default("DEFAULT ID"),
 })
 
-export default function CustomSelectorManager({
+export const Selectors = ({
   selectors,
   selectedState,
   states,
@@ -36,7 +36,7 @@ export default function CustomSelectorManager({
   setState,
   addSelector,
   removeSelector,
-}: Omit<SelectorsResultProps, "Container">) {
+}: Omit<SelectorsResultProps, "Container">) => {
   const targetStr = targets.join(", ")
 
   const form = useForm<z.infer<typeof FormSchema>>({

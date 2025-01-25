@@ -1,47 +1,24 @@
-import React from "react"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-  ScrollArea,
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/components/ui"
-import {
-  Blocks as BlocksIcon,
-  Check,
-  ChevronRight,
-  Paintbrush,
-  Settings,
-} from "lucide-react"
-import { RightPanel } from "../right-panel"
+import { Blocks as BlocksIcon, Paintbrush, Settings } from "lucide-react"
 import { useRightPanelContext } from "@/context/right-panel"
 import { ActivePanel } from "@/types"
 import { Blocks } from "./blocks"
-import { BlocksProvider } from "@grapesjs/react"
-const calendars = [
-  {
-    name: "My Calendars",
-    items: ["Personal", "Work", "Family"],
-  },
-  {
-    name: "Favorites",
-    items: ["Holidays", "Birthdays"],
-  },
-  {
-    name: "Other",
-    items: ["Travel", "Reminders", "Deadlines"],
-  },
-]
+import {
+  BlocksProvider,
+  SelectorsProvider,
+  StylesProvider,
+  TraitsProvider,
+} from "@grapesjs/react"
+import {
+  ScrollArea,
+  Sidebar,
+  SidebarContent,
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/ui"
+import { Traits } from "./traits"
+import { Selectors } from "./selectors"
+import { Style } from "./style"
+
 export const RightArea = () => {
   const { state, dispatch } = useRightPanelContext()
   return (
@@ -49,7 +26,6 @@ export const RightArea = () => {
       <Sidebar collapsible="none" className="eg-w-full">
         <ScrollArea>
           <SidebarContent>
-            <RightPanel />
             <div className="eg-flex eg-items-center eg-justify-center eg-bg-white">
               <div className="eg-flex eg-h-7 eg-w-full eg-items-center eg-gap-1.5 eg-border eg-p-[2px] eg-shadow-none">
                 <ToggleGroup
@@ -82,54 +58,26 @@ export const RightArea = () => {
               </div>
             </div>
 
-            {state.activePanel === ActivePanel.SELECTORS && <>SELECTORS</>}
-            {state.activePanel === ActivePanel.TRAITS && <>TRAITS</>}
+            {state.activePanel === ActivePanel.SELECTORS && (
+              <>
+                <SelectorsProvider>
+                  {(props) => <Selectors {...props} />}
+                </SelectorsProvider>
+                <StylesProvider>
+                  {(props) => <Style {...props} />}
+                </StylesProvider>
+              </>
+            )}
+            {state.activePanel === ActivePanel.TRAITS && (
+              <TraitsProvider>
+                {(props) => <Traits {...props} />}
+              </TraitsProvider>
+            )}
             {state.activePanel === ActivePanel.BLOCKS && (
               <BlocksProvider>
                 {(props) => <Blocks {...props} />}
               </BlocksProvider>
             )}
-
-            {calendars.map((calendar, index) => (
-              <React.Fragment key={calendar.name}>
-                <SidebarGroup key={calendar.name} className="eg-py-0">
-                  <Collapsible
-                    defaultOpen={index === 0}
-                    className="eg-group/collapsible"
-                  >
-                    <SidebarGroupLabel
-                      asChild
-                      className="eg-group/label eg-w-full eg-text-sm eg-text-sidebar-foreground hover:eg-bg-sidebar-accent hover:eg-text-sidebar-accent-foreground"
-                    >
-                      <CollapsibleTrigger>
-                        {calendar.name}
-                        <ChevronRight className="eg-ml-auto eg-transition-transform group-data-[state=open]/collapsible:eg-rotate-90" />
-                      </CollapsibleTrigger>
-                    </SidebarGroupLabel>
-                    <CollapsibleContent>
-                      <SidebarGroupContent>
-                        <SidebarMenu>
-                          {calendar.items.map((item, index) => (
-                            <SidebarMenuItem key={item}>
-                              <SidebarMenuButton>
-                                <div
-                                  data-active={index < 2}
-                                  className="eg-group/calendar-item eg-flex eg-aspect-square eg-size-4 eg-shrink-0 eg-items-center eg-justify-center eg-rounded-sm eg-border eg-border-sidebar-border eg-text-sidebar-primary-foreground data-[active=true]:eg-border-sidebar-primary data-[active=true]:eg-bg-sidebar-primary"
-                                >
-                                  <Check className="eg-hidden eg-size-3 group-data-[active=true]/calendar-item:eg-block" />
-                                </div>
-                                {item}
-                              </SidebarMenuButton>
-                            </SidebarMenuItem>
-                          ))}
-                        </SidebarMenu>
-                      </SidebarGroupContent>
-                    </CollapsibleContent>
-                  </Collapsible>
-                </SidebarGroup>
-                <SidebarSeparator className="eg-mx-0" />
-              </React.Fragment>
-            ))}
           </SidebarContent>
         </ScrollArea>
       </Sidebar>

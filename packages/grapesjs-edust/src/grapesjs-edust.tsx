@@ -6,9 +6,9 @@ import options from "./options"
 import { default as customOnEditor } from "./on-editor"
 import { SidebarInset, SidebarProvider } from "@/components/ui"
 
-import "./index.css"
 // import grapesjs css
 import "@edust/grapesjs/css/grapes.min.css"
+import "./index.css"
 import { TopArea } from "./top-area"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { cn } from "./utils"
@@ -54,7 +54,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
         <TopArea />
         <SidebarProvider
           className={cn(
-            "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)]",
+            "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-44px)]",
           )}
         >
           <div
@@ -67,7 +67,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
           </div>
           <SidebarInset
             className={cn(
-              "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)] eg-bg-slate-100 eg-p-2",
+              "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-44px)] eg-bg-slate-100 eg-p-2",
             )}
           >
             <Canvas className="eg-border-transparent" />

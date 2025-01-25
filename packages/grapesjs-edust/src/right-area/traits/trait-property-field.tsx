@@ -32,7 +32,7 @@ export default function TraitPropertyField({
   }
 
   const handleButtonClick = () => {
-    const command = (trait as any).get("command");
+    const command = (trait as any).get("command")
     if (command) {
       if (typeof command === "string") {
         editor.runCommand(command)
@@ -43,7 +43,10 @@ export default function TraitPropertyField({
   }
 
   const type = trait.getType()
-  const defValue = trait.getDefault() || (trait as any).getDefault() || (trait as any)?.attributes?.placeholder;
+  const defValue =
+    trait.getDefault() ||
+    (trait as any).getDefault() ||
+    (trait as any)?.attributes?.placeholder
   const value = trait.getValue()
   const valueWithDef = typeof value !== "undefined" ? value : defValue
 
