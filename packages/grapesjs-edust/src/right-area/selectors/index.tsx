@@ -1,6 +1,4 @@
 import { SelectorsResultProps } from "@grapesjs/react"
-import { IoIosClose } from "react-icons/io"
-import { FaPlus } from "react-icons/fa"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -14,11 +12,16 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Button,
   Input,
+  FormLabel,
+  Badge,
+  Typography,
+  Separator,
 } from "@/components/ui"
 import {} from "@/components/ui"
 import { useState } from "react"
+import { Selector } from "@edust/grapesjs"
+import { Plus, X } from "lucide-react"
 
 const FormSchema = z.object({
   state: z
@@ -43,110 +46,118 @@ export const Selectors = ({
     resolver: zodResolver(FormSchema),
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
-  }
-
   const [isShowInput, setIsShowInput] = useState(false)
 
+  if (!targetStr) {
+    return <Typography className="eg-px-2">Not selected</Typography>
+  }
+
   return (
-    <div className="gjs-custom-selector-manager eg-flex eg-flex-col eg-gap-2 eg-p-2 eg-text-left">
-      <div className="eg-flex eg-items-center">
-        <div className="flex-grow">Selectors</div>
-        <Form {...form}>
-          <form
-            onChange={(e) => {
-              const target = e.target as HTMLInputElement
-              setState(target.value)
-            }}
-            onSubmit={form.handleSubmit(onSubmit)}
-          >
-            <FormField
-              control={form.control}
-              name="state"
-              render={({ field }) => (
-                <FormItem>
-                  {/* <FormLabel>Email</FormLabel> */}
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={selectedState}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder={selectedState} />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {states.map((state) => (
-                        <SelectItem value={state.id as string} key={state.id}>
-                          {state.getName()}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-      </div>
-
-      {/* start Selectors List or classes */}
-      <div
-        className={
-          "flex min-h-[45px] flex-wrap items-center gap-2 rounded border border-slate-500 bg-slate-200 p-2"
-        }
-      >
-        {targetStr ? (
-          <>
-            {isShowInput ? (
-              <Input
-                placeholder="Custom class"
-                onKeyDown={(e) => {
-                  if (e.key == "Enter") {
-                    const target = e.target as HTMLInputElement
-                    addSelector({
-                      name: target.value,
-                      label: target.value,
-                    })
-                    setIsShowInput(false)
-                  }
-                }}
-                onBlur={() => setIsShowInput(false)}
+    <>
+      <div className="gjs-custom-selector-manager eg-flex eg-flex-col eg-gap-2 eg-p-2 eg-text-left">
+        <div>
+          <Form {...form}>
+            <form
+              onChange={(e) => {
+                const target = e.target as HTMLInputElement
+                if (target.value === "-state-") {
+                  setState("")
+                } else {
+                  setState(target.value)
+                }
+              }}
+            >
+              <FormField
+                control={form.control}
+                name="state"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Selectors</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={selectedState}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="!eg-h-8">
+                          <SelectValue
+                            placeholder={selectedState || "-state-"}
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {[
+                          {
+                            id: "-state-",
+                            getName() {
+                              return "-state-"
+                            },
+                          },
+                          ...states,
+                        ].map((state) => (
+                          <SelectItem value={state.id as string} key={state.id}>
+                            {state.getName()}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
               />
-            ) : (
-              <Button
-                type="button"
-                onClick={() => setIsShowInput(true)}
-                className={"h-6 w-6 rounded border"}
-                size="icon"
-              >
-                <FaPlus />
-              </Button>
-            )}
-          </>
-        ) : (
-          <div className="opacity-70">Select a component</div>
-        )}
-        {selectors.map((selector) => (
-          <div
-            key={selector.toString()}
-            className="flex items-center gap-1 whitespace-nowrap rounded bg-slate-500 px-2 py-1 text-white"
-          >
-            <div className="whitespace-pre-wrap break-all">
-              {selector.getLabel()}
-            </div>
-            <button type="button" onClick={() => removeSelector(selector)}>
-              <IoIosClose />
-            </button>
-          </div>
-        ))}
-      </div>
-      {/* end Selectors List or classes */}
+            </form>
+          </Form>
+        </div>
 
-      <div>
-        Selected: <span className="opacity-70">{targetStr || "None"}</span>
+        <Typography className="eg-text-sm">
+          <span className="eg-font-medium">Selected: </span>
+          {targetStr}
+        </Typography>
+        {/* start Selectors List or classes */}
+        <div className="eg-flex eg-flex-wrap eg-items-center eg-gap-1 eg-rounded eg-bg-muted eg-px-1 eg-py-2 eg-shadow-inner">
+          {isShowInput ? (
+            <Input
+              placeholder="add new"
+              className="eg-bg-white"
+              onKeyDown={(e) => {
+                if (e.key == "Enter") {
+                  const target = e.target as HTMLInputElement
+                  addSelector({
+                    name: target.value,
+                    label: target.value,
+                  })
+                  setIsShowInput(false)
+                }
+              }}
+              onBlur={() => setIsShowInput(false)}
+            />
+          ) : (
+            <button
+              className="eg-rounded eg-bg-primary eg-p-1.5 eg-text-primary-foreground"
+              onClick={() => setIsShowInput(true)}
+            >
+              <Plus className="eg-h-4 eg-w-4" />
+            </button>
+          )}
+
+          {/* show list of classes */}
+          {selectors.map((selector: Selector) => (
+            <Badge
+              variant={"outline"}
+              key={selector.toString()}
+              className="eg-bg-white"
+            >
+              {selector.getLabel()}
+              <X
+                className="eg-ml-px eg-w-3 eg-cursor-pointer hover:eg-text-red-500"
+                onClick={() => removeSelector(selector)}
+              />
+            </Badge>
+          ))}
+        </div>
+
+        {/* end Selectors List or classes */}
       </div>
-    </div>
+
+      <Separator />
+    </>
   )
 }

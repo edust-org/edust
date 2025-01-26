@@ -64,7 +64,7 @@ export const Menus = () => {
               </MenubarShortcut>
             </MenubarItem>
             <MenubarItem disabled>
-              Emoji & Symbols{" "}
+              Emoji & Symbols
               <MenubarShortcut>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

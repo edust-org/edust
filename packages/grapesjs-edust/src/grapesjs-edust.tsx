@@ -54,7 +54,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
         <TopArea />
         <SidebarProvider
           className={cn(
-            "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-44px)]",
+            "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)]",
           )}
         >
           <div
@@ -67,7 +67,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
           </div>
           <SidebarInset
             className={cn(
-              "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-44px)] eg-bg-slate-100 eg-p-2",
+              "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)] eg-bg-slate-100 eg-p-2",
             )}
           >
             <Canvas className="eg-border-transparent" />

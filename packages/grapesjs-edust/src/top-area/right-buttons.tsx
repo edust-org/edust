@@ -111,8 +111,8 @@ export const RightButtons = () => {
           <Button
             key={id}
             type="button"
+            size={'sm'}
             variant={Commands.isActive(id) ? "default" : "ghost"}
-            className={`eg-h-9 eg-px-2 eg-text-lg`}
             onClick={() => handleButtons({ Commands, id, options })}
             disabled={disabled?.()}
           >
