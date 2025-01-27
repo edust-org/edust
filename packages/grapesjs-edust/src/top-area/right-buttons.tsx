@@ -4,7 +4,7 @@ import { Button } from "@/components/ui"
 import { useEffect, useMemo, useState } from "react"
 
 import { FaCode } from "react-icons/fa"
-import { MdBorderClear, MdDelete } from "react-icons/md"
+import { MdDelete } from "react-icons/md"
 import { PiExportBold } from "react-icons/pi"
 import { SlSizeFullscreen } from "react-icons/sl"
 
@@ -31,15 +31,12 @@ export const RightButtons = () => {
         icon: <Redo2 className="h-4 w-4" />,
         disabled: () => !UndoRedoManager.hasRedo(),
       },
-      {
-        id: "core:component-outline",
-        icon: <MdBorderClear />,
-      },
-      {
-        id: "core:fullscreen",
-        icon: <SlSizeFullscreen />,
-        options: { target: "#root" },
-      },
+      // disable for modal and top hidden menus
+      // {
+      //   id: "core:fullscreen",
+      //   icon: <SlSizeFullscreen />,
+      //   options: { target: "#root" },
+      // },
       {
         id: "core:open-code",
         icon: <FaCode />,
@@ -70,9 +67,6 @@ export const RightButtons = () => {
     }
     editor.on(cmdEvent, onCommand)
     editor.on(updateEvent, updateCounter)
-
-    // Set 'core:component-outline' to true by default
-    // Commands.run("core:component-outline")
 
     return () => {
       editor.off(cmdEvent, onCommand)
@@ -111,7 +105,7 @@ export const RightButtons = () => {
           <Button
             key={id}
             type="button"
-            size={'sm'}
+            size={"sm"}
             variant={Commands.isActive(id) ? "default" : "ghost"}
             onClick={() => handleButtons({ Commands, id, options })}
             disabled={disabled?.()}

@@ -117,14 +117,14 @@ export const LayerItem = ({
               )}
             />
           </CollapsibleTrigger>
-          {name}
+          <span className="eg-text-xs">{name}</span>
           {visible ? (
             <button onClick={toggleVisibility}>
-              <Eye className="eg-h-4 eg-w-4" />
+              <Eye className="eg-h-3.5 eg-w-3.5" />
             </button>
           ) : (
             <button onClick={toggleVisibility}>
-              <EyeClosed className="eg-h-4 eg-w-4" />
+              <EyeClosed className="eg-h-3.5 eg-w-3.5" />
             </button>
           )}
         </SidebarMenuButton>

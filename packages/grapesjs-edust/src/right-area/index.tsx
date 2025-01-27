@@ -29,14 +29,16 @@ export const RightArea = () => {
             <div className="eg-flex eg-items-center eg-justify-center eg-bg-white">
               <div className="eg-flex eg-h-7 eg-w-full eg-items-center eg-gap-1.5 eg-border eg-p-[2px] eg-shadow-none">
                 <ToggleGroup
-                  defaultValue={state.activePanel}
+                  value={state.activePanel}
                   type="single"
                   className="eg-w-full eg-justify-between"
                 >
                   <ToggleGroupItem
                     value={ActivePanel.SELECTORS}
                     className="eg-h-[22px] eg-w-[22px] eg-rounded-sm eg-p-0"
-                    onClick={() => dispatch({ type: ActivePanel.SELECTORS })}
+                    onClick={() => {
+                      dispatch({ type: ActivePanel.SELECTORS })
+                    }}
                   >
                     <Paintbrush className="eg-h-3.5 eg-w-3.5" />
                   </ToggleGroupItem>

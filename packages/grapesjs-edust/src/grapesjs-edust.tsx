@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { Toaster } from "sonner"
-import grapesjs, { Editor } from "@edust/grapesjs"
-import GjsEditor, { Canvas } from "@grapesjs/react"
+import grapesjs, { Component, Editor } from "@edust/grapesjs"
+import GjsEditor, { Canvas, WithEditor } from "@grapesjs/react"
 import options from "./options"
 import { default as customOnEditor } from "./on-editor"
 import { SidebarInset, SidebarProvider } from "@/components/ui"
@@ -14,6 +14,9 @@ import { TooltipProvider } from "@radix-ui/react-tooltip"
 import { cn } from "./utils"
 import { LeftArea } from "./left-area"
 import { RightArea } from "./right-area"
+import { useRightPanelContext } from "./context/right-panel"
+import { ActivePanel } from "./types"
+import { FullSpinner } from "./components/full-spinner"
 
 interface GrapesjsEdustProps {
   onEditor: (editor: Editor) => Promise<void>
@@ -21,6 +24,8 @@ interface GrapesjsEdustProps {
 }
 
 export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
+  const { dispatch } = useRightPanelContext()
+
   const { onEditor, optionsCustomize } = props
   const editorRef = useRef<Editor | null>(null)
 
@@ -31,6 +36,18 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
     }
 
     editorRef.current = editor
+
+    editor.on(
+      "canvas:drop",
+      (_DataTransfer: DataTransfer, model: Component) => {
+        dispatch({ type: ActivePanel.SELECTORS })
+        editor.select(model)
+      },
+    )
+    editor.on("component:selected", (model: Component) => {
+      dispatch({ type: ActivePanel.SELECTORS })
+      editor.select(model)
+    })
 
     await onEditor(editor)
 
@@ -50,11 +67,12 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
         // This is an optional prop, you can always import the CSS directly in your JS if you wish.
         options={{ ...options(), ...optionsCustomize(editorRef) }}
         onEditor={gsOnEditor}
+        waitReady={<FullSpinner />}
       >
         <TopArea />
         <SidebarProvider
           className={cn(
-            "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)]",
+            "eg-max-h-[calc(100svh-40px)] !eg-min-h-[calc(100svh-40px)]",
           )}
         >
           <div
@@ -67,7 +85,7 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
           </div>
           <SidebarInset
             className={cn(
-              "eg-max-h-[calc(100svh-40px)] eg-min-h-[calc(100svh-40px)] eg-bg-slate-100 eg-p-2",
+              "eg-max-h-[calc(100svh-40px)] !eg-min-h-[calc(100svh-40px)] eg-bg-slate-100 eg-p-2",
             )}
           >
             <Canvas className="eg-border-transparent" />
@@ -78,7 +96,9 @@ export const GrapesjsEdust: React.FC<GrapesjsEdustProps> = (props) => {
               "eg-border-l",
             )}
           >
-            <RightArea />
+            <WithEditor>
+              <RightArea />
+            </WithEditor>
           </div>
         </SidebarProvider>
       </GjsEditor>

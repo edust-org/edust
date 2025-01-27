@@ -2,7 +2,6 @@ import {
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
   MenubarShortcut,
   MenubarSub,
   MenubarSubContent,
@@ -29,6 +28,7 @@ import { useEditor } from "@grapesjs/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
 const FormSchema = z.object({
@@ -57,10 +57,6 @@ export const File = () => {
           <MenubarSub>
             <MenubarSubTrigger>New</MenubarSubTrigger>
             <MenubarSubContent className="eg-w-[230px]">
-              {/* <MenubarItem>
-                Page <MenubarShortcut>⌘N</MenubarShortcut>
-              </MenubarItem> */}
-
               <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger className="eg-flex eg-w-full eg-cursor-auto eg-items-center eg-rounded-sm eg-px-2 eg-py-1.5 eg-text-sm hover:eg-bg-slate-50">
                   <span>Page</span> <MenubarShortcut>⌘N</MenubarShortcut>
@@ -108,23 +104,33 @@ export const File = () => {
                 </DialogContent>
               </Dialog>
 
-              <MenubarItem disabled>
+              {/* <MenubarItem disabled>
                 Playlist from Selection <MenubarShortcut>⇧⌘N</MenubarShortcut>
               </MenubarItem>
               <MenubarItem disabled>
                 Smart Playlist... <MenubarShortcut>⌥⌘N</MenubarShortcut>
               </MenubarItem>
               <MenubarItem disabled>Playlist Folder</MenubarItem>
-              <MenubarItem disabled>Genius Playlist</MenubarItem>
+              <MenubarItem disabled>Genius Playlist</MenubarItem> */}
             </MenubarSubContent>
           </MenubarSub>
-          <MenubarItem disabled>
+          {/* <MenubarItem disabled>
             Open Stream URL... <MenubarShortcut>⌘U</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem disabled>
+          </MenubarItem> */}
+          <MenubarItem
+            onClick={() => {
+              if (window.opener) {
+                window.close()
+              } else {
+                toast.error(
+                  "You can't close this window directly, please use the browser's close button.",
+                )
+              }
+            }}
+          >
             Close Window <MenubarShortcut>⌘W</MenubarShortcut>
           </MenubarItem>
-          <MenubarSeparator />
+          {/* <MenubarSeparator />
           <MenubarSub>
             <MenubarSubTrigger>Library</MenubarSubTrigger>
             <MenubarSubContent>
@@ -155,7 +161,7 @@ export const File = () => {
           <MenubarItem disabled>Page Setup...</MenubarItem>
           <MenubarItem disabled>
             Print... <MenubarShortcut>⌘P</MenubarShortcut>
-          </MenubarItem>
+          </MenubarItem> */}
         </MenubarContent>
       </MenubarMenu>
     </>
