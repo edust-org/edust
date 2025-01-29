@@ -1,12 +1,16 @@
 import { useEditor } from "@grapesjs/react"
-import { Redo2, Undo2 } from "lucide-react"
-import { Button } from "@/components/ui"
+import { Copy, Redo2, Undo2 } from "lucide-react"
+import { Button, Input, Label } from "@/components/ui"
 import { useEffect, useMemo, useState } from "react"
 
 import { FaCode } from "react-icons/fa"
 import { MdDelete } from "react-icons/md"
 import { PiExportBold } from "react-icons/pi"
-import { SlSizeFullscreen } from "react-icons/sl"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 interface Commands {
   isActive: (id: string) => boolean
@@ -154,6 +158,40 @@ export const RightButtons = () => {
             <Redo2 className="h-4 w-4" />
           </ToggleGroupItem>
         </ToggleGroup> */}
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="secondary" size={"sm"}>
+              Share
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent align="end" className="eg-w-[450px]">
+            <div className="eg-flex eg-flex-col eg-space-y-2 eg-text-center sm:eg-text-left">
+              <h3 className="eg-text-lg eg-font-semibold">
+                Share current page
+              </h3>
+              <p className="eg-text-sm eg-text-muted-foreground">
+                Anyone who has this link will be able to view this page.
+              </p>
+            </div>
+            <div className="eg-flex eg-items-center eg-space-x-2 eg-pt-4">
+              <div className="eg-grid eg-flex-1 eg-gap-2">
+                <Label htmlFor="link" className="sr-only">
+                  Link
+                </Label>
+                <Input
+                  defaultValue="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003"
+                  readOnly
+                  className="eg-h-9"
+                />
+              </div>
+              <Button type="submit" size="sm" className="eg-px-3">
+                <span className="sr-only">Copy</span>
+                <Copy />
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
+
         <Button
           size={"sm"}
           onClick={() =>
