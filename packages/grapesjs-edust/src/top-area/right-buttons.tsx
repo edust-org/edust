@@ -158,7 +158,7 @@ export const RightButtons = () => {
             <Redo2 className="h-4 w-4" />
           </ToggleGroupItem>
         </ToggleGroup> */}
-        <Popover>
+        {/* <Popover>
           <PopoverTrigger asChild>
             <Button variant="secondary" size={"sm"}>
               Share
@@ -190,7 +190,7 @@ export const RightButtons = () => {
               </Button>
             </div>
           </PopoverContent>
-        </Popover>
+        </Popover> */}
 
         <Button
           size={"sm"}

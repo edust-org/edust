@@ -12,6 +12,8 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
 >
   Welcome to Grapesjs Edust!
 </h1>
+</section>`
+/*
 
 <!-- delete this -->
 <section>
@@ -749,4 +751,5 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
   </section>
 </section>
 <!-- deleted end -->
-</section>`
+
+*/
