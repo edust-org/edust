@@ -17,7 +17,7 @@ export const Site = () => {
     orgUsername: params.orgIdOrUsername,
     filters,
   })
-  console.log(data)
+
   const [content, setContent] = useState(null)
 
   useEffect(() => {

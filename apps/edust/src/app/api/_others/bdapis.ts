@@ -59,7 +59,9 @@ export const bdapisApi = createApi({
     getBDSubDistrictByDistrict: build.query<string[], string>({
       query: (division) => `/district/${division}`,
       transformResponse: (district: SubDistrictResponse): string[] => {
-        return district.data[0].upazillas
+        if (!district?.data) return []
+
+        return district?.data[0].upazillas
       },
     }),
   }),

@@ -117,7 +117,7 @@ export const File = () => {
           {/* <MenubarItem disabled>
             Open Stream URL... <MenubarShortcut>⌘U</MenubarShortcut>
           </MenubarItem> */}
-          <MenubarItem
+          {/* <MenubarItem
             onClick={() => {
               if (window.opener) {
                 window.close()
@@ -129,7 +129,7 @@ export const File = () => {
             }}
           >
             Close Window <MenubarShortcut>⌘W</MenubarShortcut>
-          </MenubarItem>
+          </MenubarItem> */}
           {/* <MenubarSeparator />
           <MenubarSub>
             <MenubarSubTrigger>Library</MenubarSubTrigger>

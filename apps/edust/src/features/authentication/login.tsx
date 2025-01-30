@@ -22,7 +22,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { Link, useLocation, useNavigate } from "react-router"
 import { BarLoader } from "react-spinners"
 import { SocialAuth } from "./social-auth"
-import { OrganizationRoles, Roles } from "@/types"
 import { toast } from "sonner"
 import { LogoEdust } from "@/components"
 import { Layout } from "./layout"
@@ -48,7 +47,7 @@ export const Login: React.FC = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
-      password: "password2024",
+      password: process.env.NODE_ENV === "development" ? "password2024" : "",
     },
   })
 

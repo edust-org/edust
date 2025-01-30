@@ -45,7 +45,7 @@ export const sidelinks: SideLink[] = [
   },
   {
     title: "Site",
-    label: "1",
+    label: "",
     href: "/organizations/site",
     icon: <LucideGlobe size={18} />,
   },

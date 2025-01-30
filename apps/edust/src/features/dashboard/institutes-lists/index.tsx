@@ -17,10 +17,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui"
-import { MoreHorizontal, Trash2 } from "lucide-react"
+import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { Status } from "@/types"
 import { cn } from "@/utils"
+import { Link } from "react-router"
 
 export const InstitutesLists = () => {
   const { data, refetch } = useGetMeInstitutesListsQuery()
@@ -78,6 +79,11 @@ export const InstitutesLists = () => {
                     <DropdownMenuContent align="end">
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
                       <DropdownMenuSeparator />
+                      <Link to={`edit/${institute.id}`}>
+                        <DropdownMenuItem>
+                          Edit <Pencil className="ml-1 w-4 text-primary" />
+                        </DropdownMenuItem>
+                      </Link>
                       <DropdownMenuItem
                         onClick={() =>
                           deleteInstitute(institute.id)

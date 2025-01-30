@@ -23,6 +23,7 @@ import { toast } from "sonner"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { setAuthentication } from "@/app/features"
 import { OrganizationRoles, User } from "@/types"
+import { convertSlug } from "@/utils"
 
 const FormSchema = z.object({
   name: z
@@ -67,7 +68,7 @@ export const CreateOrganizationForm = () => {
     if (nameValue) {
       // TODO: need to generate slug with validation
       // Generate slug from the name by converting it to lowercase and replacing spaces with hyphens
-      const orgUsername = nameValue.trim().toLowerCase().replace(/\s+/g, "-")
+      const orgUsername = convertSlug(nameValue)
 
       // Update the slug field in the form state
       form.setValue("orgUsername", orgUsername)

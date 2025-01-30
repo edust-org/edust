@@ -22,6 +22,7 @@ import { Link } from "react-router" // Add this line to import Link
 import FilterInstitute from "../filter-institute"
 import { format } from "date-fns"
 import { Terminal } from "lucide-react"
+import Loading from "@/components/loading"
 
 export const InstituteDetails = () => {
   const { id } = useParams()
@@ -44,10 +45,10 @@ export const InstituteDetails = () => {
   return (
     <>
       <Helmet>
-        <title>Institute Details - Edust</title>
-        <meta name="description" content="Institute Details Page" />
-        <meta property="og:title" content="Institute Details - Edust" />
-        <meta property="og:description" content="Institute Details Page" />
+        <title> {data?.data.name || "Institute Details"} - Edust</title>
+        <meta name="description" content={"Institute Details Page"} />
+        <meta property="og:title" content={"Institute Details Edust"} />
+        <meta property="og:description" content={"Institute Details Page"} />
       </Helmet>
       <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
         <Navbar />
@@ -58,6 +59,11 @@ export const InstituteDetails = () => {
           <FilterInstitute isDetailsPage />
         </aside>
         <div className="mx-auto max-w-screen-2xl">
+          {isLoading && (
+            <Typography>
+              <Loading.Spinner />
+            </Typography>
+          )}
           <Card className="border-none p-0">
             <CardHeader className="p-0">
               <img

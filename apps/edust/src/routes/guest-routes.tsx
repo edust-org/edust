@@ -1,9 +1,7 @@
 import { ComingSoon } from "@/components"
-import Loading from "@/components/loading"
 import { InstituteDetails, Institutes, Site } from "@/features"
 import Authentication from "@/features/authentication"
 import { AboutUs, ContactUs } from "@/pages"
-import { Suspense } from "react"
 import { Route } from "react-router"
 
 export default (
@@ -30,14 +28,7 @@ export default (
     <Route path="/contact-us" element={<ContactUs />} />
     <Route path="/u/:orgIdOrUsername/site" element={<Site />} />
     <Route path="/institutes" element={<Institutes />} />
-    <Route
-      path="/institutes/:id"
-      element={
-        <Suspense fallback={<Loading.Spinner />}>
-          <InstituteDetails />
-        </Suspense>
-      }
-    />
+    <Route path="/institutes/:id" element={<InstituteDetails />} />
 
     <Route path="/feedback" element={<ComingSoon />} />
     <Route path="/help-center" element={<ComingSoon />} />

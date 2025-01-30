@@ -19,6 +19,10 @@ export default (
         path="institutes/create"
         element={<Dashboard.InstitutesCreate />}
       />
+      <Route
+        path="institutes/edit/:instituteId"
+        element={<Dashboard.InstitutesEdit />}
+      />
     </Route>
   </>
 )

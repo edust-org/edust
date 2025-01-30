@@ -102,9 +102,14 @@ export const Site = () => {
                 </CardHeader>
                 <CardContent>
                   {data?.data?.site ? (
-                    <Link to={"builder"} target="_blank">
-                      <Button className="mt-2">Start Editing</Button>
-                    </Link>
+                    <div className="flex items-center justify-between gap-2">
+                      <Link to={"builder"} target="_blank">
+                        <Button>Start Editing</Button>
+                      </Link>
+                      <Link to={`/u/${data?.data?.orgUsername}/site`} target="_blank">
+                        <Button variant={"outline"}>visit site </Button>
+                      </Link>
+                    </div>
                   ) : (
                     <Button
                       onClick={handleCreateSite}

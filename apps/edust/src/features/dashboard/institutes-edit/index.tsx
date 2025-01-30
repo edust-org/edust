@@ -30,10 +30,10 @@ import {
 import { cn, convertSlug } from "@/utils"
 import { Check, ChevronsUpDown, ImageUp } from "lucide-react"
 import {
+  useEditInstitutesByIdMutation,
+  useGetInstitutesIdQuery,
   useGetMeInstitutesListsQuery,
-  usePostInstituteMutation,
 } from "@/app/api/v0/institutes"
-import { BarLoader } from "react-spinners"
 import { lazy, Suspense, useEffect, useState } from "react"
 
 import imageCompression from "browser-image-compression"
@@ -47,7 +47,7 @@ import { CategoriesField } from "./components/categories.field"
 import { DivisionField } from "./components/division.field"
 import { DistrictField } from "./components/district.field"
 import { SubDistrictField } from "./components/sub-district.field"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 
 const Editor = lazy(() => import("./editor"))
 
@@ -70,10 +70,16 @@ const FormSchema = z.object({
   code: z.string().min(1, "code is required"),
   photo: z
     .any()
-    .refine((file) => !!file, `Photo is required`)
-    .refine((file) => {
-      return file?.[0]?.size <= MAX_FILE_SIZE
-    }, `Max image size is 5MB.`)
+    // .refine((file) => !!file, `Photo is required`)
+    // .refine((file) => {
+    //   return file?.[0]?.size <= MAX_FILE_SIZE
+    // }, `Max image size is 5MB.`)
+
+    .refine(
+      (file) => !file || file?.[0]?.size <= MAX_FILE_SIZE,
+      `Max image size is 5MB.`,
+    )
+
     .refine((file) => {
       if (!file) return true // Allow no file
       return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
@@ -119,10 +125,16 @@ const FormSchema = z.object({
   overview: z.string().trim().optional(),
 })
 
-export const InstitutesCreate = () => {
+export const InstitutesEdit = () => {
   const navigate = useNavigate()
 
-  const { refetch } = useGetMeInstitutesListsQuery()
+  const { refetch: refetchListOfInstitutes } = useGetMeInstitutesListsQuery()
+  const { instituteId } = useParams()
+
+  const { data, refetch } = useGetInstitutesIdQuery({
+    instituteId,
+  })
+
   // TODO: get lat long
   // const g= navigator.geolocation
   // g.getCurrentPosition((p)=>console.log(p))
@@ -168,6 +180,27 @@ export const InstitutesCreate = () => {
 
   const [overview, setOverview] = useState("")
 
+  useEffect(() => {
+    if (data?.data) {
+      const institute = data?.data
+
+      Object.keys(institute).forEach((key) => {
+        if (institute[key]) {
+          if (key == "foundedDate") {
+            form.setValue(key, new Date(institute[key]))
+          } else if (key == "code" || key == "slug") {
+            form.setValue(key, institute[key].split("::")[0])
+          } else if (key === "photo") {
+            setSelectedImage(institute[key])
+            form.setValue(key, undefined)
+          } else {
+            form.setValue(key, institute[key])
+          }
+        }
+      })
+    }
+  }, [data, form])
+
   const nameValue = form.watch("name")
 
   useEffect(() => {
@@ -184,7 +217,7 @@ export const InstitutesCreate = () => {
     }
   }, [nameValue, overview, form.setValue, form.formState.errors])
 
-  const [postInstitute, { isLoading }] = usePostInstituteMutation()
+  const [editInstitute, { isLoading }] = useEditInstitutesByIdMutation()
 
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     if (data.overview === '<p dir="auto"></p>') {
@@ -193,22 +226,26 @@ export const InstitutesCreate = () => {
 
     const formAction = event.nativeEvent.submitter.value
 
-    const imageFile = data.photo[0]
-
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
     }
     try {
-      const compressedImageFile = await imageCompression(imageFile, options)
+      let imageFile, compressedImageFile
+      if (data.photo) {
+        imageFile = data.photo[0]
+        compressedImageFile = await imageCompression(imageFile, options)
+      }
 
       const formData = new FormData()
 
       // Append fields from data to FormData
       Object.entries(data).forEach(([key, value]) => {
         if (key === "photo") {
-          formData.append(key, compressedImageFile, imageFile.name)
+          if (data.photo) {
+            formData.append(key, compressedImageFile, imageFile.name)
+          }
         } else {
           if (value !== undefined && value !== null && value !== "") {
             formData.append(key, value as string)
@@ -219,14 +256,20 @@ export const InstitutesCreate = () => {
       if (formAction === Status.PUBLISHED) {
         formData.append("status", Status.PUBLISHED)
       }
-
-      postInstitute(formData)
+      if (formAction === Status.DRAFT) {
+        formData.append("status", Status.DRAFT)
+      }
+      formData.append("id", instituteId)
+      editInstitute({ id: instituteId, body: formData })
         .unwrap()
         .then((data) => {
           refetch()
+          refetchListOfInstitutes()
+          if (data.data.status === Status.PUBLISHED) {
+            form.reset()
+            navigate("/dashboard/institutes")
+          }
           toast.success(data.message)
-          form.reset()
-          navigate("/dashboard/institutes")
         })
         .catch((error) => {
           toast.error(error.data.message)
@@ -436,8 +479,11 @@ export const InstitutesCreate = () => {
                         >
                           <ImageUp size={20} />
                           <span className="whitespace-nowrap">
-                            {selectedImage
+                            {/* {selectedImage
                               ? `${selectedImage.name}`
+                              : "Choose File No file chosen"} */}
+                            {selectedImage
+                              ? selectedImage.name || "File chosen"
                               : "Choose File No file chosen"}
                           </span>
                         </label>
@@ -881,11 +927,9 @@ export const InstitutesCreate = () => {
                     value={Status.PUBLISHED}
                     disabled={isLoading}
                   >
-                    {isLoading ? (
-                      <BarLoader color="#fff" />
-                    ) : (
-                      "Create and Publish"
-                    )}
+                    {data?.data?.status === Status.PUBLISHED
+                      ? "Save"
+                      : "Create and Publish"}
                   </Button>
                   <Button
                     variant="secondary"
@@ -894,7 +938,7 @@ export const InstitutesCreate = () => {
                     value={Status.DRAFT}
                     disabled={isLoading}
                   >
-                    {isLoading ? <BarLoader color="#fff" /> : "Save as draft"}
+                    Save as draft
                   </Button>
                 </div>
               </div>

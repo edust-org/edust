@@ -100,10 +100,10 @@ export const Register: React.FC = () => {
                 </Typography>
               </div>
               <Typography>
-                Not in inbox or spam folder?{" "}
-                <Button variant={"link"} disabled>
+                Not in inbox or spam folder?
+                {/* <Button variant={"link"} disabled>
                   Resend
-                </Button>
+                </Button> */}
               </Typography>
             </div>
           </div>

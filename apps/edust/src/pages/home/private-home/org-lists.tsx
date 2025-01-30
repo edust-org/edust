@@ -44,9 +44,7 @@ export const OrgLists = () => {
           <Card key={item.id}>
             <CardHeader>
               <CardTitle>
-                <Link to={"#"} className="underline-offset-8 hover:underline">
-                  <Typography variant="large">{item.name}</Typography>
-                </Link>
+                <Typography variant="large">{item.name}</Typography>
               </CardTitle>
               <CardFooter className="flex items-center justify-between p-0">
                 <Typography affects="muted">
