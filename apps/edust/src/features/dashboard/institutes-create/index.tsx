@@ -64,7 +64,12 @@ const FormSchema = z.object({
       required_error: "Please select a category.",
     })
     .min(1, "category is required"),
-  name: z.string().min(1, "Name is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .refine((value) => /^[A-Za-z\s()\-,]*$/.test(value), {
+      message: "Name must only contain English letters and spaces",
+    }),
   slug: z.string().min(1, "Slug is required"),
   codeType: z.string().trim().min(1, { message: "codeType required" }),
   code: z.string().min(1, "code is required"),

@@ -221,12 +221,18 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
             <Button type="submit" className="flex-1">
               Search
             </Button>
+
             {Object.values(stateInstituteFilter).some((i) => i !== "") && (
               <Button
                 size={"sm"}
                 variant={"ghost"}
                 onClick={() => {
                   form.reset()
+
+                  // when i are in details page rest not work so that is way we set ""
+                  form.setValue("name", "")
+                  form.setValue("instituteCategoryId", "")
+
                   dispatch(resetInstitutesFiltering())
                 }}
               >

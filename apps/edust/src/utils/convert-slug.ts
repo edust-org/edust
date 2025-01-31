@@ -1,8 +1,5 @@
-import slugify from "slugify"
+import * as urlSlug from "url-slug"
 
 export const convertSlug = (title: string) => {
-  return slugify(title, {
-    lower: true,
-    remove: /[*+~.,()'"!:@]/g,
-  })
+  return urlSlug.convert(title)
 }

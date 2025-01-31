@@ -64,8 +64,8 @@ export const InstituteDetails = () => {
               <Loading.Spinner />
             </Typography>
           )}
-          <Card className="border-none p-0">
-            <CardHeader className="p-0">
+          <Card>
+            <CardHeader>
               <img
                 src={data?.data?.photo}
                 alt={data?.data.name}
@@ -95,7 +95,7 @@ export const InstituteDetails = () => {
               </Typography>
             </CardHeader>
 
-            <CardContent className="p-0 pt-6">
+            <CardContent className="pt-6">
               <div className="rounded-md border">
                 <Table>
                   <TableBody>
