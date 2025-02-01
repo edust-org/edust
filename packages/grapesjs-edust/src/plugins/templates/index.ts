@@ -1,4 +1,5 @@
 import { Editor } from "@edust/grapesjs"
+import { defaultTemplate } from "./000-default"
 import { eduCrafets001 } from "./001-edu-crafters"
 import { eduEducation003 } from "./003-edu-education"
 import { polyNova002 } from "./002-poly-nova"
@@ -8,6 +9,7 @@ import { lifeSchool006 } from "./006-lifeschool"
 
 // Import your template and add here [t1, t2, t3, ...]
 const items = [
+  defaultTemplate,
   eduCrafets001,
   polyNova002,
   eduEducation003,

@@ -18,6 +18,7 @@ import V1UnauthorisedError from "@/pages/playground/dashboard-v1/pages/errors/un
 
 import { Playground } from "@/pages"
 import { Route } from "react-router"
+import { Landing } from "@/pages/playground/landing"
 
 export default (
   <>
@@ -36,6 +37,7 @@ export default (
         <Route path="error-example" element={<V1SettingsErrorEx />} />
       </Route>
     </Route>
+    <Route path="/playground/landing" element={<Landing />} />
     <Route path="/playground/500" element={<V1GeneralError />} />
     <Route path="/playground/404" element={<V1NotFoundError />} />
     <Route path="/playground/503" element={<V1MaintenanceError />} />
