@@ -4,6 +4,7 @@ import "@edust/grapesjs-edust/style.css"
 import {
   useDeleteSiteBuilderImagesByIdMutation,
   useEditSiteBuilderMutation,
+  useLazyGetSiteBuilderQuery,
 } from "@/app/api/v0/organizations"
 import { useAppSelector } from "@/app/hooks"
 import { toast } from "sonner"
@@ -12,6 +13,8 @@ import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
 export const Builder = () => {
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
+  const [loadProjectData] = useLazyGetSiteBuilderQuery()
+
   const {
     orgId,
     auth: { token },
@@ -58,6 +61,14 @@ export const Builder = () => {
         editor.AssetManager.add(images)
       }
     })
+    editor.on("storage:start:load", async () => {
+      try {
+        const data = await loadProjectData(orgId).unwrap()
+        editor.loadProjectData(JSON.parse(data?.data?.assets || "{}"))
+      } catch (error) {
+        console.error(error)
+      }
+    })
 
     editor.on("load", async (some, argument) => {
       try {
@@ -82,15 +93,15 @@ export const Builder = () => {
       options: {
         remote: {
           // Load project data
-          urlLoad: `${
-            import.meta.env.VITE_BACKEND_URL
-          }/api/v0/organizations/${orgId}/site-builder`,
+          // urlLoad: `${
+          //   import.meta.env.VITE_BACKEND_URL
+          // }/api/v0/organizations/${orgId}/site-builder`,
 
-          onLoad: (result) => {
-            return editorRef?.current?.loadProjectData(
-              JSON.parse(result?.data?.assets || "{}"),
-            )
-          },
+          // onLoad: (result) => {
+          //   return editorRef?.current?.loadProjectData(
+          //     JSON.parse(result?.data?.assets || "{}"),
+          //   )
+          // },
           headers: {
             Authorization: `Bearer ${token}`,
           },

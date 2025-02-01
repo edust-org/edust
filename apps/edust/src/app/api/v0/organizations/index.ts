@@ -105,7 +105,7 @@ export const organizationsApi = createApi({
       }),
     }),
 
-    getSiteBuilder: build.query<any, void>({
+    getSiteBuilder: build.query<any, string>({
       query: (orgId) => `/${orgId}/site-builder`,
     }),
 
@@ -136,5 +136,6 @@ export const {
 
   useCreateSiteBuilderMutation,
   useGetSiteBuilderQuery,
+  useLazyGetSiteBuilderQuery,
   useEditSiteBuilderMutation,
 } = organizationsApi
