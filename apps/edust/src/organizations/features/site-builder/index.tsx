@@ -10,7 +10,6 @@ import {
   useEditSiteBuilderMutation,
   useUpdateSitePageNameMutation,
 } from "@/app/api/v0/organizations"
-import slugify from "slugify"
 import { convertSlug } from "@/utils"
 
 export const SiteBuilder = () => {
