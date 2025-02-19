@@ -19,7 +19,7 @@ import { useGetOrgMeQuery } from "@/app/api/v0/organizations"
 
 export const Dashboard = () => {
   const { data } = useGetOrgMeQuery()
-  console.log(data)
+
   return (
     <Layout>
       {/* ===== Top Heading ===== */}

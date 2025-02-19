@@ -39,6 +39,13 @@ export const OrgLists = () => {
               </CardHeader>
             </Card>
           ))}
+
+      {!isLoading && !(data?.data?.items.length > 0) && (
+        <Card>
+          <CardHeader className="text-center">Welcome to Edust!</CardHeader>
+        </Card>
+      )}
+
       {data?.data?.items &&
         data?.data?.items?.map((item) => (
           <Card key={item.id}>
@@ -56,7 +63,7 @@ export const OrgLists = () => {
                       <svg
                         viewBox="0 0 64 64"
                         xmlns="http://www.w3.org/2000/svg"
-                        stroke-width="3"
+                        strokeWidth="3"
                         stroke="#000000"
                         fill="none"
                       >

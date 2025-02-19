@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react"
-import { useLocation, useParams, useSearchParams } from "react-router"
+import { useParams, useSearchParams } from "react-router"
 import { useGetOrgSitesByUsernameQuery } from "@/app/api/v0/public"
 import { toast } from "@/hooks/shadcn-ui"
-import { Button, Typography } from "@/components/ui"
-import { Link } from "react-router"
 import Loading from "@/components/loading"
+
+import notFoundData from "./not-found-data.json"
 
 export const Site = () => {
   const params = useParams()
   const [query] = useSearchParams()
-  const location = useLocation()
 
   const filters = query.get("name") ? `name=${query.get("name")}` : `name=home`
 
@@ -69,14 +68,7 @@ export const Site = () => {
       {content ? (
         <div dangerouslySetInnerHTML={{ __html: content?.html }}></div>
       ) : (
-        <div className="flex h-screen flex-col items-center justify-center gap-4">
-          <Typography variant="h1" className="text-red-500">
-            Site is not available.
-          </Typography>
-          <Link to={location.state?.from?.pathname || "/"}>
-            <Button>go back</Button>
-          </Link>
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: notFoundData.html }}></div>
       )}
     </>
   )

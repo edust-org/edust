@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { RootState, store } from "../store"
 import { signOut } from "../features"
+import { defaultValues } from "@/configs"
 
 /**
  * Creates a base query function for interacting with API version v0.
@@ -26,7 +27,7 @@ export const apiV0BaseQuery = (
   basePath?: string,
 ): ReturnType<typeof fetchBaseQuery> => {
   return fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_BACKEND_URL}/api/v0${basePath || ""}`,
+    baseUrl: `${defaultValues.backendURL}/api/v0${basePath || ""}`,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).authentication.auth?.token
 

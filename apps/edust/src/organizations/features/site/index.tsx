@@ -46,7 +46,7 @@ export const Site = () => {
       console.error(error)
     }
   }
-  console.log(data)
+
   return (
     <Layout>
       <Helmet>

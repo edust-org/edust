@@ -10,6 +10,7 @@ import { useAppSelector } from "@/app/hooks"
 import { toast } from "sonner"
 import getImages from "./get-images"
 import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
+import { defaultValues } from "@/configs"
 
 export const Builder = () => {
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
@@ -94,7 +95,7 @@ export const Builder = () => {
         remote: {
           // Load project data
           // urlLoad: `${
-          //   import.meta.env.VITE_BACKEND_URL
+          //   defaultValues.backendURL
           // }/api/v0/organizations/${orgId}/site-builder`,
 
           // onLoad: (result) => {
@@ -108,7 +109,7 @@ export const Builder = () => {
 
           // Store project data
           urlStore: `${
-            import.meta.env.VITE_BACKEND_URL
+            defaultValues.backendURL
           }/api/v0/organizations/${orgId}/site-builder`,
 
           fetchOptions: (opts) =>

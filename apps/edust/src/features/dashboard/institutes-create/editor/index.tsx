@@ -22,7 +22,7 @@ import RcTiptapEditor, {
   History,
   HorizontalRule,
   Iframe,
-  Image,
+  // Image,
   ImportWord,
   Indent,
   Italic,
@@ -38,14 +38,14 @@ import RcTiptapEditor, {
   TaskList,
   TextAlign,
   Underline,
-  Video,
+  // Video,
   locale,
   TableOfContents,
-  Excalidraw,
+  // Excalidraw,
   TextDirection,
   Mention,
   Attachment,
-  ImageGif,
+  // ImageGif,
   Mermaid,
   Twitter,
 } from "reactjs-tiptap-editor"
@@ -102,27 +102,27 @@ const extensions = [
     },
   }),
   Link,
-  Image.configure({
-    upload: (files: File) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(URL.createObjectURL(files))
-        }, 500)
-      })
-    },
-  }),
-  Video.configure({
-    upload: (files: File) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(URL.createObjectURL(files))
-        }, 500)
-      })
-    },
-  }),
-  ImageGif.configure({
-    GIPHY_API_KEY: import.meta.env.NEXT_PUBLIC_GIPHY_API_KEY,
-  }),
+  // Image.configure({
+  //   upload: (files: File) => {
+  //     return new Promise((resolve) => {
+  //       setTimeout(() => {
+  //         resolve(URL.createObjectURL(files))
+  //       }, 500)
+  //     })
+  //   },
+  // }),
+  // Video.configure({
+  //   upload: (files: File) => {
+  //     return new Promise((resolve) => {
+  //       setTimeout(() => {
+  //         resolve(URL.createObjectURL(files))
+  //       }, 500)
+  //     })
+  //   },
+  // }),
+  // ImageGif.configure({
+  //   GIPHY_API_KEY: import.meta.env.NEXT_PUBLIC_GIPHY_API_KEY,
+  // }),
   Blockquote.configure({ spacer: true }),
   SlashCommand,
   HorizontalRule,
@@ -144,7 +144,7 @@ const extensions = [
     },
   }),
   ExportWord,
-  Excalidraw,
+  // Excalidraw,
   Mention,
   Attachment.configure({
     upload: (file: any) => {

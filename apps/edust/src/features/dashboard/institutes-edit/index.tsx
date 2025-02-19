@@ -91,7 +91,13 @@ const FormSchema = z.object({
     z.date(),
   ),
 
-  phoneNumber: z.string().trim().min(1, { message: "required" }),
+  phoneNumber: z
+    .string()
+    .trim()
+    .min(1, { message: "required" })
+    .regex(/^[+]?[0-9\s\-()]*$/, {
+      message: "Invalid phone number format",
+    }),
   contactEmail: z
     .string()
     .trim()
@@ -905,7 +911,10 @@ export const InstitutesEdit = () => {
               <div>
                 <Suspense fallback={<Loading.Spinner />}>
                   <Label>Overview</Label>
-                  <Editor setContentHtml={setOverview} />
+                  <Editor
+                    setContentHtml={setOverview}
+                    DEFAULT={data?.data?.overview || ""}
+                  />
                 </Suspense>
               </div>
 

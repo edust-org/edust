@@ -1,5 +1,5 @@
-import * as urlSlug from "url-slug"
+import slugify from "slugify"
 
 export const convertSlug = (title: string) => {
-  return urlSlug.convert(title)
+  return slugify(title, { lower: true, strict: true })
 }

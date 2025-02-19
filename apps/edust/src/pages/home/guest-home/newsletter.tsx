@@ -58,20 +58,23 @@ export const Newsletter = () => {
               control={form.control}
               name="userEmail"
               render={({ field }) => (
-                <FormItem className="w-full mx-auto">
+                <FormItem className="mx-auto w-full">
                   <FormControl>
                     <Input
                       placeholder="example@gmail.com"
                       aria-label="Email address"
-                      className="bg-muted/50 dark:bg-muted/80 "
+                      className="bg-muted/50 dark:bg-muted/80"
                       {...field}
+                      readOnly
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Subscribe</Button>
+            <Button type="submit" disabled>
+              Subscribe
+            </Button>
           </form>
         </Form>
       </div>

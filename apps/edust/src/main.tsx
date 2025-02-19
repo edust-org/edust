@@ -11,10 +11,11 @@ import { PersistGate } from "redux-persist/integration/react"
 
 import { HelmetProvider } from "react-helmet-async"
 import App from "./app"
+import { defaultValues } from "./configs"
 
 async function enableMocking() {
   const isDev = process.env.NODE_ENV === "development"
-  const isMockEnabled = import.meta.env.VITE_USE_MOCKS === "true"
+  const isMockEnabled = defaultValues.useMocks
 
   // Only enable mocking if in development and mocks are enabled
   if (!(isDev && isMockEnabled)) {

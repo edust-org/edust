@@ -117,6 +117,7 @@ export const Footer = () => {
             <div className="flex items-center gap-2">
               {socialLinks.map((link) => (
                 <a
+                  key={link.href}
                   rel="noreferrer noopener"
                   href={link.href}
                   className="opacity-60 hover:opacity-100"

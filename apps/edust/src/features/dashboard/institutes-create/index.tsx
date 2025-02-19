@@ -90,7 +90,13 @@ const FormSchema = z.object({
     z.date(),
   ),
 
-  phoneNumber: z.string().trim().min(1, { message: "required" }),
+  phoneNumber: z
+    .string()
+    .trim()
+    .min(1, { message: "required" })
+    .regex(/^[+]?[0-9\s\-()]*$/, {
+      message: "Invalid phone number format",
+    }),
   contactEmail: z
     .string()
     .trim()
@@ -288,6 +294,7 @@ export const InstitutesCreate = () => {
 
               {/* slug */}
               <FormField
+              
                 control={form.control}
                 name="slug"
                 render={({ field }) => (
@@ -300,6 +307,7 @@ export const InstitutesCreate = () => {
                         type="text"
                         placeholder="Institute slug"
                         {...field}
+                        readOnly
                       />
                     </FormControl>
                     <FormDescription>

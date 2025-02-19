@@ -3,6 +3,7 @@ import type { Status } from "../common"
 export interface Institute {
   id: string
   instituteCategoryId: string
+  instituteCategory: string
   userId: string
   name: string
   slug: string

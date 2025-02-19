@@ -15,8 +15,8 @@ export const ContactNewsletter = () => {
       <div>
         {" "}
         <div className="flex w-full max-w-sm items-center space-x-2">
-          <Input type="email" placeholder="Email" />
-          <Button size="sm" type="submit">
+          <Input type="email" placeholder="Email" readOnly disabled />
+          <Button size="sm" type="submit" disabled>
             Subscribe
           </Button>
         </div>

@@ -1,9 +1,10 @@
 import { signOut } from "@/app/features"
 import { store } from "@/app/store"
+import { defaultValues } from "@/configs"
 import defaultAxios from "axios"
 
 const axios = defaultAxios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: defaultValues.backendURL,
 })
 
 axios.interceptors.request.use((config) => {
@@ -32,7 +33,7 @@ export default () => {
   const state = store.getState()
 
   // Axios - Set default configurations
-  axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
+  axios.defaults.baseURL = defaultValues.backendURL
   axios.defaults.headers.common["Content-Type"] = "application/json"
   axios.defaults.withCredentials = true // for cookies
 

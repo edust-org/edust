@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui"
+import { defaultValues } from "@/configs"
 import { FaDiscord } from "react-icons/fa"
 
 export const Community = () => {
@@ -33,7 +34,7 @@ export const Community = () => {
 
             <CardFooter>
               <Button asChild>
-                <a href="https://discord.gg/vnhqmn9mdj" target="_blank">
+                <a href={defaultValues.discordLink} target="_blank">
                   Join Discord
                 </a>
               </Button>

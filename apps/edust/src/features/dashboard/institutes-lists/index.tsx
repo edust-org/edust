@@ -24,8 +24,7 @@ import { cn } from "@/utils"
 import { Link } from "react-router"
 
 export const InstitutesLists = () => {
-  const { data, refetch } = useGetMeInstitutesListsQuery()
-  const institutes = data?.data?.items || []
+  const { data: institutes, refetch } = useGetMeInstitutesListsQuery()
 
   const [deleteInstitute, { isLoading: isDeleting }] =
     useDeleteInstituteByIdMutation()
