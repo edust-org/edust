@@ -1,0 +1,305 @@
+{
+  "status": "success",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "items": [
+      {
+        "id": "0573c702-679c-4461-9d2e-01a78b3b91be",
+        "name": "pharmacy-school",
+        "description": "An educational institution providing training in pharmaceutical sciences and medicine preparation.",
+        "createdAt": "2022-08-28T01:39:56.000Z",
+        "updatedAt": "2024-11-08T22:33:12.000Z"
+      },
+      {
+        "id": "0ab307dd-a36c-47ea-8a63-19aedc75d1e4",
+        "name": "forestry-school",
+        "description": "An institution focused on forestry, natural resource management, and environmental conservation.",
+        "createdAt": "2016-10-07T08:54:39.000Z",
+        "updatedAt": "2024-11-08T19:37:02.000Z"
+      },
+      {
+        "id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+        "name": "university",
+        "description": "A higher education institution offering undergraduate, graduate, and postgraduate degrees across various disciplines.",
+        "createdAt": "2009-06-12T17:31:20.000Z",
+        "updatedAt": "2024-11-08T13:53:06.000Z"
+      },
+      {
+        "id": "0bcb87fb-994e-447e-86f3-bdb80d3a8430",
+        "name": "kindergarten",
+        "description": "An educational program for young children, focusing on foundational skills in a structured play environment.",
+        "createdAt": "2000-09-16T11:42:47.000Z",
+        "updatedAt": "2024-11-08T15:33:29.000Z"
+      },
+      {
+        "id": "21be9f47-5c7a-41d6-8ccf-fb262ee6fe91",
+        "name": "anthropology-institute",
+        "description": "An institution focusing on the study of human societies, cultures, and their development.",
+        "createdAt": "2016-05-25T18:45:40.000Z",
+        "updatedAt": "2024-11-09T11:55:45.000Z"
+      },
+      {
+        "id": "26ea8cc2-a6ef-454c-8638-9a54c12bb62f",
+        "name": "fashion-school",
+        "description": "An institution specializing in fashion design, textile studies, and merchandising.",
+        "createdAt": "2004-04-03T02:20:57.000Z",
+        "updatedAt": "2024-11-09T07:38:48.000Z"
+      },
+      {
+        "id": "2807803f-5ffe-4549-97db-72b5db417010",
+        "name": "nursing-school",
+        "description": "An institution focusing on training students in nursing and healthcare services.",
+        "createdAt": "2006-02-14T23:40:45.000Z",
+        "updatedAt": "2024-11-09T01:25:44.000Z"
+      },
+      {
+        "id": "335caefa-7bcd-47d7-ac67-95e6b48ad0b0",
+        "name": "cybersecurity-school",
+        "description": "An educational center focusing on cybersecurity, information security, and ethical hacking.",
+        "createdAt": "2003-11-18T02:30:17.000Z",
+        "updatedAt": "2024-11-09T08:49:27.000Z"
+      },
+      {
+        "id": "3436a5f5-4723-4ba0-88b9-0e59333f0db7",
+        "name": "philosophy-school",
+        "description": "An academic institution offering programs in philosophical thought, ethics, and critical thinking.",
+        "createdAt": "2019-08-08T19:37:09.000Z",
+        "updatedAt": "2024-11-08T18:53:46.000Z"
+      },
+      {
+        "id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+        "name": "college",
+        "description": "An institution that offers undergraduate programs, typically focused on foundational academic and professional skills.",
+        "createdAt": "2003-07-09T14:50:54.000Z",
+        "updatedAt": "2024-11-08T13:35:59.000Z"
+      },
+      {
+        "id": "4d6d1af9-62c6-4550-b017-973fcccd15e7",
+        "name": "technical-college",
+        "description": "An institution providing hands-on training in technical and applied sciences fields.",
+        "createdAt": "2013-12-11T15:57:54.000Z",
+        "updatedAt": "2024-11-08T23:54:23.000Z"
+      },
+      {
+        "id": "51363fef-a984-48aa-b58f-fd5ab2c72425",
+        "name": "teacher-training-college",
+        "description": "An institution dedicated to training future educators with teaching methodologies and classroom management.",
+        "createdAt": "2020-10-20T21:10:03.000Z",
+        "updatedAt": "2024-11-09T11:25:46.000Z"
+      },
+      {
+        "id": "518b82a5-9f86-4c46-b20d-5fec38653ffa",
+        "name": "madrasah",
+        "description": "An educational institution focusing on religious studies, often providing both primary and secondary education.",
+        "createdAt": "2008-10-10T19:18:15.000Z",
+        "updatedAt": "2024-11-09T10:20:02.000Z"
+      },
+      {
+        "id": "55c90de3-f67a-44e7-b1b9-f8a1984a3a17",
+        "name": "sports-academy",
+        "description": "An institution dedicated to training students in athletic skills and sports performance.",
+        "createdAt": "2015-04-11T17:14:32.000Z",
+        "updatedAt": "2024-11-09T12:00:37.000Z"
+      },
+      {
+        "id": "5dda0694-1dbf-4e5a-b449-f46d0da495d8",
+        "name": "engineering-school",
+        "description": "An institution offering specialized programs in various engineering fields, such as mechanical and electrical engineering.",
+        "createdAt": "2024-05-20T03:01:09.000Z",
+        "updatedAt": "2024-11-08T20:48:07.000Z"
+      },
+      {
+        "id": "6164cde6-24fb-4747-ba7c-e6dda53a0795",
+        "name": "psychology-school",
+        "description": "An institution focused on the study of human behavior, psychology, and mental health.",
+        "createdAt": "2009-09-07T15:55:53.000Z",
+        "updatedAt": "2024-11-09T02:41:51.000Z"
+      },
+      {
+        "id": "69d30c18-ef6e-4c05-a24a-518b7af99c3e",
+        "name": "photography-school",
+        "description": "An institution focused on photography skills, techniques, and creative expression.",
+        "createdAt": "2004-09-08T22:40:41.000Z",
+        "updatedAt": "2024-11-08T14:13:04.000Z"
+      },
+      {
+        "id": "69fab29a-da6f-4251-a879-38ee17766997",
+        "name": "law-college",
+        "description": "An institution offering legal education, preparing students for careers in law and related fields.",
+        "createdAt": "2023-07-17T18:12:09.000Z",
+        "updatedAt": "2024-11-08T23:09:19.000Z"
+      },
+      {
+        "id": "6acf5831-b6aa-4339-b9f7-3c2d2fb099f0",
+        "name": "art-school",
+        "description": "An institution that provides education in the visual and performing arts, such as painting, sculpture, and theater.",
+        "createdAt": "2020-10-12T00:05:21.000Z",
+        "updatedAt": "2024-11-09T05:59:26.000Z"
+      },
+      {
+        "id": "6db44235-d526-49d9-890a-467b9903321f",
+        "name": "real-estate-school",
+        "description": "An institution that offers programs and certifications in real estate, property management, and sales.",
+        "createdAt": "2009-06-05T19:10:18.000Z",
+        "updatedAt": "2024-11-08T18:32:30.000Z"
+      },
+      {
+        "id": "79f97bfb-bc76-4fb9-8dbf-5ff68a0aab59",
+        "name": "school",
+        "description": "An educational institution that provides learning environments for students from kindergarten through secondary education.",
+        "createdAt": "2011-06-23T11:18:00.000Z",
+        "updatedAt": "2024-11-09T12:48:43.000Z"
+      },
+      {
+        "id": "824d68b9-0f8a-4f1e-a02d-e3d2a8756979",
+        "name": "robotics-academy",
+        "description": "An institution focused on teaching robotics, automation, and related technologies.",
+        "createdAt": "2014-11-04T21:23:18.000Z",
+        "updatedAt": "2024-11-08T22:13:51.000Z"
+      },
+      {
+        "id": "838c8f6c-74bd-4943-a447-ef3280088514",
+        "name": "astronomy-institute",
+        "description": "An institution specializing in the study of astronomy, space sciences, and astrophysics.",
+        "createdAt": "2023-09-15T05:48:35.000Z",
+        "updatedAt": "2024-11-09T07:11:04.000Z"
+      },
+      {
+        "id": "8e5efa02-4fb2-49ba-a001-66cd3a879af9",
+        "name": "public-health-institute",
+        "description": "An institution dedicated to the study of public health, health policies, and community wellness.",
+        "createdAt": "2020-11-21T18:46:44.000Z",
+        "updatedAt": "2024-11-09T06:29:34.000Z"
+      },
+      {
+        "id": "8face9f9-56aa-4244-8e8c-cf76a2afb7ac",
+        "name": "hospitality-school",
+        "description": "An institution offering education in hospitality, hotel management, and tourism.",
+        "createdAt": "2013-11-26T09:28:17.000Z",
+        "updatedAt": "2024-11-09T11:39:34.000Z"
+      },
+      {
+        "id": "93924ec4-aebf-4f19-b107-39f1f98e63fd",
+        "name": "fine-arts-school",
+        "description": "An institution providing programs in visual arts, such as painting, sculpture, and graphic arts.",
+        "createdAt": "2005-02-11T19:31:45.000Z",
+        "updatedAt": "2024-11-09T05:02:40.000Z"
+      },
+      {
+        "id": "99b931fe-f533-44d1-bbc5-9b8bff9b4602",
+        "name": "business-school",
+        "description": "An institution that provides education in business, management, finance, and related fields.",
+        "createdAt": "2014-04-18T19:01:58.000Z",
+        "updatedAt": "2024-11-08T18:16:58.000Z"
+      },
+      {
+        "id": "a290c782-9501-4b0d-984c-7b3fdafbe518",
+        "name": "environmental-studies-institute",
+        "description": "An institution focused on environmental science, conservation, and related studies.",
+        "createdAt": "2018-05-02T01:01:06.000Z",
+        "updatedAt": "2024-11-09T10:02:20.000Z"
+      },
+      {
+        "id": "ad9393f6-23a3-4c77-a32d-3d48357b23c8",
+        "name": "multimedia-institute",
+        "description": "An institution offering education in multimedia arts, digital media, and interactive design.",
+        "createdAt": "2023-10-13T11:32:57.000Z",
+        "updatedAt": "2024-11-08T21:39:13.000Z"
+      },
+      {
+        "id": "b636bd9c-dc7b-460e-b2bf-6f974e851a88",
+        "name": "tourism-school",
+        "description": "An institution providing training and education in tourism management and travel planning.",
+        "createdAt": "2010-03-16T19:51:28.000Z",
+        "updatedAt": "2024-11-08T22:17:00.000Z"
+      },
+      {
+        "id": "ba29c7bd-67a4-494e-aaf8-7c13250aa451",
+        "name": "dance-school",
+        "description": "An institution offering classes and programs focused on various forms of dance and choreography.",
+        "createdAt": "2019-08-28T12:34:33.000Z",
+        "updatedAt": "2024-11-09T06:47:17.000Z"
+      },
+      {
+        "id": "bd7bb453-e155-4471-aebc-5c9363a22461",
+        "name": "journalism-school",
+        "description": "An institution that offers training in journalism, reporting, and media studies.",
+        "createdAt": "2006-10-09T19:32:40.000Z",
+        "updatedAt": "2024-11-08T17:35:31.000Z"
+      },
+      {
+        "id": "c291a723-8993-4fc5-90e4-2d5037e46aad",
+        "name": "technical-institute",
+        "description": "An institution that offers specialized training in technical and vocational skills, such as engineering or applied sciences.",
+        "createdAt": "2024-02-27T05:19:55.000Z",
+        "updatedAt": "2024-11-09T12:36:37.000Z"
+      },
+      {
+        "id": "c5c05c4d-5805-44b4-86bb-9a524f2865a7",
+        "name": "polytechnic-institute",
+        "description": "An institution focused on technical education, often offering engineering and applied science programs.",
+        "createdAt": "2019-09-09T05:03:16.000Z",
+        "updatedAt": "2024-11-09T06:54:51.000Z"
+      },
+      {
+        "id": "cc022d1d-a1b1-4eaa-9da0-ded5cf5d5958",
+        "name": "data-science-academy",
+        "description": "An institution providing specialized education in data science, analytics, and big data technologies.",
+        "createdAt": "2007-09-19T07:54:45.000Z",
+        "updatedAt": "2024-11-09T08:19:09.000Z"
+      },
+      {
+        "id": "db974255-4698-4f24-a1e2-7e22ed558115",
+        "name": "research-institute",
+        "description": "An institution dedicated to advanced research in various scientific or academic fields.",
+        "createdAt": "2019-10-18T23:32:22.000Z",
+        "updatedAt": "2024-11-09T07:53:37.000Z"
+      },
+      {
+        "id": "dbad171e-e367-4b1f-8313-f81956148c61",
+        "name": "language-school",
+        "description": "An educational center that offers language learning programs for various levels and languages.",
+        "createdAt": "2005-05-26T19:12:30.000Z",
+        "updatedAt": "2024-11-09T05:31:58.000Z"
+      },
+      {
+        "id": "dce65344-4209-4cb3-9061-a45c14fe827f",
+        "name": "medical-college",
+        "description": "A specialized institution focusing on medical education and training for future healthcare professionals.",
+        "createdAt": "2000-05-22T20:16:03.000Z",
+        "updatedAt": "2024-11-08T19:08:31.000Z"
+      },
+      {
+        "id": "e3aaf4ed-17b2-4143-b05f-88a4b3270172",
+        "name": "music-school",
+        "description": "An institution offering programs in music education, performance, and music theory.",
+        "createdAt": "2000-09-20T17:21:06.000Z",
+        "updatedAt": "2024-11-09T10:12:44.000Z"
+      },
+      {
+        "id": "f1f6efde-9dbb-488b-96ec-eb99b5534644",
+        "name": "science-academy",
+        "description": "An institution focused on science education, often with advanced labs and research facilities.",
+        "createdAt": "2023-03-25T19:14:08.000Z",
+        "updatedAt": "2024-11-09T12:38:09.000Z"
+      },
+      {
+        "id": "f36b3c7e-e193-4cda-9086-70a57b1dff67",
+        "name": "high-school",
+        "description": "A secondary school providing education for students, typically in grades 9 through 12, preparing them for college or vocational paths.",
+        "createdAt": "2019-05-20T06:51:59.000Z",
+        "updatedAt": "2024-11-08T18:38:28.000Z"
+      },
+      {
+        "id": "f4a8ed2d-30d2-49be-8b9f-5a9177a5c1dd",
+        "name": "film-school",
+        "description": "An educational center that provides training in film production, screenwriting, and other aspects of filmmaking.",
+        "createdAt": "2022-11-10T06:21:56.000Z",
+        "updatedAt": "2024-11-09T05:58:42.000Z"
+      }
+    ]
+  },
+  "_links": {
+    "self": { "href": "/api/v0/public/institutes/categories", "method": "GET" }
+  }
+}
