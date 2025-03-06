@@ -18,6 +18,14 @@ const eslintConfig = [
     plugins: {
       import: eslintPluginImport,
     },
+    rules: {
+      "check-file/folder-naming-convention": [
+        "error",
+        {
+          "**/app/**/": "NEXT_JS_APP_ROUTER_CASE",
+        },
+      ],
+    },
   },
 ]
 

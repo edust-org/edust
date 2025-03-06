@@ -26,7 +26,7 @@ const footerData = [
       },
       {
         title: "Create Organization",
-        href: "/organization-create",
+        href: "/organizations/create",
         isExternal: false,
       },
     ],
@@ -148,8 +148,8 @@ export const Footer = () => {
                       </a>
                       <div className="absolute -right-4 top-0">
                         <span className="relative flex h-3 w-3">
-                          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                          <span className="relative inline-flex h-3 w-3 rounded-full bg-primary"></span>
+                          <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
+                          <span className="bg-primary relative inline-flex h-3 w-3 rounded-full"></span>
                         </span>
                       </div>
                     </div>

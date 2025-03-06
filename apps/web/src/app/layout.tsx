@@ -1,4 +1,3 @@
-import { defaultValues } from "@/configs"
 import { ReduxProvider } from "@/lib/store"
 import type { Metadata } from "next"
 import { Roboto } from "next/font/google"

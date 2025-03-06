@@ -26,7 +26,7 @@ import { z } from "zod"
 
 import { useState } from "react"
 
-import { Layout } from "../components/layout"
+import { Layout } from "../../components/layout"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {

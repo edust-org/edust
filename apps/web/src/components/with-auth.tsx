@@ -13,18 +13,18 @@ export function withAuth<P extends WithAuthProps>(
   Component: React.ComponentType<P>,
 ) {
   const Wrapper = (props: P): JSX.Element => {
-    const { accessToken: token } = useAppSelector(
-      (state) => state.authentication.auth,
+    const accessToken = useAppSelector(
+      (state) => state.authentication.auth.accessToken,
     )
 
     useEffect(() => {
-      if (!token) {
+      if (!accessToken) {
         redirect("/auth/login")
       }
-    }, [token])
+    }, [accessToken])
 
     // If no token is found, do not render the component yet
-    if (!token) {
+    if (!accessToken) {
       return <></>
     }
 
