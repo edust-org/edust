@@ -7,7 +7,7 @@ export interface AuthenticationState {
   user: User | null
   orgId: string
   auth: {
-    token: string
+    accessToken: string
     expiresAt: Date
   }
 }
@@ -18,7 +18,7 @@ const initialState: AuthenticationState = {
   user: null,
   orgId: "",
   auth: {
-    token: "",
+    accessToken: "",
     expiresAt: new Date(),
   },
 }

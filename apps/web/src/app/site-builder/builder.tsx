@@ -21,7 +21,7 @@ export const Builder = () => {
 
   const {
     orgId,
-    auth: { token },
+    auth: { accessToken: token },
   } = useAppSelector((state) => state.authentication)
   const { refetch: refaceGetImages } = useGetSiteBuilderImagesQuery(orgId)
 

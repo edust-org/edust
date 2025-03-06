@@ -78,7 +78,7 @@ export default function Login() {
               isLoading: false,
               user: data?.data,
               auth: {
-                token: data?.auth.token,
+                accessToken: data?.auth.accessToken,
                 expiresAt: data?.auth.expiresAt,
               },
             }),
@@ -103,7 +103,7 @@ export default function Login() {
     <>
       <Layout>
         <Form {...form}>
-          <div className="w-full rounded bg-background p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
+          <div className="bg-background w-full rounded p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">
             <div className="text-center">
               <Link href={"/"}>
                 <LogoEdust className="mb-3 inline-block" width={250} />

@@ -1,0 +1,194 @@
+[
+  {
+    "id": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+    "name": "Public Colleges (Government)",
+    "slug": "public-colleges-government",
+    "description": "Public colleges operated and funded by the government, offering a wide range of undergraduate and postgraduate programs.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "0bb6a543-b905-4d53-8bd1-5163a81768eb",
+    "name": "Private Colleges (Non-Government)",
+    "slug": "private-colleges-non-government",
+    "description": "Colleges owned and managed by private organizations that offer diverse educational programs, typically funded through tuition fees.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "79f97bfb-bc76-4fb9-8dbf-5ff68a0aab59",
+    "name": "Private Medical Colleges",
+    "slug": "private-medical-colleges",
+    "description": "Medical colleges run by private entities, providing training in various fields of medicine and healthcare.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "f36b3c7e-e193-4cda-9086-70a57b1dff67",
+    "name": "Public Engineering Colleges",
+    "slug": "public-engineering-colleges",
+    "description": "Engineering colleges operated by government bodies, offering degrees in various engineering disciplines.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "c5c05c4d-5805-44b4-86bb-9a524f2865a7",
+    "name": "Private Engineering Colleges",
+    "slug": "private-engineering-colleges",
+    "description": "Engineering colleges managed by private organizations, providing specialized engineering education and research opportunities.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "518b82a5-9f86-4c46-b20d-5fec38653ffa",
+    "name": "Polytechnic Institutes",
+    "slug": "polytechnic-institutes",
+    "description": "Institutes offering diploma-level programs in technical fields such as engineering, applied sciences, and management.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "0bcb87fb-994e-447e-86f3-bdb80d3a8430",
+    "name": "Government Agricultural Colleges",
+    "slug": "government-agricultural-colleges",
+    "description": "Agricultural colleges funded and operated by the government, focused on training in farming, agricultural sciences, and related fields.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "a7895260-64ce-4b32-99b4-9f74006772e3",
+    "name": "Private Agricultural Colleges",
+    "slug": "private-agricultural-colleges",
+    "description": "Private colleges offering specialized agricultural education and training in various aspects of farming and agribusiness.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "dce65344-4209-4cb3-9061-a45c14fe827f",
+    "name": "Public Law Colleges",
+    "slug": "public-law-colleges",
+    "description": "Law colleges funded by the government, providing legal education and training for aspiring lawyers and judges.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "e36afd0e-f139-48d1-8bdd-26b22035841a",
+    "name": "Private Law Colleges",
+    "slug": "private-law-colleges",
+    "description": "Private institutions offering law degrees and legal education, with a focus on various legal fields and disciplines.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "7c6e00c1-8fa0-4781-adbc-f043abd399ab",
+    "name": "Military Colleges",
+    "slug": "military-colleges",
+    "description": "Colleges specializing in military education, providing training in defense, military strategy, and leadership.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "08a636b7-3bc1-4c45-80dc-d005c23d86a2",
+    "name": "General Public Universities",
+    "slug": "general-public-universities",
+    "description": "Public universities offering a broad range of academic programs in diverse fields of study, including arts, science, and humanities.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "5817d3cf-4115-48cf-8941-76d38e6f634f",
+    "name": "Science & Technology Universities",
+    "slug": "science-and-technology-universities",
+    "description": "Universities focused on the advancement of science and technology, offering programs in engineering, computer science, and more.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "1fe119b0-d73c-424e-a319-d41d6f0fd61a",
+    "name": "Engineering & Technology Universities",
+    "slug": "engineering-and-technology-universities",
+    "description": "Universities specializing in engineering and technology disciplines, including mechanical, electrical, and civil engineering.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "395d3eb6-3011-45a6-b0df-4e6c16c2182e",
+    "name": "Agricultural Universities",
+    "slug": "agricultural-universities",
+    "description": "Universities dedicated to agricultural education and research, including areas such as crop science, animal husbandry, and agribusiness.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "5dda0694-1dbf-4e5a-b449-f46d0da495d8",
+    "name": "Medical Universities",
+    "slug": "medical-universities",
+    "description": "Medical universities offering comprehensive programs in medical science, training doctors, nurses, and healthcare professionals.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "db974255-4698-4f24-a1e2-7e22ed558115",
+    "name": "Islamic Universities",
+    "slug": "islamic-universities",
+    "description": "Universities offering education in Islamic studies, theology, and related disciplines, focusing on the teachings of Islam.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "ba29c7bd-67a4-494e-aaf8-7c13250aa451",
+    "name": "General Private Universities",
+    "slug": "general-private-universities",
+    "description": "Private universities offering a wide variety of undergraduate and postgraduate programs across different fields of study.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "f4a8ed2d-30d2-49be-8b9f-5a9177a5c1dd",
+    "name": "Business & Economics Universities",
+    "slug": "business-and-economics-universities",
+    "description": "Universities that offer programs in business, economics, management, and entrepreneurship, preparing students for corporate and economic leadership roles.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "d8b46fc5-799d-448b-b977-03632a4816d5",
+    "name": "Medical & Health Sciences Universities",
+    "slug": "medical-and-health-sciences-universities",
+    "description": "Universities focused on medical and health sciences education, including nursing, medicine, and public health programs.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "f1f6efde-9dbb-488b-96ec-eb99b5534644",
+    "name": "Islamic & Religious Universities",
+    "slug": "islamic-and-religious-universities",
+    "description": "Universities specializing in Islamic and religious studies, offering programs in theology, history, and Islamic philosophy.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "2e17a9e1-da62-4c59-966f-384dfea8acf9",
+    "name": "Public Schools (Government)",
+    "slug": "public-schools-government",
+    "description": "Public schools funded and operated by the government, offering education to students without tuition fees. They provide a wide range of academic programs and extracurricular activities.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "26ea8cc2-a6ef-454c-8638-9a54c12bb62f",
+    "name": "Private Schools",
+    "slug": "private-schools",
+    "description": "Privately funded schools that charge tuition fees. They often offer specialized curricula, advanced facilities, and smaller class sizes compared to public schools.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  },
+  {
+    "id": "23278e57-474d-4416-94ec-1b15d798a31c",
+    "name": "International Schools",
+    "slug": "international-schools",
+    "description": "Schools that offer an international curriculum, often following global standards like the International Baccalaureate (IB) or British A-Levels, catering to expatriates and globally minded students.",
+    "createdAt": "2025-02-11T00:00:00.000Z",
+    "updatedAt": "2025-02-11T00:00:00.000Z"
+  }
+]

@@ -13,7 +13,9 @@ export function withAuth<P extends WithAuthProps>(
   Component: React.ComponentType<P>,
 ) {
   const Wrapper = (props: P): JSX.Element => {
-    const { token } = useAppSelector((state) => state.authentication.auth)
+    const { accessToken: token } = useAppSelector(
+      (state) => state.authentication.auth,
+    )
 
     useEffect(() => {
       if (!token) {
