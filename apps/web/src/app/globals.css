@@ -2,6 +2,36 @@
 
 @plugin "tailwindcss-animate";
 
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+@theme {
+  --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
+  --animate-grid: grid 15s linear infinite;
+}
+
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes grid {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -77,13 +107,13 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(0 0% 3.9%);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
+  --background: hsl(0 0% 3.9%);
+  --foreground: hsl(0 0% 98%);
   --card: oklch(0.129 0.042 264.695);
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.129 0.042 264.695);
@@ -116,7 +146,16 @@
   --sidebar-ring: oklch(0.446 0.043 257.281);
 }
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
 @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+  }
   * {
     @apply border-border outline-ring/50;
   }

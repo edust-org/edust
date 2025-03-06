@@ -3,7 +3,8 @@ import { defaultValues } from "@/configs"
 import { ReduxProvider } from "@/lib/store"
 import { makeServer } from "@/mocks"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Roboto } from "next/font/google"
+import { Toaster } from "sonner"
 
 import "./globals.css"
 
@@ -11,14 +12,10 @@ if (process.env.NODE_ENV === "development" && defaultValues.isMocksApiEnable) {
   makeServer({ environment: "development" })
 }
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const roboto = Roboto({
+  weight: "400",
   subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -65,11 +62,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${roboto.className} antialiased`}>
         <ReduxProvider>
           <MirageSetup />
+          <Toaster richColors />
           {children}
         </ReduxProvider>
       </body>

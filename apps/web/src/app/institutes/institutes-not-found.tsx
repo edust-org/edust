@@ -1,0 +1,37 @@
+"use client"
+
+import { Button, Card, Typography } from "@/components/ui"
+import { useAppSelector } from "@/lib/store/hooks"
+import { useRouter } from "next/navigation"
+
+const InstituteNotFound = () => {
+  const isAuthenticated = useAppSelector(
+    (state) => state.authentication.isAuthenticated,
+  )
+
+  const router = useRouter()
+  return (
+    <Card className="max-w-96 p-8">
+      <Typography affects="removePaddingMargin" variant="h2">
+        Institutes not found
+      </Typography>
+      <Typography affects="removePaddingMargin" variant="p">
+        If you want to create a new institute you need to register here.
+      </Typography>
+      <Button
+        className="mt-4 w-full"
+        onClick={() => {
+          if (!isAuthenticated) {
+            return router.push("/auth/login")
+          }
+
+          router.push("/dashboard/institutes/create")
+        }}
+      >
+        Create new one
+      </Button>
+    </Card>
+  )
+}
+
+export default InstituteNotFound
