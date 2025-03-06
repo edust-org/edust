@@ -28,6 +28,7 @@ export const apiV0BaseQuery = (
 ): ReturnType<typeof fetchBaseQuery> => {
   return fetchBaseQuery({
     baseUrl: `${defaultValues.backendURL}/api/v0${basePath || ""}`,
+    credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).authentication.auth?.accessToken
 
