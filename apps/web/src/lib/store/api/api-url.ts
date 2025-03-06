@@ -1,3 +1,4 @@
+import { defaultValues } from "@/configs"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 import type { RootState } from "../store"
@@ -26,9 +27,9 @@ export const apiV0BaseQuery = (
   basePath?: string,
 ): ReturnType<typeof fetchBaseQuery> => {
   return fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/v0${basePath || ""}`,
+    baseUrl: `${defaultValues.backendURL}/api/v0${basePath || ""}`,
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).authentication.auth?.token
+      const token = (getState() as RootState).authentication.auth?.accessToken
 
       // If we have a token set in state, let's assume that we should be passing it.
       if (token) {

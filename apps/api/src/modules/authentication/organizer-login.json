@@ -1,0 +1,43 @@
+{
+  "status": "SUCCESS",
+  "message": "Logged in successfully!",
+  "auth": {
+    "accessToken": "tokenForOrganizer",
+    "expiresAt": "2025-03-06T14:02:46.111Z",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjliYzNiNWMxLTI5NmEtNDcxMi04NTllLWY0MjgzZThiMGUyYSIsImlhdCI6MTc0MTI2ODg2NiwiZXhwIjoxNzQzODYwODY2fQ.h5-5P2fMeIXE6mq-V9lrIvO_-3Z4vMDbH89CXtIRH0g"
+  },
+  "data": {
+    "id": "9bc3b5c1-296a-4712-859e-f4283e8b0e2a",
+    "name": "Organizer",
+    "username": "organizer",
+    "email": "organizer@example.com",
+    "profilePic": "https://img.freepik.com/premium-vector/teacher-icon-avatar-sitting-table-education_934241-131.jpg",
+    "systemRole": null,
+    "organizationRoles": null,
+    "createdAt": "2015-07-06T11:03:20.755Z",
+    "updatedAt": "2024-11-22T18:11:09.728Z"
+  },
+  "_links": {
+    "self": { "href": "/api/v0/auth/login", "method": "POST" },
+    "refresh": { "href": "/api/v0/auth/refresh", "method": "POST" },
+    "forgotPassword": {
+      "href": "/api/v0/auth/forgot-password",
+      "method": "POST"
+    },
+    "checkOtp": { "href": "/api/v0/auth/check-otp", "method": "POST" },
+    "resetPassword": {
+      "href": "/api/v0/auth/reset-password",
+      "method": "POST"
+    },
+    "googleAuth": { "href": "/api/v0/auth/google", "method": "GET" },
+    "googleCallback": {
+      "href": "/api/v0/auth/google/callback",
+      "method": "GET"
+    },
+    "githubAuth": { "href": "/api/v0/auth/github", "method": "GET" },
+    "githubCallback": {
+      "href": "/api/v0/auth/github/callback",
+      "method": "GET"
+    }
+  }
+}

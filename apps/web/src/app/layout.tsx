@@ -1,16 +1,10 @@
-import { MirageSetup } from "@/components/mirage-setup"
 import { defaultValues } from "@/configs"
 import { ReduxProvider } from "@/lib/store"
-import { makeServer } from "@/mocks"
 import type { Metadata } from "next"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
 import "./globals.css"
-
-if (process.env.NODE_ENV === "development" && defaultValues.isMocksApiEnable) {
-  makeServer({ environment: "development" })
-}
 
 const roboto = Roboto({
   weight: "400",
@@ -64,7 +58,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
         <ReduxProvider>
-          <MirageSetup />
           <Toaster richColors />
           {children}
         </ReduxProvider>
