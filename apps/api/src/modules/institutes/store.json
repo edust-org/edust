@@ -1,0 +1,56 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! New resource created.",
+  "data": {
+    "id": "4d1a7168-a92c-4de5-bb1c-c117a3e6b919",
+    "instituteCategoryId": "f4a8ed2d-30d2-49be-8b9f-5a9177a5c1dd",
+    "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+    "name": "Art schools",
+    "slug": "art-schools",
+    "code": "343sd",
+    "codeType": "EIIN",
+    "photo": "http://res.cloudinary.com/dmiewayfu/image/upload/v1741340592/edust_v0/institutes/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807-ezgif.com-avif-to-jpg-converter-m7yl86m9.jpg",
+    "contactEmail": "gailpouros.fay@gmail.com",
+    "phoneNumber": "01319805503",
+    "website": "http://www.edust.org",
+    "foundedDate": "2025-03-19T18:00:00.000Z",
+    "principalName": "Irma Cummings",
+    "language": "English",
+    "country": "Bangladesh",
+    "division": "Mymensingh",
+    "district": "Chapai Nawabganj",
+    "subDivision": null,
+    "subDistrict": "Nachole",
+    "addressLine1": "Address 1",
+    "addressLine2": null,
+    "postalCode": "12",
+    "latitude": 11,
+    "longitude": 11,
+    "overview": null,
+    "status": "PUBLISHED",
+    "createdAt": "2025-03-07T09:43:12.723Z",
+    "updatedAt": "2025-03-07T09:43:12.723Z"
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v0/institutes",
+      "method": "POST"
+    },
+    "me": {
+      "href": "/api/v0/institutes/me",
+      "method": "GET"
+    },
+    "getById": {
+      "href": "/api/v0/institutes/:id",
+      "method": "GET"
+    },
+    "editById": {
+      "href": "/api/v0/institutes/:id",
+      "method": "PATCH"
+    },
+    "deleteById": {
+      "href": "/api/v0/institutes/:id",
+      "method": "DELETE"
+    }
+  }
+}

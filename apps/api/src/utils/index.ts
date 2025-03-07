@@ -1,1 +1,1 @@
-export * from './convert-slug'
+export * from "./convert-slug"

@@ -6,11 +6,18 @@ import path from "path"
 // Initialize the express router
 const router: Router = express.Router()
 
-router.get("/", async (req, res) => {
-  const organizations = await loadJsonFile(
-    path.resolve(__dirname, "./get-organization.json"),
-  )
-  res.json(organizations)
-})
+router
+  .post("/", async (req, res) => {
+    const organizations = await loadJsonFile(
+      path.resolve(__dirname, "./create-org.json"),
+    )
+    res.json(organizations)
+  })
+  .get("/", async (req, res) => {
+    const organizations = await loadJsonFile(
+      path.resolve(__dirname, "./get-organization.json"),
+    )
+    res.json(organizations)
+  })
 
 export default router

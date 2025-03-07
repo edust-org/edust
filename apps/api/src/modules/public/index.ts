@@ -1,4 +1,4 @@
-import * as express from "express"
+import express from "express"
 import type { Router } from "express"
 import createHttpError from "http-errors"
 import { statusCodes, statusMessages } from "http-status-kit"
@@ -11,6 +11,7 @@ router.get("/institutes/categories", async (req, res) => {
   const categories = await loadJsonFile(
     path.resolve(__dirname, "../../data/institute-category.json"),
   )
+
   res.json({
     status: "SUCCESS",
     message: "Success! Your request has been completed.",
@@ -81,4 +82,17 @@ router.get("/institutes/:instituteId", (req, res) => {
   })
 })
 
+router.get("/organizations/orgId-:orgId/site", async (req, res) => {
+  const data = await loadJsonFile(
+    path.resolve(__dirname, "./get-site-by-ordId.json"),
+  )
+  res.json(data)
+})
+
+router.get("/organizations/orgUsername-:orgUsername/site", async (req, res) => {
+  const data = await loadJsonFile(
+    path.resolve(__dirname, "./get-site-by-org-username.json"),
+  )
+  res.json(data)
+})
 export default router
