@@ -7,6 +7,17 @@
   padding-inline: 2rem;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 @theme {
   --animate-fade-in-scale: fade-in-scale 0.3s ease-out;
   --animate-grid: grid 15s linear infinite;
@@ -161,5 +172,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  div[data-radix-popper-content-wrapper] {
+    input,
+    textarea {
+      border-width: 0px !important;
+    }
   }
 }

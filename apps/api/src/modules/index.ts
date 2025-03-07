@@ -3,6 +3,7 @@ import * as express from "express"
 import type { Router } from "express"
 
 import authenticationRoutes from "./authentication"
+import institutesRoutes from "./institutes"
 import organizationsRoutes from "./organizations"
 import publicRoutes from "./public"
 
@@ -13,6 +14,7 @@ const router: Router = express.Router()
 router.use("/v0/auth", authenticationRoutes)
 router.use("/v0/public", publicRoutes)
 
+router.use("/v0/institutes", authenticate("tokenForUser"), institutesRoutes)
 router.use(
   "/v0/organizations",
   authenticate("tokenForUser"),

@@ -18,6 +18,10 @@ export const institutesApi = createApi({
     }),
     getMeInstitutesLists: build.query<any, void>({
       query: () => `/me`,
+      transformResponse: (response) => {
+        console.log(response)
+        return response?.data?.items || []
+      },
     }),
     getInstitutesId: build.query({
       query: ({ instituteId, filters }) => {

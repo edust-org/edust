@@ -1,3 +1,5 @@
+"use client"
+
 import { useAppSelector } from "@/lib/store/hooks"
 import { detectTheme } from "@/utils"
 

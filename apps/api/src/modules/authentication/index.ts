@@ -24,10 +24,14 @@ router.post("/login", async (req, res) => {
       break
 
     case "organizer@example.com":
+      const organizer = await loadJsonFile(
+        path.resolve(__dirname, "./organizer-login.json"),
+      )
+      res.json(organizer)
       break
     default:
       const userDefault = await loadJsonFile(
-        path.resolve(__dirname, "./organizer-login.json"),
+        path.resolve(__dirname, "./user-login.json"),
       )
       res.json(userDefault)
       break

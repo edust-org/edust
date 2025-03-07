@@ -7,7 +7,14 @@ import apiRoutes from "./modules"
 const app = express()
 const port = 4000
 
-app.use(cors())
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      callback(null, origin)
+    },
+    credentials: true,
+  }),
+)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
