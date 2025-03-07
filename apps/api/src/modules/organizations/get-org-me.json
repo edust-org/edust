@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "message": "Organization retrieved successfully!",
+  "data": {
+    "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+    "name": "harvard university",
+    "orgUsername": "harvard-univ",
+    "createdAt": "2024-07-26T17:07:32.709Z",
+    "updatedAt": "2024-11-22T10:42:47.383Z",
+    "role": {
+      "id": "f3da7e11-905e-44c8-8324-d3cbcf481d83",
+      "name": "OWNER",
+      "description": "Owner of an organization with special permissions."
+    },
+    "site": {
+      "id": "33f91a95-d6ed-4b3f-bed0-24b7296ee8b6",
+      "pages": 1,
+      "images": 2
+    }
+  },
+  "_links": {
+    "self": {
+      "href": "/api/v0/organizations/me",
+      "method": "GET"
+    },
+    "create": {
+      "href": "/api/v0/organizations",
+      "method": "POST"
+    },
+    "edit": {
+      "href": "/api/v0/organizations/me",
+      "method": "PATCH"
+    }
+  }
+}

@@ -1,8 +1,5 @@
 "use client"
 
-import { useGetInstitutesCategoriesQuery } from "@/lib/store/api/v0/public"
-import { institutesFiltering, resetInstitutesFiltering } from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import {
   Button,
   Form,
@@ -18,13 +15,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui"
+import { useGetInstitutesCategoriesQuery } from "@/lib/store/api/v0/public"
+import {
+  institutesFiltering,
+  resetInstitutesFiltering,
+} from "@/lib/store/features"
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
-import React from "react"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { IoAddOutline } from "react-icons/io5"
 import { z } from "zod"
-import { useRouter } from "next/navigation"
+
+import React from "react"
 
 const FormSchema = z.object({
   name: z.string(),
@@ -99,10 +103,10 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
           className="mb-4 w-full"
           onClick={() => {
             if (!isAuthenticated) {
-              return router("/auth/login")
+              return router.push("/auth/login")
             }
 
-            router("/dashboard/institutes/create")
+            router.push("/dashboard/institutes/create")
           }}
         >
           <IoAddOutline className="mr-2 text-2xl" /> Create an institutes
@@ -116,7 +120,7 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
             render={({ field }) => (
               <FormItem>
                 <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Search className="text-muted-foreground absolute left-2 top-2.5 h-4 w-4" />
                   <Input placeholder="Search" className="pl-8" {...field} />
                 </div>
                 <FormMessage />
@@ -133,7 +137,7 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
                   defaultValue={field.value}
                   value={form.getValues().instituteCategoryId}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Choose a category" />
                   </SelectTrigger>
                   <SelectContent>
