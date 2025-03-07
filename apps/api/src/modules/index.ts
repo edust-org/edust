@@ -14,12 +14,8 @@ const router: Router = express.Router()
 router.use("/v0/auth", authenticationRoutes)
 router.use("/v0/public", publicRoutes)
 
-router.use("/v0/institutes", authenticate("tokenForUser"), institutesRoutes)
-router.use(
-  "/v0/organizations",
-  authenticate("tokenForUser"),
-  organizationsRoutes,
-)
+router.use("/v0/institutes", authenticate(), institutesRoutes)
+router.use("/v0/organizations", authenticate(), organizationsRoutes)
 
 // Export the router
 export default router

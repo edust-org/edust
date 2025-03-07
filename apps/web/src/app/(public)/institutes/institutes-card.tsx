@@ -49,7 +49,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
 
   return (
     <>
-      <Card className="overflow-hidden rounded-lg border shadow">
+      <Card className="overflow-hidden rounded-lg border py-0 shadow">
         <Link href={`/institutes/${id}`}>
           <img
             src={
@@ -109,7 +109,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
                 </Typography>
               </Link>
               <Link href="#">
-                <Typography className="text-xs text-muted-foreground">
+                <Typography className="text-muted-foreground text-xs">
                   {format(new Date(createdAt), "MMM dd yyyy")}
                 </Typography>
               </Link>
