@@ -16,6 +16,7 @@ import { useLoginMutation } from "@/lib/store/api/v0/auth"
 import { setAuthentication } from "@/lib/store/features"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { setCookie } from "cookies-next/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -77,12 +78,11 @@ export default function Login() {
               isAuthenticated: true,
               isLoading: false,
               user: data?.data,
-              auth: {
-                accessToken: data?.auth.accessToken,
-                expiresAt: data?.auth.expiresAt,
-              },
             }),
           )
+
+          setCookie("accessToken", data?.auth.accessToken)
+          setCookie("expiresAt", data?.auth.expiresAt)
           router.push("/")
         }
       })

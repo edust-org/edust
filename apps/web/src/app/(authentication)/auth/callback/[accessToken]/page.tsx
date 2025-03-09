@@ -2,7 +2,7 @@
 
 import { setAuthentication } from "@/lib/store/features"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { getCookie } from "cookies-next/client"
+import { getCookie, setCookie } from "cookies-next/client"
 import { useParams, useRouter } from "next/navigation"
 import { toast } from "sonner"
 
@@ -26,13 +26,11 @@ export default function Callback() {
           isAuthenticated: true,
           isLoading: false,
           user: data?.data,
-          auth: {
-            accessToken: data?.auth.token,
-            expiresAt: data?.auth.expiresAt,
-          },
         }),
       )
 
+      setCookie("accessToken", data?.auth.accessToken)
+      setCookie("expiresAt", data?.auth.expiresAt)
       toast.success(data?.message)
       router.back()
     } else {

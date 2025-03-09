@@ -1,38 +1,58 @@
 import { defaultValues } from "@/configs"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import axios from "axios"
+import { deleteCookie, getCookie, setCookie } from "cookies-next"
 
-import type { RootState } from "../store"
+const refreshAuthToken = async (refreshToken: string) => {
+  try {
+    const response = await axios.post(
+      `${defaultValues.backendURL}/api/v0/auth/refresh`,
+      {
+        refreshToken,
+      },
+    )
 
-/**
- * Creates a base query function for interacting with API version v0.
- *
- * The function generates a base query with an optional `basePath`. If provided, the `basePath` is appended to the base API URL.
- * The function includes authentication headers if a access_token is found in localStorage, adding it as a `Bearer` access_token in the `Authorization` header.
- * It also includes credentials for cross-origin requests.
- *
- * @param {string} [basePath] - An optional path to append to the base API URL. If not provided, no additional path is appended.
- * @returns {ReturnType<typeof fetchBaseQuery>} A base query function ready for use with RTK Query endpoints.
- *
- * @example
- * // Example of usage with a specific endpoint
- * const apiQuery = apiV0BaseQuery('users');
- * // Sends requests to: `${NEXT_PUBLIC_BACK_END_URL}/api/v0/users`
- *
- * @example
- * // Example of usage without a basePath
- * const apiQuery = apiV0BaseQuery();
- * // Sends requests to: `${NEXT_PUBLIC_BACK_END_URL}/api/v0`
- */
+    const newAccessToken = response?.data?.auth?.accessToken
+    const newExpiredAt = response?.data?.auth?.expiresAt
+
+    if (newAccessToken) {
+      setCookie("accessToken", newAccessToken)
+      setCookie("expiresAt", newExpiredAt)
+      return newAccessToken
+    }
+  } catch (error) {
+    console.error("Refresh token failed", error)
+    deleteCookie("accessToken")
+    deleteCookie("refreshToken")
+    return null
+  }
+}
+
 export const apiV0BaseQuery = (
   basePath?: string,
 ): ReturnType<typeof fetchBaseQuery> => {
   return fetchBaseQuery({
     baseUrl: `${defaultValues.backendURL}/api/v0${basePath || ""}`,
     credentials: "include",
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).authentication.auth?.accessToken
+    prepareHeaders: async (headers) => {
+      const token = getCookie("accessToken")
+      const expiresAt = getCookie("expiresAt")
+      const refreshToken = getCookie("refreshToken")
 
-      // If we have a token set in state, let's assume that we should be passing it.
+      if (expiresAt) {
+        const expiredAtDate = new Date(expiresAt as string)
+        const currentTime = Date.now()
+        const isExpired = expiredAtDate.getTime() <= currentTime
+
+        if (isExpired) {
+          const newAccessToken = await refreshAuthToken(refreshToken as string)
+          if (newAccessToken) {
+            headers.set("authorization", `Bearer ${newAccessToken}`)
+            return headers
+          }
+        }
+      }
+
       if (token) {
         headers.set("authorization", `Bearer ${token}`)
       }

@@ -58,7 +58,7 @@ export const NavbarRightMenus = () => {
               <p className="text-sm font-medium leading-none">
                 {auth?.user?.name || "unknown"}
               </p>
-              <p className="text-xs leading-none text-muted-foreground">
+              <p className="text-muted-foreground text-xs leading-none">
                 {auth?.user?.email || "unknown@email"}
               </p>
             </div>
