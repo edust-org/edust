@@ -50,7 +50,7 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   sticky?: boolean
 }
 
-export const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
+const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
   ({ className, sticky, ...props }, ref) => {
     // Check if Layout.Header is used within Layout
     const contextVal = React.useContext(LayoutContext)
