@@ -1,15 +1,12 @@
 import { Roles, User } from "@/types"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { deleteCookie, getCookies } from "cookies-next"
 
 export interface AuthenticationState {
   isAuthenticated: boolean
   isLoading: boolean
   user: User | null
   orgId: string
-  auth: {
-    accessToken: string
-    expiresAt: Date
-  }
 }
 
 const initialState: AuthenticationState = {
@@ -17,10 +14,6 @@ const initialState: AuthenticationState = {
   isLoading: false,
   user: null,
   orgId: "",
-  auth: {
-    accessToken: "",
-    expiresAt: new Date(),
-  },
 }
 
 export const authentication = createSlice({
@@ -36,13 +29,15 @@ export const authentication = createSlice({
           (item) => item.role === Roles.OWNER,
         ) || []
 
-      state.orgId = isOwner.length > 0 ? isOwner[0].organization.id : ""
-
-      state.auth = action.payload.auth
+      if (isOwner[0]) {
+        state.orgId = isOwner[0].organization.id
+      }
       state.isLoading = action.payload.isLoading
     },
     logOut() {
       localStorage.clear()
+      const cookies = Object.entries(getCookies() || {})
+      cookies.forEach((c) => deleteCookie(c[0]))
       return initialState
     },
   },

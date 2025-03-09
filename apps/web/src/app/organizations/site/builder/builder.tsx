@@ -1,5 +1,7 @@
 "use client"
 
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   useDeleteSiteBuilderImagesByIdMutation,
   useEditSiteBuilderMutation,
@@ -19,10 +21,7 @@ export const Builder = () => {
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
   const [loadProjectData] = useLazyGetSiteBuilderQuery()
 
-  const {
-    orgId,
-    auth: { accessToken: token },
-  } = useAppSelector((state) => state.authentication)
+  const { orgId } = useAppSelector((state) => state.authentication)
   const { refetch: refaceGetImages } = useGetSiteBuilderImagesQuery(orgId)
 
   const [saveGsData] = useEditSiteBuilderMutation()
@@ -44,26 +43,17 @@ export const Builder = () => {
           Array.from(files).forEach((file) => formData.append("images", file))
 
           // API endpoint for image upload
-          const apiUrl = `${process.env.NEXT_PUBLIC_BACK_END_URL}/api/v0/organizations/${orgId}/site-builder/images`
+          const apiUrl = `${defaultValues.backendURL}/api/v0/organizations/${orgId}/site-builder/images`
 
-          // Perform the upload
-          const response = await fetch(apiUrl, {
-            method: "POST",
-            body: formData,
+          const response = await axios.post(apiUrl, formData, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
             },
           })
 
-          if (!response.ok) {
-            const errorText = await response.text()
-            throw new Error(`Upload failed: ${errorText}`)
-          }
-
-          const responseData = await response.json()
-
           // Validate and process the response data
-          const imagePaths = responseData?.data?.items.map((item) => item.src)
+
+          const imagePaths = response?.data?.data?.items.map((item) => item.src)
           if (!imagePaths || imagePaths.length === 0) {
             throw new Error("No valid image paths returned from the server.")
           }
@@ -94,7 +84,6 @@ export const Builder = () => {
             page,
           },
         })
-        console.log(response)
         toast.success(response?.data?.message)
       } catch (error) {
         console.error(error)
