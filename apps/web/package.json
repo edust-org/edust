@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@edust/grapesjs": "workspace:*",
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",

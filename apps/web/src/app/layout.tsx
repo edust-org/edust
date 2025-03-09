@@ -1,4 +1,5 @@
 import { ReduxProvider } from "@/lib/store"
+import "@edust/grapesjs/style.css"
 import type { Metadata } from "next"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"

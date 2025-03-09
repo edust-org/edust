@@ -1,6 +1,5 @@
 "use client"
 
-import EdustGrapesjs, { Configs } from "@/lib/edust-grapesjs"
 import {
   useDeleteSiteBuilderImagesByIdMutation,
   useEditSiteBuilderMutation,
@@ -9,6 +8,7 @@ import {
   useLazyGetSiteBuilderQuery,
 } from "@/lib/store/api/v0/organizations"
 import { useAppSelector } from "@/lib/store/hooks"
+import EdustGrapesjs, { Configs } from "@edust/grapesjs"
 import { toast } from "sonner"
 
 // import getImages from "./get-images"
@@ -122,7 +122,7 @@ export const Builder = () => {
     async handleLoadProjectData() {
       try {
         const data = await loadProjectData(orgId).unwrap()
-        return JSON.parse(data?.data?.assets || "{}")
+        return data?.data?.assets
       } catch (error) {
         console.log(error)
         return {}

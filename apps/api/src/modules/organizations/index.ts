@@ -4,6 +4,8 @@ import type { Router } from "express"
 import { loadJsonFile } from "load-json-file"
 import path from "path"
 
+import siteBuilderRoutes from "./site-builder"
+
 // Initialize the express router
 const router: Router = express.Router()
 
@@ -27,5 +29,7 @@ router
     )
     res.json(organizations)
   })
+
+router.use("/:orgId/site-builder", authenticateForOrg, siteBuilderRoutes)
 
 export default router
