@@ -15,8 +15,10 @@ import {
 import { useLoginMutation } from "@/lib/store/api/v0/auth"
 import { setAuthentication } from "@/lib/store/features"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { AccountType } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { setCookie } from "cookies-next/client"
+import { getSession, signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -25,7 +27,7 @@ import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Layout } from "../../components/layout"
 
@@ -40,6 +42,7 @@ const FormSchema = z.object({
 
 export default function Login() {
   const router = useRouter()
+
   const dispatch = useAppDispatch()
   const authState = useAppSelector((state) => state.authentication)
   const [login, { isLoading }] = useLoginMutation()
@@ -49,8 +52,7 @@ export default function Login() {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       email: "",
-      // password: process.env.NODE_ENV === "development" ? "password2024" : "",
-      password: "password2024",
+      password: process.env.NODE_ENV === "development" ? "password2024" : "",
     },
   })
 
@@ -58,7 +60,7 @@ export default function Login() {
     setIsPasswordVisible((prev) => !prev)
   }
 
-  function onSubmit(userData: z.infer<typeof FormSchema>) {
+  async function onSubmit(userData: z.infer<typeof FormSchema>) {
     dispatch(
       setAuthentication({
         ...authState,
@@ -66,37 +68,42 @@ export default function Login() {
       }),
     )
 
-    login(userData)
-      .unwrap()
-      .then((data) => {
-        if (data?.status) {
-          toast.success(data.message)
-
-          dispatch(
-            setAuthentication({
-              ...authState,
-              isAuthenticated: true,
-              isLoading: false,
-              user: data?.data,
-            }),
-          )
-
-          setCookie("accessToken", data?.auth.accessToken)
-          setCookie("expiresAt", data?.auth.expiresAt)
-          router.push("/")
-        }
-      })
-      .catch((error) => {
+    const result = await signIn(AccountType.LOCAL, {
+      email: userData.email,
+      password: userData.password,
+      redirect: false,
+    })
+    if (result?.error) {
+      dispatch(
+        setAuthentication({
+          ...authState,
+          isLoading: false,
+        }),
+      )
+      toast.error(result?.error)
+    } else {
+      const data = await getSession()
+      if (data && data?.user) {
+        toast.success("Log in successfully!")
         dispatch(
           setAuthentication({
             ...authState,
+            isAuthenticated: true,
             isLoading: false,
+            user: {
+              id: data.user.id,
+              name: data.user.name,
+              username: data.user.username,
+              email: data.user.email,
+              profilePic: data.user.profilePic,
+              systemRole: data.user.systemRole,
+              organizationRoles: data.user.organizationRoles,
+            },
           }),
         )
-        if (error?.data?.status) {
-          toast.error(error?.data?.message)
-        }
-      })
+      }
+      router.push("/")
+    }
   }
 
   return (

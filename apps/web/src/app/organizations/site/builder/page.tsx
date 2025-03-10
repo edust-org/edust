@@ -1,6 +1,5 @@
 "use client"
 
-import { withAuth } from "@/components/with-auth"
 import {
   useAddSitePageMutation,
   useDeleteSitePageMutation,
@@ -169,4 +168,4 @@ function SiteBuilder() {
     </>
   )
 }
-export default withAuth(SiteBuilder)
+export default SiteBuilder
