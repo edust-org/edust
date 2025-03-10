@@ -20,6 +20,7 @@ import { logOut } from "@/lib/store/features/authentication"
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { Roles } from "@/types"
 import { LayoutDashboard, LogOut, Plus, School } from "lucide-react"
+import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -31,6 +32,7 @@ export const NavbarRightMenus = () => {
   const auth = useAppSelector((state) => state.authentication)
 
   const handleLogout = () => {
+    signOut()
     dispatch(logOut())
     clearAllCaches(dispatch)
     setTheme("light")
