@@ -1,7 +1,8 @@
 "use client"
 
 import { useAppSelector } from "@/lib/store/hooks"
-import RcTiptapEditor, {
+import RcTiptapEditor from "reactjs-tiptap-editor"
+import {
   Attachment,
   BaseKit,
   Blockquote,
@@ -48,7 +49,7 @@ import RcTiptapEditor, {
   Underline,
   // Video,
   locale,
-} from "reactjs-tiptap-editor"
+} from "reactjs-tiptap-editor/extension-bundle"
 
 import React, { useCallback, useState } from "react"
 

@@ -52,7 +52,7 @@
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-spinners": "^0.15.0",
-    "reactjs-tiptap-editor": "^0.1.16",
+    "reactjs-tiptap-editor": "^0.2.5",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "slugify": "^1.6.6",

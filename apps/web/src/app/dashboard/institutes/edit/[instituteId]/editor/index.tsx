@@ -1,7 +1,7 @@
-import { useAppSelector } from "@/app/hooks"
-import React, { useCallback, useState } from "react"
-
-import RcTiptapEditor, {
+import { useAppSelector } from "@/lib/store/hooks"
+import RcTiptapEditor from "reactjs-tiptap-editor"
+import {
+  Attachment,
   BaseKit,
   Blockquote,
   Bold,
@@ -29,26 +29,27 @@ import RcTiptapEditor, {
   Katex,
   LineHeight,
   Link,
+  Mention,
+  // ImageGif,
+  Mermaid,
   MoreMark,
   OrderedList,
   SearchAndReplace,
   SlashCommand,
   Strike,
   Table,
+  TableOfContents,
   TaskList,
   TextAlign,
+  // Excalidraw,
+  TextDirection,
+  Twitter,
   Underline,
   // Video,
   locale,
-  TableOfContents,
-  // Excalidraw,
-  TextDirection,
-  Mention,
-  Attachment,
-  // ImageGif,
-  Mermaid,
-  Twitter,
-} from "reactjs-tiptap-editor"
+} from "reactjs-tiptap-editor/extension-bundle"
+
+import React, { useCallback, useState } from "react"
 
 function convertBase64ToBlob(base64: string) {
   const arr = base64.split(",")
