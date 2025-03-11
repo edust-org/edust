@@ -13,14 +13,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
+  Skeleton,
 } from "@/components/ui"
 import { useTheme } from "@/hooks"
 import { clearAllCaches } from "@/lib/store/api/v0"
 import { logOut } from "@/lib/store/features/authentication"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useAppDispatch } from "@/lib/store/hooks"
 import { Roles } from "@/types"
 import { LayoutDashboard, LogOut, Plus, School } from "lucide-react"
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -29,7 +30,9 @@ export const NavbarRightMenus = () => {
   const router = useRouter()
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
-  const auth = useAppSelector((state) => state.authentication)
+
+  const { data, status } = useSession()
+  const user = data?.user
 
   const handleLogout = () => {
     signOut()
@@ -40,6 +43,10 @@ export const NavbarRightMenus = () => {
     toast.error("Log out successfully!")
   }
 
+  if (status === "loading") {
+    return <Skeleton className="h-8 w-8 rounded-full" />
+  }
+
   return (
     <div className="flex items-center">
       {/* <ThemeSwitch /> */}
@@ -47,10 +54,11 @@ export const NavbarRightMenus = () => {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
-              {auth.user?.profilePic && (
-                <AvatarImage src={auth.user?.profilePic} alt="user profile" />
+              {user?.profilePic ? (
+                <AvatarImage src={user?.profilePic} alt="user profile" />
+              ) : (
+                <AvatarFallback>SN</AvatarFallback>
               )}
-              <AvatarFallback>SN</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -58,10 +66,10 @@ export const NavbarRightMenus = () => {
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {auth?.user?.name || "unknown"}
+                {user?.name || "unknown"}
               </p>
               <p className="text-muted-foreground text-xs leading-none">
-                {auth?.user?.email || "unknown@email"}
+                {user?.email || "unknown@email"}
               </p>
             </div>
           </DropdownMenuLabel>
@@ -77,8 +85,8 @@ export const NavbarRightMenus = () => {
 
           <DropdownMenuGroup>
             {/* if organization available */}
-            {auth?.user?.organizationRoles &&
-              auth?.user?.organizationRoles?.map((role) => (
+            {user?.organizationRoles &&
+              user?.organizationRoles?.map((role) => (
                 <Link href={"/organizations"} key={role.id}>
                   <DropdownMenuItem>
                     <School className="mr-2 h-4 w-4" />
@@ -94,7 +102,7 @@ export const NavbarRightMenus = () => {
               ))}
 
             {/* if organization is not available */}
-            {!auth?.user?.organizationRoles && (
+            {!user?.organizationRoles && (
               <Link href={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

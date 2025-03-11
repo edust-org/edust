@@ -1,4 +1,3 @@
-import { useAppSelector } from "@/app/hooks"
 import assets from "@/assets/images"
 import { Button } from "@/components/ui/button"
 import {
@@ -14,8 +13,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { useAppSelector } from "@/lib/store/hooks"
+import Link from "next/link"
 import { IoMenuSharp } from "react-icons/io5"
-import { Link } from "react-router"
 
 import { LogoEdust } from "../logo-edust"
 import { NavbarRightMenus } from "./navbar-right-menus"
@@ -25,9 +25,9 @@ export const Private = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b bg-background bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
+      <header className="bg-background sticky top-0 z-50 border-b bg-opacity-50 shadow-sm backdrop-blur-xl backdrop-filter">
         <div className="container flex h-[56px] w-full shrink-0 items-center justify-between px-4 md:px-6">
-          <Link to="/" className="mr-6 hidden lg:flex">
+          <Link href="/" className="mr-6 hidden lg:flex">
             <LogoEdust />
             <span className="sr-only">Edust</span>
           </Link>
@@ -35,32 +35,32 @@ export const Private = () => {
             <NavigationMenuList>
               <NavigationMenuLink asChild>
                 <Link
-                  to="/"
-                  className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                  href="/"
+                  className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >
                   Home
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  to="#"
-                  className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                  href="#"
+                  className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >
                   About
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  to="#"
-                  className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                  href="#"
+                  className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >
                   Contact
                 </Link>
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  to="/playground"
-                  className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                  href="/playground"
+                  className="bg-background hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active]:bg-accent/50 data-[state=open]:bg-accent/50 group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >
                   Playground
                 </Link>
@@ -76,7 +76,7 @@ export const Private = () => {
             </SheetTrigger>
             <SheetContent side="left">
               <SheetTitle>
-                <Link to="/">
+                <Link href="/">
                   <img src={assets.logoDark} alt="LOGO" />
                   <span className="sr-only">Acme Inc</span>
                 </Link>
@@ -90,25 +90,25 @@ export const Private = () => {
 
               <div className="grid gap-2 py-6">
                 <Link
-                  to="#"
+                  href="#"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                 >
                   Home
                 </Link>
                 <Link
-                  to="#"
+                  href="#"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                 >
                   About
                 </Link>
                 <Link
-                  to="#"
+                  href="#"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                 >
                   Services
                 </Link>
                 <Link
-                  to="#"
+                  href="#"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                 >
                   Contact
@@ -120,7 +120,7 @@ export const Private = () => {
             {auth.isAuthenticated ? (
               <NavbarRightMenus />
             ) : (
-              <Link to={"/auth/sign-in"}>
+              <Link href={"/auth/sign-in"}>
                 <Button>Sign In</Button>
               </Link>
             )}

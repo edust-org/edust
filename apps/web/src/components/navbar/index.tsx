@@ -4,9 +4,10 @@ import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
+  Skeleton,
 } from "@/components/ui"
-import { useAppSelector } from "@/lib/store/hooks"
 import { cn } from "@/utils"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 
 import { NavMobile } from "./mobile"
@@ -29,11 +30,10 @@ const routeList: RouteProps[] = [
 ]
 
 export const Navbar = () => {
-  const isAuthenticated = useAppSelector(
-    (state) => state.authentication.isAuthenticated,
-  )
+  const { data: isAuthenticated, status } = useSession()
+
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-40 border-b backdrop-blur">
       <NavigationMenu className={cn("mx-auto !block max-w-full")}>
         <NavigationMenuList className="container flex h-14 justify-between px-4">
           <NavigationMenuItem className="flex font-bold">
@@ -56,7 +56,7 @@ export const Navbar = () => {
                 rel="noreferrer noopener"
                 href={route.href}
                 key={i}
-                className={`text-foreground/80 transition-colors hover:text-foreground/80`}
+                className={`text-foreground/80 hover:text-foreground/80 transition-colors`}
               >
                 {route.label}
               </Link>
@@ -65,7 +65,9 @@ export const Navbar = () => {
 
           <div className="hidden gap-2 md:flex">
             <ThemeSwitch />
-            {isAuthenticated ? (
+            {status === "loading" ? (
+              <Skeleton className="h-8 w-12 rounded-full"></Skeleton>
+            ) : isAuthenticated ? (
               <NavbarRightMenus />
             ) : (
               <Link href={"/auth/login"}>
