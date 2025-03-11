@@ -184,9 +184,7 @@ export default function Register() {
                   {isLoading ? <BarLoader color="#fff" /> : "Create an account"}
                 </Button>
               </form>
-              <div className="my-4">
-                <SocialAuth />
-              </div>
+              <div className="my-4">{/* <SocialAuth /> */}</div>
               <div className="mb-4 mt-4 flex items-center justify-center gap-4">
                 <Typography className="text-sm">
                   Already have an account?{" "}
