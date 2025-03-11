@@ -48,7 +48,7 @@ import { DistrictField } from "./components/district-field"
 import { DivisionField } from "./components/division-field"
 import { SubDistrictField } from "./components/sub-district-field"
 
-// const Editor = lazy(() => import("./editor"))
+const Editor = lazy(() => import("./editor"))
 
 const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
 const ACCEPTED_IMAGE_MIME_TYPES = [
@@ -866,7 +866,7 @@ export default function Create() {
               <div>
                 <Suspense fallback={<Loading.Spinner />}>
                   <Label>Overview</Label>
-                  {/* <Editor setContentHtml={setOverview} /> */}
+                  <Editor setContentHtml={setOverview} />
                 </Suspense>
               </div>
 
