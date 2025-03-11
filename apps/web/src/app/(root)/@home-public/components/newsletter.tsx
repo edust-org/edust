@@ -1,3 +1,5 @@
+"use client"
+
 import { Typography } from "@/components/ui"
 import { Button } from "@/components/ui/button"
 import {
@@ -38,11 +40,11 @@ export const Newsletter = () => {
           className="text-center text-3xl font-bold md:text-4xl"
         >
           Subscribe{" "}
-          <span className="bg-gradient-to-b from-primary/60 to-primary bg-clip-text text-transparent">
+          <span className="from-primary/60 to-primary bg-gradient-to-b bg-clip-text text-transparent">
             to Our Daily Newsletter
           </span>
         </Typography>
-        <Typography className="mb-8 mt-4 text-center text-muted-foreground">
+        <Typography className="text-muted-foreground mb-8 mt-4 text-center">
           Stay informed and inspired with the latest updates, tips, and stories
           delivered straight to your inbox.
         </Typography>
@@ -56,12 +58,12 @@ export const Newsletter = () => {
               control={form.control}
               name="userEmail"
               render={({ field }) => (
-                <FormItem className="w-full mx-auto">
+                <FormItem className="mx-auto w-full">
                   <FormControl>
                     <Input
                       placeholder="example@gmail.com"
                       aria-label="Email address"
-                      className="bg-muted/50 dark:bg-muted/80 "
+                      className="bg-muted/50 dark:bg-muted/80"
                       {...field}
                     />
                   </FormControl>
