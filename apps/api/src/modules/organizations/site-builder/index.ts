@@ -7,7 +7,34 @@ const router: Router = express.Router({ mergeParams: true })
 
 router
   .post("/images", (req: Request, res: Response) => {
-    res.json()
+    res.json({
+      status: "success",
+      message: "Success! New resource created.",
+      data: {
+        id: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        src: "https://dummyimage.com/1280x720/000000/fff,",
+        createdAt: "2024-10-26T10:00:00Z",
+        updatedAt: "2024-10-26T10:30:00Z",
+      },
+      _links: {
+        self: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "POST",
+        },
+        getImages: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "GET",
+        },
+        deleteImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+          method: "DELETE",
+        },
+        editImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+          method: "PATCH",
+        },
+      },
+    })
   })
   .get("/images", (req: Request, res: Response) => {
     res.json({
@@ -53,11 +80,60 @@ router
     "/images/:imageId",
 
     (req: Request, res: Response) => {
-      res.json()
+      res.json({
+        status: "success",
+        message: "Site retrieved successfully!",
+        data: {
+          id: "xxxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          src: "http://res.cloudinary.com/dmiewayfu/image/upload/v1735835027/edust-org/electronic-1735835024843-m5fjct76.jpg",
+          createdAt: "2024-09-06T01:35:20Z",
+          updatedAt: "2024-09-06T01:35:20Z",
+        },
+        _links: {
+          self: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "PATCH",
+          },
+          deleteImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+            method: "DELETE",
+          },
+          get: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "GET",
+          },
+          uploadImage: {
+            href: "/api/v0/organizations/:orgId/site-builder/images",
+            method: "POST",
+          },
+        },
+      })
     },
   )
   .delete("/images/:imageId", (req: Request, res: Response) => {
-    res.json()
+    res.json({
+      status: "success",
+      message: "Success! No additional content available.",
+      data: null,
+      _links: {
+        self: {
+          href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+          method: "DELETE",
+        },
+        get: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "GET",
+        },
+        uploadImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "POST",
+        },
+        editImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images/:imageId",
+          method: "PATCH",
+        },
+      },
+    })
   })
 
 router
@@ -77,7 +153,25 @@ router
 
 router
   .post("/", (req: Request, res: Response) => {
-    res.json()
+    res.json({
+      status: "success",
+      message: "Success! New resource created.",
+      data: null,
+      _links: {
+        self: {
+          href: "/api/v0/organizations/:orgId/site-builder",
+          method: "POST",
+        },
+        edit: {
+          href: "/api/v0/organizations/:orgId/site-builder",
+          method: "PATCH",
+        },
+        uploadImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "POST",
+        },
+      },
+    })
   })
   .get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -90,7 +184,25 @@ router
     }
   })
   .patch("/", (req: Request, res: Response) => {
-    res.json()
+    res.json({
+      status: "success",
+      message: "Site updated successfully!",
+      data: null,
+      _links: {
+        self: {
+          href: "/api/v0/organizations/:orgId/site-builder",
+          method: "PATCH",
+        },
+        create: {
+          href: "/api/v0/organizations/:orgId/site-builder",
+          method: "POST",
+        },
+        uploadImage: {
+          href: "/api/v0/organizations/:orgId/site-builder/images",
+          method: "POST",
+        },
+      },
+    })
   })
 
 export default router

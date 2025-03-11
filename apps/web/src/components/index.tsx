@@ -1,5 +1,6 @@
 export * from "./coming-soon"
 export * from "./full-spinner"
+export * from "./feedback"
 export * from "./footer"
 export * from "./global-top-notification-bar"
 export * from "./loading"
