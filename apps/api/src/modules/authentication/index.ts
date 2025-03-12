@@ -1,8 +1,8 @@
+import { jsonLoad } from "@/services"
 import * as express from "express"
 import type { Router } from "express"
 import createHttpError from "http-errors"
 import { statusCodes, statusMessages } from "http-status-kit"
-import { loadJsonFile } from "load-json-file"
 import path from "path"
 
 // Initialize the express router
@@ -17,20 +17,20 @@ router.post("/login", async (req, res) => {
 
   switch (email) {
     case "user@example.com":
-      const user = await loadJsonFile(
+      const user = await jsonLoad.load(
         path.resolve(__dirname, "./user-login.json"),
       )
       res.json(user)
       break
 
     case "organizer@example.com":
-      const organizer = await loadJsonFile(
+      const organizer = await jsonLoad.load(
         path.resolve(__dirname, "./organizer-login.json"),
       )
       res.json(organizer)
       break
     default:
-      const userDefault = await loadJsonFile(
+      const userDefault = await jsonLoad.load(
         path.resolve(__dirname, "./user-login.json"),
       )
       res.json(userDefault)

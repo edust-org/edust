@@ -1,14 +1,14 @@
+import { jsonLoad } from "@/services"
 import express from "express"
 import type { Router } from "express"
 import createHttpError from "http-errors"
 import { statusCodes, statusMessages } from "http-status-kit"
-import { loadJsonFile } from "load-json-file"
 import path from "path"
 
 const router: Router = express.Router()
 
 router.get("/institutes/categories", async (req, res) => {
-  const categories = await loadJsonFile(
+  const categories = await jsonLoad.load(
     path.resolve(__dirname, "../../data/institute-category.json"),
   )
 
@@ -26,7 +26,7 @@ router.get("/institutes/categories", async (req, res) => {
 })
 
 router.get("/institutes", async (req, res) => {
-  const institutes = await loadJsonFile(
+  const institutes = await jsonLoad.load(
     path.resolve(__dirname, "./get-institutes.json"),
   )
   res.json(institutes)
@@ -83,14 +83,14 @@ router.get("/institutes/:instituteId", (req, res) => {
 })
 
 router.get("/organizations/orgId-:orgId/site", async (req, res) => {
-  const data = await loadJsonFile(
+  const data = await jsonLoad.load(
     path.resolve(__dirname, "./get-site-by-ordId.json"),
   )
   res.json(data)
 })
 
 router.get("/organizations/orgUsername-:orgUsername/site", async (req, res) => {
-  const data = await loadJsonFile(
+  const data = await jsonLoad.load(
     path.resolve(__dirname, "./get-site-by-org-username.json"),
   )
   res.json(data)
