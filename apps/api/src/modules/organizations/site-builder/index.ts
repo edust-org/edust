@@ -1,6 +1,6 @@
+import { jsonLoad } from "@/services"
 import express from "express"
 import type { NextFunction, Request, Response, Router } from "express"
-import { loadJsonFile } from "load-json-file"
 import path from "path"
 
 const router: Router = express.Router({ mergeParams: true })
@@ -175,7 +175,7 @@ router
   })
   .get("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const siteBuilder = await loadJsonFile(
+      const siteBuilder = await jsonLoad.load(
         path.resolve(__dirname, "./get-site-builder.json"),
       )
       res.json(siteBuilder)

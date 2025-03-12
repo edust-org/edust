@@ -1,7 +1,7 @@
 import { authenticateForOrg } from "@/middleware"
+import { jsonLoad } from "@/services"
 import * as express from "express"
 import type { Router } from "express"
-import { loadJsonFile } from "load-json-file"
 import path from "path"
 
 import siteBuilderRoutes from "./site-builder"
@@ -10,7 +10,7 @@ import siteBuilderRoutes from "./site-builder"
 const router: Router = express.Router()
 
 router.get("/me", authenticateForOrg, async (req, res) => {
-  const organizationMe = await loadJsonFile(
+  const organizationMe = await jsonLoad.load(
     path.resolve(__dirname, "./get-org-me.json"),
   )
   res.json(organizationMe)
@@ -18,13 +18,13 @@ router.get("/me", authenticateForOrg, async (req, res) => {
 
 router
   .post("/", async (req, res) => {
-    const organizations = await loadJsonFile(
+    const organizations = await jsonLoad.load(
       path.resolve(__dirname, "./create-org.json"),
     )
     res.json(organizations)
   })
   .get("/", async (req, res) => {
-    const organizations = await loadJsonFile(
+    const organizations = await jsonLoad.load(
       path.resolve(__dirname, "./get-organization.json"),
     )
     res.json(organizations)
