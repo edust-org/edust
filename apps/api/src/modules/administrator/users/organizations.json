@@ -1,0 +1,39 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "items": [
+      {
+        "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+        "name": "harvard university",
+        "orgUsername": "harvard-univ",
+        "profilePic": null,
+        "email": null,
+        "status": "ACTIVE",
+        "createdAt": "2024-07-26T17:07:32.709Z",
+        "updatedAt": "2024-11-22T10:42:47.383Z"
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "url": "/api/v0/administrator/users/{userId}/organizations",
+      "method": "GET"
+    },
+    "getUsers": { "url": "/api/v0/administrator/users", "method": "GET" },
+    "feedback": {
+      "url": "/api/v0/administrator/users/{userId}/feedback",
+      "method": "GET"
+    },
+    "institutes": {
+      "url": "/api/v0/administrator/users/{userId}/institutes",
+      "method": "GET"
+    }
+  },
+  "pagination": {
+    "totalRecords": 1,
+    "currentPage": 1,
+    "previousPage": 0,
+    "nextPage": 2
+  }
+}
