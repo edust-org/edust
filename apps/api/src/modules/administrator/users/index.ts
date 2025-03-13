@@ -20,5 +20,21 @@ router
     const data = await jsonLoad.load(path.resolve(__dirname, "./user.json"))
     res.json(data)
   })
+  .get("/:userId/feedback", async (req: Request, res: Response) => {
+    const data = await jsonLoad.load(path.resolve(__dirname, "./feedback.json"))
+    res.json(data)
+  })
+  .get("/:userId/institutes", async (req: Request, res: Response) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./institutes.json"),
+    )
+    res.json(data)
+  })
+  .get("/:userId/organizations", async (req: Request, res: Response) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./organizations.json"),
+    )
+    res.json(data)
+  })
 
 export default router
