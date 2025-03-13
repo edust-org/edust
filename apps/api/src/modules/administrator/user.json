@@ -1,0 +1,33 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "77f47d6a-50ea-4bd6-8a55-393e0aee67b0",
+    "name": "Lloyd Lemke",
+    "username": "example-username",
+    "email": "Lloyd.Lemke@gmail.com",
+    "emailSecondary": null,
+    "password": "$2b$10$qD2cBY.ZvucAkKZwfawsOul499YSU6KrRgJxyVmJxSmiO5ofDRAxu",
+    "gender": null,
+    "dateOfBirth": null,
+    "phoneNumber": null,
+    "phoneNumberSecondary": null,
+    "homeAddress": null,
+    "profilePic": "https://avatars.githubusercontent.com/u/19598045",
+    "profilePicDetails": {
+      "url": "https://avatars.githubusercontent.com/u/19598045",
+      "alt": "Lloyd Lemke"
+    },
+    "accountType": "LOCAL",
+    "accountDetails": null,
+    "verified": "VERIFIED",
+    "profileVerified": "UNVERIFIED",
+    "hasRoles": { "organization": true },
+    "status": "ACTIVE",
+    "createdAt": "1982-11-26T11:01:53.837Z",
+    "updatedAt": "2025-03-12T23:40:48.495Z"
+  },
+  "_links": {
+    "self": { "url": "/api/v0/administrator/users/{userId}", "method": "GET" }
+  }
+}
