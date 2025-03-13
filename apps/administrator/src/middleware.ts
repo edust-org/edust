@@ -5,19 +5,13 @@ import { Roles } from "./types"
 
 export default withAuth(
   function middleware(req) {
+    console.log(req.nextauth.token)
+
     if (!req.nextauth.token) {
-      return NextResponse.redirect(new URL("/auth/login", req.url))
+      return NextResponse.redirect(new URL("/login", req.url))
     }
-
-    // Role-based access control
-    if (req.nextUrl.pathname.startsWith("/organizations")) {
-      const hasOrgOwner = req.nextauth.token.organizationRoles?.find(
-        (item) => item.role === Roles.OWNER,
-      )
-
-      if (!hasOrgOwner) {
-        return NextResponse.redirect(new URL("/", req.url)) // Redirect unauthorized users
-      }
+    if (req.nextauth.token?.systemRole !== Roles.ADMINISTRATOR) {
+      return NextResponse.redirect(new URL("/unauthorize", req.url))
     }
 
     return NextResponse.next()

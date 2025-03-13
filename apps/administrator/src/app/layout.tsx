@@ -1,5 +1,5 @@
 import { ReduxProvider } from "@/lib/store"
-import "@edust/grapesjs/style.css"
+
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
