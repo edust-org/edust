@@ -1,0 +1,47 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+    "name": "User",
+    "username": null,
+    "email": "user@example.com",
+    "emailSecondary": null,
+    "password": "$2b$10$m21xzioe/CablAWV5T2Ujuduxf35i.SxPNOCugGBSio47rz7rKlgC",
+    "gender": null,
+    "dateOfBirth": null,
+    "phoneNumber": null,
+    "phoneNumberSecondary": null,
+    "homeAddress": null,
+    "profilePic": "https://cdn-icons-png.flaticon.com/512/1754/1754623.png",
+    "profilePicDetails": null,
+    "accountType": "LOCAL",
+    "accountDetails": null,
+    "verified": "VERIFIED",
+    "profileVerified": "UNVERIFIED",
+    "hasRoles": null,
+    "status": "PENDING",
+    "createdAt": "2006-08-10T15:00:46.752Z",
+    "updatedAt": "2025-03-13T08:43:19.504Z"
+  },
+  "_links": {
+    "self": { "url": "/api/v0/administrator/users/{userId}", "method": "GET" },
+    "getUsers": { "url": "/api/v0/administrator/users/", "method": "GET" },
+    "editUserById": {
+      "url": "/api/v0/administrator/users/{userId}",
+      "method": "PATCH"
+    },
+    "organizations": {
+      "url": "/api/v0/administrator/users/{userId}/organizations",
+      "method": "GET"
+    },
+    "feedback": {
+      "url": "/api/v0/administrator/users/{userId}/feedback",
+      "method": "GET"
+    },
+    "institutes": {
+      "url": "/api/v0/administrator/users/{userId}/institutes",
+      "method": "GET"
+    }
+  }
+}
