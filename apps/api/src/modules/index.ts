@@ -6,6 +6,7 @@ import authenticationRoutes from "./authentication"
 import institutesRoutes from "./institutes"
 import organizationsRoutes from "./organizations"
 import publicRoutes from "./public"
+import administratorRoutes from './administrator';
 
 // Initialize the express router
 const router: Router = express.Router()
@@ -16,6 +17,11 @@ router.use("/v0/public", publicRoutes)
 
 router.use("/v0/institutes", authenticate(), institutesRoutes)
 router.use("/v0/organizations", authenticate(), organizationsRoutes)
+router.use(
+  '/v0/administrator',
+  authenticate(),
+  administratorRoutes,
+);
 
 // Export the router
 export default router

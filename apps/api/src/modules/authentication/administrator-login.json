@@ -1,0 +1,43 @@
+{
+  "status": "SUCCESS",
+  "message": "Logged in successfully!",
+  "auth": {
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiNzc2ZDRhYi02ZTM2LTQxMGEtODgxNC03MzBmMDJlNmU5ZGIiLCJpZCI6ImI3NzZkNGFiLTZlMzYtNDEwYS04ODE0LTczMGYwMmU2ZTlkYiIsImVtYWlsIjoiYWRtaW5pc3RyYXRvckBleGFtcGxlLmNvbSIsInN5c3RlbVJvbGUiOiJBRE1JTklTVFJBVE9SIiwib3JnYW5pemF0aW9uUm9sZXMiOm51bGwsImlhdCI6MTc0MTc3MzA5OSwiZXhwIjoxNzQxNzczMzk5fQ.EFzJ4WTe2LFJe21ESP3IK0VEuAezwDt9KeMDdlt8BMQ",
+    "expiresAt": "2030-03-06T13:55:29.593Z",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI3NzZkNGFiLTZlMzYtNDEwYS04ODE0LTczMGYwMmU2ZTlkYiIsImlhdCI6MTc0MTc3MzA5OSwiZXhwIjoxNzQ0MzY1MDk5fQ.9iSZeT-Ennt3jru-wEBnZBeuPzAtNY5HZwjJQWopHTM"
+  },
+  "data": {
+    "id": "b776d4ab-6e36-410a-8814-730f02e6e9db",
+    "name": "System Administrator",
+    "username": "administrator",
+    "email": "administrator@example.com",
+    "profilePic": "https://e7.pngegg.com/pngimages/9/763/png-clipart-computer-icons-login-user-system-administrator-admin-desktop-wallpaper-megaphone-thumbnail.png",
+    "systemRole": "ADMINISTRATOR",
+    "organizationRoles": null,
+    "createdAt": "2002-09-17T06:16:18.237Z",
+    "updatedAt": "2024-11-22T18:06:49.041Z"
+  },
+  "_links": {
+    "self": { "href": "/api/v0/auth/login", "method": "POST" },
+    "refresh": { "href": "/api/v0/auth/refresh", "method": "POST" },
+    "forgotPassword": {
+      "href": "/api/v0/auth/forgot-password",
+      "method": "POST"
+    },
+    "checkOtp": { "href": "/api/v0/auth/check-otp", "method": "POST" },
+    "resetPassword": {
+      "href": "/api/v0/auth/reset-password",
+      "method": "POST"
+    },
+    "googleAuth": { "href": "/api/v0/auth/google", "method": "GET" },
+    "googleCallback": {
+      "href": "/api/v0/auth/google/callback",
+      "method": "GET"
+    },
+    "githubAuth": { "href": "/api/v0/auth/github", "method": "GET" },
+    "githubCallback": {
+      "href": "/api/v0/auth/github/callback",
+      "method": "GET"
+    }
+  }
+}
