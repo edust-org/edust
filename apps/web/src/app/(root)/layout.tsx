@@ -6,7 +6,7 @@ import { ReactNode } from "react"
 
 interface LayoutHomeProps {
   home: ReactNode
-  "home-public": ReactNode
+  homepublic: ReactNode
 }
 
 export const metadata: Metadata = {
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
 
 export default async function LayoutHome({
   home,
-  "home-public": homePublic,
+  homepublic,
 }: LayoutHomeProps) {
   const data = await getServerSession(authOptions)
   const user = data?.user
-  return <>{user ? home : homePublic}</>
+  return <>{user ? home : homepublic}</>
 }

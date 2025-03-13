@@ -109,7 +109,7 @@ export default function Site() {
                         <Button>Start Editing</Button>
                       </Link>
                       <Link
-                        href={`/u/${data?.data?.orgUsername}/site`}
+                        href={`/org/${data?.data?.orgUsername}/site`}
                         target="_blank"
                       >
                         <Button variant={"outline"}>visit site </Button>
