@@ -31,7 +31,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     contactEmail,
     latitude,
     longitude,
-    author: { name: authorName, profilePic },
+    author,
     createdAt,
     country,
   } = item
@@ -94,18 +94,30 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
 
         <CardFooter className="flex items-center justify-between p-4">
           <div className="flex flex-1 items-center gap-2">
-            <Link href="#">
+            <Link
+              href={
+                author?.username
+                  ? `/profile/${author.username}`
+                  : `/profile?id=${author.id}`
+              }
+            >
               <Avatar>
                 <AvatarImage
-                  src={profilePic || "https://github.com/shadcn.png"}
+                  src={author.profilePic || "https://github.com/shadcn.png"}
                 />
-                <AvatarFallback>{fallbackName(authorName)}</AvatarFallback>
+                <AvatarFallback>{fallbackName(author.name)}</AvatarFallback>
               </Avatar>
             </Link>
             <div>
-              <Link href="#">
+              <Link
+                href={
+                  author?.username
+                    ? `/profile/${author.username}`
+                    : `/profile?id=${author.id}`
+                }
+              >
                 <Typography className="text-sm font-medium">
-                  {authorName}
+                  {author.name}
                 </Typography>
               </Link>
               <Link href="#">

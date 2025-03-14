@@ -28,7 +28,7 @@ export default async function OrganizationByOrgUsername({
     <section className="grid h-svh place-items-center">
       <Card className="min-w-xs max-w-sm">
         <CardHeader>
-          <div className="mx-auto grid h-24 w-24 place-items-center overflow-hidden rounded-full border shadow-sm">
+          <div className="mx-auto grid h-24 w-24 place-items-center overflow-hidden rounded-full border shadow-sm dark:bg-white">
             <Image
               src={organization.data.profilePic || profileFallback}
               width={100}

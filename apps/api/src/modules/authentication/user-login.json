@@ -11,7 +11,7 @@
     "name": "User",
     "username": null,
     "email": "user@example.com",
-    "profilePic": "https://cdn-icons-png.flaticon.com/512/1754/1754623.png",
+    "profilePic": "https://res.cloudinary.com/dbaa3pxau/image/upload/v1741928167/avatar-user_nzvmis.png",
     "systemRole": null,
     "organizationRoles": null,
     "createdAt": "2006-08-10T15:00:46.752Z",

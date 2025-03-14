@@ -7,6 +7,12 @@ import path from "path"
 
 const router: Router = express.Router()
 
+router.post("/feedback", async (req, res) => {})
+
+router
+  .get("/help-center", async (req, res) => {})
+  .get("/help-center/:articleId", async (req, res) => {})
+
 router.get("/institutes/categories", async (req, res) => {
   const categories = await jsonLoad.load(
     path.resolve(__dirname, "../../data/institute-category.json"),
@@ -82,17 +88,32 @@ router.get("/institutes/:instituteId", (req, res) => {
   })
 })
 
-router.get("/organizations/orgId-:orgId/site", async (req, res) => {
-  const data = await jsonLoad.load(
-    path.resolve(__dirname, "./get-site-by-ordId.json"),
-  )
-  res.json(data)
-})
+router
+  .get("/organizations/orgId-:orgId/site", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-site-by-ordId.json"),
+    )
+    res.json(data)
+  })
+  .get("/organizations/orgUsername-:orgUsername/site", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-site-by-org-username.json"),
+    )
+    res.json(data)
+  })
 
-router.get("/organizations/orgUsername-:orgUsername/site", async (req, res) => {
-  const data = await jsonLoad.load(
-    path.resolve(__dirname, "./get-site-by-org-username.json"),
-  )
-  res.json(data)
-})
+router
+  .get("/profile/userId-:userId", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-user-profile.json"),
+    )
+    res.json(data)
+  })
+  .get("/profile/username-:username", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-user-profile.json"),
+    )
+    res.json(data)
+  })
+
 export default router

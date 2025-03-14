@@ -1,15 +1,23 @@
-"use client"
+import "@/components/ui"
+import { defaultValues } from "@/configs"
 
-import { useSearchParams } from "next/navigation"
+import ProfileDetailsCard from "./components/profile-details-card"
 
-export default function Profile() {
-  const searchParams = useSearchParams()
-  const id = searchParams.get("id")
+export default async function Profile({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const userId = (await searchParams).id
+
+  const response = await fetch(
+    `${defaultValues.backendURL}/api/v0/public/profile/userId-${userId}`,
+  )
+  const user = await response.json()
 
   return (
-    <div>
-      <h1>Profile Page</h1>
-      <p>Profile ID: {id}</p>
-    </div>
+    <section className="grid h-svh place-items-center">
+      <ProfileDetailsCard user={user.data} />
+    </section>
   )
 }

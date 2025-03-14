@@ -11,7 +11,7 @@
     "name": "System Administrator",
     "username": "administrator",
     "email": "administrator@example.com",
-    "profilePic": "https://e7.pngegg.com/pngimages/9/763/png-clipart-computer-icons-login-user-system-administrator-admin-desktop-wallpaper-megaphone-thumbnail.png",
+    "profilePic": "https://res.cloudinary.com/dbaa3pxau/image/upload/v1741928031/avatar-administrator_amdcoq.png",
     "systemRole": "ADMINISTRATOR",
     "organizationRoles": null,
     "createdAt": "2002-09-17T06:16:18.237Z",
