@@ -1,4 +1,7 @@
+import packageInfo from "../../package.json"
+
 interface DefaultValues {
+  version: string
   frontendURL: string
   backendURL: string
   formSpreedID: string
@@ -8,6 +11,7 @@ interface DefaultValues {
 }
 
 export const defaultValues: DefaultValues = {
+  version: packageInfo.version,
   frontendURL: process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000",
   backendURL: process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000",
 
