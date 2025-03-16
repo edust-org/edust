@@ -5,7 +5,6 @@ import { Roles } from "./types"
 
 export default withAuth(
   function middleware(req) {
-    console.log(req.nextauth.token)
 
     if (!req.nextauth.token) {
       return NextResponse.redirect(new URL("/login", req.url))

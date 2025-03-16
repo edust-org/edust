@@ -48,9 +48,9 @@ export const store = configureStore({
     const middleware = getDefaultMiddleware({
       serializableCheck: false,
     })
-    if (logger) {
-      middleware.push(logger)
-    }
+    // if (logger) {
+    //   middleware.push(logger)
+    // }
     return middleware.concat([
       ...rootMiddlewareApiV0,
       ...rootMiddleware_OthersApi,
