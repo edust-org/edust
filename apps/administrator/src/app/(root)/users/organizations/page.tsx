@@ -1,18 +1,19 @@
-"use client";
+"use client"
 
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui";
-import { defaultValues } from "@/configs";
-import axios from "@/lib/axios";
-import { Status } from "@/types";
-import { useSearchParams } from "next/navigation";
-
-
-
-import { useEffect, useState } from "react";
-
-
-
-
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
+import { Status } from "@/types"
+import { useQuery } from "@tanstack/react-query"
+import { useSearchParams } from "next/navigation"
 
 interface Organization {
   id: string
@@ -23,26 +24,20 @@ interface Organization {
   profilePic: string | null
 }
 export default function OrganizationPage() {
-  const [users, setUsers] = useState([])
   const searchParams = useSearchParams()
 
   const id = searchParams.get("id")
 
-  useEffect(() => {
-    async function getOrganizations() {
-      try {
-        const response = await axios.get(
-          `${defaultValues.backendURL}/api/v0/administrator/users/${id}/organizations`,
-        )
+  const { isPending, error, data } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: async () =>
+      await axios.get(
+        `${defaultValues.backendURL}/api/v0/administrator/users/${id}/organizations`,
+      ),
+  })
+  if (isPending) return "Loading..."
 
-        setUsers(response.data.data.items)
-        console.log(response.data.data.items)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getOrganizations()
-  }, [id])
+  if (error) return "An error has occurred: " + error.message
 
   return (
     <>
@@ -59,7 +54,7 @@ export default function OrganizationPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user: Organization) => (
+          {data.data.data.items.map((user: Organization) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.status}</TableCell>
               <TableCell>{user.name}</TableCell>
