@@ -1,12 +1,18 @@
-"use client";
+"use client"
 
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui";
-import { defaultValues } from "@/configs";
-import axios from "@/lib/axios";
-import { useSearchParams } from "next/navigation";
-
-import { useEffect, useState } from "react";
-
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
+import { useQuery } from "@tanstack/react-query"
+import { useSearchParams } from "next/navigation"
 
 interface Institute {
   id: string
@@ -19,25 +25,21 @@ interface Institute {
 }
 
 export default function InstitutePage() {
-  const [users, setUsers] = useState([])
   const searchParams = useSearchParams()
 
   const id = searchParams.get("id")
 
-  useEffect(() => {
-    async function getInstitute() {
-      try {
-        const response = await axios.get(
-          `${defaultValues.backendURL}/api/v0/administrator/users/${id}/institutes`,
-        )
-        console.log(response.data.data.items)
-        setUsers(response.data.data.items)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getInstitute()
-  }, [id])
+  const { isPending, error, data } = useQuery({
+    queryKey: ["instituteData"],
+    queryFn: async () =>
+      await axios.get(
+        `${defaultValues.backendURL}/api/v0/administrator/users/${id}/institutes`,
+      ),
+  })
+  if (isPending) return "Loading..."
+
+  if (error) return "An error has occurred: " + error.message
+
   return (
     <>
       <Table>
@@ -53,7 +55,7 @@ export default function InstitutePage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user: Institute) => (
+          {data.data.data.items.map((user: Institute) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.status}</TableCell>
               <TableCell>{user.name}</TableCell>
