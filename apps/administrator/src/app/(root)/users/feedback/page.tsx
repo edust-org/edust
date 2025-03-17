@@ -1,17 +1,18 @@
-"use client";
+"use client"
 
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui";
-import { defaultValues } from "@/configs";
-import axios from "@/lib/axios";
-import { useSearchParams } from "next/navigation";
-
-
-
-import { useEffect, useState } from "react";
-
-
-
-
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
+import { useQuery } from "@tanstack/react-query"
+import { useSearchParams } from "next/navigation"
 
 interface Feedback {
   id: string
@@ -21,33 +22,24 @@ interface Feedback {
   rating: number
 }
 
-
 export default function FeedbackPage() {
-  const [users, setUsers] = useState([])
   const searchParams = useSearchParams()
   const id = searchParams.get("id")
 
+  const { isPending, error, data } = useQuery({
+    queryKey: ["feedbackData"],
+    queryFn: async () =>
+      await axios.get(
+        `${defaultValues.backendURL}/api/v0/administrator/users/${id}/feedback`,
+      ),
+  })
+  if (isPending) return "Loading..."
 
-  useEffect(() => {
-    async function getFeedback() {
-      try {
-        const response = await axios.get(
-          `${defaultValues.backendURL}/api/v0/administrator/users/${id}/feedback`,
-        )
-        console.log(response.data.data.items)
-        setUsers(response.data.data.items)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getFeedback()
-  }, [id])
-
-  // This will not be logged on the server when using static rendering
+  if (error) return "An error has occurred: " + error.message
 
   return (
     <>
-       <Table>
+      <Table>
         <TableCaption>A list of users.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -59,7 +51,7 @@ export default function FeedbackPage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user: Feedback) => (
+          {data.data.data.items.map((user: Feedback) => (
             <TableRow key={user.id}>
               <TableCell className="font-medium">{user.status}</TableCell>
               <TableCell>{user.comments}</TableCell>
@@ -71,7 +63,6 @@ export default function FeedbackPage() {
           ))}
         </TableBody>
       </Table>
-      
     </>
   )
 }
