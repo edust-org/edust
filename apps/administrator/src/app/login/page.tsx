@@ -28,7 +28,6 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import { z } from "zod"
 

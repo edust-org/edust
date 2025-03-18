@@ -74,44 +74,8 @@ export const NavbarRightMenus = () => {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <Link href={"/dashboard"}>
-              <DropdownMenuItem>
-                <LayoutDashboard className="mr-2 h-4 w-4" />
-                <span>Dashboard</span>
-              </DropdownMenuItem>
-            </Link>
-          </DropdownMenuGroup>
+        
 
-          <DropdownMenuGroup>
-            {/* if organization available */}
-            {user?.organizationRoles &&
-              user?.organizationRoles?.map((role) => (
-                <Link href={"/organizations"} key={role.id}>
-                  <DropdownMenuItem>
-                    <School className="mr-2 h-4 w-4" />
-                    <span
-                      className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
-                    >
-                      {role.organization.name.length > 21
-                        ? role.organization.name.slice(0, 20) + "..."
-                        : role.organization.name}
-                    </span>
-                  </DropdownMenuItem>
-                </Link>
-              ))}
-
-            {/* if organization is not available */}
-            {!user?.organizationRoles && (
-              <Link href={"/organizations/create"}>
-                <DropdownMenuItem>
-                  <Plus className="mr-2 h-4 w-4" />
-                  <span>Create Organizations</span>
-                </DropdownMenuItem>
-              </Link>
-            )}
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
             <span>Log out</span>
