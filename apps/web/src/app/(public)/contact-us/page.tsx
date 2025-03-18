@@ -1,22 +1,17 @@
-'use client'
-import { ContactNewsletter } from "./components/contact-newletter"
-import { ContactText } from "./components/contact-text"
 import { ContactFormSpree } from "./components/contact-form-spree"
 import { ContactHeading } from "./components/contact-heading"
-import { Footer, Navbar } from "@/components"
-
-
+import { ContactNewsletter } from "./components/contact-newletter"
+import { ContactText } from "./components/contact-text"
 
 export default function ContactUs() {
   return (
     <>
-    <Navbar />
       <section className="my-8 lg:my-16">
         <div className="container">
-          <div className="text-center mb-10">
+          <div className="mb-10 text-center">
             <ContactHeading />
           </div>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-evenly gap-10 mb-16">
+          <div className="mb-16 flex flex-col gap-10 md:flex-row md:items-center md:justify-evenly">
             <div>
               <ContactFormSpree />
             </div>
@@ -30,7 +25,6 @@ export default function ContactUs() {
       <section>
         <ContactNewsletter />
       </section>
-      <Footer />
     </>
   )
 }
