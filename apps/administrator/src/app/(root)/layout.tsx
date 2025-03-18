@@ -1,5 +1,6 @@
 "useClient"
 
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Separator,
   SidebarInset,
@@ -18,9 +19,9 @@ export default function RootLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
+          <NavbarRightMenus />
         </header>
         <main>{children}</main>
       </SidebarInset>
