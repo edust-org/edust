@@ -1,6 +1,5 @@
 "use client"
 
-import { Navbar } from "@/components"
 import { useGetInstitutesQuery } from "@/lib/store/api/v0/public"
 import { useAppSelector } from "@/lib/store/hooks"
 
@@ -28,9 +27,6 @@ export default function Institutes() {
           content="Welcome to Edust, a design platform for creating engaging and beautiful educational content."
         />
         <title>Institute | Welcome to here</title> */}
-      <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
-        <Navbar />
-      </header>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
           <FilterInstitute />
