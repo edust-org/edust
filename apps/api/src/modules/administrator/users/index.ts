@@ -8,7 +8,7 @@ const router: Router = express.Router()
 router
   .get("/", async (req: Request, res: Response) => {
     const data = await jsonLoad.load(
-      path.resolve(__dirname, "./user-list.json"),
+      path.resolve(__dirname, "../../../data/user-list.json"),
     )
     res.json(data)
   })

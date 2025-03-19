@@ -1,22 +1,25 @@
-import type { Router } from 'express';
-import express from 'express';
-import usersRoutes from './users';
+import type { Router } from "express"
+import express from "express"
+
+import organizationsRoutes from "./organizations"
+import usersRoutes from "./users"
 
 class Routes {
-  private router: Router;
+  private router: Router
 
   constructor() {
-    this.router = express.Router();
-    this.initializeRoutes();
+    this.router = express.Router()
+    this.initializeRoutes()
   }
 
   private initializeRoutes() {
-    this.router.use('/users', usersRoutes);
+    this.router.use("/organizations", organizationsRoutes)
+    this.router.use("/users", usersRoutes)
   }
 
   public getRouter(): Router {
-    return this.router;
+    return this.router
   }
 }
 
-export default new Routes().getRouter();
+export default new Routes().getRouter()

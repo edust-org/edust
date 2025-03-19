@@ -1,0 +1,19 @@
+{
+  "status": "success",
+  "message": "Organization retrieved successfully!",
+  "data": {
+    "id": "6202731c-536a-48ba-9b64-95957c41ea0e",
+    "name": "Moore Inc philosophyschool",
+    "orgUsername": "moore-inc-philosophyschool-and-arts",
+    "profilePic": "http://res.cloudinary.com/dmiewayfu/image/upload/v1742228633/edust_v0/org-profile/images-m8d9y04s.jpg",
+    "email": null,
+    "location": null,
+    "createdAt": "1974-12-27T19:18:38.981Z",
+    "updatedAt": "2025-03-17T16:23:53.969Z"
+  },
+  "_links": {
+    "self": { "href": "/api/v0/organizations/me", "method": "PATCH" },
+    "me": { "href": "/api/v0/organizations/me", "method": "GET" },
+    "get": { "href": "/api/v0/organizations", "method": "GET" }
+  }
+}

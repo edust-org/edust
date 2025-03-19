@@ -1,0 +1,31 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "3a70696d-c990-4891-9e7c-4469c1a3de5d",
+    "name": "Christian Hagenes",
+    "username": null,
+    "email": "Christian_Hagenes@yahoo.com",
+    "emailSecondary": null,
+    "gender": null,
+    "dateOfBirth": null,
+    "phoneNumber": null,
+    "phoneNumberSecondary": null,
+    "homeAddress": null,
+    "profilePic": null,
+    "createdAt": "1973-05-16T09:22:32.389Z",
+    "updatedAt": "1973-05-16T09:22:32.389Z"
+  },
+  "_links": {
+    "self": { "url": "/api/v0/profile/me", "method": "GET" },
+    "editByMe": { "url": "/api/v0/profile/me", "method": "PATCH" },
+    "getUserById": {
+      "url": "/api/v0/profile/userId-{userId}",
+      "method": "GET"
+    },
+    "getByUsername": {
+      "url": "/api/v0/profile/username-{username}",
+      "method": "GET"
+    }
+  }
+}
