@@ -58,19 +58,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <GalleryVerticalEnd className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Documentation</span>
-                  <span className="">v{defaultValues.version}</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          <div className="flex items-center justify-between">
+            <div>
+              {" "}
+              <SidebarMenuItem>
+                <SidebarMenuButton size="lg" asChild>
+                  <a href="#">
+                    <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                      <GalleryVerticalEnd className="size-4" />
+                    </div>
+                    <div className="flex flex-col gap-0.5 leading-none">
+                      <span className="font-semibold">Documentation</span>
+                      <span className="">v{defaultValues.version}</span>
+                    </div>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </div>
+          </div>
         </SidebarMenu>
         <SearchForm />
       </SidebarHeader>
@@ -111,6 +116,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Collapsible>
             ))}
           </SidebarMenu>
+         
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
