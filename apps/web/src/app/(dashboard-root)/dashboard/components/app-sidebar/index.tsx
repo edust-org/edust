@@ -12,6 +12,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui"
+import { Settings2 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -45,6 +46,17 @@ const data = {
         {
           title: "Routing",
           url: "#",
+        },
+      ],
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: Settings2,
+      items: [
+        {
+          title: "Profile",
+          url: "/dashboard/profile",
         },
       ],
     },

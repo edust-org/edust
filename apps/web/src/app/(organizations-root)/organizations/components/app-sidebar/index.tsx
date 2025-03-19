@@ -97,7 +97,7 @@ const navMain = [
     items: [
       {
         title: "Profile",
-        url: "#",
+        url: "/organizations/profile",
       },
     ],
   },
