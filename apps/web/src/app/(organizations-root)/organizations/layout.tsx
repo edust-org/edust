@@ -1,28 +1,33 @@
-"use client"
+import {
+  Separator,
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+  Typography,
+} from "@/components/ui"
 
-import { useIsCollapsed } from "@/hooks"
-
-import { Sidebar } from "./app-shell/sidebar"
+import { AppSidebar } from "./components/app-sidebar"
 
 export default function OrganizationsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [isCollapsed, setIsCollapsed] = useIsCollapsed()
   return (
-    <html lang="en">
-      <body>
-        <div className="bg-background relative h-full overflow-hidden">
-          <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-          <main
-            id="content"
-            className={`overflow-x-hidden pt-16 transition-[margin] md:overflow-y-hidden md:pt-0 ${isCollapsed ? "md:ml-14" : "md:ml-64"} h-full`}
-          >
-            {children}
-          </main>
-        </div>
-      </body>
-    </html>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <div>
+              <Typography variant="h4">Organizations Dashboard</Typography>
+            </div>
+          </div>
+        </header>
+        <main className="px-4 pb-6 pt-6 sm:px-6">{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
