@@ -63,7 +63,7 @@ export default function Site() {
           content="Edust is a powerful and flexible platform for building and managing websites."
         />
       </Helmet> */}
-      <Layout.Header className="">
+      {/* <Layout.Header className="">
         <div className="ml-auto flex items-center space-x-4">
           <Input
             type="search"
@@ -72,7 +72,7 @@ export default function Site() {
           />
           <NavbarRightMenus />
         </div>
-      </Layout.Header>
+      </Layout.Header> */}
 
       <Layout.Body>
         <section className="flex gap-4">
