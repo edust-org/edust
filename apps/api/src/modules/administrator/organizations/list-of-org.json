@@ -1,0 +1,246 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "items": [
+      {
+        "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
+        "name": "harvard university",
+        "orgUsername": "harvard-univ",
+        "createdAt": "2024-07-26T17:07:32.709Z",
+        "updatedAt": "2024-11-22T10:42:47.383Z",
+        "site": { "id": "33f91a95-d6ed-4b3f-bed0-24b7296ee8b6" }
+      },
+      {
+        "id": "a98cc64b-2891-41d3-8151-a1842eae5cc8",
+        "name": "Zboncak and Sons photographyschool",
+        "orgUsername": "zboncak-and-sons-photographyschool",
+        "createdAt": "2020-12-15T12:47:58.321Z",
+        "updatedAt": "2020-12-15T12:47:58.321Z",
+        "site": null
+      },
+      {
+        "id": "fa36c03a-65f9-4889-bb29-d48552af5cf9",
+        "name": "McCullough Cummings and Wehner college and Arts",
+        "orgUsername": "mccullough-cummings-and-wehner-college-and-arts",
+        "createdAt": "1978-06-05T13:42:46.241Z",
+        "updatedAt": "1978-06-05T13:42:46.241Z",
+        "site": null
+      },
+      {
+        "id": "fcea8faf-bf07-4110-94fc-7254b87c6a61",
+        "name": "Friesen and Sons engineeringschool of Technology",
+        "orgUsername": "friesen-and-sons-engineeringschool-of-technology",
+        "createdAt": "1994-05-02T17:06:00.424Z",
+        "updatedAt": "1994-05-02T17:06:00.424Z",
+        "site": null
+      },
+      {
+        "id": "ff79ea05-b2e8-401d-8f3f-44874a7871ca",
+        "name": "Feeney Wilderman hospitalityschool and Arts",
+        "orgUsername": "feeney-wilderman-hospitalityschool-and-arts",
+        "createdAt": "1980-09-16T12:40:56.152Z",
+        "updatedAt": "1980-09-16T12:40:56.152Z",
+        "site": null
+      },
+      {
+        "id": "ad6d0a74-cad2-4b9a-a82c-2e690611ee32",
+        "name": "Gorczany Parker polytechnicinstitute",
+        "orgUsername": "gorczany-parker-polytechnicinstitute",
+        "createdAt": "1982-12-31T17:18:12.590Z",
+        "updatedAt": "1982-12-31T17:18:12.590Z",
+        "site": null
+      },
+      {
+        "id": "7689644a-9305-407d-85fa-06e8dc75104f",
+        "name": "Schumm Batz and Runolfsdottir technicalcollege of Science",
+        "orgUsername": "schumm-batz-and-runolfsdottir-technicalcollege-of-science",
+        "createdAt": "2006-10-12T02:20:50.595Z",
+        "updatedAt": "2006-10-12T02:20:50.595Z",
+        "site": null
+      },
+      {
+        "id": "8f2bfd74-17d2-4060-97b0-c5a7e5ac714f",
+        "name": "Leuschke Group technicalcollege of Technology",
+        "orgUsername": "leuschke-group-technicalcollege-of-technology",
+        "createdAt": "2020-06-17T02:33:50.550Z",
+        "updatedAt": "2020-06-17T02:33:50.550Z",
+        "site": null
+      },
+      {
+        "id": "7149930f-c90d-44e1-96c3-4144ff9e5bcd",
+        "name": "Veum Torphy university of Science",
+        "orgUsername": "veum-torphy-university-of-science",
+        "createdAt": "2018-06-03T14:12:37.909Z",
+        "updatedAt": "2018-06-03T14:12:37.909Z",
+        "site": null
+      },
+      {
+        "id": "b94a972d-7323-4301-9bb1-633ad4fe6c9e",
+        "name": "Rutherford Greenholt and Mosciski college of Technology",
+        "orgUsername": "rutherford-greenholt-and-mosciski-college-of-technology",
+        "createdAt": "2000-01-14T08:31:54.588Z",
+        "updatedAt": "2000-01-14T08:31:54.588Z",
+        "site": null
+      },
+      {
+        "id": "355f5aed-0de1-4b8e-b6f7-1be685537978",
+        "name": "Heathcote Wisoky technicalcollege of Science",
+        "orgUsername": "heathcote-wisoky-technicalcollege-of-science",
+        "createdAt": "2005-11-17T20:08:13.740Z",
+        "updatedAt": "2005-11-17T20:08:13.740Z",
+        "site": null
+      },
+      {
+        "id": "48523e8b-1910-4dcf-baca-8612bd5bfc53",
+        "name": "Funk Weissnat astronomyinstitute and Arts",
+        "orgUsername": "funk-weissnat-astronomyinstitute-and-arts",
+        "createdAt": "2023-08-03T09:38:48.581Z",
+        "updatedAt": "2023-08-03T09:38:48.581Z",
+        "site": null
+      },
+      {
+        "id": "47cd59b9-7019-46c4-bce3-945e4e75d6f8",
+        "name": "Tillman Berge and Watsica hospitalityschool",
+        "orgUsername": "tillman-berge-and-watsica-hospitalityschool",
+        "createdAt": "1993-08-13T09:03:56.866Z",
+        "updatedAt": "1993-08-13T09:03:56.866Z",
+        "site": null
+      },
+      {
+        "id": "c0c331a1-b200-4af3-ad9c-404752953237",
+        "name": "Hand LLC medicalcollege and Arts",
+        "orgUsername": "hand-llc-medicalcollege-and-arts",
+        "createdAt": "2023-01-10T04:19:13.621Z",
+        "updatedAt": "2023-01-10T04:19:13.621Z",
+        "site": null
+      },
+      {
+        "id": "0a4cb0ed-492e-4f8f-81e1-ca5d076bf08f",
+        "name": "Goyette Gleichner and Boyle school and Arts",
+        "orgUsername": "goyette-gleichner-and-boyle-school-and-arts",
+        "createdAt": "1990-06-13T15:40:38.800Z",
+        "updatedAt": "1990-06-13T15:40:38.800Z",
+        "site": null
+      },
+      {
+        "id": "b58fec58-d1a6-4544-a930-854d400ee6c7",
+        "name": "Quigley Connelly and Kiehn engineeringschool and Arts",
+        "orgUsername": "quigley-connelly-and-kiehn-engineeringschool-and-arts",
+        "createdAt": "1989-06-25T07:46:48.946Z",
+        "updatedAt": "1989-06-25T07:46:48.946Z",
+        "site": null
+      },
+      {
+        "id": "6687799e-eeff-41df-b771-56bb33f98a15",
+        "name": "Anderson Ruecker and Stroman lawcollege",
+        "orgUsername": "anderson-ruecker-and-stroman-lawcollege",
+        "createdAt": "1998-09-19T10:14:03.823Z",
+        "updatedAt": "1998-09-19T10:14:03.823Z",
+        "site": null
+      },
+      {
+        "id": "fd959e41-df63-4c18-857d-e132c145dbc0",
+        "name": "Shields LLC artschool of Technology",
+        "orgUsername": "shields-llc-artschool-of-technology",
+        "createdAt": "1991-10-06T13:44:30.562Z",
+        "updatedAt": "1991-10-06T13:44:30.562Z",
+        "site": null
+      },
+      {
+        "id": "ac787b71-9970-4b80-99b9-932165eb1a00",
+        "name": "Douglas and Sons medicalcollege and Arts",
+        "orgUsername": "douglas-and-sons-medicalcollege-and-arts",
+        "createdAt": "1973-11-30T03:09:44.383Z",
+        "updatedAt": "1973-11-30T03:09:44.383Z",
+        "site": null
+      },
+      {
+        "id": "cb1c2511-d19f-47f4-acf8-a0ef74a7cdfe",
+        "name": "Ruecker Littel and Kessler college and Arts",
+        "orgUsername": "ruecker-littel-and-kessler-college-and-arts",
+        "createdAt": "1989-12-22T01:08:53.534Z",
+        "updatedAt": "1989-12-22T01:08:53.534Z",
+        "site": null
+      },
+      {
+        "id": "0fd4f1d6-e7eb-4434-b5f2-6205b79507df",
+        "name": "Brekke and Sons polytechnicinstitute",
+        "orgUsername": "brekke-and-sons-polytechnicinstitute",
+        "createdAt": "2019-06-12T15:44:37.962Z",
+        "updatedAt": "2019-06-12T15:44:37.962Z",
+        "site": null
+      },
+      {
+        "id": "293abc4a-d492-4189-b34a-150e03479aeb",
+        "name": "Bartoletti Hegmann philosophyschool and Arts",
+        "orgUsername": "bartoletti-hegmann-philosophyschool-and-arts",
+        "createdAt": "2008-09-03T20:14:40.072Z",
+        "updatedAt": "2008-09-03T20:14:40.072Z",
+        "site": null
+      },
+      {
+        "id": "4d7b7347-1f55-4403-9962-f7f9b99578a6",
+        "name": "Sporer Conn and Kutch hospitalityschool of Science",
+        "orgUsername": "sporer-conn-and-kutch-hospitalityschool-of-science",
+        "createdAt": "2010-08-30T00:43:13.030Z",
+        "updatedAt": "2010-08-30T00:43:13.030Z",
+        "site": null
+      },
+      {
+        "id": "841c5353-a688-46d5-a2e4-be6710d68f6a",
+        "name": "Miller Koelpin medicalcollege",
+        "orgUsername": "miller-koelpin-medicalcollege",
+        "createdAt": "1988-12-21T13:34:24.679Z",
+        "updatedAt": "1988-12-21T13:34:24.679Z",
+        "site": null
+      },
+      {
+        "id": "a92684ca-d64c-4b2f-a2a4-dbc454413d2e",
+        "name": "Kertzmann Marvin artschool",
+        "orgUsername": "kertzmann-marvin-artschool",
+        "createdAt": "2013-06-04T06:33:44.430Z",
+        "updatedAt": "2013-06-04T06:33:44.430Z",
+        "site": null
+      },
+      {
+        "id": "53e3b668-3726-41fe-ac3f-88944de76f40",
+        "name": "Bosco Inc madrasah of Science",
+        "orgUsername": "bosco-inc-madrasah-of-science",
+        "createdAt": "1978-06-23T21:40:21.903Z",
+        "updatedAt": "1978-06-23T21:40:21.903Z",
+        "site": null
+      },
+      {
+        "id": "995868ee-9f54-489b-858d-c430177f9064",
+        "name": "Barrows Kessler and Brown highschool and Arts",
+        "orgUsername": "barrows-kessler-and-brown-highschool-and-arts",
+        "createdAt": "1991-08-06T00:44:02.903Z",
+        "updatedAt": "1991-08-06T00:44:02.903Z",
+        "site": null
+      },
+      {
+        "id": "6e2f8cbd-e185-44b6-88b0-a2382a49eb62",
+        "name": "Homenick Group photographyschool of Science",
+        "orgUsername": "homenick-group-photographyschool-of-science",
+        "createdAt": "1986-06-19T09:29:39.713Z",
+        "updatedAt": "1986-06-19T09:29:39.713Z",
+        "site": null
+      },
+      {
+        "id": "d26abc79-90f7-45c7-a9f4-e364ad8ed729",
+        "name": "Rowe Ruecker lawcollege and Arts",
+        "orgUsername": "rowe-ruecker-lawcollege-and-arts",
+        "createdAt": "1989-03-24T22:30:49.637Z",
+        "updatedAt": "1989-03-24T22:30:49.637Z",
+        "site": null
+      }
+    ]
+  },
+  "_links": {
+    "self": { "href": "/api/v0/organizations", "method": "GET" },
+    "create": { "href": "/api/v0/organizations", "method": "POST" },
+    "me": { "href": "/api/v0/organizations/me", "method": "GET" },
+    "editByMe": { "href": "/api/v0/organizations/me", "method": "PATCH" }
+  }
+}
