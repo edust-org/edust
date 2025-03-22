@@ -33,7 +33,7 @@ router.get("/institutes/categories", async (req, res) => {
 
 router.get("/institutes", async (req, res) => {
   const institutes = await jsonLoad.load(
-    path.resolve(__dirname, "./get-institutes.json"),
+    path.resolve(__dirname, "../../data/get-institutes.json"),
   )
   res.json(institutes)
 })
