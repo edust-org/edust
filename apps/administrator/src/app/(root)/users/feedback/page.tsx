@@ -47,7 +47,6 @@ export default function FeedbackPage() {
             <TableHead>Comment</TableHead>
             <TableHead>UserId</TableHead>
             <TableHead>Rating</TableHead>
-            {/* <TableHead className="text-right">Amount</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,8 +56,6 @@ export default function FeedbackPage() {
               <TableCell>{user.comments}</TableCell>
               <TableCell>{user.userId}</TableCell>
               <TableCell>{user.rating}</TableCell>
-
-              {/* <TableCell className="text-right">{user.profilePic}</TableCell> */}
             </TableRow>
           ))}
         </TableBody>

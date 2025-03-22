@@ -20,11 +20,14 @@ import {
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
 import { OrganizationRoles, Roles } from "@/types"
+import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-interface User {
+import Loading from "./loading"
+
+interface Organization {
   id: string
   name: string
   username: string | null
@@ -32,27 +35,18 @@ interface User {
   profilePic: string | null
   systemRole: null | Roles
   organizationRoles: null | OrganizationRoles[]
-  // createdAt: Date
-  // updatedAt: Date
 }
 
 export default function UsersPage() {
-  const [users, setUsers] = useState([])
   const [position, setPosition] = useState("bottom")
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await axios.get(
-          `${defaultValues.backendURL}/api/v0/administrator/users`,
-        )
-        // console.log(response.data.data.items)
-        setUsers(response.data.data.items.slice(0, 10))
-      } catch (error) {
-        console.error(error)
-      }
-    }
-    getUser()
-  }, [])
+  const { isPending, error, data } = useQuery({
+    queryKey: ["organizationData"],
+    queryFn: async () =>
+      await axios.get(`${defaultValues.backendURL}/api/v0/administrator/users`),
+  })
+  if (isPending) return <Loading />
+
+  if (error) return "An error has occurred: " + error.message
 
   return (
     <>
@@ -63,17 +57,15 @@ export default function UsersPage() {
             <TableHead className="w-[100px]">Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>UserName</TableHead>
-            {/* <TableHead className="text-right">Amount</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user: User) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.username}</TableCell>
+          {data.data.data.items.map((organization: Organization) => (
+            <TableRow key={organization.id}>
+              <TableCell className="font-medium">{organization.name}</TableCell>
+              <TableCell>{organization.email}</TableCell>
+              <TableCell>{organization.username}</TableCell>
 
-              {/* <TableCell className="text-right">{user.profilePic}</TableCell> */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">Open</Button>
@@ -86,18 +78,20 @@ export default function UsersPage() {
                     onValueChange={setPosition}
                   >
                     <DropdownMenuRadioItem value="top">
-                      <Link href={`/users/feedback/?id=${user.id}`}>
+                      <Link href={`/users/feedback/?id=${organization.id}`}>
                         Feedback
                       </Link>
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="bottom">
-                      <Link href={`/users/institutes/?id=${user.id}`}>
+                      <Link href={`/users/institutes/?id=${organization.id}`}>
                         {" "}
                         Institute
                       </Link>
                     </DropdownMenuRadioItem>
                     <DropdownMenuRadioItem value="right">
-                      <Link href={`/users/organizations/?id=${user.id}`}>
+                      <Link
+                        href={`/users/organizations/?id=${organization.id}`}
+                      >
                         Organization
                       </Link>
                     </DropdownMenuRadioItem>
