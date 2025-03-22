@@ -1,0 +1,343 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "items": [
+      {
+        "id": "6c52e534-a6d4-414c-bd1a-6bd96820f100",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["perferendis", "tener", "aliquid"],
+        "comments": "Accusamus blanditiis ubi.",
+        "status": "DRAFT",
+        "createdAt": "1993-07-08T14:13:55.908Z",
+        "updatedAt": "1993-07-08T14:13:55.908Z"
+      },
+      {
+        "id": "64ecfc65-18b6-4b80-97a4-2a93c92f2123",
+        "rating": 5,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["iusto", "cimentarius", "caelestis"],
+        "comments": "Vicissitudo adipiscor audeo ascisco.",
+        "status": "DRAFT",
+        "createdAt": "1986-08-07T03:11:35.715Z",
+        "updatedAt": "1986-08-07T03:11:35.715Z"
+      },
+      {
+        "id": "5baa0d8c-c9aa-4b82-9956-a454cf729037",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["crastinus", "atrocitas", "audax"],
+        "comments": "Conculco quae dolor vesica.",
+        "status": "DRAFT",
+        "createdAt": "1976-10-16T18:56:41.836Z",
+        "updatedAt": "1976-10-16T18:56:41.836Z"
+      },
+      {
+        "id": "c9c92cb4-3d0c-4384-aefe-70077ba05b0f",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["umerus", "alveus", "valetudo"],
+        "comments": "Copiose deficio earum cernuus calculus.",
+        "status": "DRAFT",
+        "createdAt": "1983-10-29T03:18:01.846Z",
+        "updatedAt": "1983-10-29T03:18:01.846Z"
+      },
+      {
+        "id": "6cf05949-d78a-4211-a6d6-1108c2e764f4",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["sunt", "suscipit", "arcesso"],
+        "comments": "Modi a accusantium clarus consectetur decet assentator cunctatio caute cetera.",
+        "status": "DRAFT",
+        "createdAt": "1976-09-18T20:35:37.385Z",
+        "updatedAt": "1976-09-18T20:35:37.385Z"
+      },
+      {
+        "id": "6bd47b2b-77e6-4c1e-b4ce-7e05113b68b4",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["aegre", "aggero", "cunctatio"],
+        "comments": "Territo saepe utrimque nulla advoco.",
+        "status": "DRAFT",
+        "createdAt": "1981-10-17T09:30:45.517Z",
+        "updatedAt": "1981-10-17T09:30:45.517Z"
+      },
+      {
+        "id": "43c1a15f-390e-43b2-af14-9601236932ca",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["tredecim", "talus", "contra"],
+        "comments": "Cornu id defessus.",
+        "status": "DRAFT",
+        "createdAt": "1985-02-24T14:50:31.654Z",
+        "updatedAt": "1985-02-24T14:50:31.654Z"
+      },
+      {
+        "id": "58304662-da9a-4540-b77d-bbe9b738b496",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["denique", "clarus", "canonicus"],
+        "comments": "Officia doloribus incidunt optio tubineus fuga.",
+        "status": "DRAFT",
+        "createdAt": "2019-06-15T19:44:36.436Z",
+        "updatedAt": "2019-06-15T19:44:36.436Z"
+      },
+      {
+        "id": "01e65ad5-9a5d-4743-948c-2bc1a6c0b96f",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["fugit", "triumphus", "beneficium"],
+        "comments": "Thymum tendo tego vomito placeat dignissimos.",
+        "status": "DRAFT",
+        "createdAt": "1993-03-20T15:10:35.177Z",
+        "updatedAt": "1993-03-20T15:10:35.177Z"
+      },
+      {
+        "id": "db96058c-52b9-454a-b08c-0cbda08b8454",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["numquam", "illum", "crebro"],
+        "comments": "Cogo amissio defaeco odio dens desidero charisma conservo maiores attollo.",
+        "status": "DRAFT",
+        "createdAt": "1998-06-01T07:41:09.719Z",
+        "updatedAt": "1998-06-01T07:41:09.719Z"
+      },
+      {
+        "id": "8df5e7c1-d719-4e1b-b17e-f3bf7267068c",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["decerno", "conforto", "asper"],
+        "comments": "Ter conspergo accommodo crur sponte dedecor velut veritas vulnero.",
+        "status": "DRAFT",
+        "createdAt": "1991-11-14T05:47:45.335Z",
+        "updatedAt": "1991-11-14T05:47:45.335Z"
+      },
+      {
+        "id": "6855f300-b9fb-49dd-be8e-95c753f1613a",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["speciosus", "tabgo", "argentum"],
+        "comments": "Viridis arbor verbera sumptus defluo carmen vinco caterva defessus deporto.",
+        "status": "DRAFT",
+        "createdAt": "1974-07-01T22:38:45.834Z",
+        "updatedAt": "1974-07-01T22:38:45.834Z"
+      },
+      {
+        "id": "bc8f1021-b7f5-4b9e-aa4a-16418ea8b864",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["assentator", "audeo", "ut"],
+        "comments": "Suffragium calculus clamo amor concido pauci decerno corroboro texo.",
+        "status": "DRAFT",
+        "createdAt": "1976-05-31T12:17:43.620Z",
+        "updatedAt": "1976-05-31T12:17:43.620Z"
+      },
+      {
+        "id": "fc4a291a-5e5e-46b0-b0c1-2b8d9f5f9d2a",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["summisse", "tonsor", "labore"],
+        "comments": "Auctor carcer teneo cariosus constans vita porro non.",
+        "status": "DRAFT",
+        "createdAt": "2010-12-28T11:10:05.687Z",
+        "updatedAt": "2010-12-28T11:10:05.687Z"
+      },
+      {
+        "id": "bb0473f3-e591-4326-bb9d-53e5f44b2841",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["auxilium", "vorago", "bardus"],
+        "comments": "Spiritus veritatis versus amet.",
+        "status": "DRAFT",
+        "createdAt": "2003-04-18T20:11:54.204Z",
+        "updatedAt": "2003-04-18T20:11:54.204Z"
+      },
+      {
+        "id": "9ea2700e-77e5-484a-b72d-e3af207573ff",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["omnis", "adaugeo", "decens"],
+        "comments": "Tabesco labore considero.",
+        "status": "DRAFT",
+        "createdAt": "2015-09-01T21:03:58.462Z",
+        "updatedAt": "2015-09-01T21:03:58.462Z"
+      },
+      {
+        "id": "e3f9571e-b093-4019-bfa3-7b92076b6ba6",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["atqui", "conor", "surgo"],
+        "comments": "Valetudo abutor ager adsum urbanus arguo thorax.",
+        "status": "DRAFT",
+        "createdAt": "1977-11-03T04:27:57.744Z",
+        "updatedAt": "1977-11-03T04:27:57.744Z"
+      },
+      {
+        "id": "5b835958-d75f-4d19-94d7-796f09043bc4",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["aro", "caelum", "pauper"],
+        "comments": "Spes vito advenio auditor comis defetiscor.",
+        "status": "DRAFT",
+        "createdAt": "1989-01-05T14:15:35.128Z",
+        "updatedAt": "1989-01-05T14:15:35.128Z"
+      },
+      {
+        "id": "d776badc-b936-4cb7-977e-4a8512b419a0",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["arto", "dolorem", "dolore"],
+        "comments": "Cenaculum utrum suasoria videlicet alias adflicto.",
+        "status": "DRAFT",
+        "createdAt": "1979-05-15T19:38:56.657Z",
+        "updatedAt": "1979-05-15T19:38:56.657Z"
+      },
+      {
+        "id": "e911b031-05ad-45da-99d7-d0d35ab96d7a",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["vociferor", "clarus", "temporibus"],
+        "comments": "Color tumultus aut eos cursim balbus sperno perspiciatis centum.",
+        "status": "DRAFT",
+        "createdAt": "2000-09-03T16:00:44.511Z",
+        "updatedAt": "2000-09-03T16:00:44.511Z"
+      },
+      {
+        "id": "41c2df15-2c24-4488-8265-dd72a316af43",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["textus", "peior", "bellum"],
+        "comments": "Hic cena tempus molestiae.",
+        "status": "DRAFT",
+        "createdAt": "2002-12-08T20:33:02.252Z",
+        "updatedAt": "2002-12-08T20:33:02.252Z"
+      },
+      {
+        "id": "b43a5794-2bd7-4457-92fe-588e7519dae7",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["teneo", "totam", "tergiversatio"],
+        "comments": "Dolore voluptatibus curia utpote consectetur.",
+        "status": "DRAFT",
+        "createdAt": "1981-12-11T01:09:14.011Z",
+        "updatedAt": "1981-12-11T01:09:14.011Z"
+      },
+      {
+        "id": "a7ef3833-e5fa-454f-882e-5dbca4dbb122",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["sint", "curriculum", "ait"],
+        "comments": "Comedo ambitus vita adipiscor ventosus.",
+        "status": "DRAFT",
+        "createdAt": "2010-08-17T13:32:18.037Z",
+        "updatedAt": "2010-08-17T13:32:18.037Z"
+      },
+      {
+        "id": "8ac7c895-d565-448e-8c3d-58a259ed2fbe",
+        "rating": 3,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["argumentum", "subiungo", "alienus"],
+        "comments": "Amplus bestia deporto toties vos bestia ipsa aestas torqueo.",
+        "status": "DRAFT",
+        "createdAt": "2013-02-07T10:03:22.108Z",
+        "updatedAt": "2013-02-07T10:03:22.108Z"
+      },
+      {
+        "id": "644d82a1-5e90-41d7-add6-b4b7410b4560",
+        "rating": 5,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["temeritas", "barba", "suppono"],
+        "comments": "Vae statim ipsam ipsa virga cito cibo conculco demulceo turpis.",
+        "status": "DRAFT",
+        "createdAt": "2004-05-26T06:00:21.889Z",
+        "updatedAt": "2004-05-26T06:00:21.889Z"
+      },
+      {
+        "id": "f3350df2-0f07-42aa-b323-840e37f369de",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["subnecto", "collum", "tener"],
+        "comments": "Cruciamentum curia abbas aptus tempore angustus dapifer.",
+        "status": "DRAFT",
+        "createdAt": "2016-03-08T18:00:10.020Z",
+        "updatedAt": "2016-03-08T18:00:10.020Z"
+      },
+      {
+        "id": "bbb1f80c-2ca6-4392-aca4-9e442bf3be83",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["advoco", "degero", "fugit"],
+        "comments": "Colligo theca arcus cornu solus ut.",
+        "status": "DRAFT",
+        "createdAt": "1974-05-25T23:25:42.745Z",
+        "updatedAt": "1974-05-25T23:25:42.745Z"
+      },
+      {
+        "id": "551e2099-ec54-4428-b955-0f974fc890df",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["damno", "commodi", "adfero"],
+        "comments": "Velociter tergo attero eveniet voluntarius.",
+        "status": "DRAFT",
+        "createdAt": "1985-08-06T23:33:33.298Z",
+        "updatedAt": "1985-08-06T23:33:33.298Z"
+      },
+      {
+        "id": "0bf8fa29-06e9-4a94-8473-18c4844314eb",
+        "rating": 1,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["caecus", "thymbra", "pauci"],
+        "comments": "Ceno amet cornu fugiat praesentium curvo ambulo.",
+        "status": "DRAFT",
+        "createdAt": "2015-12-26T19:42:32.789Z",
+        "updatedAt": "2015-12-26T19:42:32.789Z"
+      },
+      {
+        "id": "4e1040af-c898-42c4-8def-8eea99f4afc4",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["bonus", "tremo", "bardus"],
+        "comments": "Volaticus deficio cibus acsi amor territo virgo dolores.",
+        "status": "DRAFT",
+        "createdAt": "2017-08-28T05:15:56.600Z",
+        "updatedAt": "2017-08-28T05:15:56.600Z"
+      },
+      {
+        "id": "657b73d3-7f35-4b75-ba9c-f7f1d178b9a4",
+        "rating": 4,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["copia", "temeritas", "asporto"],
+        "comments": "Suus neque benigne quam earum ciminatio volubilis adsidue fuga.",
+        "status": "DRAFT",
+        "createdAt": "2006-10-17T01:12:55.085Z",
+        "updatedAt": "2006-10-17T01:12:55.085Z"
+      },
+      {
+        "id": "c06d4c39-be7a-4a64-8d77-4d12e9d68d04",
+        "rating": 2,
+        "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
+        "improvementAreas": ["sit", "sufficio", "cimentarius"],
+        "comments": "Tolero repudiandae auditor.",
+        "status": "DRAFT",
+        "createdAt": "1976-04-08T15:39:53.184Z",
+        "updatedAt": "1976-04-08T15:39:53.184Z"
+      }
+    ]
+  },
+  "_links": {
+    "self": { "url": "/api/v0/administrator/feedback", "method": "GET" },
+    "getById": {
+      "url": "/api/v0/administrator/feedback/{feedbackId}",
+      "method": "GET"
+    },
+    "editById": {
+      "url": "/api/v0/administrator/feedback/{feedbackId}",
+      "method": "PATCH"
+    },
+    "deleteById": {
+      "url": "/api/v0/administrator/feedback/{feedbackId}",
+      "method": "DELETE"
+    }
+  }
+}

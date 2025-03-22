@@ -1,7 +1,9 @@
 import type { Router } from "express"
 import express from "express"
 
-import instituteRoutes from './institutes';
+import feedbackRoutes from "./feedback"
+import helpCenterRoutes from "./help-center"
+import instituteRoutes from "./institutes"
 import organizationsRoutes from "./organizations"
 import usersRoutes from "./users"
 
@@ -14,7 +16,9 @@ class Routes {
   }
 
   private initializeRoutes() {
-    this.router.use('/institutes', instituteRoutes);
+    this.router.use("/feedback", feedbackRoutes)
+    this.router.use("/help-center", helpCenterRoutes)
+    this.router.use("/institutes", instituteRoutes)
     this.router.use("/organizations", organizationsRoutes)
     this.router.use("/users", usersRoutes)
   }
