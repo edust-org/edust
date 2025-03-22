@@ -1,0 +1,52 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "ed26c756-2917-476f-8d05-8c5f42a47c11",
+    "instituteCategoryId": "3d56d7f6-1f3a-45e4-88bd-48e9a9035d48",
+    "instituteCategory": "Public Colleges (Government)",
+    "name": "Dhaka College DH",
+    "slug": "dhaka-college::b776d4ab-6e36-410a-8814-730f02e6e9db",
+    "code": "2001::b776d4ab-6e36-410a-8814-730f02e6e9db",
+    "codeType": "eiin",
+    "overview": "<html></html>",
+    "photo": "http://res.cloudinary.com/dmiewayfu/image/upload/v1742633866/edust_v0/institutes/joshua-sukoff-b6txz5m0il0-unsplash-m8jz7kmk.jpg",
+    "contactEmail": "merlejaskolskiiii39@yahoo.com",
+    "phoneNumber": "01234567890",
+    "website": "https://hollow-outlaw.biz/",
+    "foundedDate": "2024-11-23T12:11:04.000Z",
+    "principalName": "Merle Jaskolski III",
+    "language": "English",
+    "country": "Turkey",
+    "division": "New Jersey",
+    "district": "South Dakota",
+    "subDivision": null,
+    "subDistrict": "Murazikchester",
+    "addressLine1": "634 Walnut Street",
+    "addressLine2": null,
+    "postalCode": "52270-1450",
+    "latitude": 80.673,
+    "longitude": -141.4251,
+    "createdAt": "2025-03-22T08:55:45.605Z",
+    "updatedAt": "2025-03-22T10:02:12.790Z",
+    "author": {
+      "id": "b776d4ab-6e36-410a-8814-730f02e6e9db",
+      "name": "System Administrator",
+      "profilePic": "https://res.cloudinary.com/dbaa3pxau/image/upload/v1741928031/avatar-administrator_amdcoq.png"
+    }
+  },
+  "_links": {
+    "self": {
+      "url": "/api/v0/administrator/institutes/{instituteId}",
+      "method": "GET"
+    },
+    "editById": {
+      "url": "/api/v0/administrator/institutes/{instituteId}",
+      "method": "PATCH"
+    },
+    "deleteById": {
+      "url": "/api/v0/administrator/institutes/{instituteId}",
+      "method": "DELETE"
+    }
+  }
+}

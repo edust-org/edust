@@ -1,6 +1,7 @@
 import type { Router } from "express"
 import express from "express"
 
+import instituteRoutes from './institutes';
 import organizationsRoutes from "./organizations"
 import usersRoutes from "./users"
 
@@ -13,6 +14,7 @@ class Routes {
   }
 
   private initializeRoutes() {
+    this.router.use('/institutes', instituteRoutes);
     this.router.use("/organizations", organizationsRoutes)
     this.router.use("/users", usersRoutes)
   }
