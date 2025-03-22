@@ -55,13 +55,13 @@ export default function InstitutePage() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.data.data.items.map((user: Institute) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">{user.status}</TableCell>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.country}</TableCell>
-              <TableCell>{user.slug}</TableCell>
-              <TableCell>{user.language}</TableCell>
+          {data.data.data.items.map((institute: Institute) => (
+            <TableRow key={institute.id}>
+              <TableCell className="font-medium">{institute.status}</TableCell>
+              <TableCell>{institute.name}</TableCell>
+              <TableCell>{institute.country}</TableCell>
+              <TableCell>{institute.slug}</TableCell>
+              <TableCell>{institute.language}</TableCell>
 
               {/* <TableCell className="text-right">{user.profilePic}</TableCell> */}
             </TableRow>

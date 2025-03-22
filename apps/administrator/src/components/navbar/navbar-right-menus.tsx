@@ -20,7 +20,13 @@ import { clearAllCaches } from "@/lib/store/api/v0"
 import { logOut } from "@/lib/store/features/authentication"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { Roles } from "@/types"
-import { LayoutDashboard, LogOut, Plus, School } from "lucide-react"
+import {
+  ChevronsUpDown,
+  LayoutDashboard,
+  LogOut,
+  Plus,
+  School,
+} from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -48,33 +54,34 @@ export const NavbarRightMenus = () => {
   }
 
   return (
-    <div className="flex items-center">
-      {/* <ThemeSwitch /> */}
+    <div className="flex items-center rounded-2xl p-1 m-1 duration-300 hover:bg-slate-200">
+      <div className="flex items-center gap-1">
+        <Avatar className="h-8 w-8">
+          {user?.profilePic ? (
+            <AvatarImage src={user?.profilePic} alt="user profile" />
+          ) : (
+            <AvatarFallback>SN</AvatarFallback>
+          )}
+        </Avatar>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">
+              {user?.name || "unknown"}
+            </p>
+            <p className="text-muted-foreground text-xs leading-none">
+              {user?.email || "unknown@email"}
+            </p>
+          </div>
+        </DropdownMenuLabel>
+      </div>
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
-              {user?.profilePic ? (
-                <AvatarImage src={user?.profilePic} alt="user profile" />
-              ) : (
-                <AvatarFallback>SN</AvatarFallback>
-              )}
-            </Avatar>
+            <ChevronsUpDown />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">
-                {user?.name || "unknown"}
-              </p>
-              <p className="text-muted-foreground text-xs leading-none">
-                {user?.email || "unknown@email"}
-              </p>
-            </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-        
 
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />
