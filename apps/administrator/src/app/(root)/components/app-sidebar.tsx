@@ -1,3 +1,4 @@
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Collapsible,
   CollapsibleContent,
@@ -17,7 +18,13 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { defaultValues } from "@/configs"
-import { GalleryVerticalEnd, Minus, Plus } from "lucide-react"
+import {
+  ChevronDown,
+  ChevronRight,
+  GalleryVerticalEnd,
+  Minus,
+  Plus,
+} from "lucide-react"
 
 import * as React from "react"
 
@@ -47,6 +54,16 @@ const data = {
         {
           title: "Users",
           url: "/users",
+        },
+      ],
+    },
+    {
+      title: "Organizations",
+      url: "#",
+      items: [
+        {
+          title: "Organizations",
+          url: "/organizations",
         },
       ],
     },
@@ -92,8 +109,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton>
                       {item.title}{" "}
-                      <Plus className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                      <Minus className="ml-auto group-data-[state=closed]/collapsible:hidden" />
+                      <ChevronRight className="ml-auto group-data-[state=open]/collapsible:hidden" />
+                      <ChevronDown className="ml-auto group-data-[state=closed]/collapsible:hidden" />
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
                   {item.items?.length ? (
@@ -116,8 +133,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Collapsible>
             ))}
           </SidebarMenu>
-         
         </SidebarGroup>
+        <div className="fixed bottom-0">
+          <NavbarRightMenus />
+        </div>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
