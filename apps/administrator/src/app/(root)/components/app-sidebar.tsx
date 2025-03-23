@@ -1,34 +1,20 @@
-import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarRail,
-} from "@/components/ui/sidebar"
-import { defaultValues } from "@/configs"
-import {
-  ChevronDown,
-  ChevronRight,
-  GalleryVerticalEnd,
-  Minus,
-  Plus,
-} from "lucide-react"
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarRail } from "@/components/ui/sidebar";
+import { defaultValues } from "@/configs";
+import { ChevronDown, ChevronRight, GalleryVerticalEnd, Minus, Plus } from "lucide-react";
 
-import * as React from "react"
 
-import { SearchForm } from "./search-form"
+
+import * as React from "react";
+
+
+
+import { SearchForm } from "./search-form";
+
+
+
+
 
 // This is sample data.
 const data = {
@@ -64,6 +50,16 @@ const data = {
         {
           title: "Organizations",
           url: "/organizations",
+        },
+      ],
+    },
+    {
+      title: "Institutes",
+      url: "#",
+      items: [
+        {
+          title: "Institutes",
+          url: "/institutes",
         },
       ],
     },
