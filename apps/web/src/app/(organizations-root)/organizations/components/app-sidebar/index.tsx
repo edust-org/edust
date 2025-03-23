@@ -94,12 +94,12 @@ const navMain = [
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/organizations/settings",
     icon: Settings2,
     items: [
       {
         title: "Profile",
-        url: "/organizations/profile",
+        url: "/organizations/settings/profile",
       },
     ],
   },

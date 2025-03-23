@@ -44,7 +44,7 @@ export function NavMain({
               <Collapsible
                 key={item.title}
                 asChild
-                defaultOpen={item.isActive}
+                defaultOpen={pathname.includes(item.url)}
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
@@ -64,7 +64,7 @@ export function NavMain({
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton
                             asChild
-                            isActive={item.url === pathname}
+                            isActive={subItem.url === pathname}
                           >
                             <Link href={subItem.url}>
                               <span>{subItem.title}</span>

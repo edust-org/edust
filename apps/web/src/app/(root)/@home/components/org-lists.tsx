@@ -41,7 +41,10 @@ export const OrgLists = () => {
           <Card key={item.id}>
             <CardHeader>
               <CardTitle>
-                <Link href={`/org/${item.orgUsername}`} target="_blank">
+                <Link
+                  href={`/organizations/profile/${item.orgUsername}`}
+                  target="_blank"
+                >
                   <Typography variant="large" className="capitalize">
                     {item.name}
                   </Typography>
@@ -53,7 +56,10 @@ export const OrgLists = () => {
                 {format(new Date(item.createdAt), "MMM dd, yyyy")}
               </Typography>
               {item.site && (
-                <Link href={`/org/${item.orgUsername}/site`} target="_blank">
+                <Link
+                  href={`/organizations/profile/${item.orgUsername}/site`}
+                  target="_blank"
+                >
                   <Button variant={"link"} size={"icon"}>
                     <svg
                       viewBox="0 0 64 64"

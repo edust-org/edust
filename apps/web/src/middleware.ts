@@ -31,6 +31,6 @@ export const config = {
   matcher: [
     "/dashboard/:path*",
     "/organizations",
-    "/organizations/((?!create).*)",
+    "/organizations/((?!create|profile).*)",
   ],
 }

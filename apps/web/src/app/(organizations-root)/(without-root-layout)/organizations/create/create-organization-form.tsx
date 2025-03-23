@@ -85,13 +85,18 @@ export const CreateOrganizationForm = () => {
       .unwrap()
       .then((res) => {
         toast.success(res.message)
-
         if (res.data.role.id) {
           const organizationRoles: OrganizationRoles[] = [
             {
               id: res.data.role.id,
               role: res.data.role.name,
-              organization: res.data,
+              organization: {
+                id: res.data.id,
+                name: res.data.name,
+                orgUsername: res.data.orgUsername,
+                createdAt: res.data.createdAt,
+                updatedAt: res.data.updatedAt,
+              },
             },
           ]
 
