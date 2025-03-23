@@ -11,6 +11,7 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
+  Building2,
   Command,
   Earth,
   Frame,
@@ -22,6 +23,7 @@ import {
   Settings2,
   SquareTerminal,
 } from "lucide-react"
+import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 
 import * as React from "react"
@@ -104,18 +106,35 @@ const navMain = [
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const session = useSession()
+  const user = session.data?.user
+
+  const teams =
+    user?.organizationRoles?.map((item) => ({
+      name: item.organization.name,
+      logo: Building2,
+    })) || []
+
   const pathname = usePathname()
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        {teams?.length > 0 && <TeamSwitcher teams={teams} />}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} pathname={pathname} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {user && (
+          <NavUser
+            user={{
+              name: user?.name,
+              avatar: user?.profilePic || "/images/avatar.png",
+              email: user?.email,
+            }}
+          />
+        )}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

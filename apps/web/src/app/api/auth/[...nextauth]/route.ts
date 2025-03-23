@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id
         token.name = user.name!
@@ -63,8 +63,12 @@ export const authOptions: NextAuthOptions = {
         token.refreshToken = user.refreshToken
         token.expiresAt = user.expiresAt
       }
-      // Check if token expired, refresh if necessary
 
+      if (trigger === "update") {
+        token.organizationRoles = session.organizationRoles
+      }
+
+      // Check if token expired, refresh if necessary
       const expiredAtDate = new Date(token.expiresAt as string)
       const currentTime = Date.now()
       const isExpired = expiredAtDate.getTime() <= currentTime

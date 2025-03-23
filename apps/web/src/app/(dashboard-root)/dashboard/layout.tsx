@@ -1,11 +1,11 @@
 "use client"
 
+import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Separator,
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-  Typography,
 } from "@/components/ui"
 
 import { AppSidebar } from "./components/app-sidebar"
@@ -19,13 +19,13 @@ export default function DashboardLayout({
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <div className="flex items-center gap-2 px-3">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+          <div className="flex items-center gap-2">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <div>
-              <Typography variant="h4">User Dashboard</Typography>
-            </div>
+          </div>
+          <div className="ml-auto">
+            <NavbarRightMenus />
           </div>
         </header>
         <main className="px-4 pb-6 pt-6 sm:px-6">{children}</main>

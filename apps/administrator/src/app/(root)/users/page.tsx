@@ -33,8 +33,10 @@ interface Organization {
   username: string | null
   email: string
   profilePic: string | null
-  systemRole: null | Roles
-  organizationRoles: null | OrganizationRoles[]
+  hasRoles: null | {
+    system?: boolean
+    organization?: boolean
+  }
 }
 
 export default function UsersPage() {
@@ -57,6 +59,7 @@ export default function UsersPage() {
             <TableHead className="w-[100px]">Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>UserName</TableHead>
+            <TableHead>hasRoles</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -65,6 +68,7 @@ export default function UsersPage() {
               <TableCell className="font-medium">{organization.name}</TableCell>
               <TableCell>{organization.email}</TableCell>
               <TableCell>{organization.username}</TableCell>
+              <TableCell>{JSON.stringify(organization.hasRoles)}</TableCell>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

@@ -16,14 +16,23 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useTheme } from "@/hooks"
+import { clearAllCaches } from "@/lib/store/api/v0"
+import { logOut } from "@/lib/store/features/authentication"
+import { useAppDispatch } from "@/lib/store/hooks"
 import {
   BadgeCheck,
   Bell,
   ChevronsUpDown,
   CreditCard,
+  LayoutDashboard,
   LogOut,
   Sparkles,
 } from "lucide-react"
+import { signOut } from "next-auth/react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 export function NavUser({
   user,
@@ -34,8 +43,19 @@ export function NavUser({
     avatar: string
   }
 }) {
+  const router = useRouter()
   const { isMobile } = useSidebar()
+  const { setTheme } = useTheme()
+  const dispatch = useAppDispatch()
 
+  const handleLogout = () => {
+    signOut()
+    dispatch(logOut())
+    clearAllCaches(dispatch)
+    setTheme("light")
+    router.push("/")
+    toast.error("Log out successfully!")
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -76,12 +96,14 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
+              <Link href={"/dashboard"}>
+                <DropdownMenuItem>
+                  <LayoutDashboard />
+                  User Dashboard
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/*  <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
@@ -95,9 +117,9 @@ export function NavUser({
                 <Bell />
                 Notifications
               </DropdownMenuItem>
-            </DropdownMenuGroup>
+            </DropdownMenuGroup> */}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>
