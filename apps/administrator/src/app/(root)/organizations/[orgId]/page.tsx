@@ -20,18 +20,7 @@ import { cn } from "@/utils"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
 
-// {
-//     "id": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
-//     "name": "harvard university",
-//     "orgUsername": "harvard-univ",
-//     "profilePic": null,
-//     "email": null,
-//     "location": null,
-//     "profileVerified": "UNVERIFIED",
-//     "status": "ACTIVE",
-//     "createdAt": "2024-07-26T17:07:32.709Z",
-//     "updatedAt": "2024-11-22T10:42:47.383Z"
-// }
+
 
 export default function OrganizationsDetails() {
   const params = useParams<{ orgId: string }>()
@@ -45,7 +34,6 @@ export default function OrganizationsDetails() {
   })
 
   const post = data?.data?.data
-  console.log(post)
 
   if (isPending) return "Loading..."
 
