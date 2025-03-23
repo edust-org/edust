@@ -35,6 +35,12 @@ export function TeamSwitcher({
     return null
   }
 
+  React.useEffect(() => {
+    if (teams[0]?.name !== activeTeam.name) {
+      setActiveTeam(teams[0])
+    }
+  }, [activeTeam.name, teams])
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>

@@ -48,8 +48,8 @@ export function NavUser({
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
 
-  const handleLogout = () => {
-    signOut()
+  const handleLogout = async () => {
+    await signOut()
     dispatch(logOut())
     clearAllCaches(dispatch)
     setTheme("light")
