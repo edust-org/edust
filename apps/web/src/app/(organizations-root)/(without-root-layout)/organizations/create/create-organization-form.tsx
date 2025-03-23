@@ -15,11 +15,10 @@ import {
   useCreateOrganizationMutation,
   useGetOrgListsQuery,
 } from "@/lib/store/api/v0/organizations"
-import { setAuthentication } from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
-import { OrganizationRoles, User } from "@/types"
+import { OrganizationRoles } from "@/types"
 import { convertSlug } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { BarLoader } from "react-spinners"
@@ -49,9 +48,9 @@ const FormSchema = z.object({
 })
 
 export const CreateOrganizationForm = () => {
+  const { status, update } = useSession()
+
   const { refetch } = useGetOrgListsQuery()
-  const dispatch = useAppDispatch()
-  const authState = useAppSelector((state) => state.authentication)
   const router = useRouter()
   const [postOrganization, { isLoading }] = useCreateOrganizationMutation()
 
@@ -67,7 +66,6 @@ export const CreateOrganizationForm = () => {
   const nameValue = form.watch("name")
   useEffect(() => {
     if (nameValue) {
-      // TODO: need to generate slug with validation
       // Generate slug from the name by converting it to lowercase and replacing spaces with hyphens
       const orgUsername = convertSlug(nameValue)
 
@@ -77,7 +75,12 @@ export const CreateOrganizationForm = () => {
   }, [nameValue, form.setValue, form])
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    if (status !== "authenticated") {
+      return toast.error("Please login or create your account!")
+    }
+
     const payload = { name: data.name, orgUsername: data.orgUsername }
+
     postOrganization(payload)
       .unwrap()
       .then((res) => {
@@ -91,19 +94,8 @@ export const CreateOrganizationForm = () => {
               organization: res.data,
             },
           ]
-          if (authState.user) {
-            const user: User = {
-              ...authState?.user,
-              organizationRoles,
-            }
 
-            dispatch(
-              setAuthentication({
-                ...authState,
-                user,
-              }),
-            )
-          }
+          update({ organizationRoles })
         }
         refetch()
           .then(() => router.push("/"))
@@ -115,7 +107,6 @@ export const CreateOrganizationForm = () => {
         }
       })
   }
-
   return (
     <>
       <Form {...form}>
@@ -167,7 +158,7 @@ export const CreateOrganizationForm = () => {
           <Button
             type="submit"
             className="w-full"
-            disabled={!form.getValues("isAccepted")}
+            disabled={!form.watch("isAccepted")}
           >
             {isLoading ? <BarLoader color="#fff" /> : "Create an organization"}
           </Button>

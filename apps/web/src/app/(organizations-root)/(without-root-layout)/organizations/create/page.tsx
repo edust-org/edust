@@ -1,4 +1,7 @@
+import { LogoEdust } from "@/components"
 import { Typography } from "@/components/ui"
+import Image from "next/image"
+import Link from "next/link"
 
 import { CreateOrganizationForm } from "./create-organization-form"
 
@@ -7,9 +10,11 @@ export default function Create() {
     <>
       <div className="flex h-screen items-center gap-4 overflow-hidden">
         <div className="relative hidden flex-1 md:block md:h-full">
-          <img
+          <Image
             src={"/images/organizations/create-organizations.png"}
-            alt=""
+            alt="create-organizations"
+            width={1050}
+            height={700}
             className="h-full w-full object-cover grayscale"
           />
           <div className="absolute inset-0 h-full w-full bg-black/35 backdrop-blur-sm"></div>
@@ -130,13 +135,10 @@ export default function Create() {
             </div>
           </div>
         </div>
-        <div className="max-w-[550px] flex-1 p-4 md:pe-8 xl:flex-none 2xl:max-w-[800px] 2xl:p-24">
-          <img
-            src={"/images/logo/logo-light.svg"}
-            alt=""
-            width={180}
-            className="mx-auto"
-          />
+        <div className="max-w-[550px] flex-1 space-y-6 p-4 md:pe-8 xl:flex-none 2xl:max-w-[800px] 2xl:p-24">
+          <Link href={"/"}>
+            <LogoEdust className="mx-auto" width={180} />
+          </Link>
           <Typography variant="h2" className="text-center">
             Create a free new organization
           </Typography>

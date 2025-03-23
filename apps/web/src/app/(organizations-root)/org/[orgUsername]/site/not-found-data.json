@@ -3,7 +3,7 @@
   "orgId": "1eda04d7-71f7-4acc-ab15-3744688ecdc4",
   "siteId": "33f91a95-d6ed-4b3f-bed0-24b7296ee8b6",
   "pageName": "home",
-  "html": "<body><section id=\"ieti\" class=\"px-4 min-h-10 h-screen flex items-center flex-col justify-center\"><img id=\"ihv64\" src=\"https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg\" class=\"mt-10 mx-auto w-[300px]\"/><h1 id=\"ig4x\" class=\"scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center mt-4\">Welcome to Edust!\n    </h1></section></body>",
+  "html": "<body><section id=\"ieti\" class=\"px-4 min-h-10 h-screen flex items-center flex-col justify-center\"><img id=\"ihv64\" src=\"https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg\" class=\"mt-10 mx-auto w-[300px]\"/><h1 id=\"ig4x\" class=\"scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center mt-4\">Welcome to Edust!\n    </h1></section></body>",
   "css": "* { box-sizing: border-box; } body {margin: 0;}",
   "createdAt": "2025-02-09T16:14:51.000Z",
   "updatedAt": "2025-02-09T06:53:36.000Z"

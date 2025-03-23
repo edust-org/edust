@@ -7,7 +7,7 @@
       "assets": [
         {
           "type": "image",
-          "src": "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg",
+          "src": "https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg",
           "unitDim": "px",
           "height": 0,
           "width": 0
@@ -50,7 +50,7 @@
                         "classes": ["mt-10", "mx-auto", "w-[300px]"],
                         "attributes": {
                           "id": "ihv64",
-                          "src": "https://res.cloudinary.com/dmiewayfu/image/upload/v1724572264/edust-org/logo/logo_yiycml.jpg"
+                          "src": "https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                         }
                       },
                       {
