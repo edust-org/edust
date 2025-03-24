@@ -3,8 +3,8 @@
   "message": "Organization retrieved successfully!",
   "data": {
     "id": "6202731c-536a-48ba-9b64-95957c41ea0e",
-    "name": "Moore Inc philosophyschool",
-    "orgUsername": "moore-inc-philosophyschool-and-arts",
+    "name": "harvard university",
+    "orgUsername": "harvard-univ",
     "createdAt": "1974-12-27T19:18:38.981Z",
     "updatedAt": "2025-03-17T16:23:53.969Z",
     "role": {
