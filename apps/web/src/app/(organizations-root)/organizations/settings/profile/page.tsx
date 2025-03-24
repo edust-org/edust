@@ -1,7 +1,10 @@
 "use client"
 
+import { ImageUploadField, imageUploadFieldZod } from "@/components"
 import {
   Button,
+  Card,
+  CardContent,
   Form,
   FormControl,
   FormDescription,
@@ -16,9 +19,8 @@ import { Roles } from "@/types"
 import { asOptionalField } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
-import { ImageUp } from "lucide-react"
 import { useSession } from "next-auth/react"
-import Head from "next/head"
+import Image from "next/image"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { useBoolean } from "usehooks-ts"
@@ -26,13 +28,30 @@ import { z } from "zod"
 
 import { useEffect, useState } from "react"
 
-const MAX_FILE_SIZE = 1024 * 1024 * 5 // 5mb
-const ACCEPTED_IMAGE_MIME_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-]
+interface Role {
+  id: string
+  name: string
+  description: string
+}
+
+interface Site {
+  id: string
+  pages: number
+  images: number
+}
+
+interface Organization {
+  id: string
+  name: string
+  orgUsername: string
+  profilePic: string | null
+  email: string | null
+  location: string | null
+  createdAt: Date
+  updatedAt: Date
+  role: Role
+  site: Site | null
+}
 
 const FormSchema = z
   .object({
@@ -63,18 +82,7 @@ const FormSchema = z
       z.string().trim().min(10, "Location must be at least 10 characters long"),
     ),
 
-    profilePic: asOptionalField(
-      z
-        .any()
-        .refine((file) => !!file, `Photo is required`)
-        .refine((file) => {
-          return file?.[0]?.size <= MAX_FILE_SIZE
-        }, `Max image size is 5MB.`)
-        .refine((file) => {
-          if (!file) return true // Allow no file
-          return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
-        }, "Only .jpg, .jpeg, .png, and .webp formats are supported."),
-    ),
+    profilePic: asOptionalField(imageUploadFieldZod),
   })
   .transform((data) => {
     // Remove any undefined properties from the object
@@ -88,7 +96,9 @@ const FormSchema = z
 export default function Profile() {
   const session = useSession()
 
-  const [orgProfileData, setOrgProfileData] = useState(null)
+  const [orgProfileData, setOrgProfileData] = useState<Organization | null>(
+    null,
+  )
   const isDataSaving = useBoolean(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -101,9 +111,6 @@ export default function Profile() {
       profilePic: undefined,
     },
   })
-  const [selectedImage, setSelectedImage] = useState<File | undefined>(
-    undefined,
-  )
 
   useEffect(() => {
     // TODO: Need to refetch system
@@ -111,7 +118,7 @@ export default function Profile() {
       const data = await axios.get(`/api/v0/organizations/me`)
       const orgData = data?.data?.data
 
-      setOrgProfileData(orgData)
+      setOrgProfileData(orgData as Organization)
 
       form.setValue("name", orgData.name)
       form.setValue("orgUsername", orgData.orgUsername)
@@ -180,7 +187,7 @@ export default function Profile() {
           },
         )
 
-        const org = response?.data?.data
+        const org = response?.data?.data as Organization
 
         const organizationRole = session.data?.user.organizationRoles?.find(
           (org) => org.role === Roles.OWNER,
@@ -205,6 +212,16 @@ export default function Profile() {
         })
 
         toast.success(response?.data?.message)
+
+        if (orgProfileData) {
+          setOrgProfileData({
+            ...orgProfileData,
+            name: org.name,
+            orgUsername: org.orgUsername,
+            location: org.location,
+            profilePic: org.profilePic,
+          })
+        }
       } catch (error) {
         toast.error(error?.response?.data.message)
         console.error("Save Org Profile", error)
@@ -217,133 +234,116 @@ export default function Profile() {
   return (
     <>
       <title>Organizations Profile | Settings</title>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto max-w-xl space-y-8 rounded-md p-4 shadow md:p-8"
-        >
-          {/* Name Field */}
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Name <span className="text-destructive">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Your full name" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This will be your display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <Card className="mx-auto max-w-xl">
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              {/* Name Field */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Name <span className="text-destructive">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your full name" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This will be your display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Org Username Field */}
-          <FormField
-            control={form.control}
-            name="orgUsername"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Username <span className="text-destructive">*</span>
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Your username" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Org Username Field */}
+              <FormField
+                control={form.control}
+                name="orgUsername"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Username <span className="text-destructive">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your username" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is your public display name.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Email Field */}
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="Your email" {...field} />
-                </FormControl>
-                <FormDescription>
-                  We'll use this to contact you.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Email Field */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input type="email" placeholder="Your email" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      We'll use this to contact you.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Location Field */}
-          <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Location</FormLabel>
-                <FormControl>
-                  <Input placeholder="Your location" {...field} />
-                </FormControl>
-                <FormDescription>This is where you're located.</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Location Field */}
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your location" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      This is where you're located.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* profilePic */}
-          <FormField
-            control={form.control}
-            name="profilePic"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Organization Profile</FormLabel>
-                <FormControl>
-                  <Button variant="outline" className="w-full" type="button">
-                    <input
-                      type="file"
-                      className="hidden w-full"
-                      id="fileInput"
-                      accept="image/*"
-                      onBlur={field.onBlur}
-                      name={field.name}
-                      onChange={(e) => {
-                        field.onChange(e.target.files)
-                        setSelectedImage(e.target.files?.[0])
-                      }}
-                      ref={field.ref}
-                    />
-                    <label
-                      htmlFor="fileInput"
-                      className="flex w-full items-center gap-2"
-                    >
-                      <ImageUp size={20} />
-                      <span className="whitespace-nowrap">
-                        {selectedImage
-                          ? `${selectedImage.name}`
-                          : "Choose File No file chosen"}
-                      </span>
-                    </label>
-                  </Button>
-                </FormControl>
-                <FormDescription>
-                  Upload a cover photo of the institute.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* profilePic */}
 
-          <Button type="submit" disabled={isDataSaving.value}>
-            Update profile
-          </Button>
-        </form>
-      </Form>
+              {orgProfileData?.profilePic && (
+                <div>
+                  <Image
+                    src={orgProfileData?.profilePic}
+                    alt={orgProfileData.name}
+                    width={1280}
+                    height={720}
+                    className="rounded"
+                  />
+                </div>
+              )}
+
+              <ImageUploadField
+                form={form}
+                formField={{
+                  name: "profilePic",
+                  label: "Organization Profile",
+                  description: "Upload a photo of the organization",
+                }}
+              />
+
+              <Button type="submit" disabled={isDataSaving.value}>
+                Update profile
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </>
   )
 }
