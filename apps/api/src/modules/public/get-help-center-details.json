@@ -1,0 +1,19 @@
+{
+  "status": "SUCCESS",
+  "message": "Success! Your request has been completed.",
+  "data": {
+    "id": "450dcf3d-a7a2-4ab1-95d0-90569d9d0d70",
+    "title": "Avarus adulescens constans depereo acsi taceo angelus subvenio.",
+    "slug": "circumvenio-cometes-articulus",
+    "content": "Amaritudo veritatis dolorum velociter. Pel dedecor vicinus. Tamen sulum spoliatio infit civis pectus deripio vobis deprecator degusto.\nLibero adfectus conspergo vulnero cometes conicio trado aequitas derelinquo. Cerno alo coepi temperantia depopulo. Caelum arcus balbus crudelis absorbeo auditor volva aestus tenax cetera.\nVicinus tantillus turba animadverto. Somnus texo tantum suasoria averto sum deporto amoveo. Hic contra surculus cerno arguo apparatus tempore adicio debeo.",
+    "createdAt": "2025-03-22T09:09:06.931Z",
+    "updatedAt": "2025-03-22T09:06:05.912Z"
+  },
+  "_links": {
+    "self": {
+      "url": "/api/v0/public/help-center/{articleId}",
+      "method": "GET"
+    },
+    "getAllArticles": { "url": "/api/v0/public/help-center", "method": "GET" }
+  }
+}

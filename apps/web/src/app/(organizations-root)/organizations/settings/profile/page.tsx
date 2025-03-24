@@ -13,10 +13,12 @@ import {
 } from "@/components/ui"
 import axios from "@/lib/axios"
 import { Roles } from "@/types"
+import { asOptionalField } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
 import { ImageUp } from "lucide-react"
 import { useSession } from "next-auth/react"
+import Head from "next/head"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { useBoolean } from "usehooks-ts"
@@ -31,6 +33,7 @@ const ACCEPTED_IMAGE_MIME_TYPES = [
   "image/png",
   "image/webp",
 ]
+
 const FormSchema = z
   .object({
     name: z
@@ -48,27 +51,31 @@ const FormSchema = z
       .refine((value) => /^[a-z-]*$/.test(value), {
         message: "Username must only contain English letters and hyphens",
       }),
-    email: z
-      .string()
-      .trim()
-      .min(3, { message: "required" })
-      .email({ message: "Invalid email format" }),
-    location: z
-      .string()
-      .trim()
-      .min(10, "Location must be at least 10 characters long"),
-    profilePic: z
-      .any()
-      .refine((file) => !!file, `Photo is required`)
-      .refine((file) => {
-        return file?.[0]?.size <= MAX_FILE_SIZE
-      }, `Max image size is 5MB.`)
-      .refine((file) => {
-        if (!file) return true // Allow no file
-        return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
-      }, "Only .jpg, .jpeg, .png, and .webp formats are supported."),
+    email: asOptionalField(
+      z
+        .string()
+        .trim()
+        .min(3, { message: "required" })
+        .email({ message: "Invalid email format" }),
+    ),
+
+    location: asOptionalField(
+      z.string().trim().min(10, "Location must be at least 10 characters long"),
+    ),
+
+    profilePic: asOptionalField(
+      z
+        .any()
+        .refine((file) => !!file, `Photo is required`)
+        .refine((file) => {
+          return file?.[0]?.size <= MAX_FILE_SIZE
+        }, `Max image size is 5MB.`)
+        .refine((file) => {
+          if (!file) return true // Allow no file
+          return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
+        }, "Only .jpg, .jpeg, .png, and .webp formats are supported."),
+    ),
   })
-  .partial()
   .transform((data) => {
     // Remove any undefined properties from the object
     const cleanedData = Object.fromEntries(
@@ -87,10 +94,10 @@ export default function Profile() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: undefined,
-      orgUsername: undefined,
-      email: undefined,
-      location: undefined,
+      name: "",
+      orgUsername: "",
+      email: "",
+      location: "",
       profilePic: undefined,
     },
   })
@@ -108,32 +115,14 @@ export default function Profile() {
 
       form.setValue("name", orgData.name)
       form.setValue("orgUsername", orgData.orgUsername)
-      form.setValue("email", orgData.email || undefined)
-      form.setValue("location", orgData.location || undefined)
+      form.setValue("email", orgData.email || "")
+      form.setValue("location", orgData.location || "")
     }
     getOrgMe()
   }, [form])
 
-  const location = form.watch("location")
-  const email = form.watch("email")
-  const profilePic = form.watch("profilePic")
-
-  useEffect(() => {
-    if (!location) {
-      form.clearErrors("location")
-      form.setValue("location", undefined)
-    }
-    if (!email) {
-      form.clearErrors("email")
-      form.setValue("email", undefined)
-    }
-    if (!profilePic) {
-      form.clearErrors("profilePic")
-      form.setValue("profilePic", undefined)
-    }
-  }, [form, location, email, profilePic])
-
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log(data)
     const uniqueValue: any = {}
 
     for (const key in data) {
@@ -227,6 +216,7 @@ export default function Profile() {
 
   return (
     <>
+      <title>Organizations Profile | Settings</title>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
