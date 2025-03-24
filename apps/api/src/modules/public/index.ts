@@ -10,8 +10,18 @@ const router: Router = express.Router()
 router.post("/feedback", async (req, res) => {})
 
 router
-  .get("/help-center", async (req, res) => {})
-  .get("/help-center/:articleId", async (req, res) => {})
+  .get("/help-center", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-help-center.json"),
+    )
+    res.json(data)
+  })
+  .get("/help-center/:articleId", async (req, res) => {
+    const data = await jsonLoad.load(
+      path.resolve(__dirname, "./get-help-center-details.json"),
+    )
+    res.json(data)
+  })
 
 router.get("/institutes/categories", async (req, res) => {
   const categories = await jsonLoad.load(
