@@ -50,9 +50,13 @@ export const NavbarRightMenus = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-8 w-8 border">
               {user?.profilePic ? (
-                <AvatarImage src={user?.profilePic} alt="user profile" />
+                <AvatarImage
+                  src={user?.profilePic}
+                  alt="user profile"
+                  referrerPolicy={"no-referrer"}
+                />
               ) : (
                 <AvatarFallback>SN</AvatarFallback>
               )}

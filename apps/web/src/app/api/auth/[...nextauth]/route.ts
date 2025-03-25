@@ -46,6 +46,45 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
+    CredentialsProvider({
+      id: "SOCIAL_LOGIN",
+      name: "SOCIAL_LOGIN",
+      credentials: {},
+      async authorize(credentials) {
+        try {
+          const res = await fetch(
+            `${defaultValues.backendURL}/api/v0/auth/social-login`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(credentials),
+            },
+          )
+
+          const data = await res.json()
+
+          if (!res.ok) throw new Error(data.message || "Invalid credentials")
+
+          const user = {
+            id: data?.data.id,
+            name: data?.data.name,
+            username: data?.data.username,
+            email: data?.data.email,
+            profilePic: data?.data.profilePic,
+            systemRole: data?.data.systemRole,
+            organizationRoles: data?.data.organizationRoles,
+
+            accessToken: data?.auth.accessToken,
+            expiresAt: data?.auth.expiresAt,
+            refreshToken: data?.auth.refreshToken,
+          }
+          return user
+        } catch (error) {
+          console.error("SOCIAL_LOGIN failed:", error)
+          return null
+        }
+      },
+    }),
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {

@@ -129,7 +129,6 @@ export default function Profile() {
   }, [form])
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
     const uniqueValue: any = {}
 
     for (const key in data) {

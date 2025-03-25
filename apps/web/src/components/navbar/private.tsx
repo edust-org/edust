@@ -120,8 +120,8 @@ export const Private = () => {
             {auth.isAuthenticated ? (
               <NavbarRightMenus />
             ) : (
-              <Link href={"/auth/sign-in"}>
-                <Button>Sign In</Button>
+              <Link href={"/auth/login"}>
+                <Button>Login</Button>
               </Link>
             )}
           </div>

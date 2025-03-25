@@ -135,7 +135,6 @@ export default function Create() {
   const { refetch } = useGetMeInstitutesListsQuery()
   // TODO: get lat long
   // const g= navigator.geolocation
-  // g.getCurrentPosition((p)=>console.log(p))
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
