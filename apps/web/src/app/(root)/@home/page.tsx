@@ -7,6 +7,7 @@ import { OrgLists } from "./components/org-lists"
 export default function Home() {
   return (
     <>
+      <title>Welcome to Edust</title>
       <GlobalTopNotificationBar />
 
       <Navbar />

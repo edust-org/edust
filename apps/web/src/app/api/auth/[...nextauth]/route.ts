@@ -66,6 +66,7 @@ export const authOptions: NextAuthOptions = {
 
       if (trigger === "update") {
         token.organizationRoles = session.organizationRoles
+        token.profilePic = session.profilePic
       }
 
       // Check if token expired, refresh if necessary
