@@ -12,6 +12,7 @@ import { StartDesign } from "./components/start-design"
 export default function HomePublic() {
   return (
     <>
+      <title>Edust | Education Student Teacher</title>
       <GlobalTopNotificationBar />
 
       <Navbar />

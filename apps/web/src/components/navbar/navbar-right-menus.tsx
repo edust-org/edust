@@ -20,14 +20,12 @@ import { clearAllCaches } from "@/lib/store/api/v0"
 import { logOut } from "@/lib/store/features/authentication"
 import { useAppDispatch } from "@/lib/store/hooks"
 import { Roles } from "@/types"
-import { LayoutDashboard, LogOut, Plus, School } from "lucide-react"
+import { LayoutDashboard, LogOut, Plus, School, Settings } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export const NavbarRightMenus = () => {
-  const router = useRouter()
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
 
@@ -39,7 +37,6 @@ export const NavbarRightMenus = () => {
     dispatch(logOut())
     clearAllCaches(dispatch)
     setTheme("light")
-    router.push("/")
     toast.error("Log out successfully!")
   }
 
@@ -79,6 +76,12 @@ export const NavbarRightMenus = () => {
               <DropdownMenuItem>
                 <LayoutDashboard className="mr-2 h-4 w-4" />
                 <span>Dashboard</span>
+              </DropdownMenuItem>
+            </Link>
+            <Link href={"/settings"}>
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
               </DropdownMenuItem>
             </Link>
           </DropdownMenuGroup>

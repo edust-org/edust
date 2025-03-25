@@ -31,7 +31,6 @@ import {
 } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export function NavUser({
@@ -43,7 +42,6 @@ export function NavUser({
     avatar: string
   }
 }) {
-  const router = useRouter()
   const { isMobile } = useSidebar()
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
@@ -53,7 +51,6 @@ export function NavUser({
     dispatch(logOut())
     clearAllCaches(dispatch)
     setTheme("light")
-    router.push("/")
     toast.error("Log out successfully!")
   }
   return (
