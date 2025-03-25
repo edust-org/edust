@@ -12,13 +12,9 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useLoginMutation } from "@/lib/store/api/v0/auth"
-import { setAuthentication } from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { AccountType } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { setCookie } from "cookies-next/client"
-import { getSession, signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -27,9 +23,10 @@ import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { Layout } from "../../components/layout"
+import { SocialAuth } from "../../components/social-auth"
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }).min(2, {
@@ -42,11 +39,8 @@ const FormSchema = z.object({
 
 export default function Login() {
   const router = useRouter()
-
-  const dispatch = useAppDispatch()
-  const authState = useAppSelector((state) => state.authentication)
-  const [login, { isLoading }] = useLoginMutation()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -61,49 +55,20 @@ export default function Login() {
   }
 
   async function onSubmit(userData: z.infer<typeof FormSchema>) {
-    dispatch(
-      setAuthentication({
-        ...authState,
-        isLoading: true,
-      }),
-    )
-
+    setIsLoading(true)
     const result = await signIn(AccountType.LOCAL, {
       email: userData.email,
       password: userData.password,
       redirect: false,
     })
     if (result?.error) {
-      dispatch(
-        setAuthentication({
-          ...authState,
-          isLoading: false,
-        }),
-      )
       toast.error(result?.error)
-    } else {
-      const data = await getSession()
-      if (data && data?.user) {
-        toast.success("Log in successfully!")
-        dispatch(
-          setAuthentication({
-            ...authState,
-            isAuthenticated: true,
-            isLoading: false,
-            user: {
-              id: data.user.id,
-              name: data.user.name,
-              username: data.user.username,
-              email: data.user.email,
-              profilePic: data.user.profilePic,
-              systemRole: data.user.systemRole,
-              organizationRoles: data.user.organizationRoles,
-            },
-          }),
-        )
-      }
+    }
+
+    if (result?.ok) {
       router.push("/")
     }
+    setIsLoading(false)
   }
 
   return (
@@ -176,7 +141,9 @@ export default function Login() {
                 {isLoading ? <BarLoader color="#fff" /> : "Login"}
               </Button>
             </form>
-            <div className="my-4">{/* <SocialAuth /> */}</div>
+            <div className="my-4">
+              <SocialAuth />
+            </div>
             <div className="mb-4 mt-4 flex items-center justify-center gap-4">
               <Typography className="text-sm">
                 Don&apos;t have an account?

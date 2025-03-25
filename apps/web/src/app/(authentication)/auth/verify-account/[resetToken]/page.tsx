@@ -21,7 +21,6 @@ export default function VerifyAccount() {
       verify(params.resetToken)
         .unwrap()
         .then((res) => {
-          console.log(res)
           if (res?.status) {
             toast.success(res?.message)
 

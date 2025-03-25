@@ -2,11 +2,11 @@ import { MoonLoader } from "react-spinners"
 
 export const FullSpinner = () => {
   return (
-    <div className="eg-flex eg-h-screen eg-flex-col eg-items-center eg-justify-center eg-gap-3">
+    <div className="flex h-screen flex-col items-center justify-center gap-3">
       <MoonLoader size={30} />
 
       <svg
-        className="eg-h-auto eg-w-36"
+        className="h-auto w-36"
         width="1000"
         height="336"
         viewBox="0 0 1000 336"

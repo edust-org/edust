@@ -156,7 +156,7 @@ export default function Profile() {
         }
       }
     }
-    console.log(uniqueValue)
+
     if (Object.keys(uniqueValue).length > 0) {
       isDataSaving.setTrue()
 
@@ -203,7 +203,7 @@ export default function Profile() {
         })
 
         const user = response?.data?.data
-        console.log(user)
+        
         session.update({
           ...session.data?.user,
           profilePic: user.profilePic,

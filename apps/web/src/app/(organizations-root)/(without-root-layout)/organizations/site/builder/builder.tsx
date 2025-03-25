@@ -113,7 +113,7 @@ export const Builder = () => {
         const data = await loadProjectData(orgId).unwrap()
         return data?.data?.assets
       } catch (error) {
-        console.log(error)
+        console.error(error)
         return {}
       }
     },
@@ -137,7 +137,7 @@ export const Builder = () => {
         toast.success(res?.data?.message)
         await refaceGetImages()
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     },
   }

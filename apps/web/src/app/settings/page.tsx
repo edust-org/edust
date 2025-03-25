@@ -2,9 +2,14 @@
 
 import { useRouter } from "next/navigation"
 
+import { useEffect } from "react"
+
 export default function Settings() {
   const router = useRouter()
 
-  router.push("/settings/profile")
+  useEffect(() => {
+    router.push("/settings/profile")
+  }, [router])
+
   return null
 }
