@@ -3,6 +3,33 @@ import Script from "next/script"
 
 import notFoundData from "./not-found-data.json"
 
+export const metadata = {
+  title: "View Organization Site - Edust",
+  description:
+    "Explore the tailored web presence of educational institutions on Edust. View detailed information, updates, and more.",
+  keywords: [
+    "organization site",
+    "Edust",
+    "educational institutions",
+    "customized web presence",
+    "updates",
+    "information",
+  ],
+  author: "Edust",
+  openGraph: {
+    title: "View Organization Site - Edust",
+    description:
+      "Explore the tailored web presence of educational institutions on Edust. View detailed information, updates, and more.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "View Organization Site - Edust",
+    description:
+      "Explore the tailored web presence of educational institutions on Edust. View detailed information, updates, and more.",
+  },
+}
+
 export default async function SitePage({
   params,
   searchParams,

@@ -22,11 +22,7 @@ export default function Institutes() {
 
   return (
     <div>
-      {/* <meta
-          name="description"
-          content="Welcome to Edust, a design platform for creating engaging and beautiful educational content."
-        />
-        <title>Institute | Welcome to here</title> */}
+      <title>Find Your Institute</title>
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
           <FilterInstitute />

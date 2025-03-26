@@ -25,6 +25,7 @@ function SiteBuilder() {
 
   return (
     <>
+      <title>Build Your Site</title>
       <ContextProviders
         pageOptions={{
           addANewPage: async (data: { pageName: string }, editor: Editor) => {

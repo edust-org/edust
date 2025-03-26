@@ -251,6 +251,7 @@ export default function Create() {
 
   return (
     <>
+      <title>Create a new institutes | Dashboard</title>
       <Card className={cn("mx-auto max-w-7xl")}>
         <CardContent>
           <Form {...form}>

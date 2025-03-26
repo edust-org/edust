@@ -73,6 +73,7 @@ export default function Login() {
 
   return (
     <>
+      <title>Log In to Edust</title>
       <Layout>
         <Form {...form}>
           <div className="bg-background w-full rounded p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">

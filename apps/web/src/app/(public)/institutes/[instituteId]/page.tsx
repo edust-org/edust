@@ -44,16 +44,8 @@ export default function InstituteDetails() {
 
   return (
     <>
-      {/*
-        <title> {data?.data.name || "Institute Details"} - Edust</title>
-        <meta name="description" content={"Institute Details Page"} />
-        <meta property="og:title" content={"Institute Details Edust"} />
-        <meta property="og:description" content={"Institute Details Page"} />
-      */}
-      <header className="sticky top-0 z-50 border-b bg-white/30 backdrop-blur-3xl">
-        <Navbar />
-      </header>
-      {/*  */}
+      <title> Institute Details</title>
+
       <section className="container grid gap-4 py-4 sm:grid-cols-[250px_auto] md:gap-6 md:py-8">
         <aside>
           <FilterInstitute isDetailsPage />
@@ -83,7 +75,7 @@ export default function InstituteDetails() {
                 {/* span to <Link></Link> */}
                 <Link
                   href="#"
-                  className="font-semibold text-primary hover:underline"
+                  className="text-primary font-semibold hover:underline"
                 >
                   {" "}
                   {data?.data?.author?.name}{" "}

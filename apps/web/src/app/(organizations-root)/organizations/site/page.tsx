@@ -51,29 +51,7 @@ export default function Site() {
 
   return (
     <Layout>
-      {/* <Helmet>
-        <title>Site Builder | Edust</title>
-        <meta
-          name="description"
-          content="Edust is a powerful and flexible platform for building and managing websites."
-        />
-        <meta property="og:title" content="Site Builder | Edust" />
-        <meta
-          property="og:description"
-          content="Edust is a powerful and flexible platform for building and managing websites."
-        />
-      </Helmet> */}
-      {/* <Layout.Header className="">
-        <div className="ml-auto flex items-center space-x-4">
-          <Input
-            type="search"
-            placeholder="Search..."
-            className="md:w-[100px] lg:w-[300px]"
-          />
-          <NavbarRightMenus />
-        </div>
-      </Layout.Header> */}
-
+      <title>Site Status</title>
       <Layout.Body>
         <section className="flex gap-4">
           {isLoading ? (

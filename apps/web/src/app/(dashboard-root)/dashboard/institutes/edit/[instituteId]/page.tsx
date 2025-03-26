@@ -289,6 +289,7 @@ export default function Edit() {
 
   return (
     <>
+      <title>Edit a institutes | Dashboard</title>
       <Card className={cn("mx-auto max-w-7xl")}>
         <CardContent>
           <Form {...form}>
