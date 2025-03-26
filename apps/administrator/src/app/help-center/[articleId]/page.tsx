@@ -1,6 +1,7 @@
 "use client"
 
 import {
+ 
   Typography,
 } from "@/components/ui"
 import {
@@ -18,14 +19,14 @@ import { useParams } from "next/navigation"
 
 import Loading from "./loading"
 
-export default function FeedbackDetails() {
-  const params = useParams<{ feedbackId: string }>()
+export default function HelpCenterDetails() {
+  const params = useParams<{ articleId: string }>()
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["feedbackDetailsData"],
+    queryKey: ["helpCenterDetailsData"],
     queryFn: async () =>
       await axios.get(
-        `${defaultValues.backendURL}/api/v0/administrator/feedback/${params.feedbackId}`,
+        `${defaultValues.backendURL}/api/v0/administrator/help-center/${params.articleId}`,
       ),
   })
 
@@ -35,17 +36,16 @@ export default function FeedbackDetails() {
 
   if (error) return "An error has occurred: " + error.message
 
- 
   return (
     <>
       <Card className={cn("w-[380px]")}>
         <CardHeader>
-          <CardTitle>Comments: {info.comments}</CardTitle>
-          <CardDescription>Category: {info.status}</CardDescription>
+          <CardTitle>Title: {info.title}</CardTitle>
+          <CardDescription>Slug: {info.slug}</CardDescription>
         </CardHeader>
         <CardContent>
-          <Typography>Slug: {info.improvementAreas} </Typography>
-          <Typography>Email: {info.rating} </Typography>
+          <Typography>Status: {info.status} </Typography>
+          <Typography>createdAt: {info.createdAt} </Typography>
         </CardContent>
       </Card>
     </>

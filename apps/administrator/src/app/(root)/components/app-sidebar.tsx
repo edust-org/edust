@@ -74,6 +74,16 @@ const data = {
         },
       ],
     },
+    {
+      title: "Help Center",
+      url: "#",
+      items: [
+        {
+          title: "Help center",
+          url: "/help-center",
+        },
+      ],
+    },
   ],
 }
 

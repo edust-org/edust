@@ -6,12 +6,7 @@ import axios from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
-
-
 import Loading from "./loading";
-
-
-
 
 
 interface Feedback {
@@ -22,20 +17,6 @@ interface Feedback {
   rating: number
 }
 
-// {
-//     "id": "6c52e534-a6d4-414c-bd1a-6bd96820f100",
-//     "rating": 4,
-//     "userId": "b4bb02cc-7da5-4b2b-b842-48b0d1a5f886",
-//     "improvementAreas": [
-//         "perferendis",
-//         "tener",
-//         "aliquid"
-//     ],
-//     "comments": "Accusamus blanditiis ubi.",
-//     "status": "DRAFT",
-//     "createdAt": "1993-07-08T14:13:55.908Z",
-//     "updatedAt": "1993-07-08T14:13:55.908Z"
-// }
 export default function Feedback() {
   const { isPending, error, data } = useQuery({
     queryKey: ["instituteData"],
@@ -53,7 +34,7 @@ export default function Feedback() {
     <>
       <TableCaption>
         <Table>
-          <TableCaption>A list of institutes.</TableCaption>
+          <TableCaption>A list of feedback.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Comments</TableHead>
