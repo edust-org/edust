@@ -32,6 +32,7 @@ export default function InstitutesLists() {
     useDeleteInstituteByIdMutation()
   return (
     <>
+      <title>List of institutes | Dashboard</title>
       <Table>
         <TableHeader>
           <TableRow>

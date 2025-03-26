@@ -39,17 +39,6 @@ const data = {
         },
       ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "Profile",
-          url: "/dashboard/profile",
-        },
-      ],
-    },
   ],
 }
 

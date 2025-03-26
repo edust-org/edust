@@ -83,6 +83,8 @@ export default function Register() {
 
   return (
     <>
+      <title>Create Your Edust Account</title>
+
       <Layout>
         {confirmAccount.isConfirm && (
           <div className="bg-background w-full p-4 shadow sm:max-w-96 md:max-w-[450px] md:p-6">

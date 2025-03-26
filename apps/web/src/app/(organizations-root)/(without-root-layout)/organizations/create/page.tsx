@@ -5,6 +5,44 @@ import Link from "next/link"
 
 import { CreateOrganizationForm } from "./create-organization-form"
 
+export const metadata = {
+  title: "Create Organization - Edust",
+  description:
+    "Create a new organization on Edust. Benefit from increased visibility, customizable landing pages, efficient communication, and more. Start now!",
+  keywords: [
+    "create organization",
+    "Edust",
+    "educational institution",
+    "college",
+    "school",
+    "online presence",
+    "customizable landing page",
+    "communication",
+    "public access",
+    "upcoming features",
+  ],
+  author: "Edust",
+  openGraph: {
+    title: "Create Organization - Edust",
+    description:
+      "Create a new organization on Edust. Benefit from increased visibility, customizable landing pages, efficient communication, and more. Start now!",
+    images: [
+      {
+        url: "/images/organizations/create-organizations.png",
+        alt: "Create Organizations",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Create Organization - Edust",
+    description:
+      "Create a new organization on Edust. Benefit from increased visibility, customizable landing pages, efficient communication, and more. Start now!",
+    image: "/images/organizations/create-organizations.png",
+  },
+}
+
 export default function Create() {
   return (
     <>
