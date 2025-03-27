@@ -11,6 +11,7 @@ import * as React from "react";
 
 
 import { SearchForm } from "./search-form";
+import Link from "next/link";
 
 
 
@@ -60,6 +61,26 @@ const data = {
         {
           title: "Institutes",
           url: "/institutes",
+        },
+      ],
+    },
+    {
+      title: "Feedback",
+      url: "#",
+      items: [
+        {
+          title: "Feedback",
+          url: "/feedback",
+        },
+      ],
+    },
+    {
+      title: "Help Center",
+      url: "#",
+      items: [
+        {
+          title: "Help center",
+          url: "/help-center",
         },
       ],
     },
@@ -118,7 +139,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                               asChild
                               isActive={item.isActive}
                             >
-                              <a href={item.url}>{item.title}</a>
+                              <Link href={item.url}>{item.title}</Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
