@@ -1,14 +1,10 @@
 "useClient"
 
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui"
 
-import { AppSidebar } from "./components/app-sidebar"
+import { AppSidebar } from "./app-sidebar"
 
-export default function RootLayout({
+export function AppSidebarProvider({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -20,7 +16,7 @@ export default function RootLayout({
         <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
         </header>
-        <main>{children}</main>
+        <main className="p-4">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

@@ -1,3 +1,4 @@
+import { AppSidebarProvider } from "@/components"
 import { ReduxProvider } from "@/lib/store"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
@@ -24,7 +25,7 @@ export default function RootLayout({
           <ReactQueryProvider>
             <ReduxProvider>
               <Toaster richColors />
-              {children}
+              <AppSidebarProvider>{children}</AppSidebarProvider>
             </ReduxProvider>
           </ReactQueryProvider>
         </SessionProvider>
