@@ -23,8 +23,8 @@ const logger =
 
 // Configuration for redux-persist
 const persistConfig = {
-  keyPrefix: "",
-  key: "edust",
+  keyPrefix: "@edust/",
+  key: "web",
   storage,
   whitelist: ["authentication", "theme"],
 }
