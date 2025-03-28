@@ -1,6 +1,9 @@
-"useClient"
+"use client"
 
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui"
+import { usePathname } from "next/navigation"
+
+import { useMemo } from "react"
 
 import { AppSidebar } from "./app-sidebar"
 
@@ -9,6 +12,14 @@ export function AppSidebarProvider({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const pathname = usePathname()
+
+  const ignoreAppSidebar = useMemo(() => ["/login"], [])
+
+  if (ignoreAppSidebar.includes(pathname)) {
+    return children
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />

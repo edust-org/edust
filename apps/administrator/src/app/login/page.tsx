@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-// import { toast } from "@/components/hooks/use-toast"
 import {
   Form,
   FormControl,
@@ -18,14 +17,12 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { setAuthentication } from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { AccountType } from "@/types"
 import { cn } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { getSession, signIn } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { toast } from "sonner"
@@ -46,8 +43,7 @@ export default function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const dispatch = useAppDispatch()
-  const authState = useAppSelector((state) => state.authentication)
+  const router = useRouter()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -66,48 +62,15 @@ export default function LoginForm({
   }
 
   async function onSubmit(userData: z.infer<typeof FormSchema>) {
-    dispatch(
-      setAuthentication({
-        ...authState,
-        isLoading: true,
-      }),
-    )
-
     const result = await signIn(AccountType.LOCAL, {
       email: userData.email,
       password: userData.password,
       redirect: false,
     })
     if (result?.error) {
-      dispatch(
-        setAuthentication({
-          ...authState,
-          isLoading: false,
-        }),
-      )
       toast.error(result?.error)
     } else {
-      const data = await getSession()
-      if (data && data?.user) {
-        toast.success("Log in successfully!")
-        dispatch(
-          setAuthentication({
-            ...authState,
-            isAuthenticated: true,
-            isLoading: false,
-            user: {
-              id: data.user.id,
-              name: data.user.name,
-              username: data.user.username,
-              email: data.user.email,
-              profilePic: data.user.profilePic,
-              systemRole: data.user.systemRole,
-              organizationRoles: data.user.organizationRoles,
-            },
-          }),
-        )
-      }
-      redirect("/")
+      router.push("/")
     }
   }
 
