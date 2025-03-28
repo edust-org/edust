@@ -17,7 +17,7 @@ import { toast } from "sonner"
 // import getImages from "./get-images"
 import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
-export const Builder = () => {
+export const BuilderProvider = () => {
   const [getImages] = useLazyGetSiteBuilderImagesQuery()
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
   const [loadProjectData] = useLazyGetSiteBuilderQuery()
