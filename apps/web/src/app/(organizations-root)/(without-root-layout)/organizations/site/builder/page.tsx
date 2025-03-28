@@ -6,9 +6,10 @@ import {
   useEditSiteBuilderMutation,
   useUpdateSitePageNameMutation,
 } from "@/lib/store/api/v0/organizations"
-import { useAppSelector } from "@/lib/store/hooks"
+import { Roles } from "@/types"
 import { convertSlug } from "@/utils"
 import { ContextProviders, Editor } from "@edust/grapesjs"
+import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
@@ -16,7 +17,11 @@ import { Builder } from "./builder"
 import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
 function SiteBuilder() {
-  const orgId = useAppSelector((state) => state.authentication.orgId)
+  const { data } = useSession()
+
+  const orgId = data?.user.organizationRoles
+    ?.filter((role) => role.role === Roles.OWNER)
+    .map((role) => role.organization.id)[0]
 
   const [saveNewPage] = useAddSitePageMutation()
   const [saveGsData] = useEditSiteBuilderMutation()

@@ -9,8 +9,9 @@ import {
   useLazyGetSiteBuilderImagesQuery,
   useLazyGetSiteBuilderQuery,
 } from "@/lib/store/api/v0/organizations"
-import { useAppSelector } from "@/lib/store/hooks"
+import { Roles } from "@/types"
 import EdustGrapesjs, { Configs } from "@edust/grapesjs"
+import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 
 // import getImages from "./get-images"
@@ -20,8 +21,12 @@ export const Builder = () => {
   const [getImages] = useLazyGetSiteBuilderImagesQuery()
   const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
   const [loadProjectData] = useLazyGetSiteBuilderQuery()
+  const { data } = useSession()
 
-  const { orgId } = useAppSelector((state) => state.authentication)
+  const orgId = data?.user.organizationRoles
+    ?.filter((role) => role.role === Roles.OWNER)
+    .map((role) => role.organization.id)[0]
+
   const { refetch: refaceGetImages } = useGetSiteBuilderImagesQuery(orgId)
 
   const [saveGsData] = useEditSiteBuilderMutation()
