@@ -10,6 +10,7 @@ import { cn } from "@/utils"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 
+import { Feedback } from "./feedback"
 import { NavMobile } from "./mobile"
 import { NavbarRightMenus } from "./navbar-right-menus"
 
@@ -64,6 +65,8 @@ export const Navbar = () => {
           </nav>
 
           <div className="hidden gap-2 md:flex">
+            <Feedback />
+
             <ThemeSwitch />
             {status === "loading" ? (
               <Skeleton className="h-8 w-12 rounded-full"></Skeleton>

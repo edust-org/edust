@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 import { IoMenuSharp } from "react-icons/io5"
 
@@ -21,7 +21,7 @@ import { LogoEdust } from "../logo-edust"
 import { NavbarRightMenus } from "./navbar-right-menus"
 
 export const Private = () => {
-  const auth = useAppSelector((state) => state.authentication)
+  const { status } = useSession()
 
   return (
     <>
@@ -117,7 +117,7 @@ export const Private = () => {
             </SheetContent>
           </Sheet>
           <div className="flex items-center gap-4">
-            {auth.isAuthenticated ? (
+            {status === "authenticated" ? (
               <NavbarRightMenus />
             ) : (
               <Link href={"/auth/login"}>

@@ -35,11 +35,6 @@ const footerData = [
     title: "Support",
     links: [
       {
-        title: "Feedback Form",
-        href: "https://docs.google.com/forms/d/e/1FAIpQLScIxBL2Zm1MVpmRTNoLUIwD-vcW9rv1SG73zx3Ggq48y1RRZQ/viewform?usp=header",
-        isExternal: true,
-      },
-      {
         title: "Help Center",
         href: "/help-center",
         isExternal: false,

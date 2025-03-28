@@ -10,10 +10,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui"
+import Link from "next/link"
 import { IoMenuSharp } from "react-icons/io5"
 
 import { LogoEdust } from "../logo-edust"
-import Link from "next/link"
 
 export const Guest = () => {
   return (

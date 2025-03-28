@@ -11,19 +11,22 @@ import {
 } from "@/components/ui"
 import { Separator } from "@radix-ui/react-dropdown-menu"
 import { Menu } from "lucide-react"
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 
 import { useState } from "react"
 
+import { Feedback } from "./feedback"
 import { NavbarRightMenus } from "./navbar-right-menus"
 import { RouteProps, routeList } from "./route-lists"
 
 export const NavMobile = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { status } = useSession()
   return (
     <>
       <span className="flex gap-1 md:hidden">
-        <NavbarRightMenus />
+        {status === "authenticated" && <NavbarRightMenus />}
         <ThemeSwitch />
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -53,9 +56,12 @@ export const NavMobile = () => {
                   {label}
                 </Link>
               ))}
-              <Link href={"/auth/login"}>
-                <Button>Login</Button>
-              </Link>
+              {status !== "authenticated" && (
+                <Link href={"/auth/login"}>
+                  <Button>Login</Button>
+                </Link>
+              )}
+              <Feedback />
             </nav>
           </SheetContent>
         </Sheet>
