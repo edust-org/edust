@@ -17,17 +17,19 @@ import {
 } from "@/components/ui"
 import { useTheme } from "@/hooks"
 import { clearAllCaches } from "@/lib/store/api/v0"
-import { logOut } from "@/lib/store/features/authentication"
-import { useAppDispatch } from "@/lib/store/hooks"
-import { Roles } from "@/types"
+import { logOut, setActiveOrg } from "@/lib/store/features/authentication"
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
 import { LayoutDashboard, LogOut, Plus, School, Settings } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 export const NavbarRightMenus = () => {
+  const router = useRouter()
   const { setTheme } = useTheme()
   const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state.authentication)
 
   const { data, status } = useSession()
   const user = data?.user
@@ -92,24 +94,28 @@ export const NavbarRightMenus = () => {
 
           <DropdownMenuGroup>
             {/* if organization available */}
-            {user?.organizationRoles &&
-              user?.organizationRoles?.map((role) => (
-                <Link href={"/organizations"} key={role.id}>
-                  <DropdownMenuItem>
+            {state.organizations &&
+              state.organizations.map((org) => {
+                return (
+                  <DropdownMenuItem
+                    key={org.id}
+                    onClick={() => {
+                      dispatch(setActiveOrg(org.id))
+                      router.push("/organizations")
+                    }}
+                  >
                     <School className="mr-2 h-4 w-4" />
-                    <span
-                      className={`capitalize ${role.role === Roles.OWNER && "font-bold"}`}
-                    >
-                      {role.organization.name.length > 21
-                        ? role.organization.name.slice(0, 20) + "..."
-                        : role.organization.name}
+                    <span className={`capitalize`}>
+                      {org.name.length > 21
+                        ? org.name.slice(0, 20) + "..."
+                        : org.name}
                     </span>
                   </DropdownMenuItem>
-                </Link>
-              ))}
+                )
+              })}
 
             {/* if organization is not available */}
-            {!user?.organizationRoles && (
+            {!state?.organizations && (
               <Link href={"/organizations/create"}>
                 <DropdownMenuItem>
                   <Plus className="mr-2 h-4 w-4" />

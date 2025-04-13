@@ -1,11 +1,11 @@
 "use client"
 
+import { Badge } from "@/components/ui"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -15,54 +15,40 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { ChevronsUpDown, Plus } from "lucide-react"
+import { selectActiveOrg, setActiveOrg } from "@/lib/store/features"
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { Building2, ChevronsUpDown } from "lucide-react"
 
 import * as React from "react"
 
-export function TeamSwitcher({
-  teams,
-}: {
-  teams: {
-    name: string
-    logo: React.ElementType
-    plan?: string
-  }[]
-}) {
+export function TeamSwitcher() {
+  const dispatch = useAppDispatch()
+  const state = useAppSelector((state) => state.authentication)
+  const activeOrg = selectActiveOrg(state)
   const { isMobile } = useSidebar()
-  const [activeTeam, setActiveTeam] = React.useState(teams[0])
-
-  if (!activeTeam) {
-    return null
-  }
-
-  React.useEffect(() => {
-    if (teams[0]?.name !== activeTeam.name) {
-      setActiveTeam(teams[0])
-    }
-  }, [activeTeam.name, teams])
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <activeTeam.logo className="size-4" />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
-                  {activeTeam.name}
-                </span>
-                {activeTeam.plan && (
-                  <span className="truncate text-xs">{activeTeam.plan}</span>
-                )}
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
+            {activeOrg && (
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <Building2 className="size-4" />
+                </div>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-semibold">
+                    {activeOrg.name}
+                  </span>
+                  <Badge className="text-[10px]">{activeOrg.role.name}</Badge>
+                </div>
+                <ChevronsUpDown className="ml-auto" />
+              </SidebarMenuButton>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
@@ -73,16 +59,18 @@ export function TeamSwitcher({
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Organizations
             </DropdownMenuLabel>
-            {teams.map((team, index) => (
+            {state.organizations?.map((org, index) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveTeam(team)}
+                key={org.id}
+                onClick={() => {
+                  dispatch(setActiveOrg(org.id))
+                }}
                 className="gap-2 p-2"
               >
                 <div className="flex size-6 items-center justify-center rounded-sm border">
-                  <team.logo className="size-4 shrink-0" />
+                  <Building2 className="size-4 shrink-0" />
                 </div>
-                {team.name}
+                {org.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
               </DropdownMenuItem>
             ))}

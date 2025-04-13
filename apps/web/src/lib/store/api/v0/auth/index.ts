@@ -16,6 +16,9 @@ export const authApi = createApi({
         body,
       }),
     }),
+    authMe: build.query<any, void>({
+      query: () => "/me",
+    }),
     register: build.mutation({
       query: (body) => ({
         url: `/register`,
@@ -55,6 +58,8 @@ export const authApi = createApi({
 
 export const {
   useRegisterMutation,
+  useLazyAuthMeQuery,
+  useAuthMeQuery,
   useVerifyEmailByTokenMutation,
   useLoginMutation,
   useForgotPasswordMutation,

@@ -38,8 +38,6 @@ const rootReducer = combineReducers({
   theme: themeReducers,
 })
 
-export type RootState = ReturnType<typeof rootReducer>
-
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
@@ -62,4 +60,6 @@ export const persistor = persistStore(store)
 
 setupListeners(store.dispatch)
 
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = typeof store
 export type AppDispatch = typeof store.dispatch

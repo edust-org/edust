@@ -1,5 +1,6 @@
 "use client"
 
+import { HasOrgPermission } from "@/components/guards/organization-guard/has-org-permission"
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
   Button,
@@ -94,17 +95,22 @@ export default function Site() {
                       </Link>
                     </div>
                   ) : (
-                    <Button
-                      onClick={handleCreateSite}
-                      className="mt-2"
-                      disabled={isLoadingSiteCreation}
+                    <HasOrgPermission
+                      requiredPermissions={"siteBuilder:create"}
+                      fallback
                     >
-                      {isLoadingSiteCreation ? (
-                        <BarLoader color="#fff" />
-                      ) : (
-                        <>Create now</>
-                      )}
-                    </Button>
+                      <Button
+                        onClick={handleCreateSite}
+                        className="mt-2"
+                        disabled={isLoadingSiteCreation}
+                      >
+                        {isLoadingSiteCreation ? (
+                          <BarLoader color="#fff" />
+                        ) : (
+                          <>Create now</>
+                        )}
+                      </Button>
+                    </HasOrgPermission>
                   )}
                 </CardContent>
               </Card>

@@ -12,6 +12,10 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
+import { OrgRole } from "@/hooks"
+import { useLazyAuthMeQuery } from "@/lib/store/api/v0/auth"
+import { Organization, logOut, setAuthentication } from "@/lib/store/features"
+import { useAppDispatch } from "@/lib/store/hooks"
 import { AccountType } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
@@ -41,6 +45,8 @@ export default function Login() {
   const router = useRouter()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [getAuthMe] = useLazyAuthMeQuery()
+  const dispatch = useAppDispatch()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -66,7 +72,26 @@ export default function Login() {
     }
 
     if (result?.ok) {
-      router.push("/")
+      try {
+        const data = await getAuthMe().unwrap()
+
+        const org: Organization[] =
+          data?.organizationRoles?.map((orgRole: OrgRole) => ({
+            id: orgRole.organization.id,
+            name: orgRole.organization.name,
+            role: {
+              id: orgRole.id,
+              name: orgRole.role,
+              permissions: orgRole.rolePermissions,
+            },
+          })) || []
+
+        dispatch(setAuthentication(org))
+        router.push("/")
+      } catch (error) {
+        dispatch(logOut())
+        console.error(error)
+      }
     }
     setIsLoading(false)
   }

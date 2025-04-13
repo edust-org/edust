@@ -7,11 +7,10 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { permissions } from "@/lib/pm"
+import { useAppSelector } from "@/lib/store/hooks"
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
-  Building2,
   Command,
   Earth,
   Frame,
@@ -21,7 +20,6 @@ import {
   Map,
   PieChart,
   Settings2,
-  SquareTerminal,
 } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
@@ -106,20 +104,17 @@ const navMain = [
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const state = useAppSelector((state) => state.authentication)
   const session = useSession()
   const user = session.data?.user
-
-  const teams =
-    user?.organizationRoles?.map((item) => ({
-      name: item.organization.name,
-      logo: Building2,
-    })) || []
 
   const pathname = usePathname()
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        {teams?.length > 0 && <TeamSwitcher teams={teams} />}
+        {state.organizations && state.organizations.length > 0 && (
+          <TeamSwitcher />
+        )}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} pathname={pathname} />
