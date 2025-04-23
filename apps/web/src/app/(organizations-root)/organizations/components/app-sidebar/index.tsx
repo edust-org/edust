@@ -8,6 +8,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { permissions } from "@/lib/pm"
+import { selectActiveOrg } from "@/lib/store/features"
 import { useAppSelector } from "@/lib/store/hooks"
 import {
   AudioWaveform,
@@ -20,6 +21,7 @@ import {
   Map,
   PieChart,
   Settings2,
+  UserRoundCog,
 } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
@@ -91,6 +93,12 @@ const navMain = [
     icon: Earth,
   },
   {
+    title: "Access Control",
+    url: "/organizations/access-control",
+    icon: UserRoundCog,
+    permission: permissions.orgMenuAccessControl,
+  },
+  {
     title: "Settings",
     url: "/organizations/settings",
     icon: Settings2,
@@ -105,10 +113,25 @@ const navMain = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const state = useAppSelector((state) => state.authentication)
+  const activeOrg = selectActiveOrg(state)
+
   const session = useSession()
   const user = session.data?.user
 
   const pathname = usePathname()
+
+  // Get the rolePermissions from the active organization
+  const userPermissions = activeOrg?.rolePermissions || []
+
+  // Filter navMain based on permissions
+  const filteredNavMain = navMain.filter((item) => {
+    // If no permission is required, allow the item
+    if (!item.permission) return true
+
+    // Check if the user has the required permission
+    return userPermissions.includes(item.permission)
+  })
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -117,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         )}
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMain} pathname={pathname} />
+        <NavMain items={filteredNavMain} pathname={pathname} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>

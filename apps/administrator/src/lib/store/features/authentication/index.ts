@@ -26,7 +26,7 @@ export const authentication = createSlice({
 
       const isOwner =
         action.payload.user?.organizationRoles?.filter(
-          (item) => item.role === Roles.OWNER,
+          (item) => item.role === Roles.owner,
         ) || []
 
       if (isOwner[0]) {

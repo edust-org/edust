@@ -41,14 +41,14 @@ export const useOrganizationGuard = () => {
           )
 
           const org: Organization[] =
-            data?.organizationRoles?.map((orgRole: OrgRole) => ({
-              id: orgRole.organization.id,
-              name: orgRole.organization.name,
-              role: {
-                id: orgRole.id,
-                name: orgRole.role,
-                permissions: orgRole.rolePermissions,
-              },
+            data?.data?.organizations?.map((org: Organization) => ({
+              id: org.id,
+              name: org.name,
+              orgUsername: org.orgUsername,
+              profilePic: org.profilePic,
+              roleId: org.roleId,
+              role: org.role,
+              rolePermissions: org.rolePermissions,
             })) || []
 
           dispatch(setAuthentication(org))

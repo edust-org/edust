@@ -32,8 +32,7 @@ export const authOptions: NextAuthOptions = {
             username: data?.data.username,
             email: data?.data.email,
             profilePic: data?.data.profilePic,
-            systemRole: data?.data.systemRole,
-            organizationRoles: data?.data.organizationRoles,
+            hasRoles: data?.data.hasRoles,
 
             accessToken: data?.auth.accessToken,
             expiresAt: data?.auth.expiresAt,
@@ -71,8 +70,7 @@ export const authOptions: NextAuthOptions = {
             username: data?.data.username,
             email: data?.data.email,
             profilePic: data?.data.profilePic,
-            systemRole: data?.data.systemRole,
-            organizationRoles: data?.data.organizationRoles,
+            hasRoles: data?.data.hasRoles,
 
             accessToken: data?.auth.accessToken,
             expiresAt: data?.auth.expiresAt,
@@ -95,8 +93,7 @@ export const authOptions: NextAuthOptions = {
 
         token.username = user.username
         token.profilePic = user.profilePic
-        token.systemRole = user.systemRole
-        token.organizationRoles = user.organizationRoles
+        token.hasRoles = user.hasRoles
 
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
@@ -137,8 +134,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.username = token.username
       session.user.profilePic = token.profilePic
-      session.user.systemRole = token.systemRole
-      session.user.organizationRoles = token.organizationRoles
+      session.user.hasRoles = token.hasRoles
 
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken

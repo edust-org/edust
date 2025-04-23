@@ -11,9 +11,7 @@ export default withAuth(
 
     // Role-based access control
     if (req.nextUrl.pathname.startsWith("/organizations")) {
-      const hasOrgOwner = req.nextauth.token.organizationRoles?.find(
-        (item) => item.role === Roles.OWNER,
-      )
+      const hasOrgOwner = req.nextauth.token.hasRoles?.organization
 
       if (!hasOrgOwner) {
         return NextResponse.redirect(new URL("/", req.url)) // Redirect unauthorized users

@@ -1,5 +1,6 @@
 "use client"
 
+import { Loading } from "@/components"
 import { useSession } from "next-auth/react"
 
 import { ReactNode } from "react"
@@ -10,7 +11,12 @@ interface LayoutHomeProps {
 }
 
 export default function LayoutHome({ home, homepublic }: LayoutHomeProps) {
-  const { data } = useSession()
+  const { data, status } = useSession()
   const user = data?.user
+
+  if (status === "loading") {
+    return <Loading.FullScreen />
+  }
+
   return <>{user ? home : homepublic}</>
 }

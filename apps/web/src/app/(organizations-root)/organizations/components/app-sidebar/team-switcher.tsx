@@ -44,7 +44,7 @@ export function TeamSwitcher() {
                   <span className="truncate font-semibold">
                     {activeOrg.name}
                   </span>
-                  <Badge className="text-[10px]">{activeOrg.role.name}</Badge>
+                  <Badge className="text-[10px]">{activeOrg.role}</Badge>
                 </div>
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>

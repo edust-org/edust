@@ -1,6 +1,6 @@
 "use client"
 
-import { FullSpinner } from "@/components"
+import { Loading } from "@/components"
 import { signIn, useSession } from "next-auth/react"
 import { useParams, useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -50,5 +50,5 @@ export default function Callback() {
     socialLogin(accessCredentialToken)
   }, [accessCredentialToken, router, status])
 
-  return <FullSpinner />
+  return <Loading.FullScreen />
 }

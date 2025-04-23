@@ -1,19 +1,17 @@
+import { orgPermissions } from './org-permissions';
+
 export const permissions = {
+  ...orgPermissions,
+
   feedbackCreate: 'feedback:create',
   feedbackRead: 'feedback:read',
   feedbackUpdate: 'feedback:update',
   feedbackDelete: 'feedback:delete',
 
-  helpCenterCreate: 'helpCenter:create',
-  helpCenterRead: 'helpCenter:read',
-  helpCenterUpdate: 'helpCenter:update',
-  helpCenterDelete: 'helpCenter:delete',
-
-  organizationUpdate: 'organization:update',
-
-  siteBuilderCreate: 'siteBuilder:create',
-  siteBuilderRead: 'siteBuilder:read',
-  siteBuilderUpdate: 'siteBuilder:update',
+  helpCenterCreate: 'help_center:create',
+  helpCenterRead: 'help_center:read',
+  helpCenterUpdate: 'help_center:update',
+  helpCenterDelete: 'help_center:delete',
 } as const;
 
 export type PermissionValues = (typeof permissions)[keyof typeof permissions];

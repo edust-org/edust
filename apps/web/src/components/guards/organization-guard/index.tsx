@@ -1,10 +1,10 @@
-import { FullSpinner } from "@/components"
-import { useOrganizationGuard } from "@/hooks"
+import { Loading } from "@/components"
 import { PermissionValues } from "@/lib/pm"
 
 import { ReactNode } from "react"
 
 import { HasOrgPermission } from "./has-org-permission"
+import { useOrganizationGuard } from "./use-organization-guard"
 
 interface OrganizationGuardProps {
   children: ReactNode
@@ -18,7 +18,7 @@ export const OrganizationGuard: React.FC<OrganizationGuardProps> = ({
   const { isLoading } = useOrganizationGuard()
 
   if (isLoading) {
-    return <FullSpinner />
+    return <Loading.FullScreen />
   }
 
   return (
@@ -27,3 +27,5 @@ export const OrganizationGuard: React.FC<OrganizationGuardProps> = ({
     </HasOrgPermission>
   )
 }
+
+export * from "./has-org-permission"

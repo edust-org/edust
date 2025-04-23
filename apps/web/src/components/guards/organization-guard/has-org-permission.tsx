@@ -22,7 +22,7 @@ export const HasOrgPermission: React.FC<HasPermissionProps> = ({
   const activeOrg = selectActiveOrg(state)
 
   const userPermissions = useMemo(() => {
-    return activeOrg?.role?.permissions || []
+    return activeOrg?.rolePermissions || []
   }, [activeOrg])
 
   const isAllowed = useMemo(() => {
@@ -42,7 +42,7 @@ export const HasOrgPermission: React.FC<HasPermissionProps> = ({
         <Typography variant="h2" className="text-destructive">
           Unauthorized to access!
         </Typography>
-        <Button onClick={() => router.push("/auth/login")}>Back to home</Button>
+        <Button onClick={() => router.push("/")}>Back to home</Button>
       </div>
     )
   }

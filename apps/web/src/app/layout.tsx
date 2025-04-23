@@ -5,6 +5,7 @@ import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
 import "./globals.css"
+import ReactQueryProvider from "./react-query-provider"
 import SessionProvider from "./session-provider"
 
 const roboto = Roboto({
@@ -59,10 +60,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.className} antialiased`}>
         <SessionProvider>
-          <ReduxProvider>
-            <Toaster richColors />
-            {children}
-          </ReduxProvider>
+          <ReactQueryProvider>
+            <ReduxProvider>
+              <Toaster richColors />
+              {children}
+            </ReduxProvider>
+          </ReactQueryProvider>
         </SessionProvider>
       </body>
     </html>

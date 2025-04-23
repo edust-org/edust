@@ -3,17 +3,17 @@
  */
 export enum Roles {
   /** Guest with restricted access to certain parts of the application. */
-  GUEST = "GUEST",
+  guest = "GUEST",
 
   /** User with basic access to the application. */
-  USER = "USER",
+  user = "USER",
 
   /** Administrator with full access to the system. */
-  ADMINISTRATOR = "ADMINISTRATOR",
+  administrator = "ADMINISTRATOR",
 
   /** Owner of an organization with special permissions. */
-  OWNER = "OWNER",
+  owner = "OWNER",
 
   /** Editor with permission to edit content. */
-  EDITOR = "EDITOR",
+  editor = "EDITOR",
 }

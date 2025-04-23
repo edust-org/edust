@@ -1,15 +1,15 @@
 import { PermissionValues } from "@/lib/pm"
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { deleteCookie, getCookies } from "cookies-next"
+import { deleteCookie, getCookies, setCookie } from "cookies-next"
 
 export interface Organization {
   id: string
   name: string
-  role: {
-    id: string
-    name: string
-    permissions: PermissionValues[]
-  }
+  orgUsername: string
+  profilePic: string | null
+  roleId: string
+  role: string
+  rolePermissions: PermissionValues[]
 }
 
 export interface AuthenticationState {
@@ -26,16 +26,23 @@ const authentication = createSlice({
   name: "authentication",
   initialState,
   reducers: {
-    setAuthentication(state, action: PayloadAction<Organization[] | null>) {
-      state.organizations = action.payload
+    setAuthentication(
+      state: AuthenticationState,
+      action: PayloadAction<Organization[] | null>,
+    ) {
+      state.organizations =
+        action.payload && action.payload.length > 0 ? action.payload : null
+
       if (action.payload && action.payload.length > 0) {
         state.activeOrgId = action.payload[0]?.id || null
+        setCookie("activeOrgId", state.activeOrgId, { sameSite: "lax" })
       }
     },
-    setActiveOrg(state, action: PayloadAction<string>) {
+    setActiveOrg(state: AuthenticationState, action: PayloadAction<string>) {
       state.activeOrgId =
         state.organizations?.find((org) => org.id === action.payload)?.id ||
         null
+      setCookie("activeOrgId", state.activeOrgId, { sameSite: "lax" })
     },
     logOut() {
       localStorage.clear()

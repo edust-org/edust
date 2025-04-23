@@ -20,7 +20,7 @@ function SiteBuilder() {
   const { data } = useSession()
 
   const orgId = data?.user.organizationRoles
-    ?.filter((role) => role.role === Roles.OWNER)
+    ?.filter((role) => role.role === Roles.owner)
     .map((role) => role.organization.id)[0]
 
   const [saveNewPage] = useAddSitePageMutation()
