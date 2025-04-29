@@ -1,7 +1,6 @@
 "use client"
 
-import { HasOrgPermission } from "@/components/guards/organization-guard/has-org-permission"
-import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
+import { AuthGuard, HasPermission } from "@/components"
 import {
   Button,
   Card,
@@ -9,7 +8,6 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  Input,
   Skeleton,
 } from "@/components/ui"
 import {
@@ -51,87 +49,89 @@ export default function Site() {
   }
 
   return (
-    <Layout>
-      <title>Site Status</title>
-      <Layout.Body>
-        <section className="flex gap-4">
-          {isLoading ? (
-            <Card className="w-full max-w-xs border">
-              <CardHeader>
-                <CardTitle>
-                  <Skeleton className="h-6" />
-                </CardTitle>
-                <CardDescription className="text-sm">
-                  <Skeleton className="h-12" />
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Skeleton className="h-10 max-w-28" />
-              </CardContent>
-            </Card>
-          ) : (
-            <>
-              <Card className="max-w-xs border">
+    <AuthGuard requiredPermissions="org:menu:site">
+      <Layout>
+        <title>Site Status</title>
+        <Layout.Body>
+          <section className="flex gap-4">
+            {isLoading ? (
+              <Card className="w-full max-w-xs border">
                 <CardHeader>
-                  <CardTitle className="text-2xl font-semibold">
-                    Make Your Site Your Own
+                  <CardTitle>
+                    <Skeleton className="h-6" />
                   </CardTitle>
                   <CardDescription className="text-sm">
-                    Easily customize and build a unique static site to fit your
-                    needs.
+                    <Skeleton className="h-12" />
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {data?.data?.site ? (
-                    <div className="flex items-center justify-between gap-2">
-                      <Link href={"site/builder"} target="_blank">
-                        <Button>Start Editing</Button>
-                      </Link>
-                      <Link
-                        href={`/org/${data?.data?.orgUsername}/site`}
-                        target="_blank"
-                      >
-                        <Button variant={"outline"}>visit site </Button>
-                      </Link>
-                    </div>
-                  ) : (
-                    <HasOrgPermission
-                      requiredPermissions={"siteBuilder:create"}
-                      fallback
-                    >
-                      <Button
-                        onClick={handleCreateSite}
-                        className="mt-2"
-                        disabled={isLoadingSiteCreation}
-                      >
-                        {isLoadingSiteCreation ? (
-                          <BarLoader color="#fff" />
-                        ) : (
-                          <>Create now</>
-                        )}
-                      </Button>
-                    </HasOrgPermission>
-                  )}
+                  <Skeleton className="h-10 max-w-28" />
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    Total Pages are ({data?.data?.site?.pages || 0})
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <CardTitle>
-                    Total Images are ({data?.data?.site?.images || 0})
-                  </CardTitle>
-                </CardHeader>
-              </Card>
-            </>
-          )}
-        </section>
-      </Layout.Body>
-    </Layout>
+            ) : (
+              <>
+                <Card className="max-w-xs border">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-semibold">
+                      Make Your Site Your Own
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      Easily customize and build a unique static site to fit
+                      your needs.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {data?.data?.site ? (
+                      <div className="flex items-center justify-between gap-2">
+                        <Link href={"site/builder"} target="_blank">
+                          <Button>Start Editing</Button>
+                        </Link>
+                        <Link
+                          href={`/organizations/profile/${data?.data?.orgUsername}/site`}
+                          target="_blank"
+                        >
+                          <Button variant={"outline"}>visit site </Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <HasPermission
+                        requiredPermissions={"org:site_builder:create"}
+                        fallback
+                      >
+                        <Button
+                          onClick={handleCreateSite}
+                          className="mt-2"
+                          disabled={isLoadingSiteCreation}
+                        >
+                          {isLoadingSiteCreation ? (
+                            <BarLoader color="#fff" />
+                          ) : (
+                            <>Create now</>
+                          )}
+                        </Button>
+                      </HasPermission>
+                    )}
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      Total Pages are ({data?.data?.site?.pages || 0})
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>
+                      Total Images are ({data?.data?.site?.images || 0})
+                    </CardTitle>
+                  </CardHeader>
+                </Card>
+              </>
+            )}
+          </section>
+        </Layout.Body>
+      </Layout>
+    </AuthGuard>
   )
 }

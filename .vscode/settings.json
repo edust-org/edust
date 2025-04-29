@@ -1,4 +1,5 @@
 {
+  "typescript.preferences.autoImportFileExcludePatterns": ["@radix-ui"],
   "eslint.workingDirectories": [
     {
       "mode": "auto"

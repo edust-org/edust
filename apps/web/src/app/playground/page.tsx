@@ -1,11 +1,11 @@
 "use client"
 
-import { Feedback, OrganizationGuard } from "@/components"
+import { Typography } from "@/components/ui"
 
 export default function Playground() {
   return (
-    <OrganizationGuard requiredPermissions="siteBuilder:create">
-      <Feedback />
-    </OrganizationGuard>
+    <>
+      <Typography variant="h2">Playground</Typography>
+    </>
   )
 }

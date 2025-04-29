@@ -38,22 +38,22 @@ export interface SubDistrictResponse {
 }
 
 export const bdapisApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: `https://bdapis.com/api/v1.2` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `https://bdapi.vercel.app/api/v.1` }),
 
   reducerPath: "API_employeesApi",
   tagTypes: ["Employees"],
 
   endpoints: (build) => ({
     getBDDivisions: build.query<string[], void>({
-      query: () => "/divisions",
+      query: () => "/division",
       transformResponse: (division: DivisionResponse): string[] => {
         return division.data.map((div) => div.division)
       },
     }),
     getBDDistricts: build.query<string[], void>({
-      query: () => "/districts",
+      query: () => "/district",
       transformResponse: (district: DistrictResponse): string[] => {
-        return district.data.map((dis) => dis.district)
+        return district.data.map((dis) => dis.name)
       },
     }),
     getBDSubDistrictByDistrict: build.query<string[], string>({

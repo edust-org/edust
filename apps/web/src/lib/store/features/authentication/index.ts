@@ -34,7 +34,14 @@ const authentication = createSlice({
         action.payload && action.payload.length > 0 ? action.payload : null
 
       if (action.payload && action.payload.length > 0) {
-        state.activeOrgId = action.payload[0]?.id || null
+        const existingOrg = action.payload.find(
+          (org) => org.id === state.activeOrgId,
+        )
+        if (existingOrg) {
+          state.activeOrgId = existingOrg.id
+        } else {
+          state.activeOrgId = action.payload[0]?.id || null
+        }
         setCookie("activeOrgId", state.activeOrgId, { sameSite: "lax" })
       }
     },

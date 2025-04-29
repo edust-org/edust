@@ -91,6 +91,7 @@ const navMain = [
     title: "Site",
     url: "/organizations/site",
     icon: Earth,
+    permission: permissions.orgMenuSite,
   },
   {
     title: "Access Control",

@@ -1,3 +1,4 @@
+import { AuthGuard } from "@/components"
 import { ReduxProvider } from "@/lib/store"
 import "@edust/grapesjs/style.css"
 import { Metadata } from "next"
@@ -57,13 +58,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${roboto.className} antialiased`}>
         <SessionProvider>
           <ReactQueryProvider>
             <ReduxProvider>
               <Toaster richColors />
-              {children}
+              <AuthGuard>{children}</AuthGuard>
             </ReduxProvider>
           </ReactQueryProvider>
         </SessionProvider>
