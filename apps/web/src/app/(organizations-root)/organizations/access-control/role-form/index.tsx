@@ -86,6 +86,9 @@ export const RoleForm = ({
         onSuccess: () => {
           form.reset()
         },
+        onError: () => {
+          form.reset()
+        },
       })
       router.push("/organizations/access-control")
     } else {

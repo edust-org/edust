@@ -4,6 +4,8 @@ import {
   Button,
   Card,
   CardContent,
+  CardHeader,
+  CardTitle,
   Form,
   FormControl,
   FormDescription,
@@ -142,48 +144,48 @@ export const PermissionForm: React.FC<PermissionFormProps> = ({
 
   return (
     <Card className="mx-auto max-w-xl">
+      <CardHeader>
+        <CardTitle>Set the permissions</CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-6"
           >
-            <div>
-              <h3 className="mb-4 text-lg font-medium">Set the permissions</h3>
-              <div className="space-y-4">
-                {permissionLists.map((item) => (
-                  <FormField
-                    key={item.id}
-                    control={form.control}
-                    name="permission_lists"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-                        <div className="space-y-0.5">
-                          <FormLabel>{item.label}</FormLabel>
-                          <FormDescription>{item.description}</FormDescription>
-                        </div>
-                        <FormControl>
-                          <Switch
-                            checked={field.value.includes(item.id)}
-                            onCheckedChange={(checked) => {
-                              if (checked) {
-                                field.onChange([...field.value, item.id])
-                              } else {
-                                field.onChange(
-                                  field.value.filter(
-                                    (value) => value !== item.id,
-                                  ),
-                                )
-                              }
-                            }}
-                            disabled={roleName === Roles.owner}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
-                  />
-                ))}
-              </div>
+            <div className="space-y-4">
+              {permissionLists.map((item) => (
+                <FormField
+                  key={item.id}
+                  control={form.control}
+                  name="permission_lists"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel>{item.label}</FormLabel>
+                        <FormDescription>{item.description}</FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value.includes(item.id)}
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              field.onChange([...field.value, item.id])
+                            } else {
+                              field.onChange(
+                                field.value.filter(
+                                  (value) => value !== item.id,
+                                ),
+                              )
+                            }
+                          }}
+                          disabled={roleName === Roles.owner}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              ))}
             </div>
             <Button type="submit" disabled={roleName === Roles.owner}>
               Save preferences

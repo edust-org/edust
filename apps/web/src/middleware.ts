@@ -1,8 +1,6 @@
 import { withAuth } from "next-auth/middleware"
 import { NextResponse } from "next/server"
 
-import { Roles } from "./types"
-
 export default withAuth(
   function middleware(req) {
     if (!req.nextauth.token) {

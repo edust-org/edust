@@ -3,13 +3,26 @@
 import { AuthGuard, HasPermission } from "@/components"
 import {
   Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
   Separator,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
   Typography,
 } from "@/components/ui"
 import { useAppSelector } from "@/lib/store/hooks"
+import { Roles } from "@/types"
 import { Edit } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
@@ -17,6 +30,7 @@ import qs from "qs"
 
 import { RoleForm } from "./role-form"
 import { useRoles } from "./use-roles"
+import { UserLists } from "./user-lists"
 import { ViewPermissions } from "./view-permissions"
 
 export default function AccessControl() {
@@ -57,6 +71,16 @@ export default function AccessControl() {
 
       <section className="flex h-full items-start gap-4">
         <SidebarMenu className="max-w-48 gap-4">
+          <HasPermission
+            requiredPermissions={"org:access_control:role:create"}
+            fallback
+          >
+            <Link href={"/organizations/access-control"}>
+              <Button className="w-full" size={"sm"}>
+                New Role
+              </Button>
+            </Link>
+          </HasPermission>
           {roleLists.map((role) => (
             <SidebarMenuItem key={role.id}>
               <SidebarMenuButton asChild>
@@ -91,7 +115,27 @@ export default function AccessControl() {
         <Separator orientation="vertical" />
         <div className="grow">
           {roleId && roleName ? (
-            <ViewPermissions roleId={roleId} roleName={roleName} />
+            <>
+              <Tabs defaultValue="permissions">
+                <TabsList>
+                  <TabsTrigger value="permissions">Permissions</TabsTrigger>
+
+                  {/* disabled for owner role assign */}
+                  {roleName !== Roles.owner && (
+                    <TabsTrigger value="users">Users</TabsTrigger>
+                  )}
+                </TabsList>
+                <TabsContent value="permissions">
+                  <ViewPermissions roleId={roleId} roleName={roleName} />
+                </TabsContent>
+                {/* disabled for owner role assign */}
+                {roleName !== Roles.owner && (
+                  <TabsContent value="users">
+                    <UserLists roleId={roleId} roleName={roleName} />
+                  </TabsContent>
+                )}
+              </Tabs>
+            </>
           ) : (
             <HasPermission
               requiredPermissions={[

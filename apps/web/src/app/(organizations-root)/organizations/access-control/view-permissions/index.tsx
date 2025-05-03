@@ -1,6 +1,4 @@
-import { HasPermission } from "@/components"
-import { Button, Typography } from "@/components/ui"
-import Link from "next/link"
+import { Typography } from "@/components/ui"
 
 import React from "react"
 
@@ -17,16 +15,8 @@ export const ViewPermissions: React.FC<ViewPermissionsProps> = ({
 }) => {
   return (
     <section>
-      <div className="mb-8 flex items-center justify-between gap-4">
-        <Typography variant="h3">ViewPermissions</Typography>
-        <HasPermission
-          requiredPermissions={"org:access_control:role:create"}
-          fallback
-        >
-          <Link href={"/organizations/access-control"}>
-            <Button>New Role</Button>
-          </Link>
-        </HasPermission>
+      <div className="mb-8">
+        <Typography variant="h3">View Permissions</Typography>
       </div>
       <PermissionForm roleId={roleId} roleName={roleName} />
     </section>
