@@ -21,7 +21,7 @@ import {
   TabsTrigger,
   Typography,
 } from "@/components/ui"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { Roles } from "@/types"
 import { Edit } from "lucide-react"
 import Link from "next/link"
@@ -44,7 +44,7 @@ export default function AccessControl() {
   const ref = searchParams.get("ref")
   const editRoleId = searchParams.get("id")
 
-  const state = useAppSelector((state) => state.authentication)
+  const state = useAuthStore()
 
   // Use the custom hook to fetch roles
   const {

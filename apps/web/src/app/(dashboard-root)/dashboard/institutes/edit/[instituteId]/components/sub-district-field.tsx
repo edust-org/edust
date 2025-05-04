@@ -17,19 +17,14 @@ import {
   PopoverTrigger,
   Skeleton,
 } from "@/components/ui"
-import { useGetBDSubDistrictByDistrictQuery } from "@/lib/store/api/_others/bdapis"
+import { useGetBDSubDistrictByDistrict } from "@/hooks/react-query"
 import { cn } from "@/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useMemo } from "react"
 
 export const SubDistrictField = ({ form, district: queryDistrict }) => {
-  const { data, isLoading } = useGetBDSubDistrictByDistrictQuery(
-    queryDistrict,
-    {
-      refetchOnMountOrArgChange: queryDistrict,
-    },
-  )
+  const { data, isLoading } = useGetBDSubDistrictByDistrict(queryDistrict)
 
   const subDistrict = useMemo(() => {
     if (data) {

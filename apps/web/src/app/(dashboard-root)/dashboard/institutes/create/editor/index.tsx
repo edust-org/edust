@@ -1,55 +1,14 @@
 "use client"
 
-import { useAppSelector } from "@/lib/store/hooks"
-import RcTiptapEditor from "reactjs-tiptap-editor"
-import {
-  Attachment,
-  BaseKit,
-  Blockquote,
-  Bold,
-  BulletList,
-  Clear,
-  Code,
-  CodeBlock,
-  Color,
-  ColumnActionButton,
-  Emoji,
-  ExportPdf,
-  ExportWord,
-  FontFamily,
-  FontSize,
-  FormatPainter,
-  Heading,
-  Highlight,
-  History,
-  HorizontalRule,
-  Iframe,
-  // Image,
-  ImportWord,
-  Indent,
-  Italic,
-  Katex,
-  LineHeight,
-  Link,
-  Mention,
-  // ImageGif,
-  Mermaid,
-  MoreMark,
-  OrderedList,
-  SearchAndReplace,
-  SlashCommand,
-  Strike,
-  Table,
-  TableOfContents,
-  TaskList,
-  TextAlign,
-  // Excalidraw,
-  TextDirection,
-  Twitter,
-  Underline,
-  // Video,
-  locale,
-} from "reactjs-tiptap-editor/extension-bundle"
+import { useThemeStore } from "@/lib/store"
+import RcTiptapEditor, { BaseKit } from "reactjs-tiptap-editor"
+import { Blockquote } from "reactjs-tiptap-editor/blockquote"
+import { Bold } from "reactjs-tiptap-editor/bold"
+import { BulletList } from "reactjs-tiptap-editor/bulletlist"
+import { Clear } from "reactjs-tiptap-editor/clear"
+import { Code } from "reactjs-tiptap-editor/code"
+import { CodeBlock } from "reactjs-tiptap-editor/codeblock"
+import { SearchAndReplace } from "reactjs-tiptap-editor/searchandreplace"
 
 import React, { useCallback, useState } from "react"
 
@@ -195,7 +154,7 @@ function Editor({ setContentHtml }: { setContentHtml: any }) {
   const [content, setContent] = useState(DEFAULT)
   const refEditor = React.useRef<any>(null)
 
-  const theme = useAppSelector((state) => state.theme.theme)
+  const theme = useThemeStore((state) => state.theme)
   const [disable, setDisable] = useState(false)
 
   const onValueChange = useCallback(

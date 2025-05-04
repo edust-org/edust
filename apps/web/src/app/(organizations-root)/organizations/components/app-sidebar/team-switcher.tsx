@@ -15,16 +15,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { selectActiveOrg, setActiveOrg } from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { Building2, ChevronsUpDown } from "lucide-react"
 
 import * as React from "react"
 
 export function TeamSwitcher() {
-  const dispatch = useAppDispatch()
-  const state = useAppSelector((state) => state.authentication)
-  const activeOrg = selectActiveOrg(state)
+  const state = useAuthStore()
+  const activeOrg = useAuthStore((state) => state.selectActiveOrg())
   const { isMobile } = useSidebar()
 
   return (
@@ -63,7 +61,7 @@ export function TeamSwitcher() {
               <DropdownMenuItem
                 key={org.id}
                 onClick={() => {
-                  dispatch(setActiveOrg(org.id))
+                  state.setActiveOrg(org.id)
                 }}
                 className="gap-2 p-2"
               >

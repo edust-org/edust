@@ -16,9 +16,9 @@ import {
   TableRow,
 } from "@/components/ui"
 import {
-  useDeleteInstituteByIdMutation,
-  useGetMeInstitutesListsQuery,
-} from "@/lib/store/api/v0/institutes"
+  useDeleteInstituteById,
+  useGetMeInstitutesLists,
+} from "@/hooks/react-query"
 import { Status } from "@/types"
 import { cn } from "@/utils"
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
@@ -26,10 +26,10 @@ import Link from "next/link"
 import { toast } from "sonner"
 
 export default function InstitutesLists() {
-  const { data: institutes, refetch } = useGetMeInstitutesListsQuery()
+  const { data: institutes, refetch } = useGetMeInstitutesLists()
 
-  const [deleteInstitute, { isLoading: isDeleting }] =
-    useDeleteInstituteByIdMutation()
+  const { mutateAsync: deleteInstitute, isPending: isDeleting } =
+    useDeleteInstituteById()
   return (
     <>
       <title>List of institutes | Dashboard</title>
@@ -89,7 +89,6 @@ export default function InstitutesLists() {
                       <DropdownMenuItem
                         onClick={() =>
                           deleteInstitute(institute.id)
-                            .unwrap()
                             .then((data) => {
                               toast.success(data.message)
                               refetch()

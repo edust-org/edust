@@ -10,7 +10,7 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
-import { useGetFlagsByCountryQuery } from "@/lib/store/api/_others/restcountries"
+import { useGetFlagsByCountry } from "@/hooks/react-query/_others"
 import { format } from "date-fns"
 import { Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"
@@ -36,8 +36,7 @@ export const InstitutesCard: FC<InstitutesCardProps> = ({ item }) => {
     country,
   } = item
 
-  const { data: flag, isLoading: isFlagLoading } =
-    useGetFlagsByCountryQuery(country)
+  const { data: flag, isLoading: isFlagLoading } = useGetFlagsByCountry(country)
 
   const fallbackName = (name: string) => {
     const arrName = name.split(" ").filter(Boolean)

@@ -16,9 +16,7 @@ import {
   Skeleton,
 } from "@/components/ui"
 import { useTheme } from "@/hooks"
-import { clearAllCaches } from "@/lib/store/api/v0"
-import { logOut, setActiveOrg } from "@/lib/store/features/authentication"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { LayoutDashboard, LogOut, Plus, School, Settings } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
@@ -28,16 +26,16 @@ import { toast } from "sonner"
 export const NavbarRightMenus = () => {
   const router = useRouter()
   const { setTheme } = useTheme()
-  const dispatch = useAppDispatch()
-  const state = useAppSelector((state) => state.authentication)
+
+  const state = useAuthStore()
+  const { logOut } = useAuthStore()
 
   const { data, status } = useSession()
   const user = data?.user
 
   const handleLogout = async () => {
     await signOut()
-    dispatch(logOut())
-    clearAllCaches(dispatch)
+    logOut()
     setTheme("light")
     toast.error("Log out successfully!")
   }
@@ -100,7 +98,7 @@ export const NavbarRightMenus = () => {
                   <DropdownMenuItem
                     key={org.id}
                     onClick={() => {
-                      dispatch(setActiveOrg(org.id))
+                      state.setActiveOrg(org.id)
                       router.push("/organizations")
                     }}
                   >

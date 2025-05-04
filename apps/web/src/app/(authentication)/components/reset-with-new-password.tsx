@@ -12,7 +12,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useResetPasswordMutation } from "@/lib/store/api/v0/auth"
+import { useResetPassword } from "@/hooks/react-query"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { KeySquare } from "lucide-react"
 import Link from "next/link"
@@ -32,7 +32,8 @@ export const ResetWithNewPassword = () => {
   const searchParams = useSearchParams()
   const email = searchParams.get("email")
   const otp = searchParams.get("otp")
-  const [resetPassword, { isLoading }] = useResetPasswordMutation()
+  const { mutateAsync: resetPassword, isPending: isLoading } =
+    useResetPassword()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -43,7 +44,6 @@ export const ResetWithNewPassword = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     resetPassword({ newPassword: data.newPassword, email, otp })
-      .unwrap()
       .then((res) => {
         if (res?.status) {
           toast.success(res?.message)

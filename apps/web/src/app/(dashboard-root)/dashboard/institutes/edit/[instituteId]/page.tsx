@@ -27,10 +27,10 @@ import {
 } from "@/components/ui"
 import { DatePicker } from "@/components/ui/manual/date-picker"
 import {
-  useEditInstitutesByIdMutation,
-  useGetInstitutesIdQuery,
-  useGetMeInstitutesListsQuery,
-} from "@/lib/store/api/v0/institutes"
+  useEditInstitutesById,
+  useGetInstitutesId,
+  useGetMeInstitutesLists,
+} from "@/hooks/react-query"
 import { Status } from "@/types"
 import { cn, convertSlug } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -133,12 +133,10 @@ const FormSchema = z.object({
 export default function Edit() {
   const router = useRouter()
 
-  const { refetch: refetchListOfInstitutes } = useGetMeInstitutesListsQuery()
+  const { refetch: refetchListOfInstitutes } = useGetMeInstitutesLists()
   const { instituteId } = useParams()
 
-  const { data, refetch } = useGetInstitutesIdQuery({
-    instituteId,
-  })
+  const { data, refetch } = useGetInstitutesId(instituteId)
 
   // TODO: get lat long
   // const g= navigator.geolocation
@@ -219,9 +217,10 @@ export default function Edit() {
     if (overview) {
       form.setValue("overview", overview)
     }
-  }, [nameValue, overview, form.setValue, form.formState.errors])
+  }, [nameValue, overview, form.setValue, form.formState.errors, form])
 
-  const [editInstitute, { isLoading }] = useEditInstitutesByIdMutation()
+  const { mutateAsync: editInstitute, isPending: isLoading } =
+    useEditInstitutesById()
 
   async function onSubmit(data: z.infer<typeof FormSchema>, event) {
     if (data.overview === '<p dir="auto"></p>') {
@@ -265,7 +264,6 @@ export default function Edit() {
       }
       formData.append("id", instituteId)
       editInstitute({ id: instituteId, body: formData })
-        .unwrap()
         .then((data) => {
           refetch()
           refetchListOfInstitutes()

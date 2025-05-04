@@ -14,7 +14,7 @@ import {
   InputOTPSlot,
   Typography,
 } from "@/components/ui"
-import { useCheckOtpMutation } from "@/lib/store/api/v0/auth"
+import { useCheckOtp } from "@/hooks/react-query"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { MailOpen } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -33,7 +33,7 @@ export const VerifyOtp = () => {
   const searchParams = useSearchParams()
 
   const email = searchParams.get("email")
-  const [checkOtp, { isLoading }] = useCheckOtpMutation()
+  const { mutateAsync: checkOtp, isPending: isLoading } = useCheckOtp()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -44,7 +44,6 @@ export const VerifyOtp = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     checkOtp({ otp: data.otp, email })
-      .unwrap()
       .then((res) => {
         if (res?.status) {
           toast.success(res?.message)

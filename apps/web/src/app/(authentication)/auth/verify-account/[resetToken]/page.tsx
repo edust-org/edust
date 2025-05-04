@@ -2,7 +2,7 @@
 
 // import assets from "@/assets/images"
 import { Typography } from "@/components/ui"
-import { useVerifyEmailByTokenMutation } from "@/lib/store/api/v0/auth"
+import { useVerifyEmailByToken } from "@/hooks/react-query"
 import { useParams, useRouter } from "next/navigation"
 import { BeatLoader } from "react-spinners"
 import { toast } from "sonner"
@@ -12,14 +12,17 @@ import React, { useEffect } from "react"
 export default function VerifyAccount() {
   const params = useParams()
 
-  const [verify, { isLoading, isError }] = useVerifyEmailByTokenMutation()
+  const {
+    mutateAsync: verify,
+    isPending: isLoading,
+    isError,
+  } = useVerifyEmailByToken()
 
   const router = useRouter()
 
   useEffect(() => {
     if (params.resetToken) {
-      verify(params.resetToken)
-        .unwrap()
+      verify(params.resetToken as string)
         .then((res) => {
           if (res?.status) {
             toast.success(res?.message)

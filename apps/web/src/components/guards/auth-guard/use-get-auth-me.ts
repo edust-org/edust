@@ -1,10 +1,10 @@
 "use client"
 
 import { defaultValues } from "@/configs"
+import { useAuthMe } from "@/hooks/react-query"
 import axios from "@/lib/axios"
 import { PermissionValues } from "@/lib/pm"
-import { logOut, setAuthentication } from "@/lib/store/features"
-import { useAppDispatch } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { useQuery } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 import { useSession } from "next-auth/react"
@@ -41,36 +41,31 @@ export interface AuthMeData {
 export function useGetAuthMe() {
   const { status } = useSession()
   const router = useRouter()
-  const dispatch = useAppDispatch()
 
-  const { data, isLoading, isError, error } = useQuery<AuthMeData>({
-    queryKey: ["authMe"],
-    queryFn: async () => {
-      const res = await axios.get(`${defaultValues.backendURL}/api/v0/auth/me`)
-      return res.data?.data
-    },
-    enabled: status === "authenticated",
-    retry: false,
-  })
+  const { logOut, setAuthentication } = useAuthStore()
+
+  const { data, isLoading, isError, error } = useAuthMe(
+    status === "authenticated",
+  )
 
   useEffect(() => {
-    if (data?.organizations) {
-      dispatch(setAuthentication(data.organizations))
+    if (data?.data?.organizations) {
+      setAuthentication(data.data.organizations)
     }
-  }, [data?.organizations, dispatch])
+  }, [data?.data.organizations, setAuthentication])
 
   useEffect(() => {
     if (isError) {
       const statusCode = (error as AxiosError)?.response?.status
       if (statusCode === 401 || statusCode === 403) {
-        dispatch(logOut())
+        logOut()
         router.push("/auth/login")
       }
     }
-  }, [isError, error, dispatch, router])
+  }, [isError, error, setAuthentication, router, logOut])
 
   return {
-    data,
+    data: data?.data || null,
     isLoading,
   }
 }

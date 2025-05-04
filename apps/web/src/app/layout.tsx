@@ -1,5 +1,4 @@
 import { AuthGuard } from "@/components"
-import { ReduxProvider } from "@/lib/store"
 import "@edust/grapesjs/style.css"
 import { Metadata } from "next"
 import { Roboto } from "next/font/google"
@@ -59,13 +58,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${roboto.className} antialiased`} suppressHydrationWarning>
+      <body
+        className={`${roboto.className} antialiased`}
+        suppressHydrationWarning
+      >
         <SessionProvider>
           <ReactQueryProvider>
-            <ReduxProvider>
-              <Toaster richColors />
-              <AuthGuard>{children}</AuthGuard>
-            </ReduxProvider>
+            <Toaster richColors />
+            <AuthGuard>{children}</AuthGuard>
           </ReactQueryProvider>
         </SessionProvider>
       </body>

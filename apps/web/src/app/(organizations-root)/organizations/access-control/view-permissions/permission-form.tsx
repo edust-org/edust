@@ -16,7 +16,7 @@ import {
 } from "@/components/ui"
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { Roles } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AxiosError } from "axios"
@@ -49,7 +49,7 @@ export const PermissionForm: React.FC<PermissionFormProps> = ({
   roleId,
   roleName,
 }) => {
-  const state = useAppSelector((state) => state.authentication)
+  const state = useAuthStore()
 
   const [permissionLists, setPermissionLists] = useState<PermissionItem[]>([])
 

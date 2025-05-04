@@ -1,21 +1,21 @@
 "use client"
 
-import { useGetInstitutesQuery } from "@/lib/store/api/v0/public"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useGetInstitutes } from "@/hooks/react-query"
 
 import FilterInstitute from "./filter-institute"
 import { InstitutesCard } from "./institutes-card"
 import { InstitutesCardSkeleton } from "./institutes-card-skeleton"
 import InstituteNotFound from "./institutes-not-found"
+import { useGetInstitutesStore } from "./store/use-institutes-store"
 
 export default function Institutes() {
-  const stateInstituteFilter = useAppSelector((state) => state.institutes)
+  const stateInstituteFilter = useGetInstitutesStore()
 
   const {
     data: { data } = {},
     isLoading,
     isFetching,
-  } = useGetInstitutesQuery({
+  } = useGetInstitutes({
     search: { name: stateInstituteFilter.name },
     filter: { instituteCategoryId: stateInstituteFilter.instituteCategoryId },
   })

@@ -17,14 +17,14 @@ import {
   PopoverTrigger,
   Skeleton,
 } from "@/components/ui"
-import { useGetBDDistrictsQuery } from "@/lib/store/api/_others/bdapis"
+import { useGetBDDistricts } from "@/hooks/react-query"
 import { cn } from "@/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useMemo } from "react"
 
 export const DistrictField = ({ form }) => {
-  const { data, isLoading } = useGetBDDistrictsQuery()
+  const { data, isLoading } = useGetBDDistricts()
 
   const district = useMemo(() => {
     if (data) {

@@ -12,7 +12,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useRegisterMutation } from "@/lib/store/api/v0/auth"
+import { useRegister } from "@/hooks/react-query"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { MailOpen } from "lucide-react"
 import Link from "next/link"
@@ -59,10 +59,10 @@ export default function Register() {
     setIsPasswordVisible((prev) => !prev)
   }
 
-  const [register, { isLoading }] = useRegisterMutation()
+  const { mutateAsync: register, isPending: isLoading } = useRegister()
+
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     register(data)
-      .unwrap()
       .then((res) => {
         if (res.status) {
           toast.success(res?.message)

@@ -17,14 +17,14 @@ import {
   PopoverTrigger,
   Skeleton,
 } from "@/components/ui"
-import { useGetBDDivisionsQuery } from "@/lib/store/api/_others/bdapis"
+import { useGetBDDivisions } from "@/hooks/react-query"
 import { cn } from "@/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useMemo } from "react"
 
 export const DivisionField = ({ form }) => {
-  const { data, isLoading } = useGetBDDivisionsQuery()
+  const { data, isLoading } = useGetBDDivisions()
 
   const division = useMemo(() => {
     if (data) {

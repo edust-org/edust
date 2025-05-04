@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useAppSelector } from "@/lib/store/hooks"
+import { useThemeStore } from "@/lib/store"
 import { updateThemeOnDocument } from "@/utils"
 
 import { JSX, ReactNode, useEffect } from "react"
@@ -12,7 +12,7 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
-  const theme = useAppSelector((state) => state.theme.theme)
+  const theme = useThemeStore((state) => state.theme)
 
   useEffect(() => {
     updateThemeOnDocument(theme)

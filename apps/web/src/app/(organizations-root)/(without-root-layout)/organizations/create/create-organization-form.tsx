@@ -11,10 +11,7 @@ import {
   Input,
 } from "@/components/ui"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  useCreateOrganizationMutation,
-  useGetOrgListsQuery,
-} from "@/lib/store/api/v0/organizations"
+import { useOrgLists, usePostOrganization } from "@/hooks/react-query"
 import { OrganizationRoles } from "@/types"
 import { convertSlug } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -50,9 +47,10 @@ const FormSchema = z.object({
 export const CreateOrganizationForm = () => {
   const { status, update } = useSession()
 
-  const { refetch } = useGetOrgListsQuery()
+  const { refetch } = useOrgLists()
   const router = useRouter()
-  const [postOrganization, { isLoading }] = useCreateOrganizationMutation()
+  const { mutateAsync: postOrganization, isPending: isLoading } =
+    usePostOrganization()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -82,7 +80,6 @@ export const CreateOrganizationForm = () => {
     const payload = { name: data.name, orgUsername: data.orgUsername }
 
     postOrganization(payload)
-      .unwrap()
       .then((res) => {
         toast.success(res.message)
         if (res.data.role.id) {

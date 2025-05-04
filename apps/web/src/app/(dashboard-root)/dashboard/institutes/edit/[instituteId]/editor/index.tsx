@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/lib/store/hooks"
+import { useThemeStore } from "@/lib/store"
 import RcTiptapEditor from "reactjs-tiptap-editor"
 import {
   Attachment,
@@ -197,7 +197,7 @@ function Editor({
   const [content, setContent] = useState(DEFAULT)
   const refEditor = React.useRef<any>(null)
 
-  const theme = useAppSelector((state) => state.theme.theme)
+  const theme = useThemeStore((state) => state.theme)
   const [disable, setDisable] = useState(false)
 
   const onValueChange = useCallback(

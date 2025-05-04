@@ -17,9 +17,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useTheme } from "@/hooks"
-import { clearAllCaches } from "@/lib/store/api/v0"
-import { logOut } from "@/lib/store/features/authentication"
-import { useAppDispatch } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import {
   BadgeCheck,
   Bell,
@@ -44,12 +42,11 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
   const { setTheme } = useTheme()
-  const dispatch = useAppDispatch()
+  const { logOut } = useAuthStore()
 
   const handleLogout = async () => {
     await signOut()
-    dispatch(logOut())
-    clearAllCaches(dispatch)
+    logOut()
     setTheme("light")
     toast.error("Log out successfully!")
   }

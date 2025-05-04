@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@/components/ui"
 import { Badge } from "@/components/ui/badge"
-import { useGetInstituteByIdQuery } from "@/lib/store/api/v0/public"
+import { useGetInstituteById } from "@/hooks/react-query"
 import { format } from "date-fns"
 import { Terminal } from "lucide-react"
 import Link from "next/link"
@@ -27,7 +27,7 @@ import FilterInstitute from "../filter-institute"
 
 export default function InstituteDetails() {
   const { instituteId } = useParams()
-  const { data, isLoading } = useGetInstituteByIdQuery(instituteId)
+  const { data, isLoading } = useGetInstituteById(instituteId as string)
 
   const formatFoundedDate = (date: string) => {
     if (date) {
@@ -51,11 +51,7 @@ export default function InstituteDetails() {
           <FilterInstitute isDetailsPage />
         </aside>
         <div className="mx-auto max-w-screen-2xl">
-          {isLoading && (
-            <Typography>
-              <Loading.FullScreen />
-            </Typography>
-          )}
+          {isLoading && <Loading.FullScreen />}
           <Card>
             <CardHeader>
               <img

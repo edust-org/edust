@@ -12,7 +12,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useForgotPasswordMutation } from "@/lib/store/api/v0/auth"
+import { useForgotPassword } from "@/hooks/react-query"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CircleHelp } from "lucide-react"
 import Link from "next/link"
@@ -32,7 +32,8 @@ const FormSchema = z.object({
 export const SendOtpUsingEmail = () => {
   const router = useRouter()
 
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation()
+  const { mutateAsync: forgotPassword, isPending: isLoading } =
+    useForgotPassword()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -43,7 +44,6 @@ export const SendOtpUsingEmail = () => {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     forgotPassword(data)
-      .unwrap()
       .then((res) => {
         if (res?.status) {
           toast.success(res?.message)

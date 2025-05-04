@@ -94,7 +94,7 @@ export default async function OrganizationByOrgUsername({
           )}
           <CardFooter className="flex items-center justify-between gap-4">
             <Link
-              href={`/org/${organization.data.orgUsername}/site`}
+              href={`/organizations/profile/${organization.data.orgUsername}/site`}
               target="_blank"
             >
               <Button variant={"link"} size={"icon"}>

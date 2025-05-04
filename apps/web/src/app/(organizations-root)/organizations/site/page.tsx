@@ -10,10 +10,7 @@ import {
   CardTitle,
   Skeleton,
 } from "@/components/ui"
-import {
-  useCreateSiteBuilderMutation,
-  useGetOrgMeQuery,
-} from "@/lib/store/api/v0/organizations"
+import { useGetOrgMe, usePostOrganization } from "@/hooks/react-query"
 import Link from "next/link"
 import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
@@ -23,18 +20,18 @@ import { Layout } from "../components/layout"
 import siteAssets from "./site-assets"
 
 export default function Site() {
-  const { data, isLoading, refetch } = useGetOrgMeQuery()
-  const [createSite, { isLoading: isLoadingSiteCreation }] =
-    useCreateSiteBuilderMutation()
+  const { data, isLoading, refetch } = useGetOrgMe()
+  const { mutateAsync: createSite, isPending: isLoadingSiteCreation } =
+    usePostOrganization()
 
   const handleCreateSite = async () => {
-    const orgId = data.data.id
+    const orgId = data?.data.id
     const body = {
       assets: siteAssets.assets,
       page: { ...siteAssets.page, id: uuidv4() },
     }
     try {
-      const response = await createSite({ orgId, body }).unwrap()
+      const response = await createSite({ orgId, body })
 
       toast.success(response.message)
       refetch()

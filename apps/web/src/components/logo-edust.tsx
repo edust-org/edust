@@ -1,6 +1,6 @@
 "use client"
 
-import { useAppSelector } from "@/lib/store/hooks"
+import { useThemeStore } from "@/lib/store"
 import { detectTheme } from "@/utils"
 
 interface LogoEdustProps {
@@ -16,7 +16,7 @@ export const LogoEdust = ({
   height,
   className,
 }: LogoEdustProps) => {
-  const theme = useAppSelector((state) => state.theme.theme)
+  const theme = useThemeStore((state) => state.theme)
 
   const logos = {
     light: "/images/logo/logo-light.svg",

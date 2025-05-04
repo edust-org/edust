@@ -1,35 +1,28 @@
 "use client"
 
 import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
 import {
-  useDeleteSiteBuilderImagesByIdMutation,
-  useEditSiteBuilderMutation,
-  useGetSiteBuilderImagesQuery,
-  useLazyGetSiteBuilderImagesQuery,
-  useLazyGetSiteBuilderQuery,
-} from "@/lib/store/api/v0/organizations"
-import { Roles } from "@/types"
+  useDeleteSiteBuilderImageById,
+  useEditSiteBuilder,
+  useGetSiteBuilder,
+  useGetSiteBuilderImages,
+} from "@/hooks/react-query"
+import axios from "@/lib/axios"
+import { useAuthStore } from "@/lib/store"
 import EdustGrapesjs, { Configs } from "@edust/grapesjs"
-import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 
 // import getImages from "./get-images"
 import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
 export const BuilderProvider = () => {
-  const [getImages] = useLazyGetSiteBuilderImagesQuery()
-  const [deleteImage] = useDeleteSiteBuilderImagesByIdMutation()
-  const [loadProjectData] = useLazyGetSiteBuilderQuery()
-  const { data } = useSession()
+  const orgId = useAuthStore((state) => state.activeOrgId)
+  const { data: imagesData, refetch: refaceGetImages } =
+    useGetSiteBuilderImages(orgId || "")
+  const { mutateAsync: deleteImage } = useDeleteSiteBuilderImageById()
+  const { data: loadProjectData } = useGetSiteBuilder(orgId || "")
 
-  const orgId = data?.user.organizationRoles
-    ?.filter((role) => role.role === Roles.owner)
-    .map((role) => role.organization.id)[0]
-
-  const { refetch: refaceGetImages } = useGetSiteBuilderImagesQuery(orgId)
-
-  const [saveGsData] = useEditSiteBuilderMutation()
+  const { mutateAsync: saveGsData } = useEditSiteBuilder()
 
   const optionsCustomize = (editorRef) => ({
     assetManager: {
@@ -81,68 +74,59 @@ export const BuilderProvider = () => {
 
   const configs: Configs = {
     async handleStore(assets, page) {
-      try {
-        const response = await saveGsData({
-          orgId,
-          body: {
-            assets: assets,
-            page,
-          },
-        })
-        toast.success(response?.data?.message)
-      } catch (error) {
-        console.error(error)
+      if (orgId) {
+        try {
+          const response = await saveGsData({
+            orgId,
+            body: {
+              assets: assets,
+              page,
+            },
+          })
+          toast.success(response?.data?.message)
+        } catch (error) {
+          console.error(error)
+        }
       }
     },
     async handleSave(editor) {
       const { page, assets } = handleGetAssetsWithPage(editor)
-      saveGsData({
-        orgId,
-        body: {
-          assets: assets,
-          page,
-        },
-      })
-        .unwrap()
-        .then((res) => {
-          if (res?.status) {
-            toast.success(res?.message)
-          }
-        })
-        .catch((error) => {
-          toast.error(error?.data?.message)
-        })
+      if (orgId) {
+        try {
+          const response = await saveGsData({
+            orgId,
+            body: {
+              assets: assets,
+              page,
+            },
+          })
+          toast.success(response?.data?.message)
+        } catch (error) {
+          console.error(error)
+        }
+      }
     },
     async handleLoadProjectData() {
-      try {
-        const data = await loadProjectData(orgId).unwrap()
-        return data?.data?.assets
-      } catch (error) {
-        console.error(error)
-        return {}
-      }
+      const data = loadProjectData
+      return data?.data?.assets || {}
     },
     async handleLoadAssetImages() {
-      try {
-        const data = await getImages(orgId)
-
-        const images = data?.data?.items?.map((item) => ({
+      return (
+        imagesData?.data?.items?.map((item) => ({
           id: item.id,
           src: item.src,
-        }))
-        return images
-      } catch (error) {
-        console.error(error)
-        return []
-      }
+        })) || []
+      )
     },
     async handleRemoveAssetImage(id) {
-      try {
-        const res = await deleteImage({ imageId: id, orgId })
-        toast.success(res?.data?.message)
-        await refaceGetImages()
-      } catch (error) {
-        console.error(error)
+      if (orgId) {
+        try {
+          const res = await deleteImage({ imageId: id, orgId })
+          toast.success(res?.data?.message)
+          await refaceGetImages()
+        } catch (error) {
+          console.error(error)
+        }
       }
     },
   }

@@ -15,14 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui"
-import { useGetInstitutesCategoriesQuery } from "@/lib/store/api/v0/public"
-import {
-  institutesFiltering,
-  resetInstitutesFiltering,
-} from "@/lib/store/features"
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks"
+import { useGetInstitutesCategories } from "@/hooks/react-query"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { IoAddOutline } from "react-icons/io5"
@@ -30,21 +26,20 @@ import { z } from "zod"
 
 import React from "react"
 
+import { useGetInstitutesStore } from "./store/use-institutes-store"
+
 const FormSchema = z.object({
   name: z.string(),
   instituteCategoryId: z.string(),
 })
 const FilterInstitute = ({ isDetailsPage = false }) => {
-  const dispatch = useAppDispatch()
-  const stateInstituteFilter = useAppSelector((state) => state.institutes)
+  const stateInstituteFilter = useGetInstitutesStore()
 
-  const isAuthenticated = useAppSelector(
-    (state) => state.authentication.isAuthenticated,
-  )
+  const isAuthenticated = useSession().status === "authenticated"
 
   const router = useRouter()
 
-  const { data } = useGetInstitutesCategoriesQuery({ limit: 500 })
+  const { data } = useGetInstitutesCategories({ limit: 500 })
   const categoriesData = data?.data?.items || []
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -60,12 +55,11 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
     })
 
     if (hasValue) {
-      dispatch(
-        institutesFiltering({
-          name: values.name,
-          instituteCategoryId: values.instituteCategoryId,
-        }),
-      )
+      stateInstituteFilter.institutesFiltering({
+        name: values.name,
+        instituteCategoryId: values.instituteCategoryId,
+      })
+
       if (isDetailsPage) {
         router.push("/institutes")
       }
@@ -239,7 +233,7 @@ const FilterInstitute = ({ isDetailsPage = false }) => {
                   form.setValue("name", "")
                   form.setValue("instituteCategoryId", "")
 
-                  dispatch(resetInstitutesFiltering())
+                  stateInstituteFilter.resetInstitutesFiltering()
                 }}
               >
                 Clear

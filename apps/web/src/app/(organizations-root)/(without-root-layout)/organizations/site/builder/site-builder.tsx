@@ -1,15 +1,15 @@
 "use client"
 
+import { Typography } from "@/components/ui"
 import {
-  useAddSitePageMutation,
-  useDeleteSitePageMutation,
-  useEditSiteBuilderMutation,
-  useUpdateSitePageNameMutation,
-} from "@/lib/store/api/v0/organizations"
-import { Roles } from "@/types"
+  useDeleteSitePage,
+  useEditSiteBuilder,
+  usePostSitePage,
+  useUpdateSitePageName,
+} from "@/hooks/react-query"
+import { useAuthStore } from "@/lib/store"
 import { convertSlug } from "@/utils"
 import { ContextProviders, Editor } from "@edust/grapesjs"
-import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
@@ -17,16 +17,20 @@ import { BuilderProvider } from "./builder-provider"
 import { handleGetAssetsWithPage } from "./handle-get-assets-with-page"
 
 function SiteBuilder() {
-  const { data } = useSession()
+  const orgId = useAuthStore((state) => state.activeOrgId)
 
-  const orgId = data?.user.organizationRoles
-    ?.filter((role) => role.role === Roles.owner)
-    .map((role) => role.organization.id)[0]
+  const { mutate: saveNewPage } = usePostSitePage()
+  const { mutate: saveGsData } = useEditSiteBuilder()
+  const { mutate: deletePageByName } = useDeleteSitePage()
+  const { mutate: editPageName } = useUpdateSitePageName()
 
-  const [saveNewPage] = useAddSitePageMutation()
-  const [saveGsData] = useEditSiteBuilderMutation()
-  const [deletePageByName] = useDeleteSitePageMutation()
-  const [editPageName] = useUpdateSitePageNameMutation()
+  if (!orgId) {
+    return (
+      <Typography variant="h2" className="text-destructive">
+        orgId not found!
+      </Typography>
+    )
+  }
 
   return (
     <>
@@ -54,7 +58,7 @@ function SiteBuilder() {
             const id = uuidv4()
 
             try {
-              await saveNewPage({
+              saveNewPage({
                 orgId,
                 body: { id, pageName, html, css },
               })
@@ -69,13 +73,13 @@ function SiteBuilder() {
               const { page: htmlPages, assets } =
                 handleGetAssetsWithPage(editor)
               try {
-                await saveGsData({
+                saveGsData({
                   orgId,
                   body: {
                     assets: assets,
                     page: htmlPages,
                   },
-                }).unwrap()
+                })
 
                 toast.success("successfully new page created!")
                 return true
@@ -92,20 +96,20 @@ function SiteBuilder() {
             const pageId = page?.id
 
             try {
-              await deletePageByName({ orgId, pageId }).unwrap()
+              deletePageByName({ orgId, pageId })
 
               removePage(page)
 
               const { page: htmlPages, assets } =
                 handleGetAssetsWithPage(editor)
               try {
-                await saveGsData({
+                saveGsData({
                   orgId,
                   body: {
                     assets: assets,
                     page: htmlPages,
                   },
-                }).unwrap()
+                })
 
                 toast.success("successfully page deleted!")
                 return true
@@ -139,22 +143,22 @@ function SiteBuilder() {
             page.set("name", filteredPageName)
 
             try {
-              await editPageName({
+              editPageName({
                 orgId,
                 pageId,
                 pageName: filteredPageName,
-              }).unwrap()
+              })
 
               const { page: htmlPages, assets } =
                 handleGetAssetsWithPage(editor)
               try {
-                await saveGsData({
+                saveGsData({
                   orgId,
                   body: {
                     assets: assets,
                     page: htmlPages,
                   },
-                }).unwrap()
+                })
 
                 toast.success("successfully new page created!")
                 return true

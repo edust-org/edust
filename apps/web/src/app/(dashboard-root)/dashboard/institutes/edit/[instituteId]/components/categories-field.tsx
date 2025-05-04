@@ -18,7 +18,7 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
-import { useGetInstitutesCategoriesQuery } from "@/lib/store/api/v0/public"
+import { useGetInstitutesCategories } from "@/hooks/react-query"
 import { cn } from "@/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 import Link from "next/link"
@@ -63,7 +63,7 @@ export const CategoriesField = ({ form }) => {
     : { name: form.getValues("instituteCategory") }
 
   const { data: categoriesData, isFetching: isCategoriesLoading } =
-    useGetInstitutesCategoriesQuery(query)
+    useGetInstitutesCategories(query)
 
   const categories =
     categoriesData?.data?.items?.map((category) => ({

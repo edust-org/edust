@@ -1,16 +1,13 @@
 "use client"
 
-import { setTheme } from "@/lib/store/features"
-import { AppDispatch, RootState } from "@/lib/store/store"
+import { useThemeStore } from "@/lib/store"
 import { Theme } from "@/types"
 import { updateThemeOnDocument } from "@/utils"
-import { useDispatch, useSelector } from "react-redux"
 
 import { useCallback, useEffect } from "react"
 
 export const useTheme = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const theme = useSelector((state: RootState) => state.theme.theme)
+  const { setTheme, theme } = useThemeStore((state) => state)
 
   useEffect(() => {
     updateThemeOnDocument(theme)
@@ -18,9 +15,9 @@ export const useTheme = () => {
 
   const changeTheme = useCallback(
     (newTheme: Theme) => {
-      dispatch(setTheme(newTheme))
+      setTheme(newTheme)
     },
-    [dispatch],
+    [setTheme],
   )
 
   return { theme, setTheme: changeTheme }

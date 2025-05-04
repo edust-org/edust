@@ -1,13 +1,11 @@
 "use client"
 
 import { Button, Card, Typography } from "@/components/ui"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 const InstituteNotFound = () => {
-  const isAuthenticated = useAppSelector(
-    (state) => state.authentication.isAuthenticated,
-  )
+  const isAuthenticated = useSession().status === "authenticated"
 
   const router = useRouter()
   return (

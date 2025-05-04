@@ -56,7 +56,7 @@
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-spinners": "^0.17.0",
-    "reactjs-tiptap-editor": "^0.3.1",
+    "reactjs-tiptap-editor": "^0.3.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "slugify": "^1.6.6",
@@ -65,7 +65,8 @@
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.1",
     "uuid": "^11.1.0",
-    "zod": "^3.24.3"
+    "zod": "^3.24.3",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@edust/eslint-config": "workspace:*",

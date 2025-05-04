@@ -8,7 +8,7 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 
 import React from "react"
 
@@ -23,7 +23,7 @@ export const UserLists = ({
   roleId: string
   roleName: string
 }) => {
-  const state = useAppSelector((state) => state.authentication)
+  const state = useAuthStore()
   const { data, isLoading } = useGetUsersWithRole(state.activeOrgId, roleId)
 
   const removeUserRole = useRemoveUser(state.activeOrgId)

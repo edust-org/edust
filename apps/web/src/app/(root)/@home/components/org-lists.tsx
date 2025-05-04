@@ -7,12 +7,12 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
-import { useGetOrgListsQuery } from "@/lib/store/api/v0/organizations"
+import { useGetOrgLists } from "@/hooks/react-query"
 import { format } from "date-fns"
 import Link from "next/link"
 
 export const OrgLists = () => {
-  const { data, isLoading } = useGetOrgListsQuery()
+  const { data, isLoading } = useGetOrgLists()
 
   return (
     <div className="container mx-auto grid max-w-lg grid-cols-1 items-center justify-center gap-6">

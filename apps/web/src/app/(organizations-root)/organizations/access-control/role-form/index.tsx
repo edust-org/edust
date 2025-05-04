@@ -11,7 +11,7 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import { asOptionalField } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
@@ -62,9 +62,7 @@ export const RoleForm = ({
     },
   })
 
-  const activeOrgId = useAppSelector(
-    (state) => state.authentication.activeOrgId,
-  )
+  const activeOrgId = useAuthStore((state) => state.activeOrgId)
   const { mutate: createRole, isPending } = useRoleCreate(activeOrgId)
   const { mutate: editRole, isPending: isEditingPending } = useEditRoleById(
     activeOrgId,

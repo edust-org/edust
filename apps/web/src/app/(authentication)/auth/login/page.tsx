@@ -12,9 +12,9 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useLazyAuthMeQuery } from "@/lib/store/api/v0/auth"
-import { Organization, logOut, setAuthentication } from "@/lib/store/features"
-import { useAppDispatch } from "@/lib/store/hooks"
+import { useAuthMe } from "@/hooks/react-query"
+import { AuthMeResponse } from "@/lib/api/v0/auth"
+import { useAuthStore } from "@/lib/store"
 import { AccountType } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
@@ -44,8 +44,10 @@ export default function Login() {
   const router = useRouter()
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [getAuthMe] = useLazyAuthMeQuery()
-  const dispatch = useAppDispatch()
+
+  const { data: authMeData, trigger } = useAuthMe(false)
+
+  const { setAuthentication, logOut } = useAuthStore()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -71,24 +73,25 @@ export default function Login() {
     }
 
     if (result?.ok) {
+      trigger()
       try {
-        const data = await getAuthMe().unwrap()
+        const org: AuthMeResponse["data"]["organizations"] =
+          authMeData?.data?.organizations?.map(
+            (org: AuthMeResponse["data"]["organizations"][0]) => ({
+              id: org.id,
+              name: org.name,
+              orgUsername: org.orgUsername,
+              profilePic: org.profilePic,
+              roleId: org.roleId,
+              role: org.role,
+              rolePermissions: org.rolePermissions,
+            }),
+          ) || []
 
-        const org: Organization[] =
-          data?.data?.organizations?.map((org: Organization) => ({
-            id: org.id,
-            name: org.name,
-            orgUsername: org.orgUsername,
-            profilePic: org.profilePic,
-            roleId: org.roleId,
-            role: org.role,
-            rolePermissions: org.rolePermissions,
-          })) || []
-
-        dispatch(setAuthentication(org))
+        setAuthentication(org)
         router.push("/")
       } catch (error) {
-        dispatch(logOut())
+        logOut()
         console.error(error)
       }
     }

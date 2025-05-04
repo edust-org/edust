@@ -1,5 +1,5 @@
 export * from "./as-optional-field"
 export * from "./cn"
+export * from "./convert-slug"
 export * from "./detect-theme"
 export * from "./update-theme-on-document"
-export * from "./convert-slug"

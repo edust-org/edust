@@ -8,8 +8,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { permissions } from "@/lib/pm"
-import { selectActiveOrg } from "@/lib/store/features"
-import { useAppSelector } from "@/lib/store/hooks"
+import { useAuthStore } from "@/lib/store"
 import {
   AudioWaveform,
   Command,
@@ -113,8 +112,8 @@ const navMain = [
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const state = useAppSelector((state) => state.authentication)
-  const activeOrg = selectActiveOrg(state)
+  const state = useAuthStore()
+  const activeOrg = useAuthStore((state) => state.selectActiveOrg())
 
   const session = useSession()
   const user = session.data?.user
