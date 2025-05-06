@@ -58,9 +58,9 @@ export default function InstitutesLists() {
                   <span
                     className={cn(
                       "rounded-full px-2 py-1 text-xs",
-                      institute.status === Status.PUBLISHED
+                      institute.status === Status.published
                         ? "bg-green-300"
-                        : institute.status === Status.DRAFT
+                        : institute.status === Status.draft
                           ? "bg-slate-300"
                           : "bg-none",
                     )}

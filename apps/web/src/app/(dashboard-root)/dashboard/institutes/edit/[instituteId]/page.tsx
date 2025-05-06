@@ -256,18 +256,18 @@ export default function Edit() {
         }
       })
 
-      if (formAction === Status.PUBLISHED) {
-        formData.append("status", Status.PUBLISHED)
+      if (formAction === Status.published) {
+        formData.append("status", Status.published)
       }
-      if (formAction === Status.DRAFT) {
-        formData.append("status", Status.DRAFT)
+      if (formAction === Status.draft) {
+        formData.append("status", Status.draft)
       }
       formData.append("id", instituteId)
       editInstitute({ id: instituteId, body: formData })
         .then((data) => {
           refetch()
           refetchListOfInstitutes()
-          if (data.data.status === Status.PUBLISHED) {
+          if (data.data.status === Status.published) {
             form.reset()
             router.push("/dashboard/institutes")
           }
@@ -926,10 +926,10 @@ export default function Edit() {
                   <Button
                     type="submit"
                     name="action"
-                    value={Status.PUBLISHED}
+                    value={Status.published}
                     disabled={isLoading}
                   >
-                    {data?.data?.status === Status.PUBLISHED
+                    {data?.data?.status === Status.published
                       ? "Save"
                       : "Create and Publish"}
                   </Button>
@@ -937,7 +937,7 @@ export default function Edit() {
                     variant="secondary"
                     type="submit"
                     name="action"
-                    value={Status.DRAFT}
+                    value={Status.draft}
                     disabled={isLoading}
                   >
                     Save as draft

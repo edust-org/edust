@@ -9,7 +9,8 @@ import ReactQueryProvider from "./react-query-provider"
 import SessionProvider from "./session-provider"
 
 const roboto = Roboto({
-  weight: "400",
+  weight: ["100", "300", "400", "500", "700", "900"],
+  style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
 })

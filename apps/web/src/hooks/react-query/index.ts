@@ -1,5 +1,6 @@
 export * from "./_others"
 export * from "./auth"
+export * from "./notifications"
 export * from "./organizations"
 export * from "./institutes"
 export * from "./public"

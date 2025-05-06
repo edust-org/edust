@@ -13,6 +13,7 @@ import Link from "next/link"
 import { Feedback } from "./feedback"
 import { NavMobile } from "./mobile"
 import { NavbarRightMenus } from "./navbar-right-menus"
+import { Notification } from "./notification"
 
 interface RouteProps {
   href: string
@@ -67,8 +68,12 @@ export const Navbar = () => {
           <div className="hidden gap-2 md:flex">
             <Feedback />
 
-            {status === "loading" ||
-              (status == "unauthenticated" && <ThemeSwitch />)}
+            {status === "loading" || status == "unauthenticated" ? (
+              <ThemeSwitch />
+            ) : (
+              <Notification />
+            )}
+
             {status === "loading" ? (
               <Skeleton className="h-8 w-12 rounded-full"></Skeleton>
             ) : isAuthenticated ? (

@@ -223,8 +223,8 @@ export default function Create() {
         }
       })
 
-      if (formAction === Status.PUBLISHED) {
-        formData.append("status", Status.PUBLISHED)
+      if (formAction === Status.published) {
+        formData.append("status", Status.published)
       }
 
       postInstitute(formData)
@@ -882,7 +882,7 @@ export default function Create() {
                   <Button
                     type="submit"
                     name="action"
-                    value={Status.PUBLISHED}
+                    value={Status.published}
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -895,7 +895,7 @@ export default function Create() {
                     variant="secondary"
                     type="submit"
                     name="action"
-                    value={Status.DRAFT}
+                    value={Status.draft}
                     disabled={isLoading}
                   >
                     {isLoading ? <BarLoader color="#fff" /> : "Save as draft"}
