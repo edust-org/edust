@@ -67,7 +67,8 @@ export const Navbar = () => {
           <div className="hidden gap-2 md:flex">
             <Feedback />
 
-            <ThemeSwitch />
+            {status === "loading" ||
+              (status == "unauthenticated" && <ThemeSwitch />)}
             {status === "loading" ? (
               <Skeleton className="h-8 w-12 rounded-full"></Skeleton>
             ) : isAuthenticated ? (

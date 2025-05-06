@@ -85,7 +85,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const socket = getSocket({ query: { userId: user.id } })
 
     socket.on("connect", () => {
-      console.log("Socket connected:", socket.id)
       socket.on(socketEvents.user.online, (users: { userId: string }[]) => {
         const onlineUserIds = new Set(users.map((user) => user.userId))
         set({ onlineUsers: onlineUserIds })

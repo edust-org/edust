@@ -11,7 +11,6 @@ export const getSocket = (
       withCredentials: true,
       ...options,
     })
-    console.log("New socket instance created")
   }
   return socket
 }

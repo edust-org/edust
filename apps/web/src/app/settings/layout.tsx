@@ -13,6 +13,10 @@ const sidebarNavItems = [
     title: "Profile",
     href: "/settings/profile",
   },
+  {
+    title: "Appearance",
+    href: "/settings/appearance",
+  },
 ]
 export default function SettingsLayout({ children }: SettingsLayoutProps) {
   return (
