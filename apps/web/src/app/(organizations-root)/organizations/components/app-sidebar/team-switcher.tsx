@@ -15,14 +15,18 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useAuthStore } from "@/lib/store"
+import { authService } from "@/services"
+import { useAuthStore } from "@/store"
 import { Building2, ChevronsUpDown } from "lucide-react"
 
 import * as React from "react"
 
 export function TeamSwitcher() {
   const state = useAuthStore()
-  const activeOrg = useAuthStore((state) => state.selectActiveOrg())
+  const activeOrg = authService.findActiveOrganization(
+    state.organizations,
+    state.activeOrgId,
+  )
   const { isMobile } = useSidebar()
 
   return (

@@ -21,7 +21,7 @@ import {
   TabsTrigger,
   Typography,
 } from "@/components/ui"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import { Roles } from "@/types"
 import { Edit } from "lucide-react"
 import Link from "next/link"

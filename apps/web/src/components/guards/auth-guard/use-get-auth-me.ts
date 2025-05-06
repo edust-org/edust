@@ -1,11 +1,8 @@
 "use client"
 
-import { defaultValues } from "@/configs"
 import { useAuthMe } from "@/hooks/react-query"
-import axios from "@/lib/axios"
 import { PermissionValues } from "@/lib/pm"
-import { useAuthStore } from "@/lib/store"
-import { useQuery } from "@tanstack/react-query"
+import { useAuthStore } from "@/store"
 import { AxiosError } from "axios"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
@@ -42,17 +39,19 @@ export function useGetAuthMe() {
   const { status } = useSession()
   const router = useRouter()
 
-  const { logOut, setAuthentication } = useAuthStore()
+  const { logOut, setAuthMe } = useAuthStore()
 
   const { data, isLoading, isError, error } = useAuthMe(
     status === "authenticated",
   )
 
+  const user = data?.data || null
+
   useEffect(() => {
-    if (data?.data?.organizations) {
-      setAuthentication(data.data.organizations)
+    if (user) {
+      setAuthMe(user)
     }
-  }, [data?.data.organizations, setAuthentication])
+  }, [user, setAuthMe])
 
   useEffect(() => {
     if (isError) {
@@ -62,7 +61,7 @@ export function useGetAuthMe() {
         router.push("/auth/login")
       }
     }
-  }, [isError, error, setAuthentication, router, logOut])
+  }, [isError, error, setAuthMe, router, logOut])
 
   return {
     data: data?.data || null,

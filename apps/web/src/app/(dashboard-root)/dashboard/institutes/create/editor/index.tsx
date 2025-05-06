@@ -1,6 +1,6 @@
 "use client"
 
-import { useThemeStore } from "@/lib/store"
+import { useThemeStore } from "@/store"
 import RcTiptapEditor, { BaseKit } from "reactjs-tiptap-editor"
 import { Blockquote } from "reactjs-tiptap-editor/blockquote"
 import { Bold } from "reactjs-tiptap-editor/bold"

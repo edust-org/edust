@@ -1,7 +1,6 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-
-import { AuthMeResponse } from "./auth-type"
+import { ApiResponse, AuthMe } from "@/types"
 
 const BASE_URL = `${defaultValues.apiV0URL}/auth`
 
@@ -10,7 +9,7 @@ export const login = async (body: any): Promise<any> => {
   return response.data
 }
 
-export const getAuthMe = async (): Promise<AuthMeResponse> => {
+export const getAuthMe = async (): Promise<ApiResponse<AuthMe>> => {
   const response = await axios.get(`${BASE_URL}/me`)
   return response.data
 }
@@ -39,5 +38,3 @@ export const resetPassword = async (body: any): Promise<any> => {
   const response = await axios.post(`${BASE_URL}/reset-password`, body)
   return response.data
 }
-
-export * from "./auth-type"

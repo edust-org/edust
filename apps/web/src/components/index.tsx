@@ -1,3 +1,4 @@
+export * from "./avatar-with-status"
 export * from "./guards"
 export * from "./coming-soon"
 export * from "./full-spinner"

@@ -16,7 +16,7 @@ import {
 } from "@/components/ui"
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import { Roles } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AxiosError } from "axios"

@@ -11,7 +11,7 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import { asOptionalField } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"

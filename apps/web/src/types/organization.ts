@@ -1,15 +1,12 @@
-import { Roles } from "./roles"
+import { PermissionValues } from "@/lib/pm"
+import { Roles } from "@/types"
 
-export interface Organization {
+export type Organization = {
   id: string
   name: string
   orgUsername: string
-  createdAt: Date
-  updatedAt: Date
-}
-
-export interface OrganizationRoles {
-  id: string
-  role: Roles
-  organization: Organization
+  profilePic: string | null
+  roleId: string
+  role: Roles.owner | string
+  rolePermissions: PermissionValues[]
 }

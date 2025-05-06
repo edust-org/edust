@@ -1,4 +1,4 @@
-import { useThemeStore } from "@/lib/store"
+import { useThemeStore } from "@/store"
 import RcTiptapEditor from "reactjs-tiptap-editor"
 import {
   Attachment,

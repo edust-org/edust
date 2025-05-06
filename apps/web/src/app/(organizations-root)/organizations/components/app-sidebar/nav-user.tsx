@@ -1,5 +1,6 @@
 "use client"
 
+import { AvatarWithStatus } from "@/components"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -17,16 +18,8 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useTheme } from "@/hooks"
-import { useAuthStore } from "@/lib/store"
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LayoutDashboard,
-  LogOut,
-  Sparkles,
-} from "lucide-react"
+import { useAuthStore } from "@/store"
+import { ChevronsUpDown, LayoutDashboard, LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { toast } from "sonner"
@@ -35,8 +28,10 @@ export function NavUser({
   user,
 }: {
   user: {
+    id: string
     name: string
     email: string
+    isActive: boolean
     avatar: string
   }
 }) {
@@ -59,10 +54,13 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
+              {user && (
+                <AvatarWithStatus
+                  src={user.avatar}
+                  alt={user.name}
+                  status={user.isActive ? "online" : "offline"}
+                />
+              )}
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>
                 <span className="truncate text-xs">{user.email}</span>

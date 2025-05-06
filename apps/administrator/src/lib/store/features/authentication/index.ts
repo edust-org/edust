@@ -20,7 +20,7 @@ export const authentication = createSlice({
   name: "authentication",
   initialState,
   reducers: {
-    setAuthentication(state, action: PayloadAction<AuthenticationState>) {
+    setAuthMe(state, action: PayloadAction<AuthenticationState>) {
       state.isAuthenticated = action.payload.isAuthenticated
       state.user = action.payload.user
 
@@ -43,6 +43,6 @@ export const authentication = createSlice({
   },
 })
 
-export const { setAuthentication, logOut } = authentication.actions
+export const { setAuthMe, logOut } = authentication.actions
 
 export default authentication.reducer

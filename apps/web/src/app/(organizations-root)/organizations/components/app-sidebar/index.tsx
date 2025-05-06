@@ -8,7 +8,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { permissions } from "@/lib/pm"
-import { useAuthStore } from "@/lib/store"
+import { authService } from "@/services"
+import { useAuthStore } from "@/store"
 import {
   AudioWaveform,
   Command,
@@ -22,7 +23,6 @@ import {
   Settings2,
   UserRoundCog,
 } from "lucide-react"
-import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 
 import * as React from "react"
@@ -113,10 +113,11 @@ const navMain = [
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const state = useAuthStore()
-  const activeOrg = useAuthStore((state) => state.selectActiveOrg())
 
-  const session = useSession()
-  const user = session.data?.user
+  const activeOrg = authService.findActiveOrganization(
+    state.organizations,
+    state.activeOrgId,
+  )
 
   const pathname = usePathname()
 
@@ -144,12 +145,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
-        {user && (
+        {state.user && (
           <NavUser
             user={{
-              name: user?.name,
-              avatar: user?.profilePic || "/images/avatar.png",
-              email: user?.email,
+              id: state.user.id,
+              isActive: state.onlineUsers.has(state.user.id),
+              name: state.user?.name,
+              avatar: state.user?.profilePic || "/images/avatar.png",
+              email: state.user?.email,
             }}
           />
         )}

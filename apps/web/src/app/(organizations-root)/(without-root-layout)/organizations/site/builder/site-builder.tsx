@@ -7,7 +7,7 @@ import {
   usePostSitePage,
   useUpdateSitePageName,
 } from "@/hooks/react-query"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import { convertSlug } from "@/utils"
 import { ContextProviders, Editor } from "@edust/grapesjs"
 import { toast } from "sonner"

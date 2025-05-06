@@ -1,5 +1,5 @@
 import api from "@/lib/api"
-import { AuthMeResponse } from "@/lib/api/v0/auth"
+import { ApiResponse, AuthMe } from "@/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 import { useState } from "react"
@@ -17,7 +17,7 @@ export const useRegister = () =>
 export const useAuthMe = (isEnabled = true) => {
   const [enabled, setEnabled] = useState(isEnabled)
 
-  const query = useQuery<AuthMeResponse>({
+  const query = useQuery<ApiResponse<AuthMe>>({
     queryKey: ["authMe"],
     queryFn: api.v0.getAuthMe,
     enabled,

@@ -13,9 +13,8 @@ import {
   Typography,
 } from "@/components/ui"
 import { useAuthMe } from "@/hooks/react-query"
-import { AuthMeResponse } from "@/lib/api/v0/auth"
-import { useAuthStore } from "@/lib/store"
-import { AccountType } from "@/types"
+import { useAuthStore } from "@/store"
+import { AccountType, AuthMe } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
@@ -47,7 +46,7 @@ export default function Login() {
 
   const { data: authMeData, trigger } = useAuthMe(false)
 
-  const { setAuthentication, logOut } = useAuthStore()
+  const { setAuthMe, logOut } = useAuthStore()
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -69,31 +68,15 @@ export default function Login() {
       redirect: false,
     })
     if (result?.error) {
+      logOut()
       toast.error(result?.error)
     }
 
     if (result?.ok) {
       trigger()
-      try {
-        const org: AuthMeResponse["data"]["organizations"] =
-          authMeData?.data?.organizations?.map(
-            (org: AuthMeResponse["data"]["organizations"][0]) => ({
-              id: org.id,
-              name: org.name,
-              orgUsername: org.orgUsername,
-              profilePic: org.profilePic,
-              roleId: org.roleId,
-              role: org.role,
-              rolePermissions: org.rolePermissions,
-            }),
-          ) || []
-
-        setAuthentication(org)
-        router.push("/")
-      } catch (error) {
-        logOut()
-        console.error(error)
-      }
+      const user = authMeData?.data || null
+      setAuthMe(user)
+      router.push("/")
     }
     setIsLoading(false)
   }

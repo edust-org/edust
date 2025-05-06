@@ -8,7 +8,7 @@ import {
   useGetSiteBuilderImages,
 } from "@/hooks/react-query"
 import axios from "@/lib/axios"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import EdustGrapesjs, { Configs } from "@edust/grapesjs"
 import { toast } from "sonner"
 

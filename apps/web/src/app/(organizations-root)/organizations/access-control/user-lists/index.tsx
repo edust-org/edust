@@ -1,3 +1,4 @@
+import { AvatarWithStatus } from "@/components"
 import {
   Badge,
   Button,
@@ -8,7 +9,7 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 
 import React from "react"
 
@@ -24,6 +25,8 @@ export const UserLists = ({
   roleName: string
 }) => {
   const state = useAuthStore()
+
+  const onlineUsers = useAuthStore((state) => state.onlineUsers)
   const { data, isLoading } = useGetUsersWithRole(state.activeOrgId, roleId)
 
   const removeUserRole = useRemoveUser(state.activeOrgId)
@@ -64,24 +67,31 @@ export const UserLists = ({
               </div>
             ))}
 
-          {data?.map((user) => (
-            <div
-              key={user.id}
-              className="space-y-2 rounded-lg border p-3 shadow-sm"
-            >
-              <div className="flex items-start gap-2">
-                <Typography variant="h4">{user.name}</Typography>
-                <Badge>{user.roleName}</Badge>
-              </div>
-              <Button
-                variant={"destructive"}
-                onClick={() => handleRemove(user.id, user.assignId)}
-                disabled={removeUserRole.isPending}
+          {data?.map((user) => {
+            return (
+              <div
+                key={user.id}
+                className="space-y-2 rounded-lg border p-3 shadow-sm"
               >
-                Remove
-              </Button>
-            </div>
-          ))}
+                <div className="flex items-start gap-2">
+                  <AvatarWithStatus
+                    src={user.profilePic}
+                    alt={user.name}
+                    status={onlineUsers.has(user.id) ? "online" : "offline"}
+                  />
+                  <Typography variant="h4">{user.name}</Typography>
+                  <Badge>{user.roleName}</Badge>
+                </div>
+                <Button
+                  variant={"destructive"}
+                  onClick={() => handleRemove(user.id, user.assignId)}
+                  disabled={removeUserRole.isPending}
+                >
+                  Remove
+                </Button>
+              </div>
+            )
+          })}
         </CardContent>
       </Card>
     </div>

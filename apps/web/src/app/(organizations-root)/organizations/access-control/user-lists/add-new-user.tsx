@@ -1,3 +1,4 @@
+import { AvatarWithStatus } from "@/components"
 import {
   Badge,
   Button,
@@ -10,6 +11,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
+import { useAuthStore } from "@/store"
 import { useDebounceValue } from "usehooks-ts"
 
 import { useGetUsers } from "./use-get-users"
@@ -30,6 +32,7 @@ export const AddNewUser = ({
 
   const assignRole = usePostUserAssignRole(activeOrgId)
 
+  const onlineUsers = useAuthStore((state) => state.onlineUsers)
   return (
     <div>
       <Dialog>
@@ -57,15 +60,22 @@ export const AddNewUser = ({
               <p>Loading...</p>
             ) : (
               data?.map((user) => {
+                const isOnline = onlineUsers.has(user.id)
                 return (
                   <div
                     className="space-y-4 rounded-lg border p-4"
                     key={user.id}
                   >
-                    <Typography variant="h4" className="mb-1">
-                      {user.name}
-                    </Typography>
-
+                    <div className="flex items-center gap-2">
+                      <AvatarWithStatus
+                        src={user.profilePic}
+                        alt={user.name}
+                        status={isOnline ? "online" : "offline"}
+                      />
+                      <Typography variant="h4" className="mb-1">
+                        {user.name}
+                      </Typography>
+                    </div>
                     <div>
                       {user.roles?.map((r) => (
                         <Badge key={r.id} className="me-1">

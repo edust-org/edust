@@ -1,6 +1,6 @@
 "use client"
 
-import { useThemeStore } from "@/lib/store"
+import { useThemeStore } from "@/store"
 import { updateThemeOnDocument } from "@/utils"
 
 import { JSX, ReactNode, useEffect } from "react"

@@ -1,9 +1,7 @@
 "use client"
 
+import { AvatarWithStatus } from "@/components"
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +14,7 @@ import {
   Skeleton,
 } from "@/components/ui"
 import { useTheme } from "@/hooks"
-import { useAuthStore } from "@/lib/store"
+import { useAuthStore } from "@/store"
 import { LayoutDashboard, LogOut, Plus, School, Settings } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
@@ -30,6 +28,7 @@ export const NavbarRightMenus = () => {
   const state = useAuthStore()
   const { logOut } = useAuthStore()
 
+  const onlineUsers = useAuthStore((state) => state.onlineUsers)
   const { data, status } = useSession()
   const user = data?.user
 
@@ -50,17 +49,13 @@ export const NavbarRightMenus = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-8 w-8 border">
-              {user?.profilePic ? (
-                <AvatarImage
-                  src={user?.profilePic}
-                  alt="user profile"
-                  referrerPolicy={"no-referrer"}
-                />
-              ) : (
-                <AvatarFallback>SN</AvatarFallback>
-              )}
-            </Avatar>
+            {user && (
+              <AvatarWithStatus
+                src={user.profilePic}
+                alt={user.name}
+                status={onlineUsers.has(user.id) ? "online" : "offline"}
+              />
+            )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
