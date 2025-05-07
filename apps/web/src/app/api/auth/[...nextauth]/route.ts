@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptions = {
 
           const data = await res.json()
           if (!res.ok) throw new Error(data.message || "Invalid credentials")
+            console.log({a: data?.auth.accessToken});
 
           const user = {
             id: data?.data.id,

@@ -1,29 +1,22 @@
 "use client"
 
 import { Button, Typography } from "@/components/ui"
-import {
-  useEditNotificationsAsRead,
-  useGetUserNotifications,
-} from "@/hooks/react-query"
+import { useEditNotificationsAsRead } from "@/hooks/react-query"
 import { Status } from "@/types"
 import { cn } from "@/utils"
 import { formatDistanceToNow } from "date-fns"
 
 import React from "react"
 
-export const NotificationItems = () => {
+export const NotificationItems = ({ notifications, isLoading }) => {
   const { mutate, isPending } = useEditNotificationsAsRead()
-
-  const { data, isLoading } = useGetUserNotifications()
-
   if (isLoading) {
     return <Typography>Loading...</Typography>
   }
-
   return (
     <>
       <div>
-        {data?.data?.items?.map((notification, index) => (
+        {notifications.map((notification, index) => (
           <div
             key={index}
             className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"

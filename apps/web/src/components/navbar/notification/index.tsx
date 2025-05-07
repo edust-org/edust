@@ -12,22 +12,55 @@ import {
   useEditNotificationsAsRead,
   useGetUserNotifications,
 } from "@/hooks/react-query"
+import { socketEvents } from "@/lib/socket"
+import { useAuthStore } from "@/store"
 import { Status } from "@/types"
 import { cn } from "@/utils"
 import { Bell, Check } from "lucide-react"
 
+import { useEffect, useState } from "react"
+
 import { NotificationItems } from "./notification-items"
 
 export const Notification = () => {
+  const socket = useAuthStore((state) => state.socket)
+
+  const { data: notificationData, isLoading } = useGetUserNotifications()
   const { data } = useGetUserNotifications({
     filter: { status: Status.unread },
   })
+
+  const [notificationCount, setNotificationCount] = useState(0)
+  const [notifications, setNotifications] = useState([])
 
   const { mutate, isPending } = useEditNotificationsAsRead()
 
   const handleMakeAsARead = async () => {
     mutate({ markAllAsRead: true })
   }
+
+  useEffect(() => {
+    if (!socket) return
+
+    const handleUserRoleAssigned = (data) => {
+      if (!data) return
+      setNotificationCount((prev) => prev + 1)
+      setNotifications((prev) => {
+        return [data, ...prev]
+      })
+    }
+
+    socket.on(socketEvents.notification.new, handleUserRoleAssigned)
+
+    return () => {
+      socket.off(socketEvents.notification.new, handleUserRoleAssigned)
+    }
+  }, [socket])
+
+  useEffect(() => {
+    setNotificationCount(data?.pagination?.totalRecords)
+    setNotifications(notificationData?.data?.items || [])
+  }, [data?.pagination?.totalRecords, notificationData, setNotifications])
 
   return (
     <Popover>
@@ -37,7 +70,7 @@ export const Notification = () => {
             className="absolute -right-2 -top-2 rounded-full px-2 py-0.5"
             variant={"destructive"}
           >
-            {data?.pagination?.totalRecords || 0}
+            {notificationCount}
           </Badge>
           <Bell className="h-5 w-5" />
         </Button>
@@ -46,7 +79,7 @@ export const Notification = () => {
         <div>
           <Typography variant="h4">Notifications</Typography>
           <Typography affects="removePaddingMargin">
-            You have {data?.pagination?.totalRecords || 0} unread messages.
+            You have {notificationCount} unread messages.
           </Typography>
         </div>
         {/* <div className="flex items-center space-x-4 rounded-md border p-4">
@@ -61,11 +94,15 @@ export const Notification = () => {
           </div>
           <Switch />
         </div> */}
-        <NotificationItems />
+        <NotificationItems
+          setNotifications={setNotifications}
+          notifications={notifications}
+          isLoading={isLoading}
+        />
         <Button
           className="w-full"
           onClick={handleMakeAsARead}
-          disabled={isPending || data?.pagination?.totalRecords === 0}
+          disabled={isPending || notificationCount === 0}
         >
           <Check /> Mark all as read
         </Button>
