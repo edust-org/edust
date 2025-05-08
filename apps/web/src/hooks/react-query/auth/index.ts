@@ -14,7 +14,14 @@ export const useRegister = () =>
     mutationFn: api.v0.register,
   })
 
-export const useAuthMe = (isEnabled = true) => {
+export const useAuthMe = (isEnabled: boolean) =>
+  useQuery<ApiResponse<AuthMe>>({
+    queryKey: ["authMe"],
+    queryFn: api.v0.getAuthMe,
+    enabled: isEnabled,
+  })
+
+export const useAuthMeLazy = (isEnabled = true) => {
   const [enabled, setEnabled] = useState(isEnabled)
 
   const query = useQuery<ApiResponse<AuthMe>>({

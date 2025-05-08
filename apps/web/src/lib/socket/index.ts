@@ -15,4 +15,6 @@ export const getSocket = (
   return socket
 }
 
+export * from "./event-registry"
 export * from "./events-name"
+export * from "./handlers"

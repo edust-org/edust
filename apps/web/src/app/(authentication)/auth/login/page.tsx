@@ -12,7 +12,7 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
-import { useAuthMe } from "@/hooks/react-query"
+import { useAuthMeLazy } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
 import { AccountType, AuthMe } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -44,7 +44,7 @@ export default function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const { data: authMeData, trigger } = useAuthMe(false)
+  const { data: authMeData, trigger } = useAuthMeLazy(false)
 
   const { setAuthMe, logOut } = useAuthStore()
 

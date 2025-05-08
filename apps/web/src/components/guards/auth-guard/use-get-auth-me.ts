@@ -1,5 +1,6 @@
 "use client"
 
+import { useSocketEvents } from "@/hooks"
 import { useAuthMe } from "@/hooks/react-query"
 import { PermissionValues } from "@/lib/pm"
 import { useAuthStore } from "@/store"
@@ -62,6 +63,9 @@ export function useGetAuthMe() {
       }
     }
   }, [isError, error, setAuthMe, router, logOut])
+
+  useSocketEvents()
+
 
   return {
     data: data?.data || null,

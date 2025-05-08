@@ -25,7 +25,6 @@ export const authOptions: NextAuthOptions = {
 
           const data = await res.json()
           if (!res.ok) throw new Error(data.message || "Invalid credentials")
-            console.log({a: data?.auth.accessToken});
 
           const user = {
             id: data?.data.id,
@@ -102,8 +101,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === "update") {
-        token.organizationRoles = session.organizationRoles
-        token.profilePic = session.profilePic
+        token.hasRoles = session.hasRoles
       }
 
       // Check if token expired, refresh if necessary
@@ -124,6 +122,8 @@ export const authOptions: NextAuthOptions = {
 
         token.accessToken = data.auth.accessToken
         token.expiresAt = data.auth.expiresAt
+
+        token.hasRoles = data?.data.hasRoles
       }
 
       return token
