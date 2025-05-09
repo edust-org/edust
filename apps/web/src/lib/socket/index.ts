@@ -1,18 +1,19 @@
-import { defaultValues } from "@/configs"
 import { ManagerOptions, Socket, SocketOptions, io } from "socket.io-client"
 
-let socket: Socket
+const socketMap = new Map<string, Socket>()
 
 export const getSocket = (
+  url: string,
   options?: Partial<ManagerOptions & SocketOptions>,
 ): Socket => {
-  if (!socket) {
-    socket = io(defaultValues.backendURL, {
+  if (!socketMap.has(url)) {
+    const newSocket = io(url, {
       withCredentials: true,
       ...options,
     })
+    socketMap.set(url, newSocket)
   }
-  return socket
+  return socketMap.get(url)!
 }
 
 export * from "./event-registry"

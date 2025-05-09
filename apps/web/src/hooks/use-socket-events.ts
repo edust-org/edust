@@ -22,7 +22,7 @@ export const useSocketEvents = () => {
     notificationsHandlers(queryClient)
 
     const allEvents = [
-      // socketEvents.user.authUpdate, // TODO: it's not work for nextAuth (hasRole need update next session)
+      socketEvents.user.authUpdate, // TODO: it's not work for nextAuth (hasRole need update next session)
       socketEvents.notification.new,
     ]
 

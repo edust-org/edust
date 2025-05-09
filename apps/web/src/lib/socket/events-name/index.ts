@@ -7,4 +7,9 @@ export const socketEvents = {
   notification: {
     new: "notification:new",
   },
+  org: {
+    online: "org:status:online",
+    statusUpdate: "user:status:update",
+    accessRolePermissionsUpdate: "access:role:permissions:update",
+  },
 } as const
