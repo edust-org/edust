@@ -6,7 +6,7 @@ export type AuthMe = {
   username: string
   email: string
   profilePic: string | null
-  hasRoles?: {
+  userFlags?: {
     system?: boolean
     organization?: boolean
   }

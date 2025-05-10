@@ -26,7 +26,7 @@ export interface AuthMeData {
   username: string | null
   email: string
   profilePic: string
-  hasRoles: null | {
+  userFlags: null | {
     organization?: boolean
     system?: boolean
   }

@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
             username: data?.data.username,
             email: data?.data.email,
             profilePic: data?.data.profilePic,
-            hasRoles: data?.data.hasRoles,
+            userFlags: data?.data.userFlags,
 
             accessToken: data?.auth.accessToken,
             expiresAt: data?.auth.expiresAt,
@@ -70,7 +70,7 @@ export const authOptions: NextAuthOptions = {
             username: data?.data.username,
             email: data?.data.email,
             profilePic: data?.data.profilePic,
-            hasRoles: data?.data.hasRoles,
+            userFlags: data?.data.userFlags,
 
             accessToken: data?.auth.accessToken,
             expiresAt: data?.auth.expiresAt,
@@ -93,7 +93,7 @@ export const authOptions: NextAuthOptions = {
 
         token.username = user.username
         token.profilePic = user.profilePic
-        token.hasRoles = user.hasRoles
+        token.userFlags = user.userFlags
 
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
@@ -101,7 +101,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (trigger === "update") {
-        token.hasRoles = session.hasRoles
+        token.userFlags = session.userFlags
       }
 
       // Check if token expired, refresh if necessary
@@ -123,7 +123,7 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = data.auth.accessToken
         token.expiresAt = data.auth.expiresAt
 
-        token.hasRoles = data?.data.hasRoles
+        token.userFlags = data?.data.userFlags
       }
 
       return token
@@ -135,7 +135,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.username = token.username
       session.user.profilePic = token.profilePic
-      session.user.hasRoles = token.hasRoles
+      session.user.userFlags = token.userFlags
 
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken

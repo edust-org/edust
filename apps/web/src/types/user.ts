@@ -4,5 +4,5 @@ export interface User {
   username: string | null
   email: string
   profilePic: string | null
-  hasRoles: null | { system: boolean; organization: boolean }
+  userFlags: null | { system: boolean; organization: boolean }
 }
