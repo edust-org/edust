@@ -1,17 +1,12 @@
-import { Organization } from "@/types"
+import { Organization, User } from "@/types"
 
-export type AuthMe = {
-  id: string
-  name: string
-  username: string
-  email: string
-  profilePic: string | null
-  userFlags?: {
-    system?: boolean
-    organization?: boolean
-  }
-  systemRole: null | string
+export type Academics = Pick<
+  Organization,
+  "id" | "name" | "orgUsername" | "profilePic"
+> & { studentId: string; orgId: string }
+
+export type AuthMe = User & {
+  systemRole: null
   organizations: null | Array<Organization>
-  createdAt: string
-  updatedAt: string
+  academics: null | Array<Academics>
 }

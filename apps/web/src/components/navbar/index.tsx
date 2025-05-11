@@ -12,8 +12,8 @@ import Link from "next/link"
 
 import { Feedback } from "./feedback"
 import { NavMobile } from "./mobile"
-import { NavbarRightMenus } from "./navbar-right-menus"
 import { Notification } from "./notification"
+import { RightMenus } from "./right-menus"
 
 interface RouteProps {
   href: string
@@ -77,7 +77,7 @@ export const Navbar = () => {
             {status === "loading" ? (
               <Skeleton className="h-8 w-12 rounded-full"></Skeleton>
             ) : isAuthenticated ? (
-              <NavbarRightMenus />
+              <RightMenus />
             ) : (
               <Link href={"/auth/login"}>
                 <Button>Login</Button>

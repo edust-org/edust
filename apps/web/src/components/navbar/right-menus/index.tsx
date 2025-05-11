@@ -8,8 +8,12 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   Skeleton,
 } from "@/components/ui"
@@ -21,7 +25,10 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
-export const NavbarRightMenus = () => {
+import { Academics } from "./academics"
+import { Organizations } from "./organizations"
+
+export const RightMenus = () => {
   const router = useRouter()
   const { setTheme } = useTheme()
 
@@ -85,38 +92,17 @@ export const NavbarRightMenus = () => {
             </Link>
           </DropdownMenuGroup>
 
-          <DropdownMenuGroup>
-            {/* if organization available */}
-            {state.organizations &&
-              state.organizations.map((org) => {
-                return (
-                  <DropdownMenuItem
-                    key={org.id}
-                    onClick={() => {
-                      state.setActiveOrg(org.id)
-                      router.push("/organizations")
-                    }}
-                  >
-                    <School className="mr-2 h-4 w-4" />
-                    <span className={`capitalize`}>
-                      {org.name.length > 21
-                        ? org.name.slice(0, 20) + "..."
-                        : org.name}
-                    </span>
-                  </DropdownMenuItem>
-                )
-              })}
+          {/* if academics available */}
+          {state.academics && <Academics academics={state.academics} />}
 
-            {/* if organization is not available */}
-            {!state?.organizations && (
-              <Link href={"/organizations/create"}>
-                <DropdownMenuItem>
-                  <Plus className="mr-2 h-4 w-4" />
-                  <span>Create Organizations</span>
-                </DropdownMenuItem>
-              </Link>
-            )}
-          </DropdownMenuGroup>
+          {/* if organization available */}
+          {state.organizations && (
+            <>
+              <DropdownMenuSeparator />
+              <Organizations organizations={state.organizations} />
+            </>
+          )}
+
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
             <LogOut className="mr-2 h-4 w-4" />

@@ -17,7 +17,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 import { Feedback } from "./feedback"
-import { NavbarRightMenus } from "./navbar-right-menus"
+import { RightMenus } from "./right-menus"
 import { RouteProps, routeList } from "./route-lists"
 
 export const NavMobile = () => {
@@ -26,7 +26,7 @@ export const NavMobile = () => {
   return (
     <>
       <span className="flex gap-1 md:hidden">
-        {status === "authenticated" && <NavbarRightMenus />}
+        {status === "authenticated" && <RightMenus />}
         <ThemeSwitch />
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>

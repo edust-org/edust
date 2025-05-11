@@ -16,6 +16,14 @@ export default withAuth(
       }
     }
 
+    if (req.nextUrl.pathname.startsWith("/academics")) {
+      const isStudent = req.nextauth.token.userFlags?.student
+
+      if (!isStudent) {
+        return NextResponse.redirect(new URL("/", req.url)) // Redirect unauthorized users
+      }
+    }
+
     return NextResponse.next()
   },
   {
@@ -25,6 +33,7 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/academics/:path*",
     "/dashboard/:path*",
     "/organizations",
     "/organizations/((?!create|profile).*)",

@@ -16,10 +16,17 @@ interface AuthState {
   disconnectSocket: () => void
   clearOnlineUsers: () => void
   onlineUsers: Set<string>
-  organizations: AuthMe["organizations"] | null
-  activeOrgId: string | null
+
   setAuthMe: (user: AuthMe | null) => void
+
+  organizations: AuthMe["organizations"]
+  activeOrgId: string | null
   setActiveOrg: (orgId: string) => void
+
+  academics: AuthMe["academics"]
+  activeAcademyId: string | null
+  setActiveAcademy: (acdId: string) => void
+
   logOut: () => void
 }
 
@@ -29,8 +36,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   socketOrg: null,
   isSocketOrgConnected: false,
   onlineUsers: new Set(),
+
   organizations: null,
   activeOrgId: null,
+
+  academics: null,
+  activeAcademyId: null,
 
   setAuthMe: (user) => {
     if (!user) {
@@ -49,12 +60,36 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       setCookie(ACTIVE_ORG_COOKIE, newActiveOrgId, { sameSite: "lax" })
     }
 
+    const existingAcademy = user.academics?.find(
+      (acd) => acd.id === get().activeAcademyId,
+    )
+    const newActiveAcademyId = existingAcademy
+      ? existingAcademy.id
+      : user?.academics?.[0]?.id || null
+
+    // TODO: it's for active academy cookie if needed
+    // if (newActiveAcademyId) {
+    //   setCookie(ACTIVE_ORG_COOKIE, newActiveAcademyId, { sameSite: "lax" })
+    // }
+
     set({
       user,
-      organizations: user.organizations || null,
+      organizations: user.organizations,
       activeOrgId: newActiveOrgId,
+      academics: user.academics,
+      activeAcademyId: newActiveAcademyId,
     })
     get().connectSocket()
+  },
+
+  setActiveAcademy: (acdId) => {
+    const academy = get().academics
+
+    const matchedAcd = academy?.find((acd) => acd.id === acdId)
+    if (!matchedAcd) return
+
+    // setCookie(ACTIVE_ORG_COOKIE, matchedOrg.id, { sameSite: "lax" })
+    set({ activeAcademyId: matchedAcd.id })
   },
 
   setActiveOrg: (orgId) => {
