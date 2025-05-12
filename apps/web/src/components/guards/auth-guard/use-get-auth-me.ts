@@ -57,7 +57,9 @@ export function useGetAuthMe() {
   useEffect(() => {
     if (isError) {
       const statusCode = (error as AxiosError)?.response?.status
-      if (statusCode === 401 || statusCode === 403) {
+      const ERR_NETWORK = (error as AxiosError).code === "ERR_NETWORK"
+
+      if (statusCode === 401 || statusCode === 403 || ERR_NETWORK) {
         logOut()
         router.push("/auth/login")
       }

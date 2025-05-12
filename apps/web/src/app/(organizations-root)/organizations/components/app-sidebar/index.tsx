@@ -22,6 +22,7 @@ import {
   PieChart,
   Settings2,
   UserRoundCog,
+  Users,
 } from "lucide-react"
 import { usePathname } from "next/navigation"
 
@@ -91,6 +92,12 @@ const navMain = [
     url: "/organizations/site",
     icon: Earth,
     permission: permissions.orgMenuSite,
+  },
+  {
+    title: "Students",
+    url: "/organizations/students",
+    icon: Users,
+    permission: permissions.orgMenuStudents,
   },
   {
     title: "Access Control",

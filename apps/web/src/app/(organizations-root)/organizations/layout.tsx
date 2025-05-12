@@ -22,7 +22,7 @@ export default function OrganizationsLayout({
             <Separator orientation="vertical" className="mr-2 h-4" />
           </div>
         </header>
-        <main className="px-4 pb-6 pt-6 sm:px-6">{children}</main>
+        <main>{children}</main>
       </SidebarInset>
     </SidebarProvider>
   )

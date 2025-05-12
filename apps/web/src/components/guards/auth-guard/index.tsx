@@ -42,7 +42,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
       ? requiredPermissions
       : [requiredPermissions]
 
-    return required.every((p) => userPermissions.includes(p))
+    return required.some((p) => userPermissions.includes(p))
   }, [userPermissions, requiredPermissions])
 
   if (status === "loading" || isLoading) {

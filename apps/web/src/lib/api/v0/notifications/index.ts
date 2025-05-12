@@ -1,6 +1,5 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import QueryString from "qs"
 
 const BASE_URL = `${defaultValues.apiV0URL}/notifications`
 
@@ -8,11 +7,7 @@ export const getUserNotifications = async (query?: {
   filter?: { status?: string }
   limit?: string
 }): Promise<any> => {
-  const queryString = QueryString.stringify(query)
-    ? `?${QueryString.stringify(query)}`
-    : ""
-
-  const response = await axios.get(`${BASE_URL}/${queryString}`)
+  const response = await axios.get(`${BASE_URL}`, { params: query })
   return response.data
 }
 

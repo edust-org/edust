@@ -1,7 +1,6 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
 import { ApiResponse } from "@/types"
-import QueryString from "qs"
 
 const baseUrl = `${defaultValues.apiV0URL}/public`
 
@@ -23,11 +22,7 @@ export interface GetInstitutesQuery {
 export const getInstitutes = async (
   query?: GetInstitutesQuery,
 ): Promise<ApiResponse<null>> => {
-  const queryString = QueryString.stringify(query)
-    ? `?${QueryString.stringify(query)}`
-    : ""
-
-  const response = await axios.get(`${baseUrl}/institutes/${queryString}`)
+  const response = await axios.get(`${baseUrl}/institutes/`, { params: query })
   return response.data
 }
 
@@ -41,11 +36,8 @@ export const getInstituteById = async (
 export const getInstitutesCategories = async (query?: {
   limit?: number
 }): Promise<ApiResponse<null>> => {
-  const queryString = QueryString.stringify(query)
-    ? `?${QueryString.stringify(query)}`
-    : ""
-  const response = await axios.get(
-    `${baseUrl}/institutes/categories/${queryString}`,
-  )
+  const response = await axios.get(`${baseUrl}/institutes/categories`, {
+    params: query,
+  })
   return response.data
 }

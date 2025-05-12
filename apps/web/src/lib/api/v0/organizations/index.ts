@@ -142,3 +142,5 @@ export const editSiteBuilder = async ({
   const response = await axios.patch(`${baseUrl}/${orgId}/site-builder`, body)
   return response.data
 }
+
+export * from "./student"

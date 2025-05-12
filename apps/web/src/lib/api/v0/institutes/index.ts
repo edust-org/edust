@@ -1,6 +1,5 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import QueryString from "qs"
 
 const BASE_URL = `${defaultValues.apiV0URL}/institutes`
 
@@ -18,25 +17,21 @@ export const getMeInstitutesLists = async (): Promise<any[]> => {
   return response.data?.data?.items || []
 }
 
-export const getInstitutesId = async (params: {
+export const getInstitutesId = async (arg: {
   instituteId: string
-  filters?: InstituteFilters
+  query?: InstituteFilters
 }): Promise<any> => {
-  const queryString = QueryString.stringify(params.filters)
-    ? `/?${QueryString.stringify(params.filters)}`
-    : ""
-
-  const response = await axios.get(
-    `${BASE_URL}/${params.instituteId}${queryString}`,
-  )
+  const response = await axios.get(`${BASE_URL}/${arg.instituteId}`, {
+    params: arg.query,
+  })
   return response.data
 }
 
-export const editInstitutesById = async (params: {
+export const editInstitutesById = async (arg: {
   id: string
   body: any
 }): Promise<any> => {
-  const response = await axios.patch(`${BASE_URL}/${params.id}`, params.body)
+  const response = await axios.patch(`${BASE_URL}/${arg.id}`, arg.body)
   return response.data
 }
 
