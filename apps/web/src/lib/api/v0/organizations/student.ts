@@ -34,6 +34,7 @@ export const student = {
     const response = await axios.get(`${baseUrl}/${orgId}/students`)
     return response.data
   },
+
   postStudent: async ({
     orgId,
     body,
@@ -44,6 +45,7 @@ export const student = {
     const response = await axios.post(`${baseUrl}/${orgId}/students`, body)
     return response.data
   },
+
   deleteStudentById: async ({
     orgId,
     orgStudentId,

@@ -89,4 +89,5 @@ export const useEditSiteBuilder = () => {
   })
 }
 
+export * from "./access-control"
 export * from "./student"

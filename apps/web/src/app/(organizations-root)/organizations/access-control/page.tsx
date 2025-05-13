@@ -21,6 +21,7 @@ import {
   TabsTrigger,
   Typography,
 } from "@/components/ui"
+import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
 import { Roles } from "@/types"
 import { Edit } from "lucide-react"
@@ -30,7 +31,6 @@ import qs from "qs"
 
 import { Layout } from "../components/layout"
 import { RoleForm } from "./role-form"
-import { useRoles } from "./use-roles"
 import { UserLists } from "./user-lists"
 import { ViewPermissions } from "./view-permissions"
 
@@ -47,12 +47,9 @@ export default function AccessControl() {
 
   const state = useAuthStore()
 
-  // Use the custom hook to fetch roles
-  const {
-    data: roleLists = [],
-    isLoading,
-    isError,
-  } = useRoles(state.activeOrgId)
+  const { data, isLoading, isError } = accessControlHooks.useGetRoles(
+    state.activeOrgId,
+  )
 
   if (isLoading) {
     return <Typography variant="h3">Loading...</Typography>
@@ -89,7 +86,7 @@ export default function AccessControl() {
                   </Button>
                 </Link>
               </HasPermission>
-              {roleLists.map((role) => (
+              {data?.data?.items?.map((role) => (
                 <SidebarMenuItem key={role.id}>
                   <SidebarMenuButton asChild>
                     <div className="flex w-full items-center justify-between">

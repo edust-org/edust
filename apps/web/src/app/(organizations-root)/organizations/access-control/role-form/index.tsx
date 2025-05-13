@@ -11,18 +11,16 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui"
+import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
 import { asOptionalField } from "@/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 import { z } from "zod"
 
-import { useEffect } from "react"
-
-import { useEditRoleById } from "./use-edit-role-by-id"
-import { useGetRoleById } from "./use-get-role-by-id"
-import { useRoleCreate } from "./use-role-create"
+import { useEffect, useRef } from "react"
 
 const FormSchema = z.object({
   name: z
@@ -61,40 +59,48 @@ export const RoleForm = ({
       description: "",
     },
   })
+  const isFormReset = useRef(false)
 
   const activeOrgId = useAuthStore((state) => state.activeOrgId)
-  const { mutate: createRole, isPending } = useRoleCreate(activeOrgId)
-  const { mutate: editRole, isPending: isEditingPending } = useEditRoleById(
+
+  const createANewRole = accessControlHooks.usePostRole()
+  const editRole = accessControlHooks.usePatchRoleById()
+
+  const { data: roleData } = accessControlHooks.useGetRoleById(
     activeOrgId,
     roleId,
   )
 
-  const { data: roleData } = useGetRoleById(activeOrgId, roleId)
-
   useEffect(() => {
-    if (isEditable && roleData?.name) {
-      form.setValue("name", roleData.name)
-      form.setValue("description", roleData.description || "")
+    if (isEditable && roleData?.data.name && !isFormReset.current) {
+      form.setValue("name", roleData.data.name)
+      form.setValue("description", roleData.data.description || "")
     }
   }, [form, isEditable, roleData])
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    if (isEditable) {
-      editRole(data, {
-        onSuccess: () => {
-          form.reset()
-        },
-        onError: () => {
-          form.reset()
-        },
-      })
-      router.push("/organizations/access-control")
+    if (!activeOrgId) return
+
+    if (isEditable && roleId) {
+      editRole
+        .mutateAsync({ orgId: activeOrgId, roleId, body: data })
+        .then((value) => {
+          if (value.status === "SUCCESS") {
+            toast.success(`The role has been successfully updated.`)
+            form.reset()
+            isFormReset.current = true
+            router.push("/organizations/access-control")
+          }
+        })
     } else {
-      createRole(data, {
-        onSuccess: () => {
-          form.reset()
-        },
-      })
+      createANewRole
+        .mutateAsync({ orgId: activeOrgId, body: data })
+        .then((value) => {
+          if (value.status === "SUCCESS") {
+            toast.success(`The role has been successfully created.`)
+            form.reset()
+          }
+        })
     }
   }
 
@@ -113,11 +119,7 @@ export const RoleForm = ({
                       Role name <span className="text-destructive">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="New role"
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input placeholder="New role" {...field} />
                     </FormControl>
                     <FormDescription>
                       This name will be used to identify the role in the system.
@@ -134,11 +136,7 @@ export const RoleForm = ({
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Role description"
-                        {...field}
-                        disabled={isPending}
-                      />
+                      <Input placeholder="Role description" {...field} />
                     </FormControl>
                     <FormDescription>
                       This description will be used to provide more information
@@ -148,12 +146,12 @@ export const RoleForm = ({
                   </FormItem>
                 )}
               />
-              <Button type="submit" disabled={isPending}>
+              <Button type="submit" disabled={createANewRole.isPending}>
                 {isEditable
-                  ? isEditingPending
+                  ? editRole.isPending
                     ? "Updating..."
                     : "Update role"
-                  : isPending
+                  : createANewRole.isPending
                     ? "Creating..."
                     : "Create a new role"}
               </Button>

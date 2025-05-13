@@ -143,4 +143,5 @@ export const editSiteBuilder = async ({
   return response.data
 }
 
+export * from "./access-control"
 export * from "./student"

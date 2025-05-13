@@ -11,11 +11,11 @@ import {
   Input,
   Typography,
 } from "@/components/ui"
+import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
+import { toast } from "sonner"
 import { useDebounceValue } from "usehooks-ts"
-
-import { useGetUsers } from "./use-get-users"
-import { usePostUserAssignRole } from "./use-post-user-assign-role"
+import { z } from "zod"
 
 export const AddNewUser = ({
   activeOrgId,
@@ -28,9 +28,18 @@ export const AddNewUser = ({
 }) => {
   const [search, setSearch] = useDebounceValue("", 500)
 
-  const { data, isLoading } = useGetUsers(activeOrgId, search)
+  const isEmail = z.string().email().safeParse(search).success
 
-  const assignRole = usePostUserAssignRole(activeOrgId)
+  const { data, isLoading } = accessControlHooks.useGetAccessControlUsers(
+    activeOrgId,
+    {
+      search: isEmail ? { email: search } : { name: search },
+    },
+  )
+
+  // const { data, isLoading } = useGetUsers(activeOrgId, search)
+
+  const assignRole = accessControlHooks.usePostRoleAssignments()
 
   const onlineUsers = useAuthStore((state) => state.onlineUsers)
   return (
@@ -59,7 +68,7 @@ export const AddNewUser = ({
             {isLoading ? (
               <p>Loading...</p>
             ) : (
-              data?.map((user) => {
+              data?.data.items.map((user) => {
                 const isOnline = onlineUsers.has(user.id)
                 return (
                   <div
@@ -88,10 +97,19 @@ export const AddNewUser = ({
                       <Button
                         size={"sm"}
                         onClick={() => {
-                          assignRole.mutate({
-                            userId: user.id,
-                            roleId: roleId,
-                          })
+                          assignRole
+                            .mutateAsync({
+                              orgId: activeOrgId,
+                              body: {
+                                userId: user.id,
+                                roleId: roleId,
+                              },
+                            })
+                            .then((value) => {
+                              if (value.status === "SUCCESS") {
+                                toast.success("User added successfully")
+                              }
+                            })
                         }}
                         disabled={
                           assignRole.isPending ||

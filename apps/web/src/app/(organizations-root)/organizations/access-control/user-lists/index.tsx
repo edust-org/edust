@@ -9,13 +9,13 @@ import {
   Skeleton,
   Typography,
 } from "@/components/ui"
+import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
+import { toast } from "sonner"
 
 import React from "react"
 
 import { AddNewUser } from "./add-new-user"
-import { useGetUsersWithRole } from "./use-get-users-with-role"
-import { useRemoveUser } from "./use-remove-user"
 
 export const UserLists = ({
   roleId,
@@ -27,12 +27,24 @@ export const UserLists = ({
   const state = useAuthStore()
 
   const onlineUsers = useAuthStore((state) => state.onlineUsers)
-  const { data, isLoading } = useGetUsersWithRole(state.activeOrgId, roleId)
 
-  const removeUserRole = useRemoveUser(state.activeOrgId)
+  const { data, isLoading } = accessControlHooks.useGetRoleUsers(
+    state.activeOrgId,
+    roleId,
+  )
+
+  const removeUserRole = accessControlHooks.useDeleteRoleAssignmentById()
 
   const handleRemove = (userId: string, assignId: string) => {
-    removeUserRole.mutate({ userId, assignId })
+    if (state.activeOrgId) {
+      removeUserRole
+        .mutateAsync({ orgId: state.activeOrgId, userId, assignId })
+        .then((value) => {
+          if (value.status === "SUCCESS") {
+            toast.success("User removed successfully")
+          }
+        })
+    }
   }
 
   return (
@@ -67,7 +79,7 @@ export const UserLists = ({
               </div>
             ))}
 
-          {data?.map((user) => {
+          {data?.data.items.map((user) => {
             return (
               <div
                 key={user.id}
