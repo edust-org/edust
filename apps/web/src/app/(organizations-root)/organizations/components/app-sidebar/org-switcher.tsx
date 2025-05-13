@@ -1,5 +1,6 @@
 "use client"
 
+import { AvatarWithStatus } from "@/components"
 import { Badge } from "@/components/ui"
 import {
   DropdownMenu,
@@ -21,7 +22,7 @@ import { Building2, ChevronsUpDown } from "lucide-react"
 
 import * as React from "react"
 
-export function TeamSwitcher() {
+export function OrgSwitcher() {
   const state = useAuthStore()
   const activeOrg = authService.findActiveOrganization(
     state.organizations,
@@ -39,9 +40,18 @@ export function TeamSwitcher() {
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Building2 className="size-4" />
-                </div>
+                <AvatarWithStatus
+                  src={activeOrg.profilePic}
+                  alt={activeOrg.name}
+                  status={
+                    state.onlineOrgs.has(activeOrg.id) ? "online" : "offline"
+                  }
+                  fallback={
+                    <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                      <Building2 className="size-4" />
+                    </div>
+                  }
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
                     {activeOrg.name}

@@ -1,6 +1,6 @@
 "use client"
 
-import { Badge } from "@/components/ui"
+import { Avatar, AvatarFallback, AvatarImage, Badge } from "@/components/ui"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,9 +39,18 @@ export function AcademySwitcher() {
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Building2 className="size-4" />
-                </div>
+                <Avatar>
+                  {academy.profilePic && (
+                    <AvatarImage src={academy.profilePic} alt={academy.name} />
+                  )}
+                  <AvatarFallback>
+                    {academy.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{academy.name}</span>
                   {/* <Badge className="text-[10px]">{academy.role}</Badge> */}

@@ -7,3 +7,5 @@ export enum Gender {
   female = "FEMALE",
   others = "OTHERS",
 }
+
+export type OnlineStatus = "online" | "dnd" | "busy" | "offline"

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui"
 import { studentHooks } from "@/hooks/react-query"
 import { Student } from "@/lib/api/v0/organizations/organization-types"
+import { useAuthStore } from "@/store"
 import { MoreHorizontal, Trash2 } from "lucide-react"
 
 interface ListOfStudentsTableProps {
@@ -27,6 +28,8 @@ export const ListOfStudentsTable: React.FC<ListOfStudentsTableProps> = ({
   activeOrgId,
 }) => {
   const deleteStudentById = studentHooks.useDeleteStudentById()
+
+  const onlineUsers = useAuthStore((state) => state.onlineUsers)
   return (
     <>
       <Table className="mx-auto max-w-2xl">
@@ -44,7 +47,7 @@ export const ListOfStudentsTable: React.FC<ListOfStudentsTableProps> = ({
                 <AvatarWithStatus
                   src={student.profilePic}
                   alt={student.name}
-                  status="offline"
+                  status={onlineUsers.has(student.id) ? "online" : "offline"}
                 />
               </TableCell>
               <TableCell>{student.name}</TableCell>

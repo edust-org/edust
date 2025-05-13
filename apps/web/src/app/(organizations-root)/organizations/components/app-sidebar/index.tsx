@@ -31,7 +31,7 @@ import * as React from "react"
 import { NavMain } from "./nav-main"
 import { NavProjects } from "./nav-projects"
 import { NavUser } from "./nav-user"
-import { TeamSwitcher } from "./team-switcher"
+import { OrgSwitcher } from "./org-switcher"
 
 // This is sample data.
 const data = {
@@ -144,7 +144,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         {state.organizations && state.organizations.length > 0 && (
-          <TeamSwitcher />
+          <OrgSwitcher />
         )}
       </SidebarHeader>
       <SidebarContent>

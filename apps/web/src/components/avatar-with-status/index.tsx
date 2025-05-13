@@ -5,7 +5,7 @@ type Status = "online" | "dnd" | "busy" | "offline"
 interface AvatarWithStatusProps {
   src: string | null // Avatar image URL
   alt: string // Alt text for the image
-  fallback?: string | null // Fallback text for the avatar
+  fallback?: string | null | React.ReactNode // Fallback text for the avatar
   status: Status // Status type
 }
 

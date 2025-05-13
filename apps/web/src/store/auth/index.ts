@@ -16,6 +16,7 @@ interface AuthState {
   disconnectSocket: () => void
   clearOnlineUsers: () => void
   onlineUsers: Set<string>
+  onlineOrgs: Set<string>
 
   setAuthMe: (user: AuthMe | null) => void
 
@@ -36,6 +37,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   socketOrg: null,
   isSocketOrgConnected: false,
   onlineUsers: new Set(),
+  onlineOrgs: new Set(),
 
   organizations: null,
   activeOrgId: null,
@@ -134,12 +136,14 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       query: { userId: user.id },
     })
 
-    socket.on("connect", () => {
+    socket.on("connect", () => {})
+
+    if (socket) {
       socket.on(socketEvents.user.online, (users: { userId: string }[]) => {
         const onlineUserIds = new Set(users.map((u) => u.userId))
         set({ onlineUsers: onlineUserIds })
       })
-    })
+    }
 
     socket.on("disconnect", () => {
       console.log("Default socket disconnected")
@@ -165,6 +169,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       socketOrg.emit("joinRoom", activeOrgId)
       set({ isSocketOrgConnected: true })
     })
+
+    if (socketOrg) {
+      socketOrg.on(socketEvents.org.online, (orgs: { orgId: string }[]) => {
+        const onlineOrgIds = new Set(orgs.map((o) => o.orgId))
+        set({ onlineOrgs: onlineOrgIds })
+      })
+    }
 
     socketOrg.on("disconnect", () => {
       socketOrg.emit("leaveRoom", `org-${activeOrgId}`)
