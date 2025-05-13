@@ -1,23 +1,31 @@
-import { Card, CardContent, CardHeader, Typography } from "@/components/ui"
-import { User } from "@/types"
-import { Gender } from "@/types/common"
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Typography,
+} from "@/components/ui"
+import { ProfileResponse } from "@/types"
 import Image from "next/image"
+import Link from "next/link"
 
 import Footer from "./footer-area"
 
-type UserType = Pick<User, "id" | "name" | "username" | "profilePic"> & {
-  gender: Gender | null
+interface ProfileDetailsCardProps {
+  user: ProfileResponse["data"]
 }
 
-export default function ProfileDetailsCard({ user }: { user: UserType }) {
+export const ProfileDetailsCard: React.FC<ProfileDetailsCardProps> = ({
+  user,
+}) => {
   return (
-    <Card className="min-w-xs max-w-sm">
+    <Card className="min-w-xs w-full max-w-lg">
       <CardHeader>
         <div className="mx-auto grid h-24 w-24 place-items-center overflow-hidden rounded-full border shadow-sm dark:bg-white">
           <Image
             src={
               user.profilePic ||
-              "https://asset.cloudinary.com/dbaa3pxau/93ec921257b19a711e108cb6b554f5b7"
+              "https://res.cloudinary.com/dbaa3pxau/image/upload/v1731123273/profile_pic_zqp0tm.svg"
             }
             width={100}
             height={100}
@@ -29,11 +37,37 @@ export default function ProfileDetailsCard({ user }: { user: UserType }) {
           {user.name}
         </Typography>
       </CardHeader>
-      {user.gender && (
-        <CardContent>
+
+      <CardContent>
+        {user.gender && (
           <Typography className="capitalize">{user.gender}</Typography>
-        </CardContent>
-      )}
+        )}
+
+        {user.academics &&
+          user.academics.map((academy) => (
+            <Card key={academy.id} className="mb-4">
+              <CardHeader>
+                <Image
+                  src={
+                    academy.profilePic ||
+                    "https://asset.cloudinary.com/dbaa3pxau/93ec921257b19a711e108cb6b554f5b7"
+                  }
+                  width={100}
+                  height={100}
+                  alt={academy.name}
+                />
+                <CardTitle>
+                  <Link
+                    href={`/organizations/profile/${academy.orgUsername}`}
+                    className="capitalize"
+                  >
+                    {academy.name}
+                  </Link>
+                </CardTitle>
+              </CardHeader>
+            </Card>
+          ))}
+      </CardContent>
       <Footer user={user} />
     </Card>
   )

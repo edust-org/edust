@@ -1,7 +1,8 @@
 import "@/components/ui"
 import { defaultValues } from "@/configs"
+import { ProfileResponse } from "@/types"
 
-import ProfileDetailsCard from "./components/profile-details-card"
+import { ProfileDetailsCard } from "./components/profile-details-card"
 
 export default async function Profile({
   searchParams,
@@ -13,7 +14,7 @@ export default async function Profile({
   const response = await fetch(
     `${defaultValues.backendURL}/api/v0/public/profile/userId-${userId}`,
   )
-  const user = await response.json()
+  const user: ProfileResponse = await response.json()
 
   return (
     <section className="grid h-svh place-items-center">

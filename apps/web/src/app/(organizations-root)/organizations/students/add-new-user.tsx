@@ -89,7 +89,9 @@ export const AddNewUser: React.FC<AddNewUserProps> = ({ activeOrgId }) => {
                             },
                           })
                         }}
-                        disabled={postStudent.isPending}
+                        disabled={
+                          postStudent.isPending || Boolean(user.orgStudentId)
+                        }
                       >
                         Make as a student
                       </Button>

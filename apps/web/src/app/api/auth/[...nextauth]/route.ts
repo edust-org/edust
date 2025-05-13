@@ -123,6 +123,11 @@ export const authOptions: NextAuthOptions = {
         token.accessToken = data.auth.accessToken
         token.expiresAt = data.auth.expiresAt
 
+        token.id = data?.data.id
+        token.name = data?.data.name
+        token.username = data?.data.username
+        token.email = data?.data.email
+        token.profilePic = data?.data.profilePic
         token.userFlags = data?.data.userFlags
       }
 

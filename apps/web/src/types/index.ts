@@ -5,6 +5,7 @@ export * from "./organization"
 export * from "./theme"
 export * from "./user"
 export * from "./common"
+export * from "./proifle"
 
 export enum ActivePanel {
   "SELECTORS" = "SELECTORS",

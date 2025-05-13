@@ -1,6 +1,6 @@
 import { defaultValues } from "@/configs"
 
-import ProfileDetailsCard from "../components/profile-details-card"
+import { ProfileDetailsCard } from "../components/profile-details-card"
 
 export default async function ProfileByUsername({
   params,

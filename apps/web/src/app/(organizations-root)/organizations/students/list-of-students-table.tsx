@@ -30,6 +30,7 @@ export const ListOfStudentsTable: React.FC<ListOfStudentsTableProps> = ({
   const deleteStudentById = studentHooks.useDeleteStudentById()
 
   const onlineUsers = useAuthStore((state) => state.onlineUsers)
+
   return (
     <>
       <Table className="mx-auto max-w-2xl">
