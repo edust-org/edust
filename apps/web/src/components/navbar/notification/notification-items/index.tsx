@@ -21,7 +21,7 @@ export const NotificationItems = () => {
   return (
     <>
       <div>
-        {data?.data?.items.map((notification, index) => (
+        {data?.data?.items?.map((notification, index) => (
           <div
             key={index}
             className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
