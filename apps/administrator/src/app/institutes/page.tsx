@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthGuard } from "@/components"
 import {
   Avatar,
   AvatarFallback,
@@ -46,7 +47,7 @@ export default function Institute() {
   if (error) return "An error has occurred: " + error.message
 
   return (
-    <>
+    <AuthGuard requiredPermissions={"adm:institutes:*"}>
       <Table>
         <TableCaption>A list of institutes.</TableCaption>
         <TableHeader>
@@ -102,6 +103,6 @@ export default function Institute() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AuthGuard>
   )
 }

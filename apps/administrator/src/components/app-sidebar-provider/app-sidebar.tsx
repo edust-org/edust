@@ -1,114 +1,128 @@
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { defaultValues } from "@/configs"
-import {
-  ChevronDown,
-  ChevronRight,
-  GalleryVerticalEnd,
-  Minus,
-  Plus,
-} from "lucide-react"
-import Link from "next/link"
+import { permissions } from "@/lib/pm"
+import { useAuthStore } from "@/store"
+import { GalleryVerticalEnd, House } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { useDebounceValue } from "usehooks-ts"
 
 import * as React from "react"
 
-import { SearchForm } from "./search-form"
+import { SearchForm } from "../app-sidebar/search-form"
+import { NavMain } from "./nav-main"
 
 // This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "  Users management",
-      url: "#",
-      items: [
-        {
-          title: "Users",
-          url: "/users",
-        },
-      ],
-    },
-    {
-      title: "Organizations",
-      url: "#",
-      items: [
-        {
-          title: "Organizations",
-          url: "/organizations",
-        },
-      ],
-    },
-    {
-      title: "Institutes",
-      url: "#",
-      items: [
-        {
-          title: "Institutes",
-          url: "/institutes",
-        },
-      ],
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      items: [
-        {
-          title: "Feedback",
-          url: "/feedback",
-        },
-      ],
-    },
-    {
-      title: "Help Center",
-      url: "#",
-      items: [
-        {
-          title: "Help center",
-          url: "/help-center",
-        },
-      ],
-    },
-  ],
-}
+const navMain = [
+  {
+    title: "Home",
+    url: "/",
+    icon: House,
+  },
+  {
+    title: "Getting Started",
+    url: "#",
+    items: [
+      {
+        title: "Installation",
+        url: "#",
+      },
+      {
+        title: "Project Structure",
+        url: "#",
+      },
+    ],
+  },
+  {
+    title: "  Users management",
+    url: "#",
+    permission: permissions.admMenuUsers,
+    items: [
+      {
+        title: "Users",
+        url: "/users",
+      },
+    ],
+  },
+  {
+    title: "Organizations",
+    url: "#",
+    items: [
+      {
+        title: "Organizations",
+        url: "/organizations",
+      },
+    ],
+  },
+  {
+    title: "Institutes",
+    url: "#",
+    items: [
+      {
+        title: "Institutes",
+        url: "/institutes",
+      },
+    ],
+  },
+  {
+    title: "Feedback",
+    url: "#",
+    items: [
+      {
+        title: "Feedback",
+        url: "/feedback",
+      },
+    ],
+  },
+  {
+    title: "Help Center",
+    url: "#",
+    items: [
+      {
+        title: "Help center",
+        url: "/help-center",
+      },
+    ],
+  },
+]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname()
+
+  const state = useAuthStore()
+  const userPermissions = state.user?.systemRole.rolePermissions
+
+  const [search, setSearch] = useDebounceValue("", 500)
+
+  // Filter navMain based on permissions
+  const filteredNavMain = navMain
+    .filter(
+      (item) => !item.permission || userPermissions?.includes(item.permission),
+    )
+    .filter((item) => {
+      const q = search.toLowerCase()
+      if (!q) return true
+      const inTitle = item.title.toLowerCase().includes(q)
+      const inChildren = item.items?.some((sub) =>
+        sub.title.toLowerCase().includes(q),
+      )
+      return inTitle || inChildren
+    })
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <div className="flex items-center justify-between">
             <div>
-              {" "}
               <SidebarMenuItem>
                 <SidebarMenuButton size="lg" asChild>
                   <a href="#">
@@ -116,7 +130,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       <GalleryVerticalEnd className="size-4" />
                     </div>
                     <div className="flex flex-col gap-0.5 leading-none">
-                      <span className="font-semibold">Documentation</span>
+                      <span className="font-semibold">Admin Panel</span>
                       <span className="">v{defaultValues.version}</span>
                     </div>
                   </a>
@@ -125,46 +139,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </div>
           </div>
         </SidebarMenu>
-        <SearchForm />
+        <SearchForm
+          onChange={(e) => setSearch((e.target as HTMLInputElement).value)}
+        />
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarMenu>
-            {data.navMain.map((item, index) => (
-              <Collapsible
-                key={item.title}
-                defaultOpen={index === 1}
-                className="group/collapsible"
-              >
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton>
-                      {item.title}{" "}
-                      <ChevronRight className="ml-auto group-data-[state=open]/collapsible:hidden" />
-                      <ChevronDown className="ml-auto group-data-[state=closed]/collapsible:hidden" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  {item.items?.length ? (
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items.map((item) => (
-                          <SidebarMenuSubItem key={item.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={item.isActive}
-                            >
-                              <Link href={item.url}>{item.title}</Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  ) : null}
-                </SidebarMenuItem>
-              </Collapsible>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
+        <NavMain items={filteredNavMain} pathname={pathname} />
         <div className="fixed bottom-0">
           <NavbarRightMenus />
         </div>

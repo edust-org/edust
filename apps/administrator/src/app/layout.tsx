@@ -1,5 +1,5 @@
 import { AppSidebarProvider } from "@/components"
-import { ReduxProvider } from "@/lib/store"
+import { AuthGuard } from "@/components/guards"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
@@ -23,10 +23,10 @@ export default function RootLayout({
       <body className={`${roboto.className} antialiased`}>
         <SessionProvider>
           <ReactQueryProvider>
-            <ReduxProvider>
-              <Toaster richColors />
+            <Toaster richColors />
+            <AuthGuard>
               <AppSidebarProvider>{children}</AppSidebarProvider>
-            </ReduxProvider>
+            </AuthGuard>
           </ReactQueryProvider>
         </SessionProvider>
       </body>

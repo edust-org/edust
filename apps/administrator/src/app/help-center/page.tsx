@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 
 import Loading from "./loading"
+import { AuthGuard } from "@/components"
 
 interface HelpCenter {
   id: string
@@ -37,7 +38,7 @@ export default function HelpCenter() {
 
   if (error) return "An error has occurred: " + error.message
   return (
-    <>
+    <AuthGuard requiredPermissions={['adm:help_center:*']}>
       <Table>
         <TableCaption>A list of help center.</TableCaption>
         <TableHeader>
@@ -70,6 +71,6 @@ export default function HelpCenter() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AuthGuard>
   )
 }

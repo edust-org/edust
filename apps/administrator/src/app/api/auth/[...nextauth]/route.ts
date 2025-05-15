@@ -24,7 +24,12 @@ export const authOptions: NextAuthOptions = {
           )
 
           const data = await res.json()
+
           if (!res.ok) throw new Error(data.message || "Invalid credentials")
+
+          if (!data?.data?.userFlags?.system) {
+            throw new Error("You don't have permission!")
+          }
 
           const user = {
             id: data?.data.id,
@@ -32,8 +37,7 @@ export const authOptions: NextAuthOptions = {
             username: data?.data.username,
             email: data?.data.email,
             profilePic: data?.data.profilePic,
-            systemRole: data?.data.systemRole,
-            organizationRoles: data?.data.organizationRoles,
+            userFlags: data?.data.userFlags,
 
             accessToken: data?.auth.accessToken,
             expiresAt: data?.auth.expiresAt,
@@ -48,7 +52,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id
         token.name = user.name!
@@ -56,13 +60,17 @@ export const authOptions: NextAuthOptions = {
 
         token.username = user.username
         token.profilePic = user.profilePic
-        token.systemRole = user.systemRole
-        token.organizationRoles = user.organizationRoles
+        token.userFlags = user.userFlags
 
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
         token.expiresAt = user.expiresAt
       }
+
+      if (trigger === "update") {
+        token.userFlags = session.userFlags
+      }
+
       // Check if token expired, refresh if necessary
 
       const expiredAtDate = new Date(token.expiresAt as string)
@@ -80,8 +88,21 @@ export const authOptions: NextAuthOptions = {
         )
         const data = await res.json()
 
+        if (!res.ok)
+          throw new Error(
+            "Refresh Error: " + data.message ||
+              "Refresh Error: Invalid credentials",
+          )
+
         token.accessToken = data.auth.accessToken
         token.expiresAt = data.auth.expiresAt
+
+        token.id = data?.data.id
+        token.name = data?.data.name
+        token.username = data?.data.username
+        token.email = data?.data.email
+        token.profilePic = data?.data.profilePic
+        token.userFlags = data?.data.userFlags
       }
 
       return token
@@ -93,8 +114,7 @@ export const authOptions: NextAuthOptions = {
 
       session.user.username = token.username
       session.user.profilePic = token.profilePic
-      session.user.systemRole = token.systemRole
-      session.user.organizationRoles = token.organizationRoles
+      session.user.userFlags = token.userFlags
 
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
@@ -103,7 +123,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/auth/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
 }

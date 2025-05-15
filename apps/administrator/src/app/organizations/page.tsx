@@ -14,6 +14,7 @@ import axios from "@/lib/axios"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 import Loading from "./loading"
+import { AuthGuard } from "@/components"
 
 interface Organization {
   id: string
@@ -36,7 +37,7 @@ export default function OrganizationPage() {
 
   if (error) return "An error has occurred: " + error.message
   return (
-    <>
+    <AuthGuard requiredPermissions={['adm:organizations:*']}>
       <Table>
         <TableCaption>A list of organizations.</TableCaption>
         <TableHeader>
@@ -60,6 +61,6 @@ export default function OrganizationPage() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AuthGuard>
   )
 }

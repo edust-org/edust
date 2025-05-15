@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 
 import Loading from "./loading"
+import { AuthGuard } from "@/components"
 
 interface Feedback {
   id: string
@@ -37,7 +38,7 @@ export default function Feedback() {
 
   if (error) return "An error has occurred: " + error.message
   return (
-    <>
+    <AuthGuard requiredPermissions={['adm:feedback:*']}>
       <Table>
         <TableCaption>A list of feedback.</TableCaption>
         <TableHeader>
@@ -70,6 +71,6 @@ export default function Feedback() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AuthGuard>
   )
 }

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui"
 import { useAuthMeLazy } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
-import { AccountType, AuthMe } from "@/types"
+import { AccountType } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import Link from "next/link"

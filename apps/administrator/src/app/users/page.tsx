@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthGuard } from "@/components"
 import {
   Button,
   DropdownMenu,
@@ -19,7 +20,6 @@ import {
 } from "@/components/ui"
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { OrganizationRoles, Roles } from "@/types"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 
@@ -51,7 +51,7 @@ export default function UsersPage() {
   if (error) return "An error has occurred: " + error.message
 
   return (
-    <>
+    <AuthGuard requiredPermissions={["adm:users:*"]}>
       <Table>
         <TableCaption>A list of users.</TableCaption>
         <TableHeader>
@@ -106,6 +106,6 @@ export default function UsersPage() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </AuthGuard>
   )
 }
