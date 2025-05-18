@@ -3,7 +3,7 @@ import {
   GetStudentUsersQuery,
   GetStudentUsersResponse,
   GetStudentsResponse,
-  PostStudentsRequest,
+  PostStudentsBody,
   PostStudentsResponse,
 } from "@/lib/api/v0/organizations/organization-types"
 import { ApiResponse } from "@/types"
@@ -30,7 +30,7 @@ export const studentHooks = {
     return useMutation<
       ApiResponse<PostStudentsResponse>,
       unknown,
-      { orgId: string; body: PostStudentsRequest }
+      { orgId: string; body: PostStudentsBody }
     >({
       mutationFn: api.v0.student.postStudent,
       onSuccess: (_, variables) => {

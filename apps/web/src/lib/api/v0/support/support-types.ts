@@ -1,0 +1,37 @@
+import { CloudinaryUploadResponse, SupportTicketStatus } from "@/types"
+
+export interface Ticket {
+  id: string
+  title: string
+  status: SupportTicketStatus
+  createdById: string
+  assignedToId?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface Message {
+  id: string
+  message?: string
+  imageUrls?: string[]
+  createdAt: string
+  updatedAt: string
+  sender: {
+    id: string
+    name: string
+    profilePic: string | null
+  }
+}
+
+export interface PostTicketBody {
+  title: string
+  message: string
+  imageUrls?: string[]
+  imageDetails?: CloudinaryUploadResponse[] | null
+}
+
+export interface PostMessageBody {
+  message?: string
+  imageUrls?: string[]
+  imageDetails?: CloudinaryUploadResponse[] | null
+}

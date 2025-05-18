@@ -35,8 +35,8 @@ const footerData = [
     title: "Support",
     links: [
       {
-        title: "Help Center",
-        href: "/help-center",
+        title: "Help",
+        href: "/help",
         isExternal: false,
       },
       {

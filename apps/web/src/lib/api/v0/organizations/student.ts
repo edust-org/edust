@@ -6,7 +6,7 @@ import {
   GetStudentUsersQuery,
   GetStudentUsersResponse,
   GetStudentsResponse,
-  PostStudentsRequest,
+  PostStudentsBody,
   PostStudentsResponse,
 } from "./organization-types"
 
@@ -40,7 +40,7 @@ export const student = {
     body,
   }: {
     orgId: string
-    body: PostStudentsRequest
+    body: PostStudentsBody
   }): Promise<ApiResponse<PostStudentsResponse>> => {
     const response = await axios.post(`${baseUrl}/${orgId}/students`, body)
     return response.data

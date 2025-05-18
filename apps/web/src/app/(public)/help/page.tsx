@@ -12,7 +12,7 @@ import Link from "next/link"
 
 import { SearchArticle } from "./components/search-article"
 
-export default async function HelpCenter({
+export default async function Help({
   searchParams,
 }: {
   searchParams: Promise<{ q: string }>

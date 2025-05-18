@@ -11,7 +11,7 @@ export const getUserNotifications = async (query?: {
   return response.data
 }
 
-interface EditReadPayload {
+export interface EditReadPayload {
   userNotificationIds?: string[]
   markAllAsRead?: boolean
 }

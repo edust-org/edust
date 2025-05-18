@@ -98,7 +98,7 @@ export type GetStudentsResponse = {
   items: Student[]
 }
 
-export type PostStudentsRequest = {
+export type PostStudentsBody = {
   userIds: string[]
 }
 

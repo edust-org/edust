@@ -73,26 +73,31 @@ const navMain: NavItem[] = [
     title: "Organizations",
     url: "/organizations",
     icon: Building2,
+    permission: permissions.admMenuOrganizations,
   },
   {
     title: "Institutes",
     url: "/institutes",
     icon: School,
+    permission: permissions.admMenuInstitutes,
   },
   {
     title: "Feedback",
     url: "/feedback",
     icon: MessageSquareX,
+    permission: permissions.admMenuFeedback,
   },
   {
     title: "Help Center",
     url: "/help-center",
     icon: BadgeHelp,
+    permission: permissions.admMenuHelpCenter,
   },
   {
     title: "Support",
     url: "/support",
     icon: BotMessageSquare,
+    permission: permissions.admMenuSupport,
   },
 ]
 

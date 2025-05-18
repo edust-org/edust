@@ -19,7 +19,14 @@ import {
 } from "@/components/ui"
 import { useTheme } from "@/hooks"
 import { useAuthStore } from "@/store"
-import { LayoutDashboard, LogOut, Plus, School, Settings } from "lucide-react"
+import {
+  CircleHelp,
+  LayoutDashboard,
+  LogOut,
+  Plus,
+  School,
+  Settings,
+} from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -90,6 +97,24 @@ export const RightMenus = () => {
                 <span>Settings</span>
               </DropdownMenuItem>
             </Link>
+          </DropdownMenuGroup>
+
+          <DropdownMenuGroup>
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>
+                <CircleHelp className="mr-2 h-4 w-4" /> Help & support
+              </DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent>
+                  <Link href={"/help"}>
+                    <DropdownMenuItem>Help</DropdownMenuItem>
+                  </Link>
+                  <Link href={"/dashboard/support"}>
+                    <DropdownMenuItem>Support & Tickets</DropdownMenuItem>
+                  </Link>
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
           </DropdownMenuGroup>
 
           {/* if academics available */}

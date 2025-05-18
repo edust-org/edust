@@ -1,35 +1,31 @@
 import api from "@/lib/api"
 import { GetCloudinarySignatureQuery } from "@/lib/api/v0/_others"
+import { CloudinaryUploadResponse } from "@/types"
 import axios from "axios"
 
-type CloudinaryUploadResponse = {
-  asset_id: string
-  public_id: string
-  version: number
-  version_id: string
-  signature: string
-  width: number
-  height: number
-  format: string
-  resource_type: string
-  created_at: string
-  tags: string[]
-  bytes: number
-  type: string
-  etag: string
-  placeholder: boolean
-  url: string
-  secure_url: string
-  folder: string
-  access_mode: string
-  original_filename: string
-  api_key: string
+type UploadCategory = "support"
+
+const handleUploadCategory = (uploadCategory: UploadCategory) => {
+  const query: GetCloudinarySignatureQuery = {}
+
+  switch (uploadCategory) {
+    case "support":
+      query.folderSuffixes = "/support"
+      break
+
+    default:
+      query.folderSuffixes = "/others"
+      break
+  }
+
+  return query
 }
 
 async function uploadImage(
   image: File,
-  query?: GetCloudinarySignatureQuery,
+  uploadCategory: UploadCategory,
 ): Promise<CloudinaryUploadResponse> {
+  const query = handleUploadCategory(uploadCategory)
   try {
     // Get signature and related data from your API
     const signatureResponse = await api.v0.getCloudinarySignature(query)

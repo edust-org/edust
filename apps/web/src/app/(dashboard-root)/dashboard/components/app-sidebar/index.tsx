@@ -39,6 +39,10 @@ const data = {
         },
       ],
     },
+    {
+      title: "Support",
+      url: "/dashboard/support",
+    },
   ],
 }
 

@@ -55,6 +55,7 @@
     "react-hook-form": "^7.56.1",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
+    "react-resizable-panels": "^3.0.2",
     "react-spinners": "^0.17.0",
     "reactjs-tiptap-editor": "^0.3.2",
     "redux-logger": "^3.0.6",

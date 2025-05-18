@@ -1,5 +1,6 @@
 export enum Status {
   pending = "PENDING",
+  inProgress = "IN_PROGRESS",
   active = "ACTIVE",
   inactive = "INACTIVE",
   banned = "BANNED",
@@ -22,6 +23,14 @@ export enum Status {
 
   unread = "UNREAD",
   read = "READ",
+
+  graduated = "GRADUATED",
+  dropped = "DROPPED",
+
+  open = "OPEN",
+  closed = "CLOSED",
+  queue = "QUEUE",
+  completed = "COMPLETED",
 }
 
 export default Status

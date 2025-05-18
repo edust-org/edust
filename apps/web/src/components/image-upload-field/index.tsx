@@ -9,11 +9,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui"
-import { ImageUp } from "lucide-react"
+import { ImageUp, Trash2 } from "lucide-react"
+import Image from "next/image"
 import { UseFormReturn } from "react-hook-form"
+import type { Path } from "react-hook-form"
 import { z } from "zod"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const MAX_FILE_SIZE = 1024 * 1024 * 2 // 2mb
 
@@ -35,64 +37,109 @@ export const imageUploadFieldZod = z
     return ACCEPTED_IMAGE_MIME_TYPES.includes(file?.[0]?.type)
   }, "Only .jpg, .jpeg, .png, and .webp formats are supported.")
 
-interface ImageUploadFieldProps {
-  form: UseFormReturn<
-    {
-      [k: string]: unknown
-    },
-    unknown,
-    undefined
-  >
-
-  formField: {
-    name: string
-    label?: string
-    description?: string
-  }
+interface FormField<TFieldValues> {
+  name: Path<TFieldValues>
+  label?: string
+  description?: string
 }
 
-export const ImageUploadField = ({
+interface ImageUploadFieldProps<TFieldValues extends Record<string, any>> {
+  form: UseFormReturn<TFieldValues>
+  formField: FormField<TFieldValues>
+}
+
+export function ImageUploadField<TFieldValues extends Record<string, any>>({
   form,
   formField,
-}: ImageUploadFieldProps) => {
+}: ImageUploadFieldProps<TFieldValues>) {
   const [selectedImage, setSelectedImage] = useState<File | undefined>(
     undefined,
   )
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [inputKey, setInputKey] = useState(Date.now())
+
+  useEffect(() => {
+    if (!selectedImage) {
+      setPreviewUrl(null)
+      return
+    }
+    const objectUrl = URL.createObjectURL(selectedImage)
+    setPreviewUrl(objectUrl)
+
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedImage])
+
+  const onDelete = () => {
+    setSelectedImage(undefined)
+    setPreviewUrl(null)
+    form.setValue(formField.name, undefined as any)
+    setInputKey(Date.now())
+  }
+
   return (
     <FormField
       control={form.control}
       name={formField.name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{formField.label || "Photo"}</FormLabel>
+          <FormLabel htmlFor={formField.name}>
+            {formField.label || "Photo"}
+          </FormLabel>
           <FormControl>
             <Button variant="outline" className="w-full" type="button">
               <input
+                key={inputKey}
                 type="file"
                 className="hidden"
-                id="fileInput"
+                id={formField.name}
                 accept="image/*"
                 onBlur={field.onBlur}
                 name={field.name}
                 onChange={(e) => {
+                  const file = e.target.files?.[0]
                   field.onChange(e.target.files)
-                  setSelectedImage(e.target.files?.[0])
+                  setSelectedImage(file)
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") e.preventDefault()
                 }}
                 ref={field.ref}
               />
               <label
-                htmlFor="fileInput"
-                className="flex w-full items-center gap-2"
+                htmlFor={formField.name}
+                className="flex w-full cursor-pointer items-center gap-2"
               >
                 <ImageUp size={20} />
                 <span className="whitespace-nowrap">
                   {selectedImage
-                    ? `${selectedImage.name}`
+                    ? selectedImage.name
                     : "Choose File No file chosen"}
                 </span>
               </label>
             </Button>
           </FormControl>
+
+          {previewUrl && (
+            <div className="relative mt-2 max-w-60">
+              <Image
+                src={previewUrl}
+                alt="Preview"
+                className="h-full w-full rounded-md object-cover"
+                width={100}
+                height={100}
+              />
+              <Button
+                type="button"
+                onClick={onDelete}
+                aria-label="Delete image"
+                size={"icon"}
+                variant={"ghost"}
+                className="absolute right-0 top-0"
+              >
+                <Trash2 size={16} color="red" />
+              </Button>
+            </div>
+          )}
 
           {formField.description && (
             <FormDescription>{formField.description}</FormDescription>
