@@ -3,7 +3,7 @@
 import { useThemeStore } from "@/store"
 import { detectTheme } from "@/utils"
 
-interface LogoEdustProps {
+type LogoEdustProps = {
   iconMode?: boolean
   width?: number
   height?: number

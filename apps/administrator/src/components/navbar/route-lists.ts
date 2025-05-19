@@ -1,4 +1,4 @@
-export interface RouteProps {
+export type RouteProps = {
   href: string
   label: string
 }

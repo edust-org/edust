@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui"
 
 type Status = "online" | "dnd" | "busy" | "offline"
 
-interface AvatarWithStatusProps {
+type AvatarWithStatusProps = {
   src: string | null // Avatar image URL
   alt: string // Alt text for the image
   fallback?: string | null | React.ReactNode // Fallback text for the avatar

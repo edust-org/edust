@@ -3,7 +3,7 @@ import axios from "@/lib/axios"
 import { ApiResponse } from "@/types"
 
 export type GetCloudinarySignatureQuery = {
-  folderPrefixes?: string
+  folderSuffixes?: string
 }
 
 type CloudinarySignatureResponse = {

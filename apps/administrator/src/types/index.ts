@@ -1,11 +1,13 @@
 export * from "./api-response"
 export * from "./auth"
+export * from "./cloudinary"
 export * from "./institute"
 export * from "./organization"
 export * from "./theme"
 export * from "./user"
 export * from "./common"
-export * from "./proifle"
+export * from "./profile"
+export * from "./status"
 
 export enum ActivePanel {
   "SELECTORS" = "SELECTORS",

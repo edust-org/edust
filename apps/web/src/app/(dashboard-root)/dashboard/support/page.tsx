@@ -41,38 +41,47 @@ export default function Support() {
           </Typography>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {data?.data.items.map((ticket) => (
-              <Link href={`support/tickets/${ticket.id}`} key={ticket.id}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{ticket.title}</CardTitle>
-                  </CardHeader>
+            {data?.data.items.map((ticket) => {
+              const isTrusted = ticket.status === SupportTicketStatus.trusted
+              return (
+                <Link
+                  key={ticket.id}
+                  href={isTrusted ? "#" : `support/tickets/${ticket.id}`}
+                  className={cn(isTrusted && "cursor-not-allowed")}
+                >
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{ticket.title}</CardTitle>
+                    </CardHeader>
 
-                  <CardFooter className="flex items-center justify-between gap-4">
-                    <Badge
-                      className={cn(
-                        "me-2",
-                        ticket.status === SupportTicketStatus.open &&
-                          "bg-blue-600 text-white hover:bg-blue-700",
-                        ticket.status === SupportTicketStatus.pending &&
-                          "bg-yellow-500 text-black hover:bg-yellow-600",
-                        ticket.status === SupportTicketStatus.inProgress &&
-                          "bg-indigo-500 text-white hover:bg-indigo-600",
-                        ticket.status === SupportTicketStatus.completed &&
-                          "bg-emerald-600 text-white hover:bg-emerald-700",
-                        ticket.status === SupportTicketStatus.closed &&
-                          "bg-gray-500 text-white hover:bg-gray-600",
-                      )}
-                    >
-                      {ticket.status}
-                    </Badge>
-                    {formatDistanceToNow(new Date(ticket.createdAt), {
-                      addSuffix: true,
-                    })}
-                  </CardFooter>
-                </Card>
-              </Link>
-            ))}
+                    <CardFooter className="flex items-center justify-between gap-4">
+                      <Badge
+                        className={cn(
+                          "me-2",
+                          ticket.status === SupportTicketStatus.open &&
+                            "bg-blue-600 text-white hover:bg-blue-700",
+                          ticket.status === SupportTicketStatus.pending &&
+                            "bg-yellow-500 text-black hover:bg-yellow-600",
+                          ticket.status === SupportTicketStatus.inProgress &&
+                            "bg-indigo-500 text-white hover:bg-indigo-600",
+                          ticket.status === SupportTicketStatus.completed &&
+                            "bg-emerald-600 text-white hover:bg-emerald-700",
+                          ticket.status === SupportTicketStatus.closed &&
+                            "bg-gray-500 text-white hover:bg-gray-600",
+                          ticket.status === SupportTicketStatus.trusted &&
+                            "bg-red-500 text-white hover:bg-red-600",
+                        )}
+                      >
+                        {ticket.status}
+                      </Badge>
+                      {formatDistanceToNow(new Date(ticket.createdAt), {
+                        addSuffix: true,
+                      })}
+                    </CardFooter>
+                  </Card>
+                </Link>
+              )
+            })}
           </div>
         </section>
       </SidebarContent>

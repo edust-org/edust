@@ -5,7 +5,7 @@ import { updateThemeOnDocument } from "@/utils"
 
 import { JSX, ReactNode, useEffect } from "react"
 
-interface ThemeProviderProps {
+type ThemeProviderProps = {
   children: ReactNode
 }
 
