@@ -21,6 +21,7 @@ export interface Message {
   imageUrls?: string[]
   createdAt: string
   updatedAt: string
+  seenAt?: string | null
   sender: {
     id: string
     name: string

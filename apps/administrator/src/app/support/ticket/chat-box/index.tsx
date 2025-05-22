@@ -81,7 +81,6 @@ export const ChatBox: React.FC<ChatBoxProps> = ({ ticketId }) => {
       })
 
       if (response.status === "SUCCESS") {
-        addMessage(response.data)
         form.reset()
         setPreviewUrls([])
       }

@@ -41,7 +41,7 @@ export default function Support() {
           </Typography>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {data?.data.items.map((ticket) => {
+            {data?.data.items?.map((ticket) => {
               const isTrusted = ticket.status === SupportTicketStatus.trusted
               return (
                 <Link
