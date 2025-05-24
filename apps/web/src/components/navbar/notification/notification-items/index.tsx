@@ -1,12 +1,12 @@
 "use client"
 
-import { Button, Typography } from "@/components/ui"
 import {
   useEditNotificationsAsRead,
   useGetUserNotifications,
 } from "@/hooks/react-query"
 import { Status } from "@/types"
-import { cn } from "@/utils"
+import { Button, Typography } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { formatDistanceToNow } from "date-fns"
 
 import React from "react"

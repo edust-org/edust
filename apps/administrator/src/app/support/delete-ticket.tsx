@@ -1,6 +1,6 @@
-import { DropdownMenuLabel } from "@/components/ui"
 import { ticketHooks } from "@/hooks/react-query"
 import { SupportTicketStatus } from "@/types"
+import { DropdownMenuLabel } from "@edust/ui"
 import { toast } from "sonner"
 
 type DeleteTicketProps = {

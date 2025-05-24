@@ -1,6 +1,9 @@
 "use client"
 
 import { ImageUploadField, imageUploadFieldZod } from "@/components"
+import axios from "@/lib/axios"
+import { Gender, Roles } from "@/types"
+import { asOptionalField } from "@/utils"
 import {
   Button,
   Form,
@@ -16,11 +19,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui"
-import { DatePicker } from "@/components/ui/manual"
-import axios from "@/lib/axios"
-import { Gender, Roles } from "@/types"
-import { asOptionalField } from "@/utils"
+} from "@edust/ui"
+import { DatePicker } from "@edust/ui/components/manual"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
 import { isEqual } from "date-fns"
@@ -203,7 +203,7 @@ export default function Profile() {
         })
 
         const user = response?.data?.data
-        
+
         session.update({
           ...session.data?.user,
           profilePic: user.profilePic,

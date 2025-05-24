@@ -1,11 +1,11 @@
+import { useTheme } from "@/hooks"
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui"
-import { useTheme } from "@/hooks"
+} from "@edust/ui"
 import { Moon, Sun } from "lucide-react"
 
 export function ThemeSwitch() {

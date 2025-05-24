@@ -1,6 +1,7 @@
 "use client"
 
 import { AuthGuard, HasPermission } from "@/components"
+import { useGetOrgMe, usePostOrganization } from "@/hooks/react-query"
 import {
   Button,
   Card,
@@ -9,8 +10,7 @@ import {
   CardHeader,
   CardTitle,
   Skeleton,
-} from "@/components/ui"
-import { useGetOrgMe, usePostOrganization } from "@/hooks/react-query"
+} from "@edust/ui"
 import Link from "next/link"
 import { BarLoader } from "react-spinners"
 import { toast } from "sonner"

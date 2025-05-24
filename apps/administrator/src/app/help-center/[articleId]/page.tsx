@@ -1,19 +1,16 @@
 "use client"
 
-import {
- 
-  Typography,
-} from "@/components/ui"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { Typography } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
 

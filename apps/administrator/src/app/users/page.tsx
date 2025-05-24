@@ -1,6 +1,8 @@
 "use client"
 
 import { AuthGuard } from "@/components"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Button,
   DropdownMenu,
@@ -17,9 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
+} from "@edust/ui"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
 

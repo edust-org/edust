@@ -1,10 +1,10 @@
 "use client"
 
 import { Loading } from "@/components/loading"
-import { Typography } from "@/components/ui"
 import { PermissionValues } from "@/lib/pm"
 import { authService } from "@/services"
 import { useAuthStore } from "@/store"
+import { Typography } from "@edust/ui"
 import { useSession } from "next-auth/react"
 
 import React, { useMemo } from "react"

@@ -1,6 +1,6 @@
-import "@/components/ui"
 import { defaultValues } from "@/configs"
 import { ProfileResponse } from "@/types"
+import "@edust/ui"
 
 import { ProfileDetailsCard } from "./components/profile-details-card"
 

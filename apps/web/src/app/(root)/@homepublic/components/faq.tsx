@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   Typography,
-} from "@/components/ui"
+} from "@edust/ui"
 
 interface FaqProps {
   question: string
@@ -68,7 +68,7 @@ export const Faq = () => {
     <section className="container py-24 sm:py-32">
       <div className="mx-auto md:w-[700px]">
         <div className="mb-8 text-center">
-          <Typography className="mb-2 text-center text-lg tracking-wider text-primary">
+          <Typography className="text-primary mb-2 text-center text-lg tracking-wider">
             FAQS
           </Typography>
           <Typography className="text-center text-3xl font-bold md:text-4xl">

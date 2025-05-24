@@ -1,6 +1,9 @@
 "use client"
 
 import { AuthGuard } from "@/components"
+import { ticketHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
+import { SupportTicketStatus } from "@/types"
 import {
   Badge,
   Button,
@@ -13,11 +16,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
   ScrollArea,
-} from "@/components/ui"
-import { ticketHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
-import { SupportTicketStatus } from "@/types"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { formatDistanceToNow } from "date-fns"
 import { EllipsisVertical } from "lucide-react"
 import Link from "next/link"

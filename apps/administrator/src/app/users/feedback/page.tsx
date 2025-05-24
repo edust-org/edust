@@ -1,5 +1,7 @@
 "use client"
 
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Table,
   TableBody,
@@ -8,9 +10,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
+} from "@edust/ui"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 

@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Typography,
-} from "@/components/ui"
 import { ProfileResponse } from "@/types"
+import { Card, CardContent, CardHeader, CardTitle, Typography } from "@edust/ui"
 import Image from "next/image"
 import Link from "next/link"
 

@@ -6,7 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
+} from "@edust/ui"
 
 export default function Loading() {
   return (

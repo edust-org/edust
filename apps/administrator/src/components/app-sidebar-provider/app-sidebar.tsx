@@ -1,4 +1,7 @@
 import { NavbarRightMenus } from "@/components/navbar/navbar-right-menus"
+import { defaultValues } from "@/configs"
+import { permissions } from "@/lib/pm"
+import { useAuthStore } from "@/store"
 import {
   Sidebar,
   SidebarContent,
@@ -7,10 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { defaultValues } from "@/configs"
-import { permissions } from "@/lib/pm"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { GalleryVerticalEnd, House } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useDebounceValue } from "usehooks-ts"

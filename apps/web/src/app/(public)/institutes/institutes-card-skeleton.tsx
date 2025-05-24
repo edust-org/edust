@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardTitle,
   Skeleton,
-} from "@/components/ui"
+} from "@edust/ui"
 import { Link } from "react-router"
 
 export const InstitutesCardSkeleton = () => {

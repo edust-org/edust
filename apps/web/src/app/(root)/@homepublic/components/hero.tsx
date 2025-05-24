@@ -1,5 +1,5 @@
-import { Button, Typography } from "@/components/ui"
-import { cn } from "@/utils"
+import { Button, Typography } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import Link from "next/link"
 
 export const Hero = () => {
@@ -8,19 +8,19 @@ export const Hero = () => {
       <div className="flex max-w-[980px] flex-col items-center gap-6 pb-24">
         <Typography
           variant="h1"
-          className="font-pixel z-10 text-center font-bold leading-tight tracking-wider text-accent-foreground"
+          className="font-pixel text-accent-foreground z-10 text-center font-bold leading-tight tracking-wider"
         >
           Build your own site for your
           <Typography className="z-10 mt-0 underline decoration-gray-400 decoration-4 underline-offset-2 sm:mt-0 md:mt-0 lg:mt-3">
             organizations
           </Typography>
         </Typography>
-        <Typography className="z-10 max-w-[700px] text-center text-lg text-accent-foreground sm:text-xl">
+        <Typography className="text-accent-foreground z-10 max-w-[700px] text-center text-lg sm:text-xl">
           Don’t worry about Domain and Hoisting just build your site and publish
           it.
         </Typography>{" "}
         <Typography
-          className="z-10 max-w-[700px] text-center text-accent-foreground"
+          className="text-accent-foreground z-10 max-w-[700px] text-center"
           affects="removePaddingMargin"
         >
           Discover new features, create organizations, and build customizable

@@ -1,6 +1,6 @@
 "use client"
 
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@edust/ui"
 import { usePathname } from "next/navigation"
 
 import { useMemo } from "react"

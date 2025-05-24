@@ -1,6 +1,6 @@
 "use client"
 
-import { Skeleton } from "@/components/ui"
+import { Skeleton } from "@edust/ui"
 
 export default function Loading() {
   return (

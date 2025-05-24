@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui"
 import { defaultValues } from "@/configs"
+import { Button } from "@edust/ui"
 import { FaGithub, FaGoogle } from "react-icons/fa"
 
 export const SocialAuth = () => {

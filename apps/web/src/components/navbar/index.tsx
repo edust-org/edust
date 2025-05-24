@@ -5,8 +5,8 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
   Skeleton,
-} from "@/components/ui"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
 

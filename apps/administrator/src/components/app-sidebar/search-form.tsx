@@ -1,9 +1,5 @@
-import { Label } from "@/components/ui/label"
-import {
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarInput,
-} from "@/components/ui/sidebar"
+import { SidebarGroup, SidebarGroupContent, SidebarInput } from "@edust/ui"
+import { Label } from "@edust/ui"
 import { Search } from "lucide-react"
 
 export function SearchForm({

@@ -1,6 +1,6 @@
 "use client"
 
-import { Separator, Typography } from "@/components/ui"
+import { Separator, Typography } from "@edust/ui"
 
 import { Layout } from "./components/layout"
 

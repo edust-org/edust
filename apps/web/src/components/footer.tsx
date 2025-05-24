@@ -1,5 +1,5 @@
 import { LogoEdust } from "@/components"
-import { Separator, Typography } from "@/components/ui"
+import { Separator, Typography } from "@edust/ui"
 import Link from "next/link"
 import { FaFacebook, FaLinkedin } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"

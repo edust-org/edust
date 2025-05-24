@@ -3,13 +3,13 @@
 import { LogoEdust, ThemeSwitch } from "@/components"
 import {
   Button,
+  Separator,
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
   buttonVariants,
-} from "@/components/ui"
-import { Separator } from "@radix-ui/react-dropdown-menu"
+} from "@edust/ui"
 import { Menu } from "lucide-react"
 import { useSession } from "next-auth/react"
 import Link from "next/link"

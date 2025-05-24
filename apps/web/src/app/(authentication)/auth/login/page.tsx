@@ -1,6 +1,9 @@
 "use client"
 
 import { LogoEdust } from "@/components"
+import { useAuthMeLazy } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
+import { AccountType } from "@/types"
 import {
   Button,
   Form,
@@ -11,10 +14,7 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui"
-import { useAuthMeLazy } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
-import { AccountType } from "@/types"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import Link from "next/link"

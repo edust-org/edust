@@ -1,3 +1,5 @@
+import { ticketHooks } from "@/hooks/react-query"
+import { SupportTicketStatus } from "@/types"
 import {
   Button,
   Dialog,
@@ -17,9 +19,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui"
-import { ticketHooks } from "@/hooks/react-query"
-import { SupportTicketStatus } from "@/types"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"

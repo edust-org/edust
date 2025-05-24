@@ -1,5 +1,6 @@
 "use client"
 
+import { useThemeStore } from "@/store"
 import {
   Button,
   Form,
@@ -11,8 +12,7 @@ import {
   FormMessage,
   RadioGroup,
   RadioGroupItem,
-} from "@/components/ui"
-import { useThemeStore } from "@/store"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"

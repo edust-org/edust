@@ -1,3 +1,4 @@
+import { useGetOrgLists } from "@/hooks/react-query"
 import {
   Button,
   Card,
@@ -6,8 +7,7 @@ import {
   CardTitle,
   Skeleton,
   Typography,
-} from "@/components/ui"
-import { useGetOrgLists } from "@/hooks/react-query"
+} from "@edust/ui"
 import { format } from "date-fns"
 import Link from "next/link"
 

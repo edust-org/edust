@@ -1,9 +1,9 @@
 "use client"
 
 import { AuthGuard } from "@/components"
-import { Typography } from "@/components/ui"
 import { studentHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
+import { Typography } from "@edust/ui"
 
 import { Layout } from "../components/layout"
 import { AddNewUser } from "./add-new-user"

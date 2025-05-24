@@ -1,13 +1,7 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { AccountType } from "@/types"
+import { Input } from "@edust/ui"
 import {
   Form,
   FormControl,
@@ -15,10 +9,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { AccountType } from "@/types"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@edust/ui"
+import { Button } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import Link from "next/link"

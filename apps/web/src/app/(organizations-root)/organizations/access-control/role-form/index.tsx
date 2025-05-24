@@ -1,3 +1,6 @@
+import { accessControlHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
+import { asOptionalField } from "@/utils"
 import {
   Button,
   Card,
@@ -10,10 +13,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/components/ui"
-import { accessControlHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
-import { asOptionalField } from "@/utils"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"

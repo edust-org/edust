@@ -1,5 +1,7 @@
 "use client"
 
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Button,
   Form,
@@ -13,11 +15,9 @@ import {
   RadioGroup,
   RadioGroupItem,
   Textarea,
-} from "@/components/ui"
-import { MultipleSelector, Option } from "@/components/ui/manual"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { MultipleSelector, Option } from "@edust/ui/components/manual"
+import { cn } from "@edust/ui/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"

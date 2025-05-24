@@ -1,6 +1,7 @@
 "use client"
 
 import { LogoEdust } from "@/components"
+import { useCheckOtp } from "@/hooks/react-query"
 import {
   Button,
   Form,
@@ -13,8 +14,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
   Typography,
-} from "@/components/ui"
-import { useCheckOtp } from "@/hooks/react-query"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { MailOpen } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"

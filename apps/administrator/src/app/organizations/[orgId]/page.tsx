@@ -1,11 +1,7 @@
 "use client"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Typography,
-} from "@/components/ui"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Card,
   CardContent,
@@ -13,14 +9,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { Avatar, AvatarFallback, AvatarImage, Typography } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "next/navigation"
-
-
 
 export default function OrganizationsDetails() {
   const params = useParams<{ orgId: string }>()

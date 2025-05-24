@@ -8,7 +8,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui"
+} from "@edust/ui"
 import { ImageUp, Trash2 } from "lucide-react"
 import Image from "next/image"
 import { UseFormReturn } from "react-hook-form"

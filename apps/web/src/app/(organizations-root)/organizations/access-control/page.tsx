@@ -1,6 +1,9 @@
 "use client"
 
 import { AuthGuard, HasPermission } from "@/components"
+import { accessControlHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
+import { Roles } from "@/types"
 import {
   Button,
   Card,
@@ -20,10 +23,7 @@ import {
   TabsList,
   TabsTrigger,
   Typography,
-} from "@/components/ui"
-import { accessControlHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
-import { Roles } from "@/types"
+} from "@edust/ui"
 import { Edit } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"

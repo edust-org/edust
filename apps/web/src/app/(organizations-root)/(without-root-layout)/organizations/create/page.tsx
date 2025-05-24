@@ -1,5 +1,5 @@
 import { LogoEdust } from "@/components"
-import { Typography } from "@/components/ui"
+import { Typography } from "@edust/ui"
 import Image from "next/image"
 import Link from "next/link"
 

@@ -1,4 +1,6 @@
 import { AvatarWithStatus } from "@/components"
+import { accessControlHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
 import {
   Badge,
   Button,
@@ -8,9 +10,7 @@ import {
   CardTitle,
   Skeleton,
   Typography,
-} from "@/components/ui"
-import { accessControlHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { toast } from "sonner"
 
 import React from "react"

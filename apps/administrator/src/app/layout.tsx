@@ -1,9 +1,9 @@
 import { AppSidebarProvider } from "@/components"
 import { AuthGuard } from "@/components/guards"
+import "@edust/ui/globals.css"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
-import "./globals.css"
 import ReactQueryProvider from "./react-query-provider"
 import SessionProvider from "./session-provider"
 

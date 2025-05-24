@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store"
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -5,8 +6,7 @@ import {
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-} from "@/components/ui"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { School } from "lucide-react"
 import { useRouter } from "next/navigation"
 

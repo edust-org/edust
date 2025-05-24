@@ -1,13 +1,7 @@
 "use client"
 
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  Skeleton,
-} from "@/components/ui"
-import { cn } from "@/utils"
+import { Card, CardContent, CardFooter, CardHeader, Skeleton } from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 
 export default function Lsoading() {
   return (

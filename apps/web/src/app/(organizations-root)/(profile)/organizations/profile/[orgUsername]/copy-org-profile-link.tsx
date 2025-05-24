@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui"
+import { Button } from "@edust/ui"
 import { Share2 } from "lucide-react"
 import { toast } from "sonner"
 import { useCopyToClipboard } from "usehooks-ts"

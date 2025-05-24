@@ -1,3 +1,6 @@
+import { ticketHooks } from "@/hooks/react-query"
+import { CloudinaryUploadResponse } from "@/types"
+import { cloudinary, cn } from "@/utils"
 import {
   Button,
   Form,
@@ -7,10 +10,7 @@ import {
   FormLabel,
   Input,
   Textarea,
-} from "@/components/ui"
-import { ticketHooks } from "@/hooks/react-query"
-import { CloudinaryUploadResponse } from "@/types"
-import { cloudinary, cn } from "@/utils"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ImageUp, X } from "lucide-react"
 import Image from "next/image"

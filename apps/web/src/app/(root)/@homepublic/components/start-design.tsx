@@ -1,4 +1,4 @@
-import { Button, Typography } from "@/components/ui"
+import { Button, Typography } from "@edust/ui"
 import Link from "next/link"
 
 export const StartDesign = () => {

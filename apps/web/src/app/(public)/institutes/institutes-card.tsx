@@ -1,3 +1,4 @@
+import { useGetFlagsByCountry } from "@/hooks/react-query/_others"
 import {
   Avatar,
   AvatarFallback,
@@ -9,8 +10,7 @@ import {
   CardTitle,
   Skeleton,
   Typography,
-} from "@/components/ui"
-import { useGetFlagsByCountry } from "@/hooks/react-query/_others"
+} from "@edust/ui"
 import { format } from "date-fns"
 import { Mail, MapPin, Phone } from "lucide-react"
 import Link from "next/link"

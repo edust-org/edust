@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Typography } from "@/components/ui"
+import { Button, Typography } from "@edust/ui"
 import { useRouter } from "next/navigation"
 import { TbPlanet } from "react-icons/tb"
 

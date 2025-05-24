@@ -11,7 +11,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-} from "@/components/ui"
+} from "@edust/ui"
 import { Settings2 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
   Typography,
-} from "@/components/ui"
+} from "@edust/ui"
 
 enum ProService {
   YES = 1,
@@ -46,14 +46,14 @@ const serviceList: ServiceProps[] = [
 export const Services = () => {
   return (
     <section className="container py-24 sm:py-32">
-      <Typography className="mb-2 text-center text-lg tracking-wider text-primary">
+      <Typography className="text-primary mb-2 text-center text-lg tracking-wider">
         Services
       </Typography>
 
       <Typography className="mb-4 text-center text-3xl font-bold md:text-4xl">
         Grow Your Organization
       </Typography>
-      <Typography className="mx-auto mb-8 text-center text-xl text-muted-foreground md:w-1/2">
+      <Typography className="text-muted-foreground mx-auto mb-8 text-center text-xl md:w-1/2">
         Empower your organization with tools to create a unique and impactful
         website tailored to your educational goals.
       </Typography>
@@ -63,7 +63,7 @@ export const Services = () => {
         {serviceList.map(({ title, description, pro }) => (
           <Card
             key={title}
-            className="relative h-full bg-muted/60 dark:bg-card"
+            className="bg-muted/60 dark:bg-card relative h-full"
           >
             <CardHeader>
               <CardTitle>{title}</CardTitle>

@@ -1,14 +1,18 @@
-import { FaDiscord, FaWhatsapp } from "react-icons/fa"
-import { PhoneCall } from "lucide-react"
-import { Typography } from "@/components/ui"
 import { defaultValues } from "@/configs"
+import { Typography } from "@edust/ui"
+import { PhoneCall } from "lucide-react"
+import { FaDiscord, FaWhatsapp } from "react-icons/fa"
+
 export const ContactText = () => {
   return (
     <>
       <div className="flex flex-col gap-6">
-        <section className="flex flex-col gap-3 ">{/* px-6*/}
+        <section className="flex flex-col gap-3">
+          {/* px-6*/}
           <div>
-            <p className="text-2xl font-semibold text-black pb-6">Chat with us</p>
+            <p className="pb-6 text-2xl font-semibold text-black">
+              Chat with us
+            </p>
             <p className="text-base text-slate-900">
               Live Chat Connect with our friendly team <br /> via live chat for
               immediate assistance.
@@ -28,7 +32,9 @@ export const ContactText = () => {
             </Typography>
           </div>
         </section>
-        <section className="flex flex-col gap-3"> {/* p-6*/}
+        <section className="flex flex-col gap-3">
+          {" "}
+          {/* p-6*/}
           <Typography variant="h3">Phone Support</Typography>
           <Typography affects="removePaddingMargin">
             Our team is available by phone Monday <br /> to Friday, 8 AM - 5 PM.

@@ -1,4 +1,4 @@
-import { Button, Input } from "@/components/ui"
+import { Button, Input } from "@edust/ui"
 
 export const ContactNewsletter = () => {
   return (

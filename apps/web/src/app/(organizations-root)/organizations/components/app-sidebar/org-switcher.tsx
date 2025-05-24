@@ -1,7 +1,14 @@
 "use client"
 
 import { AvatarWithStatus } from "@/components"
-import { Badge } from "@/components/ui"
+import { authService } from "@/services"
+import { useAuthStore } from "@/store"
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@edust/ui"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,15 +16,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar"
-import { authService } from "@/services"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
+import { Badge } from "@edust/ui"
 import { Building2, ChevronsUpDown } from "lucide-react"
 
 import * as React from "react"

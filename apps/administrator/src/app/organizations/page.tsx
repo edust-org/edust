@@ -1,5 +1,8 @@
 "use client"
 
+import { AuthGuard } from "@/components"
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
 import {
   Table,
   TableBody,
@@ -8,13 +11,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
+} from "@edust/ui"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
+
 import Loading from "./loading"
-import { AuthGuard } from "@/components"
 
 interface Organization {
   id: string
@@ -33,11 +34,11 @@ export default function OrganizationPage() {
       ),
   })
 
-  if (isPending) return (<Loading/>)
+  if (isPending) return <Loading />
 
   if (error) return "An error has occurred: " + error.message
   return (
-    <AuthGuard requiredPermissions={['adm:organizations:*']}>
+    <AuthGuard requiredPermissions={["adm:organizations:*"]}>
       <Table>
         <TableCaption>A list of organizations.</TableCaption>
         <TableHeader>
@@ -55,7 +56,10 @@ export default function OrganizationPage() {
               <TableCell>{organization.site?.id}</TableCell>
               <TableCell>
                 {" "}
-                <Link href={`organizations/${organization.id}`}> Details </Link>{" "}
+                <Link href={`organizations/${organization.id}`}>
+                  {" "}
+                  Details{" "}
+                </Link>{" "}
               </TableCell>
             </TableRow>
           ))}

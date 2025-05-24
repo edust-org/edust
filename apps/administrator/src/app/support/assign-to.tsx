@@ -1,4 +1,6 @@
 import { AvatarWithStatus } from "@/components"
+import { supportHooks, ticketHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
 import {
   Button,
   Dialog,
@@ -10,9 +12,7 @@ import {
   DropdownMenuLabel,
   Input,
   Typography,
-} from "@/components/ui"
-import { supportHooks, ticketHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { useDebounceValue } from "usehooks-ts"
 import { z } from "zod"
 

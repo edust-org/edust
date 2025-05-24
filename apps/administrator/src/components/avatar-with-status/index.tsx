@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui"
+import { Avatar, AvatarFallback, AvatarImage } from "@edust/ui"
 
 type Status = "online" | "dnd" | "busy" | "offline"
 

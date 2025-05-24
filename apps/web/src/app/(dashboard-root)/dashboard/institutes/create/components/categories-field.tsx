@@ -1,3 +1,4 @@
+import { useGetInstitutesCategories } from "@/hooks/react-query"
 import {
   Button,
   Command,
@@ -17,9 +18,8 @@ import {
   PopoverTrigger,
   Skeleton,
   Typography,
-} from "@/components/ui"
-import { useGetInstitutesCategories } from "@/hooks/react-query"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 import Link from "next/link"
 

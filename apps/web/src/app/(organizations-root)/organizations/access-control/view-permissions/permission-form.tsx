@@ -1,5 +1,9 @@
 "use client"
 
+import { defaultValues } from "@/configs"
+import axios from "@/lib/axios"
+import { useAuthStore } from "@/store"
+import { Roles } from "@/types"
 import {
   Button,
   Card,
@@ -13,11 +17,7 @@ import {
   FormItem,
   FormLabel,
   Switch,
-} from "@/components/ui"
-import { defaultValues } from "@/configs"
-import axios from "@/lib/axios"
-import { useAuthStore } from "@/store"
-import { Roles } from "@/types"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AxiosError } from "axios"
 import { UseFormReturn, useForm } from "react-hook-form"

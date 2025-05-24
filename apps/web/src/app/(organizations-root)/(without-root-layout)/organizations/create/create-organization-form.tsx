@@ -1,5 +1,9 @@
 "use client"
 
+import { Checkbox } from "@/components/ui/checkbox"
+import { useGetOrgLists, usePostOrganization } from "@/hooks/react-query"
+import { OrganizationRoles } from "@/types"
+import { convertSlug } from "@/utils"
 import {
   Button,
   Form,
@@ -9,11 +13,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/components/ui"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useGetOrgLists, usePostOrganization } from "@/hooks/react-query"
-import { OrganizationRoles } from "@/types"
-import { convertSlug } from "@/utils"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"

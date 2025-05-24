@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Typography } from "@/components/ui"
+import { Button, Typography } from "@edust/ui"
 import { useRouter } from "next/navigation"
 import { TbPlanet } from "react-icons/tb"
 
@@ -21,7 +21,7 @@ export const ComingSoon = ({ className }: ComingSoonProps) => {
           Coming Soon 👀
         </Typography>
         <Typography
-          className="mb-4 text-center text-muted-foreground"
+          className="text-muted-foreground mb-4 text-center"
           affects="removePaddingMargin"
         >
           This page has not been created yet. <br />

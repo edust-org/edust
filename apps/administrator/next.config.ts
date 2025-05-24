@@ -35,6 +35,7 @@ const nextConfig: NextConfig = {
   devIndicators: {
     position: "bottom-right",
   },
+  transpilePackages: ["@edust/ui"],
 }
 
 export default nextConfig

@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui"
+import { Button } from "@edust/ui"
 import { ArrowLeft } from "lucide-react"
 
 export const BackButton = () => {

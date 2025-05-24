@@ -1,3 +1,4 @@
+import { defaultValues } from "@/configs"
 import {
   Button,
   Card,
@@ -5,8 +6,7 @@ import {
   CardFooter,
   CardHeader,
   Typography,
-} from "@/components/ui"
-import { defaultValues } from "@/configs"
+} from "@edust/ui"
 import { Metadata, ResolvingMetadata } from "next"
 import Head from "next/head"
 import Image from "next/image"

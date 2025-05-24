@@ -1,6 +1,7 @@
 "use client"
 
 import { LogoEdust } from "@/components"
+import { useResetPassword } from "@/hooks/react-query"
 import {
   Button,
   Form,
@@ -11,8 +12,7 @@ import {
   FormMessage,
   Input,
   Typography,
-} from "@/components/ui"
-import { useResetPassword } from "@/hooks/react-query"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { KeySquare } from "lucide-react"
 import Link from "next/link"

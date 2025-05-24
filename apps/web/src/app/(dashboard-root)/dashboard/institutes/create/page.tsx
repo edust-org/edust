@@ -1,6 +1,9 @@
 "use client"
 
 import { Loading } from "@/components"
+import { useGetMeInstitutesLists, usePostInstitute } from "@/hooks/react-query"
+import { Status } from "@/types"
+import { cn, convertSlug } from "@/utils"
 import {
   Button,
   Card,
@@ -24,11 +27,8 @@ import {
   PopoverContent,
   PopoverTrigger,
   Textarea,
-} from "@/components/ui"
-import { DatePicker } from "@/components/ui/manual/date-picker"
-import { useGetMeInstitutesLists, usePostInstitute } from "@/hooks/react-query"
-import { Status } from "@/types"
-import { cn, convertSlug } from "@/utils"
+} from "@edust/ui"
+import { DatePicker } from "@edust/ui/components/manual/date-picker"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
 import { Check, ChevronsUpDown, ImageUp } from "lucide-react"

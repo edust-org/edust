@@ -1,4 +1,7 @@
 import { AvatarWithStatus } from "@/components"
+import { studentHooks } from "@/hooks/react-query"
+import { Student } from "@/lib/api/v0/organizations/organization-types"
+import { useAuthStore } from "@/store"
 import {
   Button,
   DropdownMenu,
@@ -12,10 +15,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import { studentHooks } from "@/hooks/react-query"
-import { Student } from "@/lib/api/v0/organizations/organization-types"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { MoreHorizontal, Trash2 } from "lucide-react"
 
 interface ListOfStudentsTableProps {

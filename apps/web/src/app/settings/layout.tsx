@@ -1,5 +1,5 @@
 import { LogoEdust } from "@/components"
-import { Separator } from "@/components/ui"
+import { Separator } from "@edust/ui"
 import Link from "next/link"
 
 import { SidebarNav } from "./components/sidebar-nav"

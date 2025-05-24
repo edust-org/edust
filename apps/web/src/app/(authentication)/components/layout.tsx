@@ -1,4 +1,4 @@
-import { cn } from "@/utils"
+import { cn } from "@edust/ui/utils"
 
 import { ReactNode } from "react"
 
@@ -11,7 +11,7 @@ export const Layout = ({ children, className }: LayoutProps) => {
   return (
     <div
       className={cn(
-        "flex h-screen items-center justify-center bg-muted p-4",
+        "bg-muted flex h-screen items-center justify-center p-4",
         className,
       )}
     >

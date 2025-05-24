@@ -1,11 +1,6 @@
 "use client"
 
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
@@ -14,7 +9,8 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
+} from "@edust/ui"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@edust/ui"
 import { ChevronRight, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 

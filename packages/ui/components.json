@@ -6,13 +6,13 @@
   "tailwind": {
     "config": "",
     "css": "src/styles/globals.css",
-    "baseColor": "neutral",
+    "baseColor": "slate",
     "cssVariables": true
   },
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@edust/ui/components",
-    "utils": "@edust/ui/lib/utils",
+    "utils": "@edust/ui/utils",
     "hooks": "@edust/ui/hooks",
     "lib": "@edust/ui/lib",
     "ui": "@edust/ui/components"

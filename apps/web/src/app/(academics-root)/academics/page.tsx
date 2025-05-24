@@ -1,8 +1,8 @@
 "use client"
 
-import { Typography } from "@/components/ui"
 import { authService } from "@/services"
 import { useAuthStore } from "@/store"
+import { Typography } from "@edust/ui"
 
 export default function Organizations() {
   const state = useAuthStore((state) => state)

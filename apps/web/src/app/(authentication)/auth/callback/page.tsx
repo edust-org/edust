@@ -1,6 +1,6 @@
 "use client"
 
-import { Typography } from "@/components/ui"
+import { Typography } from "@edust/ui"
 import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 

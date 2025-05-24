@@ -1,6 +1,8 @@
 "use client"
 
 import { Loading, Navbar } from "@/components"
+import { Badge } from "@/components/ui/badge"
+import { useGetInstituteById } from "@/hooks/react-query"
 import {
   Alert,
   AlertDescription,
@@ -14,9 +16,7 @@ import {
   TableCell,
   TableRow,
   Typography,
-} from "@/components/ui"
-import { Badge } from "@/components/ui/badge"
-import { useGetInstituteById } from "@/hooks/react-query"
+} from "@edust/ui"
 import { format } from "date-fns"
 import { Terminal } from "lucide-react"
 import Link from "next/link"

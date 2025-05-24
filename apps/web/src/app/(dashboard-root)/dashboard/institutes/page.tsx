@@ -1,6 +1,11 @@
 "use client"
 
 import {
+  useDeleteInstituteById,
+  useGetMeInstitutesLists,
+} from "@/hooks/react-query"
+import { Status } from "@/types"
+import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
@@ -14,13 +19,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui"
-import {
-  useDeleteInstituteById,
-  useGetMeInstitutesLists,
-} from "@/hooks/react-query"
-import { Status } from "@/types"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"

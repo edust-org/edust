@@ -1,11 +1,11 @@
+import { Typography } from "@edust/ui"
 import { ExternalLink } from "lucide-react"
 
 import packageInfo from "../../package.json"
-import { Typography } from "./ui"
 
 export const GlobalTopNotificationBar = () => {
   return (
-    <div className="flex items-center justify-center gap-2 bg-primary text-xs text-white dark:from-gray-100 dark:to-gray-200 dark:text-gray-950">
+    <div className="bg-primary flex items-center justify-center gap-2 text-xs text-white dark:from-gray-100 dark:to-gray-200 dark:text-gray-950">
       <Typography affects="removePaddingMargin" className="leading-6">
         Edust - Development in Phase{" "}
       </Typography>

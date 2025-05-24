@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui"
+} from "@edust/ui"
 import Link from "next/link"
 import { IoMenuSharp } from "react-icons/io5"
 

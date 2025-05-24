@@ -1,5 +1,6 @@
 "use client"
 
+import { useAuthStore } from "@/store"
 import {
   Button,
   Card,
@@ -8,8 +9,7 @@ import {
   CardHeader,
   CardTitle,
   Typography,
-} from "@/components/ui"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 
 import React, { useEffect, useState } from "react"
 

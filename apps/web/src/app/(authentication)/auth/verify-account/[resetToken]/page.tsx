@@ -1,8 +1,8 @@
 "use client"
 
 // import assets from "@/assets/images"
-import { Typography } from "@/components/ui"
 import { useVerifyEmailByToken } from "@/hooks/react-query"
+import { Typography } from "@edust/ui"
 import { useParams, useRouter } from "next/navigation"
 import { BeatLoader } from "react-spinners"
 import { toast } from "sonner"

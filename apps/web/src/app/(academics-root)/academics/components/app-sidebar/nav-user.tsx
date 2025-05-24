@@ -1,7 +1,14 @@
 "use client"
 
 import { AvatarWithStatus } from "@/components"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useTheme } from "@/hooks"
+import { useAuthStore } from "@/store"
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "@edust/ui"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,15 +17,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar"
-import { useTheme } from "@/hooks"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
+import { Avatar, AvatarFallback, AvatarImage } from "@edust/ui"
 import { ChevronsUpDown, LayoutDashboard, LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Link from "next/link"

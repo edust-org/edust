@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, Card, Typography } from "@/components/ui"
+import { Button, Card, Typography } from "@edust/ui"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 

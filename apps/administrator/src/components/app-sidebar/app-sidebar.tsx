@@ -1,5 +1,9 @@
 "use client"
 
+import { defaultValues } from "@/configs"
+import { PermissionValues, permissions } from "@/lib/pm"
+import { authService } from "@/services"
+import { useAuthStore } from "@/store"
 import {
   Sidebar,
   SidebarContent,
@@ -9,11 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { defaultValues } from "@/configs"
-import { PermissionValues, permissions } from "@/lib/pm"
-import { authService } from "@/services"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import {
   AudioWaveform,
   BadgeHelp,

@@ -1,15 +1,15 @@
 "use client"
 
-import { Typography } from "@/components/ui"
-import { Button } from "@/components/ui/button"
+import { Button } from "@edust/ui"
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@edust/ui"
+import { Input } from "@edust/ui"
+import { Typography } from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"

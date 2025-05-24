@@ -1,4 +1,4 @@
-import { Typography } from "@/components/ui"
+import { Typography } from "@edust/ui"
 
 export default function AboutUs() {
   return (

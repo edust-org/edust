@@ -1,6 +1,9 @@
 "use client"
 
 import { ImageUploadField, imageUploadFieldZod } from "@/components"
+import { ticketHooks } from "@/hooks/react-query"
+import { CloudinaryUploadResponse } from "@/types"
+import { cloudinary } from "@/utils"
 import {
   Button,
   Card,
@@ -14,10 +17,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/components/ui"
-import { ticketHooks } from "@/hooks/react-query"
-import { CloudinaryUploadResponse } from "@/types"
-import { cloudinary } from "@/utils"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"

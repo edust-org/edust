@@ -1,10 +1,10 @@
 "use client"
 
-import { ScrollArea } from "@/components/ui"
 import { ticketHooks } from "@/hooks/react-query"
 import { Message } from "@/lib/api/v0/support/support-types"
 import { socketEvents } from "@/lib/socket"
 import { useAuthStore } from "@/store"
+import { ScrollArea } from "@edust/ui"
 import { useParams } from "next/navigation"
 
 import { useEffect } from "react"

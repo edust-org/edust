@@ -1,5 +1,4 @@
 import assets from "@/assets/images"
-import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
   NavigationMenuLink,
@@ -14,6 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { useAppSelector } from "@/lib/store/hooks"
+import { Button } from "@edust/ui"
 import Link from "next/link"
 import { IoMenuSharp } from "react-icons/io5"
 

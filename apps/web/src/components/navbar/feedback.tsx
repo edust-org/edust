@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui"
+} from "@edust/ui"
 
 import React from "react"
 

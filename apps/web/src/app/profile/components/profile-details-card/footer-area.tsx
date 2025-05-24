@@ -1,8 +1,8 @@
 "use client"
 
 import { ShareButton } from "@/components"
-import { CardFooter } from "@/components/ui"
 import type { User } from "@/types"
+import { CardFooter } from "@edust/ui"
 
 type UserType = Pick<User, "id" | "username">
 

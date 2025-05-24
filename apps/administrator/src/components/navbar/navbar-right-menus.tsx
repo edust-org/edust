@@ -1,5 +1,7 @@
 "use client"
 
+import { useTheme } from "@/hooks"
+import { useAuthStore } from "@/store"
 import {
   Avatar,
   AvatarFallback,
@@ -12,9 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui"
-import { useTheme } from "@/hooks"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { ChevronsUpDown, LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"

@@ -8,8 +8,8 @@ import {
   SheetHeader,
   SheetTrigger,
   buttonVariants,
-} from "@/components/ui"
-import { Separator } from "@radix-ui/react-dropdown-menu"
+} from "@edust/ui"
+import { Separator } from "@edust/ui"
 import { Menu } from "lucide-react"
 import Link from "next/link"
 

@@ -1,6 +1,9 @@
 "use client"
 
 import { ImageUploadField, imageUploadFieldZod } from "@/components"
+import axios from "@/lib/axios"
+import { Roles } from "@/types"
+import { asOptionalField } from "@/utils"
 import {
   Button,
   Card,
@@ -13,10 +16,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from "@/components/ui"
-import axios from "@/lib/axios"
-import { Roles } from "@/types"
-import { asOptionalField } from "@/utils"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
 import { useSession } from "next-auth/react"

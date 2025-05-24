@@ -1,3 +1,4 @@
+import { useGetBDDistricts } from "@/hooks/react-query"
 import {
   Button,
   Command,
@@ -16,9 +17,8 @@ import {
   PopoverContent,
   PopoverTrigger,
   Skeleton,
-} from "@/components/ui"
-import { useGetBDDistricts } from "@/hooks/react-query"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { useMemo } from "react"

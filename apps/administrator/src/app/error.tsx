@@ -1,5 +1,6 @@
-'use client'
-import { Typography } from "@/components/ui"
+"use client"
+
+import { Typography } from "@edust/ui"
 
 export default function Error() {
   return (

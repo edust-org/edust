@@ -1,6 +1,6 @@
 "use client"
 
-import { Typography } from "@/components/ui"
+import { Typography } from "@edust/ui"
 
 import { Suspense, lazy } from "react"
 

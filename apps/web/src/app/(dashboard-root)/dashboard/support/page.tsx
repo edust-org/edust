@@ -1,5 +1,7 @@
 "use client"
 
+import { ticketHooks } from "@/hooks/react-query"
+import { SupportTicketStatus } from "@/types"
 import {
   Badge,
   Button,
@@ -9,10 +11,8 @@ import {
   CardTitle,
   SidebarContent,
   Typography,
-} from "@/components/ui"
-import { ticketHooks } from "@/hooks/react-query"
-import { SupportTicketStatus } from "@/types"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { formatDistanceToNow } from "date-fns"
 import Link from "next/link"
 

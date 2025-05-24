@@ -1,4 +1,6 @@
 import { AvatarWithStatus } from "@/components"
+import { studentHooks } from "@/hooks/react-query"
+import { useAuthStore } from "@/store"
 import {
   Button,
   Dialog,
@@ -9,9 +11,7 @@ import {
   DialogTrigger,
   Input,
   Typography,
-} from "@/components/ui"
-import { studentHooks } from "@/hooks/react-query"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import { useDebounceValue } from "usehooks-ts"
 import { z } from "zod"
 

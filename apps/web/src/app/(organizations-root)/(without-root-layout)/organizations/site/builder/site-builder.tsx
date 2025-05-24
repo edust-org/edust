@@ -1,6 +1,5 @@
 "use client"
 
-import { Typography } from "@/components/ui"
 import {
   useDeleteSitePage,
   useEditSiteBuilder,
@@ -10,6 +9,7 @@ import {
 import { useAuthStore } from "@/store"
 import { convertSlug } from "@/utils"
 import { ContextProviders, Editor } from "@edust/grapesjs"
+import { Typography } from "@edust/ui"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 

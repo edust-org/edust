@@ -1,15 +1,15 @@
 "use client"
 
+import { permissions } from "@/lib/pm"
+import { authService } from "@/services"
+import { useAuthStore } from "@/store"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { permissions } from "@/lib/pm"
-import { authService } from "@/services"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import {
   AudioWaveform,
   Command,

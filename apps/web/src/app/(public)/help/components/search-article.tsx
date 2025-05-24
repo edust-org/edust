@@ -1,5 +1,6 @@
 "use client"
 
+import { Input } from "@/components/ui/input"
 import {
   Button,
   Form,
@@ -7,8 +8,7 @@ import {
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui"
-import { Input } from "@/components/ui/input"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"

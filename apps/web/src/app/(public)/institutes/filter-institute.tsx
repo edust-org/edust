@@ -1,5 +1,6 @@
 "use client"
 
+import { useGetInstitutesCategories } from "@/hooks/react-query"
 import {
   Button,
   Form,
@@ -14,8 +15,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui"
-import { useGetInstitutesCategories } from "@/hooks/react-query"
+} from "@edust/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Search } from "lucide-react"
 import { useSession } from "next-auth/react"

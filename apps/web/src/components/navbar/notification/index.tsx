@@ -1,19 +1,19 @@
 "use client"
 
 import {
+  useEditNotificationsAsRead,
+  useGetUserNotifications,
+} from "@/hooks/react-query"
+import { Status } from "@/types"
+import {
   Badge,
   Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Typography,
-} from "@/components/ui"
-import {
-  useEditNotificationsAsRead,
-  useGetUserNotifications,
-} from "@/hooks/react-query"
-import { Status } from "@/types"
-import { cn } from "@/utils"
+} from "@edust/ui"
+import { cn } from "@edust/ui/utils"
 import { Bell, Check } from "lucide-react"
 
 import { NotificationItems } from "./notification-items"

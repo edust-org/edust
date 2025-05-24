@@ -1,6 +1,6 @@
 "use client"
 
-import { cn } from "@/utils"
+import { cn } from "@edust/ui/utils"
 
 import * as React from "react"
 

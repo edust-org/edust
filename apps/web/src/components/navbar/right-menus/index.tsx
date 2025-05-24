@@ -1,6 +1,8 @@
 "use client"
 
 import { AvatarWithStatus } from "@/components"
+import { useTheme } from "@/hooks"
+import { useAuthStore } from "@/store"
 import {
   Button,
   DropdownMenu,
@@ -16,9 +18,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   Skeleton,
-} from "@/components/ui"
-import { useTheme } from "@/hooks"
-import { useAuthStore } from "@/store"
+} from "@edust/ui"
 import {
   CircleHelp,
   LayoutDashboard,

@@ -1,7 +1,7 @@
 import { AvatarWithStatus } from "@/components"
-import { ScrollArea } from "@/components/ui"
 import { Message } from "@/lib/api/v0/support/support-types"
 import { useAuthStore } from "@/store"
+import { ScrollArea } from "@edust/ui"
 import Image from "next/image"
 
 import { useEffect, useRef } from "react"

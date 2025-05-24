@@ -3,7 +3,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui"
+} from "@edust/ui"
 
 import { AppSidebar } from "./components/app-sidebar"
 
