@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@edust/ui": "workspace:*",
     "@edust/grapesjs": "workspace:*",
     "@formspree/react": "^3.0.0",
     "@hookform/resolvers": "^5.0.1",

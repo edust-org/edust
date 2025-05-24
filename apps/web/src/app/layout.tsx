@@ -1,10 +1,10 @@
 import { AuthGuard } from "@/components"
 import "@edust/grapesjs/style.css"
+import "@edust/ui/globals.css"
 import { Metadata } from "next"
 import { Roboto } from "next/font/google"
 import { Toaster } from "sonner"
 
-import "./globals.css"
 import ReactQueryProvider from "./react-query-provider"
 import SessionProvider from "./session-provider"
 
