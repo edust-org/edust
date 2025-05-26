@@ -65,7 +65,7 @@ export const PermissionForm: React.FC<PermissionFormProps> = ({
   useEffect(() => {
     axios
       .get(
-        `${defaultValues.backendURL}/api/v0/organizations/${state.activeOrgId}/access-control/roles/${roleId}/permissions`,
+        `${defaultValues.backendURL}/api/v0/orgs/${state.activeOrgId}/access-control/roles/${roleId}/permissions`,
       )
       .then((res) => {
         const items = res.data?.data?.items || []
@@ -110,7 +110,7 @@ export const PermissionForm: React.FC<PermissionFormProps> = ({
     async function handleAddPermissions() {
       try {
         const res = await axios.post(
-          `${defaultValues.backendURL}/api/v0/organizations/${state.activeOrgId}/access-control/roles/${roleId}/permissions`,
+          `${defaultValues.backendURL}/api/v0/orgs/${state.activeOrgId}/access-control/roles/${roleId}/permissions`,
           {
             permissionIds: permissionsToAdd,
           },
@@ -127,7 +127,7 @@ export const PermissionForm: React.FC<PermissionFormProps> = ({
     async function handleRemovePermissions() {
       try {
         const res = await axios.post(
-          `${defaultValues.backendURL}/api/v0/organizations/${state.activeOrgId}/access-control/roles/${roleId}/permissions/bulk-delete`,
+          `${defaultValues.backendURL}/api/v0/orgs/${state.activeOrgId}/access-control/roles/${roleId}/permissions/bulk-delete`,
           {
             permissionIds: permissionsToRemoveIds,
           },

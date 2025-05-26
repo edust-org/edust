@@ -115,7 +115,7 @@ export default function Profile() {
   useEffect(() => {
     // TODO: Need to refetch system
     const getOrgMe = async () => {
-      const data = await axios.get(`/api/v0/organizations/me`)
+      const data = await axios.get(`/api/v0/orgs/me`)
       const orgData = data?.data?.data
 
       setOrgProfileData(orgData as Organization)
@@ -177,7 +177,7 @@ export default function Profile() {
       // Update the profile here
       try {
         const response = await axios.patch(
-          `/api/v0/organizations/me`,
+          `/api/v0/orgs/me`,
           formData,
           {
             headers: {

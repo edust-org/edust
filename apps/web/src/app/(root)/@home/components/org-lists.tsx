@@ -42,7 +42,7 @@ export const OrgLists = () => {
             <CardHeader>
               <CardTitle>
                 <Link
-                  href={`/organizations/profile/${item.orgUsername}`}
+                  href={`/orgs/profile/${item.orgUsername}`}
                   target="_blank"
                 >
                   <Typography variant="large" className="capitalize">
@@ -57,7 +57,7 @@ export const OrgLists = () => {
               </Typography>
               {item.site && (
                 <Link
-                  href={`/organizations/profile/${item.orgUsername}/site`}
+                  href={`/orgs/profile/${item.orgUsername}/site`}
                   target="_blank"
                 >
                   <Button variant={"link"} size={"icon"}>

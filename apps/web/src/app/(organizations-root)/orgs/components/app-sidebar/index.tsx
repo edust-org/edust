@@ -84,35 +84,35 @@ const navMain = [
   },
   {
     title: "Dashboard",
-    url: "/organizations",
+    url: "/orgs",
     icon: LayoutDashboard,
   },
   {
     title: "Site",
-    url: "/organizations/site",
+    url: "/orgs/site",
     icon: Earth,
     permission: permissions.orgMenuSite,
   },
   {
     title: "Students",
-    url: "/organizations/students",
+    url: "/orgs/students",
     icon: Users,
     permission: permissions.orgMenuStudents,
   },
   {
     title: "Access Control",
-    url: "/organizations/access-control",
+    url: "/orgs/access-control",
     icon: UserRoundCog,
     permission: permissions.orgMenuAccessControl,
   },
   {
     title: "Settings",
-    url: "/organizations/settings",
+    url: "/orgs/settings",
     icon: Settings2,
     items: [
       {
         title: "Profile",
-        url: "/organizations/settings/profile",
+        url: "/orgs/settings/profile",
       },
     ],
   },

@@ -80,7 +80,7 @@ export default function AccessControl() {
                 ]}
                 fallback
               >
-                <Link href={"/organizations/access-control"}>
+                <Link href={"/orgs/access-control"}>
                   <Button className="w-full" size={"sm"}>
                     New Role
                   </Button>

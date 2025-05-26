@@ -41,7 +41,7 @@ export const BuilderProvider = () => {
           Array.from(files).forEach((file) => formData.append("images", file))
 
           // API endpoint for image upload
-          const apiUrl = `${defaultValues.backendURL}/api/v0/organizations/${orgId}/site-builder/images`
+          const apiUrl = `${defaultValues.backendURL}/api/v0/orgs/${orgId}/site-builder/images`
 
           const response = await axios.post(apiUrl, formData, {
             headers: {

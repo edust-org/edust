@@ -9,8 +9,8 @@ export const useCheckActiveNav = () => {
     const normalizedNav = nav.startsWith("/") ? nav : `/${nav}`
     const pathArray = pathname.split("/").filter((item) => item !== "")
 
-    if (normalizedNav === "/organizations") {
-      return pathArray.length === 1 && pathArray[0] === "organizations"
+    if (normalizedNav === "/orgs") {
+      return pathArray.length === 1 && pathArray[0] === "orgs"
     }
     return (
       pathname === normalizedNav || pathname.startsWith(normalizedNav + "/")

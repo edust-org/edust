@@ -37,7 +37,7 @@ export default function Site() {
       refetch()
 
       window.open(
-        `${window.location.origin}/organizations/site/builder`,
+        `${window.location.origin}/orgs/site/builder`,
         "_blank",
       )
     } catch (error) {
@@ -84,7 +84,7 @@ export default function Site() {
                           <Button>Start Editing</Button>
                         </Link>
                         <Link
-                          href={`/organizations/profile/${data?.data?.orgUsername}/site`}
+                          href={`/orgs/profile/${data?.data?.orgUsername}/site`}
                           target="_blank"
                         >
                           <Button variant={"outline"}>visit site </Button>

@@ -26,7 +26,7 @@ const footerData = [
       },
       {
         title: "Create Organization",
-        href: "/organizations/create",
+        href: "/orgs/create",
         isExternal: false,
       },
     ],

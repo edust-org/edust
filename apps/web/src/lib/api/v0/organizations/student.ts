@@ -10,7 +10,7 @@ import {
   PostStudentsResponse,
 } from "./organization-types"
 
-const baseUrl = `${defaultValues.apiV0URL}/organizations`
+const baseUrl = `${defaultValues.apiV0URL}/orgs`
 
 export const student = {
   getStudentUsers: async ({

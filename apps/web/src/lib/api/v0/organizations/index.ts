@@ -2,7 +2,7 @@ import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
 import { ApiResponse } from "@/types"
 
-const baseUrl = `${defaultValues.apiV0URL}/organizations`
+const baseUrl = `${defaultValues.apiV0URL}/orgs`
 
 export const getOrgMe = async (): Promise<ApiResponse<any>> => {
   const response = await axios.get(`${baseUrl}/me`)

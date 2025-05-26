@@ -68,7 +68,7 @@ export const AddNewUser = ({
             {isLoading ? (
               <p>Loading...</p>
             ) : (
-              data?.data.items.map((user) => {
+              data?.data.items?.map((user) => {
                 const isOnline = onlineUsers.has(user.id)
                 return (
                   <div

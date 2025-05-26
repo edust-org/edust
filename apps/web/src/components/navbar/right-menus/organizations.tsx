@@ -37,7 +37,7 @@ export const Organizations: React.FC<OrganizationsProps> = ({
                 key={org.id}
                 onClick={() => {
                   setActiveOrg(org.id)
-                  router.push("/organizations")
+                  router.push("/orgs")
                 }}
                 className={`capitalize`}
               >

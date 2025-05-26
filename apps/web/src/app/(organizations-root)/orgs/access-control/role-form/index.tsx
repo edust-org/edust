@@ -89,7 +89,7 @@ export const RoleForm = ({
             toast.success(`The role has been successfully updated.`)
             form.reset()
             isFormReset.current = true
-            router.push("/organizations/access-control")
+            router.push("/orgs/access-control")
           }
         })
     } else {

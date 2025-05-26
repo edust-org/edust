@@ -52,7 +52,7 @@ export const ProfileDetailsCard: React.FC<ProfileDetailsCardProps> = ({
                 />
                 <CardTitle>
                   <Link
-                    href={`/organizations/profile/${academy.orgUsername}`}
+                    href={`/orgs/profile/${academy.orgUsername}`}
                     className="capitalize"
                   >
                     {academy.name}

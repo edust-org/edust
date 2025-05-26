@@ -36,7 +36,6 @@ import { Academics } from "./academics"
 import { Organizations } from "./organizations"
 
 export const RightMenus = () => {
-  const router = useRouter()
   const { setTheme } = useTheme()
 
   const state = useAuthStore()

@@ -8,7 +8,7 @@ export default withAuth(
     }
 
     // Role-based access control
-    if (req.nextUrl.pathname.startsWith("/organizations")) {
+    if (req.nextUrl.pathname.startsWith("/orgs")) {
       const hasOrgOwner = req.nextauth.token.userFlags?.organization
 
       if (!hasOrgOwner) {
@@ -35,7 +35,7 @@ export const config = {
   matcher: [
     "/academics/:path*",
     "/dashboard/:path*",
-    "/organizations",
-    "/organizations/((?!create|profile).*)",
+    "/orgs",
+    "/orgs/((?!create|profile).*)",
   ],
 }

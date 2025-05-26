@@ -21,7 +21,7 @@ export default function CopyOrgProfileLink({ username }: { username: string }) {
   return (
     <Button
       variant={"link"}
-      onClick={handleCopy(`${window.origin}/organizations/profile/${username}`)}
+      onClick={handleCopy(`${window.origin}/orgs/profile/${username}`)}
     >
       <Share2 />
     </Button>
