@@ -22,7 +22,7 @@ export default function OrganizationsDetails() {
     queryKey: ["organizationDetailsData"],
     queryFn: async () =>
       await axios.get(
-        `${defaultValues.backendURL}/api/v0/administrator/organizations/${params.orgId}`,
+        `${defaultValues.backendURL}/api/v0/administrator/orgs/${params.orgId}`,
       ),
   })
 

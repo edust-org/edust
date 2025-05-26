@@ -29,9 +29,7 @@ export default function OrganizationPage() {
   const { isPending, error, data } = useQuery({
     queryKey: ["organizationData"],
     queryFn: async () =>
-      await axios.get(
-        `${defaultValues.backendURL}/api/v0/administrator/organizations`,
-      ),
+      await axios.get(`${defaultValues.backendURL}/api/v0/administrator/orgs`),
   })
 
   if (isPending) return <Loading />

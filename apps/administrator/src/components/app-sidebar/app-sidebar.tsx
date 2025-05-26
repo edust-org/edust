@@ -71,7 +71,7 @@ const navMain: NavItem[] = [
   },
   {
     title: "Organizations",
-    url: "/organizations",
+    url: "/orgs",
     icon: Building2,
     permission: permissions.admMenuOrganizations,
   },
