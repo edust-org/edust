@@ -1,6 +1,6 @@
 "use client"
 
-import { buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@edust/ui"
 import { cn } from "@edust/ui/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

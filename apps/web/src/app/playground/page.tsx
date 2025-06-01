@@ -1,13 +1,11 @@
 "use client"
 
-import { Button, Typography } from "@edust/ui"
+import { Typography } from "@edust/ui"
 
 export default function Playground() {
   return (
-    <>
-      <Typography variant="h2">Playground</Typography>
-
-      <Button>Click here</Button>
-    </>
+    <div className="container">
+      <Typography variant="h1">Playground</Typography>
+    </div>
   )
 }

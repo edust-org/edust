@@ -3,11 +3,10 @@
 import { Loading } from "@/components"
 import { useSession } from "next-auth/react"
 
-import { ReactNode } from "react"
 
-interface LayoutHomeProps {
-  home: ReactNode
-  homepublic: ReactNode
+type LayoutHomeProps = {
+  home: React.ReactNode
+  homepublic: React.ReactNode
 }
 
 export default function LayoutHome({ home, homepublic }: LayoutHomeProps) {

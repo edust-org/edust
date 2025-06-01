@@ -51,6 +51,17 @@ export const config = [
           "src/**/": "KEBAB_CASE",
         },
       ],
+      "no-restricted-imports": [
+        "warn",
+        {
+          paths: [
+            {
+              name: "@edust/ui/index",
+              message: 'Use "@edust/ui" instead of "@edust/ui/index"',
+            },
+          ],
+        },
+      ],
     },
   },
 ]

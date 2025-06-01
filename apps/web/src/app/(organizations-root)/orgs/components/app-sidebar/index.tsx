@@ -25,6 +25,7 @@ import {
   Users,
 } from "lucide-react"
 import { usePathname } from "next/navigation"
+import { FaWpforms } from "react-icons/fa"
 
 import * as React from "react"
 
@@ -98,6 +99,12 @@ const navMain = [
     url: "/orgs/students",
     icon: Users,
     permission: permissions.orgMenuStudents,
+  },
+  {
+    title: "Quizzes",
+    url: "/orgs/quizzes",
+    icon: FaWpforms,
+    // permission: permissions.
   },
   {
     title: "Access Control",

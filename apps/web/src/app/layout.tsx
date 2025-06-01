@@ -3,6 +3,7 @@ import "@edust/grapesjs/style.css"
 import "@edust/ui/globals.css"
 import { Metadata } from "next"
 import { Roboto } from "next/font/google"
+import NextTopLoader from "nextjs-toploader"
 import { Toaster } from "sonner"
 
 import ReactQueryProvider from "./react-query-provider"
@@ -63,6 +64,7 @@ export default function RootLayout({
         className={`${roboto.className} antialiased`}
         suppressHydrationWarning
       >
+        <NextTopLoader color="#171717" />
         <SessionProvider>
           <ReactQueryProvider>
             <Toaster richColors />

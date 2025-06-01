@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@edust/ui"
 import {
   SidebarGroup,
   SidebarGroupLabel,
