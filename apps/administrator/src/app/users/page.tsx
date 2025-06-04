@@ -22,6 +22,7 @@ import {
 } from "@edust/ui"
 import { useQuery } from "@tanstack/react-query"
 import Link from "next/link"
+import UsersPages from "./user-page"
 
 import { useState } from "react"
 
@@ -52,7 +53,7 @@ export default function UsersPage() {
 
   return (
     <AuthGuard requiredPermissions={["adm:users:*"]}>
-      <Table>
+      {/* <Table>
         <TableCaption>A list of users.</TableCaption>
         <TableHeader>
           <TableRow>
@@ -105,7 +106,8 @@ export default function UsersPage() {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table> */}
+      <UsersPages />
     </AuthGuard>
   )
 }
