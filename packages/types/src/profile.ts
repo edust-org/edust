@@ -1,6 +1,6 @@
 
 import { ApiResponse } from "./api-response"
-import { User } from "./user"
+import { User } from "./schemas"
 import { Gender } from "./common"
 
 

@@ -132,7 +132,7 @@ export default function Profile() {
     const uniqueValue: any = {}
 
     for (const key in data) {
-      if (orgProfileData && data[key] !== orgProfileData[key]) {
+      if (orgProfileData && data[key] !== orgProfileData[key] ) {
         uniqueValue[key] = data[key]
       }
     }
