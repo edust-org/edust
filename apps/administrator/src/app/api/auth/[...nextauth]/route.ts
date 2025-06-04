@@ -2,6 +2,7 @@ import { defaultValues } from "@/configs"
 import { AccountType } from "@/types"
 import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import { log } from "node:console"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,6 +25,7 @@ export const authOptions: NextAuthOptions = {
           )
 
           const data = await res.json()
+          console.log('data', data)
 
           if (!res.ok) throw new Error(data.message || "Invalid credentials")
 
