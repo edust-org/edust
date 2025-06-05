@@ -1,6 +1,6 @@
 import api from "@/lib/api"
 import { GetCloudinarySignatureQuery } from "@/lib/api/v0/_others"
-import { CloudinaryUploadResponse } from "@/types"
+import { CloudinaryUploadResponse } from "@edust/types"
 import axios from "axios"
 
 type UploadCategory = "support"

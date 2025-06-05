@@ -1,12 +1,12 @@
 "use client"
 
 import { Loading, Navbar } from "@/components"
-import { Badge } from "@/components/ui/badge"
 import { useGetInstituteById } from "@/hooks/react-query"
 import {
   Alert,
   AlertDescription,
   AlertTitle,
+  Badge,
   Card,
   CardContent,
   CardHeader,

@@ -2,7 +2,7 @@
 
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { Status } from "@/types"
+import { Status } from "@edust/types"
 import {
   Table,
   TableBody,

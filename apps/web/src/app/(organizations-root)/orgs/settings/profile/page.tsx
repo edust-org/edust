@@ -2,8 +2,8 @@
 
 import { ImageUploadField, imageUploadFieldZod } from "@/components"
 import axios from "@/lib/axios"
-import { Roles } from "@/types"
 import { asOptionalField } from "@/utils"
+import { Roles } from "@edust/types"
 import {
   Button,
   Card,
@@ -132,7 +132,7 @@ export default function Profile() {
     const uniqueValue: any = {}
 
     for (const key in data) {
-      if (orgProfileData && data[key] !== orgProfileData[key] ) {
+      if (orgProfileData && data[key] !== orgProfileData[key]) {
         uniqueValue[key] = data[key]
       }
     }
@@ -176,15 +176,11 @@ export default function Profile() {
 
       // Update the profile here
       try {
-        const response = await axios.patch(
-          `/api/v0/orgs/me`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+        const response = await axios.patch(`/api/v0/orgs/me`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
           },
-        )
+        })
 
         const org = response?.data?.data as Organization
 

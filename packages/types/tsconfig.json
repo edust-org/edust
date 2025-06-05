@@ -1,0 +1,13 @@
+{
+  "extends": "@edust/typescript-config/react-library.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@edust/types": ["./src/index.ts"]
+    }
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}

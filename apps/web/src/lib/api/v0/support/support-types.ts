@@ -1,4 +1,4 @@
-import { CloudinaryUploadResponse, SupportTicketStatus } from "@/types"
+import { CloudinaryUploadResponse, SupportTicketStatus } from "@edust/types"
 
 export interface Ticket {
   id: string

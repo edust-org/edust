@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@edust/ui"
+import { Card, CardContent } from "@edust/ui"
 import { defaultValues } from "@/configs"
 import { format } from "date-fns"
 import { Clock } from "lucide-react"

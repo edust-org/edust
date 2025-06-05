@@ -1,4 +1,4 @@
-import { Theme } from "@/types"
+import { Theme } from "@edust/types"
 
 export const updateThemeOnDocument = (theme: Theme) => {
   const root = window.document.documentElement

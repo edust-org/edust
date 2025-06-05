@@ -4,7 +4,7 @@ import {
   useEditNotificationsAsRead,
   useGetUserNotifications,
 } from "@/hooks/react-query"
-import { Status } from "@/types"
+import { Status } from "@edust/types"
 import {
   Badge,
   Button,

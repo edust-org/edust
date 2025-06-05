@@ -3,7 +3,7 @@
 import { LogoEdust } from "@/components"
 import { useAuthMeLazy } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
-import { AccountType } from "@/types"
+import { AccountType } from "@edust/types"
 import {
   Button,
   Form,

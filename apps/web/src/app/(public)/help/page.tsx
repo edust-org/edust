@@ -1,10 +1,10 @@
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@edust/ui"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@edust/ui"
 import { defaultValues } from "@/configs"
 import { format } from "date-fns"
 import { HelpCircle } from "lucide-react"

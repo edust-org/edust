@@ -1,7 +1,7 @@
 "use client"
 
 import { ticketHooks } from "@/hooks/react-query"
-import { SupportTicketStatus } from "@/types"
+import { SupportTicketStatus } from "@edust/types"
 import {
   Badge,
   Button,

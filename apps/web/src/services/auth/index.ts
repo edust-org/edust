@@ -1,5 +1,4 @@
-import { Academics, Organization } from "@/types"
-
+import { Academics, Organization } from "@edust/types"
 
 const findActiveOrganization = (
   organizations: Organization[] | null,

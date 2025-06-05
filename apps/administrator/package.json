@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@edust/eslint-config": "workspace:*",
+    "@edust/types": "workspace:*",
     "@edust/typescript-config": "workspace:*",
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^22.15.3",

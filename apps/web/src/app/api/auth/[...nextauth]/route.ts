@@ -1,5 +1,5 @@
 import { defaultValues } from "@/configs"
-import { AccountType } from "@/types"
+import { AccountType } from "@edust/types"
 import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 

@@ -1,8 +1,4 @@
-
-import { ApiResponse } from "./api-response"
-import { User } from "./schemas"
-import { Gender } from "./common"
-
+import type { ApiResponse, Gender, User } from "@edust/types"
 
 type Academic = {
   id: string

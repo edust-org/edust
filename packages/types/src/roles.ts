@@ -1,6 +1,4 @@
-
-import { PermissionValues } from "./pm"
-import { Roles } from "./common"
+import { PermissionValues, Roles } from "@edust/types"
 
 export type Organization = {
   id: string

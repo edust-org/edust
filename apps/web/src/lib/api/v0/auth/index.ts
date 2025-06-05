@@ -1,6 +1,6 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { ApiResponse, AuthMe } from "@/types"
+import { ApiResponse, AuthMe } from "@edust/types"
 
 const BASE_URL = `${defaultValues.apiV0URL}/auth`
 

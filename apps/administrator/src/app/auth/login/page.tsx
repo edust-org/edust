@@ -1,6 +1,6 @@
 "use client"
 
-import { AccountType } from "@/types"
+import { AccountType } from "@edust/types"
 import { Input } from "@edust/ui"
 import {
   Form,

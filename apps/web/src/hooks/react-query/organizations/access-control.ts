@@ -11,7 +11,7 @@ import {
   RolePermission,
   RoleUser,
 } from "@/lib/api/v0/organizations/organization-types"
-import { ApiResponse } from "@/types"
+import { ApiResponse } from "@edust/types"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const accessControlHooks = {

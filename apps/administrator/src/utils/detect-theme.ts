@@ -1,4 +1,4 @@
-import { Theme } from "@/types"
+import { Theme } from "@edust/types"
 
 export const detectTheme = (theme: Theme): "light" | "dark" => {
   if (theme === "system") {

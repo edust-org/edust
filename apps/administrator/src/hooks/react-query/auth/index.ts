@@ -1,5 +1,5 @@
 import api from "@/lib/api"
-import { ApiResponse, AuthMe } from "@/types"
+import { ApiResponse, AuthMe } from "@edust/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 import { useState } from "react"

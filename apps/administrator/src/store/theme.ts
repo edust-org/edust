@@ -1,5 +1,5 @@
-import { Theme } from "@/types"
 import { updateThemeOnDocument } from "@/utils"
+import { Theme } from "@edust/types"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 

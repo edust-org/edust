@@ -4,7 +4,7 @@ import {
   useEditNotificationsAsRead,
   useGetUserNotifications,
 } from "@/hooks/react-query"
-import { Status } from "@/types"
+import { Status } from "@edust/types"
 import { Button, Typography } from "@edust/ui"
 import { cn } from "@edust/ui/utils"
 import { formatDistanceToNow } from "date-fns"

@@ -3,7 +3,7 @@
 import { AuthGuard } from "@/components"
 import { ticketHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
-import { SupportTicketStatus } from "@/types"
+import { SupportTicketStatus } from "@edust/types"
 import {
   Badge,
   Button,

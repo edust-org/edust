@@ -1,4 +1,4 @@
-import type { Status } from "../common"
+import type { Status } from "@edust/types"
 
 export interface Institute {
   id: string

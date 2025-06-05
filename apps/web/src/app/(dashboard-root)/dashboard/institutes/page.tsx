@@ -4,7 +4,7 @@ import {
   useDeleteInstituteById,
   useGetMeInstitutesLists,
 } from "@/hooks/react-query"
-import { Status } from "@/types"
+import { Status } from "@edust/types"
 import {
   Button,
   DropdownMenu,

@@ -1,6 +1,6 @@
 import { ticketHooks } from "@/hooks/react-query"
-import { CloudinaryUploadResponse } from "@/types"
 import { cloudinary } from "@/utils"
+import { CloudinaryUploadResponse } from "@edust/types"
 import {
   Button,
   Form,

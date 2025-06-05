@@ -3,7 +3,7 @@
 import { AuthGuard, HasPermission } from "@/components"
 import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
-import { Roles } from "@/types"
+import { Roles } from "@edust/types"
 import {
   Button,
   Card,

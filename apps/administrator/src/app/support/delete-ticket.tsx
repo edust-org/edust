@@ -1,5 +1,5 @@
 import { ticketHooks } from "@/hooks/react-query"
-import { SupportTicketStatus } from "@/types"
+import { SupportTicketStatus } from "@edust/types"
 import { DropdownMenuLabel } from "@edust/ui"
 import { toast } from "sonner"
 

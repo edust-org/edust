@@ -3,7 +3,7 @@ import {
   SupportUser,
   SupportUserQuery,
 } from "@/lib/api/v0/support/support-types"
-import { ApiResponse } from "@/types"
+import { ApiResponse } from "@edust/types"
 import { useQuery } from "@tanstack/react-query"
 
 export const supportHooks = {

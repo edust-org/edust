@@ -1,6 +1,6 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
-import { ApiResponse } from "@/types"
+import { ApiResponse } from "@edust/types"
 
 export type GetCloudinarySignatureQuery = {
   folderSuffixes?: string

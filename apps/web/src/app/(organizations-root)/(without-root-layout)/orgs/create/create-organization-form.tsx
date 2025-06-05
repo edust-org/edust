@@ -1,9 +1,9 @@
 "use client"
 
-import { Checkbox } from "@/components/ui/checkbox"
 import { useGetOrgLists, usePostOrganization } from "@/hooks/react-query"
-import { OrganizationRoles } from "@/types"
 import { convertSlug } from "@/utils"
+import { OrganizationRoles } from "@edust/types"
+import { Checkbox } from "@edust/ui"
 import {
   Button,
   Form,

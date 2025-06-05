@@ -1,9 +1,4 @@
-import { User } from './schemas/user';
-
-import { Organization } from './organization';
-
-
-
+import type { Organization, User } from "@edust/types"
 
 export type Academics = Pick<
   Organization,
@@ -11,9 +6,7 @@ export type Academics = Pick<
 > & { studentId: string; orgId: string }
 
 export type AuthMe = User & {
-
   systemRole: null
   organizations: null | Array<Organization>
   academics: null | Array<Academics>
 }
-

@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@edust/ui"
 import {
   Form,
   FormControl,
@@ -9,8 +9,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@edust/ui"
+import { Input } from "@edust/ui"
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
 import { zodResolver } from "@hookform/resolvers/zod"

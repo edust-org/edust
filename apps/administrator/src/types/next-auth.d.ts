@@ -1,6 +1,6 @@
+/* eslint-disable check-file/filename-naming-convention */
+import { User as CoreUser } from "@edust/types"
 import { DefaultSession, User as DefaultUser } from "next-auth"
-
-import { User as CoreUser } from "./user"
 
 declare module "next-auth" {
   interface User

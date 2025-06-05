@@ -1,4 +1,4 @@
-import { ApiResponse, Gender, User } from "@/types"
+import { ApiResponse, Gender, User } from "@edust/types"
 
 type Academic = {
   id: string

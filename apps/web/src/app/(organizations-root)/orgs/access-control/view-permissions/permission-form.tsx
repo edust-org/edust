@@ -3,7 +3,7 @@
 import { defaultValues } from "@/configs"
 import axios from "@/lib/axios"
 import { useAuthStore } from "@/store"
-import { Roles } from "@/types"
+import { Roles } from "@edust/types"
 import {
   Button,
   Card,

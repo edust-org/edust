@@ -2,8 +2,8 @@
 
 import { ImageUploadField, imageUploadFieldZod } from "@/components"
 import axios from "@/lib/axios"
-import { Gender, Roles } from "@/types"
 import { asOptionalField } from "@/utils"
+import { Gender, Roles } from "@edust/types"
 import {
   Button,
   Form,

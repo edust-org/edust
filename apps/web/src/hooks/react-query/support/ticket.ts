@@ -5,7 +5,7 @@ import {
   PostTicketBody,
   Ticket,
 } from "@/lib/api/v0/support/support-types"
-import { ApiResponse } from "@/types"
+import { ApiResponse } from "@edust/types"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const ticketHooks = {

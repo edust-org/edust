@@ -2,8 +2,8 @@
 
 import { Loading } from "@/components"
 import { useGetMeInstitutesLists, usePostInstitute } from "@/hooks/react-query"
-import { Status } from "@/types"
 import { convertSlug } from "@/utils"
+import { Status } from "@edust/types"
 import {
   Button,
   Card,

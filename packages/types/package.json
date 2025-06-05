@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "license": "ISC",
   "devDependencies": {
-    "@edust/eslint-config": "workspace:*"
+    "@edust/eslint-config": "workspace:*",
+    "@edust/typescript-config": "workspace:*"
   },
   "dependencies": {
     "next-auth": "^4.24.11"

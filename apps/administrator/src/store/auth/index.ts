@@ -1,6 +1,6 @@
 import { defaultValues } from "@/configs"
 import { getSocket, socketEvents } from "@/lib/socket"
-import { AuthMe } from "@/types"
+import { AuthMe } from "@edust/types"
 import { deleteCookie, getCookies } from "cookies-next"
 import { Socket } from "socket.io-client"
 import { create } from "zustand"

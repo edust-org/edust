@@ -3,7 +3,7 @@ import {
   NavigationMenu,
   NavigationMenuLink,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu"
+} from "@edust/ui"
 import {
   Sheet,
   SheetContent,
@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@edust/ui"
 import { useAppSelector } from "@/lib/store/hooks"
 import { Button } from "@edust/ui"
 import Link from "next/link"

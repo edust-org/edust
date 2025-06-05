@@ -6,8 +6,8 @@ import {
   useGetInstitutesId,
   useGetMeInstitutesLists,
 } from "@/hooks/react-query"
-import { Status } from "@/types"
-import { cn, convertSlug } from "@/utils"
+import { convertSlug } from "@/utils"
+import { Status } from "@edust/types"
 import {
   Button,
   Card,
@@ -33,6 +33,7 @@ import {
   Textarea,
 } from "@edust/ui"
 import { DatePicker } from "@edust/ui/components/manual/date-picker"
+import { cn } from "@edust/ui/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import imageCompression from "browser-image-compression"
 import { Check, ChevronsUpDown, ImageUp } from "lucide-react"

@@ -8,10 +8,10 @@ export * from "./theme"
 export * from "./common"
 export * from "./profile"
 export * from "./status"
+export * from "./pm"
 
 export enum ActivePanel {
   "SELECTORS" = "SELECTORS",
   "TRAITS" = "TRAITS",
   "BLOCKS" = "BLOCKS",
 }
-
