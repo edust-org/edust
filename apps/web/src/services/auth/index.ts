@@ -1,5 +1,6 @@
 import { Academics, Organization } from "@/types"
 
+
 const findActiveOrganization = (
   organizations: Organization[] | null,
   activeOrgId: string | null,
