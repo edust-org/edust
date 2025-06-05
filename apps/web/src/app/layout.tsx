@@ -64,7 +64,7 @@ export default function RootLayout({
         className={`${roboto.className} antialiased`}
         suppressHydrationWarning
       >
-        <NextTopLoader color="#171717" />
+        <NextTopLoader color="#171717" showSpinner={false} />
         <SessionProvider>
           <ReactQueryProvider>
             <Toaster richColors />

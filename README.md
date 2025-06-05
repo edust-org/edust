@@ -5,7 +5,11 @@
 
 <p align="center">
     <strong>Join Us ↘</strong><br/>
-    <a href="https://discord.gg/vnhqmn9mdj">Connect on Discord 🤝</a>
+    <a href="https://discord.gg/vnhqmn9mdj">
+    Connect on Discord 🤝
+    <br />
+    <img src="https://static.cdnlogo.com/logos/d/15/discord.svg" alt="Discord" width="80" style="margin-right:6px; margin-top:12px"/>
+    </a>
 </p>
 
 <p align="center">
