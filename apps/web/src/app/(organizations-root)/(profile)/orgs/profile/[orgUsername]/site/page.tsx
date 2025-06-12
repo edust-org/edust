@@ -41,7 +41,7 @@ export default async function SitePage({
   const pageName = (await searchParams).pageName
 
   const response = await fetch(
-    `${defaultValues.backendURL}/api/v0/public/organizations/orgUsername-${orgUsername}/site${pageName ? `?pageName=${pageName}` : "?pageName=home"}`,
+    `${defaultValues.backendURL}/api/v0/public/orgs/orgUsername-${orgUsername}/site${pageName ? `?pageName=${pageName}` : "?pageName=home"}`,
   )
 
   const site = await response.json()

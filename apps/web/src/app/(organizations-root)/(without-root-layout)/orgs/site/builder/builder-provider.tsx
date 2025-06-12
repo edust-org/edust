@@ -10,6 +10,7 @@ import {
 import axios from "@/lib/axios"
 import { useAuthStore } from "@/store"
 import EdustGrapesjs, { Configs } from "@edust/grapesjs"
+import { Typography } from "@edust/ui"
 import { toast } from "sonner"
 
 // import getImages from "./get-images"
@@ -20,9 +21,14 @@ export const BuilderProvider = () => {
   const { data: imagesData, refetch: refaceGetImages } =
     useGetSiteBuilderImages(orgId || "")
   const { mutateAsync: deleteImage } = useDeleteSiteBuilderImageById()
-  const { data: loadProjectData } = useGetSiteBuilder(orgId || "")
+  const { data: loadProjectData, isLoading: isProjectDataLoading } =
+    useGetSiteBuilder(orgId || "")
 
   const { mutateAsync: saveGsData } = useEditSiteBuilder()
+
+  if (isProjectDataLoading) {
+    return <Typography variant="h1">Loading Project data...</Typography>
+  }
 
   const optionsCustomize = (editorRef) => ({
     assetManager: {
@@ -100,7 +106,7 @@ export const BuilderProvider = () => {
               page,
             },
           })
-          toast.success(response?.data?.message)
+          toast.success(response?.message)
         } catch (error) {
           console.error(error)
         }

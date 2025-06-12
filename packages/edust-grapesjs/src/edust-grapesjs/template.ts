@@ -4,7 +4,7 @@ export default `
 class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
 >
 <img
-  src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+  src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
   class="mt-10 mx-auto w-[300px]"
 />
 <h1
@@ -18,7 +18,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
 <!-- delete this -->
 <section>
   <img
-    src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+    src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
     class="mt-10 mx-auto w-[300px]"
   />
   <h1
@@ -40,7 +40,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
       </h1>
       <section>
         <img
-          src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+          src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
           class="mt-10 mx-auto w-[300px]"
         />
         <h1
@@ -62,7 +62,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
             </h1>
             <section>
               <img
-                src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                 class="mt-10 mx-auto w-[300px]"
               />
               <h1
@@ -84,7 +84,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                   </h1>
                   <section>
                     <img
-                      src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                      src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                       class="mt-10 mx-auto w-[300px]"
                     />
                     <h1
@@ -106,7 +106,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                         </h1>
                         <section>
                           <img
-                            src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                            src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                             class="mt-10 mx-auto w-[300px]"
                           />
                           <h1
@@ -128,7 +128,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                               </h1>
                               <section>
                                 <img
-                                  src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                  src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                   class="mt-10 mx-auto w-[300px]"
                                 />
                                 <h1
@@ -150,7 +150,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                     </h1>
                                     <section>
                                       <img
-                                        src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                        src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                         class="mt-10 mx-auto w-[300px]"
                                       />
                                       <h1
@@ -172,7 +172,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                           </h1>
                                           <section>
                                             <img
-                                              src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                              src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                               class="mt-10 mx-auto w-[300px]"
                                             />
                                             <h1
@@ -195,7 +195,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                 </h1>
                                                 <section>
                                                   <img
-                                                    src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                    src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                     class="mt-10 mx-auto w-[300px]"
                                                   />
                                                   <h1
@@ -220,7 +220,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                       </h1>
                                                       <section>
                                                         <img
-                                                          src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                          src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                           class="mt-10 mx-auto w-[300px]"
                                                         />
                                                         <h1
@@ -247,7 +247,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                             </h1>
                                                             <section>
                                                               <img
-                                                                src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                 class="mt-10 mx-auto w-[300px]"
                                                               />
                                                               <h1
@@ -277,7 +277,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                   </h1>
                                                                   <section>
                                                                     <img
-                                                                      src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                      src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                       class="mt-10 mx-auto w-[300px]"
                                                                     />
                                                                     <h1
@@ -308,7 +308,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                         </h1>
                                                                         <section>
                                                                           <img
-                                                                            src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                            src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                             class="mt-10 mx-auto w-[300px]"
                                                                           />
                                                                           <h1
@@ -339,7 +339,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                               </h1>
                                                                               <section>
                                                                                 <img
-                                                                                  src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                  src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                   class="mt-10 mx-auto w-[300px]"
                                                                                 />
                                                                                 <h1
@@ -370,7 +370,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                     </h1>
                                                                                     <section>
                                                                                       <img
-                                                                                        src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                        src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                         class="mt-10 mx-auto w-[300px]"
                                                                                       />
                                                                                       <h1
@@ -401,7 +401,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                           </h1>
                                                                                           <section>
                                                                                             <img
-                                                                                              src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                              src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                               class="mt-10 mx-auto w-[300px]"
                                                                                             />
                                                                                             <h1
@@ -432,7 +432,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                 </h1>
                                                                                                 <section>
                                                                                                   <img
-                                                                                                    src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                    src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                     class="mt-10 mx-auto w-[300px]"
                                                                                                   />
                                                                                                   <h1
@@ -463,7 +463,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                       </h1>
                                                                                                       <section>
                                                                                                         <img
-                                                                                                          src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                          src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                           class="mt-10 mx-auto w-[300px]"
                                                                                                         />
                                                                                                         <h1
@@ -494,7 +494,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                             </h1>
                                                                                                             <section>
                                                                                                               <img
-                                                                                                                src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                 class="mt-10 mx-auto w-[300px]"
                                                                                                               />
                                                                                                               <h1
@@ -525,7 +525,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                                   </h1>
                                                                                                                   <section>
                                                                                                                     <img
-                                                                                                                      src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                      src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                       class="mt-10 mx-auto w-[300px]"
                                                                                                                     />
                                                                                                                     <h1
@@ -556,7 +556,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                                         </h1>
                                                                                                                         <section>
                                                                                                                           <img
-                                                                                                                            src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                            src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                             class="mt-10 mx-auto w-[300px]"
                                                                                                                           />
                                                                                                                           <h1
@@ -587,7 +587,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                                               </h1>
                                                                                                                               <section>
                                                                                                                                 <img
-                                                                                                                                  src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                                  src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                                   class="mt-10 mx-auto w-[300px]"
                                                                                                                                 />
                                                                                                                                 <h1
@@ -618,7 +618,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                                                     </h1>
                                                                                                                                     <section>
                                                                                                                                       <img
-                                                                                                                                        src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                                        src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                                         class="mt-10 mx-auto w-[300px]"
                                                                                                                                       />
                                                                                                                                       <h1
@@ -649,7 +649,7 @@ class="px-4 min-h-10 h-screen flex items-center flex-col justify-center"
                                                                                                                                           </h1>
                                                                                                                                           <section>
                                                                                                                                             <img
-                                                                                                                                              src="https://res.cloudinary.com/dmiewayfu/image/upload/v1724572263/edust-org/logo/logo_zcaqtt.svg"
+                                                                                                                                              src="https://res.cloudinary.com/dbaa3pxau/image/upload/v1725846914/logo_lvcnbc.jpg"
                                                                                                                                               class="mt-10 mx-auto w-[300px]"
                                                                                                                                             />
                                                                                                                                             <h1
