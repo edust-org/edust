@@ -33,6 +33,8 @@ import { NavMain } from "./nav-main"
 import { NavProjects } from "./nav-projects"
 import { NavUser } from "./nav-user"
 import { OrgSwitcher } from "./org-switcher"
+import { useSession } from "next-auth/react"
+
 
 // This is sample data.
 const data = {
@@ -138,8 +140,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Get the rolePermissions from the active organization
   const userPermissions = activeOrg?.rolePermissions || []
 
+  const navMainFunction = React.useMemo(() => {
+    return navMain.map((item) => {
+      if (item.title === "Quizzes" && activeOrg?.id) {
+        return {
+          ...item,
+          url: `/orgs/${activeOrg.id}/quizzes`,
+        }
+      }
+      return item
+    })
+  }, [activeOrg?.id])
+
   // Filter navMain based on permissions
-  const filteredNavMain = navMain.filter((item) => {
+  const filteredNavMain = navMainFunction.filter((item) => {
     // If no permission is required, allow the item
     if (!item.permission) return true
 
