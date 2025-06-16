@@ -2,10 +2,10 @@
 
 import { SetStateAction, useEffect, useState } from "react"
 import Link from "next/link"
-import { Button } from "../../../../../../../packages/ui/src/components/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../../../../packages/ui/src/components/card"
+import { Button } from "@edust/ui"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@edust/ui"
 import { Badge } from "../../../../../../../packages/ui/src/components/badge"
-import { Input } from "../../../../../../../packages/ui/src/components/input"
+import { Input } from "@edust/ui"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../../../packages/ui/src/components/select"
 import {
   BookOpen,
@@ -26,8 +26,10 @@ import {
 // import { ApiClient } from "@/lib/api-client"
 import { Layout } from "../components/layout"
 import { Typography } from "../../../../../../../packages/ui/src/components/typography"
+
+
 interface Quiz {
-  _id: string
+  _id?: string
   title: string
   description?: string
   status: "draft" | "active" | "archived"
@@ -43,14 +45,13 @@ interface Quiz {
     completedAttempts: number
     averageScore: number
   }
-  createdAt: string
+  createdAt?: string
   questionCount: number
 }
 
 // Demo data
 const demoQuizzes: Quiz[] = [
   {
-    _id: "1",
     title: "JavaScript Fundamentals",
     description: "Test your knowledge of JavaScript basics including variables, functions, and control structures.",
     status: "active",
@@ -66,11 +67,9 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 198,
       averageScore: 78.5,
     },
-    createdAt: "2024-01-15T10:30:00Z",
     questionCount: 15,
   },
   {
-    _id: "2",
     title: "React Hooks Deep Dive",
     description: "Advanced concepts in React Hooks including useState, useEffect, useContext, and custom hooks.",
     status: "active",
@@ -86,11 +85,9 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 76,
       averageScore: 85.2,
     },
-    createdAt: "2024-02-20T14:15:00Z",
     questionCount: 20,
   },
   {
-    _id: "3",
     title: "Database Design Principles",
     description: "Understanding relational database design, normalization, and SQL optimization techniques.",
     status: "draft",
@@ -106,11 +103,9 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 0,
       averageScore: 0,
     },
-    createdAt: "2024-03-10T09:45:00Z",
     questionCount: 25,
   },
   {
-    _id: "4",
     title: "Python for Data Science",
     description: "Essential Python libraries and techniques for data analysis including pandas, numpy, and matplotlib.",
     status: "active",
@@ -126,11 +121,9 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 134,
       averageScore: 72.8,
     },
-    createdAt: "2024-01-28T16:20:00Z",
     questionCount: 18,
   },
   {
-    _id: "5",
     title: "Web Security Fundamentals",
     description: "Learn about common web vulnerabilities, security best practices, and protection mechanisms.",
     status: "archived",
@@ -146,11 +139,9 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 58,
       averageScore: 81.3,
     },
-    createdAt: "2023-12-05T11:10:00Z",
     questionCount: 22,
   },
   {
-    _id: "6",
     title: "Machine Learning Basics",
     description: "Introduction to machine learning concepts, algorithms, and practical applications.",
     status: "active",
@@ -166,7 +157,6 @@ const demoQuizzes: Quiz[] = [
       completedAttempts: 287,
       averageScore: 69.4,
     },
-    createdAt: "2024-02-14T13:30:00Z",
     questionCount: 30,
   },
 ]
@@ -236,7 +226,7 @@ export default function QuizzesDemo() {
       <Layout.Header>
         <div className="flex items-center justify-between w-full">
           <Typography variant="h1">Quizzes Demo</Typography>
-          <Link href="quizzes/create">
+          <Link href="/quiz/create">
             <Button>
               <Plus className="w-4 h-4 mr-2" />
               Create Quiz
@@ -246,7 +236,6 @@ export default function QuizzesDemo() {
       </Layout.Header>
 
       <div className="container mx-auto px-4 py-6 space-y-6">
-        {/* Demo Notice */}
         
 
         {/* Search and Filters */}
@@ -317,8 +306,8 @@ export default function QuizzesDemo() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {quizzes.map((quiz) => (
-              <Card key={quiz._id} className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
+            {quizzes.map((quiz, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -377,18 +366,24 @@ export default function QuizzesDemo() {
 
                   {/* Action Buttons */}
                   <div className="flex gap-2 pt-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Eye className="w-4 h-4 mr-1" />
-                      View
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Edit className="w-4 h-4 mr-1" />
-                      Edit
-                    </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <BarChart3 className="w-4 h-4 mr-1" />
-                      Results
-                    </Button>
+                    <Link href={`/quiz/view/demo-${index}`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Eye className="w-4 h-4 mr-1" />
+                        View
+                      </Button>
+                    </Link>
+                    <Link href={`/quiz/edit/demo-${index}`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <Edit className="w-4 h-4 mr-1" />
+                        Edit
+                      </Button>
+                    </Link>
+                    <Link href={`/quiz/results/demo-${index}`} className="flex-1">
+                      <Button variant="outline" size="sm" className="w-full">
+                        <BarChart3 className="w-4 h-4 mr-1" />
+                        Results
+                      </Button>
+                    </Link>
                   </div>
 
                   {/* Additional Actions */}
@@ -401,11 +396,6 @@ export default function QuizzesDemo() {
                       <Download className="w-4 h-4 mr-1" />
                       Export
                     </Button>
-                  </div>
-
-                  {/* Creation Date */}
-                  <div className="text-xs text-gray-500 pt-2 border-t">
-                    Created {new Date(quiz.createdAt).toLocaleDateString()}
                   </div>
                 </CardContent>
               </Card>
