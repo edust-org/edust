@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useRef, SetStateAction } from "react"
-import { Button } from "../../../../../../../../packages/ui/src/components/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../../../../../packages/ui/src/components/card"
-import { Input } from "../../../../../../../../packages/ui/src/components/input"
+import { Button, Typography } from "@edust/ui"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@edust/ui"
+import { Input } from "@edust/ui"
 import { Label } from "../../../../../../../../packages/ui/src/components/label"
 import { Textarea } from "../../../../../../../../packages/ui/src/components/textarea"
 import { Switch } from "../../../../../../../../packages/ui/src/components/switch"
@@ -28,14 +28,16 @@ import { RadioGroup, RadioGroupItem } from "../../../../../../../../packages/ui/
 import { Checkbox } from "../../../../../../../../packages/ui/src/components/checkbox"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../../../../../packages/ui/src/components/tooltip"
 import Link from "next/link"
+import { Layout } from "../../components/layout"
+
 
 interface Question {
   id: string
   type: "single-choice" | "multiple-choice"
   question: string
   options: string[]
-  correctAnswers?: number[] // For multiple-choice, can have multiple correct answers
-  correctAnswer?: number // For single-choice
+  correctAnswers?: number[] 
+  correctAnswer?: number 
   points: number
   required: boolean
 }
@@ -102,7 +104,6 @@ export default function CreateQuizPage() {
 
     const newQuestion = {
       ...currentQuestion,
-      id: `q_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       options: filledOptions, // Only save filled options
     }
 
@@ -235,7 +236,6 @@ export default function CreateQuizPage() {
 
       // Create quiz data object
       const quizData = {
-        id: `quiz_${Date.now()}`,
         title: quizTitle,
         description: quizDescription,
         visibility,
@@ -249,20 +249,18 @@ export default function CreateQuizPage() {
           allowReview,
         },
         questions,
-        createdAt: new Date(),
-        updatedAt: new Date(),
       }
 
       // Store in localStorage for demo purposes (in real app, this would be API call)
-      localStorage.setItem(`quiz_${quizData.id}`, JSON.stringify(quizData))
-      localStorage.setItem("lastCreatedQuizId", quizData.id)
+      localStorage.setItem(`quiz_demo_${Date.now()}`, JSON.stringify(quizData))
+      localStorage.setItem("lastCreatedQuiz", JSON.stringify(quizData))
 
       console.log("Quiz saved:", quizData)
       setSaveStatus("saved")
 
       // If preview is requested, redirect to preview page
       if (preview) {
-        window.open(`/quiz/preview/${quizData.id}`, "_blank")
+        window.open(`/quiz/preview/demo`, "_blank")
       }
 
       // Reset after a delay
@@ -276,46 +274,43 @@ export default function CreateQuizPage() {
   const totalPoints = questions.reduce((sum, q) => sum + q.points, 0)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <Link href="/">
-                <Button variant="ghost" size="sm" className="mb-2">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Dashboard
-                </Button>
-              </Link>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Create New Quiz</h1>
-              <p className="text-gray-600">
-                Build an interactive quiz with single-choice and multiple-choice questions
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" onClick={() => saveQuiz(true)} disabled={!quizTitle || questions.length === 0}>
-                Preview
+    <>
+      <Layout.Header>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-4">
+            <Link href="/orgs/quizzes">
+              <Button variant="ghost" size="sm">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Quizzes
               </Button>
-              <Button
-                onClick={() => saveQuiz(false)}
-                disabled={!quizTitle || questions.length === 0 || saveStatus === "saving"}
-              >
-                {saveStatus === "saving" ? (
-                  <>Saving...</>
-                ) : saveStatus === "saved" ? (
-                  <>
-                    <Check className="w-4 h-4 mr-2" /> Saved
-                  </>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4 mr-2" /> Save Quiz
-                  </>
-                )}
-              </Button>
-            </div>
+            </Link>
+            <Typography variant="h1">Create Quiz</Typography>
+          </div>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" onClick={() => saveQuiz(true)} disabled={!quizTitle || questions.length === 0}>
+              Preview
+            </Button>
+            <Button
+              onClick={() => saveQuiz(false)}
+              disabled={!quizTitle || questions.length === 0 || saveStatus === "saving"}
+            >
+              {saveStatus === "saving" ? (
+                <>Saving...</>
+              ) : saveStatus === "saved" ? (
+                <>
+                  <Check className="w-4 h-4 mr-2" /> Saved
+                </>
+              ) : (
+                <>
+                  <Save className="w-4 h-4 mr-2" /> Save Quiz
+                </>
+              )}
+            </Button>
           </div>
         </div>
+      </Layout.Header>
 
+      <div className="container mx-auto px-4 py-6">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <Card>
@@ -333,7 +328,7 @@ export default function CreateQuizPage() {
                   <Input
                     id="title"
                     value={quizTitle}
-                    onChange={(e: { target: { value: SetStateAction<string> } }) => setQuizTitle(e.target.value)}
+                    onChange={(e) => setQuizTitle(e.target.value)}
                     placeholder="Enter quiz title..."
                     className="mb-1"
                   />
@@ -345,7 +340,7 @@ export default function CreateQuizPage() {
                   <Textarea
                     id="description"
                     value={quizDescription}
-                    onChange={(e: { target: { value: SetStateAction<string> } }) => setQuizDescription(e.target.value)}
+                    onChange={(e) => setQuizDescription(e.target.value)}
                     placeholder="Describe what this quiz covers..."
                     rows={3}
                     className="mb-1"
@@ -424,7 +419,7 @@ export default function CreateQuizPage() {
                           id="points"
                           type="number"
                           value={currentQuestion.points}
-                          onChange={(e: { target: { value: any } }) => setCurrentQuestion({ ...currentQuestion, points: Number(e.target.value) })}
+                          onChange={(e) => setCurrentQuestion({ ...currentQuestion, points: Number(e.target.value) })}
                           min="1"
                         />
                       </div>
@@ -437,7 +432,7 @@ export default function CreateQuizPage() {
                       <Textarea
                         id="questionText"
                         value={currentQuestion.question}
-                        onChange={(e: { target: { value: any } }) => setCurrentQuestion({ ...currentQuestion, question: e.target.value })}
+                        onChange={(e) => setCurrentQuestion({ ...currentQuestion, question: e.target.value })}
                         placeholder="Enter your question..."
                         rows={2}
                       />
@@ -447,7 +442,7 @@ export default function CreateQuizPage() {
                       <Checkbox
                         id="required"
                         checked={currentQuestion.required}
-                        onCheckedChange={(checked: boolean) =>
+                        onCheckedChange={(checked) =>
                           setCurrentQuestion({ ...currentQuestion, required: checked === true })
                         }
                       />
@@ -467,7 +462,7 @@ export default function CreateQuizPage() {
                             {currentQuestion.type === "single-choice" && (
                               <RadioGroup
                                 value={currentQuestion.correctAnswer?.toString() || ""}
-                                onValueChange={(value: string) => handleCorrectAnswerChange(Number.parseInt(value))}
+                                onValueChange={(value) => handleCorrectAnswerChange(Number.parseInt(value))}
                                 className="flex items-center"
                               >
                                 <RadioGroupItem value={index.toString()} id={`option-${index}`} />
@@ -478,13 +473,13 @@ export default function CreateQuizPage() {
                               <Checkbox
                                 id={`option-${index}`}
                                 checked={currentQuestion.correctAnswers?.includes(index)}
-                                onCheckedChange={(checked: boolean) => handleMultipleCorrectChange(index, checked === true)}
+                                onCheckedChange={(checked) => handleMultipleCorrectChange(index, checked === true)}
                               />
                             )}
 
                             <Input
                               value={option}
-                              onChange={(e: { target: { value: string } }) => handleOptionChange(index, e.target.value)}
+                              onChange={(e) => handleOptionChange(index, e.target.value)}
                               placeholder={`Option ${index + 1}`}
                               className="flex-1"
                             />
@@ -597,7 +592,7 @@ export default function CreateQuizPage() {
                           id="timeLimit"
                           type="number"
                           value={timeLimit}
-                          onChange={(e: { target: { value: any } }) => setTimeLimit(Number(e.target.value))}
+                          onChange={(e) => setTimeLimit(Number(e.target.value))}
                           min="0"
                           className="mb-1"
                         />
@@ -609,7 +604,7 @@ export default function CreateQuizPage() {
                           id="maxAttempts"
                           type="number"
                           value={maxAttempts}
-                          onChange={(e: { target: { value: any } }) => setMaxAttempts(Number(e.target.value))}
+                          onChange={(e) => setMaxAttempts(Number(e.target.value))}
                           min="1"
                           className="mb-1"
                         />
@@ -684,7 +679,7 @@ export default function CreateQuizPage() {
                         id="passingScore"
                         type="number"
                         value={passingScore}
-                        onChange={(e: { target: { value: any } }) => setPassingScore(Number(e.target.value))}
+                        onChange={(e) => setPassingScore(Number(e.target.value))}
                         min="0"
                         max="100"
                         className="mb-1"
@@ -805,6 +800,6 @@ export default function CreateQuizPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
