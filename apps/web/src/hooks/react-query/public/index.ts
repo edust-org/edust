@@ -23,3 +23,11 @@ export const useGetInstitutesCategories = (query?: { limit?: number }) => {
     queryFn: () => api.v0.getInstitutesCategories(query),
   })
 }
+
+export const useGetQuizResultByResultToken = (resultToken: string) => {
+  return useQuery({
+    queryKey: ["quiz-result", resultToken],
+    queryFn: () => api.v0.getQuizResultByResultToken(resultToken),
+    enabled: !!resultToken,
+  })
+}

@@ -41,3 +41,8 @@ export const getInstitutesCategories = async (query?: {
   })
   return response.data
 }
+
+export const getQuizResultByResultToken = async (resultToken: string) => {
+  const response = await axios.get(`${baseUrl}/quiz-results/${resultToken}`)
+  return response.data
+}
