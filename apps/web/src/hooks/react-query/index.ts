@@ -1,4 +1,5 @@
 export * from "./_others"
+export * from "./academics"
 export * from "./auth"
 export * from "./notifications"
 export * from "./organizations"

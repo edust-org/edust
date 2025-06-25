@@ -13,6 +13,7 @@ import {
 } from "@edust/ui"
 import { ChevronRight, type LucideIcon } from "lucide-react"
 import Link from "next/link"
+import { IconType } from "react-icons/lib"
 
 export function NavMain({
   items,
@@ -21,7 +22,7 @@ export function NavMain({
   items: {
     title: string
     url: string
-    icon?: LucideIcon
+    icon?: LucideIcon | IconType
     isActive?: boolean
     items?: {
       title: string

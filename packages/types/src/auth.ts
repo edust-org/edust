@@ -12,7 +12,7 @@ export type AuthMe = User & {
   profiles: null | Array<{
     id: string
     role: Roles.student
-    orgStudentId: string
+    studentId: string
     organization: Pick<
       Organization,
       "id" | "name" | "orgUsername" | "profilePic"

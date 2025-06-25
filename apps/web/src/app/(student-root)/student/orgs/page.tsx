@@ -9,10 +9,11 @@ import {
   CardTitle,
   Typography,
 } from "@edust/ui"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
-  const { user } = useAuthStore()
+  const router = useRouter()
+  const { user, setActiveProfileOrg } = useAuthStore()
   const profiles = user?.profiles || []
 
   return (
@@ -23,16 +24,21 @@ export default function Page() {
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {profiles.length > 0 &&
             profiles.map((profile) => (
-              <Card key={profile.id + profile.orgStudentId}>
+              <Card key={profile.id + profile.studentId}>
                 <CardHeader>
                   <CardTitle>{profile.organization.name}</CardTitle>
                 </CardHeader>
                 <CardFooter>
-                  <Link
-                    href={`/student/orgs/${profile.organization.orgUsername}`}
+                  <Button
+                    onClick={() => {
+                      setActiveProfileOrg(profile.organization.orgUsername)
+                      router.push(
+                        `/student/orgs/${profile.organization.orgUsername}`,
+                      )
+                    }}
                   >
-                    <Button>View Profile</Button>
-                  </Link>
+                    View Profile
+                  </Button>
                 </CardFooter>
               </Card>
             ))}

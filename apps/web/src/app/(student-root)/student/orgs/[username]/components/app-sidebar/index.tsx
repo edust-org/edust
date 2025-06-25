@@ -20,6 +20,8 @@ import {
   PieChart,
 } from "lucide-react"
 import { usePathname } from "next/navigation"
+import { FaWpforms } from "react-icons/fa"
+import { IconType } from "react-icons/lib"
 
 import * as React from "react"
 
@@ -70,30 +72,35 @@ const data = {
   ],
 }
 
-const navMain: {
-  title: string
-  url: string
-  icon?: LucideIcon
-  isActive?: boolean
-  items?: {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const navMain: {
     title: string
     url: string
+    icon?: LucideIcon | IconType
     isActive?: boolean
-  }[]
-}[] = [
-  {
-    title: "Home",
-    url: "/",
-    icon: House,
-  },
-  {
-    title: "Dashboard",
-    url: "/student/orgs/:username",
-    icon: LayoutDashboard,
-  },
-]
+    items?: {
+      title: string
+      url: string
+      isActive?: boolean
+    }[]
+  }[] = [
+    {
+      title: "Home",
+      url: "/",
+      icon: House,
+    },
+    {
+      title: "Dashboard",
+      url: "/student/orgs/:username",
+      icon: LayoutDashboard,
+    },
+    {
+      title: "Quizzes",
+      url: "/student/orgs/:username/quizzes",
+      icon: FaWpforms,
+    },
+  ]
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const state = useAuthStore()
 
   const pathname = usePathname()

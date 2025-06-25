@@ -23,16 +23,13 @@ import {
   CircleHelp,
   LayoutDashboard,
   LogOut,
-  Plus,
   School,
   Settings,
 } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
-import { Academics } from "./academics"
 import { Organizations } from "./organizations"
 
 export const RightMenus = () => {
@@ -116,8 +113,14 @@ export const RightMenus = () => {
             </DropdownMenuSub>
           </DropdownMenuGroup>
 
-          {/* if academics available */}
-          {state.academics && <Academics academics={state.academics} />}
+          {state.user?.profiles && (
+            <Link href={"/student/orgs"}>
+              <DropdownMenuItem>
+                <School className="mr-2 h-4 w-4" />
+                <span>Student Profiles</span>
+              </DropdownMenuItem>
+            </Link>
+          )}
 
           {/* if organization available */}
           {state.organizations && (

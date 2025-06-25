@@ -6,6 +6,7 @@ import { Socket } from "socket.io-client"
 import { create } from "zustand"
 
 const ACTIVE_ORG_COOKIE = "activeOrgId"
+const ACTIVE_ACADEMY_COOKIE = "activeAcademyId"
 
 interface AuthState {
   user: null | AuthMe
@@ -23,10 +24,6 @@ interface AuthState {
   organizations: AuthMe["organizations"]
   activeOrgId: string | null
   setActiveOrg: (orgId: string) => void
-
-  academics: AuthMe["academics"]
-  activeAcademyId: string | null
-  setActiveAcademy: (acdId: string) => void
 
   getProfile: (
     orgUsername: string | undefined,
@@ -51,8 +48,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   organizations: null,
   activeOrgId: null,
 
-  academics: null,
-  activeAcademyId: null,
   activeProfileOrgId: null,
 
   setAuthMe: (user) => {
@@ -72,36 +67,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       setCookie(ACTIVE_ORG_COOKIE, newActiveOrgId, { sameSite: "lax" })
     }
 
-    const existingAcademy = user.academics?.find(
-      (acd) => acd.id === get().activeAcademyId,
-    )
-    const newActiveAcademyId = existingAcademy
-      ? existingAcademy.id
-      : user?.academics?.[0]?.id || null
-
-    // TODO: it's for active academy cookie if needed
-    // if (newActiveAcademyId) {
-    //   setCookie(ACTIVE_ORG_COOKIE, newActiveAcademyId, { sameSite: "lax" })
-    // }
-
     set({
       user,
       organizations: user.organizations,
       activeOrgId: newActiveOrgId,
-      academics: user.academics,
-      activeAcademyId: newActiveAcademyId,
     })
     get().connectSocket()
-  },
-
-  setActiveAcademy: (acdId) => {
-    const academy = get().academics
-
-    const matchedAcd = academy?.find((acd) => acd.id === acdId)
-    if (!matchedAcd) return
-
-    // setCookie(ACTIVE_ORG_COOKIE, matchedOrg.id, { sameSite: "lax" })
-    set({ activeAcademyId: matchedAcd.id })
   },
 
   setActiveOrg: (orgId) => {
@@ -148,6 +119,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const profile = get().getProfile(orgUsername)
     if (profile && profile.organization?.id) {
       set({ activeProfileOrgId: profile.organization.id })
+      setCookie(ACTIVE_ACADEMY_COOKIE, profile.organization.id, {
+        sameSite: "lax",
+      })
     }
   },
 

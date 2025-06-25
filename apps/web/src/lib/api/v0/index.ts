@@ -1,4 +1,5 @@
 import * as _others from "./_others"
+import * as academics from "./academics"
 import * as auth from "./auth"
 import * as institutes from "./institutes"
 import * as notifications from "./notifications"
@@ -8,6 +9,7 @@ import * as support from "./support"
 
 export const v0 = {
   ..._others,
+  ...academics,
   ...auth,
   ...institutes,
   ...notifications,
