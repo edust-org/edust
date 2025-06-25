@@ -12,7 +12,9 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@edust/ui/*": ["../../packages/ui/src/*"]
+      "@edust/ui/*": ["../../packages/ui/src/*"],
+      "@edust/types": ["../../packages/types/src/index.ts"],
+      "@edust/types/*": ["../../packages/types/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -16,4 +16,6 @@ export enum Roles {
 
   /** Editor with permission to edit content. */
   editor = "EDITOR",
+
+  student = "STUDENT",
 }

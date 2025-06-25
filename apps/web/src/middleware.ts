@@ -16,7 +16,7 @@ export default withAuth(
       }
     }
 
-    if (req.nextUrl.pathname.startsWith("/academics")) {
+    if (req.nextUrl.pathname.startsWith("/student")) {
       const isStudent = req.nextauth.token.userFlags?.student
 
       if (!isStudent) {
@@ -37,5 +37,6 @@ export const config = {
     "/dashboard/:path*",
     "/orgs",
     "/orgs/((?!create|profile).*)",
+    "/student/:path*",
   ],
 }

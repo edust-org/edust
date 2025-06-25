@@ -28,6 +28,15 @@ interface AuthState {
   activeAcademyId: string | null
   setActiveAcademy: (acdId: string) => void
 
+  getProfile: (
+    orgUsername: string | undefined,
+  ) => NonNullable<AuthMe["profiles"]>[number] | null
+  setActiveProfileOrg: (orgUsername: string) => void
+  getActiveProfileOrg: () => NonNullable<AuthMe["profiles"]>[number] | null
+
+  setActiveProfileOrgId: (orgUsername: string) => void
+  activeProfileOrgId: string | null
+
   logOut: () => void
 }
 
@@ -44,6 +53,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   academics: null,
   activeAcademyId: null,
+  activeProfileOrgId: null,
 
   setAuthMe: (user) => {
     if (!user) {
@@ -109,6 +119,58 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       socketOrg.emit("leaveRoom", previousOrgId)
       socketOrg.emit("joinRoom", matchedOrg.id)
     }
+  },
+
+  getActiveOrg: () => {
+    const orgs = get().organizations
+    const activeOrgId = get().activeOrgId
+
+    if (!orgs || !activeOrgId) return null
+
+    return orgs.find((org) => org.id === activeOrgId) || null
+  },
+
+  getProfile: (orgUsername) => {
+    const user = get().user
+    if (!user || !orgUsername) return null
+
+    const profiles = Array.isArray(user.profiles) ? user.profiles : []
+    const foundProfile = profiles.find(
+      (profile) =>
+        profile &&
+        profile.organization &&
+        profile.organization.orgUsername === orgUsername,
+    )
+
+    return foundProfile || null
+  },
+  setActiveProfileOrgId: (orgUsername) => {
+    const profile = get().getProfile(orgUsername)
+    if (profile && profile.organization?.id) {
+      set({ activeProfileOrgId: profile.organization.id })
+    }
+  },
+
+  setActiveProfileOrg: (orgUsername) => {
+    const profile = get().getProfile(orgUsername)
+    if (profile && profile.organization?.id) {
+      set({ activeProfileOrgId: profile.organization.id })
+    }
+  },
+  getActiveProfileOrg: () => {
+    const activeProfileOrgId = get().activeProfileOrgId
+    const user = get().user
+
+    if (!user || !activeProfileOrgId) return null
+
+    const profiles = Array.isArray(user.profiles) ? user.profiles : []
+    const foundProfile = profiles.find(
+      (profile) =>
+        profile &&
+        profile.organization &&
+        profile.organization.id === activeProfileOrgId,
+    )
+    return foundProfile || null
   },
 
   logOut: () => {
