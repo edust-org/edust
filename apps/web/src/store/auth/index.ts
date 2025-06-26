@@ -5,9 +5,6 @@ import { deleteCookie, getCookies, setCookie } from "cookies-next"
 import { Socket } from "socket.io-client"
 import { create } from "zustand"
 
-const ACTIVE_ORG_COOKIE = "activeOrgId"
-const ACTIVE_ACADEMY_COOKIE = "activeAcademyId"
-
 interface AuthState {
   user: null | AuthMe
   socket: Socket | null
@@ -63,10 +60,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       ? existingOrg.id
       : user?.organizations?.[0]?.id || null
 
-    if (newActiveOrgId) {
-      setCookie(ACTIVE_ORG_COOKIE, newActiveOrgId, { sameSite: "lax" })
-    }
-
     set({
       user,
       organizations: user.organizations,
@@ -83,7 +76,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const matchedOrg = orgs?.find((org) => org.id === orgId)
     if (!matchedOrg) return
 
-    setCookie(ACTIVE_ORG_COOKIE, matchedOrg.id, { sameSite: "lax" })
     set({ activeOrgId: matchedOrg.id })
 
     if (socketOrg?.connected && previousOrgId) {
@@ -119,9 +111,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const profile = get().getProfile(orgUsername)
     if (profile && profile.organization?.id) {
       set({ activeProfileOrgId: profile.organization.id })
-      setCookie(ACTIVE_ACADEMY_COOKIE, profile.organization.id, {
-        sameSite: "lax",
-      })
     }
   },
 
@@ -151,8 +140,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     localStorage.clear()
     const cookies = Object.entries(getCookies() || {})
     cookies.forEach(([key]) => deleteCookie(key))
-
-    deleteCookie(ACTIVE_ORG_COOKIE)
 
     set({ user: null, organizations: null, activeOrgId: null })
     get().disconnectSocket()

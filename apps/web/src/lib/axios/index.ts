@@ -1,4 +1,6 @@
 import { defaultValues } from "@/configs"
+import { ACTIVE_ORG_ID_HEADER, ACTIVE_PROFILE_ORG_ID_HEADER } from "@/constant"
+import { useAuthStore } from "@/store"
 import axiosCore from "axios"
 import { getSession } from "next-auth/react"
 
@@ -22,6 +24,17 @@ axios.interceptors.request.use(
     if (accessToken) {
       config.headers["Authorization"] = `Bearer ${accessToken}`
     }
+    const activeOrgId = useAuthStore.getState().activeOrgId
+
+    if (activeOrgId) {
+      config.headers[ACTIVE_ORG_ID_HEADER] = activeOrgId
+    }
+
+    const activeProfileOrgId = useAuthStore.getState().activeProfileOrgId
+    if (activeProfileOrgId) {
+      config.headers[ACTIVE_PROFILE_ORG_ID_HEADER] = activeProfileOrgId
+    }
+
     return config
   },
   (error) => Promise.reject(error),
