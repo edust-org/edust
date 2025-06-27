@@ -30,6 +30,14 @@ import {
 import { format } from "date-fns"
 import { Copy, Link as IconLink, Share2 } from "lucide-react"
 import Link from "next/link"
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+} from "react-share"
 import { toast } from "sonner"
 
 import { useState } from "react"
@@ -41,32 +49,19 @@ export default function QuizzesPage() {
 
   const activeProfileOrg = getActiveProfileOrg()
 
-  const [shareCode, setShareCode] = useState("")
   const [selectedQuiz, setSelectedQuiz] = useState<null>(null)
+  const [resultLink, setResultLink] = useState<string>("")
 
   const { data: quizzes, isLoading } = academicHooks.student.useGetQuizzes({
     academyId: activeProfileOrg?.organization.id || null,
     studentId: activeProfileOrg?.studentId || null,
   })
 
-  const getShareableLink = (quiz: Quiz) => {
-    return `${window.location.origin}/quiz/join/${quiz.shareCode}`
-  }
-
-  const handleCopyShareCode = (code: string) => {
-    navigator.clipboard.writeText(code)
-    toast.success("Share code copied to clipboard")
-  }
-
-  const handleCopyShareLink = (quiz: Quiz) => {
-    const link = getShareableLink(quiz)
-    navigator.clipboard.writeText(link)
+  const handleCopyShareLink = (resultLink: string) => {
+    navigator.clipboard.writeText(resultLink)
     toast.success("Share link copied to clipboard")
   }
 
-  const handleDeleteQuiz = (id: string) => {
-    toast.success("Quiz deleted successfully")
-  }
 
   if (isLoading) {
     return <Typography variant="h2">Loading...</Typography>
@@ -78,7 +73,7 @@ export default function QuizzesPage() {
         <Typography variant="h1">Your Quiz Attempts</Typography>
       </Layout.Header>
       <Layout.Body>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="xxl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {quizzes?.length ? (
             quizzes.map((quiz) => (
               <Card key={quiz.id}>
@@ -161,21 +156,6 @@ export default function QuizzesPage() {
 
                       <TableRow>
                         <TableCell className="font-medium">
-                          View Result
-                        </TableCell>
-                        <TableCell>
-                          <Link
-                            href={`/share/quiz-result/${quiz.resultToken}`}
-                            className="hover:underline"
-                            target="_blank"
-                          >
-                            click here
-                          </Link>
-                        </TableCell>
-                      </TableRow>
-
-                      <TableRow>
-                        <TableCell className="font-medium">
                           Visibility
                         </TableCell>
                         <TableCell>{quiz.visibility}</TableCell>
@@ -188,15 +168,14 @@ export default function QuizzesPage() {
                     variant={"ghost"}
                     onClick={() => {
                       setSelectedQuiz(quiz)
-                      setShareCode(quiz.shareCode)
+                      setResultLink(
+                        `${window.origin}/share/quiz-result/${quiz.resultToken}`,
+                      )
                     }}
                   >
                     <Share2 className="mr-2 h-4 w-4" />
                     Share
                   </Button>
-                  <ShareButton
-                    text={`${window.origin}//share/quiz-result/${quiz.resultToken}`}
-                  />
                 </CardFooter>
               </Card>
             ))
@@ -212,11 +191,10 @@ export default function QuizzesPage() {
         >
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Share Quiz</DialogTitle>
-              <DialogDescription>
-                Share this quiz with students using either the code or the
-                direct link.
-              </DialogDescription>
+                <DialogTitle>Share Your Quiz Result</DialogTitle>
+                <DialogDescription>
+                Share your quiz achievement with others! Use the direct link below or share on social media to showcase your results.
+                </DialogDescription>
             </DialogHeader>
             <div className="space-y-6 py-4">
               <div className="space-y-2">
@@ -224,14 +202,15 @@ export default function QuizzesPage() {
                 <div className="flex items-center gap-2">
                   <Input
                     id="shareLink"
-                    value={selectedQuiz ? getShareableLink(selectedQuiz) : ""}
+                    value={resultLink ? resultLink : ""}
                     readOnly
                     className="text-sm"
                   />
+
                   <Button
                     variant="outline"
                     onClick={() =>
-                      selectedQuiz && handleCopyShareLink(selectedQuiz)
+                      resultLink && handleCopyShareLink(resultLink)
                     }
                     size="sm"
                   >
@@ -241,6 +220,38 @@ export default function QuizzesPage() {
                 <p className="text-muted-foreground text-xs">
                   Students can click this link to join directly.
                 </p>
+              </div>
+
+              {/* social share link */}
+
+              <div className="flex flex-row gap-x-4">
+                <FacebookShareButton
+                  hashtag="#edust #quiz #result #student"
+                  url={resultLink}
+                >
+                  <FacebookIcon
+                    round={true}
+                    size={40}
+                    className="cursor-pointer"
+                  />
+                </FacebookShareButton>
+
+                <LinkedinShareButton
+                  about="🎓 Just completed a quiz on Edust! Check out my results."
+                  summary={"I am summary from Edust"}
+                  title={"I am title from Edust"}
+                  url={resultLink}
+                >
+                  <LinkedinIcon round={true} size={40} />
+                </LinkedinShareButton>
+
+                <TwitterShareButton
+                  title="🎓 Just completed a quiz on Edust! Check out my results."
+                  about="🎓 Just completed a quiz on Edust! Check out my results."
+                  url={resultLink}
+                >
+                  <TwitterIcon round={true} size={40} />
+                </TwitterShareButton>
               </div>
             </div>
             <DialogFooter>
