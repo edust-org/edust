@@ -158,7 +158,7 @@ export default function QuizzesPage() {
                         </TableCell>
                         <TableCell>{quiz.maxPoints}</TableCell>
                       </TableRow>
-
+{/* 
                       <TableRow>
                         <TableCell className="font-medium">
                           View Result
@@ -172,7 +172,7 @@ export default function QuizzesPage() {
                             click here
                           </Link>
                         </TableCell>
-                      </TableRow>
+                      </TableRow> */}
 
                       <TableRow>
                         <TableCell className="font-medium">
