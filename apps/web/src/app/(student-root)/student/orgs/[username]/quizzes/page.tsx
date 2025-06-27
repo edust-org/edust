@@ -194,9 +194,10 @@ export default function QuizzesPage() {
                     <Share2 className="mr-2 h-4 w-4" />
                     Share
                   </Button>
-                  <ShareButton
+                  {/* <ShareButton
                     text={`${window.origin}//share/quiz-result/${quiz.resultToken}`}
-                  />
+                  /> */}
+
                 </CardFooter>
               </Card>
             ))
