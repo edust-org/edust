@@ -1,14 +1,13 @@
 "use client"
 
-import { useState, useRef, SetStateAction } from "react"
+import { useState, useRef } from "react"
 import { Button, Typography } from "@edust/ui"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@edust/ui"
 import { Input } from "@edust/ui"
-import { Label } from "../../../../../../../../packages/ui/src/components/label"
-import { Textarea } from "../../../../../../../../packages/ui/src/components/textarea"
-import { Switch } from "../../../../../../../../packages/ui/src/components/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../../../../../packages/ui/src/components/tabs"
-import { Badge } from "../../../../../../../../packages/ui/src/components/badge"
+import { Label } from "@edust/ui"
+import { Textarea } from "@edust/ui"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@edust/ui"
+import { Badge } from "@edust/ui"
 import {
   Trash2,
   Clock,
@@ -22,88 +21,94 @@ import {
   Lock,
   AlertCircle,
   ArrowLeft,
+  Loader2,
 } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../../../../../packages/ui/src/components/select"
-import { RadioGroup, RadioGroupItem } from "../../../../../../../../packages/ui/src/components/radio-group"
-import { Checkbox } from "../../../../../../../../packages/ui/src/components/checkbox"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../../../../../../packages/ui/src/components/tooltip"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@edust/ui"
+import { RadioGroup, RadioGroupItem } from "@edust/ui"
+import { Checkbox } from "@edust/ui"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@edust/ui"
 import Link from "next/link"
-import { Layout } from "../../components/layout"
+import { Layout } from "../../../components/layout"
+import { quizHooks, type CreateQuizBody, type QuizQuestion } from "@/hooks/quiz-hooks"
+import { toast } from "sonner"
+import { useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 
 interface Question {
   id: string
-  type: "single-choice" | "multiple-choice"
+  type: "SINGLE_CHOICE" | "MULTIPLE_CHOICE"
   question: string
   options: string[]
-  correctAnswers?: number[] 
-  correctAnswer?: number 
+  correctAnswers?: number[]
+  correctAnswer?: number
   points: number
-  required: boolean
 }
 
+
 export default function CreateQuizPage() {
+  const params = useParams()
+  const orgId = params.orgId as string
+  const router = useRouter()
+
+
+  // React Query mutation
+  const postQuizMutation = quizHooks.usePostQuiz()
+
   // Quiz metadata
   const [quizTitle, setQuizTitle] = useState("")
   const [quizDescription, setQuizDescription] = useState("")
-  const [visibility, setVisibility] = useState<"public" | "organization" | "private">("organization")
+  const [visibility, setVisibility] = useState<"PUBLIC_FOR_STUDENTS" | "ORGANIZATION" | "PRIVATE">("ORGANIZATION")
 
   // Quiz settings
   const [timeLimit, setTimeLimit] = useState(30)
-  const [maxAttempts, setMaxAttempts] = useState(1)
-  const [shuffleQuestions, setShuffleQuestions] = useState(false)
-  const [shuffleOptions, setShuffleOptions] = useState(false)
-  const [showResults, setShowResults] = useState("always")
-  const [passingScore, setPassingScore] = useState(60)
-  const [allowReview, setAllowReview] = useState(true)
+  const [attemptLimit, setAttemptLimit] = useState(1)
 
   // Questions
   const [questions, setQuestions] = useState<Question[]>([])
   const [currentQuestion, setCurrentQuestion] = useState<Question>({
     id: "",
-    type: "single-choice",
+    type: "SINGLE_CHOICE",
     question: "",
     options: ["", ""],
     correctAnswer: undefined,
     points: 1,
-    required: true,
   })
 
   // Drag and drop
   const dragItem = useRef<number | null>(null)
   const dragOverItem = useRef<number | null>(null)
 
-  // Save status
-  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle")
-
   // Add a new question
   const addQuestion = () => {
     if (!currentQuestion.question.trim()) {
+      toast.error("Please enter a question")
       return
     }
 
     // Validate that at least one option is filled and correct answer is selected
     const filledOptions = currentQuestion.options.filter((opt) => opt.trim())
     if (filledOptions.length < 2) {
-      alert("Please provide at least 2 answer options")
+      toast.error("Please provide at least 2 answer options")
       return
     }
 
-    if (currentQuestion.type === "single-choice" && currentQuestion.correctAnswer === undefined) {
-      alert("Please select the correct answer")
+    if (currentQuestion.type === "SINGLE_CHOICE" && currentQuestion.correctAnswer === undefined) {
+      toast.error("Please select the correct answer")
       return
     }
 
     if (
-      currentQuestion.type === "multiple-choice" &&
+      currentQuestion.type === "MULTIPLE_CHOICE" &&
       (!currentQuestion.correctAnswers || currentQuestion.correctAnswers.length === 0)
     ) {
-      alert("Please select at least one correct answer")
+      toast.error("Please select at least one correct answer")
       return
     }
 
     const newQuestion = {
       ...currentQuestion,
+      id: `question_${Date.now()}`,
       options: filledOptions, // Only save filled options
     }
 
@@ -112,18 +117,20 @@ export default function CreateQuizPage() {
     // Reset current question form
     setCurrentQuestion({
       id: "",
-      type: "single-choice",
+      type: "SINGLE_CHOICE",
       question: "",
       options: ["", ""],
       correctAnswer: undefined,
       points: 1,
-      required: true,
     })
+
+    toast.success("Question added successfully")
   }
 
   // Remove a question
   const removeQuestion = (id: string) => {
     setQuestions(questions.filter((q) => q.id !== id))
+    toast.success("Question removed")
   }
 
   // Handle drag and drop reordering
@@ -140,7 +147,6 @@ export default function CreateQuizPage() {
       const newQuestions = [...questions]
       const draggedItem = newQuestions[dragItem.current]
 
-      // Add type check to ensure draggedItem exists
       if (draggedItem) {
         newQuestions.splice(dragItem.current, 1)
         newQuestions.splice(dragOverItem.current, 0, draggedItem)
@@ -174,13 +180,13 @@ export default function CreateQuizPage() {
     newOptions.splice(index, 1)
 
     // Adjust correct answers if needed
-    if (currentQuestion.type === "single-choice") {
+    if (currentQuestion.type === "SINGLE_CHOICE") {
       let correctAnswer = currentQuestion.correctAnswer
       if (correctAnswer !== undefined && correctAnswer >= index) {
         correctAnswer = correctAnswer > index ? correctAnswer - 1 : undefined
       }
       setCurrentQuestion({ ...currentQuestion, options: newOptions, correctAnswer })
-    } else if (currentQuestion.type === "multiple-choice") {
+    } else if (currentQuestion.type === "MULTIPLE_CHOICE") {
       let correctAnswers = [...(currentQuestion.correctAnswers || [])]
       correctAnswers = correctAnswers.filter((i) => i !== index).map((i) => (i > index ? i - 1 : i))
       setCurrentQuestion({ ...currentQuestion, options: newOptions, correctAnswers })
@@ -213,7 +219,7 @@ export default function CreateQuizPage() {
       options: currentQuestion.options.length ? currentQuestion.options : ["", ""],
     }
 
-    if (type === "single-choice") {
+    if (type === "SINGLE_CHOICE") {
       updatedQuestion.correctAnswer = undefined
       delete updatedQuestion.correctAnswers
     } else {
@@ -224,52 +230,65 @@ export default function CreateQuizPage() {
     setCurrentQuestion(updatedQuestion)
   }
 
-  // Save the quiz
-  const saveQuiz = async (preview = false) => {
-    if (!quizTitle || questions.length === 0) return
+  // Transform questions to API format
+const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
+  return questions.map((q) => ({
+    type: q.type,
+    question: q.question,
+    points: q.points,
+    options: q.options.map((option, index) => ({
+      text: option, // ✅ this must be "text" not "answerText"
+      isCorrect: q.type === "SINGLE_CHOICE" ? q.correctAnswer === index : q.correctAnswers?.includes(index) || false,
+    })),
+  }))
+}
 
-    setSaveStatus("saving")
+
+
+  const saveQuiz = async (preview = false) => {
+    if (!orgId) {
+      toast.error("Organization ID is missing.")
+      return
+    }
+
+    if (!quizTitle.trim()) {
+      toast.error("Please enter a quiz title")
+      return
+    }
+
+    if (questions.length === 0) {
+      toast.error("Please add at least one question")
+      return
+    }
+
+    const quizData: CreateQuizBody = {
+      title: quizTitle,
+      description: quizDescription,
+      visibility,
+      timeLimit,
+      maxAttempts: attemptLimit,
+      questions: transformQuestionsToAPI(questions),
+    }
+    console.log("Quiz payload being sent:", JSON.stringify(quizData, null, 2));
+
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const response = await postQuizMutation.mutateAsync({ orgId, body: quizData })
+      console.log("💥 saveQuiz called", { quizData })
 
-      // Create quiz data object
-      const quizData = {
-        title: quizTitle,
-        description: quizDescription,
-        visibility,
-        settings: {
-          timeLimit,
-          maxAttempts,
-          shuffleQuestions,
-          shuffleOptions,
-          showResults,
-          passingScore,
-          allowReview,
-        },
-        questions,
-      }
+      toast.success("Quiz created successfully!")
 
-      // Store in localStorage for demo purposes (in real app, this would be API call)
-      localStorage.setItem(`quiz_demo_${Date.now()}`, JSON.stringify(quizData))
-      localStorage.setItem("lastCreatedQuiz", JSON.stringify(quizData))
-
-      console.log("Quiz saved:", quizData)
-      setSaveStatus("saved")
-
-      // If preview is requested, redirect to preview page
       if (preview) {
-        window.open(`/quiz/preview/demo`, "_blank")
+        window.open(`/orgs/${orgId}/quizzes/${response.data.id}/preview`, "_blank")
+      } else {
+        router.push(`/orgs/${orgId}/quizzes`)
       }
-
-      // Reset after a delay
-      setTimeout(() => setSaveStatus("idle"), 3000)
-    } catch (error) {
-      console.error("Error saving quiz:", error)
-      setSaveStatus("error")
+    } catch (error: any) {
+      console.error("Error creating quiz:", error)
+      toast.error(error?.message || "Failed to create quiz. Please try again.")
     }
   }
+
 
   const totalPoints = questions.reduce((sum, q) => sum + q.points, 0)
 
@@ -278,7 +297,7 @@ export default function CreateQuizPage() {
       <Layout.Header>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-4">
-            <Link href="/orgs/quizzes">
+            <Link href={`/orgs/${orgId}/quizzes`}>
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Quizzes
@@ -287,22 +306,26 @@ export default function CreateQuizPage() {
             <Typography variant="h1">Create Quiz</Typography>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={() => saveQuiz(true)} disabled={!quizTitle || questions.length === 0}>
-              Preview
+            <Button
+              variant="outline"
+              onClick={() => saveQuiz(true)}
+              disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
+            >
+              {postQuizMutation.isPending ? "Creating..." : "Create & Preview"}
             </Button>
             <Button
               onClick={() => saveQuiz(false)}
-              disabled={!quizTitle || questions.length === 0 || saveStatus === "saving"}
+              disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
             >
-              {saveStatus === "saving" ? (
-                <>Saving...</>
-              ) : saveStatus === "saved" ? (
+              {postQuizMutation.isPending ? (
                 <>
-                  <Check className="w-4 h-4 mr-2" /> Saved
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Creating...
                 </>
               ) : (
                 <>
-                  <Save className="w-4 h-4 mr-2" /> Save Quiz
+                  <Save className="w-4 h-4 mr-2" />
+                  Create Quiz
                 </>
               )}
             </Button>
@@ -352,25 +375,25 @@ export default function CreateQuizPage() {
                   <Label htmlFor="visibility">Visibility</Label>
                   <Select
                     value={visibility}
-                    onValueChange={(value: "public" | "organization" | "private") => setVisibility(value)}
+                    onValueChange={(value: "PUBLIC_FOR_STUDENTS" | "ORGANIZATION" | "PRIVATE") => setVisibility(value)}
                   >
                     <SelectTrigger id="visibility" className="mb-1">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="public">
+                      <SelectItem value="PUBLIC_FOR_STUDENTS">
                         <div className="flex items-center">
                           <Globe className="w-4 h-4 mr-2" />
                           <span>Public - Anyone with the link</span>
                         </div>
                       </SelectItem>
-                      <SelectItem value="organization">
+                      <SelectItem value="ORGANIZATION">
                         <div className="flex items-center">
                           <Building2 className="w-4 h-4 mr-2" />
                           <span>Organization - Members only</span>
                         </div>
                       </SelectItem>
-                      <SelectItem value="private">
+                      <SelectItem value="PRIVATE">
                         <div className="flex items-center">
                           <Lock className="w-4 h-4 mr-2" />
                           <span>Private - Specific users only</span>
@@ -408,8 +431,8 @@ export default function CreateQuizPage() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="single-choice">Single Choice</SelectItem>
-                            <SelectItem value="multiple-choice">Multiple Choice</SelectItem>
+                            <SelectItem value="SINGLE_CHOICE">Single Choice</SelectItem>
+                            <SelectItem value="MULTIPLE_CHOICE">Multiple Choice</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -438,28 +461,12 @@ export default function CreateQuizPage() {
                       />
                     </div>
 
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="required"
-                        checked={currentQuestion.required}
-                        onCheckedChange={(checked) =>
-                          setCurrentQuestion({ ...currentQuestion, required: checked === true })
-                        }
-                      />
-                      <label
-                        htmlFor="required"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Required question
-                      </label>
-                    </div>
-
                     <div>
                       <Label>Answer Options</Label>
                       <div className="space-y-2 mt-2">
                         {currentQuestion.options.map((option, index) => (
                           <div key={index} className="flex items-center gap-2">
-                            {currentQuestion.type === "single-choice" && (
+                            {currentQuestion.type === "SINGLE_CHOICE" && (
                               <RadioGroup
                                 value={currentQuestion.correctAnswer?.toString() || ""}
                                 onValueChange={(value) => handleCorrectAnswerChange(Number.parseInt(value))}
@@ -469,7 +476,7 @@ export default function CreateQuizPage() {
                               </RadioGroup>
                             )}
 
-                            {currentQuestion.type === "multiple-choice" && (
+                            {currentQuestion.type === "MULTIPLE_CHOICE" && (
                               <Checkbox
                                 id={`option-${index}`}
                                 checked={currentQuestion.correctAnswers?.includes(index)}
@@ -499,9 +506,9 @@ export default function CreateQuizPage() {
                       </div>
 
                       <div className="mt-2 text-sm text-gray-500">
-                        {currentQuestion.type === "single-choice" &&
+                        {currentQuestion.type === "SINGLE_CHOICE" &&
                           "Select the radio button next to the correct answer."}
-                        {currentQuestion.type === "multiple-choice" && "Check all options that are correct answers."}
+                        {currentQuestion.type === "MULTIPLE_CHOICE" && "Check all options that are correct answers."}
                       </div>
                     </div>
 
@@ -543,7 +550,6 @@ export default function CreateQuizPage() {
                                 <Badge variant="outline">{index + 1}</Badge>
                                 <Badge variant="secondary">{question.type}</Badge>
                                 <Badge>{question.points} pts</Badge>
-                                {question.required && <Badge variant="destructive">Required</Badge>}
                               </div>
                               <Button variant="ghost" size="sm" onClick={() => removeQuestion(question.id)}>
                                 <Trash2 className="w-4 h-4" />
@@ -554,15 +560,15 @@ export default function CreateQuizPage() {
                               {question.options.map((option, optIndex) => (
                                 <div key={optIndex} className="flex items-center gap-2">
                                   {/* Show correct answer indicators */}
-                                  {question.type === "single-choice" && question.correctAnswer === optIndex && (
+                                  {question.type === "SINGLE_CHOICE" && question.correctAnswer === optIndex && (
                                     <Check className="w-3 h-3 text-green-500" />
                                   )}
-                                  {question.type === "multiple-choice" &&
+                                  {question.type === "MULTIPLE_CHOICE" &&
                                     question.correctAnswers?.includes(optIndex) && (
                                       <Check className="w-3 h-3 text-green-500" />
                                     )}
-                                  {((question.type === "single-choice" && question.correctAnswer !== optIndex) ||
-                                    (question.type === "multiple-choice" &&
+                                  {((question.type === "SINGLE_CHOICE" && question.correctAnswer !== optIndex) ||
+                                    (question.type === "MULTIPLE_CHOICE" &&
                                       !question.correctAnswers?.includes(optIndex))) && <div className="w-3" />}
                                   <span>{option}</span>
                                 </div>
@@ -599,92 +605,17 @@ export default function CreateQuizPage() {
                         <p className="text-xs text-gray-500">Set to 0 for no time limit</p>
                       </div>
                       <div>
-                        <Label htmlFor="maxAttempts">Max Attempts</Label>
+                        <Label htmlFor="attemptLimit">Attempt Limit</Label>
                         <Input
-                          id="maxAttempts"
+                          id="attemptLimit"
                           type="number"
-                          value={maxAttempts}
-                          onChange={(e) => setMaxAttempts(Number(e.target.value))}
+                          value={attemptLimit}
+                          onChange={(e) => setAttemptLimit(Number(e.target.value))}
                           min="1"
                           className="mb-1"
                         />
                         <p className="text-xs text-gray-500">How many times a user can take this quiz</p>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Display Settings</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label htmlFor="shuffleQuestions">Shuffle Questions</Label>
-                          <p className="text-sm text-gray-600">Randomize question order for each participant</p>
-                        </div>
-                        <Switch
-                          id="shuffleQuestions"
-                          checked={shuffleQuestions}
-                          onCheckedChange={setShuffleQuestions}
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label htmlFor="shuffleOptions">Shuffle Answer Options</Label>
-                          <p className="text-sm text-gray-600">Randomize the order of answer choices</p>
-                        </div>
-                        <Switch id="shuffleOptions" checked={shuffleOptions} onCheckedChange={setShuffleOptions} />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label htmlFor="allowReview">Allow Answer Review</Label>
-                          <p className="text-sm text-gray-600">
-                            Let participants review their answers before submission
-                          </p>
-                        </div>
-                        <Switch id="allowReview" checked={allowReview} onCheckedChange={setAllowReview} />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Results Settings</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div>
-                      <Label htmlFor="showResults">Show Results</Label>
-                      <Select value={showResults} onValueChange={setShowResults}>
-                        <SelectTrigger id="showResults" className="mb-1">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="always">Always show results</SelectItem>
-                          <SelectItem value="passing">Only if passing score achieved</SelectItem>
-                          <SelectItem value="never">Never show detailed results</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <p className="text-xs text-gray-500">Control when participants can see their detailed results</p>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="passingScore">Passing Score (%)</Label>
-                      <Input
-                        id="passingScore"
-                        type="number"
-                        value={passingScore}
-                        onChange={(e) => setPassingScore(Number(e.target.value))}
-                        min="0"
-                        max="100"
-                        className="mb-1"
-                      />
-                      <p className="text-xs text-gray-500">Minimum percentage required to pass the quiz</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -711,12 +642,12 @@ export default function CreateQuizPage() {
                   <span className="font-medium">{timeLimit > 0 ? `${timeLimit} min` : "None"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm text-gray-600">Max Attempts:</span>
-                  <span className="font-medium">{maxAttempts}</span>
+                  <span className="text-sm text-gray-600">Attempt Limit:</span>
+                  <span className="font-medium">{attemptLimit}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Visibility:</span>
-                  <span className="font-medium capitalize">{visibility}</span>
+                  <span className="font-medium capitalize">{visibility.toLowerCase().replace("_", " ")}</span>
                 </div>
               </CardContent>
             </Card>
@@ -740,7 +671,7 @@ export default function CreateQuizPage() {
                           <p>Questions with one correct answer</p>
                         </TooltipContent>
                       </Tooltip>
-                      <span className="font-medium">{questions.filter((q) => q.type === "single-choice").length}</span>
+                      <span className="font-medium">{questions.filter((q) => q.type === "SINGLE_CHOICE").length}</span>
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -756,7 +687,7 @@ export default function CreateQuizPage() {
                         </TooltipContent>
                       </Tooltip>
                       <span className="font-medium">
-                        {questions.filter((q) => q.type === "multiple-choice").length}
+                        {questions.filter((q) => q.type === "MULTIPLE_CHOICE").length}
                       </span>
                     </div>
                   </TooltipProvider>
@@ -772,27 +703,34 @@ export default function CreateQuizPage() {
                 <Button
                   className="w-full"
                   onClick={() => saveQuiz(false)}
-                  disabled={!quizTitle || questions.length === 0 || saveStatus === "saving"}
+                  disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
                 >
-                  {saveStatus === "saving" ? "Saving..." : "Save Quiz"}
+                  {postQuizMutation.isPending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Creating...
+                    </>
+                  ) : (
+                    "Create Quiz"
+                  )}
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full"
                   onClick={() => saveQuiz(true)}
-                  disabled={!quizTitle || questions.length === 0}
+                  disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
                 >
-                  Preview Quiz
+                  Create & Preview
                 </Button>
               </CardContent>
             </Card>
 
-            {saveStatus === "error" && (
+            {postQuizMutation.isError && (
               <Card className="border-red-200 bg-red-50">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-2 text-red-800">
                     <AlertCircle className="w-5 h-5" />
-                    <p>Failed to save quiz. Please try again.</p>
+                    <p>Failed to create quiz. Please try again.</p>
                   </div>
                 </CardContent>
               </Card>
