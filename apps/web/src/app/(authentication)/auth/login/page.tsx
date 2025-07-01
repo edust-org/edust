@@ -77,6 +77,7 @@ export default function Login() {
       const user = authMeData?.data || null
       setAuthMe(user)
       router.push("/")
+      router.refresh()
     }
     setIsLoading(false)
   }
