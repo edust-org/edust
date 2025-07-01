@@ -1,6 +1,6 @@
 "use client"
 
-import { AuthGuard, HasPermission } from "@/components"
+import { AuthGuard, HasPermission, Layout } from "@/components"
 import { useGetOrgMe, usePostOrganization } from "@/hooks/react-query"
 import {
   Button,
@@ -12,14 +12,15 @@ import {
   Skeleton,
 } from "@edust/ui"
 import Link from "next/link"
+import { useParams } from "next/navigation"
 import { BarLoader } from "react-spinners"
 import { toast } from "sonner"
 import { v4 as uuidv4 } from "uuid"
 
-import { Layout } from "../components/layout"
 import siteAssets from "./site-assets"
 
 export default function Site() {
+  const { orgUsername } = useParams<{ orgUsername: string }>()
   const { data, isLoading, refetch } = useGetOrgMe()
   const { mutateAsync: createSite, isPending: isLoadingSiteCreation } =
     usePostOrganization()
@@ -37,7 +38,7 @@ export default function Site() {
       refetch()
 
       window.open(
-        `${window.location.origin}/orgs/site/builder`,
+        `${window.location.origin}/orgs/${orgUsername}/site/builder`,
         "_blank",
       )
     } catch (error) {
@@ -84,7 +85,7 @@ export default function Site() {
                           <Button>Start Editing</Button>
                         </Link>
                         <Link
-                          href={`/orgs/profile/${data?.data?.orgUsername}/site`}
+                          href={`/orgs/${orgUsername}/profile/${data?.data?.orgUsername}/site`}
                           target="_blank"
                         >
                           <Button variant={"outline"}>visit site </Button>

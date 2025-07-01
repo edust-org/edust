@@ -1,22 +1,18 @@
 "use client"
 
-import { useParams } from "next/navigation"
-import { quizHooks } from "@/hooks/quiz-hooks"
-import {
-  Typography,
-  Card,
-  CardHeader,
-  CardTitle,
-  Badge,
-} from "@edust/ui"
-import { Layout } from "../../../../components/layout"
+import { Layout } from "@/components"
 import EditableQuestion from "@/components/EditableQuestion"
+import { quizHooks } from "@/hooks/quiz-hooks"
+import { useAuthStore } from "@/store"
+import { Badge, Card, CardHeader, CardTitle, Typography } from "@edust/ui"
+import { useParams } from "next/navigation"
 
 export default function QuizViewPage() {
-  const { orgId, quizId } = useParams() as {
-    orgId: string
+  const { quizId } = useParams() as {
     quizId: string
   }
+
+  const orgId = useAuthStore().activeOrgId
 
   const { data: quizData, isLoading } = quizHooks.useGetQuizById(orgId, quizId)
   const quiz = quizData?.data
@@ -34,12 +30,12 @@ export default function QuizViewPage() {
   }
 
   return (
-    <>
+    <Layout>
       <Layout.Header>
         <Typography variant="h1">Quiz Details</Typography>
       </Layout.Header>
 
-      <div className="max-w-4xl mx-auto px-4 py-6">
+      <div className="mx-auto max-w-4xl px-4 py-6">
         <Card className="mb-6">
           <CardHeader>
             <CardTitle>{quiz.title}</CardTitle>
@@ -54,7 +50,9 @@ export default function QuizViewPage() {
           </CardHeader>
         </Card>
 
-        {Array.isArray(quiz.orgQuizQuestions) && quiz.orgQuizQuestions.length > 0 ? (
+        {Array.isArray(quiz.orgQuizQuestions) &&
+        quiz.orgQuizQuestions.length > 0 &&
+        orgId ? (
           <div className="space-y-6">
             {quiz.orgQuizQuestions.map((question, index) => (
               <EditableQuestion
@@ -70,6 +68,6 @@ export default function QuizViewPage() {
           <Typography>No questions added yet.</Typography>
         )}
       </div>
-    </>
+    </Layout>
   )
 }

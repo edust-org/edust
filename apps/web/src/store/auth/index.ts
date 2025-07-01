@@ -1,30 +1,33 @@
 import { defaultValues } from "@/configs"
 import { getSocket, socketEvents } from "@/lib/socket"
-import { AuthMe } from "@edust/types"
-import { deleteCookie, getCookies, setCookie } from "cookies-next"
+import { AuthMe, Roles } from "@edust/types"
+import { deleteCookie, getCookies } from "cookies-next"
 import { Socket } from "socket.io-client"
 import { create } from "zustand"
 
 interface AuthState {
-  user: null | AuthMe
+  user: AuthMe | null
+  setAuthMe: (user: AuthMe | null) => void
+
   socket: Socket | null
-  socketOrg: Socket | null
-  isSocketOrgConnected: boolean
   connectSocket: () => void
   disconnectSocket: () => void
   clearOnlineUsers: () => void
   onlineUsers: Set<string>
-  onlineOrgs: Set<string>
 
-  setAuthMe: (user: AuthMe | null) => void
+  getOrganization: (
+    orgUsername: string,
+  ) => NonNullable<AuthMe["organizations"]>[number] | null
 
-  organizations: AuthMe["organizations"]
+  setActiveOrg: (orgUsername: string) => void
+  getActiveOrg: () => NonNullable<AuthMe["organizations"]>[number] | null
+  setActiveOrgId: (orgUsername: string) => void
   activeOrgId: string | null
-  setActiveOrg: (orgId: string) => void
 
   getProfile: (
     orgUsername: string | undefined,
   ) => NonNullable<AuthMe["profiles"]>[number] | null
+
   setActiveProfileOrg: (orgUsername: string) => void
   getActiveProfileOrg: () => NonNullable<AuthMe["profiles"]>[number] | null
 
@@ -37,76 +40,76 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   socket: null,
-  socketOrg: null,
-  isSocketOrgConnected: false,
   onlineUsers: new Set(),
-  onlineOrgs: new Set(),
 
-  organizations: null,
   activeOrgId: null,
-
   activeProfileOrgId: null,
 
+  // Set the user and manage socket connection
   setAuthMe: (user) => {
     if (!user) {
-      set({ user: null, organizations: null, activeOrgId: null })
+      set({ user: null, activeOrgId: null, activeProfileOrgId: null })
+      get().disconnectSocket()
       return
     }
 
-    const existingOrg = user.organizations?.find(
-      (org) => org.id === get().activeOrgId,
-    )
-    const newActiveOrgId = existingOrg
-      ? existingOrg.id
-      : user?.organizations?.[0]?.id || null
-
-    set({
-      user,
-      organizations: user.organizations,
-      activeOrgId: newActiveOrgId,
-    })
+    set({ user })
     get().connectSocket()
   },
 
-  setActiveOrg: (orgId) => {
-    const orgs = get().organizations
-    const previousOrgId = get().activeOrgId
-    const socketOrg = get().socketOrg
+  // get organization
+  getOrganization: (orgUsername: string) => {
+    const { user } = get()
+    if (!user || !user.organizations) return null
 
-    const matchedOrg = orgs?.find((org) => org.id === orgId)
-    if (!matchedOrg) return
+    return (
+      user.organizations.find((org) => org.orgUsername === orgUsername) || null
+    )
+  },
 
-    set({ activeOrgId: matchedOrg.id })
+  // Set the active organization
+  setActiveOrg: (orgUsername) => {
+    const user = get().user
+    if (!user || !user.organizations) return
 
-    if (socketOrg?.connected && previousOrgId) {
-      socketOrg.emit("leaveRoom", previousOrgId)
-      socketOrg.emit("joinRoom", matchedOrg.id)
+    const org = user.organizations.find((o) => o.orgUsername === orgUsername)
+    if (org) {
+      set({ activeOrgId: org.id })
+      get().connectSocket()
     }
   },
 
+  // Get the active organization
   getActiveOrg: () => {
-    const orgs = get().organizations
-    const activeOrgId = get().activeOrgId
+    const { user, activeOrgId } = get()
+    if (!user || !activeOrgId || !user.organizations) return null
+    return user.organizations.find((org) => org.id === activeOrgId) || null
+  },
+  // set active org id
+  setActiveOrgId: (orgUsername: string) => {
+    const { user } = get()
+    if (!user || !user.organizations) return
 
-    if (!orgs || !activeOrgId) return null
-
-    return orgs.find((org) => org.id === activeOrgId) || null
+    const org = user.organizations.find((o) => o.orgUsername === orgUsername)
+    if (org) {
+      set({ activeOrgId: org.id })
+    }
   },
 
+  // Get the profile based on orgUsername
   getProfile: (orgUsername) => {
-    const user = get().user
+    const { user } = get()
     if (!user || !orgUsername) return null
 
-    const profiles = Array.isArray(user.profiles) ? user.profiles : []
-    const foundProfile = profiles.find(
-      (profile) =>
-        profile &&
-        profile.organization &&
-        profile.organization.orgUsername === orgUsername,
+    return (
+      user.profiles?.find(
+        (profile) =>
+          profile?.organization?.orgUsername === orgUsername &&
+          profile.role === Roles.student,
+      ) || null
     )
-
-    return foundProfile || null
   },
+
   setActiveProfileOrgId: (orgUsername) => {
     const profile = get().getProfile(orgUsername)
     if (profile && profile.organization?.id) {
@@ -114,117 +117,76 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
+  // Set active profile org and id
   setActiveProfileOrg: (orgUsername) => {
     const profile = get().getProfile(orgUsername)
-    if (profile && profile.organization?.id) {
+    if (profile?.organization?.id) {
       set({ activeProfileOrgId: profile.organization.id })
     }
   },
-  getActiveProfileOrg: () => {
-    const activeProfileOrgId = get().activeProfileOrgId
-    const user = get().user
 
+  // Get the active profile organization
+  getActiveProfileOrg: () => {
+    const { activeProfileOrgId, user } = get()
     if (!user || !activeProfileOrgId) return null
 
-    const profiles = Array.isArray(user.profiles) ? user.profiles : []
-    const foundProfile = profiles.find(
-      (profile) =>
-        profile &&
-        profile.organization &&
-        profile.organization.id === activeProfileOrgId,
+    return (
+      user.profiles?.find(
+        (profile) =>
+          profile?.organization?.id === activeProfileOrgId &&
+          profile.role === Roles.student,
+      ) || null
     )
-    return foundProfile || null
   },
 
+  // Log out: Clear state and cookies
   logOut: () => {
     localStorage.clear()
     const cookies = Object.entries(getCookies() || {})
     cookies.forEach(([key]) => deleteCookie(key))
 
-    set({ user: null, organizations: null, activeOrgId: null })
+    set({ user: null, activeOrgId: null, activeProfileOrgId: null })
     get().disconnectSocket()
     get().clearOnlineUsers()
   },
 
+  // Clear online users from state
   clearOnlineUsers: () => set({ onlineUsers: new Set() }),
 
+  // Connect to the socket
   connectSocket: () => {
-    const user = get().user
-    const activeOrgId = get().activeOrgId
+    const { user, socket } = get()
+    if (!user?.id || socket) return // Prevent reconnecting if already connected
 
-    if (!user?.id || get().socket) return
-
-    // Connect to default socket
-    const socket = getSocket(defaultValues.backendURL, {
+    const newSocket = getSocket(defaultValues.backendURL, {
       query: { userId: user.id },
     })
 
-    socket.on("connect", () => {
-      socket.on(socketEvents.user.online, (users: { userId: string }[]) => {
+    newSocket.on("connect", () => {
+      newSocket.on(socketEvents.user.online, (users: { userId: string }[]) => {
         const onlineUserIds = new Set(users.map((u) => u.userId))
         set({ onlineUsers: onlineUserIds })
       })
     })
 
-    socket.on("disconnect", () => {
-      console.log("Default socket disconnected")
+    newSocket.on("disconnect", () => {
+      console.log("Socket disconnected")
     })
 
-    socket.on("connect_error", (err) => {
-      console.error("Default socket error:", err)
-    })
-    if (!activeOrgId) {
-      return set({ socket, socketOrg: null })
-    }
-
-    // Connect to org namespace
-    const socketOrg = getSocket(`${defaultValues.backendURL}/org`, {
-      query: {
-        userId: user.id,
-        activeOrgId,
-      },
-      forceNew: true,
+    newSocket.on("connect_error", (err) => {
+      console.error("Socket error:", err)
     })
 
-    socketOrg.on("connect", () => {
-      socketOrg.emit("joinRoom", activeOrgId)
-
-      socketOrg.on(socketEvents.org.online, (orgs: { orgId: string }[]) => {
-        const onlineOrgIds = new Set(orgs.map((o) => o.orgId))
-        set({ onlineOrgs: onlineOrgIds })
-      })
-
-      set({ isSocketOrgConnected: true })
-    })
-
-    socketOrg.on("disconnect", () => {
-      socketOrg.emit("leaveRoom", `org-${activeOrgId}`)
-      set({ isSocketOrgConnected: false })
-      console.log("Org socket disconnected")
-    })
-
-    socketOrg.on("connect_error", (err) => {
-      set({ isSocketOrgConnected: false })
-      console.error("Org socket error:", err)
-    })
-
-    set({ socket, socketOrg })
+    set({ socket: newSocket })
   },
 
+  // Disconnect the socket
   disconnectSocket: () => {
-    const socket = get().socket
-    const socketOrg = get().socketOrg
-
+    const { socket } = get()
     if (socket) {
       socket.disconnect()
       socket.close()
+      set({ socket: null })
     }
-
-    if (socketOrg) {
-      socketOrg.disconnect()
-      socketOrg.close()
-    }
-
-    set({ socket: null, socketOrg: null })
   },
 }))

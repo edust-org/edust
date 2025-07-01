@@ -1,39 +1,62 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { Button, Typography } from "@edust/ui"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@edust/ui"
-import { Input } from "@edust/ui"
-import { Label } from "@edust/ui"
-import { Textarea } from "@edust/ui"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@edust/ui"
-import { Badge } from "@edust/ui"
+import { Layout } from "@/components"
 import {
-  Trash2,
-  Clock,
-  BookOpen,
-  Save,
-  GripVertical,
-  Plus,
-  Check,
-  Globe,
-  Building2,
-  Lock,
+  type CreateQuizBody,
+  type QuizQuestion,
+  quizHooks,
+} from "@/hooks/quiz-hooks"
+import { useAuthStore } from "@/store"
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Checkbox,
+  Input,
+  Label,
+  RadioGroup,
+  RadioGroupItem,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  Typography,
+} from "@edust/ui"
+import {
   AlertCircle,
   ArrowLeft,
+  Badge,
+  BookOpen,
+  Building2,
+  Check,
+  Clock,
+  Globe,
+  GripVertical,
   Loader2,
+  Lock,
+  Plus,
+  Save,
+  Trash2,
 } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@edust/ui"
-import { RadioGroup, RadioGroupItem } from "@edust/ui"
-import { Checkbox } from "@edust/ui"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@edust/ui"
 import Link from "next/link"
-import { Layout } from "../../../components/layout"
-import { quizHooks, type CreateQuizBody, type QuizQuestion } from "@/hooks/quiz-hooks"
-import { toast } from "sonner"
 import { useParams } from "next/navigation"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
+import { useRef, useState } from "react"
 
 interface Question {
   id: string
@@ -45,20 +68,20 @@ interface Question {
   points: number
 }
 
-
 export default function CreateQuizPage() {
-  const params = useParams()
-  const orgId = params.orgId as string
+  const { orgUsername } = useParams<{ orgUsername: string }>()
   const router = useRouter()
 
-
+  const orgId = useAuthStore().activeOrgId
   // React Query mutation
   const postQuizMutation = quizHooks.usePostQuiz()
 
   // Quiz metadata
   const [quizTitle, setQuizTitle] = useState("")
   const [quizDescription, setQuizDescription] = useState("")
-  const [visibility, setVisibility] = useState<"PUBLIC_FOR_STUDENTS" | "ORGANIZATION" | "PRIVATE">("ORGANIZATION")
+  const [visibility, setVisibility] = useState<
+    "PUBLIC_FOR_STUDENTS" | "ORG_ONLY"
+  >("ORG_ONLY")
 
   // Quiz settings
   const [timeLimit, setTimeLimit] = useState(30)
@@ -93,14 +116,18 @@ export default function CreateQuizPage() {
       return
     }
 
-    if (currentQuestion.type === "SINGLE_CHOICE" && currentQuestion.correctAnswer === undefined) {
+    if (
+      currentQuestion.type === "SINGLE_CHOICE" &&
+      currentQuestion.correctAnswer === undefined
+    ) {
       toast.error("Please select the correct answer")
       return
     }
 
     if (
       currentQuestion.type === "MULTIPLE_CHOICE" &&
-      (!currentQuestion.correctAnswers || currentQuestion.correctAnswers.length === 0)
+      (!currentQuestion.correctAnswers ||
+        currentQuestion.correctAnswers.length === 0)
     ) {
       toast.error("Please select at least one correct answer")
       return
@@ -185,11 +212,21 @@ export default function CreateQuizPage() {
       if (correctAnswer !== undefined && correctAnswer >= index) {
         correctAnswer = correctAnswer > index ? correctAnswer - 1 : undefined
       }
-      setCurrentQuestion({ ...currentQuestion, options: newOptions, correctAnswer })
+      setCurrentQuestion({
+        ...currentQuestion,
+        options: newOptions,
+        correctAnswer,
+      })
     } else if (currentQuestion.type === "MULTIPLE_CHOICE") {
       let correctAnswers = [...(currentQuestion.correctAnswers || [])]
-      correctAnswers = correctAnswers.filter((i) => i !== index).map((i) => (i > index ? i - 1 : i))
-      setCurrentQuestion({ ...currentQuestion, options: newOptions, correctAnswers })
+      correctAnswers = correctAnswers
+        .filter((i) => i !== index)
+        .map((i) => (i > index ? i - 1 : i))
+      setCurrentQuestion({
+        ...currentQuestion,
+        options: newOptions,
+        correctAnswers,
+      })
     }
   }
 
@@ -216,7 +253,9 @@ export default function CreateQuizPage() {
     const updatedQuestion: Question = {
       ...currentQuestion,
       type,
-      options: currentQuestion.options.length ? currentQuestion.options : ["", ""],
+      options: currentQuestion.options.length
+        ? currentQuestion.options
+        : ["", ""],
     }
 
     if (type === "SINGLE_CHOICE") {
@@ -231,19 +270,20 @@ export default function CreateQuizPage() {
   }
 
   // Transform questions to API format
-const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
-  return questions.map((q) => ({
-    type: q.type,
-    question: q.question,
-    points: q.points,
-    options: q.options.map((option, index) => ({
-      text: option, // ✅ this must be "text" not "answerText"
-      isCorrect: q.type === "SINGLE_CHOICE" ? q.correctAnswer === index : q.correctAnswers?.includes(index) || false,
-    })),
-  }))
-}
-
-
+  const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
+    return questions.map((q) => ({
+      type: q.type,
+      question: q.question,
+      points: q.points,
+      options: q.options.map((option, index) => ({
+        text: option, // ✅ this must be "text" not "answerText"
+        isCorrect:
+          q.type === "SINGLE_CHOICE"
+            ? q.correctAnswer === index
+            : q.correctAnswers?.includes(index) || false,
+      })),
+    }))
+  }
 
   const saveQuiz = async (preview = false) => {
     if (!orgId) {
@@ -269,19 +309,24 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
       maxAttempts: attemptLimit,
       questions: transformQuestionsToAPI(questions),
     }
-    console.log("Quiz payload being sent:", JSON.stringify(quizData, null, 2));
-
+    console.log("Quiz payload being sent:", JSON.stringify(quizData, null, 2))
 
     try {
-      const response = await postQuizMutation.mutateAsync({ orgId, body: quizData })
+      const response = await postQuizMutation.mutateAsync({
+        orgId,
+        body: quizData,
+      })
       console.log("💥 saveQuiz called", { quizData })
 
       toast.success("Quiz created successfully!")
 
       if (preview) {
-        window.open(`/orgs/${orgId}/quizzes/${response.data.id}/preview`, "_blank")
+        window.open(
+          `/orgs/${orgUsername}/quizzes/${response.data.id}/preview`,
+          "_blank",
+        )
       } else {
-        router.push(`/orgs/${orgId}/quizzes`)
+        router.push(`/orgs/${orgUsername}/quizzes`)
       }
     } catch (error: any) {
       console.error("Error creating quiz:", error)
@@ -289,17 +334,16 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
     }
   }
 
-
   const totalPoints = questions.reduce((sum, q) => sum + q.points, 0)
 
   return (
-    <>
+    <Layout>
       <Layout.Header>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href={`/orgs/${orgId}/quizzes`}>
+            <Link href={`/orgs/${orgUsername}/quizzes`}>
               <Button variant="ghost" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Quizzes
               </Button>
             </Link>
@@ -309,22 +353,30 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
             <Button
               variant="outline"
               onClick={() => saveQuiz(true)}
-              disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
+              disabled={
+                !quizTitle ||
+                questions.length === 0 ||
+                postQuizMutation.isPending
+              }
             >
               {postQuizMutation.isPending ? "Creating..." : "Create & Preview"}
             </Button>
             <Button
               onClick={() => saveQuiz(false)}
-              disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
+              disabled={
+                !quizTitle ||
+                questions.length === 0 ||
+                postQuizMutation.isPending
+              }
             >
               {postQuizMutation.isPending ? (
                 <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Creating...
                 </>
               ) : (
                 <>
-                  <Save className="w-4 h-4 mr-2" />
+                  <Save className="mr-2 h-4 w-4" />
                   Create Quiz
                 </>
               )}
@@ -334,12 +386,12 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
       </Layout.Header>
 
       <div className="container mx-auto px-4 py-6">
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid gap-8 lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5" />
+                  <BookOpen className="h-5 w-5" />
                   Quiz Information
                 </CardTitle>
               </CardHeader>
@@ -355,7 +407,9 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                     placeholder="Enter quiz title..."
                     className="mb-1"
                   />
-                  <p className="text-xs text-gray-500">Give your quiz a clear, descriptive title</p>
+                  <p className="text-xs text-gray-500">
+                    Give your quiz a clear, descriptive title
+                  </p>
                 </div>
 
                 <div>
@@ -368,14 +422,18 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                     rows={3}
                     className="mb-1"
                   />
-                  <p className="text-xs text-gray-500">Provide context and instructions for quiz takers</p>
+                  <p className="text-xs text-gray-500">
+                    Provide context and instructions for quiz takers
+                  </p>
                 </div>
 
                 <div>
                   <Label htmlFor="visibility">Visibility</Label>
                   <Select
                     value={visibility}
-                    onValueChange={(value: "PUBLIC_FOR_STUDENTS" | "ORGANIZATION" | "PRIVATE") => setVisibility(value)}
+                    onValueChange={(
+                      value: "PUBLIC_FOR_STUDENTS" | "ORG_ONLY",
+                    ) => setVisibility(value)}
                   >
                     <SelectTrigger id="visibility" className="mb-1">
                       <SelectValue />
@@ -383,25 +441,21 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                     <SelectContent>
                       <SelectItem value="PUBLIC_FOR_STUDENTS">
                         <div className="flex items-center">
-                          <Globe className="w-4 h-4 mr-2" />
+                          <Globe className="mr-2 h-4 w-4" />
                           <span>Public - Anyone with the link</span>
                         </div>
                       </SelectItem>
-                      <SelectItem value="ORGANIZATION">
+                      <SelectItem value="ORG_ONLY">
                         <div className="flex items-center">
-                          <Building2 className="w-4 h-4 mr-2" />
+                          <Building2 className="mr-2 h-4 w-4" />
                           <span>Organization - Members only</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="PRIVATE">
-                        <div className="flex items-center">
-                          <Lock className="w-4 h-4 mr-2" />
-                          <span>Private - Specific users only</span>
                         </div>
                       </SelectItem>
                     </SelectContent>
                   </Select>
-                  <p className="text-xs text-gray-500">Control who can access your quiz</p>
+                  <p className="text-xs text-gray-500">
+                    Control who can access your quiz
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -417,7 +471,9 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                 <Card>
                   <CardHeader>
                     <CardTitle>Create New Question</CardTitle>
-                    <CardDescription>Build your question with the options below</CardDescription>
+                    <CardDescription>
+                      Build your question with the options below
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
@@ -425,14 +481,20 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                         <Label htmlFor="questionType">Question Type</Label>
                         <Select
                           value={currentQuestion.type}
-                          onValueChange={(value: Question["type"]) => handleQuestionTypeChange(value)}
+                          onValueChange={(value: Question["type"]) =>
+                            handleQuestionTypeChange(value)
+                          }
                         >
                           <SelectTrigger id="questionType">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="SINGLE_CHOICE">Single Choice</SelectItem>
-                            <SelectItem value="MULTIPLE_CHOICE">Multiple Choice</SelectItem>
+                            <SelectItem value="SINGLE_CHOICE">
+                              Single Choice
+                            </SelectItem>
+                            <SelectItem value="MULTIPLE_CHOICE">
+                              Multiple Choice
+                            </SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -442,7 +504,12 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                           id="points"
                           type="number"
                           value={currentQuestion.points}
-                          onChange={(e) => setCurrentQuestion({ ...currentQuestion, points: Number(e.target.value) })}
+                          onChange={(e) =>
+                            setCurrentQuestion({
+                              ...currentQuestion,
+                              points: Number(e.target.value),
+                            })
+                          }
                           min="1"
                         />
                       </div>
@@ -455,7 +522,12 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                       <Textarea
                         id="questionText"
                         value={currentQuestion.question}
-                        onChange={(e) => setCurrentQuestion({ ...currentQuestion, question: e.target.value })}
+                        onChange={(e) =>
+                          setCurrentQuestion({
+                            ...currentQuestion,
+                            question: e.target.value,
+                          })
+                        }
                         placeholder="Enter your question..."
                         rows={2}
                       />
@@ -463,44 +535,67 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
 
                     <div>
                       <Label>Answer Options</Label>
-                      <div className="space-y-2 mt-2">
+                      <div className="mt-2 space-y-2">
                         {currentQuestion.options.map((option, index) => (
                           <div key={index} className="flex items-center gap-2">
                             {currentQuestion.type === "SINGLE_CHOICE" && (
                               <RadioGroup
-                                value={currentQuestion.correctAnswer?.toString() || ""}
-                                onValueChange={(value) => handleCorrectAnswerChange(Number.parseInt(value))}
+                                value={
+                                  currentQuestion.correctAnswer?.toString() ||
+                                  ""
+                                }
+                                onValueChange={(value) =>
+                                  handleCorrectAnswerChange(
+                                    Number.parseInt(value),
+                                  )
+                                }
                                 className="flex items-center"
                               >
-                                <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+                                <RadioGroupItem
+                                  value={index.toString()}
+                                  id={`option-${index}`}
+                                />
                               </RadioGroup>
                             )}
 
                             {currentQuestion.type === "MULTIPLE_CHOICE" && (
                               <Checkbox
                                 id={`option-${index}`}
-                                checked={currentQuestion.correctAnswers?.includes(index)}
-                                onCheckedChange={(checked) => handleMultipleCorrectChange(index, checked === true)}
+                                checked={currentQuestion.correctAnswers?.includes(
+                                  index,
+                                )}
+                                onCheckedChange={(checked) =>
+                                  handleMultipleCorrectChange(
+                                    index,
+                                    checked === true,
+                                  )
+                                }
                               />
                             )}
 
                             <Input
                               value={option}
-                              onChange={(e) => handleOptionChange(index, e.target.value)}
+                              onChange={(e) =>
+                                handleOptionChange(index, e.target.value)
+                              }
                               placeholder={`Option ${index + 1}`}
                               className="flex-1"
                             />
 
                             {currentQuestion.options.length > 2 && (
-                              <Button variant="ghost" size="sm" onClick={() => removeOption(index)}>
-                                <Trash2 className="w-4 h-4" />
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeOption(index)}
+                              >
+                                <Trash2 className="h-4 w-4" />
                               </Button>
                             )}
                           </div>
                         ))}
 
                         <Button variant="outline" size="sm" onClick={addOption}>
-                          <Plus className="w-4 h-4 mr-2" />
+                          <Plus className="mr-2 h-4 w-4" />
                           Add Option
                         </Button>
                       </div>
@@ -508,12 +603,17 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                       <div className="mt-2 text-sm text-gray-500">
                         {currentQuestion.type === "SINGLE_CHOICE" &&
                           "Select the radio button next to the correct answer."}
-                        {currentQuestion.type === "MULTIPLE_CHOICE" && "Check all options that are correct answers."}
+                        {currentQuestion.type === "MULTIPLE_CHOICE" &&
+                          "Check all options that are correct answers."}
                       </div>
                     </div>
 
-                    <Button onClick={addQuestion} disabled={!currentQuestion.question.trim()} className="w-full">
-                      <Plus className="w-4 h-4 mr-2" />
+                    <Button
+                      onClick={addQuestion}
+                      disabled={!currentQuestion.question.trim()}
+                      className="w-full"
+                    >
+                      <Plus className="mr-2 h-4 w-4" />
                       Add Question
                     </Button>
                   </CardContent>
@@ -527,49 +627,68 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                   </CardHeader>
                   <CardContent>
                     {questions.length === 0 ? (
-                      <div className="text-center py-8 border border-dashed rounded-lg">
-                        <AlertCircle className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                      <div className="rounded-lg border border-dashed py-8 text-center">
+                        <AlertCircle className="mx-auto mb-3 h-12 w-12 text-gray-300" />
                         <p className="text-gray-500">No questions added yet</p>
-                        <p className="text-sm text-gray-400">Use the question builder above to add questions</p>
+                        <p className="text-sm text-gray-400">
+                          Use the question builder above to add questions
+                        </p>
                       </div>
                     ) : (
                       <div className="space-y-3">
                         {questions.map((question, index) => (
                           <div
                             key={question.id}
-                            className="border rounded-lg p-4 bg-white cursor-move"
+                            className="cursor-move rounded-lg border bg-white p-4"
                             draggable
                             onDragStart={() => handleDragStart(index)}
                             onDragEnter={() => handleDragEnter(index)}
                             onDragEnd={handleDragEnd}
                             onDragOver={(e) => e.preventDefault()}
                           >
-                            <div className="flex items-start justify-between mb-2">
+                            <div className="mb-2 flex items-start justify-between">
                               <div className="flex items-center gap-2">
-                                <GripVertical className="w-5 h-5 text-gray-400" />
+                                <GripVertical className="h-5 w-5 text-gray-400" />
                                 <Badge variant="outline">{index + 1}</Badge>
-                                <Badge variant="secondary">{question.type}</Badge>
+                                <Badge variant="secondary">
+                                  {question.type}
+                                </Badge>
                                 <Badge>{question.points} pts</Badge>
                               </div>
-                              <Button variant="ghost" size="sm" onClick={() => removeQuestion(question.id)}>
-                                <Trash2 className="w-4 h-4" />
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => removeQuestion(question.id)}
+                              >
+                                <Trash2 className="h-4 w-4" />
                               </Button>
                             </div>
-                            <p className="text-sm font-medium mb-2">{question.question}</p>
-                            <div className="text-xs text-gray-600 space-y-1">
+                            <p className="mb-2 text-sm font-medium">
+                              {question.question}
+                            </p>
+                            <div className="space-y-1 text-xs text-gray-600">
                               {question.options.map((option, optIndex) => (
-                                <div key={optIndex} className="flex items-center gap-2">
+                                <div
+                                  key={optIndex}
+                                  className="flex items-center gap-2"
+                                >
                                   {/* Show correct answer indicators */}
-                                  {question.type === "SINGLE_CHOICE" && question.correctAnswer === optIndex && (
-                                    <Check className="w-3 h-3 text-green-500" />
-                                  )}
-                                  {question.type === "MULTIPLE_CHOICE" &&
-                                    question.correctAnswers?.includes(optIndex) && (
-                                      <Check className="w-3 h-3 text-green-500" />
+                                  {question.type === "SINGLE_CHOICE" &&
+                                    question.correctAnswer === optIndex && (
+                                      <Check className="h-3 w-3 text-green-500" />
                                     )}
-                                  {((question.type === "SINGLE_CHOICE" && question.correctAnswer !== optIndex) ||
+                                  {question.type === "MULTIPLE_CHOICE" &&
+                                    question.correctAnswers?.includes(
+                                      optIndex,
+                                    ) && (
+                                      <Check className="h-3 w-3 text-green-500" />
+                                    )}
+                                  {((question.type === "SINGLE_CHOICE" &&
+                                    question.correctAnswer !== optIndex) ||
                                     (question.type === "MULTIPLE_CHOICE" &&
-                                      !question.correctAnswers?.includes(optIndex))) && <div className="w-3" />}
+                                      !question.correctAnswers?.includes(
+                                        optIndex,
+                                      ))) && <div className="w-3" />}
                                   <span>{option}</span>
                                 </div>
                               ))}
@@ -586,7 +705,7 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" />
+                      <Clock className="h-5 w-5" />
                       Time & Attempts
                     </CardTitle>
                   </CardHeader>
@@ -602,7 +721,9 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                           min="0"
                           className="mb-1"
                         />
-                        <p className="text-xs text-gray-500">Set to 0 for no time limit</p>
+                        <p className="text-xs text-gray-500">
+                          Set to 0 for no time limit
+                        </p>
                       </div>
                       <div>
                         <Label htmlFor="attemptLimit">Attempt Limit</Label>
@@ -610,11 +731,15 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                           id="attemptLimit"
                           type="number"
                           value={attemptLimit}
-                          onChange={(e) => setAttemptLimit(Number(e.target.value))}
+                          onChange={(e) =>
+                            setAttemptLimit(Number(e.target.value))
+                          }
                           min="1"
                           className="mb-1"
                         />
-                        <p className="text-xs text-gray-500">How many times a user can take this quiz</p>
+                        <p className="text-xs text-gray-500">
+                          How many times a user can take this quiz
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -639,7 +764,9 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Time Limit:</span>
-                  <span className="font-medium">{timeLimit > 0 ? `${timeLimit} min` : "None"}</span>
+                  <span className="font-medium">
+                    {timeLimit > 0 ? `${timeLimit} min` : "None"}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Attempt Limit:</span>
@@ -647,7 +774,9 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Visibility:</span>
-                  <span className="font-medium capitalize">{visibility.toLowerCase().replace("_", " ")}</span>
+                  <span className="font-medium capitalize">
+                    {visibility.toLowerCase().replace("_", " ")}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -662,8 +791,8 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                     <div className="flex items-center justify-between">
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-sm flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                          <span className="flex items-center gap-2 text-sm">
+                            <div className="h-3 w-3 rounded-full bg-blue-500"></div>
                             Single Choice
                           </span>
                         </TooltipTrigger>
@@ -671,14 +800,19 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                           <p>Questions with one correct answer</p>
                         </TooltipContent>
                       </Tooltip>
-                      <span className="font-medium">{questions.filter((q) => q.type === "SINGLE_CHOICE").length}</span>
+                      <span className="font-medium">
+                        {
+                          questions.filter((q) => q.type === "SINGLE_CHOICE")
+                            .length
+                        }
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between">
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="text-sm flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                          <span className="flex items-center gap-2 text-sm">
+                            <div className="h-3 w-3 rounded-full bg-purple-500"></div>
                             Multiple Choice
                           </span>
                         </TooltipTrigger>
@@ -687,7 +821,10 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                         </TooltipContent>
                       </Tooltip>
                       <span className="font-medium">
-                        {questions.filter((q) => q.type === "MULTIPLE_CHOICE").length}
+                        {
+                          questions.filter((q) => q.type === "MULTIPLE_CHOICE")
+                            .length
+                        }
                       </span>
                     </div>
                   </TooltipProvider>
@@ -703,11 +840,15 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                 <Button
                   className="w-full"
                   onClick={() => saveQuiz(false)}
-                  disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
+                  disabled={
+                    !quizTitle ||
+                    questions.length === 0 ||
+                    postQuizMutation.isPending
+                  }
                 >
                   {postQuizMutation.isPending ? (
                     <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                       Creating...
                     </>
                   ) : (
@@ -718,7 +859,11 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
                   variant="outline"
                   className="w-full"
                   onClick={() => saveQuiz(true)}
-                  disabled={!quizTitle || questions.length === 0 || postQuizMutation.isPending}
+                  disabled={
+                    !quizTitle ||
+                    questions.length === 0 ||
+                    postQuizMutation.isPending
+                  }
                 >
                   Create & Preview
                 </Button>
@@ -729,7 +874,7 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
               <Card className="border-red-200 bg-red-50">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-2 text-red-800">
-                    <AlertCircle className="w-5 h-5" />
+                    <AlertCircle className="h-5 w-5" />
                     <p>Failed to create quiz. Please try again.</p>
                   </div>
                 </CardContent>
@@ -738,6 +883,6 @@ const transformQuestionsToAPI = (questions: Question[]): QuizQuestion[] => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }

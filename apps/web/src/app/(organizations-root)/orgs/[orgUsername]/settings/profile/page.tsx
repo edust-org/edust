@@ -184,28 +184,6 @@ export default function Profile() {
 
         const org = response?.data?.data as Organization
 
-        const organizationRole = session.data?.user.organizationRoles?.find(
-          (org) => org.role === Roles.owner,
-        )
-        const organizationRolesFilter =
-          session.data?.user.organizationRoles?.filter(
-            (org) => org.role !== Roles.owner,
-          ) || []
-
-        const updatedOrg = {
-          ...organizationRole,
-          organization: {
-            ...organizationRole?.organization,
-
-            name: org.name,
-            orgUsername: org.orgUsername,
-          },
-        }
-
-        session.update({
-          organizationRoles: [...organizationRolesFilter, updatedOrg],
-        })
-
         toast.success(response?.data?.message)
 
         if (orgProfileData) {

@@ -46,9 +46,11 @@ const FormSchema = z.object({
 export const RoleForm = ({
   isEditable,
   roleId,
+  orgUsername,
 }: {
   isEditable: boolean
   roleId: string | null
+  orgUsername: string
 }) => {
   const router = useRouter()
 
@@ -89,7 +91,7 @@ export const RoleForm = ({
             toast.success(`The role has been successfully updated.`)
             form.reset()
             isFormReset.current = true
-            router.push("/orgs/access-control")
+            router.push(`/orgs/${orgUsername}/access-control`)
           }
         })
     } else {

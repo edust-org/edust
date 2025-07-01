@@ -1,19 +1,11 @@
 "use client"
 
-import { AuthGuard, HasPermission } from "@/components"
+import { AuthGuard, HasPermission, Layout } from "@/components"
 import { accessControlHooks } from "@/hooks/react-query"
 import { useAuthStore } from "@/store"
 import { Roles } from "@edust/types"
 import {
   Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Input,
-  Label,
   Separator,
   SidebarMenu,
   SidebarMenuButton,
@@ -26,15 +18,20 @@ import {
 } from "@edust/ui"
 import { Edit } from "lucide-react"
 import Link from "next/link"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation"
 import qs from "qs"
 
-import { Layout } from "../components/layout"
 import { RoleForm } from "./role-form"
 import { UserLists } from "./user-lists"
 import { ViewPermissions } from "./view-permissions"
 
 export default function AccessControl() {
+  const { orgUsername } = useParams<{ orgUsername: string }>()
   const router = useRouter()
   const pathname = usePathname()
 
@@ -80,7 +77,7 @@ export default function AccessControl() {
                 ]}
                 fallback
               >
-                <Link href={"/orgs/access-control"}>
+                <Link href={`/orgs/${orgUsername}/access-control`}>
                   <Button className="w-full" size={"sm"}>
                     New Role
                   </Button>
@@ -152,6 +149,7 @@ export default function AccessControl() {
                   <RoleForm
                     isEditable={ref === "edit_role"}
                     roleId={editRoleId}
+                    orgUsername={orgUsername}
                   />
                 </HasPermission>
               )}

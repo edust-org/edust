@@ -17,7 +17,7 @@ export interface QuizQuestion {
 export interface CreateQuizRequest {
   title: string
   description: string
-  visibility: "PUBLIC_FOR_STUDENTS" | "ORGANIZATION" | "PRIVATE"
+  visibility: "PUBLIC_FOR_STUDENTS" | "ORG_ONLY" 
   timeLimit: number
   maxAttempts: number
   questions: QuizQuestion[]
@@ -32,7 +32,7 @@ export interface Quiz {
   id: string
   title: string
   description: string
-  visibility: string
+  visibility: "PUBLIC_FOR_STUDENTS" | "ORG_ONLY" 
   timeLimit: number
   maxAttempts: number
   questions: {

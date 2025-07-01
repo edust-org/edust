@@ -21,7 +21,8 @@ export default function StudentLayout({
     if (username) setActiveProfileOrgId(username)
   }, [username, setActiveProfileOrgId])
 
-  // No profiles at all
+  // Case 1: No profiles and no username in the URL
+  // When no profiles exist and no username is in the URL, we display a message indicating no profiles.
   if (!profiles.length && username === undefined) {
     return (
       <div className="container py-8">
@@ -33,7 +34,8 @@ export default function StudentLayout({
     )
   }
 
-  // Username present but profile not found
+  // Case 2: Username is present but profile not found
+  // If there are profiles, but the profile for the given username does not exist, show a "Profile Not Found" message.
   if (profiles.length && username && !profile) {
     return (
       <div className="container py-8">
@@ -46,5 +48,6 @@ export default function StudentLayout({
     )
   }
 
+  // Default: Render the children if profiles exist and everything is valid
   return <>{children}</>
 }

@@ -1,7 +1,6 @@
 "use client"
 
 import { AvatarWithStatus } from "@/components"
-import { authService } from "@/services"
 import { useAuthStore } from "@/store"
 import {
   SidebarMenu,
@@ -19,16 +18,21 @@ import {
 } from "@edust/ui"
 import { Badge } from "@edust/ui"
 import { Building2, ChevronsUpDown } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 import * as React from "react"
 
 export function OrgSwitcher() {
+  const router = useRouter()
+
   const state = useAuthStore()
-  const activeOrg = authService.findActiveOrganization(
-    state.organizations,
-    state.activeOrgId,
-  )
+  const activeOrg = state.getActiveOrg()
+
   const { isMobile } = useSidebar()
+
+  if (!activeOrg) {
+    return null
+  }
 
   return (
     <SidebarMenu>
@@ -43,9 +47,7 @@ export function OrgSwitcher() {
                 <AvatarWithStatus
                   src={activeOrg.profilePic}
                   alt={activeOrg.name}
-                  status={
-                    state.onlineOrgs.has(activeOrg.id) ? "online" : "offline"
-                  }
+                  status={"online"}
                 />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">
@@ -66,11 +68,12 @@ export function OrgSwitcher() {
             <DropdownMenuLabel className="text-muted-foreground text-xs">
               Organizations
             </DropdownMenuLabel>
-            {state.organizations?.map((org, index) => (
+            {state.user?.organizations?.map((org, index) => (
               <DropdownMenuItem
                 key={org.id}
                 onClick={() => {
-                  state.setActiveOrg(org.id)
+                  state.setActiveOrg(org.orgUsername)
+                  router.push(`/orgs/${org.orgUsername}`)
                 }}
                 className="gap-2 p-2"
               >

@@ -2,7 +2,6 @@
 
 import { Loading } from "@/components/loading"
 import { PermissionValues } from "@/lib/pm"
-import { authService } from "@/services"
 import { useAuthStore } from "@/store"
 import { Typography } from "@edust/ui"
 import { useSession } from "next-auth/react"
@@ -24,10 +23,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
 }) => {
   const { status } = useSession()
   const state = useAuthStore()
-  const activeOrg = authService.findActiveOrganization(
-    state.organizations,
-    state.activeOrgId,
-  )
+  const activeOrg = state.getActiveOrg()
 
   const userPermissions = useMemo(
     () => activeOrg?.rolePermissions || [],

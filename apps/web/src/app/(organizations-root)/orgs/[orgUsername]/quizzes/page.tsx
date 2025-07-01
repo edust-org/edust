@@ -1,32 +1,16 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
-import Link from "next/link"
-import { useParams } from "next/navigation"
-import { useSession } from "next-auth/react"
+import { Layout } from "@/components"
 import { quizHooks } from "@/hooks/quiz-hooks"
+import { useAuthStore } from "@/store"
 import {
-  BookOpen,
-  BarChart3,
-  Search,
-  Plus,
-  Eye,
-  Edit,
-  Share2,
-  Download,
-  Globe,
-  Lock,
-  Building,
-  Timer,
-} from "lucide-react"
-import {
+  Badge,
   Button,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  Badge,
   Input,
   Select,
   SelectContent,
@@ -35,16 +19,34 @@ import {
   SelectValue,
   Typography,
 } from "@edust/ui"
-import { Layout } from "../../components/layout"
+import {
+  BarChart3,
+  BookOpen,
+  Building,
+  Download,
+  Edit,
+  Eye,
+  Globe,
+  Lock,
+  Plus,
+  Search,
+  Share2,
+  Timer,
+} from "lucide-react"
+import Link from "next/link"
+import { useParams } from "next/navigation"
+import { toast } from "sonner"
 
-export default function QuizzesDemo() {
+import { useMemo, useState } from "react"
+
+export default function Quizzes() {
+  const state = useAuthStore()
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState<string>("all")
-  const { data: session } = useSession()
-  const params = useParams()
-  const orgId = params?.orgId as string
+  const { orgUsername } = useParams<{ orgUsername: string }>()
+  const org = state.getActiveOrg()
 
-  const { data, isLoading } = quizHooks.useGetQuizzes(orgId)
+  const { data, isLoading } = quizHooks.useGetQuizzes(org?.id || null)
   const quizzes = data?.data?.items || []
 
   const validQuizzes = useMemo(() => {
@@ -61,8 +63,6 @@ export default function QuizzesDemo() {
       return isValid
     })
   }, [quizzes])
-
-
 
   const filteredQuizzes = useMemo(() => {
     const lowerSearchTerm = searchTerm.toLowerCase()
@@ -85,35 +85,35 @@ export default function QuizzesDemo() {
   const getVisibilityIcon = (visibility: string) => {
     switch (visibility?.toLowerCase()) {
       case "public":
-        return <Globe className="w-4 h-4 text-blue-600" />
+        return <Globe className="h-4 w-4 text-blue-600" />
       case "organization":
-        return <Building className="w-4 h-4 text-purple-600" />
+        return <Building className="h-4 w-4 text-purple-600" />
       case "private":
-        return <Lock className="w-4 h-4 text-gray-600" />
+        return <Lock className="h-4 w-4 text-gray-600" />
       default:
         return null
     }
   }
 
   return (
-    <>
+    <Layout>
       <Layout.Header>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex w-full items-center justify-between">
           <Typography variant="h1">Quizzes</Typography>
-          <Link href={`/orgs/${orgId}/quizzes/create`}>
+          <Link href={`/orgs/${orgUsername}/quizzes/create`}>
             <Button>
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="mr-2 h-4 w-4" />
               Create Quiz
             </Button>
           </Link>
         </div>
       </Layout.Header>
 
-      <div className="container mx-auto px-4 py-6 space-y-6">
-        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          <div className="flex-1 max-w-md">
+      <div className="container mx-auto space-y-6 px-4 py-6">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="max-w-md flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
               <Input
                 placeholder="Search quizzes..."
                 value={searchTerm}
@@ -138,17 +138,17 @@ export default function QuizzesDemo() {
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <Card key={i} className="animate-pulse">
                 <CardHeader>
-                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  <div className="h-4 w-3/4 rounded bg-gray-200"></div>
+                  <div className="h-3 w-1/2 rounded bg-gray-200"></div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    <div className="h-3 bg-gray-200 rounded"></div>
-                    <div className="h-3 bg-gray-200 rounded w-2/3"></div>
+                    <div className="h-3 rounded bg-gray-200"></div>
+                    <div className="h-3 w-2/3 rounded bg-gray-200"></div>
                   </div>
                 </CardContent>
               </Card>
@@ -156,8 +156,8 @@ export default function QuizzesDemo() {
           </div>
         ) : filteredQuizzes.length === 0 ? (
           <Card>
-            <CardContent className="text-center py-12">
-              <BookOpen className="w-12 h-12 mx-auto text-gray-400 mb-4" />
+            <CardContent className="py-12 text-center">
+              <BookOpen className="mx-auto mb-4 h-12 w-12 text-gray-400" />
               <Typography variant="h3" className="mb-2">
                 No quizzes found
               </Typography>
@@ -175,68 +175,84 @@ export default function QuizzesDemo() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredQuizzes.map((quiz) => (
               <Card
                 key={quiz.id}
-                className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500"
+                className="border-l-4 border-l-blue-500 transition-shadow hover:shadow-lg"
               >
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-lg mb-2 line-clamp-1">
+                      <CardTitle className="mb-2 line-clamp-1 text-lg">
                         {quiz.title}
                       </CardTitle>
-                      <CardDescription className="line-clamp-2 mb-3">
+                      <CardDescription className="mb-3 line-clamp-2">
                         {quiz.description || "No description provided"}
                       </CardDescription>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                  </div>
+                  <div className="flex items-center gap-2"></div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div className="flex items-center gap-2">
-                      <BookOpen className="w-4 h-4 text-gray-500" />
-                      <span className="text-gray-600">{quiz.questionCount} Questions</span>
+                      <BookOpen className="h-4 w-4 text-gray-500" />
+                      <span className="text-gray-600">
+                        {quiz.questionCount} Questions
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Timer className="w-4 h-4 text-gray-500" />
+                      <Timer className="h-4 w-4 text-gray-500" />
                       <span className="text-gray-600">
                         {quiz.timeLimit ? `${quiz.timeLimit}m` : "No limit"}
                       </span>
                     </div>
                   </div>
                   <div className="flex gap-2 pt-2">
-                    <Link href={`/orgs/${orgId}/quizzes/${quiz.id}/view`} className="flex-1">
+                    <Link
+                      href={`/orgs/${orgUsername}/quizzes/${quiz.id}/view`}
+                      className="flex-1"
+                    >
                       <Button variant="outline" size="sm" className="w-full">
-                        <Eye className="w-4 h-4 mr-1" />
+                        <Eye className="mr-1 h-4 w-4" />
                         View
                       </Button>
                     </Link>
-                    <Link href={`/orgs/${orgId}/quizzes/${quiz.id}/edit`} className="flex-1">
+                    <Link
+                      href={`/orgs/${orgUsername}/quizzes/${quiz.id}/edit`}
+                      className="flex-1"
+                    >
                       <Button variant="outline" size="sm" className="w-full">
-                        <Edit className="w-4 h-4 mr-1" />
+                        <Edit className="mr-1 h-4 w-4" />
                         Edit
                       </Button>
                     </Link>
 
-
                     <Link href={`/quiz/results/${quiz.id}`} className="flex-1">
                       <Button variant="outline" size="sm" className="w-full">
-                        <BarChart3 className="w-4 h-4 mr-1" />
+                        <BarChart3 className="mr-1 h-4 w-4" />
                         Results
                       </Button>
                     </Link>
                   </div>
                   <div className="flex gap-2 pt-1">
-                    <Button variant="ghost" size="sm" className="flex-1">
-                      <Share2 className="w-4 h-4 mr-1" />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${window.origin}/student/orgs/${orgUsername}/quizzes/${quiz.id}/attempt`,
+                        )
+                        toast.success("Share link copied to clipboard")
+                      }}
+                    >
+                      <Share2 className="mr-1 h-4 w-4" />
                       Share
                     </Button>
                     <Button variant="ghost" size="sm" className="flex-1">
-                      <Download className="w-4 h-4 mr-1" />
+                      <Download className="mr-1 h-4 w-4" />
                       Export
                     </Button>
                   </div>
@@ -246,6 +262,6 @@ export default function QuizzesDemo() {
           </div>
         )}
       </div>
-    </>
+    </Layout>
   )
 }

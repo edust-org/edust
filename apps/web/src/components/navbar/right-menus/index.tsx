@@ -113,22 +113,60 @@ export const RightMenus = () => {
             </DropdownMenuSub>
           </DropdownMenuGroup>
 
-          {state.user?.profiles && (
-            <Link href={"/student/orgs"}>
-              <DropdownMenuItem>
-                <School className="mr-2 h-4 w-4" />
-                <span>Student Profiles</span>
-              </DropdownMenuItem>
-            </Link>
-          )}
+          <>
+            {state.user?.profiles ? (
+              <>
+                {state.user?.profiles.length === 1 ? (
+                  <Link
+                    href={`/student/orgs/${state.user?.profiles[0]?.organization?.orgUsername}`}
+                  >
+                    <DropdownMenuItem>
+                      <School className="mr-2 h-4 w-4" />
+                      <span>{state.user?.profiles[0]?.organization?.name}</span>
+                    </DropdownMenuItem>
+                  </Link>
+                ) : (
+                  <Link href={"/student/orgs"}>
+                    <DropdownMenuItem>
+                      <School className="mr-2 h-4 w-4" />
+                      <span>Student Profiles</span>
+                    </DropdownMenuItem>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+          </>
 
           {/* if organization available */}
-          {state.organizations && (
-            <>
-              <DropdownMenuSeparator />
-              <Organizations organizations={state.organizations} />
-            </>
-          )}
+          <>
+            {state.user?.organizations ? (
+              <>
+                {" "}
+                {state.user?.organizations &&
+                state.user?.organizations.length === 1 ? (
+                  <Link
+                    href={`/orgs/${state.user?.organizations[0]?.orgUsername}`}
+                  >
+                    <DropdownMenuItem>
+                      <School className="mr-2 h-4 w-4" />
+                      <span>{state.user?.organizations[0]?.name}</span>
+                    </DropdownMenuItem>
+                  </Link>
+                ) : (
+                  <Link href={"/orgs"}>
+                    <DropdownMenuItem>
+                      <School className="mr-2 h-4 w-4" />
+                      <span>Organizations</span>
+                    </DropdownMenuItem>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+          </>
 
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
