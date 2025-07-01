@@ -1,11 +1,11 @@
 {
   "name": "@edust/web",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "ui": "pnpm dlx shadcn@canary add",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -- -p 4001",
     "lint": "next lint"
   },
   "dependencies": {
