@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack --port=3001",
     "ui": "pnpm dlx shadcn@canary add",
     "build": "next build",
-    "start": "next start -- -p 4002",
+    "start": "next start -p 4002",
     "lint": "next lint"
   },
   "dependencies": {
